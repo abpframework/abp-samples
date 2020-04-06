@@ -24,12 +24,18 @@ namespace Acme.BookStore.Web.Pages.Account
             var emailAddress = info.Principal.FindFirstValue(AbpClaimTypes.Email);
             var userId = GuidGenerator.Create();
             var user = new IdentityUser(userId, emailAddress, emailAddress, CurrentTenant.Id);
-            user.Name = info.Principal.FindFirstValue(JwtClaimTypes.GivenName);
-            user.Surname = info.Principal.FindFirstValue(JwtClaimTypes.FamilyName);
+            user.Name = info.Principal.FindFirstValue(JwtClaimTypes.GivenName);     // This claim will be null if using AzureAD v2.0 endpoint
+            user.Surname = info.Principal.FindFirstValue(JwtClaimTypes.FamilyName); // This claim will be null if using AzureAD v2.0 endpoint
 
             //Optional: Add claims to user claims
-            user.Claims.Add(new Volo.Abp.Identity.IdentityUserClaim(GuidGenerator.Create(), userId, JwtClaimTypes.GivenName, info.Principal.FindFirstValue(JwtClaimTypes.GivenName), CurrentTenant.Id));
-            user.Claims.Add(new Volo.Abp.Identity.IdentityUserClaim(GuidGenerator.Create(), userId, JwtClaimTypes.FamilyName, info.Principal.FindFirstValue(JwtClaimTypes.FamilyName), CurrentTenant.Id));
+            if (!string.IsNullOrEmpty(info.Principal.FindFirstValue(JwtClaimTypes.GivenName)))
+            {
+                user.Claims.Add(new Volo.Abp.Identity.IdentityUserClaim(GuidGenerator.Create(), userId, JwtClaimTypes.GivenName, info.Principal.FindFirstValue(JwtClaimTypes.GivenName), CurrentTenant.Id));
+            }
+            if (!string.IsNullOrEmpty(info.Principal.FindFirstValue(JwtClaimTypes.FamilyName)))
+            {
+                user.Claims.Add(new Volo.Abp.Identity.IdentityUserClaim(GuidGenerator.Create(), userId, JwtClaimTypes.FamilyName, info.Principal.FindFirstValue(JwtClaimTypes.FamilyName), CurrentTenant.Id));
+            }
 
             CheckIdentityErrors(await UserManager.CreateAsync(user));
             CheckIdentityErrors(await UserManager.SetEmailAsync(user, emailAddress));

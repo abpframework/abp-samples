@@ -1,7 +1,8 @@
-# abp-samples
+# ABP Framework Sample Projects
+
 Sample solutions built with the ABP Framework
 
-Also see https://github.com/abpframework/abp/tree/dev/samples (they will be moved here by the time)
+Also see https://github.com/abpframework/abp/tree/dev/samples
 
 ### Issues
 

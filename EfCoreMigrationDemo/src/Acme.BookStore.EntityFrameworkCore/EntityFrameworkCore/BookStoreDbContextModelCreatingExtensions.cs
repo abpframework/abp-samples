@@ -23,17 +23,5 @@ namespace Acme.BookStore.EntityFrameworkCore
             //    //...
             //});
         }
-
-        public static void ConfigureCustomUserProperties<TUser>(this EntityTypeBuilder<TUser> b)
-            where TUser: class, IUser
-        {
-            //b.Property<string>(nameof(AppUser.MyProperty))...
-        }
-
-        public static void ConfigureCustomRoleProperties<TRole>(this EntityTypeBuilder<TRole> b)
-            where TRole : class, IEntity<Guid>
-        {
-            b.Property<string>(nameof(AppRole.Title)).HasMaxLength(128);
-        }
     }
 }

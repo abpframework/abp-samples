@@ -1,4 +1,5 @@
 ﻿using Acme.BookStore.MultiTenancy;
+using Acme.BookStore.ObjectExtending;
 using Volo.Abp.AuditLogging;
 using Volo.Abp.BackgroundJobs;
 using Volo.Abp.FeatureManagement;
@@ -27,6 +28,11 @@ namespace Acme.BookStore
         )]
     public class BookStoreDomainModule : AbpModule
     {
+        public override void PreConfigureServices(ServiceConfigurationContext context)
+        {
+            BookStoreDomainObjectExtensions.Configure();
+        }
+
         public override void ConfigureServices(ServiceConfigurationContext context)
         {
             Configure<AbpMultiTenancyOptions>(options =>

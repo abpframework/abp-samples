@@ -1,31 +1,29 @@
-import { Component, OnInit } from "@angular/core";
-import { Store, Select } from "@ngxs/store";
-import { BooksState } from "../../store/states";
-import { Observable } from "rxjs";
-import { Books } from "../../store/models";
-import { GetBooks, CreateUpdateBook, DeleteBook } from "../../store/actions";
-import { FormGroup, FormBuilder, Validators } from "@angular/forms";
-import {
-  NgbDateNativeAdapter,
-  NgbDateAdapter
-} from "@ng-bootstrap/ng-bootstrap";
-import { BooksService } from "../shared/books.service";
-import { ConfirmationService, Confirmation } from "@abp/ng.theme.shared";
+import { Component, OnInit } from '@angular/core';
+import { Select, Store } from '@ngxs/store';
+import { Observable } from 'rxjs';
+import { finalize } from 'rxjs/operators';
+import { BookDto, BookType } from '../../app/shared/models';
+import { GetBooks, CreateUpdateBook, DeleteBook } from '../state/books.actions';
+import { BooksState } from '../state/books.state';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { NgbDateNativeAdapter, NgbDateAdapter } from '@ng-bootstrap/ng-bootstrap';
+import { BookService } from '../../app/shared/services';
+import { ConfirmationService, Confirmation } from '@abp/ng.theme.shared';
 
 @Component({
-  selector: "app-book-list",
-  templateUrl: "./book-list.component.html",
-  styleUrls: ["./book-list.component.scss"],
-  providers: [{ provide: NgbDateAdapter, useClass: NgbDateNativeAdapter }]
+  selector: 'app-book-list',
+  templateUrl: './book-list.component.html',
+  styleUrls: ['./book-list.component.scss'],
+  providers: [{ provide: NgbDateAdapter, useClass: NgbDateNativeAdapter }],
 })
 export class BookListComponent implements OnInit {
   @Select(BooksState.getBooks)
-  books$: Observable<Books.Book[]>;
+  books$: Observable<BookDto[]>;
 
-  booksType = Books.BookType;
+  booksType = BookType;
 
-  bookTypeArr = Object.keys(Books.BookType).filter(
-    bookType => typeof this.booksType[bookType] === "number"
+  bookTypeArr = Object.keys(BookType).filter(
+    (bookType) => typeof this.booksType[bookType] === 'number'
   );
 
   loading = false;
@@ -34,13 +32,13 @@ export class BookListComponent implements OnInit {
 
   form: FormGroup;
 
-  selectedBook = {} as Books.Book;
+  selectedBook = {} as BookDto;
 
   constructor(
     private store: Store,
     private fb: FormBuilder,
-    private booksService: BooksService,
-    private confirmationService: ConfirmationService
+    private bookService: BookService,
+    private confirmation: ConfirmationService
   ) {}
 
   ngOnInit() {
@@ -49,19 +47,20 @@ export class BookListComponent implements OnInit {
 
   get() {
     this.loading = true;
-    this.store.dispatch(new GetBooks()).subscribe(() => {
-      this.loading = false;
-    });
+    this.store
+      .dispatch(new GetBooks())
+      .pipe(finalize(() => (this.loading = false)))
+      .subscribe(() => {});
   }
 
   createBook() {
-    this.selectedBook = {} as Books.Book;
+    this.selectedBook = {} as BookDto;
     this.buildForm();
     this.isModalOpen = true;
   }
 
   editBook(id: string) {
-    this.booksService.getById(id).subscribe(book => {
+    this.bookService.getById(id).subscribe((book) => {
       this.selectedBook = book;
       this.buildForm();
       this.isModalOpen = true;
@@ -69,17 +68,14 @@ export class BookListComponent implements OnInit {
   }
 
   buildForm() {
-    console.warn(this.selectedBook);
     this.form = this.fb.group({
-      name: [this.selectedBook.name || "", Validators.required],
+      name: [this.selectedBook.name || '', Validators.required],
       type: [this.selectedBook.type || null, Validators.required],
       publishDate: [
-        this.selectedBook.publishDate
-          ? new Date(this.selectedBook.publishDate)
-          : null,
-        Validators.required
+        this.selectedBook.publishDate ? new Date(this.selectedBook.publishDate) : null,
+        Validators.required,
       ],
-      price: [this.selectedBook.price || null, Validators.required]
+      price: [this.selectedBook.price || null, Validators.required],
     });
   }
 
@@ -97,13 +93,11 @@ export class BookListComponent implements OnInit {
       });
   }
 
-  delete(id: string, name: string) {
-    this.confirmationService
-      .warn("::AreYouSureToDelete", "AbpAccount::AreYouSure")
-      .subscribe(status => {
-        if (status === Confirmation.Status.confirm) {
-          this.store.dispatch(new DeleteBook(id)).subscribe(() => this.get());
-        }
-      });
+  delete(id: string) {
+    this.confirmation.warn('::AreYouSureToDelete', 'AbpAccount::AreYouSure').subscribe((status) => {
+      if (status === Confirmation.Status.confirm) {
+        this.store.dispatch(new DeleteBook(id)).subscribe(() => this.get());
+      }
+    });
   }
 }

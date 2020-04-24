@@ -1,25 +1,24 @@
 export const environment = {
   production: false,
-  hmr: false,
   application: {
     name: 'BookStore',
-    logoUrl: '',
+    logoUrl: ''
   },
   oAuthConfig: {
-    issuer: 'https://localhost:44317',
+    issuer: 'https://localhost:44314',
     clientId: 'BookStore_App',
     dummyClientSecret: '1q2w3e*',
     scope: 'BookStore',
     showDebugInformation: true,
     oidc: false,
-    requireHttps: true,
+    requireHttps: true
   },
   apis: {
     default: {
-      url: 'https://localhost:44317',
-    },
+      url: 'https://localhost:44314'
+    }
   },
   localization: {
-    defaultResourceName: 'BookStore',
-  },
+    defaultResourceName: 'BookStore'
+  }
 };

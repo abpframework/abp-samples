@@ -3,7 +3,6 @@ import { CoreModule } from '@abp/ng.core';
 import { IdentityConfigModule } from '@abp/ng.identity.config';
 import { SettingManagementConfigModule } from '@abp/ng.setting-management.config';
 import { TenantManagementConfigModule } from '@abp/ng.tenant-management.config';
-import { LAYOUTS } from '@abp/ng.theme.basic';
 import { ThemeSharedModule } from '@abp/ng.theme.shared';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -14,17 +13,17 @@ import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SharedModule } from './shared/shared.module';
-import { BooksState } from './store/states/books.state';
+import { BooksState } from './books/state/books.state';
 
 const LOGGERS = [NgxsLoggerPluginModule.forRoot({ disabled: false })];
 
 @NgModule({
   imports: [
+    BrowserModule,
+    BrowserAnimationsModule,
+    AppRoutingModule,
     CoreModule.forRoot({
       environment,
-      requirements: {
-        layouts: LAYOUTS,
-      },
     }),
     ThemeSharedModule.forRoot(),
     AccountConfigModule.forRoot({ redirectUrl: '/' }),
@@ -32,9 +31,6 @@ const LOGGERS = [NgxsLoggerPluginModule.forRoot({ disabled: false })];
     TenantManagementConfigModule,
     SettingManagementConfigModule,
     NgxsModule.forRoot([BooksState]),
-    BrowserModule,
-    BrowserAnimationsModule,
-    AppRoutingModule,
     SharedModule,
     ...(environment.production ? [] : LOGGERS),
   ],

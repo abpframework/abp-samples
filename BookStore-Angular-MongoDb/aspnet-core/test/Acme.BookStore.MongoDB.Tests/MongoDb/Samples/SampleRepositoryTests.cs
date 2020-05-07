@@ -13,6 +13,7 @@ namespace Acme.BookStore.MongoDB.Samples
      * (like default AppUser repository IRepository<AppUser, Guid> here).
      * Only test your custom repository methods.
      */
+    [Collection(MongoTestCollection.Name)]
     public class SampleRepositoryTests : BookStoreMongoDbTestBase
     {
         private readonly IRepository<AppUser, Guid> _appUserRepository;

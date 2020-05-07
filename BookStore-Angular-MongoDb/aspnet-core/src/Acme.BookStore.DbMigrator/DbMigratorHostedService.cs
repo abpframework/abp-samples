@@ -10,6 +10,13 @@ namespace Acme.BookStore.DbMigrator
 {
     public class DbMigratorHostedService : IHostedService
     {
+        private readonly IHostApplicationLifetime _hostApplicationLifetime;
+
+        public DbMigratorHostedService(IHostApplicationLifetime hostApplicationLifetime)
+        {
+            _hostApplicationLifetime = hostApplicationLifetime;
+        }
+
         public async Task StartAsync(CancellationToken cancellationToken)
         {
             using (var application = AbpApplicationFactory.Create<BookStoreDbMigratorModule>(options =>
@@ -26,6 +33,8 @@ namespace Acme.BookStore.DbMigrator
                     .MigrateAsync();
 
                 application.Shutdown();
+
+                _hostApplicationLifetime.StopApplication();
             }
         }
 

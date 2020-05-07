@@ -39,6 +39,8 @@ namespace Acme.BookStore
                     .Add<BookStoreResource>("en")
                     .AddBaseTypes(typeof(AbpValidationResource))
                     .AddVirtualJson("/Localization/BookStore");
+                
+                options.DefaultResourceType = typeof(BookStoreResource);
             });
         }
     }

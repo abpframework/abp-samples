@@ -13,7 +13,7 @@ import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SharedModule } from './shared/shared.module';
-import { BooksState } from './books/state/books.state';
+import { BookState } from './book/state/book.state';
 
 const LOGGERS = [NgxsLoggerPluginModule.forRoot({ disabled: false })];
 
@@ -30,7 +30,7 @@ const LOGGERS = [NgxsLoggerPluginModule.forRoot({ disabled: false })];
     IdentityConfigModule,
     TenantManagementConfigModule,
     SettingManagementConfigModule,
-    NgxsModule.forRoot([BooksState]),
+    NgxsModule.forRoot([BookState]),
     SharedModule,
     ...(environment.production ? [] : LOGGERS),
   ],

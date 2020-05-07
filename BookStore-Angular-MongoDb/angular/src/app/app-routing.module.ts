@@ -32,7 +32,7 @@ const routes: Routes = [
   {
     path: 'books',
     component: ApplicationLayoutComponent,
-    loadChildren: () => import('./books/books.module').then((m) => m.BooksModule),
+    loadChildren: () => import('./book/book.module').then((m) => m.BookModule),
     data: {
       routes: {
         name: '::Menu:Books',

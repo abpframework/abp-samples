@@ -9,8 +9,7 @@ namespace Acme.BookStore.MongoDB
     public class BookStoreMongoDbContext : AbpMongoDbContext
     {
         public IMongoCollection<AppUser> Users => Collection<AppUser>();
-         public IMongoCollection<Book> Books => Collection<Book>();
-
+        public IMongoCollection<Book> Books => Collection<Book>();
         protected override void CreateModel(IMongoModelBuilder modelBuilder)
         {
             base.CreateModel(modelBuilder);

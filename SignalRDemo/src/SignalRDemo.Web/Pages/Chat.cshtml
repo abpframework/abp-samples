@@ -3,5 +3,17 @@
 @model SignalRDemo.Web.Pages.ChatModel
 @section scripts {
     <abp-script type="typeof(SignalRBrowserScriptContributor)" />
+    <abp-script src="/Pages/Chat.js" />
 }
 <h1>Chat</h1>
+
+<div>
+    <ul id="MessageList">
+    </ul>
+</div>
+
+<div>
+    Target user: <input type="text" id="TargetUser" /><br/>
+    Message: <input type="text" id="Message" /><br />
+    <button id="SendMessageButton">Send</button>
+</div>

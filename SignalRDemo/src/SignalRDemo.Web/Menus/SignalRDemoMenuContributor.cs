@@ -29,6 +29,8 @@ namespace SignalRDemo.Web.Menus
             var l = context.ServiceProvider.GetRequiredService<IStringLocalizer<SignalRDemoResource>>();
 
             context.Menu.Items.Insert(0, new ApplicationMenuItem("SignalRDemo.Home", l["Menu:Home"], "/"));
+
+            context.Menu.Items.Add(new ApplicationMenuItem("SignalRDemo.Chat", "Chat", "/Chat"));
         }
     }
 }

@@ -38,6 +38,7 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="5.3.1" />
     <PackageReference Include="IdentityServer4.AccessTokenValidation" Version="3.0.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.2" />
+    <PackageReference Include="Volo.Abp.AspNetCore.SignalR" Version="2.8.0-preview20200511" />
   </ItemGroup>
 
   <ItemGroup>

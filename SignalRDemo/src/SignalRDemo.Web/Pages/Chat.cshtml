@@ -1,5 +1,7 @@
 ﻿@page
+@using Volo.Abp.AspNetCore.Mvc.UI.Packages.SignalR
 @model SignalRDemo.Web.Pages.ChatModel
-@{
+@section scripts {
+    <abp-script type="typeof(SignalRBrowserScriptContributor)" />
 }
 <h1>Chat</h1>

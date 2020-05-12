@@ -23,7 +23,7 @@ namespace SignalRDemo.Web
         {
             var targetUser = await _identityUserRepository.FindByNormalizedUserNameAsync(_lookupNormalizer.NormalizeName(targetUserName));
 
-            message = $"{CurrentUser.UserName} => {targetUserName}: {message}";
+            message = $"{CurrentUser.UserName}: {message}";
 
             await Clients
                 .User(targetUser.Id.ToString())

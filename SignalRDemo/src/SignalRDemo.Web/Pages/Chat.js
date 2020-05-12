@@ -2,7 +2,7 @@
     var connection = new signalR.HubConnectionBuilder().withUrl("/signalr-hubs/chat").build();
 
     connection.on("ReceiveMessage", function (message) {
-        $('#MessageList').append('<li><strong>' + message + '</strong></li>');
+        $('#MessageList').append('<li><strong><i class="fas fa-long-arrow-alt-right"></i> ' + message + '</strong></li>');
     });
 
     connection.start().then(function () {
@@ -20,7 +20,8 @@
 
         connection.invoke("SendMessage", targetUserName, message)
             .then(function() {
-                $('#MessageList').append('<li>' + abp.currentUser.userName + ' => ' + targetUserName + ': ' + message + '</li>');
+                $('#MessageList')
+                    .append('<li><i class="fas fa-long-arrow-alt-left"></i> ' + abp.currentUser.userName + ': ' + message + '</li>');
             })
             .catch(function(err) {
                 return console.error(err.toString());

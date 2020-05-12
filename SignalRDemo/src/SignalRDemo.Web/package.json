@@ -4,6 +4,6 @@
   "private": true,
   "dependencies": {
     "@abp/aspnetcore.mvc.ui.theme.basic": "~2.8.0-preview20200511",
-    "@abp/signalr": "~2.7.0"
+    "@abp/signalr": "^2.7.0"
   }
 }

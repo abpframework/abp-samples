@@ -7,8 +7,11 @@ namespace TextTemplateDemo
         public override void Define(ITemplateDefinitionContext context)
         {
             context.Add(
-                new TemplateDefinition("Hello")
-                    .WithVirtualFilePath("/Demos/Hello/Hello.tpl", isInlineLocalized: true)
+                new TemplateDefinition("Hello") //template name: "Hello"
+                    .WithVirtualFilePath(
+                        "/Demos/Hello/Hello.tpl", //template content path
+                        isInlineLocalized: true
+                    )
             );
         }
     }

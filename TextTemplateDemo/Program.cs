@@ -17,7 +17,10 @@ namespace TextTemplateDemo
             {
                 application.Initialize();
 
-                await application.ServiceProvider.GetRequiredService<HelloDemo>().RunAsync();
+                var helloDemo = application.ServiceProvider.GetRequiredService<HelloDemo>();
+
+                await helloDemo.RunAsync();
+                await helloDemo.RunWithAnonymousModelAsync();
 
                 Console.WriteLine();
                 Console.WriteLine("Press enter to exit...");

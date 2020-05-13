@@ -26,5 +26,18 @@ namespace TextTemplateDemo.Demos.Hello
 
             Console.WriteLine(result);
         }
+
+        public async Task RunWithAnonymousModelAsync()
+        {
+            var result = await _templateRenderer.RenderAsync(
+                "Hello", //the template name
+                new
+                {
+                    Name = "John"
+                }
+            );
+
+            Console.WriteLine(result);
+        }
     }
 }

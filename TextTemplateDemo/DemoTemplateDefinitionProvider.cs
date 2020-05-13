@@ -25,6 +25,17 @@ namespace TextTemplateDemo
                         isInlineLocalized: true
                     )
             );
+
+            context.Add(
+                new TemplateDefinition(
+                        name: "WelcomeEmail",
+                        defaultCultureName: "en"
+                    )
+                    .WithVirtualFilePath(
+                        "/Demos/WelcomeEmail/Templates", //template content folder
+                        isInlineLocalized: false
+                    )
+            );
         }
     }
 }

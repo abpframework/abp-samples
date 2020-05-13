@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
 using TextTemplateDemo.Demos.Hello;
 using TextTemplateDemo.Demos.PasswordReset;
+using TextTemplateDemo.Demos.WelcomeEmail;
 using Volo.Abp;
 
 namespace TextTemplateDemo
@@ -20,11 +21,15 @@ namespace TextTemplateDemo
 
                 var helloDemo = application.ServiceProvider.GetRequiredService<HelloDemo>();
                 var passwordResetDemo = application.ServiceProvider.GetRequiredService<PasswordResetDemo>();
+                var welcomeEmailDemo = application.ServiceProvider.GetRequiredService<WelcomeEmailDemo>();
 
                 await helloDemo.RunAsync();
                 await helloDemo.RunWithAnonymousModelAsync();
 
                 await passwordResetDemo.RunAsync();
+
+                await welcomeEmailDemo.RunAsync("en");
+                await welcomeEmailDemo.RunAsync("tr");
 
                 Console.WriteLine();
                 Console.WriteLine("Press enter to exit...");

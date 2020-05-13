@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
@@ -8,8 +8,11 @@
   <ItemGroup>
     <EmbeddedResource Include="Demos\**\*.tpl" />
     <EmbeddedResource Include="Localization\*.json" />
-  </ItemGroup>  
+  </ItemGroup>
 
+  <ItemGroup>
+    <None Remove="Demos\GlobalContext\GlobalContextUsage.tpl" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Volo.Abp.Autofac" Version="2.7.0" />

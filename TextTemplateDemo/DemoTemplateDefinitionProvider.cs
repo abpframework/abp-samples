@@ -1,4 +1,5 @@
-﻿using Volo.Abp.TextTemplating;
+﻿using TextTemplateDemo.Localization;
+using Volo.Abp.TextTemplating;
 
 namespace TextTemplateDemo
 {
@@ -10,6 +11,17 @@ namespace TextTemplateDemo
                 new TemplateDefinition("Hello") //template name: "Hello"
                     .WithVirtualFilePath(
                         "/Demos/Hello/Hello.tpl", //template content path
+                        isInlineLocalized: true
+                    )
+            );
+
+            context.Add(
+                new TemplateDefinition(
+                        name: "PasswordReset",
+                        localizationResource: typeof(DemoResource)
+                    )
+                    .WithVirtualFilePath(
+                        "/Demos/PasswordReset/PasswordReset.tpl", //template content path
                         isInlineLocalized: true
                     )
             );

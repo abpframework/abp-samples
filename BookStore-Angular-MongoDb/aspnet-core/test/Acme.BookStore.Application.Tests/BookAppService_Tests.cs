@@ -5,7 +5,6 @@ using Xunit;
 using Shouldly;
 using Volo.Abp.Application.Dtos;
 using Volo.Abp.Validation;
-using Microsoft.EntityFrameworkCore.Internal;
 
 namespace Acme.BookStore
 {

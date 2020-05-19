@@ -10,6 +10,7 @@ namespace Acme.BookStore.Samples
      * (like IIdentityUserAppService here).
      * Only test your own application services.
      */
+    [Collection(BookStoreTestConsts.CollectionDefinitionName)]
     public class SampleAppServiceTests : BookStoreApplicationTestBase
     {
         private readonly IIdentityUserAppService _userAppService;

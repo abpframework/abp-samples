@@ -8,6 +8,7 @@ using Volo.Abp.Validation;
 
 namespace Acme.BookStore
 {
+    [Collection(BookStoreTestConsts.CollectionDefinitionName)]
     public class BookAppService_Tests : BookStoreApplicationTestBase
     {
         private readonly IBookAppService _bookAppService;

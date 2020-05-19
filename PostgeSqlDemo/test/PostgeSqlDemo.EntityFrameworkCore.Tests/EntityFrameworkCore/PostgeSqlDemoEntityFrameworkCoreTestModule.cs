@@ -28,7 +28,10 @@ namespace PostgeSqlDemo.EntityFrameworkCore
 
             services.Configure<AbpDbContextOptions>(options =>
             {
-                options.Configure(context => { context.DbContextOptions.UseSqlite(_sqliteConnection); });
+                options.Configure(context =>
+                {
+                    context.DbContextOptions.UseSqlite(_sqliteConnection, sqliteOptions => sqliteOptions.UseNetTopologySuite());
+                });
             });
         }
 
@@ -43,7 +46,10 @@ namespace PostgeSqlDemo.EntityFrameworkCore
             connection.Open();
 
             var options = new DbContextOptionsBuilder<PostgeSqlDemoMigrationsDbContext>()
-                .UseSqlite(connection)
+                .UseSqlite(connection, sqliteOptions =>
+                {
+                    sqliteOptions.UseNetTopologySuite();
+                })
                 .Options;
 
             using (var context = new PostgeSqlDemoMigrationsDbContext(options))

@@ -5,10 +5,10 @@ using Xunit;
 using Shouldly;
 using Volo.Abp.Application.Dtos;
 using Volo.Abp.Validation;
-using Microsoft.EntityFrameworkCore.Internal;
 
 namespace Acme.BookStore
 {
+    [Collection(BookStoreTestConsts.CollectionDefinitionName)]
     public class BookAppService_Tests : BookStoreApplicationTestBase
     {
         private readonly IBookAppService _bookAppService;

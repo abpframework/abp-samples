@@ -10,6 +10,7 @@ namespace Acme.BookStore.Samples
      * (like IdentityUserManager here).
      * Only test your own domain services.
      */
+    [Collection(BookStoreTestConsts.CollectionDefinitionName)]
     public class SampleDomainTests : BookStoreDomainTestBase
     {
         private readonly IIdentityUserRepository _identityUserRepository;

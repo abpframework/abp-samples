@@ -1,7 +1,7 @@
-using System;
+﻿using System;
 using Mongo2Go;
 
-namespace Acme.BookStore.MongoDB
+namespace Acme.BookStore.BookManagement.MongoDB
 {
     public class MongoDbFixture : IDisposable
     {

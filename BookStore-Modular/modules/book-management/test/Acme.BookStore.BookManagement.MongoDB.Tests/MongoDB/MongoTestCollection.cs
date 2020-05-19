@@ -1,6 +1,6 @@
-using Xunit;
+﻿using Xunit;
 
-namespace Acme.BookStore.MongoDB
+namespace Acme.BookStore.BookManagement.MongoDB
 {
     [CollectionDefinition(Name)]
     public class MongoTestCollection : ICollectionFixture<MongoDbFixture>

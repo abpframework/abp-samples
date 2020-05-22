@@ -19,10 +19,10 @@
   <ItemGroup>
     <ProjectReference Include="..\..\src\Acme.BookStore.HttpApi.Client\Acme.BookStore.HttpApi.Client.csproj" />
   </ItemGroup>
-  
+
   <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="3.1.2" />
-    <PackageReference Include="Volo.Abp.Http.Client.IdentityModel" Version="2.5.0" />
+    <PackageReference Include="Volo.Abp.Http.Client.IdentityModel" Version="2.8.0" />
 
   </ItemGroup>
 

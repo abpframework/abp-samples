@@ -154,7 +154,7 @@ namespace Acme.BookStore.BookManagement
                 options.SwaggerEndpoint("/swagger/v1/swagger.json", "Support APP API");
             });
             app.UseAuditing();
-            app.UseMvcWithDefaultRouteAndArea();
+            app.UseConfiguredEndpoints();
 
             SeedData(context);
         }

@@ -126,7 +126,7 @@ namespace Acme.BookStore.Web
             //    options.ResponseType = OpenIdConnectResponseType.IdToken;
             //    options.RequireHttpsMetadata = false;
 
-            //    options.TokenValidationParameters.ValidateIssuer = false; // accept several tenants (here simplified)                
+            //    options.TokenValidationParameters.ValidateIssuer = false; // accept several tenants (here simplified)
             //    options.GetClaimsFromUserInfoEndpoint = true;
             //    options.SaveTokens = true;
             //    options.SignInScheme = IdentityConstants.ExternalScheme;
@@ -266,7 +266,7 @@ namespace Acme.BookStore.Web
             });
             app.UseAuditing();
             app.UseAbpSerilogEnrichers();
-            app.UseMvcWithDefaultRouteAndArea();
+            app.UseConfiguredEndpoints();
         }
     }
 }

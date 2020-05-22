@@ -1,3 +1,7 @@
+using System;
+using System.IO;
+using System.Net;
+using System.Net.Http;
 using Microsoft.Extensions.Hosting;
 using System.Threading;
 using System.Threading.Tasks;
@@ -10,12 +14,22 @@ namespace GrpcDemo.HttpApi.Client.ConsoleTestApp
     {
         public async Task StartAsync(CancellationToken cancellationToken)
         {
+            ServicePointManager.ServerCertificateValidationCallback += (sender, cert, chain, sslPolicyErrors) => true;
+
             using (var application = AbpApplicationFactory.Create<GrpcDemoConsoleApiClientModule>())
             {
                 application.Initialize();
 
-                var demo = application.ServiceProvider.GetRequiredService<ClientDemoService>();
-                await demo.RunAsync();
+
+                /* Disabled regular REST request demo since it is not working when
+                 * the server runs with HTTP/2.
+                 */
+
+                //var demo = application.ServiceProvider.GetRequiredService<ClientDemoService>();
+                //await demo.RunAsync();
+
+                var grpcDemo = application.ServiceProvider.GetRequiredService<GrpcClientDemoService>();
+                await grpcDemo.RunAsync();
 
                 application.Shutdown();
             }

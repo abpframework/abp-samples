@@ -10,6 +10,7 @@ using Microsoft.Extensions.Hosting;
 using GrpcDemo.EntityFrameworkCore;
 using GrpcDemo.Localization;
 using GrpcDemo.MultiTenancy;
+using GrpcDemo.Web.GrpcServices;
 using GrpcDemo.Web.Menus;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.Swagger;
@@ -81,6 +82,8 @@ namespace GrpcDemo.Web
             ConfigureNavigationServices();
             ConfigureAutoApiControllers();
             ConfigureSwaggerServices(context.Services);
+
+            context.Services.AddGrpc();
         }
 
         private void ConfigureUrls(IConfiguration configuration)
@@ -210,7 +213,10 @@ namespace GrpcDemo.Web
             });
             app.UseAuditing();
             app.UseAbpSerilogEnrichers();
-            app.UseConfiguredEndpoints();
+            app.UseConfiguredEndpoints(endpoints =>
+            {
+                endpoints.MapGrpcService<GreeterService>();
+            });
         }
     }
 }

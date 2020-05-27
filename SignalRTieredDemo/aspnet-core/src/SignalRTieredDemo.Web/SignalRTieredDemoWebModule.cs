@@ -23,9 +23,11 @@ using Volo.Abp.AspNetCore.Mvc.UI.Bootstrap;
 using Volo.Abp.AspNetCore.Mvc.UI.Theme.Basic;
 using Volo.Abp.AspNetCore.Mvc.UI.Theme.Shared;
 using Volo.Abp.AspNetCore.Serilog;
+using Volo.Abp.AspNetCore.SignalR;
 using Volo.Abp.Autofac;
 using Volo.Abp.AutoMapper;
 using Volo.Abp.Caching;
+using Volo.Abp.EventBus.RabbitMq;
 using Volo.Abp.FeatureManagement;
 using Volo.Abp.Http.Client.IdentityModel.Web;
 using Volo.Abp.Identity.Web;
@@ -51,7 +53,9 @@ namespace SignalRTieredDemo.Web
         typeof(AbpHttpClientIdentityModelWebModule),
         typeof(AbpIdentityWebModule),
         typeof(AbpTenantManagementWebModule),
-        typeof(AbpAspNetCoreSerilogModule)
+        typeof(AbpAspNetCoreSerilogModule),
+        typeof(AbpAspNetCoreSignalRModule),
+        typeof(AbpEventBusRabbitMqModule)
         )]
     public class SignalRTieredDemoWebModule : AbpModule
     {
@@ -81,6 +85,12 @@ namespace SignalRTieredDemo.Web
             ConfigureNavigationServices(configuration);
             ConfigureMultiTenancy();
             ConfigureSwaggerServices(context.Services);
+
+            Configure<AbpRabbitMqEventBusOptions>(options =>
+            {
+                options.ClientName = "SignalRTieredApp";
+                options.ExchangeName = "SignalRTieredAppMessages";
+            });
         }
 
         private void ConfigureCache(IConfiguration configuration)

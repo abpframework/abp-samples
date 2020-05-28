@@ -25,6 +25,7 @@ namespace SignalRTieredDemo
             {
                 options.AddMaps<SignalRTieredDemoApplicationModule>();
             });
+
         }
     }
 }

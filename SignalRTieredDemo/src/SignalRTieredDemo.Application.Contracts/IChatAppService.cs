@@ -4,8 +4,8 @@ using Volo.Abp.Application.Services;
 
 namespace SignalRTieredDemo
 {
-    public interface IUserAppService : IApplicationService
+    public interface IChatAppService : IApplicationService
     {
-        Task<Guid> GetUserIdByUserNameAsync(string userName);
+        Task SendMessageAsync(SendMessageInput input);
     }
 }

@@ -85,12 +85,6 @@ namespace SignalRTieredDemo.Web
             ConfigureNavigationServices(configuration);
             ConfigureMultiTenancy();
             ConfigureSwaggerServices(context.Services);
-
-            Configure<AbpRabbitMqEventBusOptions>(options =>
-            {
-                options.ClientName = "SignalRTieredApp";
-                options.ExchangeName = "SignalRTieredAppMessages";
-            });
         }
 
         private void ConfigureCache(IConfiguration configuration)

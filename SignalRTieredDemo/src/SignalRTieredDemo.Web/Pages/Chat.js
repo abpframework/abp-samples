@@ -19,14 +19,14 @@
         var message = $('#Message').val();
         $('#Message').val('');
 
-        $.post('/api/chat/send-message',
-            {
-                targetUserName: targetUserName,
-                message: message
-            },
-            function () {
-                $('#MessageList')
-                    .append('<li><i class="fas fa-long-arrow-alt-left"></i> ' + abp.currentUser.userName + ': ' + message + '</li>');
-            });
+
+        signalRTieredDemo.controllers.chat.sendMessage({
+            targetUserName: targetUserName,
+            message: message
+        }).then(function() {
+            $('#MessageList')
+                .append('<li><i class="fas fa-long-arrow-alt-left"></i> ' + abp.currentUser.userName + ': ' + message + '</li>');
+        });
+      
     });
 });

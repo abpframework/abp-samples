@@ -19,6 +19,7 @@ using Volo.Abp.AspNetCore.Mvc.UI.Theme.Shared;
 using Volo.Abp.AspNetCore.Serilog;
 using Volo.Abp.Autofac;
 using Volo.Abp.Caching;
+using Volo.Abp.EventBus.RabbitMq;
 using Volo.Abp.Localization;
 using Volo.Abp.Modularity;
 using Volo.Abp.VirtualFileSystem;
@@ -31,7 +32,8 @@ namespace SignalRTieredDemo
         typeof(AbpAspNetCoreMvcUiMultiTenancyModule),
         typeof(SignalRTieredDemoApplicationModule),
         typeof(SignalRTieredDemoEntityFrameworkCoreDbMigrationsModule),
-        typeof(AbpAspNetCoreSerilogModule)
+        typeof(AbpAspNetCoreSerilogModule),
+        typeof(AbpEventBusRabbitMqModule)
         )]
     public class SignalRTieredDemoHttpApiHostModule : AbpModule
     {

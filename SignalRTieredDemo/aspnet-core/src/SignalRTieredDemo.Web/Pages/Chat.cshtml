@@ -1,0 +1,43 @@
+﻿@page
+@using Volo.Abp.AspNetCore.Mvc.UI.Packages.SignalR
+@model SignalRTieredDemo.Web.Pages.ChatModel
+@section styles {
+    <abp-style src="/Pages/Chat.css" />
+}
+@section scripts {
+    <abp-script type="typeof(SignalRBrowserScriptContributor)" />
+    <abp-script src="/Pages/Chat.js" />
+}
+<h1>Chat</h1>
+
+<div>
+    <abp-row>
+        <abp-column size-md="_6">
+            <div>All Messages:</div>
+            <ul id="MessageList" style="">
+            </ul>
+        </abp-column>
+        <abp-column size-md="_6">
+            <form>
+                <abp-row>
+                    <abp-column>
+                        <label for="TargetUser">Target user:</label>
+                        <input type="text" id="TargetUser" />
+                    </abp-column>
+                </abp-row>
+                <abp-row class="mt-2">
+                    <abp-column>
+                        <label for="Message">Message:</label>
+                        <textarea id="Message" rows="4"></textarea>
+                    </abp-column>
+                </abp-row>
+                <abp-row class="mt-2">
+                    <abp-column>
+                        <abp-button type="submit" id="SendMessageButton" button-type="Primary" size="Block" text="SEND!" />
+                    </abp-column>
+                </abp-row>
+            </form>
+        </abp-column>
+    </abp-row>
+
+</div>

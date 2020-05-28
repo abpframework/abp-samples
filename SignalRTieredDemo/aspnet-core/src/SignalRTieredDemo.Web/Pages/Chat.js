@@ -19,7 +19,7 @@
         var message = $('#Message').val();
         $('#Message').val('');
 
-        $.post('https://localhost:44379/send-message',
+        $.post('/api/chat/send-message',
             {
                 targetUserName: targetUserName,
                 message: message
@@ -28,14 +28,5 @@
                 $('#MessageList')
                     .append('<li><i class="fas fa-long-arrow-alt-left"></i> ' + abp.currentUser.userName + ': ' + message + '</li>');
             });
-
-        //connection.invoke("AddMessage", targetUserName, message)
-        //    .then(function () {
-        //        $('#MessageList')
-        //            .append('<li><i class="fas fa-long-arrow-alt-left"></i> ' + abp.currentUser.userName + ': ' + message + '</li>');
-        //    })
-        //    .catch(function (err) {
-        //        return console.error(err.toString());
-        //    });
     });
 });

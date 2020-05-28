@@ -23,5 +23,8 @@ namespace SignalRTieredDemo
         {
             SignalRTieredDemoDtoExtensions.Configure();
         }
+        public override void ConfigureServices(ServiceConfigurationContext context)
+        {
+        }
     }
 }

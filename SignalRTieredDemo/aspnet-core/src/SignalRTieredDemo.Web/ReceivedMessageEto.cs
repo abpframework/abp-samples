@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace SignalRTieredDemo
 {
-    public class ReceivedMessageEventData
+    public class ReceivedMessageEto
     {
         public string ReceivedText { get; set; }
 
@@ -13,12 +10,7 @@ namespace SignalRTieredDemo
 
         public string SenderUserName { get; set; }
 
-        public ReceivedMessageEventData()
-        {
-
-        }
-
-        public ReceivedMessageEventData(Guid targetUserId, string senderUserName, string receivedText)
+        public ReceivedMessageEto(Guid targetUserId, string senderUserName, string receivedText)
         {
             ReceivedText = receivedText;
             TargetUserId = targetUserId;

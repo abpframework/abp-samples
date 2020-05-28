@@ -5,7 +5,7 @@ using Volo.Abp.EventBus.Distributed;
 
 namespace SignalRTieredDemo.Web
 {
-    public class ReceivedMessageEventHandler : IDistributedEventHandler<ReceivedMessageEventData>, ITransientDependency
+    public class ReceivedMessageEventHandler : IDistributedEventHandler<ReceivedMessageEto>, ITransientDependency
     {
         private readonly IHubContext<ChatHub> _hubContext;
 
@@ -14,12 +14,12 @@ namespace SignalRTieredDemo.Web
             _hubContext = hubContext;
         }
 
-        public async Task HandleEventAsync(ReceivedMessageEventData eventData)
+        public async Task HandleEventAsync(ReceivedMessageEto eto)
         {
-            var message = $"{eventData.SenderUserName}: {eventData.ReceivedText}";
+            var message = $"{eto.SenderUserName}: {eto.ReceivedText}";
 
             await _hubContext.Clients
-                .User(eventData.TargetUserId.ToString())
+                .User(eto.TargetUserId.ToString())
                 .SendAsync("ReceiveMessage", message);
         }
     }

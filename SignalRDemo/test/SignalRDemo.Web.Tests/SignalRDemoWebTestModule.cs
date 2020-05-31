@@ -107,7 +107,7 @@ namespace SignalRDemo
                 }
             });
 
-            app.UseMvcWithDefaultRouteAndArea();
+            app.UseConfiguredEndpoints();
         }
     }
 }

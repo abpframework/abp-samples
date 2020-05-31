@@ -27,7 +27,7 @@ namespace BasicAspNetCoreApplication
 
             app.UseStaticFiles();
             app.UseRouting();
-            app.UseMvcWithDefaultRouteAndArea();
+            app.UseConfiguredEndpoints();
         }
     }
 }

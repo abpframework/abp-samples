@@ -39,10 +39,10 @@ namespace Acme.BookStore
         {
             ConfigureLocalizationServices(context.Services);
             ConfigureNavigationServices(context.Services);
-            
+
             Configure<AbpDbConnectionOptions>(options =>
             {
-                //SqliteConnection does not support nested transactions. 
+                //SqliteConnection does not support nested transactions.
                 //So Dbcontext and connectionString need be same.
                 options.ConnectionStrings.Clear();
             });
@@ -115,7 +115,7 @@ namespace Acme.BookStore
                 }
             });
 
-            app.UseMvcWithDefaultRouteAndArea();
+            app.UseConfiguredEndpoints();
         }
     }
 }

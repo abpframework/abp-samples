@@ -213,7 +213,7 @@ namespace Acme.BookStore.Web
             });
 
             app.UseAuditing();
-            app.UseMvcWithDefaultRouteAndArea();
+            app.UseConfiguredEndpoints();
         }
     }
 }

@@ -107,7 +107,7 @@ namespace PostgeSqlDemo
                 }
             });
 
-            app.UseMvcWithDefaultRouteAndArea();
+            app.UseConfiguredEndpoints();
         }
     }
 }

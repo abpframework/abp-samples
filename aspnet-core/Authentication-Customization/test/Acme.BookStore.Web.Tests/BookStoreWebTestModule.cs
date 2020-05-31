@@ -107,7 +107,7 @@ namespace Acme.BookStore
                 }
             });
 
-            app.UseMvcWithDefaultRouteAndArea();
+            app.UseConfiguredEndpoints();
         }
     }
 }

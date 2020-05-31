@@ -206,7 +206,7 @@ namespace DashboardDemo.Web
                 options.SwaggerEndpoint("/swagger/v1/swagger.json", "DashboardDemo API");
             });
             app.UseAuditing();
-            app.UseMvcWithDefaultRouteAndArea();
+            app.UseConfiguredEndpoints();
         }
     }
 }

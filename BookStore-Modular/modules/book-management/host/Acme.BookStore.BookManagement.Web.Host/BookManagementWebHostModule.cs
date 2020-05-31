@@ -70,7 +70,7 @@ namespace Acme.BookStore.BookManagement
                 );
             });
         }
-        
+
         public override void ConfigureServices(ServiceConfigurationContext context)
         {
             var hostingEnvironment = context.Services.GetHostingEnvironment();
@@ -85,7 +85,7 @@ namespace Acme.BookStore.BookManagement
             ConfigureMultiTenancy();
             ConfigureRedis(context, configuration, hostingEnvironment);
         }
-        
+
         private void ConfigureCache(IConfiguration configuration)
         {
             Configure<AbpDistributedCacheOptions>(options =>
@@ -231,7 +231,7 @@ namespace Acme.BookStore.BookManagement
 
             app.UseAuditing();
 
-            app.UseMvcWithDefaultRouteAndArea();
+            app.UseConfiguredEndpoints();
         }
     }
 }

@@ -132,14 +132,14 @@ namespace Acme.BookStore.BookManagement
             {
                 app.UseMultiTenancy();
             }
-            app.UseAbpRequestLocalization();     
+            app.UseAbpRequestLocalization();
             app.UseSwagger();
             app.UseSwaggerUI(options =>
             {
                 options.SwaggerEndpoint("/swagger/v1/swagger.json", "Support APP API");
             });
             app.UseAuditing();
-            app.UseMvcWithDefaultRouteAndArea();
+            app.UseConfiguredEndpoints();
         }
     }
 }

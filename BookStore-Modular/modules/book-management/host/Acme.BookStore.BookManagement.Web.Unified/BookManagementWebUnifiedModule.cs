@@ -134,7 +134,7 @@ namespace Acme.BookStore.BookManagement
 
             app.UseAbpRequestLocalization();
             app.UseAuditing();
-            app.UseMvcWithDefaultRouteAndArea();
+            app.UseConfiguredEndpoints();
 
             using (var scope = context.ServiceProvider.CreateScope())
             {

@@ -12,11 +12,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Volo.Abp.Account.Application.Contracts" Version="2.8.0" />
-    <PackageReference Include="Volo.Abp.Identity.Application.Contracts" Version="2.8.0" />
-    <PackageReference Include="Volo.Abp.PermissionManagement.Application.Contracts" Version="2.8.0" />
-    <PackageReference Include="Volo.Abp.TenantManagement.Application.Contracts" Version="2.8.0" />
-    <PackageReference Include="Volo.Abp.FeatureManagement.Application.Contracts" Version="2.8.0" />
+    <PackageReference Include="Volo.Abp.Account.Application.Contracts" Version="2.9.0" />
+    <PackageReference Include="Volo.Abp.Identity.Application.Contracts" Version="2.9.0" />
+    <PackageReference Include="Volo.Abp.PermissionManagement.Application.Contracts" Version="2.9.0" />
+    <PackageReference Include="Volo.Abp.TenantManagement.Application.Contracts" Version="2.9.0" />
+    <PackageReference Include="Volo.Abp.FeatureManagement.Application.Contracts" Version="2.9.0" />
   </ItemGroup>
 
 </Project>

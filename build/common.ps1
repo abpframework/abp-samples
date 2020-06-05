@@ -17,5 +17,6 @@ $solutionPaths = (
     "../PostgeSqlDemo",
     "../RabbitMqEventBus",
     "../SignalRDemo",
+    "../SignalRTieredDemo",
     "../TextTemplateDemo"
 )

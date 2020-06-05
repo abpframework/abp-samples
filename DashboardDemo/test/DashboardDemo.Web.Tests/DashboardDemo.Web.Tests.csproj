@@ -15,7 +15,7 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.4.0" />
-    <PackageReference Include="Volo.Abp.AspNetCore.TestBase" Version="2.8.0" />
+    <PackageReference Include="Volo.Abp.AspNetCore.TestBase" Version="2.9.0" />
     <ProjectReference Include="..\DashboardDemo.Application.Tests\DashboardDemo.Application.Tests.csproj" />
     <ProjectReference Include="..\..\src\DashboardDemo.Web\DashboardDemo.Web.csproj" />
   </ItemGroup>

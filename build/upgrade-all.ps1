@@ -7,7 +7,7 @@ foreach ($solutionPath in $solutionPaths) {
     Set-Location $solutionAbsPath
     abp update
     if (-Not $?) {
-        Write-Host ("Build failed for the solution: " + $solutionPath)
+        Write-Host ("Update failed for the solution: " + $solutionPath)
         Set-Location $rootFolder
         exit $LASTEXITCODE
     }

@@ -17,7 +17,7 @@
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.4.0" />
     <ProjectReference Include="..\SignalRDemo.Application.Tests\SignalRDemo.Application.Tests.csproj" />
     <ProjectReference Include="..\..\src\SignalRDemo.Web\SignalRDemo.Web.csproj" />
-    <PackageReference Include="Volo.Abp.AspNetCore.TestBase" Version="2.8.0" />
+    <PackageReference Include="Volo.Abp.AspNetCore.TestBase" Version="2.9.0" />
   </ItemGroup>
 
   <ItemGroup>

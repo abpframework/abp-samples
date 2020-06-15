@@ -23,7 +23,6 @@ using Volo.Abp.Auditing;
 using Volo.Abp.Autofac;
 using Volo.Abp.BackgroundJobs;
 using Volo.Abp.Caching;
-using Volo.Abp.EventBus.RabbitMq;
 using Volo.Abp.Localization;
 using Volo.Abp.Modularity;
 using Volo.Abp.UI.Navigation.Urls;
@@ -38,8 +37,7 @@ namespace SignalRTieredDemo
         typeof(AbpAccountApplicationModule),
         typeof(AbpAspNetCoreMvcUiBasicThemeModule),
         typeof(SignalRTieredDemoEntityFrameworkCoreDbMigrationsModule),
-        typeof(AbpAspNetCoreSerilogModule),
-        typeof(AbpEventBusRabbitMqModule)
+        typeof(AbpAspNetCoreSerilogModule)
         )]
     public class SignalRTieredDemoIdentityServerModule : AbpModule
     {

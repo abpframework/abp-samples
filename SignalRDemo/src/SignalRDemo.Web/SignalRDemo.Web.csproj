@@ -38,21 +38,21 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="5.3.1" />
     <PackageReference Include="IdentityServer4.AccessTokenValidation" Version="3.0.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.2" />
-    <PackageReference Include="Volo.Abp.AspNetCore.SignalR" Version="2.8.0" />
+    <PackageReference Include="Volo.Abp.AspNetCore.SignalR" Version="2.9.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\SignalRDemo.Application\SignalRDemo.Application.csproj" />
     <ProjectReference Include="..\SignalRDemo.HttpApi\SignalRDemo.HttpApi.csproj" />
     <ProjectReference Include="..\SignalRDemo.EntityFrameworkCore.DbMigrations\SignalRDemo.EntityFrameworkCore.DbMigrations.csproj" />
-    <PackageReference Include="Volo.Abp.AspNetCore.Mvc.UI.Theme.Basic" Version="2.8.0" />
-    <PackageReference Include="Volo.Abp.Autofac" Version="2.8.0" />
-    <PackageReference Include="Volo.Abp.AspNetCore.Authentication.JwtBearer" Version="2.8.0" />
-    <PackageReference Include="Volo.Abp.AspNetCore.Serilog" Version="2.8.0" />
-    <PackageReference Include="Volo.Abp.Identity.Web" Version="2.8.0" />
-    <PackageReference Include="Volo.Abp.Account.Web.IdentityServer" Version="2.8.0" />
-    <PackageReference Include="Volo.Abp.TenantManagement.Web" Version="2.8.0" />
-    <PackageReference Include="Volo.Abp.FeatureManagement.Web" Version="2.8.0" />
+    <PackageReference Include="Volo.Abp.AspNetCore.Mvc.UI.Theme.Basic" Version="2.9.0" />
+    <PackageReference Include="Volo.Abp.Autofac" Version="2.9.0" />
+    <PackageReference Include="Volo.Abp.AspNetCore.Authentication.JwtBearer" Version="2.9.0" />
+    <PackageReference Include="Volo.Abp.AspNetCore.Serilog" Version="2.9.0" />
+    <PackageReference Include="Volo.Abp.Identity.Web" Version="2.9.0" />
+    <PackageReference Include="Volo.Abp.Account.Web.IdentityServer" Version="2.9.0" />
+    <PackageReference Include="Volo.Abp.TenantManagement.Web" Version="2.9.0" />
+    <PackageReference Include="Volo.Abp.FeatureManagement.Web" Version="2.9.0" />
   </ItemGroup>
 
 </Project>

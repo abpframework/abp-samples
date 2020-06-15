@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <Import Project="..\..\common.props" />
 
@@ -8,11 +8,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Volo.Abp.Account.HttpApi" Version="2.8.0" />
-    <PackageReference Include="Volo.Abp.FeatureManagement.HttpApi" Version="2.8.0" />
-    <PackageReference Include="Volo.Abp.Identity.HttpApi" Version="2.8.0" />
-    <PackageReference Include="Volo.Abp.PermissionManagement.HttpApi" Version="2.8.0" />
-    <PackageReference Include="Volo.Abp.TenantManagement.HttpApi" Version="2.8.0" />
+    <PackageReference Include="Volo.Abp.Account.HttpApi" Version="2.9.0" />
+    <PackageReference Include="Volo.Abp.FeatureManagement.HttpApi" Version="2.9.0" />
+    <PackageReference Include="Volo.Abp.Identity.HttpApi" Version="2.9.0" />
+    <PackageReference Include="Volo.Abp.PermissionManagement.HttpApi" Version="2.9.0" />
+    <PackageReference Include="Volo.Abp.TenantManagement.HttpApi" Version="2.9.0" />
   </ItemGroup>
 
   <ItemGroup>

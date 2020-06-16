@@ -17,7 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Volo.Abp.Http.Client.IdentityModel" Version="2.8.0" />
+    <PackageReference Include="Volo.Abp.Http.Client.IdentityModel" Version="2.9.0" />
     <ProjectReference Include="..\..\src\PostgeSqlDemo.HttpApi.Client\PostgeSqlDemo.HttpApi.Client.csproj" />
   </ItemGroup>
 

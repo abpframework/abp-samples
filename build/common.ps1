@@ -18,5 +18,7 @@ $solutionPaths = (
     "../RabbitMqEventBus",
     "../SignalRDemo",
     "../TextTemplateDemo",
-    "../DocumentationSamples/CustomApplicationModules"
+    "../DocumentationSamples/CustomApplicationModules",
+    "../SignalRTieredDemo",
+    "../TextTemplateDemo"
 )

@@ -19,6 +19,7 @@ $solutionPaths = (
     "../SignalRDemo",
     "../TextTemplateDemo",
     "../StoredProcedureDemo",
+    "../DocumentationSamples/CustomApplicationModules",
     "../SignalRTieredDemo",
     "../TextTemplateDemo"
 )

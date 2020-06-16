@@ -4,7 +4,7 @@ This sample solution demonstrates how to make some customizing the existing modu
 
 * [Customizing the Application Modules](https://docs.abp.io/en/abp/latest/Customizing-Application-Modules-Guide)
 
-In addition, the solution also contains some implemented not included in the document:
+In addition, the solution also contains some implementations not included in the document:
 
 * [How to add navigation property to an entity of a dependen module](https://github.com/abpframework/abp/issues/3807#issuecomment-644682948)
 * [How to add relationship to AppUser entity](https://github.com/abpframework/abp/issues/1414#issuecomment-508818941)

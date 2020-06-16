@@ -1,0 +1,33 @@
+﻿using System.IO;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Design;
+using Microsoft.Extensions.Configuration;
+
+namespace CustomApplicationModules.EntityFrameworkCore
+{
+    /* This class is needed for EF Core console commands
+     * (like Add-Migration and Update-Database commands) */
+    public class CustomApplicationModulesMigrationsDbContextFactory : IDesignTimeDbContextFactory<CustomApplicationModulesMigrationsDbContext>
+    {
+        public CustomApplicationModulesMigrationsDbContext CreateDbContext(string[] args)
+        {
+            CustomApplicationModulesEfCoreEntityExtensionMappings.Configure();
+
+            var configuration = BuildConfiguration();
+
+            var builder = new DbContextOptionsBuilder<CustomApplicationModulesMigrationsDbContext>()
+                .UseSqlServer(configuration.GetConnectionString("Default"));
+
+            return new CustomApplicationModulesMigrationsDbContext(builder.Options);
+        }
+
+        private static IConfigurationRoot BuildConfiguration()
+        {
+            var builder = new ConfigurationBuilder()
+                .SetBasePath(Directory.GetCurrentDirectory())
+                .AddJsonFile("appsettings.json", optional: false);
+
+            return builder.Build();
+        }
+    }
+}

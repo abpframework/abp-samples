@@ -1,0 +1,9 @@
+﻿.card-title {
+    color: orange;
+    font-size: 2em;
+    text-decoration: underline;
+}
+
+.btn-primary {
+    background-color: red;
+}

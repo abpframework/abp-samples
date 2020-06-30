@@ -1,0 +1,22 @@
+﻿using OrganizationUnitSample.Localization;
+using Volo.Abp.Authorization.Permissions;
+using Volo.Abp.Localization;
+
+namespace OrganizationUnitSample.Permissions
+{
+    public class OrganizationUnitSamplePermissionDefinitionProvider : PermissionDefinitionProvider
+    {
+        public override void Define(IPermissionDefinitionContext context)
+        {
+            var myGroup = context.AddGroup(OrganizationUnitSamplePermissions.GroupName);
+
+            //Define your own permissions here. Example:
+            //myGroup.AddPermission(OrganizationUnitSamplePermissions.MyPermission1, L("Permission:MyPermission1"));
+        }
+
+        private static LocalizableString L(string name)
+        {
+            return LocalizableString.Create<OrganizationUnitSampleResource>(name);
+        }
+    }
+}

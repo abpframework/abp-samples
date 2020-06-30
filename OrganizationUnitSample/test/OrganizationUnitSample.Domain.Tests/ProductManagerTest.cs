@@ -51,7 +51,7 @@ namespace OrganizationUnitSample
             ou11.ShouldNotBeNull();
 
             await _productManager.CreateAsync(new Product(name: "TV", price: 1350.55f, ou1, tenantId: null));
-            await _productManager.CreateAsync(new Product(name: "Fridge", price: 990.45f, ou1, tenantId: null));
+            await _productManager.CreateAsync(new Product(name: "Fridge", price: 990.45f, ou11, tenantId: null));
 
             var products = await _productRepository.GetListAsync();
 
@@ -61,6 +61,18 @@ namespace OrganizationUnitSample
 
         [Fact]
         public async Task Should_Get_Products_In_OrganizationUnit()
+        {
+            var ou11 = (await _organizationUnitRepository.GetListAsync()).FirstOrDefault(ou =>
+                ou.DisplayName.Equals(DataConstants.Ou11Name));
+            ou11.ShouldNotBeNull();
+
+            var productList = await _productManager.GetProductsInOuAsync(ou11);
+            productList.Count.ShouldBe(2);
+            productList.ShouldContain(q => q.Name.Contains("High End PC"));
+        }
+
+        [Fact]
+        public async Task Should_Get_Products_In_OrganizationUnit_Including_Children()
         {
             var ou11 = (await _organizationUnitRepository.GetListAsync()).FirstOrDefault(ou =>
                 ou.DisplayName.Equals(DataConstants.Ou11Name));
@@ -88,7 +100,7 @@ namespace OrganizationUnitSample
             }
 
             var productList = await _productManager.GetProductForUserAsync(user.Id);
-            productList.ShouldContain(t=>t.Name.Contains("Nvidia"));
+            productList.ShouldContain(t => t.Name.Contains("Nvidia"));
             productList.Count.ShouldBe(4);
         }
     }

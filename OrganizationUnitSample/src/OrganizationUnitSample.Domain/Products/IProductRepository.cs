@@ -9,5 +9,6 @@ namespace OrganizationUnitSample.Products
     public interface IProductRepository : IRepository<Product, Guid>
     {
         public Task<List<Product>> GetProductsOfOrganizationUnitListAsync(List<Guid> organizationUnitIds);
+        public Task<List<Product>> GetProductsOfOrganizationUnitAsync(Guid organizationUnitId);
     }
 }

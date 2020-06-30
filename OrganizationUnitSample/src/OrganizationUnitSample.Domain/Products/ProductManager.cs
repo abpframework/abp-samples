@@ -22,6 +22,11 @@ namespace OrganizationUnitSample.Products
             _userManager = userManager;
         }
 
+        public virtual async Task<List<Product>> GetProductsInOuAsync(OrganizationUnit organizationUnit)
+        {
+            return await _productRepository.GetProductsOfOrganizationUnitAsync(organizationUnit.Id);
+        }
+
         public virtual async Task<List<Product>> GetProductsInOuIncludingChildrenAsync(
             OrganizationUnit organizationUnit)
         {

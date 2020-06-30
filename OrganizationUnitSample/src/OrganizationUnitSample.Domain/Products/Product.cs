@@ -11,7 +11,6 @@ namespace OrganizationUnitSample.Products
     public class Product : AuditedAggregateRoot<Guid>, IMultiTenant
     {
         public virtual Guid OrganizationUnitId { get; private set; }
-
         public virtual Guid? TenantId { get; }
         public virtual string Name { get; private set; }
         public virtual float Price { get; private set; }

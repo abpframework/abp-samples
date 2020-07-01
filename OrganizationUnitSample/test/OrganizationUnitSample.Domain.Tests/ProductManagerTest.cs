@@ -60,6 +60,18 @@ namespace OrganizationUnitSample
         }
 
         [Fact]
+        public async Task Should_Get_Products_In_OrganizationUnit_Sync()
+        {
+            var ou11 = (await _organizationUnitRepository.GetListAsync()).FirstOrDefault(ou =>
+                ou.DisplayName.Equals(DataConstants.Ou11Name));
+            ou11.ShouldNotBeNull();
+
+            var productList = await _productManager.GetProductsInOuWithDefaultRepositoryMethodAsync(ou11);
+            productList.Count.ShouldBe(2);
+            productList.ShouldContain(q => q.Name.Contains("High End PC"));
+        }
+
+        [Fact]
         public async Task Should_Get_Products_In_OrganizationUnit()
         {
             var ou11 = (await _organizationUnitRepository.GetListAsync()).FirstOrDefault(ou =>

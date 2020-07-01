@@ -22,6 +22,12 @@ namespace OrganizationUnitSample.Products
             _userManager = userManager;
         }
 
+        [UnitOfWork]
+        public virtual Task<List<Product>> GetProductsInOuWithDefaultRepositoryMethodAsync(OrganizationUnit organizationUnit)
+        {
+            return Task.FromResult(_productRepository.Where(p => p.OrganizationUnitId == organizationUnit.Id).ToList());
+        }
+
         public virtual async Task<List<Product>> GetProductsInOuAsync(OrganizationUnit organizationUnit)
         {
             return await _productRepository.GetProductsOfOrganizationUnitAsync(organizationUnit.Id);
@@ -41,7 +47,7 @@ namespace OrganizationUnitSample.Products
         public virtual async Task<List<Product>> GetProductForUserAsync(Guid userId)
         {
             var user = await _userManager.GetByIdAsync(userId);
-            // var userOrganizationUnits = await _userManager.GetOrganizationUnitsAsync(user); // returns null
+            // var userOrganizationUnits = await _userManager.GetOrganizationUnitsAsync(user); // TODO: shouldn't returns null? Discuss if the methods should be in UoW.
             // var userOuIds = userOrganizationUnits.Select(ou => ou.Id);
             var userOuIds = user.OrganizationUnits.Select(ou => ou.OrganizationUnitId);
 

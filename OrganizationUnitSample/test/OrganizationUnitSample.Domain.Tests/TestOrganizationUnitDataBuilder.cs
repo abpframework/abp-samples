@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore.Query;
 using OrganizationUnitSample.Products;
 using Volo.Abp.DependencyInjection;
 using Volo.Abp.Guids;

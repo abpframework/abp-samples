@@ -5,7 +5,7 @@ $rootFolder = (Get-Item -Path "./" -Verbose).FullName
 # List of solutions
 
 $solutionPaths = (
-    "../aspnet-core/Authentication-Customization",
+    "../Authentication-Customization",
     "../BasicAspNetCoreApplication",
     "../BasicConsoleApplication",
     "../BookStore",

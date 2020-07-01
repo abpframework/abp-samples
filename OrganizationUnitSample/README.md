@@ -8,13 +8,13 @@ Also see [Organization Unit Management docs](https://github.com/abpframework/abp
 
 #### Creating An Entity That Belongs To An Organization Unit
 
-The most obvious usage of OUs is to assign an entity to an OU. [Sample entity](https://github.com/abpframework/abp-samples/blob/master/OrganizationUnitSample/src/OrganizationUnitSample.Domain/Products/Product.cs):
+The most obvious usage of OUs is to assign an entity to an OU. [Sample Product entity](https://github.com/abpframework/abp-samples/blob/master/OrganizationUnitSample/src/OrganizationUnitSample.Domain/Products/Product.cs):
 
 ```csharp
 public class Product : AuditedAggregateRoot<Guid>, IMultiTenant
 {
     public virtual Guid OrganizationUnitId { get; private set; }
-    public virtual Guid? TenantId { get; }
+    public virtual Guid? TenantId { get; private set;}
     public virtual string Name { get; private set; }
     public virtual float Price { get; private set; }
 }
@@ -48,7 +48,7 @@ public class ProductManager : IDomainService
 }
 ```
 
-**For better practice**, you should consider querying it on domain layer for performance and scalability. To do so, add a method to your [repository interface](https://github.com/abpframework/abp-samples/blob/master/OrganizationUnitSample/src/OrganizationUnitSample.Domain/Products/IProductRepository.cs):
+**For better practice**, you should consider querying it on domain layer for performance and scalability. To do so, add a method to your [IProductRepository](https://github.com/abpframework/abp-samples/blob/master/OrganizationUnitSample/src/OrganizationUnitSample.Domain/Products/IProductRepository.cs) interface:
 
 ```csharp
 public interface IProductRepository : IRepository<Product, Guid>
@@ -77,7 +77,7 @@ public List<Product> GetProductsInOu(OrganizationUnit organizationUnit)
 
 #### Get Entities In An Organization Unit Including It's Child Organization Units
 
-You may want to get the Products of an organization unit including child organization units. In this case, the OU **Code** can help us.
+You may want to get the Products of an organization unit including child organization units. In this case, the OU **Code** can be helpful.
 
 You can introduce an other method for your domain service [Product Manager](https://github.com/abpframework/abp-samples/blob/master/OrganizationUnitSample/src/OrganizationUnitSample.Domain/Products/ProductManager.cs) like below:
 
@@ -117,7 +117,6 @@ You may want to get all products that are in the OUs of a specific user. To do s
 ```csharp
 public interface IProductRepository : IRepository<Product, Guid>
 {
-    public Task<List<Product>> GetProductsOfOrganizationUnitAsync(Guid organizationUnitId);
     public Task<List<Product>> GetProductsOfOrganizationUnitListAsync(List<Guid> organizationUnitIds);
 }
 ```

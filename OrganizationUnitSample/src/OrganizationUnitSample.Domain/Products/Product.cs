@@ -11,7 +11,7 @@ namespace OrganizationUnitSample.Products
     public class Product : AuditedAggregateRoot<Guid>, IMultiTenant
     {
         public virtual Guid OrganizationUnitId { get; private set; }
-        public virtual Guid? TenantId { get; }
+        public virtual Guid? TenantId { get; private set; }
         public virtual string Name { get; private set; }
         public virtual float Price { get; private set; }
 
@@ -46,6 +46,11 @@ namespace OrganizationUnitSample.Products
         public void UpdateOrganizationUnit(OrganizationUnit newOrganizationUnit)
         {
             OrganizationUnitId = newOrganizationUnit.Id;
+        }
+
+        public void UpdateTenant(Guid? tenantId)
+        {
+            TenantId = tenantId;
         }
 
         private void CheckNameForValidation(string name)

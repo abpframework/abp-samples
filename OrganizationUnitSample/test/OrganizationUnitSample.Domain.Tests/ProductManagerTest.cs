@@ -60,7 +60,7 @@ namespace OrganizationUnitSample
         }
 
         [Fact]
-        public async Task Should_Get_Products_In_OrganizationUnit_Sync()
+        public async Task Should_Get_Products_In_OrganizationUnit_WithDefaultRepositoryMethod()
         {
             var ou11 = (await _organizationUnitRepository.GetListAsync()).FirstOrDefault(ou =>
                 ou.DisplayName.Equals(DataConstants.Ou11Name));

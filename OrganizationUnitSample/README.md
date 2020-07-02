@@ -53,25 +53,25 @@ public class ProductManager : IDomainService
 ```csharp
 public interface IProductRepository : IRepository<Product, Guid>
 {
-    public Task<List<Product>> GetProductsOfOrganizationUnitAsync(Guid organizationUnitId);
+    public Task<List<Product>> GetProductsInOrganizationUnitAsync(Guid organizationUnitId);
 }
 ```
 
 Then implement it on your ORM layer (which is EntityFrameworkCore in this sample), [ProductRepository](https://github.com/abpframework/abp-samples/blob/master/OrganizationUnitSample/src/OrganizationUnitSample.EntityFrameworkCore/Products/ProductRepository.cs):
 
 ```csharp
-public Task<List<Product>> GetProductsOfOrganizationUnitAsync(Guid organizationUnitId)
+public async Task<List<Product>> GetProductsInOrganizationUnitAsync(Guid organizationUnitId)
 {
-    return DbSet.Where(p => p.OrganizationUnitId == organizationUnitId).ToListAsync();
+    return await DbSet.Where(p => p.OrganizationUnitId == organizationUnitId).ToListAsync();
 }
 ```
 
 Afterwards, you can modify your domain service [Product Manager](https://github.com/abpframework/abp-samples/blob/master/OrganizationUnitSample/src/OrganizationUnitSample.Domain/Products/ProductManager.cs) like below:
 
 ```csharp
-public List<Product> GetProductsInOu(OrganizationUnit organizationUnit)
+public async Task<List<Product>> GetProductsInOuAsync(OrganizationUnit organizationUnit)
 {
-	return await _productRepository.GetProductsOfOrganizationUnitAsync(organizationUnit.Id);
+	return await _productRepository.GetProductsInOrganizationUnitAsync(organizationUnit.Id);
 }
 ```
 

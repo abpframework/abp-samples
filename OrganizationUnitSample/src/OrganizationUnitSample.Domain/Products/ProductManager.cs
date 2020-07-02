@@ -30,13 +30,13 @@ namespace OrganizationUnitSample.Products
 
         public virtual async Task<List<Product>> GetProductsInOuAsync(OrganizationUnit organizationUnit)
         {
-            return await _productRepository.GetProductsOfOrganizationUnitAsync(organizationUnit.Id);
+            return await _productRepository.GetProductsInOrganizationUnitAsync(organizationUnit.Id);
         }
 
         public virtual async Task<List<Product>> GetProductsInOuIncludingChildrenAsync(
             OrganizationUnit organizationUnit)
         {
-            var query = from product in (await _productRepository.GetListAsync())
+            var query = from product in  _productRepository
                 join ou in (await _organizationUnitRepository.GetListAsync()).Where(ou =>
                     ou.Code.StartsWith(organizationUnit.Code)) on product.OrganizationUnitId equals ou.Id
                 select product;
@@ -51,7 +51,7 @@ namespace OrganizationUnitSample.Products
             // var userOuIds = userOrganizationUnits.Select(ou => ou.Id);
             var userOuIds = user.OrganizationUnits.Select(ou => ou.OrganizationUnitId);
 
-            return await _productRepository.GetProductsOfOrganizationUnitListAsync(userOuIds.ToList());
+            return await _productRepository.GetProductsInOrganizationUnitListAsync(userOuIds.ToList());
         }
 
         [UnitOfWork]

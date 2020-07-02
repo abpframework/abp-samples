@@ -19,15 +19,15 @@ namespace OrganizationUnitSample.Products
         {
         }
 
-        public Task<List<Product>> GetProductsOfOrganizationUnitListAsync(List<Guid> organizationUnitIds)
+        public async Task<List<Product>> GetProductsInOrganizationUnitListAsync(List<Guid> organizationUnitIds)
         {
-            return Products.Where(p => organizationUnitIds.Contains(p.OrganizationUnitId))
+            return await Products.Where(p => organizationUnitIds.Contains(p.OrganizationUnitId))
                 .ToListAsync();
         }
 
-        public Task<List<Product>> GetProductsOfOrganizationUnitAsync(Guid organizationUnitId)
+        public async Task<List<Product>> GetProductsInOrganizationUnitAsync(Guid organizationUnitId)
         {
-            return Products.Where(p => p.OrganizationUnitId == organizationUnitId).ToListAsync();
+            return await Products.Where(p => p.OrganizationUnitId == organizationUnitId).ToListAsync();
         }
     }
 }

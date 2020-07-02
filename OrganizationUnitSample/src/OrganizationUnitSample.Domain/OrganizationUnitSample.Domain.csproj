@@ -12,15 +12,15 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Volo.Abp.Identity.Domain" Version="2.9.0" />
-    <PackageReference Include="Volo.Abp.PermissionManagement.Domain.Identity" Version="2.9.0" />
-    <PackageReference Include="Volo.Abp.IdentityServer.Domain" Version="2.9.0" />
-    <PackageReference Include="Volo.Abp.PermissionManagement.Domain.IdentityServer" Version="2.9.0" />
-    <PackageReference Include="Volo.Abp.BackgroundJobs.Domain" Version="2.9.0" />
-    <PackageReference Include="Volo.Abp.AuditLogging.Domain" Version="2.9.0" />
-    <PackageReference Include="Volo.Abp.TenantManagement.Domain" Version="2.9.0" />
-    <PackageReference Include="Volo.Abp.FeatureManagement.Domain" Version="2.9.0" />
-    <PackageReference Include="Volo.Abp.SettingManagement.Domain" Version="2.9.0" />
+    <PackageReference Include="Volo.Abp.Identity.Domain" Version="3.0.0" />
+    <PackageReference Include="Volo.Abp.PermissionManagement.Domain.Identity" Version="3.0.0" />
+    <PackageReference Include="Volo.Abp.IdentityServer.Domain" Version="3.0.0" />
+    <PackageReference Include="Volo.Abp.PermissionManagement.Domain.IdentityServer" Version="3.0.0" />
+    <PackageReference Include="Volo.Abp.BackgroundJobs.Domain" Version="3.0.0" />
+    <PackageReference Include="Volo.Abp.AuditLogging.Domain" Version="3.0.0" />
+    <PackageReference Include="Volo.Abp.TenantManagement.Domain" Version="3.0.0" />
+    <PackageReference Include="Volo.Abp.FeatureManagement.Domain" Version="3.0.0" />
+    <PackageReference Include="Volo.Abp.SettingManagement.Domain" Version="3.0.0" />
   </ItemGroup>
 
 </Project>

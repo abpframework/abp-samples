@@ -8,7 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Volo.Abp.Validation" Version="2.9.0" />
+    <PackageReference Include="Volo.Abp.Validation" Version="3.0.0" />
   </ItemGroup>
 
   <ItemGroup>

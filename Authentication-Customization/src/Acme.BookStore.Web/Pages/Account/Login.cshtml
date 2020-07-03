@@ -1,8 +1,10 @@
 ﻿@page
+@using Microsoft.AspNetCore.Mvc.Localization
+@using Volo.Abp.Account.Localization
 @using Volo.Abp.Account.Settings
 @using Volo.Abp.Settings
 @model Acme.BookStore.Web.Pages.Account.CustomLoginModel
-@inherits Volo.Abp.Account.Web.Pages.Account.AccountPage
+@inject IHtmlLocalizer<AccountResource> L
 @inject Volo.Abp.Settings.ISettingProvider SettingProvider
 
 <div class="jumbotron">

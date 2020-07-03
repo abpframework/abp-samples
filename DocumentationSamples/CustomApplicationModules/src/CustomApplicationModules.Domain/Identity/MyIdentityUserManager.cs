@@ -32,7 +32,6 @@ namespace CustomApplicationModules.Identity
             ILogger<IdentityUserManager> logger,
             ICancellationTokenProvider cancellationTokenProvider,
             IOrganizationUnitRepository organizationUnitRepository,
-            IIdentityUserRepository identityUserRepository,
             ISettingProvider settingProvider) :
             base(store,
                 roleRepository,
@@ -47,7 +46,6 @@ namespace CustomApplicationModules.Identity
                 logger,
                 cancellationTokenProvider,
                 organizationUnitRepository,
-                identityUserRepository,
                 settingProvider)
         {
         }

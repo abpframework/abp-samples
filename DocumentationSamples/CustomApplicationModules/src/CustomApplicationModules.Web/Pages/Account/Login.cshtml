@@ -1,8 +1,10 @@
 ﻿@page
 @model CustomApplicationModules.Web.Pages.Account.MyLoginModel
+@using Microsoft.AspNetCore.Mvc.Localization
+@using Volo.Abp.Account.Localization
 @using Volo.Abp.Account.Settings
 @using Volo.Abp.Settings
-@inherits Volo.Abp.Account.Web.Pages.Account.AccountPage
+@inject IHtmlLocalizer<AccountResource> L
 @inject Volo.Abp.Settings.ISettingProvider SettingProvider
 
 @if (Model.EnableLocalLogin)

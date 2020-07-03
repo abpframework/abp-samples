@@ -12,8 +12,9 @@ namespace CustomApplicationModules.Identity
     {
         public MyIdentityUserAppService(
             IdentityUserManager userManager,
-            IIdentityUserRepository userRepository) :
-            base(userManager, userRepository)
+            IIdentityUserRepository userRepository,
+            IIdentityRoleRepository roleRepository) :
+            base(userManager, userRepository, roleRepository)
         {
         }
 

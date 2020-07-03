@@ -75,14 +75,15 @@ namespace Acme.BookStore.Web
                     typeof(BookStoreWebModule).Assembly
                 );
             });
+
+            PreConfigure<IdentityBuilder>(identityBuilder =>
+            {
+                identityBuilder.AddSignInManager<CustomSignInManager>();
+            });
         }
 
         public override void ConfigureServices(ServiceConfigurationContext context)
         {
-            context.Services
-                .GetObject<IdentityBuilder>()
-                .AddSignInManager<CustomSignInManager>();
-
             var hostingEnvironment = context.Services.GetHostingEnvironment();
             var configuration = context.Services.GetConfiguration();
 

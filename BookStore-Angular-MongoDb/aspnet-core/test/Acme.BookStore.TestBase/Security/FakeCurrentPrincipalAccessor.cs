@@ -8,11 +8,6 @@ namespace Acme.BookStore.Security
     [Dependency(ReplaceServices = true)]
     public class FakeCurrentPrincipalAccessor : ThreadCurrentPrincipalAccessor
     {
-        public override ClaimsPrincipal GetClaimsPrincipal()
-        {
-            return GetPrincipal();
-        }
-
         private ClaimsPrincipal _principal;
 
         private ClaimsPrincipal GetPrincipal()

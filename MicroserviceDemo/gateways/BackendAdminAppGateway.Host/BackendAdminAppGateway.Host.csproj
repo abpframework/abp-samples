@@ -1,0 +1,64 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+    <PropertyGroup>
+        <TargetFramework>netcoreapp3.1</TargetFramework>
+        <AssetTargetFallback>$(AssetTargetFallback);portable-net45+win8+wp8+wpa81;</AssetTargetFallback>
+        <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+        <GenerateBindingRedirectsOutputType>true</GenerateBindingRedirectsOutputType>
+        <GenerateRuntimeConfigurationFiles>true</GenerateRuntimeConfigurationFiles>
+        <PreserveCompilationContext>true</PreserveCompilationContext>
+        <MvcRazorExcludeRefAssembliesFromPublish>false</MvcRazorExcludeRefAssembliesFromPublish>
+        <PreserveCompilationReferences>true</PreserveCompilationReferences>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Serilog.AspNetCore" Version="3.2.0"/>
+        <PackageReference Include="Serilog.Sinks.File" Version="4.1.0"/>
+        <PackageReference Include="Serilog.Sinks.Elasticsearch" Version="6.5.0"/>
+        <PackageReference Include="Swashbuckle.AspNetCore" Version="5.3.1"/>
+        <PackageReference Include="Ocelot" Version="13.8.0"/>
+        <PackageReference Include="IdentityServer4.AccessTokenValidation" Version="3.0.1"/>
+        <PackageReference Include="Microsoft.Extensions.Caching.StackExchangeRedis" Version="3.1.2"/>
+        <PackageReference Include="Microsoft.AspNetCore.DataProtection.StackExchangeRedis" Version="3.1.2"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Volo.Abp.Autofac" Version="3.0.1"/>
+        <PackageReference Include="Volo.Abp.AspNetCore.Mvc.UI.MultiTenancy" Version="3.0.1"/>
+        <PackageReference Include="Volo.Abp.EntityFrameworkCore.SqlServer" Version="3.0.1"/>
+        <PackageReference Include="Volo.Abp.Http.Client.IdentityModel.Web" Version="3.0.1"/>
+        <PackageReference Include="Volo.Abp.Identity.HttpApi" Version="3.0.1"/>
+        <PackageReference Include="Volo.Abp.Identity.HttpApi.Client" Version="3.0.1"/>
+        <PackageReference Include="Volo.Abp.PermissionManagement.Domain.Identity" Version="3.0.1"/>
+        <PackageReference Include="Volo.Abp.PermissionManagement.Domain.IdentityServer" Version="3.0.1"/>
+        <PackageReference Include="Volo.Abp.PermissionManagement.Application" Version="3.0.1"/>
+        <PackageReference Include="Volo.Abp.PermissionManagement.HttpApi" Version="3.0.1"/>
+        <PackageReference Include="Volo.Abp.PermissionManagement.EntityFrameworkCore" Version="3.0.1"/>
+        <PackageReference Include="Volo.Abp.FeatureManagement.Application" Version="3.0.1"/>
+        <PackageReference Include="Volo.Abp.FeatureManagement.HttpApi" Version="3.0.1"/>
+        <PackageReference Include="Volo.Abp.FeatureManagement.EntityFrameworkCore" Version="3.0.1"/>
+        <PackageReference Include="Volo.Abp.SettingManagement.EntityFrameworkCore" Version="3.0.1"/>
+        <PackageReference Include="Volo.Blogging.Application.Contracts" Version="3.0.1"/>
+        <PackageReference Include="Volo.Abp.TenantManagement.Application.Contracts" Version="3.0.1"/>
+        <PackageReference Include="Volo.Abp.TenantManagement.HttpApi" Version="3.0.1"/>
+        <PackageReference Include="Volo.Abp.TenantManagement.HttpApi.Client" Version="3.0.1"/>
+        <PackageReference Include="Volo.Abp.TenantManagement.EntityFrameworkCore" Version="3.0.1"/>
+
+        <ProjectReference Include="..\..\modules\product\src\ProductManagement.HttpApi\ProductManagement.HttpApi.csproj"/>
+        <ProjectReference Include="..\..\shared\MsDemo.Shared\MsDemo.Shared.csproj"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <Compile Remove="Logs\**"/>
+        <Content Remove="Logs\**"/>
+        <EmbeddedResource Remove="Logs\**"/>
+        <None Remove="Logs\**"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <Content Update="appsettings.json">
+            <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+        </Content>
+    </ItemGroup>
+
+</Project>

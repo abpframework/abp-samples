@@ -37,7 +37,7 @@ namespace OrganizationUnitSample.Products
         public virtual async Task<List<Product>> GetProductsInOuIncludingChildrenAsync(
             OrganizationUnit organizationUnit)
         {
-            var query = from product in _productRepository
+            var query = from product in (await _productRepository.GetListAsync())
                 join ou in (await _organizationUnitRepository.GetListAsync()).Where(ou =>
                     ou.Code.StartsWith(organizationUnit.Code)) on product.OrganizationUnitId equals ou.Id
                 select product;

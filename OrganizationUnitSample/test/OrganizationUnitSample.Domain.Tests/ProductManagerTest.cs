@@ -66,9 +66,13 @@ namespace OrganizationUnitSample
                 ou.DisplayName.Equals(DataConstants.Ou11Name));
             ou11.ShouldNotBeNull();
 
-            var productList = await _productManager.GetProductsInOuWithDefaultRepositoryMethodAsync(ou11);
-            productList.Count.ShouldBe(2);
-            productList.ShouldContain(q => q.Name.Contains("High End PC"));
+            using (var uow = _unitOfWorkManager.Begin())
+            {
+                var productList = await _productManager.GetProductsInOuWithDefaultRepositoryMethodAsync(ou11);
+                productList.Count.ShouldBe(2);
+                productList.ShouldContain(q => q.Name.Contains("High End PC"));
+                await uow.CompleteAsync();
+            }
         }
 
         [Fact]
@@ -90,10 +94,14 @@ namespace OrganizationUnitSample
                 ou.DisplayName.Equals(DataConstants.Ou11Name));
             ou11.ShouldNotBeNull();
 
-            var productList = await _productManager.GetProductsInOuIncludingChildrenAsync(ou11);
+            using (var uow = _unitOfWorkManager.Begin())
+            {
+                var productList = await _productManager.GetProductsInOuIncludingChildrenAsync(ou11);
 
-            productList.Count.ShouldBe(10);
-            productList.ShouldContain(q => q.Name.Contains("AMD"));
+                productList.Count.ShouldBe(10);
+                productList.ShouldContain(q => q.Name.Contains("AMD"));
+                await uow.CompleteAsync();
+            }
         }
 
         [Fact]

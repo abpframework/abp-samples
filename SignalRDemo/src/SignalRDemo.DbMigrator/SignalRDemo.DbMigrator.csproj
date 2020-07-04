@@ -22,11 +22,11 @@
     <PackageReference Include="Serilog.Extensions.Logging" Version="3.0.1" />
     <PackageReference Include="Serilog.Sinks.File" Version="4.1.0" />
     <PackageReference Include="Serilog.Sinks.Console" Version="3.1.1" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.2" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.5" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Volo.Abp.Autofac" Version="3.0.0" />
+    <PackageReference Include="Volo.Abp.Autofac" Version="3.0.2" />
     <ProjectReference Include="..\SignalRDemo.Application.Contracts\SignalRDemo.Application.Contracts.csproj" />
     <ProjectReference Include="..\SignalRDemo.EntityFrameworkCore.DbMigrations\SignalRDemo.EntityFrameworkCore.DbMigrations.csproj" />
   </ItemGroup>

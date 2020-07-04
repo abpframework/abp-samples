@@ -2,16 +2,16 @@
 
     <PropertyGroup>
         <TargetFramework>netcoreapp3.1</TargetFramework>
-        <RootNamespace/>
+        <RootNamespace />
     </PropertyGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\..\src\ProductManagement.Application\ProductManagement.Application.csproj"/>
-        <ProjectReference Include="..\ProductManagement.Domain.Tests\ProductManagement.Domain.Tests.csproj"/>
+        <ProjectReference Include="..\..\src\ProductManagement.Application\ProductManagement.Application.csproj" />
+        <ProjectReference Include="..\ProductManagement.Domain.Tests\ProductManagement.Domain.Tests.csproj" />
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.6.1"/>
+        <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.6.1" />
     </ItemGroup>
 
 </Project>

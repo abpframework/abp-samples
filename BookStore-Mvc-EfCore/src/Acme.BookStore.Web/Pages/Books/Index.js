@@ -47,4 +47,15 @@
         )
     );
 
+    var createModal = new abp.ModalManager(abp.appPath + 'Books/CreateModal');
+
+    createModal.onResult(function () {
+        dataTable.ajax.reload();
+    });
+
+    $('#NewBookButton').click(function (e) {
+        e.preventDefault();
+        createModal.open();
+    });
+
 });

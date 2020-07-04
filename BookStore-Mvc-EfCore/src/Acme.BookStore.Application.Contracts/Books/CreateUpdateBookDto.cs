@@ -13,7 +13,8 @@ namespace Acme.BookStore.Books
         public BookType Type { get; set; } = BookType.Undefined;
 
         [Required]
-        public DateTime PublishDate { get; set; }
+        [DataType(DataType.Date)]
+        public DateTime PublishDate { get; set; } = DateTime.Now;
 
         [Required]
         public float Price { get; set; }

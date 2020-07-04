@@ -20,13 +20,8 @@ namespace GrpcDemo.HttpApi.Client.ConsoleTestApp
             {
                 application.Initialize();
 
-
-                /* Disabled regular REST request demo since it is not working when
-                 * the server runs with HTTP/2.
-                 */
-
-                //var demo = application.ServiceProvider.GetRequiredService<ClientDemoService>();
-                //await demo.RunAsync();
+                var demo = application.ServiceProvider.GetRequiredService<ClientDemoService>();
+                await demo.RunAsync();
 
                 var grpcDemo = application.ServiceProvider.GetRequiredService<GrpcClientDemoService>();
                 await grpcDemo.RunAsync();

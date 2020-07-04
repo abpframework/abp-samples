@@ -2,12 +2,12 @@
 
     <PropertyGroup>
         <TargetFramework>netcoreapp3.1</TargetFramework>
-        <RootNamespace/>
+        <RootNamespace />
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Volo.Abp.AspNetCore.Mvc" Version="3.0.1"/>
-        <ProjectReference Include="..\ProductManagement.Application.Contracts\ProductManagement.Application.Contracts.csproj"/>
+        <PackageReference Include="Volo.Abp.AspNetCore.Mvc" Version="3.0.2" />
+        <ProjectReference Include="..\ProductManagement.Application.Contracts\ProductManagement.Application.Contracts.csproj" />
     </ItemGroup>
 
 </Project>

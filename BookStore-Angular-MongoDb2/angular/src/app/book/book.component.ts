@@ -14,6 +14,8 @@ export class BookComponent implements OnInit {
 
   booksType = BookType;
 
+  isModalOpen = false; // <== added this line ==>
+
   constructor(public readonly list: ListService, private bookService: BookService) {}
 
   ngOnInit() {
@@ -22,5 +24,10 @@ export class BookComponent implements OnInit {
     this.list.hookToQuery(bookStreamCreator).subscribe((response) => {
       this.book = response;
     });
+  }
+
+  // added createBook method
+  createBook() {
+    this.isModalOpen = true;
   }
 }

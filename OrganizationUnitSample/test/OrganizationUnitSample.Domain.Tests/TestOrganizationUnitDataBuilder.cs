@@ -19,7 +19,6 @@ namespace OrganizationUnitSample
         private readonly IGuidGenerator _guidGenerator;
         private readonly IOrganizationUnitRepository _organizationUnitRepository;
         private readonly IUnitOfWorkManager _unitOfWorkManager;
-        private readonly HashSet<string> _ouHashSet;
 
         public TestOrganizationUnitDataBuilder(IGuidGenerator guidGenerator,
             OrganizationUnitManager organizationUnitManager, IOrganizationUnitRepository organizationUnitRepository,
@@ -30,7 +29,6 @@ namespace OrganizationUnitSample
             _organizationUnitRepository = organizationUnitRepository;
             _productManager = productManager;
             _unitOfWorkManager = unitOfWorkManager;
-            _ouHashSet = new HashSet<string>();
         }
 
         public async Task Build()
@@ -55,7 +53,6 @@ namespace OrganizationUnitSample
                     var ou = new OrganizationUnit(id, ouName);
                     await _organizationUnitManager.CreateAsync(ou);
                     await uow.CompleteAsync();
-                    _ouHashSet.Add(ouName);
                     await _productManager.CreateAsync(new Product(CreateRandomWordWithGuid(id),
                         CreateRandomFloatNumber(), ou, null));
                 }

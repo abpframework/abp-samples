@@ -1,5 +1,4 @@
-﻿using System;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using OrganizationUnitSample.Products;
@@ -8,7 +7,6 @@ using Volo.Abp.Identity;
 using Volo.Abp.Uow;
 using Xunit;
 using Xunit.Abstractions;
-using Xunit.Sdk;
 
 namespace OrganizationUnitSample
 {
@@ -20,12 +18,10 @@ namespace OrganizationUnitSample
         private readonly IdentityUserManager _userManager;
         private readonly IUnitOfWorkManager _unitOfWorkManager;
         private readonly ITestOutputHelper _testOutputHelper;
-        private readonly IMessageSink _diagnosticMessageSink;
 
-        public ProductManagerTest()
+        public ProductManagerTest(ITestOutputHelper testOutputHelper)
         {
-            //_testOutputHelper = GetRequiredService<ITestOutputHelper>();
-            _diagnosticMessageSink = GetRequiredService<IMessageSink>();
+            _testOutputHelper = testOutputHelper;
             _unitOfWorkManager = GetRequiredService<IUnitOfWorkManager>();
             _userManager = GetRequiredService<IdentityUserManager>();
             _productRepository = GetRequiredService<IProductRepository>();
@@ -37,14 +33,14 @@ namespace OrganizationUnitSample
         public async Task TestOrganizationUnitSeed()
         {
             var result = await _organizationUnitRepository.GetListAsync();
-            result.Count.ShouldBe(6);
+            result.Count.ShouldBeGreaterThan(5);
         }
 
         [Fact]
         public async Task TestProductSeed()
         {
             var result = await _productRepository.GetListAsync();
-            result.Count.ShouldBe(12);
+            result.Count.ShouldBeGreaterThan(11);
         }
 
         [Fact]
@@ -99,7 +95,7 @@ namespace OrganizationUnitSample
         public async Task Should_Get_Products_In_OrganizationUnit_Including_Children()
         {
             var ou11 = (await _organizationUnitRepository.GetListAsync()).FirstOrDefault(ou =>
-                ou.DisplayName.Equals(DataConstants.Ou11Name));
+            ou.DisplayName.Equals(DataConstants.Ou11Name));
             ou11.ShouldNotBeNull();
 
             using (var uow = _unitOfWorkManager.Begin())
@@ -108,17 +104,15 @@ namespace OrganizationUnitSample
                 var productList = await _productManager.GetProductsInOuIncludingChildrenAsync(ou11);
                 timer.Stop();
 
-                var message = new DiagnosticMessage(
-                    $"Elapsed time {timer.ElapsedMilliseconds} ms for finding {productList.Count} products");
-                _diagnosticMessageSink.OnMessage(message);
-
-                //_testOutputHelper.WriteLine(
-                //    $"Elapsed time {timer.ElapsedMilliseconds} ms for finding {productList.Count} products");
-
+                var productCount = await _productRepository.GetCountAsync();
+                var ouCount = await _organizationUnitRepository.GetCountAsync();
                 productList.Count.ShouldBe(10);
                 productList.ShouldContain(q => q.Name.Contains("AMD"));
+
+                _testOutputHelper.WriteLine($"Elapsed time {timer.ElapsedMilliseconds} ms for finding {productList.Count()} products in total of {productCount} products and {ouCount} organization units");
                 await uow.CompleteAsync();
             }
+
         }
 
         [Fact]

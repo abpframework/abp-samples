@@ -7,9 +7,8 @@ using Volo.Abp.DependencyInjection;
 using Volo.Abp.Guids;
 using Volo.Abp.Identity;
 using System.Diagnostics;
-using System.Threading;
-using Shouldly;
 using Volo.Abp.Uow;
+using System.Collections.Generic;
 
 namespace OrganizationUnitSample
 {
@@ -20,6 +19,7 @@ namespace OrganizationUnitSample
         private readonly IGuidGenerator _guidGenerator;
         private readonly IOrganizationUnitRepository _organizationUnitRepository;
         private readonly IUnitOfWorkManager _unitOfWorkManager;
+        private readonly HashSet<string> _ouHashSet;
 
         public TestOrganizationUnitDataBuilder(IGuidGenerator guidGenerator,
             OrganizationUnitManager organizationUnitManager, IOrganizationUnitRepository organizationUnitRepository,
@@ -30,17 +30,15 @@ namespace OrganizationUnitSample
             _organizationUnitRepository = organizationUnitRepository;
             _productManager = productManager;
             _unitOfWorkManager = unitOfWorkManager;
+            _ouHashSet = new HashSet<string>();
         }
 
         public async Task Build()
         {
-            int count = 500;
+            int count = 10;
             Stopwatch timer = Stopwatch.StartNew();
             await SeedRandomOrganizationUnitsWithProductsAsync(count);
             timer.Stop();
-
-            Console.WriteLine(
-                $"Elapsed time {timer.ElapsedMilliseconds} ms for Creating {count} OrganizationUnits and Products");
 
             await AddOrganizationUnitsAsync();
             await AddProductsAsync();
@@ -51,16 +49,16 @@ namespace OrganizationUnitSample
             for (int i = 0; i < count; i++)
             {
                 var id = _guidGenerator.Create();
+                var ouName = CreateRandomWordWithGuid(id);
                 using (var uow = _unitOfWorkManager.Begin())
                 {
-                    await _organizationUnitManager.CreateAsync(new OrganizationUnit(id,
-                        CreateRandomWordNumberCombination()));
+                    var ou = new OrganizationUnit(id, ouName);
+                    await _organizationUnitManager.CreateAsync(ou);
                     await uow.CompleteAsync();
+                    _ouHashSet.Add(ouName);
+                    await _productManager.CreateAsync(new Product(CreateRandomWordWithGuid(id),
+                        CreateRandomFloatNumber(), ou, null));
                 }
-
-                var ou = await _organizationUnitRepository.FindAsync(id);
-                await _productManager.CreateAsync(new Product(CreateRandomWordNumberCombination(),
-                    CreateRandomFloatNumber(), ou, null));
             }
         }
 
@@ -150,7 +148,7 @@ namespace OrganizationUnitSample
             // await _productManager.CreateAsync(new Product("Sound System", 125.00f, ou1, null));
         }
 
-        private string CreateRandomWordNumberCombination()
+        private string CreateRandomWordWithGuid(Guid id)
         {
             Random rnd = new Random();
             //Dictionary of strings
@@ -166,10 +164,8 @@ namespace OrganizationUnitSample
                 "broken", "wherever", "finger", "exist", "member", "route",
                 "single", "broad", "rubber", "increase", "structure", "egg"
             };
-            //Random number from - to
-            int randomNumber = rnd.Next(1000, 90000);
-            //Create combination of word + number
-            string randomString = $"{words[rnd.Next(0, words.Length)]}{randomNumber}";
+            //Create combination of word + guid
+            string randomString = $"{words[rnd.Next(0, words.Length)]}--{id}";
 
             return randomString;
         }

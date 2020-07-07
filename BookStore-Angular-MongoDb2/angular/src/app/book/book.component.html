@@ -8,7 +8,13 @@
       </div>
       <div class="text-right col col-md-6">
         <div class="text-lg-right pt-2">
-          <button id="create" class="btn btn-primary" type="button" (click)="createBook()">
+          <button
+            abpPermission="BookStore.Books.Create"
+            id="create"
+            class="btn btn-primary"
+            type="button"
+            (click)="createBook()"
+          >
             <i class="fa fa-plus mr-1"></i>
             <span>{{ '::NewBook' | abpLocalization }}</span>
           </button>

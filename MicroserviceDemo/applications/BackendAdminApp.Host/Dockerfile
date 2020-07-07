@@ -1,18 +1,25 @@
-FROM mcr.microsoft.com/dotnet/core/aspnet:3.0-buster-slim AS base
+FROM mcr.microsoft.com/dotnet/core/aspnet:3.1-buster-slim AS base
 WORKDIR /app
 EXPOSE 80
 
-FROM mcr.microsoft.com/dotnet/core/sdk:3.0-buster AS build
+FROM mcr.microsoft.com/dotnet/core/sdk:3.1-buster AS build
 WORKDIR /src
+COPY ["applications/BackendAdminApp.Host/BackendAdminApp.Host.csproj", "applications/BackendAdminApp.Host/"]
+COPY ["modules/product/src/ProductManagement.Web/ProductManagement.Web.csproj", "modules/product/src/ProductManagement.Web/"]
+COPY ["modules/product/src/ProductManagement.HttpApi/ProductManagement.HttpApi.csproj", "modules/product/src/ProductManagement.HttpApi/"]
+COPY ["modules/product/src/ProductManagement.Application.Contracts/ProductManagement.Application.Contracts.csproj", "modules/product/src/ProductManagement.Application.Contracts/"]
+COPY ["modules/product/src/ProductManagement.Domain.Shared/ProductManagement.Domain.Shared.csproj", "modules/product/src/ProductManagement.Domain.Shared/"]
+COPY ["modules/product/src/ProductManagement.HttpApi.Client/ProductManagement.HttpApi.Client.csproj", "modules/product/src/ProductManagement.HttpApi.Client/"]
+COPY ["shared/MsDemo.Shared/MsDemo.Shared.csproj", "shared/MsDemo.Shared/"]
+RUN dotnet restore "applications/BackendAdminApp.Host/BackendAdminApp.Host.csproj" -nowarn:msb3202,msb3277,nu1503
 COPY . .
-WORKDIR "/src/samples/MicroserviceDemo/applications/BackendAdminApp.Host"
-RUN dotnet restore -nowarn:msb3202,nu1503
-RUN dotnet build --no-restore -c Release -o /app
+WORKDIR "/src/applications/BackendAdminApp.Host"
+RUN dotnet build "BackendAdminApp.Host.csproj" --no-restore -nowarn:msb3202,msb3277,nu1503 -c Release -o /app/build
 
 FROM build AS publish
-RUN dotnet publish --no-restore -c Release -o /app
+RUN dotnet publish "BackendAdminApp.Host.csproj" --no-restore -nowarn:msb3202,msb3277,nu1503 -c Release -o /app/publish
 
 FROM base AS final
 WORKDIR /app
-COPY --from=publish /app .
+COPY --from=publish /app/publish .
 ENTRYPOINT ["dotnet", "BackendAdminApp.Host.dll"]

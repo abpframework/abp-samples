@@ -6,7 +6,7 @@ export SHELL="/bin/bash"
 minikube start
 
 eval $(minikube docker-env)
-docker-compose -f docker-compose.yml -f docker-compose.migrations.yml -f docker-compose.override.yml build
+docker-compose -f docker-compose.infrastructure.yml -f docker-compose.infrastructure.override.yml -f docker-compose.yml -f docker-compose.migrations.yml -f docker-compose.override.yml build
 
 cd ./k8s
 kubectl create -f $(ls -x | grep .yaml | grep -v deployment | tr " \t\n\r" ","  | sed 's/.$//')

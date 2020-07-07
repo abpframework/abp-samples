@@ -41,10 +41,18 @@
               <i class="fa fa-cog mr-1"></i>{{ '::Actions' | abpLocalization }}
             </button>
             <div ngbDropdownMenu>
-              <button ngbDropdownItem (click)="editBook(row.id)">
+              <button
+                abpPermission="BookStore.Books.Edit"
+                ngbDropdownItem
+                (click)="editBook(row.id)"
+              >
                 {{ '::Edit' | abpLocalization }}
               </button>
-              <button ngbDropdownItem (click)="delete(row.id)">
+              <button
+                abpPermission="BookStore.Books.Delete"
+                ngbDropdownItem
+                (click)="delete(row.id)"
+              >
                 {{ 'AbpAccount::Delete' | abpLocalization }}
               </button>
             </div>

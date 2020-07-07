@@ -4,6 +4,7 @@ import { BookDto, BookType, CreateUpdateBookDto } from './models';
 import { BookService } from './services';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { NgbDateNativeAdapter, NgbDateAdapter } from '@ng-bootstrap/ng-bootstrap';
+import { ConfirmationService, Confirmation } from '@abp/ng.theme.shared';
 
 @Component({
   selector: 'app-book',
@@ -18,7 +19,7 @@ export class BookComponent implements OnInit {
 
   form: FormGroup;
 
-  selectedBook = new BookDto(); // declare selectedBook
+  selectedBook = new BookDto();
 
   bookTypes = Object.keys(BookType).filter(
     (bookType) => typeof this.booksType[bookType] === 'number'
@@ -29,7 +30,8 @@ export class BookComponent implements OnInit {
   constructor(
     public readonly list: ListService,
     private bookService: BookService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private confirmation: ConfirmationService
   ) {}
 
   ngOnInit() {
@@ -41,12 +43,11 @@ export class BookComponent implements OnInit {
   }
 
   createBook() {
-    this.selectedBook = new BookDto(); // reset the selected book
+    this.selectedBook = new BookDto();
     this.buildForm();
     this.isModalOpen = true;
   }
 
-  // Add editBook method
   editBook(id: string) {
     this.bookService.getById(id).subscribe((book) => {
       this.selectedBook = book;
@@ -67,7 +68,6 @@ export class BookComponent implements OnInit {
     });
   }
 
-  // change the save method
   save() {
     if (this.form.invalid) {
       return;
@@ -81,6 +81,14 @@ export class BookComponent implements OnInit {
       this.isModalOpen = false;
       this.form.reset();
       this.list.get();
+    });
+  }
+
+  delete(id: string) {
+    this.confirmation.warn('::AreYouSureToDelete', 'AbpAccount::AreYouSure').subscribe((status) => {
+      if (status === Confirmation.Status.confirm) {
+        this.bookService.deleteById(id).subscribe(() => this.list.get());
+      }
     });
   }
 }

@@ -38,6 +38,9 @@
               <button ngbDropdownItem (click)="editBook(row.id)">
                 {{ '::Edit' | abpLocalization }}
               </button>
+              <button ngbDropdownItem (click)="delete(row.id)">
+                {{ 'AbpAccount::Delete' | abpLocalization }}
+              </button>
             </div>
           </div>
         </ng-template>

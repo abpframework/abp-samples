@@ -1,0 +1,36 @@
+version: '3.7'
+
+services:
+  
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server
+    volumes:
+      - dbdata:/var/opt/mssql
+
+  mongodb:
+    image: mongo
+
+  rabbitmq:
+    image: 'rabbitmq:3-management-alpine'
+
+  redis:
+    image: redis:alpine
+
+  elasticsearch:
+    image: 'docker.elastic.co/elasticsearch/elasticsearch:7.8.0'
+    volumes:
+      - esdata:/usr/share/elasticsearch/data
+
+  logstash:
+    image: 'docker.elastic.co/logstash/logstash:7.8.0'
+    depends_on:
+      - elasticsearch
+
+  kibana:
+    image: 'docker.elastic.co/kibana/kibana:7.8.0'
+    depends_on:
+      - elasticsearch
+        
+volumes:
+  dbdata:
+  esdata:

@@ -38,12 +38,10 @@ public class ProductManager : IDomainService
         _productRepository = productRepository;
     }
 
-    [UnitOfWork]
     public virtual Task<List<Product>> GetProductsInOuAsync(OrganizationUnit organizationUnit)
     {
-        return Task.FromResult(
-            _productRepository.Where(p => p.OrganizationUnitId == organizationUnit.Id).ToList()
-        );
+        return await AsyncExecuter.ToListAsync(_productRepository.Where(p =>
+                p.OrganizationUnitId == organizationUnit.Id));
     }               
 }
 ```

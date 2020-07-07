@@ -1,10 +1,14 @@
-﻿using System.Linq;
+﻿using System;
+using System.Diagnostics;
+using System.Linq;
 using System.Threading.Tasks;
 using OrganizationUnitSample.Products;
 using Shouldly;
 using Volo.Abp.Identity;
 using Volo.Abp.Uow;
 using Xunit;
+using Xunit.Abstractions;
+using Xunit.Sdk;
 
 namespace OrganizationUnitSample
 {
@@ -15,9 +19,13 @@ namespace OrganizationUnitSample
         private readonly IProductRepository _productRepository;
         private readonly IdentityUserManager _userManager;
         private readonly IUnitOfWorkManager _unitOfWorkManager;
+        private readonly ITestOutputHelper _testOutputHelper;
+        private readonly IMessageSink _diagnosticMessageSink;
 
         public ProductManagerTest()
         {
+            //_testOutputHelper = GetRequiredService<ITestOutputHelper>();
+            _diagnosticMessageSink = GetRequiredService<IMessageSink>();
             _unitOfWorkManager = GetRequiredService<IUnitOfWorkManager>();
             _userManager = GetRequiredService<IdentityUserManager>();
             _productRepository = GetRequiredService<IProductRepository>();
@@ -96,7 +104,16 @@ namespace OrganizationUnitSample
 
             using (var uow = _unitOfWorkManager.Begin())
             {
+                Stopwatch timer = Stopwatch.StartNew();
                 var productList = await _productManager.GetProductsInOuIncludingChildrenAsync(ou11);
+                timer.Stop();
+
+                var message = new DiagnosticMessage(
+                    $"Elapsed time {timer.ElapsedMilliseconds} ms for finding {productList.Count} products");
+                _diagnosticMessageSink.OnMessage(message);
+
+                //_testOutputHelper.WriteLine(
+                //    $"Elapsed time {timer.ElapsedMilliseconds} ms for finding {productList.Count} products");
 
                 productList.Count.ShouldBe(10);
                 productList.ShouldContain(q => q.Name.Contains("AMD"));

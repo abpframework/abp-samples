@@ -8,22 +8,22 @@ services:
     ports:
       - "1433"
 
-  migrations:
-     image: 'volosoft/microservice-demo-migrations:${TAG:-latest}'
-     build:
-       context: .
-       dockerfile: databases/Dockerfile
-     depends_on:
-       - sqlserver
+#  migrations:
+#     image: 'volosoft/microservice-demo-migrations:${TAG:-latest}'
+#     build:
+#       context: .
+#       dockerfile: databases/Dockerfile
+#     depends_on:
+#       - sqlserver
 
-#  restore-database:
-#    image: 'volosoft/microservice-demo-restore-database:${TAG:-latest}'
-#    build:
-#      context: ../..
-#      dockerfile: abp-samples/MicroserviceDemo/databases/restore/Dockerfile
-#    volumes:
-#      - dbdata:/var/opt/mssql
-#    environment:
-#      - SA_PASSWORD=yourStrong(!)Password
-#    depends_on:
-#      - sqlserver
+  restore-database:
+    image: 'volosoft/microservice-demo-restore-database:${TAG:-latest}'
+    build:
+      context: ../..
+      dockerfile: abp-samples/MicroserviceDemo/databases/restore/Dockerfile
+    volumes:
+      - dbdata:/var/opt/mssql
+    environment:
+      - SA_PASSWORD=yourStrong(!)Password
+    depends_on:
+      - sqlserver

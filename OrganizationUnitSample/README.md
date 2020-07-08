@@ -95,13 +95,10 @@ public class ProductManager : DomainService
     public virtual async Task<List<Product>> GetProductsInOuIncludingChildrenAsync(
         OrganizationUnit organizationUnit)
     {
-        var query = from product in (await _productRepository.GetListAsync())
-            join ou in (await _organizationUnitRepository.GetListAsync())
-            	.Where(ou => ou.Code.StartsWith(organizationUnit.Code)) 
-            on product.OrganizationUnitId equals ou.Id
-            select product;
-
-        return query.ToList();
+        var ouIds = (await _organizationUnitRepository.GetAllChildrenWithParentCodeAsync(
+                code: organizationUnit.Code,
+                parentId: organizationUnit.ParentId)).Select(ou => ou.Id).ToList();
+            return await AsyncExecuter.ToListAsync(_productRepository.Where(p => ouIds.Contains(p.OrganizationUnitId)));
     }
 }
 ```

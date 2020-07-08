@@ -103,7 +103,7 @@ public class ProductManager : DomainService
 }
 ```
 
-This way, you can get the **organizationUnitIds** of the the given OU children. Then look for the products with these organizationUnitIds. This way you can hierarchically get the products of an OU.
+This way, you can get the **organizationUnitIds** of all the children of the given OU. Then look for the products with these organizationUnitIds. This way you can hierarchically get the products of an OU.
 
 #### Filter Entities For A User
 

@@ -8,7 +8,6 @@ using Volo.Abp.Guids;
 using Volo.Abp.Identity;
 using System.Diagnostics;
 using Volo.Abp.Uow;
-using System.Collections.Generic;
 
 namespace OrganizationUnitSample
 {

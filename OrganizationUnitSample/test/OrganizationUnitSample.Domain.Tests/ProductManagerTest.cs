@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using OrganizationUnitSample.Products;
@@ -91,9 +92,14 @@ namespace OrganizationUnitSample
             productList.ShouldContain(q => q.Name.Contains("High End PC"));
         }
 
-        [Fact]
+        [Fact, Trait("Category", "Q")]
         public async Task Should_Get_Products_In_OrganizationUnit_Including_Children()
         {
+            long elapsedTime = 0;
+            var productCount = await _productRepository.GetCountAsync();
+            var ouCount = await _organizationUnitRepository.GetCountAsync();
+            int foundProducts = 0;
+
             var ou11 = (await _organizationUnitRepository.GetListAsync()).FirstOrDefault(ou =>
             ou.DisplayName.Equals(DataConstants.Ou11Name));
             ou11.ShouldNotBeNull();
@@ -103,16 +109,76 @@ namespace OrganizationUnitSample
                 Stopwatch timer = Stopwatch.StartNew();
                 var productList = await _productManager.GetProductsInOuIncludingChildrenAsync(ou11);
                 timer.Stop();
+                elapsedTime = timer.ElapsedMilliseconds;
 
-                var productCount = await _productRepository.GetCountAsync();
-                var ouCount = await _organizationUnitRepository.GetCountAsync();
                 productList.Count.ShouldBe(10);
                 productList.ShouldContain(q => q.Name.Contains("AMD"));
+                foundProducts = productList.Count;
 
-                _testOutputHelper.WriteLine($"Elapsed time {timer.ElapsedMilliseconds} ms for finding {productList.Count()} products in total of {productCount} products and {ouCount} organization units");
                 await uow.CompleteAsync();
             }
 
+            Console.WriteLine($"Elapsed time {elapsedTime} ms for finding {foundProducts} products in total of {productCount} products and {ouCount} organization units");
+            _testOutputHelper.WriteLine($"Elapsed time {elapsedTime} ms for finding {foundProducts} products in total of {productCount} products and {ouCount} organization units");
+        }
+
+        [Fact, Trait("Category", "Q")]
+        public async Task Should_Get_Products_In_OrganizationUnit_Including_Children_Optimized()
+        {
+            long elapsedTime = 0;
+            var productCount = await _productRepository.GetCountAsync();
+            var ouCount = await _organizationUnitRepository.GetCountAsync();
+            int foundProducts = 0;
+
+            var ou11 = (await _organizationUnitRepository.GetListAsync()).FirstOrDefault(ou =>
+                ou.DisplayName.Equals(DataConstants.Ou11Name));
+            ou11.ShouldNotBeNull();
+
+            using (var uow = _unitOfWorkManager.Begin())
+            {
+                Stopwatch timer = Stopwatch.StartNew();
+                var productList = await _productManager.GetProductsInOuIncludingChildrenOptimizedAsync(ou11);
+                timer.Stop();
+                elapsedTime = timer.ElapsedMilliseconds;
+
+                productList.Count.ShouldBe(10);
+                productList.ShouldContain(q => q.Name.Contains("AMD"));
+                foundProducts = productList.Count;
+
+                await uow.CompleteAsync();
+            }
+
+            Console.WriteLine($"Elapsed time {elapsedTime} ms for finding {foundProducts} products in total of {productCount} products and {ouCount} organization units");
+            _testOutputHelper.WriteLine($"Elapsed time {elapsedTime} ms for finding {foundProducts} products in total of {productCount} products and {ouCount} organization units");
+        }
+
+        [Fact, Trait("Category", "Q")]
+        public async Task Should_Get_Products_In_OrganizationUnit_Including_Children_Optimized_More()
+        {
+            long elapsedTime = 0;
+            var productCount = await _productRepository.GetCountAsync();
+            var ouCount = await _organizationUnitRepository.GetCountAsync();
+            int foundProducts = 0;
+
+            var ou11 = (await _organizationUnitRepository.GetListAsync()).FirstOrDefault(ou =>
+                ou.DisplayName.Equals(DataConstants.Ou11Name));
+            ou11.ShouldNotBeNull();
+
+            using (var uow = _unitOfWorkManager.Begin())
+            {
+                Stopwatch timer = Stopwatch.StartNew();
+                var productList = await _productManager.GetProductsInOuIncludingChildrenOptimizedMoreAsync(ou11);
+                timer.Stop();
+                elapsedTime = timer.ElapsedMilliseconds;
+
+                productList.Count.ShouldBe(10);
+                productList.ShouldContain(q => q.Name.Contains("AMD"));
+                foundProducts = productList.Count;
+
+                await uow.CompleteAsync();
+            }
+            Console.WriteLine($"Elapsed time {elapsedTime} ms for finding {foundProducts} products in total of {productCount} products and {ouCount} organization units");
+            _testOutputHelper.WriteLine($"Elapsed time {elapsedTime} ms for finding {foundProducts} products in total of {productCount} products and {ouCount} organization units");
         }
 
         [Fact]

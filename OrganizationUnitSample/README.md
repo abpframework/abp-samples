@@ -96,14 +96,14 @@ public class ProductManager : DomainService
         OrganizationUnit organizationUnit)
     {
         var ouIds = (await _organizationUnitRepository.GetAllChildrenWithParentCodeAsync(
-                code: organizationUnit.Code,
-                parentId: organizationUnit.ParentId)).Select(ou => ou.Id).ToList();
+                organizationUnit.Code, organizationUnit.ParentId))
+				.Select(ou => ou.Id).ToList();
             return await AsyncExecuter.ToListAsync(_productRepository.Where(p => ouIds.Contains(p.OrganizationUnitId)));
     }
 }
 ```
 
-This way, you can get the **code** of the the given OU. Then create a LINQ expression with a **join** and a **StartsWith(code)** condition (StartsWith creates a **LIKE** query in SQL). This way you can hierarchically get the products of an OU.
+This way, you can get the **organizationUnitIds** of the the given OU children. Then look for the products with these organizationUnitIds. This way you can hierarchically get the products of an OU.
 
 #### Filter Entities For A User
 

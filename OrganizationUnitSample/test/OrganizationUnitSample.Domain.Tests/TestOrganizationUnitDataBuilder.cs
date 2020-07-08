@@ -1,10 +1,13 @@
 ﻿using System;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using OrganizationUnitSample.Products;
 using Volo.Abp.DependencyInjection;
 using Volo.Abp.Guids;
 using Volo.Abp.Identity;
+using System.Diagnostics;
+using Volo.Abp.Uow;
 
 namespace OrganizationUnitSample
 {
@@ -14,21 +17,45 @@ namespace OrganizationUnitSample
         private readonly ProductManager _productManager;
         private readonly IGuidGenerator _guidGenerator;
         private readonly IOrganizationUnitRepository _organizationUnitRepository;
+        private readonly IUnitOfWorkManager _unitOfWorkManager;
 
         public TestOrganizationUnitDataBuilder(IGuidGenerator guidGenerator,
             OrganizationUnitManager organizationUnitManager, IOrganizationUnitRepository organizationUnitRepository,
-            ProductManager productManager)
+            ProductManager productManager, IUnitOfWorkManager unitOfWorkManager)
         {
             _guidGenerator = guidGenerator;
             _organizationUnitManager = organizationUnitManager;
             _organizationUnitRepository = organizationUnitRepository;
             _productManager = productManager;
+            _unitOfWorkManager = unitOfWorkManager;
         }
 
         public async Task Build()
         {
+            int count = 10;
+            Stopwatch timer = Stopwatch.StartNew();
+            await SeedRandomOrganizationUnitsWithProductsAsync(count);
+            timer.Stop();
+
             await AddOrganizationUnitsAsync();
             await AddProductsAsync();
+        }
+
+        private async Task SeedRandomOrganizationUnitsWithProductsAsync(int count)
+        {
+            for (int i = 0; i < count; i++)
+            {
+                var id = _guidGenerator.Create();
+                var ouName = CreateRandomWordWithGuid(id);
+                using (var uow = _unitOfWorkManager.Begin())
+                {
+                    var ou = new OrganizationUnit(id, ouName);
+                    await _organizationUnitManager.CreateAsync(ou);
+                    await uow.CompleteAsync();
+                    await _productManager.CreateAsync(new Product(CreateRandomWordWithGuid(id),
+                        CreateRandomFloatNumber(), ou, null));
+                }
+            }
         }
 
         private async Task AddOrganizationUnitsAsync()
@@ -101,7 +128,7 @@ namespace OrganizationUnitSample
         private async Task AddOu11ProductsAsync()
         {
             var ou11 = (await _organizationUnitRepository.GetListAsync()).FirstOrDefault(ou =>
-            ou.DisplayName == DataConstants.Ou11Name);
+                ou.DisplayName == DataConstants.Ou11Name);
 
             await _productManager.CreateAsync(new Product("All in one PC", 950.50f, ou11, null));
             await _productManager.CreateAsync(new Product("High End PC", 1320.90f, ou11, null));
@@ -115,6 +142,34 @@ namespace OrganizationUnitSample
             // await _productManager.CreateAsync(new Product("TV", 750.50f, ou1, null));
             // await _productManager.CreateAsync(new Product("WashingMachine", 320.50f, ou1, null));
             // await _productManager.CreateAsync(new Product("Sound System", 125.00f, ou1, null));
+        }
+
+        private string CreateRandomWordWithGuid(Guid id)
+        {
+            Random rnd = new Random();
+            //Dictionary of strings
+            string[] words =
+            {
+                "Bold", "Think", "Friend", "Pony", "Fall", "Easy", "Wednesday", "Saturday", "Human", "Animal", "Pretty",
+                "Fake", "Forge", "Field", "Astrology", "Dominion", "Blake", "Ball", "Tristan", "Clay", "since", "earth",
+                "outline", "settle", "welcome", "attempt",
+                "floating", "crop", "nearest", "lack", "another", "ate",
+                "animal", "yesterday", "bat", "met", "wore", "physical",
+                "few", "determine", "torn", "circus", "brave", "tea",
+                "automobile", "rather", "curve", "four", "name", "forest",
+                "broken", "wherever", "finger", "exist", "member", "route",
+                "single", "broad", "rubber", "increase", "structure", "egg"
+            };
+            //Create combination of word + guid
+            string randomString = $"{words[rnd.Next(0, words.Length)]}--{id}";
+
+            return randomString;
+        }
+
+        private float CreateRandomFloatNumber()
+        {
+            Random rnd = new Random();
+            return float.Parse((rnd.NextDouble() * 10000).ToString(CultureInfo.CurrentCulture));
         }
     }
 }

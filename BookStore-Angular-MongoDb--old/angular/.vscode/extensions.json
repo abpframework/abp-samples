@@ -1,8 +1,0 @@
-{
-  "recommendations": [
-    "angular.ng-template",
-    "esbenp.prettier-vscode",
-    "ms-vscode.vscode-typescript-tslint-plugin",
-    "visualstudioexptteam.vscodeintellicode"
-  ]
-}

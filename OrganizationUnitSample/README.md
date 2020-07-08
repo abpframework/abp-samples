@@ -38,12 +38,10 @@ public class ProductManager : IDomainService
         _productRepository = productRepository;
     }
 
-    [UnitOfWork]
     public virtual Task<List<Product>> GetProductsInOuAsync(OrganizationUnit organizationUnit)
     {
-        return Task.FromResult(
-            _productRepository.Where(p => p.OrganizationUnitId == organizationUnit.Id).ToList()
-        );
+        return await AsyncExecuter.ToListAsync(_productRepository.Where(p =>
+                p.OrganizationUnitId == organizationUnit.Id));
     }               
 }
 ```
@@ -97,18 +95,15 @@ public class ProductManager : DomainService
     public virtual async Task<List<Product>> GetProductsInOuIncludingChildrenAsync(
         OrganizationUnit organizationUnit)
     {
-        var query = from product in (await _productRepository.GetListAsync())
-            join ou in (await _organizationUnitRepository.GetListAsync())
-            	.Where(ou => ou.Code.StartsWith(organizationUnit.Code)) 
-            on product.OrganizationUnitId equals ou.Id
-            select product;
-
-        return query.ToList();
+        var ouIds = (await _organizationUnitRepository.GetAllChildrenWithParentCodeAsync(
+                organizationUnit.Code, organizationUnit.ParentId))
+				.Select(ou => ou.Id).ToList();
+            return await AsyncExecuter.ToListAsync(_productRepository.Where(p => ouIds.Contains(p.OrganizationUnitId)));
     }
 }
 ```
 
-This way, you can get the **code** of the the given OU. Then create a LINQ expression with a **join** and a **StartsWith(code)** condition (StartsWith creates a **LIKE** query in SQL). This way you can hierarchically get the products of an OU.
+This way, you can get the **organizationUnitIds** of all the children of the given OU. Then look for the products with these organizationUnitIds. This way you can hierarchically get the products of an OU.
 
 #### Filter Entities For A User
 

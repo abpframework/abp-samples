@@ -2,11 +2,6 @@ version: '3.7'
 
 services:
   sqlserver:
-    environment:
-      - SA_PASSWORD=yourStrong(!)Password
-      - ACCEPT_EULA=Y
-    ports:
-      - "1433"
 
 #  migrations:
 #     image: 'volosoft/microservice-demo-migrations:${TAG:-latest}'
@@ -19,8 +14,8 @@ services:
   restore-database:
     image: 'volosoft/microservice-demo-restore-database:${TAG:-latest}'
     build:
-      context: ../..
-      dockerfile: abp-samples/MicroserviceDemo/databases/restore/Dockerfile
+      context: .
+      dockerfile: databases/restore/Dockerfile
     volumes:
       - dbdata:/var/opt/mssql
     environment:

@@ -7,20 +7,20 @@ services:
       - SA_PASSWORD=yourStrong(!)Password
       - ACCEPT_EULA=Y
     ports:
-      - "1433"
+      - "1433:1433"
 
   mongodb:
     ports:
-      - "27017"
+      - "27017:27017"
 
   rabbitmq:
     ports:
-      - "15672"
-      - "5672"
+      - "15672:15672"
+      - "5672:5672"
 
   redis:
     ports:
-      - "6379"
+      - "6379:6379"
 
   elasticsearch:
     volumes:
@@ -28,7 +28,7 @@ services:
     environment:
       - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
     ports:
-      - "9200"
+      - "9200:9200"
 
   logstash:
     volumes:

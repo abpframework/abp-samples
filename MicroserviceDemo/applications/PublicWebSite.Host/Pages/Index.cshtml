@@ -1,7 +1,12 @@
 ﻿@page
 @using Volo.Abp.Users
 @model PublicWebSite.Host.Pages.IndexModel
+@using Volo.Abp.AspNetCore.Mvc.UI.Theming
+@inject IThemeManager ThemeManager
 @inject ICurrentUser CurrentUser
+@{
+    Layout = ThemeManager.CurrentTheme.GetApplicationLayout();
+}
 @section styles{
     <style>
     </style>

@@ -2,9 +2,12 @@
 @using ProductManagement
 @using Volo.Abp.Settings
 @model PublicWebSite.Host.Pages.ProductsModel
+@using Volo.Abp.AspNetCore.Mvc.UI.Theming
+@inject IThemeManager ThemeManager
 @inject ISettingProvider SettingProvider
 @{
     const int columnSize = 3;
+    Layout = ThemeManager.CurrentTheme.GetApplicationLayout();
 }
 @section styles{
     <link href="~/Pages/Products.css" rel="stylesheet" />

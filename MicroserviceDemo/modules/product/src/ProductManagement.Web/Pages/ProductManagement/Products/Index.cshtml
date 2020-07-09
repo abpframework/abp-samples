@@ -4,10 +4,13 @@
 @using ProductManagement
 @using ProductManagement.Localization
 @model ProductManagement.Pages.ProductManagement.Products.IndexModel
+@using Volo.Abp.AspNetCore.Mvc.UI.Theming
+@inject IThemeManager ThemeManager
 @inject IAuthorizationService Authorization
 @inject IHtmlLocalizer<ProductManagementResource> L
 @{
     ViewBag.PageTitle = "Products";
+    Layout = ThemeManager.CurrentTheme.GetApplicationLayout();
 }
 
 @section scripts {

@@ -8,6 +8,7 @@ using Xunit;
 
 namespace Acme.BookStore.Books
 {
+    [Collection(BookStoreTestConsts.CollectionDefinitionName)]
     public class BookAppService_Tests : BookStoreApplicationTestBase
     {
         private readonly IBookAppService _bookAppService;

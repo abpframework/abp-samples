@@ -69,6 +69,16 @@ services:
       - sqlserver
       - redis
   
+  tenant-management-service:
+    image: 'volosoft/microservice-demo-tenant-management-service:${TAG:-latest}'
+    build:
+      context: .
+      dockerfile: microservices/TenantManagementService.Host/Dockerfile
+    depends_on:
+      - elasticsearch
+      - sqlserver
+      - redis
+  
   auth-server:
     image: 'volosoft/microservice-demo-auth-server:${TAG:-latest}'
     build:

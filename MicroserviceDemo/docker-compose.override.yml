@@ -16,6 +16,8 @@ services:
       - ReRoutes__1__DownstreamHostAndPorts__0__Port=80
       - ReRoutes__2__DownstreamHostAndPorts__0__Host=blogging-service
       - ReRoutes__2__DownstreamHostAndPorts__0__Port=80
+      - ReRoutes__3__DownstreamHostAndPorts__0__Host=tenant-management-service
+      - ReRoutes__3__DownstreamHostAndPorts__0__Port=80
       - GlobalConfiguration__BaseUrl=http://internal-gateway
     ports:
       - "80"
@@ -92,6 +94,18 @@ services:
     ports:
       - 51523:80
 
+  tenant-management-service:
+    environment:
+      - ElasticSearch__Url=http://elasticsearch:9200
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://0.0.0.0:80
+      - AuthServer__Authority=http://auth-server:51511
+      - ConnectionStrings__Default=Server=sqlserver;Database=MsDemo_Identity;Trusted_Connection=True;MultipleActiveResultSets=true;User=sa;Password=yourStrong(!)Password;Integrated Security=false      
+      - Redis__Configuration=redis
+      - RabbitMQ__Connections__Default__HostName=rabbitmq
+    ports:
+      - 51524:80
+  
   auth-server:
     environment:
       - ElasticSearch__Url=http://elasticsearch:9200

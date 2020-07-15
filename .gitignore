@@ -352,3 +352,7 @@ MigrationBackup/
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
 /aspnet-core/Authentication-Customization/src/Acme.BookStore.Web/package-lock.json
+MicroserviceDemo/applications/BackendAdminApp.Host/package-lock.json
+MicroserviceDemo/applications/AuthServer.Host/package-lock.json
+MicroserviceDemo/applications/PublicWebSite.Host/package-lock.json
+MicroserviceDemo/modules/product/src/ProductManagement.Web/Properties/launchSettings.json

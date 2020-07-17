@@ -23,7 +23,7 @@ namespace Acme.BookStore.DbMigrationsForSecondDb.EntityFrameworkCore
         private static IConfigurationRoot BuildConfiguration()
         {
             var builder = new ConfigurationBuilder()
-                .SetBasePath(Directory.GetCurrentDirectory())
+                .SetBasePath(Path.Combine(Directory.GetCurrentDirectory(), "../Acme.BookStore.DbMigrator/"))
                 .AddJsonFile("appsettings.json", optional: false);
 
             return builder.Build();

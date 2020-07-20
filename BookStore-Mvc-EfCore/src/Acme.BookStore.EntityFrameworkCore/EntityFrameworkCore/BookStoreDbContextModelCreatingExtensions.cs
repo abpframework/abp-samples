@@ -23,7 +23,7 @@ namespace Acme.BookStore.EntityFrameworkCore
 
             builder.Entity<Author>(b =>
             {
-                b.ToTable(BookStoreConsts.DbTablePrefix + "Books",
+                b.ToTable(BookStoreConsts.DbTablePrefix + "Authors",
                     BookStoreConsts.DbSchema);
                 b.ConfigureByConvention();
                 b.Property(x => x.Name)

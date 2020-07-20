@@ -13,7 +13,7 @@ namespace Acme.BookStore.Authors
             int skipCount,
             int maxResultCount,
             string sorting,
-            string filter = ""
+            string filter = null
         );
     }
 }

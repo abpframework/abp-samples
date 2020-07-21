@@ -27,18 +27,12 @@ namespace Acme.BookStore
 
         public async Task SeedAsync(DataSeedContext context)
         {
-            await CreateAuthorsAsync();
-            await CreateBooksAsync();
-        }
-
-        private async Task CreateAuthorsAsync()
-        {
-            if (await _authorRepository.GetCountAsync() > 0)
+            if (await _bookRepository.GetCountAsync() > 0)
             {
                 return;
             }
 
-            await _authorRepository.InsertAsync(
+            var orwell = await _authorRepository.InsertAsync(
                 await _authorManager.CreateAsync(
                     "George Orwell",
                     new DateTime(1903, 06, 25),
@@ -46,25 +40,18 @@ namespace Acme.BookStore
                 )
             );
 
-            await _authorRepository.InsertAsync(
+            var douglas = await _authorRepository.InsertAsync(
                 await _authorManager.CreateAsync(
                     "Douglas Adams",
                     new DateTime(1952, 03, 11),
                     "Douglas Adams was an English author, screenwriter, essayist, humorist, satirist and dramatist. Adams was an advocate for environmentalism and conservation, a lover of fast cars, technological innovation and the Apple Macintosh, and a self-proclaimed 'radical atheist'."
                 )
             );
-        }
-
-        private async Task CreateBooksAsync()
-        {
-            if (await _bookRepository.GetCountAsync() > 0)
-            {
-                return;
-            }
 
             await _bookRepository.InsertAsync(
                 new Book
                 {
+                    AuthorId = orwell.Id,
                     Name = "1984",
                     Type = BookType.Dystopia,
                     PublishDate = new DateTime(1949, 6, 8),
@@ -76,6 +63,7 @@ namespace Acme.BookStore
             await _bookRepository.InsertAsync(
                 new Book
                 {
+                    AuthorId = douglas.Id,
                     Name = "The Hitchhiker's Guide to the Galaxy",
                     Type = BookType.ScienceFiction,
                     PublishDate = new DateTime(1995, 9, 27),

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
@@ -46,6 +47,7 @@ namespace Acme.BookStore.Web.Pages.Books
         public class CreateBookViewModel
         {
             [SelectItems(nameof(Authors))]
+            [DisplayName("Author")]
             public Guid AuthorId { get; set; }
 
             [Required]

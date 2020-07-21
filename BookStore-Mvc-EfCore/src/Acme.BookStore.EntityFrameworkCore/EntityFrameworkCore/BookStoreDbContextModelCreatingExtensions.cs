@@ -25,10 +25,14 @@ namespace Acme.BookStore.EntityFrameworkCore
             {
                 b.ToTable(BookStoreConsts.DbTablePrefix + "Authors",
                     BookStoreConsts.DbSchema);
+                
                 b.ConfigureByConvention();
+                
                 b.Property(x => x.Name)
                     .IsRequired()
                     .HasMaxLength(AuthorConsts.MaxNameLength);
+
+                b.HasIndex(x => x.Name);
             });
         }
     }

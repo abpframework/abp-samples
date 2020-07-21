@@ -74,7 +74,8 @@
                     data: "price"
                 },
                 {
-                    title: l('CreationTime'), data: "creationTime",
+                    title: l('CreationTime'),
+                    data: "creationTime",
                     render: function (data) {
                         return luxon
                             .DateTime

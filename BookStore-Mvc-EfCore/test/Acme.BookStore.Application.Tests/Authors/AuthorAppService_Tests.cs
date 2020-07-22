@@ -31,6 +31,7 @@ namespace Acme.BookStore.Authors
 
             result.TotalCount.ShouldBeGreaterThanOrEqualTo(1);
             result.Items.ShouldContain(author => author.Name == "George Orwell");
+            result.Items.ShouldNotContain(author => author.Name == "Douglas Adams");
         }
 
         [Fact]

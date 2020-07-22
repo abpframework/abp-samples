@@ -3,7 +3,7 @@ using Xunit;
 
 namespace Acme.BookStore.MongoDB
 {
-    public class BookStoreMongoDbCollectionFixtureBase : ICollectionFixture<BookStoreMongoDbFixture>
+    public abstract class BookStoreMongoDbCollectionFixtureBase : ICollectionFixture<BookStoreMongoDbFixture>
     {
 
     }

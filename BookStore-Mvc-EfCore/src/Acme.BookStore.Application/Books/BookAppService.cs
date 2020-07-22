@@ -65,7 +65,9 @@ namespace Acme.BookStore.Books
                 orderby input.Sorting //TODO: Can not sort like that!
                 select new {book, author};
 
-            query = query.Skip(input.SkipCount).Take(input.MaxResultCount);
+            query = query
+                .Skip(input.SkipCount)
+                .Take(input.MaxResultCount);
 
             //Execute the query and get a list
             var queryResult = await AsyncExecuter.ToListAsync(query);
@@ -80,7 +82,7 @@ namespace Acme.BookStore.Books
 
             //Get the total count with another query
             var totalCount = await Repository.GetCountAsync();
-            
+
             return new PagedResultDto<BookDto>(
                 totalCount,
                 bookDtos

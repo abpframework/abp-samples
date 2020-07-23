@@ -52,6 +52,10 @@
                     data: "name"
                 },
                 {
+                    title: l('Author'),
+                    data: "authorName"
+                },
+                {
                     title: l('Type'),
                     data: "type",
                     render: function (data) {
@@ -74,7 +78,8 @@
                     data: "price"
                 },
                 {
-                    title: l('CreationTime'), data: "creationTime",
+                    title: l('CreationTime'),
+                    data: "creationTime",
                     render: function (data) {
                         return luxon
                             .DateTime

@@ -83,7 +83,7 @@ namespace Acme.BookStore.Web
             ConfigureNavigationServices();
             ConfigureAutoApiControllers();
             ConfigureSwaggerServices(context.Services);
-            
+
             Configure<RazorPagesOptions>(options =>
             {
                 options.Conventions.AuthorizePage("/Books/Index", BookStorePermissions.Books.Default);
@@ -116,7 +116,6 @@ namespace Acme.BookStore.Web
             Configure<AbpAutoMapperOptions>(options =>
             {
                 options.AddMaps<BookStoreWebModule>();
-
             });
         }
 

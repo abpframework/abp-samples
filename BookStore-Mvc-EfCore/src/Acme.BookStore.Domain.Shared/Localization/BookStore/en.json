@@ -30,6 +30,16 @@
     "Permission:Books": "Book Management",
     "Permission:Books.Create": "Creating new books",
     "Permission:Books.Edit": "Editing the books",
-    "Permission:Books.Delete": "Deleting the books"
+    "Permission:Books.Delete": "Deleting the books",
+    "BookStore:00001": "There is already an author with the same name: {name}",
+    "Permission:Authors": "Author Management",
+    "Permission:Authors.Create": "Creating new authors",
+    "Permission:Authors.Edit": "Editing the authors",
+    "Permission:Authors.Delete": "Deleting the authors",
+    "Menu:Authors": "Authors",
+    "Authors": "Authors",
+    "AuthorDeletionConfirmationMessage": "Are you sure to delete the author '{0}'?",
+    "BirthDate": "Birth date",
+    "NewAuthor": "New author"
   }
 }

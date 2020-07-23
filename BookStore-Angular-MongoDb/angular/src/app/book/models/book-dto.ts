@@ -1,6 +1,8 @@
 import { AuditedEntityDto } from '@abp/ng.core';
 
 export class BookDto extends AuditedEntityDto<string> {
+  authorId: string;
+  authorName: string;
   name: string;
   type: any;
   publishDate: string;

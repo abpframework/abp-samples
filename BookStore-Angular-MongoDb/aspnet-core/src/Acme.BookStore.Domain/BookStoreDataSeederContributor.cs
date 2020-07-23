@@ -32,9 +32,7 @@ namespace Acme.BookStore
                 return;
             }
 
-            // ADDED SEED DATA FOR AUTHORS
-
-            await _authorRepository.InsertAsync(
+            var orwell = await _authorRepository.InsertAsync(
                 await _authorManager.CreateAsync(
                     "George Orwell",
                     new DateTime(1903, 06, 25),
@@ -42,7 +40,7 @@ namespace Acme.BookStore
                 )
             );
 
-            await _authorRepository.InsertAsync(
+            var douglas = await _authorRepository.InsertAsync(
                 await _authorManager.CreateAsync(
                     "Douglas Adams",
                     new DateTime(1952, 03, 11),
@@ -53,6 +51,7 @@ namespace Acme.BookStore
             await _bookRepository.InsertAsync(
                 new Book
                 {
+                    AuthorId = orwell.Id, // SET THE AUTHOR
                     Name = "1984",
                     Type = BookType.Dystopia,
                     PublishDate = new DateTime(1949, 6, 8),
@@ -64,6 +63,7 @@ namespace Acme.BookStore
             await _bookRepository.InsertAsync(
                 new Book
                 {
+                    AuthorId = douglas.Id, // SET THE AUTHOR
                     Name = "The Hitchhiker's Guide to the Galaxy",
                     Type = BookType.ScienceFiction,
                     PublishDate = new DateTime(1995, 9, 27),

@@ -4,6 +4,7 @@ using Localization.Resources.AbpUi;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -81,6 +82,11 @@ namespace PasswordlessAuthentication.Web
             ConfigureNavigationServices();
             ConfigureAutoApiControllers();
             ConfigureSwaggerServices(context.Services);
+
+            context.Services
+                .GetObject<IdentityBuilder>()
+                .AddDefaultTokenProviders()
+                .AddPasswordlessLoginProvider();
         }
 
         private void ConfigureUrls(IConfiguration configuration)

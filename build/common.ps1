@@ -7,7 +7,6 @@ $rootFolder = (Get-Item -Path "./" -Verbose).FullName
 $solutionPaths = (
     "../Authentication-Customization",
     "../BasicAspNetCoreApplication",
-    "../BasicConsoleApplication",
     "../BookStore",
     "../BookStore-Angular-MongoDb/aspnet-core",
     "../BookStore-Modular/modules/book-management",

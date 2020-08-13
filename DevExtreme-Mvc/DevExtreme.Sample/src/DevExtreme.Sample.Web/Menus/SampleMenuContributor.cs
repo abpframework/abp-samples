@@ -31,7 +31,7 @@ namespace DevExtreme.Sample.Web.Menus
             context.Menu.Items.Insert(0, new ApplicationMenuItem("Sample.Home", l["Menu:Home"], "~/"));
 
             var examples = new ApplicationMenuItem("Sample.Examples", l["Menu:Examples"], "~/Examples");
-            examples.AddItem(new ApplicationMenuItem("Sample.Examples.DataGrid", l["Menu:Examples:DataGrid"], "~/Examples/DataGrid"));
+            examples.AddItem(new ApplicationMenuItem("Sample.Examples.TreeList", l["Menu:Examples:TreeList"], "~/Examples/TreeList"));
             
             
             context.Menu.Items.Insert(1, examples);

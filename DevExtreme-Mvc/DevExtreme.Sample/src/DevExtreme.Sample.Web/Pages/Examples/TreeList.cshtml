@@ -1,10 +1,22 @@
 ﻿@page
 @using DevExtreme.AspNet.Mvc
 @using DevExtreme.Sample.EmployeeTasks
-@model DevExtreme.Sample.Web.Pages.Examples.DataGridModel
+@using DevExtreme.Sample.Localization
+@using Microsoft.AspNetCore.Mvc.Localization
+@using Volo.Abp.AspNetCore.Mvc.UI.Layout
+@model DevExtreme.Sample.Web.Pages.Examples.TreeListModel
+
+@inject IHtmlLocalizer<SampleResource> L
+@inject IPageLayout PageLayout
+
+@{
+    PageLayout.Content.Title = L["Menu:Examples:TreeList"].Value;
+    PageLayout.Content.BreadCrumb.Add(L["Menu:Examples"].Value);
+    PageLayout.Content.MenuItemName = "Sample.Examples.TreeList";
+}
 
 @section styles{
-    <abp-style src="/Pages/Examples/data-grid.css" />
+    <abp-style src="/Pages/Examples/tree-list.css" />
 }
 
 <abp-card>

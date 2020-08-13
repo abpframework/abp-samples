@@ -2,7 +2,7 @@
 
 namespace DevExtreme.Sample.Web.Pages.Examples
 {
-    public class DataGridModel : PageModel
+    public class TreeListModel : PageModel
     {
         public void OnGet()
         {

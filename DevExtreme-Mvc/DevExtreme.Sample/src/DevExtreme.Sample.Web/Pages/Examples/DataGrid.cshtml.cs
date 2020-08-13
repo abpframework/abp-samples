@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace DevExtreme.Sample.Web.Pages.Test
+namespace DevExtreme.Sample.Web.Pages.Examples
 {
-    public class IndexModel : PageModel
+    public class DataGridModel : PageModel
     {
         public void OnGet()
         {

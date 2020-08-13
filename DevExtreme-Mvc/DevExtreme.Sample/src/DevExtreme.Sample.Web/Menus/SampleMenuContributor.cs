@@ -29,6 +29,12 @@ namespace DevExtreme.Sample.Web.Menus
             var l = context.GetLocalizer<SampleResource>();
 
             context.Menu.Items.Insert(0, new ApplicationMenuItem("Sample.Home", l["Menu:Home"], "~/"));
+
+            var examples = new ApplicationMenuItem("Sample.Examples", l["Menu:Examples"], "~/Examples");
+            examples.AddItem(new ApplicationMenuItem("Sample.Examples.DataGrid", l["Menu:Examples:DataGrid"], "~/Examples/DataGrid"));
+            
+            
+            context.Menu.Items.Insert(1, examples);
         }
     }
 }

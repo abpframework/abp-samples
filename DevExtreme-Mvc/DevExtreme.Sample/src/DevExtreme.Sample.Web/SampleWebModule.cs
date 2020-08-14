@@ -10,7 +10,7 @@ using Microsoft.Extensions.Hosting;
 using DevExtreme.Sample.EntityFrameworkCore;
 using DevExtreme.Sample.Localization;
 using DevExtreme.Sample.MultiTenancy;
-using DevExtreme.Sample.Web.Components.DevExtremeHead;
+using DevExtreme.Sample.Web.Components.DevExtremeJs;
 using DevExtreme.Sample.Web.Components.jQuery;
 using DevExtreme.Sample.Web.Menus;
 using Microsoft.OpenApi.Models;
@@ -110,7 +110,7 @@ namespace DevExtreme.Sample.Web
                     typeof(JqueryHeadViewComponent) //The component to add
                     ).Add(
                     LayoutHooks.Head.Last, //The hook name
-                    typeof(DevExtremeHeadViewComponent) //The component to add
+                    typeof(DevExtremeJsViewComponent) //The component to add
                 );
             });
 

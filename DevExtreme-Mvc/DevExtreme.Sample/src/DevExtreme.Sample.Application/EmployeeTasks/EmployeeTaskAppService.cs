@@ -3,27 +3,20 @@ using System.Threading.Tasks;
 using DevExtreme.AspNet.Data;
 using DevExtreme.AspNet.Data.ResponseModel;
 using DevExtreme.AspNet.Mvc;
-using DevExtreme.Sample.Controllers;
 using DevExtreme.Sample.Data;
-using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 
 namespace DevExtreme.Sample.EmployeeTasks
 {
-    [Area("employeeTask")]
-    [ControllerName("EmployeeTask")]
-    [Route("EmployeeTask")]
-    [Microsoft.AspNetCore.Components.Route("api/employee-task/")]
-    public class EmployeeTaskController : SampleController
+    public class EmployeeTaskAppService : SampleAppService, IEmployeeTaskAppService
     {
         private readonly SampleDataService _dataService;
 
-        public EmployeeTaskController(SampleDataService dataService)
+        public EmployeeTaskAppService(SampleDataService dataService)
         {
             _dataService = dataService;
         }
 
-        [HttpGet]
         public async Task<LoadResult> GetTasksAsync(DataSourceLoadOptions loadOptions)
         {
             var tasks = from d in _dataService.Tasks
@@ -44,8 +37,6 @@ namespace DevExtreme.Sample.EmployeeTasks
             return DataSourceLoader.Load(tasks, loadOptions);
         }
 
-        [HttpGet]
-        [Route("get-tasks-with-employees")]
         public async Task<LoadResult> GetTasksWithEmployeesAsync(DataSourceLoadOptions loadOptions)
         {
             var tasks = from d in _dataService.Tasks
@@ -66,44 +57,42 @@ namespace DevExtreme.Sample.EmployeeTasks
             return DataSourceLoader.Load(tasks, loadOptions);
         }
 
-        [HttpGet]
-        [Route("get-task-employees")]
         public LoadResult GetTaskEmployees(DataSourceLoadOptions loadOptions)
         {
             return DataSourceLoader.Load(_dataService.Employees, loadOptions);
         }
-       
-        [HttpPost]
-        [Route("create-task")]
-        public IActionResult CreateTask(string values)
+
+        public bool CreateTask(string values)
         {
             var newItem = new EmployeeTask();
             JsonConvert.PopulateObject(values, newItem);
 
-            if(!TryValidateModel(newItem))
-                return BadRequest();
+            // Custom validation
+            var validation = true;
+
+            if (!validation)
+                return false;
 
             _dataService.Tasks.Add(newItem);
 
-            return Ok();
+            return true;
         }
 
-        [HttpPut]
-        [Route("update-task")]
-        public IActionResult UpdateTask(int key, string values)
+        public bool UpdateTask(int key, string values)
         {
             var item = _dataService.Tasks.First(e => e.Task_ID == key);
 
+            // Custom validation
+            var validation = true;
+
+            if (!validation)
+                return false;
+            
             JsonConvert.PopulateObject(values, item);
 
-            if(!TryValidateModel(item))
-                return BadRequest();
-
-            return Ok();
+            return true;
         }
-        
-        [HttpDelete]
-        [Route("delete-task")]
+
         public void DeleteTask(int key)
         {
             var item = _dataService.Tasks.First(e => e.Task_ID == key);

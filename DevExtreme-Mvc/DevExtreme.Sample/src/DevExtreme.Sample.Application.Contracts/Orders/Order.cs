@@ -31,7 +31,7 @@ namespace DevExtreme.Sample.Orders
         public int ShipVia { get; set; } 
         
         [JsonProperty("Freight")]
-        public double Freight { get; set; } 
+        public float Freight { get; set; } 
         
         [JsonProperty("ShipName")]
         public string ShipName { get; set; } 
@@ -48,6 +48,7 @@ namespace DevExtreme.Sample.Orders
         [JsonProperty("ShipPostalCode")]
         public string ShipPostalCode { get; set; } 
         
+        [Display(Name = "Ship Country")]
         [JsonProperty("ShipCountry")]
         public string ShipCountry { get; set; } 
         

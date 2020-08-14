@@ -70,21 +70,21 @@ namespace DevExtreme.Sample.Orders
                     new
                     {
                         Product = "Sir Rodney's Marmalade",
-                        Prica = 64.8,
+                        Price = 65,
                         Quantity = 40,
                         Sum = 2592
                     },
                     new
                     {
                         Product = "Geitost",
-                        Prica = 2,
+                        Price = 2,
                         Quantity = 25,
                         Sum = 50
                     },
                     new
                     {
                         Product = "Camembert Pierrot",
-                        Prica = 27.2,
+                        Price = 21,
                         Quantity = 40,
                         Sum = 1088
                     }

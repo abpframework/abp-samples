@@ -8,12 +8,12 @@ namespace DevExtreme.Sample.Orders
         public string Product { get; set; }
 
         [JsonProperty("Price")]
-        public decimal Price { get; set; }
+        public float Price { get; set; }
 
         [JsonProperty("Quantity")]
         public int Quantity { get; set; }
 
         [JsonProperty("Sum")]
-        public decimal Sum { get; set; }
+        public float Sum { get; set; }
     }
 }

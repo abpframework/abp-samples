@@ -3,7 +3,7 @@
     "windowsAuthentication": false, 
     "anonymousAuthentication": true, 
     "iisExpress": {
-      "applicationUrl": "http://localhost:51954",
+      "applicationUrl": "https://localhost:44354",
       "sslPort": 0
     }
   },
@@ -18,7 +18,7 @@
     "BackendAdminApp.Host": {
       "commandName": "Project",
       "launchBrowser": true,
-      "applicationUrl": "http://localhost:51954",
+      "applicationUrl": "https://localhost:44354",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }

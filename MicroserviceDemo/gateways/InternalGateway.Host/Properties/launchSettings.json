@@ -3,7 +3,7 @@
     "windowsAuthentication": false, 
     "anonymousAuthentication": true, 
     "iisExpress": {
-      "applicationUrl": "http://localhost:65129",
+      "applicationUrl": "https://localhost:44329",
       "sslPort": 0
     }
   },
@@ -18,7 +18,7 @@
     "InternalGateway.Host": {
       "commandName": "Project",
       "launchBrowser": true,
-      "applicationUrl": "http://localhost:65129",
+      "applicationUrl": "https://localhost:44329",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }

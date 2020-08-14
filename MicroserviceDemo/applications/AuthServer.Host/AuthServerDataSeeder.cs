@@ -120,8 +120,8 @@ namespace AuthServer.Host
                 new[] { "hybrid" },
                 commonSecret,
                 permissions: new[] { IdentityPermissions.Users.Default, "ProductManagement.Product" },
-                redirectUri: "http://localhost:51954/signin-oidc",
-                postLogoutRedirectUri: "http://localhost:51954/signout-callback-oidc"
+                redirectUri: "https://localhost:44354/signin-oidc",
+                postLogoutRedirectUri: "https://localhost:44354/signout-callback-oidc"
             );
 
             await CreateClientAsync(
@@ -129,8 +129,8 @@ namespace AuthServer.Host
                 commonScopes.Union(new[] { "PublicWebSiteGateway", "BloggingService", "ProductService" }),
                 new[] { "hybrid" },
                 commonSecret,
-                redirectUri: "http://localhost:53435/signin-oidc",
-                postLogoutRedirectUri: "http://localhost:53435/signout-callback-oidc"
+                redirectUri: "https://localhost:44335/signin-oidc",
+                postLogoutRedirectUri: "https://localhost:44335/signout-callback-oidc"
             );
 
             await CreateClientAsync(

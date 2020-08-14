@@ -3,7 +3,7 @@
     "windowsAuthentication": false, 
     "anonymousAuthentication": true, 
     "iisExpress": {
-      "applicationUrl": "http://localhost:59835",
+      "applicationUrl": "https://localhost:44336",
       "sslPort": 0
     }
   },
@@ -18,7 +18,7 @@
     "TenantManagementService.Host": {
       "commandName": "Project",
       "launchBrowser": true,
-      "applicationUrl": "http://localhost:59835",
+      "applicationUrl": "https://localhost:44336",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }

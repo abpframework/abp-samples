@@ -10,8 +10,6 @@
 @inject IPageLayout PageLayout
 
 @{
-    var controller = "Order";
-
     PageLayout.Content.Title = L["Menu:Examples:DataGrid"].Value;
     PageLayout.Content.BreadCrumb.Add(L["Menu:Examples"].Value);
     PageLayout.Content.MenuItemName = "Sample.Examples.DataGrid";
@@ -25,7 +23,7 @@
     <abp-card-body>
         @(Html.DevExtreme().DataGrid<Order>()
             .DataSource(d => d.Mvc()
-                .Controller(controller)
+                .Controller("Order")
                 .LoadAction("GetOrders")
                 .InsertAction("InsertOrder")
                 .UpdateAction("UpdateOrder")
@@ -36,7 +34,7 @@
             .Columns(columns => {
                 columns.AddFor(m => m.CustomerID)
                     .Lookup(lookup => lookup
-                        .DataSource(d => d.Mvc().Controller(controller).LoadAction("GetCustomers").Key("value"))
+                        .DataSource(d => d.Mvc().Controller("Order").LoadAction("GetCustomers").Key("value"))
                         .ValueExpr("value")
                         .DisplayExpr("text")
                     );
@@ -50,7 +48,7 @@
         
                 columns.AddFor(m => m.ShipVia)
                     .Lookup(lookup => lookup
-                        .DataSource(d => d.Mvc().Controller(controller).LoadAction("GetShippers").Key("value"))
+                        .DataSource(d => d.Mvc().Controller("Order").LoadAction("GetShippers").Key("value"))
                         .ValueExpr("value")
                         .DisplayExpr("text")
                     );
@@ -68,7 +66,7 @@
         
                     @(Html.DevExtreme().DataGrid()
                         .DataSource(d => d.Mvc()
-                            .Controller(controller)
+                            .Controller("Order")
                             .LoadAction("GetSampleOrderDetails")
                             .LoadParams(new { orderID = new JS("data.OrderID") })
                         )

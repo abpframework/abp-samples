@@ -8,7 +8,7 @@ namespace DevExtremeSample.Web.Bundling
     [DependsOn(
         typeof(JQueryScriptContributor)
         )]
-    public class DevextremeScriptContributor : BundleContributor
+    public class DevExtremeScriptContributor : BundleContributor
     {
         public override void ConfigureBundle(BundleConfigurationContext context)
         {

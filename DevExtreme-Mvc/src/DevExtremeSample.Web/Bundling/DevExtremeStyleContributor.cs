@@ -3,7 +3,7 @@ using Volo.Abp.AspNetCore.Mvc.UI.Bundling;
 
 namespace DevExtremeSample.Web.Bundling
 {
-    public class DevextremeStyleContributor : BundleContributor
+    public class DevExtremeStyleContributor : BundleContributor
     {
         public override void ConfigureBundle(BundleConfigurationContext context)
         {

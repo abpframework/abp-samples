@@ -93,7 +93,7 @@ namespace DevExtremeSample.Web
                 options
                     .StyleBundles
                     .Get(StandardBundles.Styles.Global)
-                    .AddContributors(typeof(DevextremeStyleContributor));
+                    .AddContributors(typeof(DevExtremeStyleContributor));
             });
             
             Configure<AbpLayoutHookOptions>(options =>

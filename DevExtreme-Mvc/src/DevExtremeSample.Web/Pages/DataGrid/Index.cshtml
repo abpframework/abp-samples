@@ -1,0 +1,93 @@
+﻿@page
+@using DevExtreme.AspNet.Mvc
+@using DevExtremeSample.Localization
+@using DevExtremeSample.Orders
+@using Microsoft.AspNetCore.Mvc.Localization
+@using Volo.Abp.AspNetCore.Mvc.UI.Layout
+@model DevExtremeSample.Web.Pages.DataGrid.IndexModel
+
+@inject IHtmlLocalizer<DevExtremeSampleResource> L
+@inject IPageLayout PageLayout
+
+@{
+    PageLayout.Content.Title = L["Menu:Examples:DataGrid"].Value;
+    PageLayout.Content.BreadCrumb.Add(L["Menu:Examples"].Value);
+    PageLayout.Content.MenuItemName = "Sample.Examples.DataGrid";
+}
+
+@section styles{
+    <abp-style src="/Pages/DataGrid/index.css" />
+}
+
+<abp-card>
+    <abp-card-body>
+        @(Html.DevExtreme().DataGrid<Order>()
+            .DataSource(d => d.Mvc()
+                .Controller("Order")
+                .LoadAction("GetOrders")
+                .InsertAction("InsertOrder")
+                .UpdateAction("UpdateOrder")
+                .DeleteAction("DeleteOrder")
+                .Key("OrderID")
+            )
+            .RemoteOperations(true)
+            .Columns(columns => {
+                columns.AddFor(m => m.CustomerID)
+                    .Lookup(lookup => lookup
+                        .DataSource(d => d.Mvc().Controller("Order").LoadAction("GetCustomers").Key("value"))
+                        .ValueExpr("value")
+                        .DisplayExpr("text")
+                    );
+        
+                columns.AddFor(m => m.OrderDate);
+        
+                columns.AddFor(m => m.Freight)
+                    .HeaderFilter(f => f.GroupInterval(100));
+        
+                columns.AddFor(m => m.ShipCountry);
+        
+                columns.AddFor(m => m.ShipVia)
+                    .Lookup(lookup => lookup
+                        .DataSource(d => d.Mvc().Controller("Order").LoadAction("GetShippers").Key("value"))
+                        .ValueExpr("value")
+                        .DisplayExpr("text")
+                    );
+        
+            })
+            .FilterRow(f => f.Visible(true))
+            .HeaderFilter(f => f.Visible(true))
+            .GroupPanel(p => p.Visible(true))
+            .Scrolling(s => s.Mode(GridScrollingMode.Virtual))
+            .Height(600)
+            .ShowBorders(true)
+            .MasterDetail(md => md
+                .Enabled(true)
+                .Template(@<text>
+        
+                    @(Html.DevExtreme().DataGrid()
+                        .DataSource(d => d.Mvc()
+                            .Controller("Order")
+                            .LoadAction("GetSampleOrderDetails")
+                            .LoadParams(new { orderID = new JS("data.OrderID") })
+                        )
+                        .ShowBorders(true)
+                    )
+        
+                </text>)
+            )
+            .Editing(e => e.AllowAdding(true).AllowDeleting(true).AllowUpdating(true))
+            .Grouping(g => g.AutoExpandAll(false))
+            .Summary(s => s
+                .TotalItems(totalItems => {
+                    totalItems.AddFor(m => m.Freight).SummaryType(SummaryType.Sum);
+                })
+                .GroupItems(groupItems => {
+                    groupItems.AddFor(m => m.Freight).SummaryType(SummaryType.Sum);
+        
+                    groupItems.Add().SummaryType(SummaryType.Count);
+                })
+            )
+        )
+
+    </abp-card-body>
+</abp-card>

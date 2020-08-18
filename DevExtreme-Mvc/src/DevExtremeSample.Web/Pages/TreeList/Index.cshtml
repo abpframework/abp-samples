@@ -1,0 +1,102 @@
+﻿@page
+@using DevExtreme.AspNet.Mvc
+@using DevExtremeSample.EmployeeTasks
+@using DevExtremeSample.Localization
+@using Microsoft.AspNetCore.Mvc.Localization
+@using Volo.Abp.AspNetCore.Mvc.UI.Layout
+@model DevExtremeSample.Web.Pages.TreeList.IndexModel
+
+@inject IHtmlLocalizer<DevExtremeSampleResource> L
+@inject IPageLayout PageLayout
+
+@{
+    PageLayout.Content.Title = L["Menu:Examples:TreeList"].Value;
+}
+
+@section styles{
+    <abp-style src="/Pages/TreeList/index.css" />
+}
+
+<abp-card>
+    <abp-card-body>
+        @(Html.DevExtreme().TreeList<EmployeeTask>()
+            .ID("tasks")
+            .DataSource(ds => ds.Mvc()
+                .Controller("EmployeeTask")
+                .LoadAction("GetTasksWithEmployees")
+                .Key("Task_ID")
+            )
+            .KeyExpr("Task_ID")
+            .ParentIdExpr("Task_Parent_ID")
+            .ExpandedRowKeys(new[] { 1, 2 })
+            .SelectedRowKeys(new[] { 1, 29, 42 })
+            .SearchPanel(seachPanel => seachPanel
+                .Visible(true)
+                .Width(250)
+            )
+            .HeaderFilter(headerFilter => headerFilter.Visible(true))
+            .Selection(s => s
+                .Mode(SelectionMode.Multiple)
+            )
+            .ColumnChooser(cc => cc.Enabled(true))
+            .ColumnAutoWidth(true)
+            .WordWrapEnabled(true)
+            .ShowBorders(true)
+            .Columns(columns => {
+                columns.AddFor(m => m.Task_Subject)
+                    .Width(300);
+        
+                columns.AddFor(m => m.Task_Assigned_Employee_ID)
+                    .MinWidth(200)
+                    .AllowSorting(false)
+                    .CssClass("employee")
+                    .CellTemplate(@<text>
+                        <div class="img" style="background-image: url(<%-data.Task_Assigned_Employee.Picture%>)"></div>
+                        <span class="name"><%-data.Task_Assigned_Employee.Name%></span>
+                    </text>)
+                    .Lookup(lookup => lookup
+                        .DataSource(ds => ds.Mvc()
+                            .Controller("EmployeeTask")
+                            .LoadAction("GetTaskEmployees")
+                            .Key("ID")
+                        )
+                        .ValueExpr("ID")
+                        .DisplayExpr("Name")
+                    );
+        
+                columns.AddFor(m => m.Task_Status)
+                    .MinWidth(100)
+                    .Lookup(lookup => lookup
+                        .DataSource(new[] {
+                            "Not Started",
+                            "Need Assistance",
+                            "In Progress",
+                            "Deferred",
+                            "Completed"
+                        })
+                    );
+        
+                columns.AddFor(m => m.Task_Priority)
+                    .Lookup(lookup => lookup
+                    .DataSource(Enum.GetNames(typeof(Priority))))
+                    .Caption("Priority")
+                    .Visible(false);
+        
+                columns.AddFor(m => m.Task_Completion)
+                    .Caption("% Completed")
+                    .CustomizeText("completion_customizeText")
+                    .Visible(false);
+        
+                columns.AddFor(m => m.Task_Start_Date);
+        
+                columns.AddFor(m => m.Task_Due_Date);
+            })
+        )
+        
+        <script>
+            function completion_customizeText(cellInfo) {
+                return cellInfo.value + "%";
+            }
+        </script>
+    </abp-card-body>
+</abp-card>

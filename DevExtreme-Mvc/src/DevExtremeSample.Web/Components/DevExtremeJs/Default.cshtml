@@ -1,6 +1,4 @@
-﻿@addTagHelper *, Volo.Abp.AspNetCore.Mvc.UI.Bundling
-
+﻿@using DevExtremeSample.Web.Bundling
+@addTagHelper *, Volo.Abp.AspNetCore.Mvc.UI.Bundling
 <!-- Devextreme -->
-<abp-script src="/libs/devextreme/js/dx.all.js" />
-<abp-script src="/libs/devextreme/js/dx.aspnet.mvc.js" />
-<abp-script src="/libs/devextreme/js/dx.aspnet.data.js" />
+<abp-script type="typeof(DevextremeScriptContributor)" />

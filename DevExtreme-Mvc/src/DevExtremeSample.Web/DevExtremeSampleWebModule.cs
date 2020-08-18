@@ -10,8 +10,8 @@ using Microsoft.Extensions.Hosting;
 using DevExtremeSample.EntityFrameworkCore;
 using DevExtremeSample.Localization;
 using DevExtremeSample.MultiTenancy;
+using DevExtremeSample.Web.Bundling;
 using DevExtremeSample.Web.Components.DevExtremeJs;
-using DevExtremeSample.Web.Components.jQuery;
 using DevExtremeSample.Web.Menus;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.Swagger;
@@ -93,21 +93,12 @@ namespace DevExtremeSample.Web
                 options
                     .StyleBundles
                     .Get(StandardBundles.Styles.Global)
-                    .AddFiles("/libs/devextreme/css/dx.common.css")
-                    .AddFiles("/libs/devextreme/css/dx.light.css");
-
-                options.ScriptBundles
-                    .Get(StandardBundles.Scripts.Global)
-                    .Contributors
-                    .Replace<JQueryScriptContributor, MyScriptContributor>();
+                    .AddContributors(typeof(DevextremeStyleContributor));
             });
             
             Configure<AbpLayoutHookOptions>(options =>
             {
                 options.Add(
-                    LayoutHooks.Head.Last, //The hook name
-                    typeof(JqueryHeadViewComponent) //The component to add
-                ).Add(
                     LayoutHooks.Head.Last, //The hook name
                     typeof(DevExtremeJsViewComponent) //The component to add
                 );

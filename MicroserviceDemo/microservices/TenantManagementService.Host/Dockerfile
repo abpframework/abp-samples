@@ -9,10 +9,10 @@ COPY ["shared/MsDemo.Shared/MsDemo.Shared.csproj", "shared/MsDemo.Shared/"]
 RUN dotnet restore "microservices/TenantManagementService.Host/TenantManagementService.Host.csproj" -nowarn:msb3202,msb3277,nu1503
 COPY . .
 WORKDIR "/src/microservices/TenantManagementService.Host"
-RUN dotnet build "TenantManagementService.Host.csproj" -nowarn:msb3202,msb3277,nu1503 -c Release -o /app/build
+RUN dotnet build "TenantManagementService.Host.csproj" --no-restore -nowarn:msb3202,msb3277,nu1503 -c Release -o /app/build
 
 FROM build AS publish
-RUN dotnet publish "TenantManagementService.Host.csproj"-nowarn:msb3202,msb3277,nu1503 -c Release -o /app/publish
+RUN dotnet publish "TenantManagementService.Host.csproj" --no-restore -nowarn:msb3202,msb3277,nu1503 -c Release -o /app/publish
 
 FROM base AS final
 WORKDIR /app

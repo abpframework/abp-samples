@@ -1,7 +1,6 @@
 import { ListService, PagedResultDto } from '@abp/ng.core';
 import { Component, OnInit } from '@angular/core';
-import { BookDto, BookType, CreateUpdateBookDto } from './models';
-import { BookService } from './services';
+import { BookService, BookDto, bookTypeOptions } from '@proxy/books';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { NgbDateNativeAdapter, NgbDateAdapter } from '@ng-bootstrap/ng-bootstrap';
 import { ConfirmationService, Confirmation } from '@abp/ng.theme.shared';
@@ -15,15 +14,11 @@ import { ConfirmationService, Confirmation } from '@abp/ng.theme.shared';
 export class BookComponent implements OnInit {
   book = { items: [], totalCount: 0 } as PagedResultDto<BookDto>;
 
-  booksType = BookType;
-
   form: FormGroup;
 
-  selectedBook = new BookDto();
+  selectedBook = {} as BookDto;
 
-  bookTypes = Object.keys(BookType).filter(
-    (bookType) => typeof this.booksType[bookType] === 'number'
-  );
+  bookTypes = bookTypeOptions;
 
   isModalOpen = false;
 
@@ -35,7 +30,7 @@ export class BookComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    const bookStreamCreator = (query) => this.bookService.getListByInput(query);
+    const bookStreamCreator = (query) => this.bookService.getList(query);
 
     this.list.hookToQuery(bookStreamCreator).subscribe((response) => {
       this.book = response;
@@ -43,13 +38,13 @@ export class BookComponent implements OnInit {
   }
 
   createBook() {
-    this.selectedBook = new BookDto();
+    this.selectedBook = {} as BookDto;
     this.buildForm();
     this.isModalOpen = true;
   }
 
   editBook(id: string) {
-    this.bookService.getById(id).subscribe((book) => {
+    this.bookService.get(id).subscribe((book) => {
       this.selectedBook = book;
       this.buildForm();
       this.isModalOpen = true;
@@ -74,8 +69,8 @@ export class BookComponent implements OnInit {
     }
 
     const request = this.selectedBook.id
-      ? this.bookService.updateByIdAndInput(this.form.value, this.selectedBook.id)
-      : this.bookService.createByInput(this.form.value);
+      ? this.bookService.update(this.selectedBook.id, this.form.value)
+      : this.bookService.create(this.form.value);
 
     request.subscribe(() => {
       this.isModalOpen = false;
@@ -87,7 +82,7 @@ export class BookComponent implements OnInit {
   delete(id: string) {
     this.confirmation.warn('::AreYouSureToDelete', 'AbpAccount::AreYouSure').subscribe((status) => {
       if (status === Confirmation.Status.confirm) {
-        this.bookService.deleteById(id).subscribe(() => this.list.get());
+        this.bookService.delete(id).subscribe(() => this.list.get());
       }
     });
   }

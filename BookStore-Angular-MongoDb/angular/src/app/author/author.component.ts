@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ListService, PagedResultDto } from '@abp/ng.core';
-import { AuthorDto } from './models';
-import { AuthorService } from './services';
+import { AuthorService, AuthorDto } from '@proxy/authors';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { NgbDateNativeAdapter, NgbDateAdapter } from '@ng-bootstrap/ng-bootstrap';
 import { ConfirmationService, Confirmation } from '@abp/ng.theme.shared';
@@ -19,7 +18,7 @@ export class AuthorComponent implements OnInit {
 
   form: FormGroup;
 
-  selectedAuthor = new AuthorDto();
+  selectedAuthor = {} as AuthorDto;
 
   constructor(
     public readonly list: ListService,
@@ -29,7 +28,7 @@ export class AuthorComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    const authorStreamCreator = (query) => this.authorService.getListByInput(query);
+    const authorStreamCreator = (query) => this.authorService.getList(query);
 
     this.list.hookToQuery(authorStreamCreator).subscribe((response) => {
       this.author = response;
@@ -37,13 +36,13 @@ export class AuthorComponent implements OnInit {
   }
 
   createAuthor() {
-    this.selectedAuthor = new AuthorDto();
+    this.selectedAuthor = {} as AuthorDto;
     this.buildForm();
     this.isModalOpen = true;
   }
 
   editAuthor(id: string) {
-    this.authorService.getById(id).subscribe((author) => {
+    this.authorService.get(id).subscribe((author) => {
       this.selectedAuthor = author;
       this.buildForm();
       this.isModalOpen = true;
@@ -66,15 +65,13 @@ export class AuthorComponent implements OnInit {
     }
 
     if (this.selectedAuthor.id) {
-      this.authorService
-        .updateByIdAndInput(this.form.value, this.selectedAuthor.id)
-        .subscribe(() => {
-          this.isModalOpen = false;
-          this.form.reset();
-          this.list.get();
-        });
+      this.authorService.update(this.selectedAuthor.id, this.form.value).subscribe(() => {
+        this.isModalOpen = false;
+        this.form.reset();
+        this.list.get();
+      });
     } else {
-      this.authorService.createByInput(this.form.value).subscribe(() => {
+      this.authorService.create(this.form.value).subscribe(() => {
         this.isModalOpen = false;
         this.form.reset();
         this.list.get();
@@ -85,7 +82,7 @@ export class AuthorComponent implements OnInit {
   delete(id: string) {
     this.confirmation.warn('::AreYouSureToDelete', '::AreYouSure').subscribe((status) => {
       if (status === Confirmation.Status.confirm) {
-        this.authorService.deleteById(id).subscribe(() => this.list.get());
+        this.authorService.delete(id).subscribe(() => this.list.get());
       }
     });
   }

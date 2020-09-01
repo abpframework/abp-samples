@@ -90,6 +90,16 @@
   <ng-template #abpBody>
     <form [formGroup]="form" (ngSubmit)="save()">
       <div class="form-group">
+        <label for="author-id">Author</label><span> * </span>
+        <select class="form-control" id="author-id" formControlName="authorId">
+          <option [ngValue]="null">Select author</option>
+          <option [ngValue]="author.id" *ngFor="let author of authors$ | async">
+            {{ author.name }}
+          </option>
+        </select>
+      </div>
+
+      <div class="form-group">
         <label for="book-name">Name</label><span> * </span>
         <input type="text" id="book-name" class="form-control" formControlName="name" autofocus />
       </div>

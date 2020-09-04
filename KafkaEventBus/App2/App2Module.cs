@@ -15,7 +15,7 @@ namespace App2
         {
             Configure<AbpKafkaOptions>(options =>
             {
-                options.Connections.Default.BootstrapServers = "192.168.0.3:9093";
+                options.Connections.Default.BootstrapServers = "127.0.0.1:9093";
             });
 
             Configure<AbpKafkaEventBusOptions>(options =>

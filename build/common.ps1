@@ -15,6 +15,7 @@ $solutionPaths = (
     "../DocumentationSamples/CustomApplicationModules",
     "../EfCoreMigrationDemo",
     "../GrpcDemo",
+    "../KafkaEventBus",
     "../MicroserviceDemo",
     "../OrganizationUnitSample",
     "../PostgeSqlDemo",

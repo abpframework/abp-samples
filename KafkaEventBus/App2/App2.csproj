@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Volo.Abp.Autofac" Version="3.2.0-preview20200904" />
+    <PackageReference Include="Volo.Abp.EventBus.Kafka" Version="3.2.0-preview20200904" />
+    <ProjectReference Include="..\SharedModule\SharedModule.csproj" />
+  </ItemGroup>
+
+</Project>

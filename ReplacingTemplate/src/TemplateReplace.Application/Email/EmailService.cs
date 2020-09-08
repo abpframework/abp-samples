@@ -17,10 +17,9 @@ namespace TemplateReplace.Email
             _templateRenderer = templateRenderer;
         }
 
-        public async Task SendAsync()
+        public async Task<string> SendAsync()
         {
-            //standart email layout
-            var body = await _templateRenderer.RenderAsync(
+            var emailBody = await _templateRenderer.RenderAsync(
                 StandardEmailTemplates.Message,
                 new
                 {
@@ -31,8 +30,10 @@ namespace TemplateReplace.Email
             await _emailSender.SendAsync(
                 "target_email@abp.io",
                 "Subject",
-                body
+                emailBody
             );
+
+            return emailBody;
         }
     }
 }

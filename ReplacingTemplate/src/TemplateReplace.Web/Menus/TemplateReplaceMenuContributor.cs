@@ -29,6 +29,7 @@ namespace TemplateReplace.Web.Menus
             var l = context.GetLocalizer<TemplateReplaceResource>();
 
             context.Menu.Items.Insert(0, new ApplicationMenuItem(TemplateReplaceMenus.Home, l["Menu:Home"], "~/"));
+            context.Menu.Items.Insert(1, new ApplicationMenuItem(TemplateReplaceMenus.Email, "Email", "~/email"));
         }
     }
 }

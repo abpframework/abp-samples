@@ -117,6 +117,7 @@ namespace TemplateReplace.Web
             {
                 Configure<AbpVirtualFileSystemOptions>(options =>
                 {
+                    options.FileSets.AddEmbedded<TemplateReplaceWebModule>();
                     options.FileSets.ReplaceEmbeddedByPhysical<TemplateReplaceDomainSharedModule>(Path.Combine(hostingEnvironment.ContentRootPath, $"..{Path.DirectorySeparatorChar}TemplateReplace.Domain.Shared"));
                     options.FileSets.ReplaceEmbeddedByPhysical<TemplateReplaceDomainModule>(Path.Combine(hostingEnvironment.ContentRootPath, $"..{Path.DirectorySeparatorChar}TemplateReplace.Domain"));
                     options.FileSets.ReplaceEmbeddedByPhysical<TemplateReplaceApplicationContractsModule>(Path.Combine(hostingEnvironment.ContentRootPath, $"..{Path.DirectorySeparatorChar}TemplateReplace.Application.Contracts"));

@@ -1,10 +1,20 @@
-﻿namespace TemplateReplace.Web.Pages
+﻿using TemplateReplace.Email;
+
+namespace TemplateReplace.Web.Pages
 {
     public class IndexModel : TemplateReplacePageModel
     {
-        public void OnGet()
+        private readonly IEmailService _emailService;
+
+        public IndexModel(IEmailService emailService)
         {
-            
+            _emailService = emailService;
+        }
+        
+        public async void OnGet()
+        {
+            //send email
+            await _emailService.SendAsync();
         }
     }
 }

@@ -1,13 +1,76 @@
-﻿<html>
+﻿<!DOCTYPE html>
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-             <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-                         <meta http-equiv="X-UA-Compatible" content="ie=edge">
-             <title>Document</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        a {
+          text-decoration: none !important;
+        }
+        td img {
+            color: #0f3462;
+        }
+        
+        table {
+            max-width: 650px;
+        }
+    </style>
 </head>
 <body>
-<code>
-    New Email Layout (override the standart layout)
-</code>
+<div class="container">
+    <table border="0" align="center" cellspacing="0" cellpadding="0" bgcolor="white" class="email-template">
+        <tr>
+            <td>
+                <table border="0" cellspacing="0" cellpadding="0" style="color:#0f3462; font-family: sans-serif;">
+                    <tr>
+                        <td>
+                            <h2 style="text-align:center; margin: 0px; padding-bottom: 25px; margin-top: 25px;">
+                                <span style="color:lightcoral"></span>
+                            </h2>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <img src="https://image.flaticon.com/icons/svg/149/149314.svg" height="90px" style="display:block; margin:auto;padding-bottom: 25px;"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: center;">
+                            <h1 style="margin: 0px;padding-bottom: 25px; color: #E90052">ABP Community</h1>
+                            <h2 style="margin: 0px;padding-bottom: 25px;font-size:22px;">Share your experiences with the ABP Framework!</h2>
+                            <p style=" margin: 0px 40px;padding-bottom: 25px;line-height: 2; font-size: 15px;">
+                                ABP is an <a href="https://github.com/abpframework">open source</a> and community driven project. This guide is aims to help anyone wants to contribute to the project.
+                            </p>
+                            <p style=" margin: 0px 32px;padding-bottom: 25px;line-height: 2; font-size: 15px;">
+                                If you want to write articles or "how to" guides related to the ABP Framework and ASP.NET Core, please submit your article to the <a href="https://community.abp.io/">community.abp.io</a> web site.
+                            </p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <button type="button" style="background-color:#E90052; color:white; padding:15px 97px; outline: none; display: block; margin: auto; border-radius: 31px;
+                                    font-weight: bold; margin-top: 25px; margin-bottom: 25px; border: none; text-transform:uppercase; ">
+                                <a style="text-decoration: none; color:white" href="https://community.abp.io/articles/submit">Contribute</a>
+                            </button>
+                        </td>
+                    </tr>
+                    <tr style="text-align:center;">
+                        <td>
+                            <a href="https://github.com/abpframework/abp" style="color: black">
+                                <i class="fab fa-github fa-2x" style="padding: 20px"></i>
+                            </a>
+                            <a href="https://stackoverflow.com/questions/tagged/abp" style="color:orange;">
+                                <i style="padding: 20px" class="fab fa-stack-overflow fa-2x"></i>
+                            </a>
+                            <a href="https://twitter.com/abpframework">
+                                <i class="fab fa-twitter fa-2x" style="padding: 20px"></i>
+                            </a>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+</div>
 </body>
 </html>

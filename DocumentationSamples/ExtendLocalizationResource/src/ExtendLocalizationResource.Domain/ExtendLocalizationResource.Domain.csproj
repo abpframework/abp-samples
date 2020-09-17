@@ -1,0 +1,27 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="..\..\common.props" />
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <RootNamespace>ExtendLocalizationResource</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ExtendLocalizationResource.Domain.Shared\ExtendLocalizationResource.Domain.Shared.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Volo.Abp.Emailing" Version="3.1.2" />
+    <PackageReference Include="Volo.Abp.Identity.Domain" Version="3.1.2" />
+    <PackageReference Include="Volo.Abp.PermissionManagement.Domain.Identity" Version="3.1.2" />
+    <PackageReference Include="Volo.Abp.IdentityServer.Domain" Version="3.1.2" />
+    <PackageReference Include="Volo.Abp.PermissionManagement.Domain.IdentityServer" Version="3.1.2" />
+    <PackageReference Include="Volo.Abp.BackgroundJobs.Domain" Version="3.1.2" />
+    <PackageReference Include="Volo.Abp.AuditLogging.Domain" Version="3.1.2" />
+    <PackageReference Include="Volo.Abp.TenantManagement.Domain" Version="3.1.2" />
+    <PackageReference Include="Volo.Abp.FeatureManagement.Domain" Version="3.1.2" />
+    <PackageReference Include="Volo.Abp.SettingManagement.Domain" Version="3.1.2" />
+  </ItemGroup>
+
+</Project>

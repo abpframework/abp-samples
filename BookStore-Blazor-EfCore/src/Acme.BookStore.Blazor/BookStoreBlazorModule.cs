@@ -15,6 +15,7 @@ using Volo.Abp.Modularity;
 using Volo.Abp.UI.Navigation;
 using Volo.Abp.Identity.Blazor;
 using Volo.Abp.Account.Blazor;
+using Volo.Abp.AutoMapper;
 
 namespace Acme.BookStore.Blazor
 {
@@ -38,6 +39,15 @@ namespace Acme.BookStore.Blazor
             ConfigureRouter(context);
             ConfigureUI(builder);
             ConfigureMenu(context);
+            ConfigureAutoMapper();
+        }
+
+        private void ConfigureAutoMapper()
+        {
+            Configure<AbpAutoMapperOptions>(options =>
+            {
+                options.AddMaps<BookStoreBlazorModule>();
+            });
         }
 
         private void ConfigureRouter(ServiceConfigurationContext context)

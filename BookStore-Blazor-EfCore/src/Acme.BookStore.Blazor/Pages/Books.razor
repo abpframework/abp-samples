@@ -1,7 +1,41 @@
 ﻿@page "/books"
+@using Volo.Abp.Application.Dtos
+@using Volo.Abp.BlazoriseUI
+@using Acme.BookStore.Books
+@using Acme.BookStore.Localization
+@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<BookStoreResource> L
+@inherits BlazoriseCrudPageBase<IBookAppService, BookDto, Guid, PagedAndSortedResultRequestDto, CreateUpdateBookDto>
 
-<h2>Books</h2>
-
-@code {
-
-}
+<Card>
+    <CardHeader>
+        <h2>@L["Books"]</h2>
+    </CardHeader>
+    <CardBody>
+        <DataGrid TItem="BookDto"
+                  Data="Entities"
+                  ReadData="OnDataGridReadAsync"
+                  TotalItems="TotalCount"
+                  ShowPager="true"
+                  PageSize="PageSize">
+            <DataGridColumns>
+                <DataGridColumn TItem="BookDto" Field="@nameof(BookDto.Name)" Caption="@L["Name"].Value"></DataGridColumn>
+                <DataGridColumn TItem="BookDto" Field="@nameof(BookDto.Type)" Caption="@L["Type"].Value">
+                    <DisplayTemplate>
+                        @L[$"Enum:BookType:{(int)context.Type}"]
+                    </DisplayTemplate>
+                </DataGridColumn>
+                <DataGridColumn TItem="BookDto" Field="@nameof(BookDto.PublishDate)" Caption="@L["PublishDate"].Value">
+                    <DisplayTemplate>
+                        @context.PublishDate.ToShortDateString()
+                    </DisplayTemplate>
+                </DataGridColumn>
+                <DataGridColumn TItem="BookDto" Field="@nameof(BookDto.CreationTime)" Caption="@L["CreationTime"].Value">
+                    <DisplayTemplate>
+                        @context.CreationTime.ToLongDateString()
+                    </DisplayTemplate>
+                </DataGridColumn>
+            </DataGridColumns>
+        </DataGrid>
+    </CardBody>
+</Card>

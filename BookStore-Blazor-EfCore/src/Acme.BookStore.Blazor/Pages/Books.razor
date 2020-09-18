@@ -43,6 +43,9 @@
                                 <DropdownItem Clicked="() => OpenEditModalAsync(context.Id)">
                                     @L["Edit"]
                                 </DropdownItem>
+                                <DropdownItem Clicked="() => DeleteEntityAsync(context)">
+                                    @L["Delete"]
+                                </DropdownItem>
                             </DropdownMenu>
                         </Dropdown>
                     </DisplayTemplate>

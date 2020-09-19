@@ -1,11 +1,15 @@
 ﻿@page "/books"
+@attribute [Authorize(BookStorePermissions.Books.Default)]
 @using Volo.Abp.Application.Dtos
 @using Volo.Abp.BlazoriseUI
 @using Acme.BookStore.Books
 @using Acme.BookStore.Localization
+@using Acme.BookStore.Permissions
+@using Microsoft.AspNetCore.Authorization
 @using Microsoft.Extensions.Localization
 @inject IStringLocalizer<BookStoreResource> L
 @inherits BlazoriseCrudPageBase<IBookAppService, BookDto, Guid, PagedAndSortedResultRequestDto, CreateUpdateBookDto>
+@inject IAuthorizationService AuthorizationService
 
 <Card>
     <CardHeader>
@@ -15,8 +19,11 @@
             </Column>
             <Column ColumnSize="ColumnSize.Is6">
                 <Paragraph Alignment="TextAlignment.Right">
-                    <Button Color="Color.Primary"
-                            Clicked="OpenCreateModalAsync">@L["NewBook"]</Button>
+                    @if (canCreateBook)
+                    {
+                        <Button Color="Color.Primary"
+                                Clicked="OpenCreateModalAsync">@L["NewBook"]</Button>
+                    }
                 </Paragraph>
             </Column>
         </Row>
@@ -40,12 +47,18 @@
                                 @L["Actions"]
                             </DropdownToggle>
                             <DropdownMenu>
-                                <DropdownItem Clicked="() => OpenEditModalAsync(context.Id)">
-                                    @L["Edit"]
-                                </DropdownItem>
-                                <DropdownItem Clicked="() => DeleteEntityAsync(context)">
-                                    @L["Delete"]
-                                </DropdownItem>
+                                @if (canEditBook)
+                                {
+                                    <DropdownItem Clicked="() => OpenEditModalAsync(context.Id)">
+                                        @L["Edit"]
+                                    </DropdownItem>
+                                }
+                                @if (canDeleteBook)
+                                {
+                                    <DropdownItem Clicked="() => DeleteEntityAsync(context)">
+                                        @L["Delete"]
+                                    </DropdownItem>
+                                }
                             </DropdownMenu>
                         </Dropdown>
                     </DisplayTemplate>
@@ -164,3 +177,19 @@
         </ModalFooter>
     </ModalContent>
 </Modal>
+
+@code
+{
+    bool canCreateBook;
+    bool canEditBook;
+    bool canDeleteBook;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await base.OnInitializedAsync();
+
+        canCreateBook = await AuthorizationService.IsGrantedAsync(BookStorePermissions.Books.Create);
+        canEditBook = await AuthorizationService.IsGrantedAsync(BookStorePermissions.Books.Edit);
+        canDeleteBook = await AuthorizationService.IsGrantedAsync(BookStorePermissions.Books.Delete);
+    }
+}

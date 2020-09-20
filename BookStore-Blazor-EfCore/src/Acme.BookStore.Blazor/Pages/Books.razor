@@ -36,10 +36,10 @@
                   ShowPager="true"
                   PageSize="PageSize">
             <DataGridColumns>
-                <DataGridColumn Width="150px" 
+                <DataGridColumn Width="150px"
                                 TItem="BookDto"
-                                Field="@nameof(BookDto.Id)" 
-                                Sortable="false" 
+                                Field="@nameof(BookDto.Id)"
+                                Sortable="false"
                                 Caption="@L["Actions"]">
                     <DisplayTemplate>
                         <Dropdown>
@@ -67,10 +67,13 @@
                                 Field="@nameof(BookDto.Name)"
                                 Caption="@L["Name"]"></DataGridColumn>
                 <DataGridColumn TItem="BookDto"
+                                Field="@nameof(BookDto.AuthorName)"
+                                Caption="@L["Author"]"></DataGridColumn>
+                <DataGridColumn TItem="BookDto"
                                 Field="@nameof(BookDto.Type)"
                                 Caption="@L["Type"]">
                     <DisplayTemplate>
-                        @L[$"Enum:BookType:{(int) context.Type}"]
+                        @L[$"Enum:BookType:{(int)context.Type}"]
                     </DisplayTemplate>
                 </DataGridColumn>
                 <DataGridColumn TItem="BookDto"

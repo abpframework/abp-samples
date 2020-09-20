@@ -108,15 +108,27 @@
         </ModalHeader>
         <ModalBody>
             <Field>
+                <FieldLabel>@L["Author"]</FieldLabel>
+                <Select TValue="Guid" @bind-SelectedValue="@NewEntity.AuthorId">
+                    <SelectItem TValue="Guid" Value="Guid.Empty">@L["PickAnAuthor"]</SelectItem>
+                    @foreach (var author in authorList)
+                    {
+                        <SelectItem TValue="Guid" Value="@author.Id">
+                            @author.Name
+                        </SelectItem>
+                    }
+                    </Select>
+            </Field>
+            <Field>
                 <FieldLabel>@L["Name"]</FieldLabel>
-                <TextEdit @bind-text="NewEntity.Name" />
+                <TextEdit @bind-text="NewEntity.Name"/>
             </Field>
             <Field>
                 <FieldLabel>@L["Type"]</FieldLabel>
                 <Select TValue="BookType" @bind-SelectedValue="@NewEntity.Type">
                     @foreach (int bookTypeValue in Enum.GetValues(typeof(BookType)))
                     {
-                        <SelectItem TValue="BookType" Value="@((BookType)bookTypeValue)">
+                        <SelectItem TValue="BookType" Value="@((BookType) bookTypeValue)">
                             @L[$"Enum:BookType:{bookTypeValue}"]
                         </SelectItem>
                     }
@@ -124,11 +136,11 @@
             </Field>
             <Field>
                 <FieldLabel>@L["PublishDate"]</FieldLabel>
-                <DateEdit TValue="DateTime" @bind-Date="NewEntity.PublishDate" />
+                <DateEdit TValue="DateTime" @bind-Date="NewEntity.PublishDate"/>
             </Field>
             <Field>
                 <FieldLabel>@L["Price"]</FieldLabel>
-                <NumericEdit TValue="float" @bind-Value="NewEntity.Price" />
+                <NumericEdit TValue="float" @bind-Value="NewEntity.Price"/>
             </Field>
         </ModalBody>
         <ModalFooter>
@@ -148,6 +160,17 @@
             <CloseButton Clicked="CloseEditModalAsync" />
         </ModalHeader>
         <ModalBody>
+            <Field>
+                <FieldLabel>@L["Author"]</FieldLabel>
+                <Select TValue="Guid" @bind-SelectedValue="@EditingEntity.AuthorId">
+                    @foreach (var author in authorList)
+                    {
+                        <SelectItem TValue="Guid" Value="@author.Id">
+                            @author.Name
+                        </SelectItem>
+                    }
+                </Select>
+            </Field>
             <Field>
                 <FieldLabel>@L["Name"]</FieldLabel>
                 <TextEdit @bind-text="EditingEntity.Name" />
@@ -187,6 +210,8 @@
     bool canEditBook;
     bool canDeleteBook;
 
+    IReadOnlyList<AuthorLookupDto> authorList = Array.Empty<AuthorLookupDto>();
+
     protected override async Task OnInitializedAsync()
     {
         await base.OnInitializedAsync();
@@ -194,5 +219,7 @@
         canCreateBook = await AuthorizationService.IsGrantedAsync(BookStorePermissions.Books.Create);
         canEditBook = await AuthorizationService.IsGrantedAsync(BookStorePermissions.Books.Edit);
         canDeleteBook = await AuthorizationService.IsGrantedAsync(BookStorePermissions.Books.Delete);
+
+        authorList = (await AppService.GetAuthorLookupAsync()).Items;
     }
 }

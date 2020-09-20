@@ -25,6 +25,7 @@ namespace Acme.BookStore.Blazor.Pages
         private bool CanDeleteAuthor { get; set; }
 
         private CreateAuthorDto NewAuthor { get; set; }
+
         private Guid EditingAuthorId { get; set; }
         private UpdateAuthorDto EditingAuthor { get; set; }
 
@@ -118,14 +119,14 @@ namespace Acme.BookStore.Blazor.Pages
             EditAuthorModal.Hide();
         }
 
-        protected virtual async Task CreateEntityAsync()
+        private async Task CreateAuthorAsync()
         {
             await AuthorAppService.CreateAsync(NewAuthor);
             await GetAuthorsAsync();
             CreateAuthorModal.Hide();
         }
 
-        protected virtual async Task UpdateAuthorAsync()
+        private async Task UpdateAuthorAsync()
         {
             await AuthorAppService.UpdateAsync(EditingAuthorId, EditingAuthor);
             await GetAuthorsAsync();

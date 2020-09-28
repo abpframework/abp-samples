@@ -8,6 +8,10 @@ const routes: Routes = [
     loadChildren: () => import('./home/home.module').then((m) => m.HomeModule),
   },
   {
+    path: 'dev-extreme',
+    loadChildren: () => import('./dev-extreme/dev-extreme.module').then((m) => m.DevExtremeModule),
+  },
+  {
     path: 'account',
     loadChildren: () =>
       import('@abp/ng.account').then((m) => m.AccountModule.forLazy({ redirectUrl: '/' })),

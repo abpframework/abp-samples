@@ -15,6 +15,12 @@ function configureRoutes(routes: RoutesService) {
         order: 1,
         layout: eLayoutType.application,
       },
+      {
+        path: '/dev-extreme',
+        name: 'DevExtreme',
+        order: 2,
+        layout: eLayoutType.application,
+      },
     ]);
   };
 }

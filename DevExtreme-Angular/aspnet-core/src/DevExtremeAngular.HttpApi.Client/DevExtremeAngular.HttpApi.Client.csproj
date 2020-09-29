@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="..\..\common.props" />
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <RootNamespace>DevExtremeAngular</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\DevExtremeAngular.Application.Contracts\DevExtremeAngular.Application.Contracts.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Volo.Abp.Account.HttpApi.Client" Version="3.2.0-rc.2" />
+    <PackageReference Include="Volo.Abp.Identity.HttpApi.Client" Version="3.2.0-rc.2" />
+    <PackageReference Include="Volo.Abp.PermissionManagement.HttpApi.Client" Version="3.2.0-rc.2" />
+    <PackageReference Include="Volo.Abp.TenantManagement.HttpApi.Client" Version="3.2.0-rc.2" />
+    <PackageReference Include="Volo.Abp.FeatureManagement.HttpApi.Client" Version="3.2.0-rc.2" />
+  </ItemGroup>
+
+</Project>

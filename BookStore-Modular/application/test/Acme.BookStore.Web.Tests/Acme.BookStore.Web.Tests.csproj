@@ -20,7 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Volo.Abp.AspNetCore.TestBase" Version="3.0.2" />
+    <PackageReference Include="Volo.Abp.AspNetCore.TestBase" Version="3.2.1" />
   </ItemGroup>
 
 

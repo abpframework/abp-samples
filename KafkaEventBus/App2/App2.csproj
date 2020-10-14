@@ -6,8 +6,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Volo.Abp.Autofac" Version="3.2.0-preview20200904" />
-    <PackageReference Include="Volo.Abp.EventBus.Kafka" Version="3.2.0-preview20200904" />
+    <PackageReference Include="Volo.Abp.Autofac" Version="3.3.0-preview20201009" />
+    <PackageReference Include="Volo.Abp.EventBus.Kafka" Version="3.3.0-preview20201009" />
     <ProjectReference Include="..\SharedModule\SharedModule.csproj" />
   </ItemGroup>
 

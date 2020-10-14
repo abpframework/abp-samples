@@ -2,6 +2,7 @@
 using Mongo2Go;
 using Volo.Abp;
 using Volo.Abp.Data;
+using Volo.Abp.Uow;
 using Volo.Abp.Modularity;
 
 namespace Acme.BookStore.BookManagement.MongoDB
@@ -23,6 +24,11 @@ namespace Acme.BookStore.BookManagement.MongoDB
             Configure<AbpDbConnectionOptions>(options =>
             {
                 options.ConnectionStrings.Default = connectionString;
+            });
+
+            Configure<AbpUnitOfWorkDefaultOptions>(options =>
+            {
+                options.TransactionBehavior = UnitOfWorkTransactionBehavior.Disabled;
             });
         }
     }

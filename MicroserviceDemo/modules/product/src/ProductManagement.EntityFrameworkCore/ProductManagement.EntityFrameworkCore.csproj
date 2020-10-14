@@ -6,8 +6,8 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.1.5" />
-        <PackageReference Include="Volo.Abp.EntityFrameworkCore" Version="3.0.2" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.1.6" />
+        <PackageReference Include="Volo.Abp.EntityFrameworkCore" Version="3.2.1" />
         <ProjectReference Include="..\ProductManagement.Domain\ProductManagement.Domain.csproj" />
     </ItemGroup>
 

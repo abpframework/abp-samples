@@ -1,5 +1,6 @@
 ﻿using System;
 using Volo.Abp.Data;
+using Volo.Abp.Uow;
 using Volo.Abp.Modularity;
 
 namespace Acme.BookStore.MongoDB
@@ -19,6 +20,11 @@ namespace Acme.BookStore.MongoDB
             Configure<AbpDbConnectionOptions>(options =>
             {
                 options.ConnectionStrings.Default = connectionString;
+            });
+
+            Configure<AbpUnitOfWorkDefaultOptions>(options =>
+            {
+                options.TransactionBehavior = UnitOfWorkTransactionBehavior.Disabled;
             });
         }
     }

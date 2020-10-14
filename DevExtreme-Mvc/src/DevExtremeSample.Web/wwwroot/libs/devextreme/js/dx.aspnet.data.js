@@ -1,4 +1,4 @@
-// Version: 2.6.2
+// Version: 2.7.1
 // https://github.com/DevExpress/DevExtreme.AspNet.Data
 // Copyright (c) Developer Express Inc.
 
@@ -62,21 +62,11 @@
             onAjaxError = options.onAjaxError;
 
         function send(operation, requiresKey, ajaxSettings, customSuccessHandler) {
-            var d = Deferred();
+            var d = Deferred(),
+                thenable,
+                beforeSendResult;
 
-            if(requiresKey && !keyExpr) {
-                d.reject(new Error("Primary key is not specified (operation: '" + operation + "', url: '" + ajaxSettings.url + "')"));
-            } else {
-                if(operation === "load") {
-                    ajaxSettings.cache = false;
-                    ajaxSettings.dataType = "json";
-                } else {
-                    ajaxSettings.dataType = "text";
-                }
-
-                if(onBeforeSend)
-                    onBeforeSend(operation, ajaxSettings);
-
+            function sendCore() {
                 ajaxUtility.sendRequest(ajaxSettings).then(
                     function(res, textStatus, xhr) {
                         if(customSuccessHandler)
@@ -99,6 +89,28 @@
                             d.reject(xhr, textStatus);
                     }
                 );
+            }
+
+            if(requiresKey && !keyExpr) {
+                d.reject(new Error("Primary key is not specified (operation: '" + operation + "', url: '" + ajaxSettings.url + "')"));
+            } else {
+                if(operation === "load") {
+                    ajaxSettings.cache = false;
+                    ajaxSettings.dataType = "json";
+                } else {
+                    ajaxSettings.dataType = "text";
+                }
+
+                if(onBeforeSend) {
+                    beforeSendResult = onBeforeSend(operation, ajaxSettings);
+                    if(beforeSendResult && typeof beforeSendResult.then === "function")
+                        thenable = beforeSendResult;
+                }
+
+                if(thenable)
+                    thenable.then(sendCore, function(error) { d.reject(error); });
+                else
+                    sendCore();
             }
 
             return d.promise();

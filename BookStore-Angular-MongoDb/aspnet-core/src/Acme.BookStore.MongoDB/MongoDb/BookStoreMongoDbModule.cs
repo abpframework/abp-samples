@@ -8,6 +8,7 @@ using Volo.Abp.Modularity;
 using Volo.Abp.PermissionManagement.MongoDB;
 using Volo.Abp.SettingManagement.MongoDB;
 using Volo.Abp.TenantManagement.MongoDB;
+using Volo.Abp.Uow;
 
 namespace Acme.BookStore.MongoDB
 {
@@ -29,6 +30,11 @@ namespace Acme.BookStore.MongoDB
             context.Services.AddMongoDbContext<BookStoreMongoDbContext>(options =>
             {
                 options.AddDefaultRepositories();
+            });
+
+            Configure<AbpUnitOfWorkDefaultOptions>(options =>
+            {
+                options.TransactionBehavior = UnitOfWorkTransactionBehavior.Disabled;
             });
         }
     }

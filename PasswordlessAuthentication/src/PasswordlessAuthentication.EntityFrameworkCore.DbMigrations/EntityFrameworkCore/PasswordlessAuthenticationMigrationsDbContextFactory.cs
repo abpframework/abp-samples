@@ -24,8 +24,8 @@ namespace PasswordlessAuthentication.EntityFrameworkCore
         private static IConfigurationRoot BuildConfiguration()
         {
             var builder = new ConfigurationBuilder()
-                .SetBasePath(Directory.GetCurrentDirectory())
-                .AddJsonFile("appsettings.json", optional: false);
+                   .SetBasePath(Path.Combine(Directory.GetCurrentDirectory(), "../PasswordlessAuthentication.DbMigrator/"))
+                   .AddJsonFile("appsettings.json", optional: false);
 
             return builder.Build();
         }

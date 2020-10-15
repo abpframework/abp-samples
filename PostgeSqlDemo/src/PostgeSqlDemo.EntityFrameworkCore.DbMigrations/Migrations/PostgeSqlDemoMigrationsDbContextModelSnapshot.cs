@@ -19,7 +19,7 @@ namespace PostgeSqlDemo.Migrations
             modelBuilder
                 .HasAnnotation("_Abp_DatabaseProvider", EfCoreDatabaseProvider.PostgreSql)
                 .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn)
-                .HasAnnotation("ProductVersion", "3.1.5")
+                .HasAnnotation("ProductVersion", "3.1.6")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             modelBuilder.Entity("PostgeSqlDemo.Spatial.City", b =>
@@ -543,6 +543,81 @@ namespace PostgeSqlDemo.Migrations
                     b.ToTable("AbpRoleClaims");
                 });
 
+            modelBuilder.Entity("Volo.Abp.Identity.IdentitySecurityLog", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Action")
+                        .HasColumnType("character varying(96)")
+                        .HasMaxLength(96);
+
+                    b.Property<string>("ApplicationName")
+                        .HasColumnType("character varying(96)")
+                        .HasMaxLength(96);
+
+                    b.Property<string>("BrowserInfo")
+                        .HasColumnType("character varying(512)")
+                        .HasMaxLength(512);
+
+                    b.Property<string>("ClientId")
+                        .HasColumnType("character varying(64)")
+                        .HasMaxLength(64);
+
+                    b.Property<string>("ClientIpAddress")
+                        .HasColumnType("character varying(64)")
+                        .HasMaxLength(64);
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .HasColumnName("ConcurrencyStamp")
+                        .HasColumnType("character varying(40)")
+                        .HasMaxLength(40);
+
+                    b.Property<string>("CorrelationId")
+                        .HasColumnType("character varying(64)")
+                        .HasMaxLength(64);
+
+                    b.Property<DateTime>("CreationTime")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<string>("ExtraProperties")
+                        .HasColumnName("ExtraProperties")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Identity")
+                        .HasColumnType("character varying(96)")
+                        .HasMaxLength(96);
+
+                    b.Property<Guid?>("TenantId")
+                        .HasColumnName("TenantId")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("TenantName")
+                        .HasColumnType("character varying(64)")
+                        .HasMaxLength(64);
+
+                    b.Property<Guid?>("UserId")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("UserName")
+                        .HasColumnType("character varying(256)")
+                        .HasMaxLength(256);
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("TenantId", "Action");
+
+                    b.HasIndex("TenantId", "ApplicationName");
+
+                    b.HasIndex("TenantId", "Identity");
+
+                    b.HasIndex("TenantId", "UserId");
+
+                    b.ToTable("AbpSecurityLogs");
+                });
+
             modelBuilder.Entity("Volo.Abp.Identity.IdentityUser", b =>
                 {
                     b.Property<Guid>("Id")
@@ -596,6 +671,12 @@ namespace PostgeSqlDemo.Migrations
                     b.Property<bool>("IsDeleted")
                         .ValueGeneratedOnAdd()
                         .HasColumnName("IsDeleted")
+                        .HasColumnType("boolean")
+                        .HasDefaultValue(false);
+
+                    b.Property<bool>("IsExternal")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnName("IsExternal")
                         .HasColumnType("boolean")
                         .HasDefaultValue(false);
 

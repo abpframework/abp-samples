@@ -8,7 +8,7 @@ namespace Acme.BookStore.Blazor
     {
         public Task ConfigureMenuAsync(MenuConfigurationContext context)
         {
-            if(context.Menu.DisplayName != StandardMenus.Main)
+            if (context.Menu.DisplayName != StandardMenus.Main)
             {
                 return Task.CompletedTask;
             }
@@ -22,6 +22,20 @@ namespace Acme.BookStore.Blazor
                     l["Menu:Home"],
                     "/",
                     icon: "fas fa-home"
+                )
+            );
+
+            context.Menu.AddItem(
+                new ApplicationMenuItem(
+                    "BooksStore",
+                    l["Menu:BookStore"],
+                    icon: "fa fa-book"
+                ).AddItem(
+                    new ApplicationMenuItem(
+                        "BooksStore.Books",
+                        l["Menu:Books"],
+                        url: "/books"
+                    )
                 )
             );
 

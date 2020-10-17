@@ -2,7 +2,7 @@
 
 ![build and test](https://github.com/abpframework/abp-samples/workflows/build%20and%20test/badge.svg)
 
-Sample solutions built with the ABP Framework
+Sample solutions built with the ABP Framework.
 
 ### Issues
 

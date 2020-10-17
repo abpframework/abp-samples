@@ -69,6 +69,9 @@
                                 Field="@nameof(BookDto.Name)"
                                 Caption="@L["Name"]"></DataGridColumn>
                 <DataGridColumn TItem="BookDto"
+                                Field="@nameof(BookDto.AuthorName)"
+                                Caption="@L["Author"]"></DataGridColumn>
+                <DataGridColumn TItem="BookDto"
                                 Field="@nameof(BookDto.Type)"
                                 Caption="@L["Type"]">
                     <DisplayTemplate>
@@ -106,6 +109,18 @@
             <CloseButton Clicked="CloseCreateModalAsync" />
         </ModalHeader>
         <ModalBody>
+            <Field>
+                <FieldLabel>@L["Author"]</FieldLabel>
+                <Select TValue="Guid" @bind-SelectedValue="@NewEntity.AuthorId">
+                    <SelectItem TValue="Guid" Value="Guid.Empty">@L["PickAnAuthor"]</SelectItem>
+                    @foreach (var author in authorList)
+                    {
+                        <SelectItem TValue="Guid" Value="@author.Id">
+                            @author.Name
+                        </SelectItem>
+                    }
+                </Select>
+            </Field>
             <Field>
                 <FieldLabel>@L["Name"]</FieldLabel>
                 <TextEdit @bind-text="NewEntity.Name" />
@@ -152,6 +167,17 @@
         </ModalHeader>
         <ModalBody>
             <Field>
+                <FieldLabel>@L["Author"]</FieldLabel>
+                <Select TValue="Guid" @bind-SelectedValue="@EditingEntity.AuthorId">
+                    @foreach (var author in authorList)
+                    {
+                        <SelectItem TValue="Guid" Value="@author.Id">
+                            @author.Name
+                        </SelectItem>
+                    }
+                </Select>
+            </Field>
+            <Field>
                 <FieldLabel>@L["Name"]</FieldLabel>
                 <TextEdit @bind-text="EditingEntity.Name" />
             </Field>
@@ -194,12 +220,19 @@
     bool canEditBook;
     bool canDeleteBook;
 
+    IReadOnlyList<AuthorLookupDto> authorList = Array.Empty<AuthorLookupDto>();
+
     protected override async Task OnInitializedAsync()
     {
         await base.OnInitializedAsync();
 
-        canCreateBook = await AuthorizationService.IsGrantedAsync(BookStorePermissions.Books.Create);
-        canEditBook = await AuthorizationService.IsGrantedAsync(BookStorePermissions.Books.Edit);
-        canDeleteBook = await AuthorizationService.IsGrantedAsync(BookStorePermissions.Books.Delete);
+        canCreateBook = await
+            AuthorizationService.IsGrantedAsync(BookStorePermissions.Books.Create);
+        canEditBook = await
+            AuthorizationService.IsGrantedAsync(BookStorePermissions.Books.Edit);
+        canDeleteBook = await
+            AuthorizationService.IsGrantedAsync(BookStorePermissions.Books.Delete);
+
+        authorList = (await AppService.GetAuthorLookupAsync()).Items;
     }
 }

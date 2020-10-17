@@ -8,6 +8,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Migrations\20201017171904_Added_AuthorId_To_Book.cs" />
+    <Compile Remove="Migrations\20201017171904_Added_AuthorId_To_Book.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Acme.BookStore.EntityFrameworkCore\Acme.BookStore.EntityFrameworkCore.csproj" />
   </ItemGroup>
 

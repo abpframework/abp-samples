@@ -13,13 +13,13 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Volo.Abp.Autofac.WebAssembly" Version="3.3.0-rc.1" />
-    <PackageReference Include="Volo.Abp.AspNetCore.Components.WebAssembly.BasicTheme" Version="3.3.0-rc.1" />
+    <PackageReference Include="Volo.Abp.Autofac.WebAssembly" Version="3.3.0-rc.2" />
+    <PackageReference Include="Volo.Abp.AspNetCore.Components.WebAssembly.BasicTheme" Version="3.3.0-rc.2" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Volo.Abp.Identity.Blazor" Version="3.3.0-rc.1" />
-    <PackageReference Include="Volo.Abp.TenantManagement.Blazor" Version="3.3.0-rc.1" />
+    <PackageReference Include="Volo.Abp.Identity.Blazor" Version="3.3.0-rc.2" />
+    <PackageReference Include="Volo.Abp.TenantManagement.Blazor" Version="3.3.0-rc.2" />
   </ItemGroup>
 
   <ItemGroup>

@@ -1,0 +1,29 @@
+﻿@page "/create-event"
+@using Microsoft.Extensions.Localization
+@using EventOrganizer.Localization
+@inject IStringLocalizer<EventOrganizerResource> L
+
+<Heading Size="HeadingSize.Is3" Class="text-center">Create Event</Heading>
+
+<Row>
+    <Column ColumnSize="ColumnSize.Is6.Is3.WithOffset">
+    <EditForm Model="@Event" OnValidSubmit="Create">
+        <Field>
+            <FieldLabel>@L["Title"]</FieldLabel>
+            <TextEdit @bind-text="@Event.Title"/>
+        </Field>
+        <Field>
+            <FieldLabel>@L["Description"]</FieldLabel>
+            <MemoEdit @bind-text="@Event.Description"/>
+        </Field>
+        <Field>
+            <Check TValue="bool" @bind-Checked="@Event.IsFree">@L["Free"]</Check>
+        </Field>
+        <Field>
+            <FieldLabel>@L["Free"]</FieldLabel>
+            <DateEdit TValue="DateTime" @bind-Date="@Event.StartTime"/>
+        </Field>
+        <Button Type="@ButtonType.Submit" Color="@Color.Primary">@L["Save"]</Button>
+    </EditForm>
+    </Column>
+</Row>

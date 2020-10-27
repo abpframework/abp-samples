@@ -1,0 +1,45 @@
+﻿@page "/events/{id}"
+@if (Event != null)
+{
+    <Row>
+        <Column ColumnSize="ColumnSize.Is8">
+            <h1>@Event.Title</h1>
+            <p>Start time: @Event.StartTime.ToLongDateString()</p>
+            <p>@Event.Description</p>
+        </Column>
+        <Column ColumnSize="ColumnSize.Is4">
+            @if (CurrentUser.IsAuthenticated)
+            {
+                <div>
+                    @if (!IsRegistered)
+                    {
+                        <Button Color="Color.Primary" Clicked="Register">Register now!</Button>
+                    }
+                    else
+                    {
+                        <Button Color="Color.Secondary" Clicked="UnRegister">Cancel registration!</Button>
+                    }
+                </div>
+                @if (CurrentUser.Id == Event.CreatorId)
+                {
+                    <div>
+                        <Button Color="Color.Danger" Clicked="Delete">Delete</Button>
+                    </div>
+                }
+            }
+            else
+            {
+                <a class="btn btn-primary" href="/authentication/login">
+                    <i class="fa fa-sign-in-alt"></i> Login to attend!
+                </a>
+            }
+            <h3>Attendees (@Event.Attendees.Count)</h3>
+            <ul>
+                @foreach (var attendee in Event.Attendees)
+                {
+                    <li>@attendee.UserName</li>
+                }
+            </ul>
+        </Column>
+    </Row>
+}

@@ -155,6 +155,7 @@ namespace Acme.BookStore.IdentityServer
                     grantTypes: new[] { "authorization_code" },
                     secret: configurationSection["BookStore_Blazor:ClientSecret"]?.Sha256(),
                     requireClientSecret: false,
+                    requirePkce: true,
                     redirectUri: $"{blazorRootUrl}/authentication/login-callback",
                     postLogoutRedirectUri: $"{blazorRootUrl}/authentication/logout-callback"
                 );

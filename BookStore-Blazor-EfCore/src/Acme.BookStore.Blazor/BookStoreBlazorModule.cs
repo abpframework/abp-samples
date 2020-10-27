@@ -14,8 +14,8 @@ using Volo.Abp.Autofac.WebAssembly;
 using Volo.Abp.Modularity;
 using Volo.Abp.UI.Navigation;
 using Volo.Abp.Identity.Blazor;
-using Volo.Abp.Account.Blazor;
 using Volo.Abp.AutoMapper;
+using Volo.Abp.TenantManagement.Blazor;
 
 namespace Acme.BookStore.Blazor
 {
@@ -24,7 +24,7 @@ namespace Acme.BookStore.Blazor
         typeof(BookStoreHttpApiClientModule),
         typeof(AbpAspNetCoreComponentsWebAssemblyBasicThemeModule),
         typeof(AbpIdentityBlazorModule),
-        typeof(AbpAccountBlazorModule)
+        typeof(AbpTenantManagementBlazorModule)
     )]
     public class BookStoreBlazorModule : AbpModule
     {
@@ -39,15 +39,7 @@ namespace Acme.BookStore.Blazor
             ConfigureRouter(context);
             ConfigureUI(builder);
             ConfigureMenu(context);
-            ConfigureAutoMapper();
-        }
-
-        private void ConfigureAutoMapper()
-        {
-            Configure<AbpAutoMapperOptions>(options =>
-            {
-                options.AddMaps<BookStoreBlazorModule>();
-            });
+            ConfigureAutoMapper(context);
         }
 
         private void ConfigureRouter(ServiceConfigurationContext context)
@@ -93,6 +85,14 @@ namespace Acme.BookStore.Blazor
             context.Services.AddTransient(sp => new HttpClient
             {
                 BaseAddress = new Uri(environment.BaseAddress)
+            });
+        }
+
+        private void ConfigureAutoMapper(ServiceConfigurationContext context)
+        {
+            Configure<AbpAutoMapperOptions>(options =>
+            {
+                options.AddMaps<BookStoreBlazorModule>();
             });
         }
 

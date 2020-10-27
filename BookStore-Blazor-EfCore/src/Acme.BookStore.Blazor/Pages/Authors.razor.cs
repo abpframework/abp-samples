@@ -48,10 +48,10 @@ namespace Acme.BookStore.Blazor.Pages
         {
             CanCreateAuthor = await AuthorizationService
                 .IsGrantedAsync(BookStorePermissions.Authors.Create);
-            
+
             CanEditAuthor = await AuthorizationService
                 .IsGrantedAsync(BookStorePermissions.Authors.Edit);
-            
+
             CanDeleteAuthor = await AuthorizationService
                 .IsGrantedAsync(BookStorePermissions.Authors.Delete);
         }

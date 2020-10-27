@@ -66,7 +66,5 @@ namespace Acme.BookStore.Authors
                 );
             });
         }
-
-        //TODO: Test other methods...
     }
 }

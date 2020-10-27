@@ -9,7 +9,7 @@ namespace Acme.BookStore.Blazor
     {
         public async Task ConfigureMenuAsync(MenuConfigurationContext context)
         {
-            if(context.Menu.DisplayName != StandardMenus.Main)
+            if (context.Menu.DisplayName != StandardMenus.Main)
             {
                 return;
             }
@@ -42,7 +42,7 @@ namespace Acme.BookStore.Blazor
                     url: "/books"
                 ));
             }
-            
+
             if (await context.IsGrantedAsync(BookStorePermissions.Authors.Default))
             {
                 bookStoreMenu.AddItem(new ApplicationMenuItem(

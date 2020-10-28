@@ -12,4 +12,15 @@
         <PackageReference Include="Volo.ClientSimulation.Web" Version="3.3.0" />
     </ItemGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\..\src\ClientSimulationDemo.HttpApi.Client\ClientSimulationDemo.HttpApi.Client.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <Compile Remove="Logs\**" />
+        <EmbeddedResource Remove="Logs\**" />
+        <None Remove="Logs\**" />
+        <Content Remove="Logs\**" />
+    </ItemGroup>
+
 </Project>

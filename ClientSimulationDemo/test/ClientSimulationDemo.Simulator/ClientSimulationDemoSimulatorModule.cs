@@ -1,4 +1,5 @@
-﻿using ClientSimulationDemo.Simulator.Scenarios;
+﻿using ClientSimulationDemo.Simulator.Scenarios.RoleManagement;
+using ClientSimulationDemo.Simulator.Scenarios.UserManagement;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Hosting;
 using Volo.Abp;
@@ -12,7 +13,8 @@ namespace ClientSimulationDemo.Simulator
     [DependsOn(
         typeof(AbpAspNetCoreMvcUiBasicThemeModule),
         typeof(AbpAutofacModule),
-        typeof(ClientSimulationWebModule)
+        typeof(ClientSimulationWebModule),
+        typeof(ClientSimulationDemoHttpApiClientModule)
         )]
     public class ClientSimulationDemoSimulatorModule : AbpModule
     {
@@ -22,8 +24,15 @@ namespace ClientSimulationDemo.Simulator
             {
                 options.Scenarios.Add(
                     new ScenarioConfiguration(
-                        typeof(DemoScenario),
-                        clientCount: 20
+                        typeof(RoleManagementScenario),
+                        clientCount: 50
+                    )
+                );
+
+                options.Scenarios.Add(
+                    new ScenarioConfiguration(
+                        typeof(UserManagementScenario),
+                        clientCount: 50
                     )
                 );
             });

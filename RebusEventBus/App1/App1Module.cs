@@ -1,4 +1,5 @@
-﻿using Volo.Abp.Autofac;
+﻿using Rebus.Config;
+using Volo.Abp.Autofac;
 using Volo.Abp.EventBus.Rebus;
 using Volo.Abp.Modularity;
 
@@ -14,6 +15,11 @@ namespace App1
         {
             PreConfigure<AbpRebusEventBusOptions>(options =>
             {
+                options.Configurer = configure =>
+                {
+                    configure.Transport(x => x.UseRabbitMq("amqp://user:bitnami@192.168.0.3", "eventbus"));
+                };
+
                 options.InputQueueName = "eventbus";
             });
         }

@@ -26,7 +26,7 @@
                     {
                         <Badge Color="Color.Success">FREE</Badge>
                     }
-                    <span class="badge badge-warning font-weight-normal"><i class="fas fa-user-friends"></i><span class="font-weight-bold"> @Event.Attendees.Count</span> attendes</span>
+                    <span class="badge badge-warning font-weight-normal"><i class="fas fa-user-friends"></i> <span class="font-weight-bold">@Event.Attendees.Count</span></span>
                 </div>
                 <img src="https://picsum.photos/id/870/800/600" class="event-pic" />
                 <small class="font-weight-bold text-warning my-2 d-block text-uppercase">Start time: @Event.StartTime.ToLongDateString()</small>
@@ -56,15 +56,15 @@
                         <i class="fa fa-sign-in-alt"></i> Login to attend!
                     </a>
                 }
-                <div class="mt-4">
-                    <span class="font-weight-bold">Attendees (@Event.Attendees.Count)</span>
-                    <ul class="mt-1 mb-0">
-                        @foreach (var attendee in Event.Attendees)
-                        {
-                            <li>@attendee.UserName</li>
-                        }
-                    </ul>
-                </div>
+            </div>
+            <div class="mt-4 event-form p-4">
+                <span class="font-weight-bold"><i class="fas fa-user-friends"></i> Attendees <span class="float-right font-weight-normal" style="opacity:.65;">(@Event.Attendees.Count)</span></span>
+                <ul class="mt-1 mb-0 att-list">
+                    @foreach (var attendee in Event.Attendees)
+                    {
+                        <li><i class="fa fa-check"></i> @attendee.UserName</li>
+                    }
+                </ul>
             </div>
         </Column>
     </Row>

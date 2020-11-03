@@ -3,27 +3,29 @@
 @using EventOrganizer.Localization
 @inject IStringLocalizer<EventOrganizerResource> L
 
-<Heading Size="HeadingSize.Is3" Class="text-center">Create Event</Heading>
+<Heading Size="HeadingSize.Is3" Class="text-center mt-5 mb-4">Create Event</Heading>
 
 <Row>
     <Column ColumnSize="ColumnSize.Is6.Is3.WithOffset">
-    <EditForm Model="@Event" OnValidSubmit="Create">
-        <Field>
-            <FieldLabel>@L["Title"]</FieldLabel>
-            <TextEdit @bind-text="@Event.Title"/>
-        </Field>
-        <Field>
-            <FieldLabel>@L["Description"]</FieldLabel>
-            <MemoEdit @bind-text="@Event.Description"/>
-        </Field>
-        <Field>
-            <Check TValue="bool" @bind-Checked="@Event.IsFree">@L["Free"]</Check>
-        </Field>
-        <Field>
-            <FieldLabel>@L["Free"]</FieldLabel>
-            <DateEdit TValue="DateTime" @bind-Date="@Event.StartTime"/>
-        </Field>
-        <Button Type="@ButtonType.Submit" Color="@Color.Primary">@L["Save"]</Button>
-    </EditForm>
+        <div class="p-lg-5 p-md-3 event-form">
+            <EditForm Model="@Event" OnValidSubmit="Create">
+                <Field>
+                    <FieldLabel>@L["Title"]</FieldLabel>
+                    <TextEdit @bind-text="@Event.Title" />
+                </Field>
+                <Field>
+                    <FieldLabel>@L["Description"]</FieldLabel>
+                    <MemoEdit @bind-text="@Event.Description" />
+                </Field>
+                <Field>
+                    <Check TValue="bool" @bind-Checked="@Event.IsFree">@L["Free"]</Check>
+                </Field>
+                <Field>
+                    <FieldLabel>@L["StartTime"]</FieldLabel>
+                    <DateEdit TValue="DateTime" @bind-Date="@Event.StartTime" />
+                </Field>
+                <Button Type="@ButtonType.Submit" Color="@Color.Primary" Class="btn-block btn-lg">@L["Save"]</Button>
+            </EditForm>
+        </div>
     </Column>
 </Row>

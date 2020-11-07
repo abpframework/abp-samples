@@ -1,40 +1,35 @@
 ﻿@page "/events/{id}"
 @if (Event != null)
 {
-
     <Row Class="mb-4">
         <Column Class="text-left">
             <h1>Event Detail</h1>
         </Column>
         <Column Class="text-right">
             <a href="/" Class="mt-2 btn btn-dark"><i class="fa fa-arrow-left"></i> Back</a>
-            @if (CurrentUser.IsAuthenticated)
+            @if (CurrentUser.IsAuthenticated && CurrentUser.Id == Event.CreatorId)
             {
-                @if (CurrentUser.Id == Event.CreatorId)
-                {
-                    <Button Color="Color.Danger" Clicked="Delete" Class="mt-2">Delete</Button>
-
-                }
-            }     
+                <Button Color="Color.Danger" Clicked="Delete" Class="mt-2">Delete</Button>
+            }
         </Column>
     </Row>
     <Row>
-        <Column ColumnSize="ColumnSize.Is8" Class="col-12 col-md-8">
+        <Column Class="col-12 col-md-8">
             <div class="position-relative">
                 <div class="position-absolute text-right w-100 px-3 py-2" style="left: 0px; top: 2px;">
-                    @if (@Event.IsFree)
+                    @if (Event.IsFree)
                     {
                         <Badge Color="Color.Success">FREE</Badge>
                     }
                     <span class="badge badge-warning font-weight-normal"><i class="fas fa-user-friends"></i> <span class="font-weight-bold">@Event.Attendees.Count</span></span>
                 </div>
-                <img src="https://picsum.photos/id/870/800/600" class="event-pic" />
+                <img src="https://picsum.photos/seed/@Event.Id/800/600" class="event-pic" />
                 <small class="font-weight-bold text-warning my-2 d-block text-uppercase">Start time: @Event.StartTime.ToLongDateString()</small>
                 <h1>@Event.Title</h1>
                 <p style="opacity: .65;">@Event.Description</p>
             </div>
         </Column>
-        <Column ColumnSize="ColumnSize.Is4" Class="col-12 col-md-4">
+        <Column Class="col-12 col-md-4">
             <div class="p-4 event-form">
                 @if (CurrentUser.IsAuthenticated)
                 {

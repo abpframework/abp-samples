@@ -13,7 +13,6 @@
             <h1>Upcoming Events</h1>
         </Column>
         <Column Class="text-right">
-
             @if (!CurrentUser.IsAuthenticated)
             {
                 <a class="btn btn-primary mt-2" href="/authentication/login">
@@ -34,13 +33,13 @@
             <Column Class="col-12 col-lg-4 col-md-6">
                 <a class="mb-5 position-relative d-block event-link" href="/events/@upcomingEvent.Id">
                     <div class="position-absolute text-right w-100 px-3 py-2" style="left: 0px; top: 2px;">
-                        @if (@upcomingEvent.IsFree)
+                        @if (upcomingEvent.IsFree)
                         {
                             <Badge Color="Color.Success">FREE</Badge>
                         }
                         <span class="badge badge-warning font-weight-normal"><i class="fas fa-user-friends"></i><span class="font-weight-bold"> @upcomingEvent.AttendeesCount</span></span>
                     </div>
-                    <img src="https://picsum.photos/id/870/400/300" class="event-pic" />
+                    <img src="https://picsum.photos/seed/@upcomingEvent.Id/400/300" class="event-pic" />
                     <div class="px-3 py-1">
                         <small class="font-weight-bold text-warning my-2 d-block text-uppercase">@upcomingEvent.StartTime.ToLongDateString()</small>
                         <p class="h4 text-light d-block mb-2">@upcomingEvent.Title</p>

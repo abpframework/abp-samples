@@ -3,7 +3,7 @@
 {
     <Row Class="mb-4">
         <Column Class="text-left">
-            <h1>Event Detail</h1>
+            <h1>@Event.Title</h1>
         </Column>
         <Column Class="text-right">
             <a href="/" Class="mt-2 btn btn-dark"><i class="fa fa-arrow-left"></i> Back</a>
@@ -25,7 +25,6 @@
                 </div>
                 <img src="https://picsum.photos/seed/@Event.Id/800/600" class="event-pic" />
                 <small class="font-weight-bold text-warning my-2 d-block text-uppercase">Start time: @Event.StartTime.ToLongDateString()</small>
-                <h1>@Event.Title</h1>
                 <p style="opacity: .65;">@Event.Description</p>
             </div>
         </Column>

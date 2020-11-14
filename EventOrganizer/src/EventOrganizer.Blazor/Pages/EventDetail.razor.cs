@@ -3,8 +3,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using EventOrganizer.Events;
 using Microsoft.AspNetCore.Components;
-using Volo.Abp.AspNetCore.Components.Messages;
-using Volo.Abp.Users;
 
 namespace EventOrganizer.Blazor.Pages
 {
@@ -13,21 +11,19 @@ namespace EventOrganizer.Blazor.Pages
         [Parameter]
         public string Id { get; set; }
 
-        [Inject]
-        private IEventAppService EventAppService { get; set; }
-
-        [Inject]
-        private ICurrentUser CurrentUser { get; set; }
-
-        [Inject]
-        private NavigationManager NavigationManager { get; set; }
-
-        [Inject]
-        private IUiMessageService MessageService { get; set; }
-
         private EventDetailDto Event { get; set; }
-
         private bool IsRegistered { get; set; }
+
+        private readonly IEventAppService _eventAppService;
+        private readonly NavigationManager _navigationManager;
+
+        public EventDetail(
+            IEventAppService eventAppService,
+            NavigationManager navigationManager)
+        {
+            _eventAppService = eventAppService;
+            _navigationManager = navigationManager;
+        }
 
         protected override async Task OnInitializedAsync()
         {
@@ -36,7 +32,7 @@ namespace EventOrganizer.Blazor.Pages
 
         private async Task GetEventAsync()
         {
-            Event = await EventAppService.GetAsync(Guid.Parse(Id));
+            Event = await _eventAppService.GetAsync(Guid.Parse(Id));
             if (CurrentUser.IsAuthenticated)
             {
                 IsRegistered = Event.Attendees.Any(a => a.UserId == CurrentUser.Id);
@@ -45,25 +41,25 @@ namespace EventOrganizer.Blazor.Pages
 
         private async Task Register()
         {
-            await EventAppService.RegisterAsync(Guid.Parse(Id));
+            await _eventAppService.RegisterAsync(Guid.Parse(Id));
             await GetEventAsync();
         }
 
         private async Task UnRegister()
         {
-            await EventAppService.UnregisterAsync(Guid.Parse(Id));
+            await _eventAppService.UnregisterAsync(Guid.Parse(Id));
             await GetEventAsync();
         }
 
         private async Task Delete()
         {
-            if (!await MessageService.Confirm("This event will be deleted: " + Event.Title))
+            if (!await Message.Confirm("This event will be deleted: " + Event.Title))
             {
                 return;
             }
 
-            await EventAppService.DeleteAsync(Guid.Parse(Id));
-            NavigationManager.NavigateTo("/");
+            await _eventAppService.DeleteAsync(Guid.Parse(Id));
+            _navigationManager.NavigateTo("/");
         }
     }
 }

@@ -12,15 +12,9 @@
         <h1>Upcoming Events</h1>
     </Column>
     <Column Class="text-right">
-        @if (!CurrentUser.IsAuthenticated)
+        @if (CurrentUser.IsAuthenticated)
         {
-            <a class="btn btn-primary mt-2" href="/authentication/login">
-                <i class="fa fa-sign-in-alt"></i> @L["Login"]
-            </a>
-        }
-        else
-        {
-            <a class="btn btn-primary mt-2" href="/create-event">
+            <a class="btn btn-primary" href="/create-event">
                 <i class="fa fa-sign-in-alt"></i> @L["CreateEvent"]
             </a>
         }

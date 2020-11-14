@@ -4,6 +4,10 @@ This document has been prepared for me (@hikalkan) as a reference on giving the 
 
 ## Preparing to the Workshop
 
+* Prepare the solution
+  * Create empty project: `abp new EventOrganizer -u blazor -d mongodb --preview`
+  * Add styles to main.css.
+  * Fix classes in index.html/body tag: `bg-dark text-light`.
 * Open the MongoDB Compass Community.
 * Delete the existing MongoDB database.
 * Create & open the solution in Rider, build, run migrations & test it.
@@ -32,7 +36,7 @@ abp new EventOrganizer -u blazor -d mongodb --preview
 
 * Run the application, login & show the Identity module UI.
 
-### Domain Layer & MongoDB Mapping
+### Domain Layer
 
 * Add the following `Event` aggregate (with `EventAttendee`) to the solution:
 
@@ -81,6 +85,8 @@ namespace EventOrganizer.Events
     }
 }
 ```
+
+### MongoDB Mapping
 
 * Add the following property to the `EventOrganizerMongoDbContext`:
 

@@ -26,4 +26,65 @@ The following tools are needed to be able to run the solution.
 abp new EventOrganizer -u blazor -d mongodb --preview
 ````
 
-* Open the solution in Visual Studio 2019
+* Open the pre-opened solution in Rider
+
+### Run, Introduce the Application
+
+* Run the application, login & show the Identity module UI.
+
+### Domain Layer & MongoDB Mapping
+
+* Add the following `Event` aggregate (with `EventAttendee`) to the solution:
+
+**Event**
+
+````csharp
+using System;
+using System.Collections.Generic;
+using Volo.Abp.Domain.Entities.Auditing;
+
+namespace EventOrganizer.Events
+{
+    public class Event : FullAuditedAggregateRoot<Guid>
+    {
+        public string Title { get; set; }
+
+        public string Description { get; set; }
+
+        public bool IsFree { get; set; }
+
+        public DateTime StartTime { get; set; }
+
+        public ICollection<EventAttendee> Attendees { get; set; }
+
+        public Event()
+        {
+            Attendees = new List<EventAttendee>();
+        }
+    }
+}
+````
+
+**EventAttendee**
+
+```csharp
+using System;
+using Volo.Abp.Auditing;
+
+namespace EventOrganizer.Events
+{
+    public class EventAttendee : IHasCreationTime
+    {
+        public Guid UserId { get; set; }
+
+        public DateTime CreationTime { get; set; }
+    }
+}
+```
+
+* Add the following property to the `EventOrganizerMongoDbContext`:
+
+````csharp
+public IMongoCollection<Event> Events => Collection<Event>();
+````
+

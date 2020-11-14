@@ -1,0 +1,65 @@
+﻿@page "/events/{id}"
+@if (Event != null)
+{
+    <Row Class="mb-4">
+        <Column Class="text-left">
+            <h1>@Event.Title</h1>
+        </Column>
+        <Column Class="text-right">
+            <a href="/" Class="mt-2 btn btn-dark"><i class="fa fa-arrow-left"></i> Back</a>
+            @if (CurrentUser.IsAuthenticated && CurrentUser.Id == Event.CreatorId)
+            {
+                <Button Color="Color.Danger" Clicked="Delete" Class="mt-2">Delete</Button>
+            }
+        </Column>
+    </Row>
+    <Row>
+        <Column Class="col-12 col-md-8">
+            <div class="position-relative">
+                <div class="position-absolute text-right w-100 px-3 py-2" style="left: 0px; top: 2px;">
+                    @if (Event.IsFree)
+                    {
+                        <Badge Color="Color.Success">FREE</Badge>
+                    }
+                    <span class="badge badge-warning font-weight-normal"><i class="fas fa-user-friends"></i> <span class="font-weight-bold">@Event.Attendees.Count</span></span>
+                </div>
+                <img src="https://picsum.photos/seed/@Event.Id/800/600" class="event-pic" />
+                <small class="font-weight-bold text-warning my-2 d-block text-uppercase">Start time: @Event.StartTime.ToLongDateString()</small>
+                <p style="opacity: .65;">@Event.Description</p>
+            </div>
+        </Column>
+        <Column Class="col-12 col-md-4">
+            <div class="p-4 event-form">
+                @if (CurrentUser.IsAuthenticated)
+                {
+                    <div>
+                        @if (!IsRegistered)
+                        {
+                            <Button Color="Color.Primary" Clicked="Register" Class="btn-block btn-lg">Register now!</Button>
+                        }
+                        else
+                        {
+                            <p>You are registered in this event</p>
+                            <Button Color="Color.Secondary" Clicked="UnRegister" Class="btn-block">Cancel registration!</Button>
+                        }
+                    </div>
+                }
+                else
+                {
+                    <a class="btn btn-primary" href="/authentication/login">
+                        <i class="fa fa-sign-in-alt"></i> Login to attend!
+                    </a>
+                }
+            </div>
+            <div class="mt-4 event-form p-4">
+                <span class="font-weight-bold"><i class="fas fa-user-friends"></i> Attendees <span class="float-right font-weight-normal" style="opacity:.65;">(@Event.Attendees.Count)</span></span>
+                <ul class="mt-1 mb-0 att-list">
+                    @foreach (var attendee in Event.Attendees)
+                    {
+                        <li><i class="fa fa-check"></i> @attendee.UserName</li>
+                    }
+                </ul>
+            </div>
+        </Column>
+    </Row>
+}

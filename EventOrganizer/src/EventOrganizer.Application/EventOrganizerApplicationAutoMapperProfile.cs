@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using EventOrganizer.Events;
+using Volo.Abp.AutoMapper;
 
 namespace EventOrganizer
 {
@@ -6,9 +8,15 @@ namespace EventOrganizer
     {
         public EventOrganizerApplicationAutoMapperProfile()
         {
-            /* You can configure your AutoMapper mapping configuration here.
-             * Alternatively, you can split your mapping configurations
-             * into multiple profile classes for a better organization. */
+            CreateMap<EventCreationDto, Event>()
+                .Ignore(x => x.Attendees);
+
+            CreateMap<Event, EventDetailDto>();
+
+            CreateMap<EventAttendee, EventAttendeeDto>()
+                .Ignore(x => x.UserName);
+
+            CreateMap<Event, EventDto>();
         }
     }
 }

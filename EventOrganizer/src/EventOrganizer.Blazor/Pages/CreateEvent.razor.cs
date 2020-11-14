@@ -8,16 +8,20 @@ namespace EventOrganizer.Blazor.Pages
     {
         private EventCreationDto Event { get; set; } = new EventCreationDto();
 
-        [Inject]
-        private IEventAppService EventAppService { get; set; }
-
-        [Inject]
-        private NavigationManager NavigationManager { get; set; }
+        private readonly IEventAppService _eventAppService;
+        private readonly NavigationManager _navigationManager;
+        public CreateEvent(
+            IEventAppService eventAppService,
+            NavigationManager navigationManager)
+        {
+            _eventAppService = eventAppService;
+            _navigationManager = navigationManager;
+        }
 
         private async Task Create()
         {
-            var id = await EventAppService.CreateAsync(Event);
-            NavigationManager.NavigateTo("/events/" + id);
+            var eventId = await _eventAppService.CreateAsync(Event);
+            _navigationManager.NavigateTo("/events/" + eventId);
         }
     }
 }

@@ -94,3 +94,131 @@ namespace EventOrganizer.Events
 public IMongoCollection<Event> Events => Collection<Event>();
 ````
 
+### Clean Index.razor & Add the Header & "Create Event" button
+
+* Clean the Index.razor file.
+* Paste the following code:
+
+````html
+@page "/"
+@inherits EventOrganizerComponentBase
+<Row Class="mb-4">
+    <Column Class="text-left">
+        <h1>Upcoming Events</h1>
+    </Column>
+    <Column Class="text-right">
+        @if (CurrentUser.IsAuthenticated)
+        {
+            <a class="btn btn-primary" href="/create-event">
+                <i class="fa fa-sign-in-alt"></i> @L["CreateEvent"]
+            </a>
+        }
+    </Column>
+</Row>
+````
+
+### Implement Event Creation
+
+* Create the Initial `IEventAppService` with the `CreateAsync` method:
+
+````csharp
+using System;
+using System.Threading.Tasks;
+using Volo.Abp.Application.Services;
+
+namespace EventOrganizer.Events
+{
+    public interface IEventAppService : IApplicationService
+    {
+        Task<Guid> CreateAsync(EventCreationDto input);
+    }
+}
+````
+
+* Add `EventCreationDto` class:
+
+````csharp
+using System;
+using System.ComponentModel.DataAnnotations;
+
+namespace EventOrganizer.Events
+{
+    public class EventCreationDto
+    {
+        [Required]
+        [StringLength(100)]
+        public string Title { get; set; }
+
+        [Required]
+        [StringLength(2000)]
+        public string Description { get; set; }
+
+        public bool IsFree { get; set; }
+
+        public DateTime StartTime { get; set; }
+    }
+}
+````
+
+* Implement the `EventAppService`:
+
+````csharp
+using System;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
+using Volo.Abp.Domain.Repositories;
+
+namespace EventOrganizer.Events
+{
+    public class EventAppService : EventOrganizerAppService, IEventAppService
+    {
+        private readonly IRepository<Event, Guid> _eventRepository;
+
+        public EventAppService(IRepository<Event, Guid> eventRepository)
+        {
+            _eventRepository = eventRepository;
+        }
+
+        [Authorize]
+        public async Task<Guid> CreateAsync(EventCreationDto input)
+        {
+            var eventEntity = ObjectMapper.Map<EventCreationDto, Event>(input);
+            await _eventRepository.InsertAsync(eventEntity);
+            return eventEntity.Id;
+        }
+    }
+}
+````
+
+* Create the `CreateEvent.razor` file:
+
+````csharp
+@page "/create-event"
+@inherits EventOrganizerComponentBase
+<Heading Size="HeadingSize.Is3" Margin="Margin.Is5.FromTop.Is4.FromBottom" Class="text-center">Create Event</Heading>
+<Row>
+    <Column ColumnSize="ColumnSize.Is6.Is3.WithOffset">
+        <div class="p-lg-5 p-md-3 event-form">
+            <EditForm Model="@Event" OnValidSubmit="Create">
+                <Field>
+                    <FieldLabel>@L["Title"]</FieldLabel>
+                    <TextEdit @bind-Text="@Event.Title" />
+                </Field>
+                <Field>
+                    <FieldLabel>@L["Description"]</FieldLabel>
+                    <MemoEdit @bind-Text="@Event.Description" />
+                </Field>
+                <Field>
+                    <Check TValue="bool" @bind-Checked="@Event.IsFree">@L["Free"]</Check>
+                </Field>
+                <Field>
+                    <FieldLabel>@L["StartTime"]</FieldLabel>
+                    <DateEdit TValue="DateTime" @bind-Date="@Event.StartTime" />
+                </Field>
+                <Button Type="@ButtonType.Submit" Block="true" Color="@Color.Primary" Size="Size.Large">@L["Save"]</Button>
+            </EditForm>
+        </div>
+    </Column>
+</Row>
+````
+

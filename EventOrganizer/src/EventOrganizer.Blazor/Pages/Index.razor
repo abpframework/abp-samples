@@ -32,12 +32,15 @@
         {
             <Column Class="col-12 col-lg-4 col-md-6">
                 <a class="mb-5 position-relative d-block event-link" href="/events/@upcomingEvent.Id">
-                    <div class="position-absolute text-right w-100 px-3 py-2" style="left: 0px; top: 2px;">
+                    <div class="position-absolute text-right w-100 px-3 py-2" style="left: 0; top: 2px;">
                         @if (upcomingEvent.IsFree)
                         {
                             <Badge Color="Color.Success" Class="mr-1">FREE</Badge>
                         }
-                        <span class="badge badge-warning font-weight-normal"><i class="fas fa-user-friends"></i><span class="font-weight-bold"> @upcomingEvent.AttendeesCount</span></span>
+                        <span class="badge badge-warning font-weight-normal">
+                            <i class="fas fa-user-friends"></i>
+                            <span class="font-weight-bold">@upcomingEvent.AttendeesCount</span>
+                        </span>
                     </div>
                     <img src="https://picsum.photos/seed/@upcomingEvent.Id/400/300" class="event-pic" />
                     <div class="px-3 py-1">

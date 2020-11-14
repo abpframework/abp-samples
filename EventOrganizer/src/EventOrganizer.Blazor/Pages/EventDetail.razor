@@ -21,7 +21,10 @@
                     {
                         <Badge Color="Color.Success" Class="mr-1">FREE</Badge>
                     }
-                    <span class="badge badge-warning font-weight-normal"><i class="fas fa-user-friends"></i> <span class="font-weight-bold">@Event.Attendees.Count</span></span>
+                    <span class="badge badge-warning font-weight-normal">
+                        <i class="fas fa-user-friends"></i>
+                        <span class="font-weight-bold">@Event.Attendees.Count</span>
+                    </span>
                 </div>
                 <img src="https://picsum.photos/seed/@Event.Id/800/600" class="event-pic" />
                 <small class="font-weight-bold text-warning my-2 d-block text-uppercase">Start time: @Event.StartTime.ToLongDateString()</small>

@@ -1,10 +1,6 @@
 ﻿@page "/create-event"
-@using Microsoft.Extensions.Localization
-@using EventOrganizer.Localization
-@inject IStringLocalizer<EventOrganizerResource> L
-
+@inherits EventOrganizerComponentBase
 <Heading Size="HeadingSize.Is3" Margin="Margin.Is5.FromTop.Is4.FromBottom" Class="text-center">Create Event</Heading>
-
 <Row>
     <Column ColumnSize="ColumnSize.Is6.Is3.WithOffset">
         <div class="p-lg-5 p-md-3 event-form">

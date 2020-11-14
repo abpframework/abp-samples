@@ -1,40 +1,99 @@
 # Event Organizer Workshop Notes
 
-This document has been prepared for me (@hikalkan) as a reference on giving the ABP & Blazor Workshop.
-
-## Preparing to the Workshop
-
-* Prepare the solution
-  * Create empty project: `abp new EventOrganizer -u blazor -d mongodb --preview`
-  * Add styles to main.css.
-  * Fix classes in index.html/body tag: `bg-dark text-light`.
-* Open the MongoDB Compass Community.
-* Delete the existing MongoDB database.
-* Create & open the solution in Rider, build, run migrations & test it.
+This document has been prepared for me (@hikalkan) as a reference on giving the ABP & Blazor Workshop. It contains the steps to build the application.
 
 ## Requirements
 
 The following tools are needed to be able to run the solution.
 
 * .NET 5.0 SDK
-* Visual Studio 2019 16.8.0+ or another compatible IDE (e.g. Rider)
-* MongoDB Server
+* Visual Studio 2019 16.8.0+ or another compatible IDE
+* MongoDB Server (with MongoDB Compass)
 
 ## Development
 
+### Clean the Database
+
+* If it does exists, delete the MongoDB `EventOrganizer` database for a fresh start.
+
 ### Creating a new Application
 
-* Use the following command line tool
+* Use the following ABP CLI command:
 
 ````bash
 abp new EventOrganizer -u blazor -d mongodb --preview
 ````
 
-* Open the pre-opened solution in Rider
+### Open & Run the Application
 
-### Run, Introduce the Application
+* Open the solution in Visual Studio.
+* Run the `EventOrganizer.DbMigrator` application to seed the initial data.
+* Run the `EventOrganizer.HttpApi.Host` application that starts the server side.
+* Run the `EventOrganizer.Blazor` application.
 
-* Run the application, login & show the Identity module UI.
+### Apply the Custom Styles
+
+* Add styles to `wwwroot/main.css`:
+
+````css
+body.abp-application-layout {
+    background-color: #222 !important;
+    font-size: 18px;
+}
+nav#main-navbar.bg-dark {
+    background-color: #222 !important;
+    box-shadow: none !important;
+}
+.event-pic {
+    width: 100%;
+    border-radius: 12px;
+    box-shadow: 5px 5px 0px 0px rgba(0,0,0,.5);
+    margin-bottom: 10px;
+}
+.event-link:hover, .event-link:hover *{
+    text-decoration: none;
+}
+.event-link:hover .event-pic {
+    box-shadow: 5px 5px 0px 0px #ffd800;
+}
+.event-form {
+    background-color: #333 !important;
+    box-shadow: 5px 5px 0px 0px rgba(0,0,0,.5);
+    border-radius: 12px;
+}
+.table {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 5px 5px 0px 0px rgba(0,0,0,.5);
+}
+.table th{
+    border: 0 !important;
+}
+.modal {
+    color: #333;
+}
+.page-item:first-child .page-link {
+    margin-left: 0;
+    border-top-left-radius: 12px;
+    border-bottom-left-radius: 12px;
+}
+.page-item:last-child .page-link {
+    border-top-right-radius: 12px;
+    border-bottom-right-radius: 12px;
+}
+.btn {
+    border-radius: 8px;
+}
+.att-list {
+    list-style: none;
+    padding: 0;
+}
+.att-list li {
+    padding: 4px 0 0 0;
+}
+````
+
+* `wwwroot/index.html`: Remove `bg-light` class from the `body` tag and add `bg-dark text-light`.
 
 ### Domain Layer
 

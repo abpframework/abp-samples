@@ -527,4 +527,336 @@ namespace EventOrganizer.Blazor.Pages
 
 The new home page is shown below:
 
-![event-list-ui](D:\Github\abp-samples\EventOrganizer\docs\images\event-list-ui.png)
+![event-list-ui](images/event-list-ui.png)
+
+### Event Detail Page
+
+* Add `GetAsync`, `RegisterAsync`, `UnregisterAsync` and `DeleteAsync` methods to the `IEventAppService`:
+
+````csharp
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using Volo.Abp.Application.Services;
+
+namespace EventOrganizer.Events
+{
+    public interface IEventAppService : IApplicationService
+    {
+        Task<Guid> CreateAsync(EventCreationDto input);
+
+        Task<List<EventDto>> GetUpcomingAsync();
+
+        Task<EventDetailDto> GetAsync(Guid id);
+
+        Task RegisterAsync(Guid id);
+
+        Task UnregisterAsync(Guid id);
+
+        Task DeleteAsync(Guid id);
+    }
+}
+````
+
+* Add `EventDetailDto` class:
+
+````csharp
+using System;
+using System.Collections.Generic;
+using Volo.Abp.Application.Dtos;
+
+namespace EventOrganizer.Events
+{
+    public class EventDetailDto : CreationAuditedEntityDto<Guid>
+    {
+        public string Title { get; set; }
+
+        public string Description { get; set; }
+
+        public bool IsFree { get; set; }
+
+        public DateTime StartTime { get; set; }
+
+        public List<EventAttendeeDto> Attendees { get; set; }
+    }
+}
+````
+
+* Add `EventAttendeeDto` class:
+
+````csharp
+using System;
+
+namespace EventOrganizer.Events
+{
+    public class EventAttendeeDto
+    {
+        public Guid UserId { get; set; }
+
+        public string UserName { get; set; }
+
+        public DateTime CreationTime { get; set; }
+    }
+}
+````
+
+* Implement the new methods in the `EventAppService`:
+
+````csharp
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using EventOrganizer.Users;
+using Microsoft.AspNetCore.Authorization;
+using Volo.Abp;
+using Volo.Abp.Domain.Repositories;
+using Volo.Abp.Users;
+
+namespace EventOrganizer.Events
+{
+    public class EventAppService : EventOrganizerAppService, IEventAppService
+    {
+        private readonly IRepository<Event, Guid> _eventRepository;
+        private readonly IRepository<AppUser, Guid> _userRepository;
+
+        public EventAppService(IRepository<Event, Guid> eventRepository, IRepository<AppUser, Guid> userRepository)
+        {
+            _eventRepository = eventRepository;
+            _userRepository = userRepository;
+        }
+
+        [Authorize]
+        public async Task<Guid> CreateAsync(EventCreationDto input)
+        {
+            var eventEntity = ObjectMapper.Map<EventCreationDto, Event>(input);
+            await _eventRepository.InsertAsync(eventEntity);
+            return eventEntity.Id;
+        }
+
+        public async Task<List<EventDto>> GetUpcomingAsync()
+        {
+            var events = await AsyncExecuter.ToListAsync(
+                _eventRepository
+                    .Where(x => x.StartTime > Clock.Now)
+                    .OrderBy(x => x.StartTime)
+            );
+
+            return ObjectMapper.Map<List<Event>, List<EventDto>>(events);
+        }
+
+        public async Task<EventDetailDto> GetAsync(Guid id)
+        {
+            var @event = await _eventRepository.GetAsync(id);
+            var attendeeIds = @event.Attendees.Select(a => a.UserId).ToList();
+            var attendees = (await AsyncExecuter.ToListAsync(_userRepository.Where(u => attendeeIds.Contains(u.Id))))
+                .ToDictionary(x => x.Id);
+
+            var result = ObjectMapper.Map<Event, EventDetailDto>(@event);
+
+            foreach (var attendeeDto in result.Attendees)
+            {
+                attendeeDto.UserName = attendees[attendeeDto.UserId].UserName;
+            }
+
+            return result;
+        }
+
+        [Authorize]
+        public async Task RegisterAsync(Guid id)
+        {
+            var @event = await _eventRepository.GetAsync(id);
+            if (@event.Attendees.Any(a => a.UserId == CurrentUser.Id))
+            {
+                return;
+            }
+
+            @event.Attendees.Add(new EventAttendee {UserId = CurrentUser.GetId(), CreationTime = Clock.Now});
+            await _eventRepository.UpdateAsync(@event);
+        }
+
+        [Authorize]
+        public async Task UnregisterAsync(Guid id)
+        {
+            var @event = await _eventRepository.GetAsync(id);
+            var removedItems = @event.Attendees.RemoveAll(x => x.UserId == CurrentUser.Id);
+            if (removedItems.Any())
+            {
+                await _eventRepository.UpdateAsync(@event);
+            }
+        }
+
+        [Authorize]
+        public async Task DeleteAsync(Guid id)
+        {
+            var @event = await _eventRepository.GetAsync(id);
+
+            if (CurrentUser.Id != @event.CreatorId)
+            {
+                throw new UserFriendlyException("You don't have the necessary permission to delete this event!");
+            }
+
+            await _eventRepository.DeleteAsync(id);
+        }
+    }
+}
+````
+
+* Add the following mappings into the `EventOrganizerApplicationAutoMapperProfile`:
+
+````csharp
+CreateMap<Event, EventDetailDto>();
+CreateMap<EventAttendee, EventAttendeeDto>();
+````
+
+Run the `EventOrganizer.HttpApi.Host` application to see the complete Event HTTP API in the Swagger UI:
+
+![swagger-event-all](images/swagger-event-all.png)
+
+* Create `EventDetail.razor` component with the following content:
+
+````html
+@page "/events/{id}"
+@inherits EventOrganizerComponentBase
+@if (Event != null)
+{
+    <Row Class="mb-4">
+        <Column Class="text-left">
+            <h1>@Event.Title</h1>
+        </Column>
+        <Column Class="text-right pt-2">
+            <a href="/" Class="btn btn-dark"><i class="fa fa-arrow-left"></i> Back</a>
+            @if (CurrentUser.IsAuthenticated && CurrentUser.Id == Event.CreatorId)
+            {
+                <Button Color="Color.Danger" Clicked="Delete" Class="ml-1">Delete</Button>
+            }
+        </Column>
+    </Row>
+    <Row>
+        <Column Class="col-12 col-md-8">
+            <div class="position-relative">
+                <div class="position-absolute text-right w-100 px-3 py-2" style="left: 0; top: 2px;">
+                    @if (Event.IsFree)
+                    {
+                        <Badge Color="Color.Success" Class="mr-1">FREE</Badge>
+                    }
+                    <span class="badge badge-warning font-weight-normal">
+                        <i class="fas fa-user-friends"></i>
+                        <span class="font-weight-bold">@Event.Attendees.Count</span>
+                    </span>
+                </div>
+                <img src="https://picsum.photos/seed/@Event.Id/800/600" class="event-pic" />
+                <small class="font-weight-bold text-warning my-2 d-block text-uppercase">Start time: @Event.StartTime.ToLongDateString()</small>
+                <p style="opacity: .65;">@Event.Description</p>
+            </div>
+        </Column>
+        <Column Class="col-12 col-md-4">
+            <div class="p-4 event-form">
+                @if (CurrentUser.IsAuthenticated)
+                {
+                    <div>
+                        @if (!IsRegistered)
+                        {
+                            <Button Color="Color.Primary" Clicked="Register" Class="btn-block btn-lg">Register now!</Button>
+                        }
+                        else
+                        {
+                            <p>You are registered in this event</p>
+                            <Button Color="Color.Secondary" Clicked="UnRegister" Class="btn-block">Cancel registration!</Button>
+                        }
+                    </div>
+                }
+                else
+                {
+                    <a class="btn btn-primary" href="/authentication/login">
+                        <i class="fa fa-sign-in-alt"></i> Login to attend!
+                    </a>
+                }
+            </div>
+            <div class="mt-4 event-form p-4">
+                <span class="font-weight-bold"><i class="fas fa-user-friends"></i> Attendees <span class="float-right font-weight-normal" style="opacity:.65;">(@Event.Attendees.Count)</span></span>
+                <ul class="mt-1 mb-0 att-list">
+                    @foreach (var attendee in Event.Attendees)
+                    {
+                        <li><i class="fa fa-check"></i> @attendee.UserName</li>
+                    }
+                </ul>
+            </div>
+        </Column>
+    </Row>
+}
+````
+
+* Create `EventDetail.razor.cs` file with the following content:
+
+````csharp
+using System;
+using System.Linq;
+using System.Threading.Tasks;
+using EventOrganizer.Events;
+using Microsoft.AspNetCore.Components;
+
+namespace EventOrganizer.Blazor.Pages
+{
+    public partial class EventDetail
+    {
+        [Parameter]
+        public string Id { get; set; }
+
+        private EventDetailDto Event { get; set; }
+        private bool IsRegistered { get; set; }
+
+        private readonly IEventAppService _eventAppService;
+        private readonly NavigationManager _navigationManager;
+
+        public EventDetail(
+            IEventAppService eventAppService,
+            NavigationManager navigationManager)
+        {
+            _eventAppService = eventAppService;
+            _navigationManager = navigationManager;
+        }
+
+        protected override async Task OnInitializedAsync()
+        {
+            await GetEventAsync();
+        }
+
+        private async Task GetEventAsync()
+        {
+            Event = await _eventAppService.GetAsync(Guid.Parse(Id));
+            if (CurrentUser.IsAuthenticated)
+            {
+                IsRegistered = Event.Attendees.Any(a => a.UserId == CurrentUser.Id);
+            }
+        }
+
+        private async Task Register()
+        {
+            await _eventAppService.RegisterAsync(Guid.Parse(Id));
+            await GetEventAsync();
+        }
+
+        private async Task UnRegister()
+        {
+            await _eventAppService.UnregisterAsync(Guid.Parse(Id));
+            await GetEventAsync();
+        }
+
+        private async Task Delete()
+        {
+            if (!await Message.Confirm("This event will be deleted: " + Event.Title))
+            {
+                return;
+            }
+
+            await _eventAppService.DeleteAsync(Guid.Parse(Id));
+            _navigationManager.NavigateTo("/");
+        }
+    }
+}
+````
+
+The resulting page is shown below:
+
+![event-detail-ui](images/event-detail-ui.png)

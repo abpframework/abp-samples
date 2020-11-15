@@ -2,9 +2,10 @@
 
 This document is a reference on giving the ABP & Blazor Workshop. It contains the steps to build the application.
 
-## The Final Application
+## TODO
 
-TODO: Add final images at the beginning
+* Add final images at the beginning
+* Add the application logo at the end
 
 ## Requirements
 
@@ -98,7 +99,6 @@ nav#main-navbar.bg-dark {
 ````
 
 * `wwwroot/index.html`: Remove `bg-light` class from the `body` tag and add `bg-dark text-light`.
-* **TODO: Add logo**
 
 ### Domain Layer
 
@@ -181,11 +181,17 @@ public IMongoCollection<Event> Events => Collection<Event>();
 </Row>
 ````
 
-The Result:
+* Open `Localization/EventOrganizer/en.json` in the `EventOrganizer.Domain.Shared` project and add the following entry:
+
+````json
+"CreateEvent": "Create a new event!"
+````
+
+The Result (run the `EventOrganizer.Blazor` application to see):
 
 ![index-title](images/index-title.png)
 
-### Implement Event Creation
+### Event Creation
 
 * Create the Initial `IEventAppService` with the `CreateAsync` method:
 
@@ -349,3 +355,176 @@ The final UI is (run the `EventOrganizer.Blazor` application and click to the "C
 
 ![event-create-ui](images/event-create-ui.png)
 
+### Upcoming Events (Home Page)
+
+* Open the `IEventAppService` and add a `GetUpcomingAsync` method to get the list of upcoming events:
+
+````csharp
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using Volo.Abp.Application.Services;
+
+namespace EventOrganizer.Events
+{
+    public interface IEventAppService : IApplicationService
+    {
+        Task<Guid> CreateAsync(EventCreationDto input);
+
+        Task<List<EventDto>> GetUpcomingAsync();
+    }
+}
+````
+
+* Add a `EventDto` class:
+
+````csharp
+using System;
+using Volo.Abp.Application.Dtos;
+
+namespace EventOrganizer.Events
+{
+    public class EventDto : EntityDto<Guid>
+    {
+        public string Title { get; set; }
+
+        public string Description { get; set; }
+
+        public bool IsFree { get; set; }
+
+        public DateTime StartTime { get; set; }
+
+        public int AttendeesCount { get; set; }
+    }
+}
+````
+
+* Implement the `GetUpcomingAsync` in the `EventAppService` class:
+
+````csharp
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
+using Volo.Abp.Domain.Repositories;
+
+namespace EventOrganizer.Events
+{
+    public class EventAppService : EventOrganizerAppService, IEventAppService
+    {
+        private readonly IRepository<Event, Guid> _eventRepository;
+
+        public EventAppService(IRepository<Event, Guid> eventRepository)
+        {
+            _eventRepository = eventRepository;
+        }
+
+        [Authorize]
+        public async Task<Guid> CreateAsync(EventCreationDto input)
+        {
+            var eventEntity = ObjectMapper.Map<EventCreationDto, Event>(input);
+            await _eventRepository.InsertAsync(eventEntity);
+            return eventEntity.Id;
+        }
+
+        public async Task<List<EventDto>> GetUpcomingAsync()
+        {
+            var events = await AsyncExecuter.ToListAsync(
+                _eventRepository
+                    .Where(x => x.StartTime > Clock.Now)
+                    .OrderBy(x => x.StartTime)
+            );
+
+            return ObjectMapper.Map<List<Event>, List<EventDto>>(events);
+        }
+    }
+}
+````
+
+* Add the following line into the `EventOrganizerApplicationAutoMapperProfile` constructor:
+
+````csharp
+CreateMap<Event, EventDto>();
+````
+
+Run the `EventOrganizer.HttpApi.Host` application to see the new `upcoming` endpoint on the Swagger UI:
+
+![swagger-event-upcoming](images/swagger-event-upcoming.png)
+
+* Change the `Pages/Index.razor.cs` content in the `EventOrganizer.Blazor` project as shown below:
+
+```csharp
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using EventOrganizer.Events;
+
+namespace EventOrganizer.Blazor.Pages
+{
+    public partial class Index
+    {
+        private List<EventDto> UpcomingEvents { get; set; } = new List<EventDto>();
+
+        private readonly IEventAppService _eventAppService;
+
+        public Index(IEventAppService eventAppService)
+        {
+            _eventAppService = eventAppService;
+        }
+
+        protected override async Task OnInitializedAsync()
+        {
+            UpcomingEvents = await _eventAppService.GetUpcomingAsync();
+        }
+    }
+}
+```
+
+* Change the `Pages/Index.razor` content in the `EventOrganizer.Blazor` project as shown below:
+
+````html
+@page "/"
+@inherits EventOrganizerComponentBase
+<Row Class="mb-4">
+    <Column Class="text-left">
+        <h1>Upcoming Events</h1>
+    </Column>
+    <Column Class="text-right">
+        @if (CurrentUser.IsAuthenticated)
+        {
+            <a class="btn btn-primary" href="/create-event">
+                <i class="fa fa-plus"></i> @L["CreateEvent"]
+            </a>
+        }
+    </Column>
+</Row>
+<Row>
+    @foreach (var upcomingEvent in UpcomingEvents)
+    {
+        <Column Class="col-12 col-lg-4 col-md-6">
+            <a class="mb-5 position-relative d-block event-link" href="/events/@upcomingEvent.Id">
+                <div class="position-absolute text-right w-100 px-3 py-2" style="left: 0; top: 2px;">
+                    @if (upcomingEvent.IsFree)
+                    {
+                        <Badge Color="Color.Success" Class="mr-1">FREE</Badge>
+                    }
+                    <span class="badge badge-warning font-weight-normal">
+                        <i class="fas fa-user-friends"></i>
+                        <span class="font-weight-bold">@upcomingEvent.AttendeesCount</span>
+                    </span>
+                </div>
+                <img src="https://picsum.photos/seed/@upcomingEvent.Id/400/300" class="event-pic"/>
+                <div class="px-3 py-1">
+                    <small class="font-weight-bold text-warning my-2 d-block text-uppercase">@upcomingEvent.StartTime.ToLongDateString()</small>
+                    <p class="h4 text-light d-block mb-2">@upcomingEvent.Title</p>
+                    <p class="text-light" style="opacity: .65;">@upcomingEvent.Description.TruncateWithPostfix(150)</p>
+                </div>
+            </a>
+        </Column>
+    }
+</Row>
+````
+
+The new home page is shown below:
+
+![event-list-ui](D:\Github\abp-samples\EventOrganizer\docs\images\event-list-ui.png)

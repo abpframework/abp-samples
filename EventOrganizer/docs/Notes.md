@@ -1,6 +1,10 @@
 # Event Organizer Workshop Notes
 
-This document has been prepared for me (@hikalkan) as a reference on giving the ABP & Blazor Workshop. It contains the steps to build the application.
+This document is a reference on giving the ABP & Blazor Workshop. It contains the steps to build the application.
+
+## The Final Application
+
+TODO: Add final images at the beginning
 
 ## Requirements
 
@@ -26,10 +30,10 @@ abp new EventOrganizer -u blazor -d mongodb --preview
 
 ### Open & Run the Application
 
-* Open the solution in Visual Studio.
+* Open the solution in Visual Studio (or your favorite IDE).
 * Run the `EventOrganizer.DbMigrator` application to seed the initial data.
 * Run the `EventOrganizer.HttpApi.Host` application that starts the server side.
-* Run the `EventOrganizer.Blazor` application.
+* Run the `EventOrganizer.Blazor` application to start the UI.
 
 ### Apply the Custom Styles
 
@@ -94,6 +98,7 @@ nav#main-navbar.bg-dark {
 ````
 
 * `wwwroot/index.html`: Remove `bg-light` class from the `body` tag and add `bg-dark text-light`.
+* **TODO: Add logo**
 
 ### Domain Layer
 
@@ -155,7 +160,7 @@ public IMongoCollection<Event> Events => Collection<Event>();
 
 ### Clean Index.razor & Add the Header & "Create Event" button
 
-* Clean the Index.razor file.
+* Clean the `Index.razor` file.
 * Paste the following code:
 
 ````html
@@ -175,6 +180,10 @@ public IMongoCollection<Event> Events => Collection<Event>();
     </Column>
 </Row>
 ````
+
+The Result:
+
+![index-title](images/index-title.png)
 
 ### Implement Event Creation
 
@@ -249,6 +258,28 @@ namespace EventOrganizer.Events
 }
 ````
 
+* Add AutoMapper mapping to the `EventOrganizerApplicationAutoMapperProfile` class:
+
+````csharp
+using AutoMapper;
+using EventOrganizer.Events;
+
+namespace EventOrganizer
+{
+    public class EventOrganizerApplicationAutoMapperProfile : Profile
+    {
+        public EventOrganizerApplicationAutoMapperProfile()
+        {
+            CreateMap<EventCreationDto, Event>();
+        }
+    }
+}
+````
+
+This will automatically create the HTTP (REST) API for the application service (run the `EventOrganizer.HttpApi.Host` application to see it on the Swagger UI):
+
+![swagger-event-create](images/swagger-event-create.png)
+
 * Create the `CreateEvent.razor` file:
 
 ````csharp
@@ -280,4 +311,41 @@ namespace EventOrganizer.Events
     </Column>
 </Row>
 ````
+
+* Create a partial `CreateEvent` class in the same folder, with the `CreateEvent.razor.cs` as the file name:
+
+````csharp
+using System.Threading.Tasks;
+using EventOrganizer.Events;
+using Microsoft.AspNetCore.Components;
+
+namespace EventOrganizer.Blazor.Pages
+{
+    public partial class CreateEvent
+    {
+        private EventCreationDto Event { get; set; } = new EventCreationDto();
+
+        private readonly IEventAppService _eventAppService;
+        private readonly NavigationManager _navigationManager;
+
+        public CreateEvent(
+            IEventAppService eventAppService,
+            NavigationManager navigationManager)
+        {
+            _eventAppService = eventAppService;
+            _navigationManager = navigationManager;
+        }
+
+        private async Task Create()
+        {
+            var eventId = await _eventAppService.CreateAsync(Event);
+            _navigationManager.NavigateTo("/events/" + eventId);
+        }
+    }
+}
+````
+
+The final UI is (run the `EventOrganizer.Blazor` application and click to the "Create Event" button):
+
+![event-create-ui](images/event-create-ui.png)
 

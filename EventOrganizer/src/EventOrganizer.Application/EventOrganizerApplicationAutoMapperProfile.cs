@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using EventOrganizer.Events;
-using Volo.Abp.AutoMapper;
 
 namespace EventOrganizer
 {
@@ -8,15 +7,10 @@ namespace EventOrganizer
     {
         public EventOrganizerApplicationAutoMapperProfile()
         {
-            CreateMap<EventCreationDto, Event>()
-                .Ignore(x => x.Attendees);
-
-            CreateMap<Event, EventDetailDto>();
-
-            CreateMap<EventAttendee, EventAttendeeDto>()
-                .Ignore(x => x.UserName);
-
+            CreateMap<EventCreationDto, Event>();
             CreateMap<Event, EventDto>();
+            CreateMap<Event, EventDetailDto>();
+            CreateMap<EventAttendee, EventAttendeeDto>();
         }
     }
 }

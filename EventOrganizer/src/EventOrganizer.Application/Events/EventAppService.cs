@@ -15,9 +15,7 @@ namespace EventOrganizer.Events
         private readonly IRepository<Event, Guid> _eventRepository;
         private readonly IRepository<AppUser, Guid> _userRepository;
 
-        public EventAppService(
-            IRepository<Event, Guid> eventRepository,
-            IRepository<AppUser, Guid> userRepository)
+        public EventAppService(IRepository<Event, Guid> eventRepository, IRepository<AppUser, Guid> userRepository)
         {
             _eventRepository = eventRepository;
             _userRepository = userRepository;
@@ -31,6 +29,17 @@ namespace EventOrganizer.Events
             return eventEntity.Id;
         }
 
+        public async Task<List<EventDto>> GetUpcomingAsync()
+        {
+            var events = await AsyncExecuter.ToListAsync(
+                _eventRepository
+                    .Where(x => x.StartTime > Clock.Now)
+                    .OrderBy(x => x.StartTime)
+            );
+
+            return ObjectMapper.Map<List<Event>, List<EventDto>>(events);
+        }
+
         public async Task<EventDetailDto> GetAsync(Guid id)
         {
             var @event = await _eventRepository.GetAsync(id);
@@ -39,23 +48,13 @@ namespace EventOrganizer.Events
                 .ToDictionary(x => x.Id);
 
             var result = ObjectMapper.Map<Event, EventDetailDto>(@event);
+
             foreach (var attendeeDto in result.Attendees)
             {
                 attendeeDto.UserName = attendees[attendeeDto.UserId].UserName;
             }
 
             return result;
-        }
-
-        public async Task<List<EventDto>> GetUpcomingAsync()
-        {
-            var events = await AsyncExecuter.ToListAsync(
-                _eventRepository
-                    .Where(x => x.StartTime > DateTime.Now)
-                    .OrderBy(x => x.StartTime)
-            );
-
-            return ObjectMapper.Map<List<Event>, List<EventDto>>(events);
         }
 
         [Authorize]
@@ -89,7 +88,7 @@ namespace EventOrganizer.Events
 
             if (CurrentUser.Id != @event.CreatorId)
             {
-                throw new UserFriendlyException("You don't have necessary permission to delete this event!");
+                throw new UserFriendlyException("You don't have the necessary permission to delete this event!");
             }
 
             await _eventRepository.DeleteAsync(id);

@@ -1,11 +1,12 @@
 ﻿using System;
-using Volo.Abp.Auditing;
 
 namespace EventOrganizer.Events
 {
-    public class EventAttendee : IHasCreationTime
+    public class EventAttendeeDto
     {
         public Guid UserId { get; set; }
+
+        public string UserName { get; set; }
 
         public DateTime CreationTime { get; set; }
     }

@@ -10,6 +10,7 @@ namespace EventOrganizer.Blazor.Pages
 
         private readonly IEventAppService _eventAppService;
         private readonly NavigationManager _navigationManager;
+
         public CreateEvent(
             IEventAppService eventAppService,
             NavigationManager navigationManager)

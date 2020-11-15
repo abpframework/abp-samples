@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using EventOrganizer.Events;
-using Microsoft.AspNetCore.Components;
 
 namespace EventOrganizer.Blazor.Pages
 {
@@ -9,12 +8,16 @@ namespace EventOrganizer.Blazor.Pages
     {
         private List<EventDto> UpcomingEvents { get; set; } = new List<EventDto>();
 
-        [Inject]
-        private IEventAppService EventAppService { get; set; }
+        private readonly IEventAppService _eventAppService;
+
+        public Index(IEventAppService eventAppService)
+        {
+            _eventAppService = eventAppService;
+        }
 
         protected override async Task OnInitializedAsync()
         {
-            UpcomingEvents = await EventAppService.GetUpcomingAsync();
+            UpcomingEvents = await _eventAppService.GetUpcomingAsync();
         }
     }
 }

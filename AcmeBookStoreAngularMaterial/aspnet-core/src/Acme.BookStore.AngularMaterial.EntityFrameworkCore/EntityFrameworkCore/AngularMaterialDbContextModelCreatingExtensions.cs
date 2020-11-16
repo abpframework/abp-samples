@@ -1,5 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Acme.BookStore.Books;
+using Microsoft.EntityFrameworkCore;
 using Volo.Abp;
+using Volo.Abp.EntityFrameworkCore.Modeling;
 
 namespace Acme.BookStore.AngularMaterial.EntityFrameworkCore
 {
@@ -10,6 +12,14 @@ namespace Acme.BookStore.AngularMaterial.EntityFrameworkCore
             Check.NotNull(builder, nameof(builder));
 
             /* Configure your own tables/entities inside here */
+
+            builder.Entity<Book>(b =>
+            {
+                b.ToTable(AngularMaterialConsts.DbTablePrefix + "Books",
+                    AngularMaterialConsts.DbSchema);
+                b.ConfigureByConvention();
+                b.Property(x => x.Name).IsRequired().HasMaxLength(128);
+            });
 
             //builder.Entity<YourEntity>(b =>
             //{

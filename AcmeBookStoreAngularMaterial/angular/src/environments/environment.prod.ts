@@ -10,7 +10,7 @@ export const environment = {
     logoUrl: '',
   },
   oAuthConfig: {
-    issuer: 'https://localhost:44340',
+    issuer: 'https://localhost:44354',
     redirectUri: baseUrl,
     clientId: 'AngularMaterial_App',
     responseType: 'code',
@@ -18,7 +18,7 @@ export const environment = {
   },
   apis: {
     default: {
-      url: 'https://localhost:44340',
+      url: 'https://localhost:44354',
       rootNamespace: 'Acme.BookStore.AngularMaterial',
     },
   },

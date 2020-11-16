@@ -356,3 +356,5 @@ MicroserviceDemo/applications/BackendAdminApp.Host/package-lock.json
 MicroserviceDemo/applications/AuthServer.Host/package-lock.json
 MicroserviceDemo/applications/PublicWebSite.Host/package-lock.json
 MicroserviceDemo/modules/product/src/ProductManagement.Web/Properties/launchSettings.json
+
+tempkey.jwk

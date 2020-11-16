@@ -33,6 +33,10 @@
                             <EntityAction TItem="BookDto"
                                           Text="@L["Edit"]"
                                           Clicked="() => OpenEditModalAsync(context)" />
+                            <EntityAction TItem="BookDto"
+                                          Text="@L["Delete"]"
+                                          Clicked="() => DeleteEntityAsync(context)"
+                                          ConfirmationMessage="()=>GetDeleteConfirmationMessage(context)" />
                         </EntityActions>
                     </DisplayTemplate>
                 </DataGridEntityActionsColumn>

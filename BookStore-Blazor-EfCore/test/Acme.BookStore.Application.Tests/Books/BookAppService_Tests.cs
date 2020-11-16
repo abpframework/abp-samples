@@ -39,7 +39,7 @@ namespace Acme.BookStore.Books
                 {
                     Name = "New test book 42",
                     Price = 10,
-                    PublishDate = System.DateTime.Now,
+                    PublishDate = DateTime.Now,
                     Type = BookType.ScienceFiction
                 }
             );

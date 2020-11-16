@@ -1,4 +1,7 @@
 ﻿@page "/books"
+@attribute [Authorize(BookStorePermissions.Books.Default)]
+@using Acme.BookStore.Permissions
+@using Microsoft.AspNetCore.Authorization
 @using Volo.Abp.Application.Dtos
 @using Acme.BookStore.Books
 @using Acme.BookStore.Localization
@@ -14,8 +17,11 @@
                 <h2>@L["Books"]</h2>
             </Column>
             <Column ColumnSize="ColumnSize.IsAuto">
-                <Button Color="Color.Primary"
-                        Clicked="OpenCreateModalAsync">@L["NewBook"]</Button>
+                @if (HasCreatePermission)
+                {
+                    <Button Color="Color.Primary"
+                            Clicked="OpenCreateModalAsync">@L["NewBook"]</Button>
+                }
             </Column>
         </Row>
     </CardHeader>
@@ -32,9 +38,11 @@
                         <EntityActions TItem="BookDto" EntityActionsColumn="@EntityActionsColumn">
                             <EntityAction TItem="BookDto"
                                           Text="@L["Edit"]"
+                                          RequiredPolicy="@UpdatePolicyName"
                                           Clicked="() => OpenEditModalAsync(context)" />
                             <EntityAction TItem="BookDto"
                                           Text="@L["Delete"]"
+                                          RequiredPolicy="@DeletePolicyName"
                                           Clicked="() => DeleteEntityAsync(context)"
                                           ConfirmationMessage="()=>GetDeleteConfirmationMessage(context)" />
                         </EntityActions>
@@ -178,3 +186,13 @@
         </Form>
     </ModalContent>
 </Modal>
+
+@code
+{
+    public Books() // Constructor
+    {
+        CreatePolicyName = BookStorePermissions.Books.Create;
+        UpdatePolicyName = BookStorePermissions.Books.Edit;
+        DeletePolicyName = BookStorePermissions.Books.Delete;
+    }
+}

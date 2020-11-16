@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Acme.BookStore.Localization;
+using Acme.BookStore.Permissions;
 using Volo.Abp.Account.Localization;
 using Volo.Abp.UI.Navigation;
 using Volo.Abp.Users;
@@ -30,7 +31,7 @@ namespace Acme.BookStore.Blazor
             }
         }
 
-        private Task ConfigureMainMenuAsync(MenuConfigurationContext context)
+        private async Task ConfigureMainMenuAsync(MenuConfigurationContext context)
         {
             var l = context.GetLocalizer<BookStoreResource>();
 
@@ -44,21 +45,23 @@ namespace Acme.BookStore.Blazor
                 )
             );
 
-            context.Menu.AddItem(
-                new ApplicationMenuItem(
-                    "BooksStore",
-                    l["Menu:BookStore"],
-                    icon: "fa fa-book"
-                ).AddItem(
-                    new ApplicationMenuItem(
-                        "BooksStore.Books",
-                        l["Menu:Books"],
-                        url: "/books"
-                    )
-                )
+            var bookStoreMenu = new ApplicationMenuItem(
+                "BooksStore",
+                l["Menu:BookStore"],
+                icon: "fa fa-book"
             );
 
-            return Task.CompletedTask;
+            context.Menu.AddItem(bookStoreMenu);
+
+            //CHECK the PERMISSION
+            if (await context.IsGrantedAsync(BookStorePermissions.Books.Default))
+            {
+                bookStoreMenu.AddItem(new ApplicationMenuItem(
+                    "BooksStore.Books",
+                    l["Menu:Books"],
+                    url: "/books"
+                ));
+            }
         }
 
         private Task ConfigureUserMenuAsync(MenuConfigurationContext context)

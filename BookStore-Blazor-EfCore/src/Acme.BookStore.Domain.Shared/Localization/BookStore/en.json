@@ -26,6 +26,11 @@
     "Enum:BookType:5": "Horror",
     "Enum:BookType:6": "Science",
     "Enum:BookType:7": "Science fiction",
-    "Enum:BookType:8": "Poetry"
+    "Enum:BookType:8": "Poetry",
+    "Permission:BookStore": "Book Store",
+    "Permission:Books": "Book Management",
+    "Permission:Books.Create": "Creating new books",
+    "Permission:Books.Edit": "Editing the books",
+    "Permission:Books.Delete": "Deleting the books"
   }
 }

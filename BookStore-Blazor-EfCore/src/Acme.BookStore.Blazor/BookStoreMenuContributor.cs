@@ -53,13 +53,21 @@ namespace Acme.BookStore.Blazor
 
             context.Menu.AddItem(bookStoreMenu);
 
-            //CHECK the PERMISSION
             if (await context.IsGrantedAsync(BookStorePermissions.Books.Default))
             {
                 bookStoreMenu.AddItem(new ApplicationMenuItem(
                     "BooksStore.Books",
                     l["Menu:Books"],
                     url: "/books"
+                ));
+            }
+
+            if (await context.IsGrantedAsync(BookStorePermissions.Authors.Default))
+            {
+                bookStoreMenu.AddItem(new ApplicationMenuItem(
+                    "BooksStore.Authors",
+                    l["Menu:Authors"],
+                    url: "/authors"
                 ));
             }
         }

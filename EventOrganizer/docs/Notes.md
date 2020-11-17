@@ -2,10 +2,23 @@
 
 This document is a reference on giving the ABP & Blazor Workshop. It contains the steps to build the application.
 
-## TODO
+## The Application
 
-* Add final images at the beginning
-* Add the application logo at the end
+The sample application is a simple meeting/event organizer: People create events and other people registers to the event.
+
+### Screenshots
+
+**Home Page - Event List**
+
+![event-list-ui](images/event-list-ui.png)
+
+**Creating a new Event**
+
+![event-create-ui](images/event-create-ui.png)
+
+**Event Detail Page**
+
+![event-detail-ui](images/event-detail-ui.png)
 
 ## Requirements
 
@@ -16,10 +29,6 @@ The following tools are needed to be able to run the solution.
 * MongoDB Server (with MongoDB Compass)
 
 ## Development
-
-### Clean the Database
-
-* If it does exists, delete the MongoDB `EventOrganizer` database for a fresh start.
 
 ### Creating a new Application
 

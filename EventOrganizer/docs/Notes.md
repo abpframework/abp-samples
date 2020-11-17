@@ -183,7 +183,7 @@ public IMongoCollection<Event> Events => Collection<Event>();
         @if (CurrentUser.IsAuthenticated)
         {
             <a class="btn btn-primary" href="/create-event">
-                <i class="fa fa-sign-in-alt"></i> @L["CreateEvent"]
+                <i class="fa fa-plus"></i> @L["CreateEvent"]
             </a>
         }
     </Column>

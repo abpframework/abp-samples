@@ -1,4 +1,5 @@
-﻿using Acme.BookStore.Books;
+﻿using Acme.BookStore.AngularMaterial.Authors;
+using Acme.BookStore.Books;
 using Microsoft.EntityFrameworkCore;
 using Volo.Abp;
 using Volo.Abp.EntityFrameworkCore.Modeling;
@@ -20,13 +21,21 @@ namespace Acme.BookStore.AngularMaterial.EntityFrameworkCore
                 b.ConfigureByConvention();
                 b.Property(x => x.Name).IsRequired().HasMaxLength(128);
             });
+            
+            builder.Entity<Author>(b =>
+            {
+                b.ToTable(AngularMaterialConsts.DbTablePrefix + "Authors",
+                    AngularMaterialConsts.DbSchema);
+    
+                b.ConfigureByConvention();
+    
+                b.Property(x => x.Name)
+                    .IsRequired()
+                    .HasMaxLength(AuthorConsts.MaxNameLength);
 
-            //builder.Entity<YourEntity>(b =>
-            //{
-            //    b.ToTable(AngularMaterialConsts.DbTablePrefix + "YourEntities", AngularMaterialConsts.DbSchema);
-            //    b.ConfigureByConvention(); //auto configure for the base class props
-            //    //...
-            //});
+                b.HasIndex(x => x.Name);
+            });
+            
         }
     }
 }

@@ -9,6 +9,18 @@ namespace Acme.BookStore.AngularMaterial.Permissions
         public override void Define(IPermissionDefinitionContext context)
         {
             var myGroup = context.AddGroup(AngularMaterialPermissions.GroupName);
+            
+            var authorsPermission = myGroup.AddPermission(
+                AngularMaterialPermissions.Authors.Default, L("Permission:Authors"));
+
+            authorsPermission.AddChild(
+                AngularMaterialPermissions.Authors.Create, L("Permission:Authors.Create"));
+
+            authorsPermission.AddChild(
+                AngularMaterialPermissions.Authors.Edit, L("Permission:Authors.Edit"));
+
+            authorsPermission.AddChild(
+                AngularMaterialPermissions.Authors.Delete, L("Permission:Authors.Delete"));
 
             //Define your own permissions here. Example:
             //myGroup.AddPermission(AngularMaterialPermissions.MyPermission1, L("Permission:MyPermission1"));

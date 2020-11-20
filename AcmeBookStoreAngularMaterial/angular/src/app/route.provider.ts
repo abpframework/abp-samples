@@ -1,5 +1,5 @@
-import {eLayoutType, RoutesService} from '@abp/ng.core';
-import {APP_INITIALIZER} from '@angular/core';
+import { eLayoutType, RoutesService } from '@abp/ng.core';
+import { APP_INITIALIZER } from '@angular/core';
 
 export const APP_ROUTE_PROVIDER = [
   { provide: APP_INITIALIZER, useFactory: configureRoutes, deps: [RoutesService], multi: true },
@@ -28,6 +28,13 @@ function configureRoutes(routesService: RoutesService) {
         parentName: '::Menu:BookStore',
         layout: eLayoutType.application,
       },
+      {
+        path: '/authors',
+        name: '::Menu:Authors',
+        parentName: '::Menu:BookStore',
+        layout: eLayoutType.application,
+        requiredPolicy: 'AngularMaterial.Authors',
+      }
     ]);
   };
 }

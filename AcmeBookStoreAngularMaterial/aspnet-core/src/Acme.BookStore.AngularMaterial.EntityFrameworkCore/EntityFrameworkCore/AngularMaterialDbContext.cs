@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Acme.BookStore.AngularMaterial.Authors;
+using Microsoft.EntityFrameworkCore;
 using Acme.BookStore.AngularMaterial.Users;
 using Acme.BookStore.Books;
 using Volo.Abp.Data;
@@ -23,6 +24,8 @@ namespace Acme.BookStore.AngularMaterial.EntityFrameworkCore
     {
         public DbSet<Book> Books { get; set; }
         public DbSet<AppUser> Users { get; set; }
+        public DbSet<Author> Authors { get; set; }
+
 
         /* Add DbSet properties for your Aggregate Roots / Entities here.
          * Also map them inside AngularMaterialDbContextModelCreatingExtensions.ConfigureAngularMaterial

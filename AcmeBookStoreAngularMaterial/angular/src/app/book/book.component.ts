@@ -80,6 +80,6 @@ export class BookComponent implements OnInit {
       if (confirmationResult) {
         this.bookService.delete(id).subscribe(() => this.list.get());
       }
-    })
+    });
   }
 }

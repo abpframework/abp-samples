@@ -1,7 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { bookTypeOptions } from '@proxy/acme/book-store/books';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material/dialog';
 import { BookDto } from '@proxy/books';
 
 
@@ -10,6 +10,7 @@ import { BookDto } from '@proxy/books';
   templateUrl: './book-dialog.component.html',
   styleUrls: ['./book-dialog.component.scss'],
   providers: [
+    {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: true, width: "50vw" }}
   ]
 })
 export class BookDialogComponent implements OnInit{

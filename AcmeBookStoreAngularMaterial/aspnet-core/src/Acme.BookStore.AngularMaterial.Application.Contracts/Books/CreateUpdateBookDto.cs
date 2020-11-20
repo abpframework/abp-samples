@@ -19,5 +19,8 @@ namespace Acme.BookStore.AngularMaterial.Books
 
         [Required]
         public float Price { get; set; }
+        
+        public Guid AuthorId { get; set; }
+
     }
 }

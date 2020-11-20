@@ -31,6 +31,7 @@
         </td>
       </ng-container>
       <mat-text-column name="price"></mat-text-column>
+      <mat-text-column [headerText]="'::Author' | abpLocalization"  name="authorName"></mat-text-column>
 
     </table>
     <mat-paginator [length]="book.totalCount" [pageSize]="list.maxResultCount" (page)="changePage($event)"></mat-paginator>

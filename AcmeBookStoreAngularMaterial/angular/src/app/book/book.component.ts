@@ -16,7 +16,7 @@ import { ConfirmationDialogComponent } from '../shared/confirmation-dialog/confi
 export class BookComponent implements OnInit {
 
   book = { items: [], totalCount: 0 } as PagedResultDto<BookDto>;
-  columns: string[] = ['actions', 'name', 'type', 'price'];
+  columns: string[] = ['actions', 'name', 'type', 'price', 'authorName'];
 
   isModalOpen = false;
 

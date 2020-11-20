@@ -8,9 +8,14 @@ namespace Acme.BookStore.AngularMaterial.Permissions
     {
         public override void Define(IPermissionDefinitionContext context)
         {
-            var myGroup = context.AddGroup(AngularMaterialPermissions.GroupName);
+            var bookStoreGroup = context.AddGroup(AngularMaterialPermissions.GroupName, L("Permission:AngularMaterial"));
+
+            var booksPermission = bookStoreGroup.AddPermission(AngularMaterialPermissions.Books.Default, L("Permission:Books"));
+            booksPermission.AddChild(AngularMaterialPermissions.Books.Create, L("Permission:Books.Create"));
+            booksPermission.AddChild(AngularMaterialPermissions.Books.Edit, L("Permission:Books.Edit"));
+            booksPermission.AddChild(AngularMaterialPermissions.Books.Delete, L("Permission:Books.Delete"));
             
-            var authorsPermission = myGroup.AddPermission(
+            var authorsPermission = bookStoreGroup.AddPermission(
                 AngularMaterialPermissions.Authors.Default, L("Permission:Authors"));
 
             authorsPermission.AddChild(

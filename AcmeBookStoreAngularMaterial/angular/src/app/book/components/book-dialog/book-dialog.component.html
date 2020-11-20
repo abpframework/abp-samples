@@ -1,4 +1,4 @@
-<h2 mat-dialog-title>{{ '::NewBook' | abpLocalization }}</h2>
+<h2 mat-dialog-title>{{ (data ? '::EditBook' : '::NewBook' )| abpLocalization }}</h2>
 <mat-dialog-content>
 
   <form [formGroup]="form" (ngSubmit)="save()" class="form-container">

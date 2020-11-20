@@ -5,6 +5,7 @@ import { PageEvent } from '@angular/material/paginator';
 import { Sort } from '@angular/material/sort';
 import { MatDialog } from '@angular/material/dialog';
 import { BookDialogComponent } from './components/book-dialog/book-dialog.component';
+import { ConfirmationDialogComponent } from '../shared/confirmation-dialog/confirmation-dialog.component';
 
 @Component({
   selector: 'app-book',
@@ -15,7 +16,7 @@ import { BookDialogComponent } from './components/book-dialog/book-dialog.compon
 export class BookComponent implements OnInit {
 
   book = { items: [], totalCount: 0 } as PagedResultDto<BookDto>;
-  columns: string[] = ['name', 'type', 'price'];
+  columns: string[] = ['actions', 'name', 'type', 'price'];
 
   isModalOpen = false;
 
@@ -51,6 +52,34 @@ export class BookComponent implements OnInit {
     });
   }
 
+  editBook(id: any) {
+    this.bookService.get(id).subscribe((book) => {
+      const dialogRef = this.dialog.open(BookDialogComponent, {
+        data: book
+      });
+      dialogRef.afterClosed().subscribe(result => {
+        if (result) {
+          this.bookService.update(id, result).subscribe(() => {
+            this.list.get();
+          });
+        }
+      });
+    });
+  }
 
+  // Add a delete method
+  deleteBook(id: string) {
 
+    const confirmationDialogRef = this.dialog.open(ConfirmationDialogComponent, {
+      data: {
+        title: '::AreYouSure',
+        description: '::AreYouSureToDelete'
+      }
+    });
+    confirmationDialogRef.afterClosed().subscribe(confirmationResult => {
+      if (confirmationResult) {
+        this.bookService.delete(id).subscribe(() => this.list.get());
+      }
+    })
+  }
 }

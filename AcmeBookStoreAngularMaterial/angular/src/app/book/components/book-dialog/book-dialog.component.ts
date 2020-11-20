@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { bookTypeOptions } from '@proxy/acme/book-store/books';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { BookDto } from '@proxy/books';
 
 
 @Component({
@@ -16,7 +18,8 @@ export class BookDialogComponent implements OnInit{
   // add bookTypes as a list of BookType enum members
   bookTypes = bookTypeOptions;
   constructor(
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    @Inject(MAT_DIALOG_DATA) public data: BookDto
   ) { }
 
   ngOnInit() {
@@ -26,10 +29,10 @@ export class BookDialogComponent implements OnInit{
 
   buildForm() {
     this.form = this.fb.group({
-      name: ['', Validators.required],
-      type: [null, Validators.required],
-      publishDate: [null, Validators.required],
-      price: [null, Validators.required],
+      name: [this.data?.name, Validators.required],
+      type: [this.data?.type, Validators.required],
+      publishDate: [this.data?.publishDate, Validators.required],
+      price: [this.data?.price, Validators.required],
     });
   }
 

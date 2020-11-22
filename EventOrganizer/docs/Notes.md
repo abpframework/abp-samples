@@ -882,6 +882,7 @@ using Xunit;
 
 namespace EventOrganizer.Events
 {
+    [Collection(EventOrganizerTestConsts.CollectionDefinitionName)]
     public class EventAppService_Tests : EventOrganizerApplicationTestBase
     {
         private readonly IEventAppService _eventAppService;

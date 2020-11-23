@@ -1,7 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material/dialog';
 import { AuthorDto } from '@proxy/authors';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-author-dialog',
@@ -12,19 +12,16 @@ import { AuthorDto } from '@proxy/authors';
 
   ]
 })
-export class AuthorDialogComponent implements OnInit {
+export class AuthorDialogComponent implements OnInit{
 
-  form: FormGroup; // add this line
-
+  form: FormGroup;
 
   constructor(
+    @Inject(MAT_DIALOG_DATA) public data: AuthorDto,
     private fb: FormBuilder,
-    @Inject(MAT_DIALOG_DATA) public data: AuthorDto
   ) { }
-
   ngOnInit(): void {
     this.buildForm();
-
   }
 
   buildForm() {
@@ -33,5 +30,4 @@ export class AuthorDialogComponent implements OnInit {
       birthDate: [this.data?.birthDate, Validators.required],
     });
   }
-
 }

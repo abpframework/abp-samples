@@ -27,6 +27,7 @@ function configureRoutes(routesService: RoutesService) {
         name: '::Menu:Books',
         parentName: '::Menu:BookStore',
         layout: eLayoutType.application,
+        requiredPolicy: 'AngularMaterial.Books',
       },
       {
         path: '/authors',

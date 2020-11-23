@@ -2,10 +2,17 @@
   <mat-card-header class="full-width">
     <mat-card-title-group class="full-width">
       <mat-card-title class="abp-card-title">{{ '::Menu:Authors' | abpLocalization }}</mat-card-title>
-      <button id="create" mat-raised-button color="primary" type="button" (click)="createAuthor()">
-        <i class="fa fa-plus mr-1"></i>
-        <span>{{ '::NewAuthor' | abpLocalization }}</span>
-      </button>
+      <div>
+        <button id="create" mat-raised-button color="primary" type="button" (click)="createAuthor()">
+          <i class="fa fa-plus mr-1"></i>
+          <span>{{ '::NewAuthor' | abpLocalization }}</span>
+        </button>
+
+        <button id="create-with-book" mat-raised-button color="primary" type="button" (click)="createAuthor()">
+          <i class="fa fa-plus mr-1"></i>
+          <span>New Author With Books</span>
+        </button>
+      </div>
     </mat-card-title-group>
   </mat-card-header>
   <mat-card-content>

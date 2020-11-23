@@ -24,13 +24,16 @@ namespace Acme.BookStore.AngularMaterial.Books
         IBookAppService //implement the IBookAppService
     {
         private readonly IAuthorRepository _authorRepository;
+        private readonly AuthorManager _authorManager;
         public BookAppService(
             IRepository<Book, Guid> repository,            
-            IAuthorRepository authorRepository)
+            IAuthorRepository authorRepository,
+            AuthorManager authorManager)
 
             : base(repository)
         {
             _authorRepository = authorRepository;
+            _authorManager = authorManager;
             GetPolicyName = AngularMaterialPermissions.Books.Default;
             GetListPolicyName = AngularMaterialPermissions.Books.Default;
             CreatePolicyName = AngularMaterialPermissions.Books.Create;
@@ -102,6 +105,30 @@ namespace Acme.BookStore.AngularMaterial.Books
             return new ListResultDto<AuthorLookupDto>(
                 ObjectMapper.Map<List<Author>, List<AuthorLookupDto>>(authors)
             );
+        }
+
+        public async Task<List<BookDto>> CreateBookWithAuthorAsync(CreateBookWithAuthorDto input)
+        {
+            var result = new List<BookDto>();
+            Console.WriteLine(input);
+            var author =  await _authorManager.CreateAsync(
+                input.Author.Name,
+                input.Author.BirthDate,
+                input.Author.ShortBio
+            );
+
+            await _authorRepository.InsertAsync(author);
+            foreach (var book in input.Books)
+            {
+                var bookDto = ObjectMapper.Map<CreateBookDto, Book>(book);
+                bookDto.AuthorId = author.Id;
+                await Repository.InsertAsync(bookDto);
+                var createdBook = ObjectMapper.Map<Book, BookDto>(bookDto);
+                createdBook.AuthorName = author.Name;
+                result.Add(createdBook);
+            }
+
+            return result;
         }
     }
 }

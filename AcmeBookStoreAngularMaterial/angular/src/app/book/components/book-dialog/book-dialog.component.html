@@ -1,8 +1,6 @@
 <h2 mat-dialog-title>{{ (data ? '::EditBook' : '::NewBook' )| abpLocalization }}</h2>
 <mat-dialog-content>
-
-  <form [formGroup]="form" (ngSubmit)="save()" class="form-container">
-
+  <form [formGroup]="form" class="form-container">
     <mat-form-field class="full-width">
       <mat-label>Author<span> * </span></mat-label>
       <mat-select id="author-id" formControlName="authorId">
@@ -36,6 +34,7 @@
     </mat-form-field>
 
   </form>
+
 </mat-dialog-content>
 <mat-dialog-actions>
   <button mat-button  mat-dialog-close>{{ '::Close' | abpLocalization }}</button>

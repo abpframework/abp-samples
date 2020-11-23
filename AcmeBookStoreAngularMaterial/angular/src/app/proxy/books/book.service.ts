@@ -1,4 +1,4 @@
-import type { AuthorLookupDto, BookDto, CreateUpdateBookDto } from './models';
+import type { AuthorLookupDto, BookDto, CreateBookWithAuthorDto, CreateUpdateBookDto } from './models';
 import { RestService } from '@abp/ng.core';
 import type { ListResultDto, PagedAndSortedResultRequestDto, PagedResultDto } from '@abp/ng.core';
 import { Injectable } from '@angular/core';
@@ -13,6 +13,14 @@ export class BookService {
     this.restService.request<any, BookDto>({
       method: 'POST',
       url: `/api/app/book`,
+      body: input,
+    },
+    { apiName: this.apiName });
+
+  createBookWithAuthor = (input: CreateBookWithAuthorDto) =>
+    this.restService.request<any, BookDto[]>({
+      method: 'POST',
+      url: `/api/app/book/book-with-author`,
       body: input,
     },
     { apiName: this.apiName });

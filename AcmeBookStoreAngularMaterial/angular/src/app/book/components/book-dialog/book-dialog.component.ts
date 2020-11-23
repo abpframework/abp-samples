@@ -1,10 +1,10 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { bookTypeOptions } from '@proxy/acme/book-store/books';
 import { MAT_DIALOG_DATA, MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material/dialog';
 import { AuthorLookupDto, BookDto, BookService } from '@proxy/books';
-import { Observable } from 'rxjs';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { bookTypeOptions } from '@proxy/acme/book-store/books';
 import { map } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 
 
 @Component({
@@ -16,22 +16,22 @@ import { map } from 'rxjs/operators';
   ]
 })
 export class BookDialogComponent implements OnInit{
-  form: FormGroup; // add this line
 
-  // add bookTypes as a list of BookType enum members
+  form: FormGroup;
+
   bookTypes = bookTypeOptions;
 
   authors$: Observable<AuthorLookupDto[]>;
 
   constructor(
-    private fb: FormBuilder,
     @Inject(MAT_DIALOG_DATA) public data: BookDto,
-    bookService: BookService
+    bookService: BookService,
+    private fb: FormBuilder
   ) {
-      this.authors$ = bookService.getAuthorLookup().pipe(map((r) => r.items));
+    this.authors$ = bookService.getAuthorLookup().pipe(map((r) => r.items));
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.buildForm();
   }
 
@@ -45,9 +45,4 @@ export class BookDialogComponent implements OnInit{
     });
   }
 
-  save() {
-    if (this.form.invalid) {
-      return;
-    }
-  }
 }

@@ -1,6 +1,5 @@
 <h2 mat-dialog-title>{{ (data ? '::EditAuthor' : '::NewAuthor' )| abpLocalization }}</h2>
 <mat-dialog-content>
-
   <form [formGroup]="form" class="form-container">
     <mat-form-field class="full-width">
       <mat-label>Name <span> * </span></mat-label>
@@ -13,8 +12,8 @@
       <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
       <mat-datepicker #picker></mat-datepicker>
     </mat-form-field>
-
   </form>
+
 </mat-dialog-content>
 <mat-dialog-actions>
   <button mat-button mat-dialog-close>{{ '::Close' | abpLocalization }}</button>

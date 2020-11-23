@@ -18,7 +18,6 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatIconModule } from '@angular/material/icon';
 import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-dialog.component';
-import { MatGridListModule } from '@angular/material/grid-list';
 
 @NgModule({
   declarations: [ ConfirmationDialogComponent],
@@ -43,7 +42,7 @@ import { MatGridListModule } from '@angular/material/grid-list';
     MatSelectModule,
     MatMenuModule,
     MatIconModule,
-    MatGridListModule
+
   ],
   exports: [
     CoreModule,
@@ -66,7 +65,7 @@ import { MatGridListModule } from '@angular/material/grid-list';
     MatSelectModule,
     MatMenuModule,
     MatIconModule,
-    MatGridListModule
+
 
   ]
 })

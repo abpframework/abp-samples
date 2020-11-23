@@ -11,6 +11,6 @@ import { AuthorDialogComponent } from './components/author-dialog/author-dialog.
   imports: [
     AuthorRoutingModule,
     SharedModule
-  ]
+  ],
 })
 export class AuthorModule { }

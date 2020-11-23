@@ -14,6 +14,5 @@ import { BookDialogComponent } from './components/book-dialog/book-dialog.compon
     BookRoutingModule,
     SharedModule,
   ],
-  exports: [SharedModule],
 })
 export class BookModule { }

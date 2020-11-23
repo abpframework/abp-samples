@@ -40,6 +40,12 @@
     "AuthorWithBook:Success": "{0} added with books successfully",
     "AuthorInfo": "Author Info",
     "BookInfo": "Book Info",
-    "AddBook": "Add Book"
+    "AddBook": "Add Book",
+    "Author": "Author",
+    "SelectAuthor": "Select Author",
+    "SelectBookType": "Select Book Type",
+    "EditBook": "Edit Book",
+    "EditAuthor": "Edit Author",
+    "NewAuthorWithBook": "New Author With Book"
   }
 }

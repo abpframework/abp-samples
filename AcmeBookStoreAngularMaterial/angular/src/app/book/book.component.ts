@@ -67,9 +67,7 @@ export class BookComponent implements OnInit {
     });
   }
 
-  // Add a delete method
   deleteBook(id: string) {
-
     const confirmationDialogRef = this.dialog.open(ConfirmationDialogComponent, {
       data: {
         title: '::AreYouSure',

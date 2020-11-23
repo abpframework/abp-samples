@@ -37,6 +37,9 @@
     "AuthorDeletionConfirmationMessage": "Are you sure to delete the author '{0}'?",
     "BirthDate": "Birth date",
     "NewAuthor": "New author",
-    "AuthorWithBook:Success": "{0} added with books successfully"
+    "AuthorWithBook:Success": "{0} added with books successfully",
+    "AuthorInfo": "Author Info",
+    "BookInfo": "Book Info",
+    "AddBook": "Add Book"
   }
 }

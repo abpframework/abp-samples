@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ListService, PagedResultDto } from '@abp/ng.core';
 import { AuthorDto, AuthorService } from '@proxy/authors';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormGroup } from '@angular/forms';
 import { PageEvent } from '@angular/material/paginator';
 import { Sort } from '@angular/material/sort';
 import { MatDialog } from '@angular/material/dialog';
@@ -26,7 +26,6 @@ export class AuthorComponent implements OnInit {
   constructor(
     public readonly list: ListService,
     private authorService: AuthorService,
-    private fb: FormBuilder,
     public dialog: MatDialog
   ) {}
 
@@ -41,6 +40,7 @@ export class AuthorComponent implements OnInit {
   changePage(pageEvent: PageEvent) {
     this.list.page = pageEvent.pageIndex;
   }
+
 
   changeSort(sort: Sort) {
     this.list.sortKey = sort.active;

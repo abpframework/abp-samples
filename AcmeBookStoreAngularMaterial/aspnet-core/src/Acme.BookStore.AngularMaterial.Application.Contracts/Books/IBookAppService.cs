@@ -14,6 +14,6 @@ namespace Acme.BookStore.AngularMaterial.Books
             CreateUpdateBookDto> //Used to create/update a book
     {
         Task<ListResultDto<AuthorLookupDto>> GetAuthorLookupAsync();
-        Task<List<BookDto>> CreateBookWithAuthorAsync(CreateBookWithAuthorDto input);
+        Task<AuthorWithDetailsDto> CreateAuthorWithBooksAsync(CreateAuthorWithBookDto input);
     }
 }

@@ -107,28 +107,27 @@ namespace Acme.BookStore.AngularMaterial.Books
             );
         }
 
-        public async Task<List<BookDto>> CreateBookWithAuthorAsync(CreateBookWithAuthorDto input)
+        public async Task<AuthorWithDetailsDto> CreateAuthorWithBooksAsync(CreateAuthorWithBookDto input)
         {
-            var result = new List<BookDto>();
-            Console.WriteLine(input);
             var author =  await _authorManager.CreateAsync(
-                input.Author.Name,
-                input.Author.BirthDate,
-                input.Author.ShortBio
+                input.Name,
+                input.BirthDate,
+                input.ShortBio
             );
 
-            await _authorRepository.InsertAsync(author);
+            var createdAuthor = await _authorRepository.InsertAsync(author);
+            var authorWithBooks = ObjectMapper.Map<Author, AuthorWithDetailsDto>(createdAuthor);
             foreach (var book in input.Books)
             {
-                var bookDto = ObjectMapper.Map<CreateBookDto, Book>(book);
-                bookDto.AuthorId = author.Id;
-                await Repository.InsertAsync(bookDto);
-                var createdBook = ObjectMapper.Map<Book, BookDto>(bookDto);
-                createdBook.AuthorName = author.Name;
-                result.Add(createdBook);
+                var bookEntity = ObjectMapper.Map<CreateBookDto, Book>(book);
+                bookEntity.AuthorId = author.Id;
+                var createdBook = await Repository.InsertAsync(bookEntity);
+                var bookDto = ObjectMapper.Map<Book, BookDto>(createdBook);
+                bookDto.AuthorName = author.Name;
+                authorWithBooks.Books.Add(bookDto);
             }
 
-            return result;
+            return authorWithBooks;
         }
     }
 }

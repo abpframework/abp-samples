@@ -4,12 +4,11 @@ using Acme.BookStore.AngularMaterial.Authors;
 
 namespace Acme.BookStore.AngularMaterial.Books
 {
-    public class CreateBookWithAuthorDto
-    {
-        public AuthorDto Author { get; set; }
+    public class CreateAuthorWithBookDto: CreateAuthorDto
+    { 
         public ICollection<CreateBookDto> Books { get; set; }
 
-        public CreateBookWithAuthorDto()
+        public CreateAuthorWithBookDto()
         {
             Books = new List<CreateBookDto>();
         }

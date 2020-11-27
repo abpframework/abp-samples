@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { BookService } from '@proxy/books';
+import { BookService, CreateAuthorWithBookDto } from '@proxy/books';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { bookTypeOptions } from '@proxy/acme/book-store/books';
 import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
@@ -55,8 +55,15 @@ export class AuthorWithBookComponent implements OnInit {
   }
 
   save() {
-    this.bookService.createBookWithAuthor(this.form.value).subscribe((res) => {
-      this.toasterService.success('::AuthorWithBook:Success', '', {messageLocalizationParams: [res[0].authorName]});
+    if (this.form.invalid) {
+      return;
+    }
+    const authorWithBook: CreateAuthorWithBookDto = {
+      ...this.form.value.author,
+      books: this.form.value.books
+    };
+    this.bookService.createAuthorWithBooks(authorWithBook).subscribe((res) => {
+      this.toasterService.success('::AuthorWithBook:Success', '', {messageLocalizationParams: [res.name]});
     });
   }
 

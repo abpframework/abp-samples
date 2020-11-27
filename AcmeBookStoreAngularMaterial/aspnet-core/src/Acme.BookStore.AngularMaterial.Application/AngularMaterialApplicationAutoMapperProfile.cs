@@ -16,7 +16,9 @@ namespace Acme.BookStore.AngularMaterial
             CreateMap<CreateUpdateBookDto, Book>();
             CreateMap<Author, AuthorDto>();
             CreateMap<Author, AuthorLookupDto>();
+            CreateMap<CreateAuthorWithBookDto, Author>();
             CreateMap<CreateBookDto, Book>();
+            CreateMap<Author, AuthorWithDetailsDto>();
         }
     }
 }

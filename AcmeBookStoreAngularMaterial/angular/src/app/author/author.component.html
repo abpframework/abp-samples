@@ -1,0 +1,55 @@
+<mat-card>
+  <mat-card-header class="full-width">
+    <mat-card-title-group class="full-width">
+      <mat-card-title class="abp-card-title">{{ '::Menu:Authors' | abpLocalization }}</mat-card-title>
+      <div class="button-container">
+        <button id="create" mat-raised-button color="primary" type="button" (click)="createAuthor()">
+          <i class="fa fa-plus mr-1"></i>
+          <span>{{ '::NewAuthor' | abpLocalization }}</span>
+        </button>
+
+        <button id="create-with-book" mat-raised-button color="primary" type="button" routerLink="/author-with-book">
+          <i class="fa fa-plus mr-1"></i>
+          <span>{{'::NewAuthorWithBook' | abpLocalization}}</span>
+        </button>
+      </div>
+    </mat-card-title-group>
+  </mat-card-header>
+  <mat-card-content>
+    <table mat-table [dataSource]="author.items" class="w-100" matSort (matSortChange)="changeSort($event)">
+      <tr mat-header-row *matHeaderRowDef="columns"></tr>
+      <tr mat-row *matRowDef="let myRowData; columns: columns"></tr>
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef> {{'::Actions' | abpLocalization}} </th>
+        <td mat-cell *matCellDef="let element">
+          <button mat-raised-button color="primary" [matMenuTriggerFor]="menu" [matMenuTriggerData]="{id: element.id}">
+            <mat-icon>settings</mat-icon>
+            {{'::Actions' | abpLocalization}}
+            <mat-icon>expand_more</mat-icon>
+          </button>
+        </td>
+      </ng-container><ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>{{'::Name' | abpLocalization}}</th>
+      <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+    </ng-container>
+      <ng-container matColumnDef="birthDate">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header > {{'::BirthDate' | abpLocalization}} </th>
+        <td mat-cell *matCellDef="let element">  {{ element.birthDate | date }}
+        </td>
+      </ng-container>
+    </table>
+    <mat-paginator [length]="author.totalCount" [pageSize]="list.maxResultCount" (page)="changePage($event)"></mat-paginator>
+  </mat-card-content>
+</mat-card>
+<mat-menu #menu="matMenu">
+  <ng-template matMenuContent let-id="id">
+    <button mat-menu-item (click)="editAuthor(id)">
+      {{ '::Edit' | abpLocalization }}
+    </button>
+    <button mat-menu-item (click)="deleteAuthor(id)">
+      {{ '::Delete' | abpLocalization }}
+    </button>
+  </ng-template>
+
+</mat-menu>
+

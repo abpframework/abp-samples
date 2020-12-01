@@ -1,0 +1,21 @@
+<h2 mat-dialog-title>{{ (data ? '::EditAuthor' : '::NewAuthor' )| abpLocalization }}</h2>
+<mat-dialog-content>
+  <form [formGroup]="form" class="form-container">
+    <mat-form-field class="full-width">
+      <mat-label>{{'::Name' | abpLocalization}} <span> * </span></mat-label>
+      <input matInput id="author-name" formControlName="name" autofocus>
+    </mat-form-field>
+
+    <mat-form-field class="full-width">
+      <mat-label>{{'::BirthDate' | abpLocalization}}<span> * </span></mat-label>
+      <input matInput [matDatepicker]="picker" formControlName="birthDate">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+  </form>
+
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button mat-dialog-close>{{ '::Close' | abpLocalization }}</button>
+  <button mat-raised-button color="primary" [mat-dialog-close]="form.value">{{'::Save' |abpLocalization}}</button>
+</mat-dialog-actions>

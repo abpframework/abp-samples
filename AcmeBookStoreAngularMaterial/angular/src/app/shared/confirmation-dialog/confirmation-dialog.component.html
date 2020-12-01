@@ -1,0 +1,13 @@
+<mat-dialog-content>
+  <div class="dialog-container">
+
+  <mat-icon class="warn-icon" color="warn">warning</mat-icon>
+  <h2 mat-dialog-title>{{ data.title | abpLocalization }}</h2>
+  <p mat-dialog-title>{{ data.description | abpLocalization }}</p>
+  </div>
+
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button  mat-dialog-close [mat-dialog-close]="false">{{ '::Cancel' | abpLocalization }}</button>
+  <button mat-raised-button color="primary" [mat-dialog-close]="true">{{ '::Yes' | abpLocalization }}</button>
+</mat-dialog-actions>

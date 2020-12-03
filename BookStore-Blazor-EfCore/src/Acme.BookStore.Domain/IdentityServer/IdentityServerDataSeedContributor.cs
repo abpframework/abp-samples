@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using IdentityServer4.Models;
@@ -8,11 +8,14 @@ using Volo.Abp.Data;
 using Volo.Abp.DependencyInjection;
 using Volo.Abp.Guids;
 using Volo.Abp.IdentityServer.ApiResources;
+using Volo.Abp.IdentityServer.ApiScopes;
 using Volo.Abp.IdentityServer.Clients;
 using Volo.Abp.IdentityServer.IdentityResources;
+using Volo.Abp.MultiTenancy;
 using Volo.Abp.PermissionManagement;
 using Volo.Abp.Uow;
 using ApiResource = Volo.Abp.IdentityServer.ApiResources.ApiResource;
+using ApiScope = Volo.Abp.IdentityServer.ApiScopes.ApiScope;
 using Client = Volo.Abp.IdentityServer.Clients.Client;
 
 namespace Acme.BookStore.IdentityServer
@@ -20,34 +23,49 @@ namespace Acme.BookStore.IdentityServer
     public class IdentityServerDataSeedContributor : IDataSeedContributor, ITransientDependency
     {
         private readonly IApiResourceRepository _apiResourceRepository;
+        private readonly IApiScopeRepository _apiScopeRepository;
         private readonly IClientRepository _clientRepository;
         private readonly IIdentityResourceDataSeeder _identityResourceDataSeeder;
         private readonly IGuidGenerator _guidGenerator;
         private readonly IPermissionDataSeeder _permissionDataSeeder;
         private readonly IConfiguration _configuration;
+        private readonly ICurrentTenant _currentTenant;
 
         public IdentityServerDataSeedContributor(
             IClientRepository clientRepository,
             IApiResourceRepository apiResourceRepository,
+            IApiScopeRepository apiScopeRepository,
             IIdentityResourceDataSeeder identityResourceDataSeeder,
             IGuidGenerator guidGenerator,
             IPermissionDataSeeder permissionDataSeeder,
-            IConfiguration configuration)
+            IConfiguration configuration,
+            ICurrentTenant currentTenant)
         {
             _clientRepository = clientRepository;
             _apiResourceRepository = apiResourceRepository;
+            _apiScopeRepository = apiScopeRepository;
             _identityResourceDataSeeder = identityResourceDataSeeder;
             _guidGenerator = guidGenerator;
             _permissionDataSeeder = permissionDataSeeder;
             _configuration = configuration;
+            _currentTenant = currentTenant;
         }
 
         [UnitOfWork]
         public virtual async Task SeedAsync(DataSeedContext context)
         {
-            await _identityResourceDataSeeder.CreateStandardResourcesAsync();
-            await CreateApiResourcesAsync();
-            await CreateClientsAsync();
+            using (_currentTenant.Change(context?.TenantId))
+            {
+                await _identityResourceDataSeeder.CreateStandardResourcesAsync();
+                await CreateApiResourcesAsync();
+                await CreateApiScopesAsync();
+                await CreateClientsAsync();
+            }
+        }
+
+        private async Task CreateApiScopesAsync()
+        {
+            await CreateApiScopeAsync("BookStore");
         }
 
         private async Task CreateApiResourcesAsync()
@@ -91,6 +109,24 @@ namespace Acme.BookStore.IdentityServer
             return await _apiResourceRepository.UpdateAsync(apiResource);
         }
 
+        private async Task<ApiScope> CreateApiScopeAsync(string name)
+        {
+            var apiScope = await _apiScopeRepository.GetByNameAsync(name);
+            if (apiScope == null)
+            {
+                apiScope = await _apiScopeRepository.InsertAsync(
+                    new ApiScope(
+                        _guidGenerator.Create(),
+                        name,
+                        name + " API"
+                    ),
+                    autoSave: true
+                );
+            }
+
+            return apiScope;
+        }
+
         private async Task CreateClientsAsync()
         {
             var commonScopes = new[]
@@ -118,7 +154,7 @@ namespace Acme.BookStore.IdentityServer
                 await CreateClientAsync(
                     name: webClientId,
                     scopes: commonScopes,
-                    grantTypes: new[] {"hybrid"},
+                    grantTypes: new[] { "hybrid" },
                     secret: (configurationSection["BookStore_Web:ClientSecret"] ?? "1q2w3e*").Sha256(),
                     redirectUri: $"{webClientRootUrl}signin-oidc",
                     postLogoutRedirectUri: $"{webClientRootUrl}signout-callback-oidc",
@@ -135,7 +171,7 @@ namespace Acme.BookStore.IdentityServer
                 await CreateClientAsync(
                     name: consoleAndAngularClientId,
                     scopes: commonScopes,
-                    grantTypes: new[] {"password", "client_credentials", "authorization_code"},
+                    grantTypes: new[] { "password", "client_credentials", "authorization_code" },
                     secret: (configurationSection["BookStore_App:ClientSecret"] ?? "1q2w3e*").Sha256(),
                     requireClientSecret: false,
                     redirectUri: webClientRootUrl,
@@ -155,9 +191,24 @@ namespace Acme.BookStore.IdentityServer
                     grantTypes: new[] { "authorization_code" },
                     secret: configurationSection["BookStore_Blazor:ClientSecret"]?.Sha256(),
                     requireClientSecret: false,
-                    requirePkce: true,
                     redirectUri: $"{blazorRootUrl}/authentication/login-callback",
                     postLogoutRedirectUri: $"{blazorRootUrl}/authentication/logout-callback"
+                );
+            }
+
+            // Swagger Client
+            var swaggerClientId = configurationSection["BookStore_Swagger:ClientId"];
+            if (!swaggerClientId.IsNullOrWhiteSpace())
+            {
+                var swaggerRootUrl = configurationSection["BookStore_Swagger:RootUrl"].TrimEnd('/');
+
+                await CreateClientAsync(
+                    name: swaggerClientId,
+                    scopes: commonScopes,
+                    grantTypes: new[] { "authorization_code" },
+                    secret: configurationSection["BookStore_Swagger:ClientSecret"]?.Sha256(),
+                    requireClientSecret: false,
+                    redirectUri: $"{swaggerRootUrl}/swagger/oauth2-redirect.html"
                 );
             }
         }
@@ -174,7 +225,7 @@ namespace Acme.BookStore.IdentityServer
             bool requirePkce = false,
             IEnumerable<string> permissions = null)
         {
-            var client = await _clientRepository.FindByCliendIdAsync(name);
+            var client = await _clientRepository.FindByClientIdAsync(name);
             if (client == null)
             {
                 client = await _clientRepository.InsertAsync(
@@ -246,7 +297,8 @@ namespace Acme.BookStore.IdentityServer
                 await _permissionDataSeeder.SeedAsync(
                     ClientPermissionValueProvider.ProviderName,
                     name,
-                    permissions
+                    permissions,
+                    null
                 );
             }
 

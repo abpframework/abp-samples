@@ -3,21 +3,16 @@
   <Import Project="..\..\common.props" />
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>net5.0</TargetFramework>
     <RootNamespace>Acme.BookStore</RootNamespace>
   </PropertyGroup>
-
-  <ItemGroup>
-    <Compile Remove="Migrations\20201017171904_Added_AuthorId_To_Book.cs" />
-    <Compile Remove="Migrations\20201017171904_Added_AuthorId_To_Book.Designer.cs" />
-  </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Acme.BookStore.EntityFrameworkCore\Acme.BookStore.EntityFrameworkCore.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.1.8" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="5.0.0" />
   </ItemGroup>
 
 </Project>

@@ -1,12 +1,12 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Acme.BookStore.Authors;
+using Acme.BookStore.Books;
+using Microsoft.EntityFrameworkCore;
 using Acme.BookStore.Users;
 using Volo.Abp.Data;
 using Volo.Abp.EntityFrameworkCore;
 using Volo.Abp.EntityFrameworkCore.Modeling;
 using Volo.Abp.Identity;
 using Volo.Abp.Users.EntityFrameworkCore;
-using Acme.BookStore.Books;
-using Acme.BookStore.Authors;
 
 namespace Acme.BookStore.EntityFrameworkCore
 {
@@ -47,7 +47,7 @@ namespace Acme.BookStore.EntityFrameworkCore
             builder.Entity<AppUser>(b =>
             {
                 b.ToTable(AbpIdentityDbProperties.DbTablePrefix + "Users"); //Sharing the same table "AbpUsers" with the IdentityUser
-                
+
                 b.ConfigureByConvention();
                 b.ConfigureAbpUser();
 

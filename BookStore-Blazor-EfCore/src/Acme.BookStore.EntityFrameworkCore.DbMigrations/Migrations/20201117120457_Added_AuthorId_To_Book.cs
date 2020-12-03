@@ -10,6 +10,7 @@ namespace Acme.BookStore.Migrations
             migrationBuilder.AddColumn<Guid>(
                 name: "AuthorId",
                 table: "AppBooks",
+                type: "uniqueidentifier",
                 nullable: false,
                 defaultValue: new Guid("00000000-0000-0000-0000-000000000000"));
 

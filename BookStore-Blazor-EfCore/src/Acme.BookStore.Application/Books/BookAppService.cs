@@ -43,9 +43,9 @@ namespace Acme.BookStore.Books
 
             //Prepare a query to join books and authors
             var query = from book in Repository
-                        join author in _authorRepository on book.AuthorId equals author.Id
-                        where book.Id == id
-                        select new { book, author };
+                join author in _authorRepository on book.AuthorId equals author.Id
+                where book.Id == id
+                select new { book, author };
 
             //Execute the query and get the book with author
             var queryResult = await AsyncExecuter.FirstOrDefaultAsync(query);
@@ -59,16 +59,16 @@ namespace Acme.BookStore.Books
             return bookDto;
         }
 
-        public override async Task<PagedResultDto<BookDto>>
-            GetListAsync(PagedAndSortedResultRequestDto input)
+        public override async Task<PagedResultDto<BookDto>> GetListAsync(
+            PagedAndSortedResultRequestDto input)
         {
             await CheckGetListPolicyAsync();
 
             //Prepare a query to join books and authors
             var query = from book in Repository
-                        join author in _authorRepository on book.AuthorId equals author.Id
-                        orderby input.Sorting
-                        select new { book, author };
+                join author in _authorRepository on book.AuthorId equals author.Id
+                orderby input.Sorting
+                select new {book, author};
 
             query = query
                 .Skip(input.SkipCount)

@@ -105,7 +105,7 @@ namespace Acme.BookStore.Blazor.Pages
         private async Task DeleteAuthorAsync(AuthorDto author)
         {
             var confirmMessage = L["AuthorDeletionConfirmationMessage", author.Name];
-            if (!await UiMessageService.ConfirmAsync(confirmMessage))
+            if (!await Message.Confirm(confirmMessage))
             {
                 return;
             }

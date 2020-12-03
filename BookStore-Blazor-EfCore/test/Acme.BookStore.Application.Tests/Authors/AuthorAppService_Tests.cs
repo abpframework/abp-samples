@@ -28,7 +28,7 @@ namespace Acme.BookStore.Authors
         public async Task Should_Get_Filtered_Authors()
         {
             var result = await _authorAppService.GetListAsync(
-                new GetAuthorListDto { Filter = "George" });
+                new GetAuthorListDto {Filter = "George"});
 
             result.TotalCount.ShouldBeGreaterThanOrEqualTo(1);
             result.Items.ShouldContain(author => author.Name == "George Orwell");
@@ -66,5 +66,7 @@ namespace Acme.BookStore.Authors
                 );
             });
         }
+
+        //TODO: Test other methods...
     }
 }

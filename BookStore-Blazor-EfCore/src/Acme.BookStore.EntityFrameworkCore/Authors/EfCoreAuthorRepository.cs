@@ -35,7 +35,7 @@ namespace Acme.BookStore.Authors
                 .WhereIf(
                     !filter.IsNullOrWhiteSpace(),
                     author => author.Name.Contains(filter)
-                 )
+                )
                 .OrderBy(sorting)
                 .Skip(skipCount)
                 .Take(maxResultCount)

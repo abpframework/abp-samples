@@ -1,19 +1,38 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using Acme.BookStore.Localization;
 using Acme.BookStore.Permissions;
+using Volo.Abp.Account.Localization;
 using Volo.Abp.UI.Navigation;
+using Volo.Abp.Users;
 
 namespace Acme.BookStore.Blazor
 {
     public class BookStoreMenuContributor : IMenuContributor
     {
+        private readonly IConfiguration _configuration;
+
+        public BookStoreMenuContributor(IConfiguration configuration)
+        {
+            _configuration = configuration;
+        }
+
         public async Task ConfigureMenuAsync(MenuConfigurationContext context)
         {
-            if (context.Menu.DisplayName != StandardMenus.Main)
+            if (context.Menu.Name == StandardMenus.Main)
             {
-                return;
+                await ConfigureMainMenuAsync(context);
             }
+            else if (context.Menu.Name == StandardMenus.User)
+            {
+                await ConfigureUserMenuAsync(context);
+            }
+        }
 
+        private async Task ConfigureMainMenuAsync(MenuConfigurationContext context)
+        {
             var l = context.GetLocalizer<BookStoreResource>();
 
             context.Menu.Items.Insert(
@@ -51,6 +70,28 @@ namespace Acme.BookStore.Blazor
                     url: "/authors"
                 ));
             }
+        }
+
+        private Task ConfigureUserMenuAsync(MenuConfigurationContext context)
+        {
+            var accountStringLocalizer = context.GetLocalizer<AccountResource>();
+            var currentUser = context.ServiceProvider.GetRequiredService<ICurrentUser>();
+
+            var identityServerUrl = _configuration["AuthServer:Authority"] ?? "";
+
+            if (currentUser.IsAuthenticated)
+            {
+                context.Menu.AddItem(new ApplicationMenuItem(
+                    "Account.Manage",
+                    accountStringLocalizer["ManageYourProfile"],
+                    $"{identityServerUrl.EnsureEndsWith('/')}Account/Manage",
+                    icon: "fa fa-cog",
+                    order: 1000,
+                    null,
+                    "_blank"));
+            }
+
+            return Task.CompletedTask;
         }
     }
 }

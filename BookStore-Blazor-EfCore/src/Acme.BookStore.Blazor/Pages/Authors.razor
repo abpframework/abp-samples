@@ -1,14 +1,7 @@
 ﻿@page "/authors"
 @using Acme.BookStore.Authors
-@using Acme.BookStore.Localization
-@using Microsoft.AspNetCore.Authorization
-@using Microsoft.Extensions.Localization
-@using Volo.Abp.ObjectMapping
+@inherits BookStoreComponentBase
 @inject IAuthorAppService AuthorAppService
-@inject IStringLocalizer<BookStoreResource> L
-@inject IAuthorizationService AuthorizationService
-@inject IUiMessageService UiMessageService
-@inject IObjectMapper ObjectMapper
 <Card>
     <CardHeader>
         <Row>

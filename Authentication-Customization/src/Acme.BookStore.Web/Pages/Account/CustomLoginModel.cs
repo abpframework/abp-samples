@@ -7,6 +7,7 @@ using Volo.Abp.Security.Claims;
 using IdentityUser = Volo.Abp.Identity.IdentityUser;
 using Microsoft.AspNetCore.Mvc;
 using IdentityModel;
+using Microsoft.Extensions.Options;
 
 namespace Acme.BookStore.Web.Pages.Account
 {
@@ -14,27 +15,37 @@ namespace Acme.BookStore.Web.Pages.Account
     {
         public CustomLoginModel(
             Microsoft.AspNetCore.Authentication.IAuthenticationSchemeProvider schemeProvider,
-            Microsoft.Extensions.Options.IOptions<Volo.Abp.Account.Web.AbpAccountOptions> accountOptions)
-            : base(schemeProvider, accountOptions)
+            IOptions<Volo.Abp.Account.Web.AbpAccountOptions> accountOptions,
+            IOptions<IdentityOptions> identityOptions)
+            : base(schemeProvider: schemeProvider, accountOptions: accountOptions, identityOptions: identityOptions)
         {
         }
 
-        protected override async Task<Volo.Abp.Identity.IdentityUser> CreateExternalUserAsync(ExternalLoginInfo info)
+        protected override async Task<IdentityUser> CreateExternalUserAsync(ExternalLoginInfo info)
         {
             var emailAddress = info.Principal.FindFirstValue(AbpClaimTypes.Email);
             var userId = GuidGenerator.Create();
-            var user = new IdentityUser(userId, emailAddress, emailAddress, CurrentTenant.Id);
-            user.Name = info.Principal.FindFirstValue(JwtClaimTypes.GivenName);     // This claim will be null if using AzureAD v2.0 endpoint
-            user.Surname = info.Principal.FindFirstValue(JwtClaimTypes.FamilyName); // This claim will be null if using AzureAD v2.0 endpoint
+            var user = new IdentityUser(userId, emailAddress, emailAddress, CurrentTenant.Id)
+            {
+                // This claim will be null if using AzureAD v2.0 endpoint
+                Name = info.Principal.FindFirstValue(JwtClaimTypes.GivenName),
+                // This claim will be null if using AzureAD v2.0 endpoint
+                Surname = info.Principal.FindFirstValue(JwtClaimTypes.FamilyName),
+                IsExternal = true
+            };
 
             //Optional: Add claims to user claims
             if (!string.IsNullOrEmpty(info.Principal.FindFirstValue(JwtClaimTypes.GivenName)))
             {
-                user.Claims.Add(new Volo.Abp.Identity.IdentityUserClaim(GuidGenerator.Create(), userId, JwtClaimTypes.GivenName, info.Principal.FindFirstValue(JwtClaimTypes.GivenName), CurrentTenant.Id));
+                user.Claims.Add(new Volo.Abp.Identity.IdentityUserClaim(GuidGenerator.Create(), userId,
+                    JwtClaimTypes.GivenName, info.Principal.FindFirstValue(JwtClaimTypes.GivenName), CurrentTenant.Id));
             }
+
             if (!string.IsNullOrEmpty(info.Principal.FindFirstValue(JwtClaimTypes.FamilyName)))
             {
-                user.Claims.Add(new Volo.Abp.Identity.IdentityUserClaim(GuidGenerator.Create(), userId, JwtClaimTypes.FamilyName, info.Principal.FindFirstValue(JwtClaimTypes.FamilyName), CurrentTenant.Id));
+                user.Claims.Add(new Volo.Abp.Identity.IdentityUserClaim(GuidGenerator.Create(), userId,
+                    JwtClaimTypes.FamilyName, info.Principal.FindFirstValue(JwtClaimTypes.FamilyName),
+                    CurrentTenant.Id));
             }
 
             CheckIdentityErrors(await UserManager.CreateAsync(user));

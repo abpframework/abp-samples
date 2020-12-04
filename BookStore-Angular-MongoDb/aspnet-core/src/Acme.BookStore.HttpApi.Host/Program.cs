@@ -19,6 +19,7 @@ namespace Acme.BookStore
                 .MinimumLevel.Override("Microsoft", LogEventLevel.Information)
                 .Enrich.FromLogContext()
                 .WriteTo.Async(c => c.File("Logs/logs.txt"))
+                .WriteTo.Async(c => c.Console())
                 .CreateLogger();
 
             try

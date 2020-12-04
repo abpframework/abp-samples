@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using Volo.Abp.Account.Web;
@@ -12,8 +13,9 @@ namespace CustomApplicationModules.Web.Pages.Account
 
         public MyLoginModel(
             IAuthenticationSchemeProvider schemeProvider,
-            IOptions<AbpAccountOptions> accountOptions)
-            : base(schemeProvider, accountOptions)
+            IOptions<AbpAccountOptions> accountOptions,
+            IOptions<IdentityOptions> identityOptions)
+            : base(schemeProvider, accountOptions, identityOptions)
         {
         }
 

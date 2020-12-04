@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Options;
 using Volo.Abp.Data;
 using Volo.Abp.DependencyInjection;
 using Volo.Abp.Identity;
@@ -13,8 +15,9 @@ namespace CustomApplicationModules.Identity
         public MyIdentityUserAppService(
             IdentityUserManager userManager,
             IIdentityUserRepository userRepository,
-            IIdentityRoleRepository roleRepository) :
-            base(userManager, userRepository, roleRepository)
+            IIdentityRoleRepository roleRepository,
+            IOptions<IdentityOptions> identityOptions) :
+            base(userManager, userRepository, roleRepository, identityOptions)
         {
         }
 
@@ -35,5 +38,7 @@ namespace CustomApplicationModules.Identity
 
             return await base.GetAsync(id);
         }
+
+
     }
 }

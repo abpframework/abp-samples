@@ -2,7 +2,7 @@
 
 namespace Acme.BookStore.Blazor
 {
-    public class BookStoreBundleContributer : IBundleContributer
+    public class BookStoreBundleContributor : IBundleContributor
     {
         public void AddScripts(BundleContext context)
         {

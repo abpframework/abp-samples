@@ -8,6 +8,7 @@ using StackExchange.Redis;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.Swagger;
 using Volo.Abp;
+using Volo.Abp.Account;
 using Volo.Abp.Account.Web;
 using Volo.Abp.AspNetCore.Authentication.JwtBearer;
 using Volo.Abp.AspNetCore.MultiTenancy;
@@ -39,6 +40,7 @@ namespace Acme.BookStore.BookManagement
 {
     [DependsOn(
         typeof(AbpAccountWebIdentityServerModule),
+        typeof(AbpAccountApplicationModule),
         typeof(AbpAspNetCoreMultiTenancyModule),
         typeof(AbpAspNetCoreMvcModule),
         typeof(AbpAspNetCoreMvcUiBasicThemeModule),

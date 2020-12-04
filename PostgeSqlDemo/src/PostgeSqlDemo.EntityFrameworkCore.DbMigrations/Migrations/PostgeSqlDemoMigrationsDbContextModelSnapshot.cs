@@ -17,37 +17,37 @@ namespace PostgeSqlDemo.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
+                .UseIdentityByDefaultColumns()
                 .HasAnnotation("_Abp_DatabaseProvider", EfCoreDatabaseProvider.PostgreSql)
-                .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn)
-                .HasAnnotation("ProductVersion", "3.1.6")
-                .HasAnnotation("Relational:MaxIdentifierLength", 63);
+                .HasAnnotation("Relational:MaxIdentifierLength", 63)
+                .HasAnnotation("ProductVersion", "5.0.0");
 
             modelBuilder.Entity("PostgeSqlDemo.Spatial.City", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer")
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+                        .UseIdentityByDefaultColumn();
 
                     b.Property<string>("CityName")
                         .HasColumnType("text");
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
-                        .HasColumnName("ConcurrencyStamp")
+                        .HasMaxLength(40)
                         .HasColumnType("character varying(40)")
-                        .HasMaxLength(40);
+                        .HasColumnName("ConcurrencyStamp");
 
                     b.Property<string>("ExtraProperties")
-                        .HasColumnName("ExtraProperties")
-                        .HasColumnType("text");
+                        .HasColumnType("text")
+                        .HasColumnName("ExtraProperties");
 
                     b.Property<Point>("Location")
                         .HasColumnType("geometry");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Cities","Application");
+                    b.ToTable("Cities", "Application");
                 });
 
             modelBuilder.Entity("PostgeSqlDemo.Spatial.Country", b =>
@@ -55,27 +55,27 @@ namespace PostgeSqlDemo.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer")
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+                        .UseIdentityByDefaultColumn();
 
                     b.Property<Geometry>("Border")
                         .HasColumnType("geometry");
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
-                        .HasColumnName("ConcurrencyStamp")
+                        .HasMaxLength(40)
                         .HasColumnType("character varying(40)")
-                        .HasMaxLength(40);
+                        .HasColumnName("ConcurrencyStamp");
 
                     b.Property<string>("CountryName")
                         .HasColumnType("text");
 
                     b.Property<string>("ExtraProperties")
-                        .HasColumnName("ExtraProperties")
-                        .HasColumnType("text");
+                        .HasColumnType("text")
+                        .HasColumnName("ExtraProperties");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Countries","Application");
+                    b.ToTable("Countries", "Application");
                 });
 
             modelBuilder.Entity("Volo.Abp.AuditLogging.AuditLog", b =>
@@ -85,99 +85,99 @@ namespace PostgeSqlDemo.Migrations
                         .HasColumnType("uuid");
 
                     b.Property<string>("ApplicationName")
-                        .HasColumnName("ApplicationName")
+                        .HasMaxLength(96)
                         .HasColumnType("character varying(96)")
-                        .HasMaxLength(96);
+                        .HasColumnName("ApplicationName");
 
                     b.Property<string>("BrowserInfo")
-                        .HasColumnName("BrowserInfo")
+                        .HasMaxLength(512)
                         .HasColumnType("character varying(512)")
-                        .HasMaxLength(512);
+                        .HasColumnName("BrowserInfo");
 
                     b.Property<string>("ClientId")
-                        .HasColumnName("ClientId")
+                        .HasMaxLength(64)
                         .HasColumnType("character varying(64)")
-                        .HasMaxLength(64);
+                        .HasColumnName("ClientId");
 
                     b.Property<string>("ClientIpAddress")
-                        .HasColumnName("ClientIpAddress")
+                        .HasMaxLength(64)
                         .HasColumnType("character varying(64)")
-                        .HasMaxLength(64);
+                        .HasColumnName("ClientIpAddress");
 
                     b.Property<string>("ClientName")
-                        .HasColumnName("ClientName")
+                        .HasMaxLength(128)
                         .HasColumnType("character varying(128)")
-                        .HasMaxLength(128);
+                        .HasColumnName("ClientName");
 
                     b.Property<string>("Comments")
-                        .HasColumnName("Comments")
+                        .HasMaxLength(256)
                         .HasColumnType("character varying(256)")
-                        .HasMaxLength(256);
+                        .HasColumnName("Comments");
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
-                        .HasColumnName("ConcurrencyStamp")
+                        .HasMaxLength(40)
                         .HasColumnType("character varying(40)")
-                        .HasMaxLength(40);
+                        .HasColumnName("ConcurrencyStamp");
 
                     b.Property<string>("CorrelationId")
-                        .HasColumnName("CorrelationId")
+                        .HasMaxLength(64)
                         .HasColumnType("character varying(64)")
-                        .HasMaxLength(64);
+                        .HasColumnName("CorrelationId");
 
                     b.Property<string>("Exceptions")
-                        .HasColumnName("Exceptions")
+                        .HasMaxLength(4000)
                         .HasColumnType("character varying(4000)")
-                        .HasMaxLength(4000);
+                        .HasColumnName("Exceptions");
 
                     b.Property<int>("ExecutionDuration")
-                        .HasColumnName("ExecutionDuration")
-                        .HasColumnType("integer");
+                        .HasColumnType("integer")
+                        .HasColumnName("ExecutionDuration");
 
                     b.Property<DateTime>("ExecutionTime")
                         .HasColumnType("timestamp without time zone");
 
                     b.Property<string>("ExtraProperties")
-                        .HasColumnName("ExtraProperties")
-                        .HasColumnType("text");
+                        .HasColumnType("text")
+                        .HasColumnName("ExtraProperties");
 
                     b.Property<string>("HttpMethod")
-                        .HasColumnName("HttpMethod")
+                        .HasMaxLength(16)
                         .HasColumnType("character varying(16)")
-                        .HasMaxLength(16);
+                        .HasColumnName("HttpMethod");
 
                     b.Property<int?>("HttpStatusCode")
-                        .HasColumnName("HttpStatusCode")
-                        .HasColumnType("integer");
+                        .HasColumnType("integer")
+                        .HasColumnName("HttpStatusCode");
 
                     b.Property<Guid?>("ImpersonatorTenantId")
-                        .HasColumnName("ImpersonatorTenantId")
-                        .HasColumnType("uuid");
+                        .HasColumnType("uuid")
+                        .HasColumnName("ImpersonatorTenantId");
 
                     b.Property<Guid?>("ImpersonatorUserId")
-                        .HasColumnName("ImpersonatorUserId")
-                        .HasColumnType("uuid");
+                        .HasColumnType("uuid")
+                        .HasColumnName("ImpersonatorUserId");
 
                     b.Property<Guid?>("TenantId")
-                        .HasColumnName("TenantId")
-                        .HasColumnType("uuid");
+                        .HasColumnType("uuid")
+                        .HasColumnName("TenantId");
 
                     b.Property<string>("TenantName")
                         .HasColumnType("text");
 
                     b.Property<string>("Url")
-                        .HasColumnName("Url")
+                        .HasMaxLength(256)
                         .HasColumnType("character varying(256)")
-                        .HasMaxLength(256);
+                        .HasColumnName("Url");
 
                     b.Property<Guid?>("UserId")
-                        .HasColumnName("UserId")
-                        .HasColumnType("uuid");
+                        .HasColumnType("uuid")
+                        .HasColumnName("UserId");
 
                     b.Property<string>("UserName")
-                        .HasColumnName("UserName")
+                        .HasMaxLength(256)
                         .HasColumnType("character varying(256)")
-                        .HasMaxLength(256);
+                        .HasColumnName("UserName");
 
                     b.HasKey("Id");
 
@@ -195,39 +195,39 @@ namespace PostgeSqlDemo.Migrations
                         .HasColumnType("uuid");
 
                     b.Property<Guid>("AuditLogId")
-                        .HasColumnName("AuditLogId")
-                        .HasColumnType("uuid");
+                        .HasColumnType("uuid")
+                        .HasColumnName("AuditLogId");
 
                     b.Property<int>("ExecutionDuration")
-                        .HasColumnName("ExecutionDuration")
-                        .HasColumnType("integer");
+                        .HasColumnType("integer")
+                        .HasColumnName("ExecutionDuration");
 
                     b.Property<DateTime>("ExecutionTime")
-                        .HasColumnName("ExecutionTime")
-                        .HasColumnType("timestamp without time zone");
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("ExecutionTime");
 
                     b.Property<string>("ExtraProperties")
-                        .HasColumnName("ExtraProperties")
-                        .HasColumnType("text");
+                        .HasColumnType("text")
+                        .HasColumnName("ExtraProperties");
 
                     b.Property<string>("MethodName")
-                        .HasColumnName("MethodName")
+                        .HasMaxLength(128)
                         .HasColumnType("character varying(128)")
-                        .HasMaxLength(128);
+                        .HasColumnName("MethodName");
 
                     b.Property<string>("Parameters")
-                        .HasColumnName("Parameters")
+                        .HasMaxLength(2000)
                         .HasColumnType("character varying(2000)")
-                        .HasMaxLength(2000);
+                        .HasColumnName("Parameters");
 
                     b.Property<string>("ServiceName")
-                        .HasColumnName("ServiceName")
+                        .HasMaxLength(256)
                         .HasColumnType("character varying(256)")
-                        .HasMaxLength(256);
+                        .HasColumnName("ServiceName");
 
                     b.Property<Guid?>("TenantId")
-                        .HasColumnName("TenantId")
-                        .HasColumnType("uuid");
+                        .HasColumnType("uuid")
+                        .HasColumnName("TenantId");
 
                     b.HasKey("Id");
 
@@ -245,39 +245,39 @@ namespace PostgeSqlDemo.Migrations
                         .HasColumnType("uuid");
 
                     b.Property<Guid>("AuditLogId")
-                        .HasColumnName("AuditLogId")
-                        .HasColumnType("uuid");
+                        .HasColumnType("uuid")
+                        .HasColumnName("AuditLogId");
 
                     b.Property<DateTime>("ChangeTime")
-                        .HasColumnName("ChangeTime")
-                        .HasColumnType("timestamp without time zone");
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("ChangeTime");
 
                     b.Property<byte>("ChangeType")
-                        .HasColumnName("ChangeType")
-                        .HasColumnType("smallint");
+                        .HasColumnType("smallint")
+                        .HasColumnName("ChangeType");
 
                     b.Property<string>("EntityId")
                         .IsRequired()
-                        .HasColumnName("EntityId")
+                        .HasMaxLength(128)
                         .HasColumnType("character varying(128)")
-                        .HasMaxLength(128);
+                        .HasColumnName("EntityId");
 
                     b.Property<Guid?>("EntityTenantId")
                         .HasColumnType("uuid");
 
                     b.Property<string>("EntityTypeFullName")
                         .IsRequired()
-                        .HasColumnName("EntityTypeFullName")
+                        .HasMaxLength(128)
                         .HasColumnType("character varying(128)")
-                        .HasMaxLength(128);
+                        .HasColumnName("EntityTypeFullName");
 
                     b.Property<string>("ExtraProperties")
-                        .HasColumnName("ExtraProperties")
-                        .HasColumnType("text");
+                        .HasColumnType("text")
+                        .HasColumnName("ExtraProperties");
 
                     b.Property<Guid?>("TenantId")
-                        .HasColumnName("TenantId")
-                        .HasColumnType("uuid");
+                        .HasColumnType("uuid")
+                        .HasColumnName("TenantId");
 
                     b.HasKey("Id");
 
@@ -298,30 +298,30 @@ namespace PostgeSqlDemo.Migrations
                         .HasColumnType("uuid");
 
                     b.Property<string>("NewValue")
-                        .HasColumnName("NewValue")
+                        .HasMaxLength(512)
                         .HasColumnType("character varying(512)")
-                        .HasMaxLength(512);
+                        .HasColumnName("NewValue");
 
                     b.Property<string>("OriginalValue")
-                        .HasColumnName("OriginalValue")
+                        .HasMaxLength(512)
                         .HasColumnType("character varying(512)")
-                        .HasMaxLength(512);
+                        .HasColumnName("OriginalValue");
 
                     b.Property<string>("PropertyName")
                         .IsRequired()
-                        .HasColumnName("PropertyName")
+                        .HasMaxLength(128)
                         .HasColumnType("character varying(128)")
-                        .HasMaxLength(128);
+                        .HasColumnName("PropertyName");
 
                     b.Property<string>("PropertyTypeFullName")
                         .IsRequired()
-                        .HasColumnName("PropertyTypeFullName")
+                        .HasMaxLength(64)
                         .HasColumnType("character varying(64)")
-                        .HasMaxLength(64);
+                        .HasColumnName("PropertyTypeFullName");
 
                     b.Property<Guid?>("TenantId")
-                        .HasColumnName("TenantId")
-                        .HasColumnType("uuid");
+                        .HasColumnType("uuid")
+                        .HasColumnName("TenantId");
 
                     b.HasKey("Id");
 
@@ -338,17 +338,17 @@ namespace PostgeSqlDemo.Migrations
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
-                        .HasColumnName("ConcurrencyStamp")
+                        .HasMaxLength(40)
                         .HasColumnType("character varying(40)")
-                        .HasMaxLength(40);
+                        .HasColumnName("ConcurrencyStamp");
 
                     b.Property<DateTime>("CreationTime")
-                        .HasColumnName("CreationTime")
-                        .HasColumnType("timestamp without time zone");
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("CreationTime");
 
                     b.Property<string>("ExtraProperties")
-                        .HasColumnName("ExtraProperties")
-                        .HasColumnType("text");
+                        .HasColumnType("text")
+                        .HasColumnName("ExtraProperties");
 
                     b.Property<bool>("IsAbandoned")
                         .ValueGeneratedOnAdd()
@@ -357,13 +357,13 @@ namespace PostgeSqlDemo.Migrations
 
                     b.Property<string>("JobArgs")
                         .IsRequired()
-                        .HasColumnType("character varying(1048576)")
-                        .HasMaxLength(1048576);
+                        .HasMaxLength(1048576)
+                        .HasColumnType("character varying(1048576)");
 
                     b.Property<string>("JobName")
                         .IsRequired()
-                        .HasColumnType("character varying(128)")
-                        .HasMaxLength(128);
+                        .HasMaxLength(128)
+                        .HasColumnType("character varying(128)");
 
                     b.Property<DateTime?>("LastTryTime")
                         .HasColumnType("timestamp without time zone");
@@ -396,21 +396,21 @@ namespace PostgeSqlDemo.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("character varying(128)")
-                        .HasMaxLength(128);
+                        .HasMaxLength(128)
+                        .HasColumnType("character varying(128)");
 
                     b.Property<string>("ProviderKey")
-                        .HasColumnType("character varying(64)")
-                        .HasMaxLength(64);
+                        .HasMaxLength(64)
+                        .HasColumnType("character varying(64)");
 
                     b.Property<string>("ProviderName")
-                        .HasColumnType("character varying(64)")
-                        .HasMaxLength(64);
+                        .HasMaxLength(64)
+                        .HasColumnType("character varying(64)");
 
                     b.Property<string>("Value")
                         .IsRequired()
-                        .HasColumnType("character varying(128)")
-                        .HasMaxLength(128);
+                        .HasMaxLength(128)
+                        .HasColumnType("character varying(128)");
 
                     b.HasKey("Id");
 
@@ -427,33 +427,33 @@ namespace PostgeSqlDemo.Migrations
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
-                        .HasColumnName("ConcurrencyStamp")
+                        .HasMaxLength(40)
                         .HasColumnType("character varying(40)")
-                        .HasMaxLength(40);
+                        .HasColumnName("ConcurrencyStamp");
 
                     b.Property<string>("Description")
-                        .HasColumnType("character varying(256)")
-                        .HasMaxLength(256);
+                        .HasMaxLength(256)
+                        .HasColumnType("character varying(256)");
 
                     b.Property<string>("ExtraProperties")
-                        .HasColumnName("ExtraProperties")
-                        .HasColumnType("text");
+                        .HasColumnType("text")
+                        .HasColumnName("ExtraProperties");
 
                     b.Property<bool>("IsStatic")
                         .HasColumnType("boolean");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("character varying(256)")
-                        .HasMaxLength(256);
+                        .HasMaxLength(256)
+                        .HasColumnType("character varying(256)");
 
                     b.Property<string>("Regex")
-                        .HasColumnType("character varying(512)")
-                        .HasMaxLength(512);
+                        .HasMaxLength(512)
+                        .HasColumnType("character varying(512)");
 
                     b.Property<string>("RegexDescription")
-                        .HasColumnType("character varying(128)")
-                        .HasMaxLength(128);
+                        .HasMaxLength(128)
+                        .HasColumnType("character varying(128)");
 
                     b.Property<bool>("Required")
                         .HasColumnType("boolean");
@@ -466,6 +466,32 @@ namespace PostgeSqlDemo.Migrations
                     b.ToTable("AbpClaimTypes");
                 });
 
+            modelBuilder.Entity("Volo.Abp.Identity.IdentityLinkUser", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid?>("SourceTenantId")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("SourceUserId")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid?>("TargetTenantId")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("TargetUserId")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("SourceUserId", "SourceTenantId", "TargetUserId", "TargetTenantId")
+                        .IsUnique();
+
+                    b.ToTable("AbpLinkUsers");
+                });
+
             modelBuilder.Entity("Volo.Abp.Identity.IdentityRole", b =>
                 {
                     b.Property<Guid>("Id")
@@ -474,39 +500,39 @@ namespace PostgeSqlDemo.Migrations
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
-                        .HasColumnName("ConcurrencyStamp")
+                        .HasMaxLength(40)
                         .HasColumnType("character varying(40)")
-                        .HasMaxLength(40);
+                        .HasColumnName("ConcurrencyStamp");
 
                     b.Property<string>("ExtraProperties")
-                        .HasColumnName("ExtraProperties")
-                        .HasColumnType("text");
+                        .HasColumnType("text")
+                        .HasColumnName("ExtraProperties");
 
                     b.Property<bool>("IsDefault")
-                        .HasColumnName("IsDefault")
-                        .HasColumnType("boolean");
+                        .HasColumnType("boolean")
+                        .HasColumnName("IsDefault");
 
                     b.Property<bool>("IsPublic")
-                        .HasColumnName("IsPublic")
-                        .HasColumnType("boolean");
+                        .HasColumnType("boolean")
+                        .HasColumnName("IsPublic");
 
                     b.Property<bool>("IsStatic")
-                        .HasColumnName("IsStatic")
-                        .HasColumnType("boolean");
+                        .HasColumnType("boolean")
+                        .HasColumnName("IsStatic");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("character varying(256)")
-                        .HasMaxLength(256);
+                        .HasMaxLength(256)
+                        .HasColumnType("character varying(256)");
 
                     b.Property<string>("NormalizedName")
                         .IsRequired()
-                        .HasColumnType("character varying(256)")
-                        .HasMaxLength(256);
+                        .HasMaxLength(256)
+                        .HasColumnType("character varying(256)");
 
                     b.Property<Guid?>("TenantId")
-                        .HasColumnName("TenantId")
-                        .HasColumnType("uuid");
+                        .HasColumnType("uuid")
+                        .HasColumnName("TenantId");
 
                     b.HasKey("Id");
 
@@ -522,19 +548,19 @@ namespace PostgeSqlDemo.Migrations
 
                     b.Property<string>("ClaimType")
                         .IsRequired()
-                        .HasColumnType("character varying(256)")
-                        .HasMaxLength(256);
+                        .HasMaxLength(256)
+                        .HasColumnType("character varying(256)");
 
                     b.Property<string>("ClaimValue")
-                        .HasColumnType("character varying(1024)")
-                        .HasMaxLength(1024);
+                        .HasMaxLength(1024)
+                        .HasColumnType("character varying(1024)");
 
                     b.Property<Guid>("RoleId")
                         .HasColumnType("uuid");
 
                     b.Property<Guid?>("TenantId")
-                        .HasColumnName("TenantId")
-                        .HasColumnType("uuid");
+                        .HasColumnType("uuid")
+                        .HasColumnName("TenantId");
 
                     b.HasKey("Id");
 
@@ -550,60 +576,60 @@ namespace PostgeSqlDemo.Migrations
                         .HasColumnType("uuid");
 
                     b.Property<string>("Action")
-                        .HasColumnType("character varying(96)")
-                        .HasMaxLength(96);
+                        .HasMaxLength(96)
+                        .HasColumnType("character varying(96)");
 
                     b.Property<string>("ApplicationName")
-                        .HasColumnType("character varying(96)")
-                        .HasMaxLength(96);
+                        .HasMaxLength(96)
+                        .HasColumnType("character varying(96)");
 
                     b.Property<string>("BrowserInfo")
-                        .HasColumnType("character varying(512)")
-                        .HasMaxLength(512);
+                        .HasMaxLength(512)
+                        .HasColumnType("character varying(512)");
 
                     b.Property<string>("ClientId")
-                        .HasColumnType("character varying(64)")
-                        .HasMaxLength(64);
+                        .HasMaxLength(64)
+                        .HasColumnType("character varying(64)");
 
                     b.Property<string>("ClientIpAddress")
-                        .HasColumnType("character varying(64)")
-                        .HasMaxLength(64);
+                        .HasMaxLength(64)
+                        .HasColumnType("character varying(64)");
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
-                        .HasColumnName("ConcurrencyStamp")
+                        .HasMaxLength(40)
                         .HasColumnType("character varying(40)")
-                        .HasMaxLength(40);
+                        .HasColumnName("ConcurrencyStamp");
 
                     b.Property<string>("CorrelationId")
-                        .HasColumnType("character varying(64)")
-                        .HasMaxLength(64);
+                        .HasMaxLength(64)
+                        .HasColumnType("character varying(64)");
 
                     b.Property<DateTime>("CreationTime")
                         .HasColumnType("timestamp without time zone");
 
                     b.Property<string>("ExtraProperties")
-                        .HasColumnName("ExtraProperties")
-                        .HasColumnType("text");
+                        .HasColumnType("text")
+                        .HasColumnName("ExtraProperties");
 
                     b.Property<string>("Identity")
-                        .HasColumnType("character varying(96)")
-                        .HasMaxLength(96);
+                        .HasMaxLength(96)
+                        .HasColumnType("character varying(96)");
 
                     b.Property<Guid?>("TenantId")
-                        .HasColumnName("TenantId")
-                        .HasColumnType("uuid");
+                        .HasColumnType("uuid")
+                        .HasColumnName("TenantId");
 
                     b.Property<string>("TenantName")
-                        .HasColumnType("character varying(64)")
-                        .HasMaxLength(64);
+                        .HasMaxLength(64)
+                        .HasColumnType("character varying(64)");
 
                     b.Property<Guid?>("UserId")
                         .HasColumnType("uuid");
 
                     b.Property<string>("UserName")
-                        .HasColumnType("character varying(256)")
-                        .HasMaxLength(256);
+                        .HasMaxLength(256)
+                        .HasColumnType("character varying(256)");
 
                     b.HasKey("Id");
 
@@ -626,136 +652,136 @@ namespace PostgeSqlDemo.Migrations
 
                     b.Property<int>("AccessFailedCount")
                         .ValueGeneratedOnAdd()
-                        .HasColumnName("AccessFailedCount")
                         .HasColumnType("integer")
-                        .HasDefaultValue(0);
+                        .HasDefaultValue(0)
+                        .HasColumnName("AccessFailedCount");
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
-                        .HasColumnName("ConcurrencyStamp")
+                        .HasMaxLength(40)
                         .HasColumnType("character varying(40)")
-                        .HasMaxLength(40);
+                        .HasColumnName("ConcurrencyStamp");
 
                     b.Property<DateTime>("CreationTime")
-                        .HasColumnName("CreationTime")
-                        .HasColumnType("timestamp without time zone");
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("CreationTime");
 
                     b.Property<Guid?>("CreatorId")
-                        .HasColumnName("CreatorId")
-                        .HasColumnType("uuid");
+                        .HasColumnType("uuid")
+                        .HasColumnName("CreatorId");
 
                     b.Property<Guid?>("DeleterId")
-                        .HasColumnName("DeleterId")
-                        .HasColumnType("uuid");
+                        .HasColumnType("uuid")
+                        .HasColumnName("DeleterId");
 
                     b.Property<DateTime?>("DeletionTime")
-                        .HasColumnName("DeletionTime")
-                        .HasColumnType("timestamp without time zone");
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("DeletionTime");
 
                     b.Property<string>("Email")
                         .IsRequired()
-                        .HasColumnName("Email")
+                        .HasMaxLength(256)
                         .HasColumnType("character varying(256)")
-                        .HasMaxLength(256);
+                        .HasColumnName("Email");
 
                     b.Property<bool>("EmailConfirmed")
                         .ValueGeneratedOnAdd()
-                        .HasColumnName("EmailConfirmed")
                         .HasColumnType("boolean")
-                        .HasDefaultValue(false);
+                        .HasDefaultValue(false)
+                        .HasColumnName("EmailConfirmed");
 
                     b.Property<string>("ExtraProperties")
-                        .HasColumnName("ExtraProperties")
-                        .HasColumnType("text");
+                        .HasColumnType("text")
+                        .HasColumnName("ExtraProperties");
 
                     b.Property<bool>("IsDeleted")
                         .ValueGeneratedOnAdd()
-                        .HasColumnName("IsDeleted")
                         .HasColumnType("boolean")
-                        .HasDefaultValue(false);
+                        .HasDefaultValue(false)
+                        .HasColumnName("IsDeleted");
 
                     b.Property<bool>("IsExternal")
                         .ValueGeneratedOnAdd()
-                        .HasColumnName("IsExternal")
                         .HasColumnType("boolean")
-                        .HasDefaultValue(false);
+                        .HasDefaultValue(false)
+                        .HasColumnName("IsExternal");
 
                     b.Property<DateTime?>("LastModificationTime")
-                        .HasColumnName("LastModificationTime")
-                        .HasColumnType("timestamp without time zone");
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("LastModificationTime");
 
                     b.Property<Guid?>("LastModifierId")
-                        .HasColumnName("LastModifierId")
-                        .HasColumnType("uuid");
+                        .HasColumnType("uuid")
+                        .HasColumnName("LastModifierId");
 
                     b.Property<bool>("LockoutEnabled")
                         .ValueGeneratedOnAdd()
-                        .HasColumnName("LockoutEnabled")
                         .HasColumnType("boolean")
-                        .HasDefaultValue(false);
+                        .HasDefaultValue(false)
+                        .HasColumnName("LockoutEnabled");
 
                     b.Property<DateTimeOffset?>("LockoutEnd")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("Name")
-                        .HasColumnName("Name")
+                        .HasMaxLength(64)
                         .HasColumnType("character varying(64)")
-                        .HasMaxLength(64);
+                        .HasColumnName("Name");
 
                     b.Property<string>("NormalizedEmail")
                         .IsRequired()
-                        .HasColumnName("NormalizedEmail")
+                        .HasMaxLength(256)
                         .HasColumnType("character varying(256)")
-                        .HasMaxLength(256);
+                        .HasColumnName("NormalizedEmail");
 
                     b.Property<string>("NormalizedUserName")
                         .IsRequired()
-                        .HasColumnName("NormalizedUserName")
+                        .HasMaxLength(256)
                         .HasColumnType("character varying(256)")
-                        .HasMaxLength(256);
+                        .HasColumnName("NormalizedUserName");
 
                     b.Property<string>("PasswordHash")
-                        .HasColumnName("PasswordHash")
+                        .HasMaxLength(256)
                         .HasColumnType("character varying(256)")
-                        .HasMaxLength(256);
+                        .HasColumnName("PasswordHash");
 
                     b.Property<string>("PhoneNumber")
-                        .HasColumnName("PhoneNumber")
+                        .HasMaxLength(16)
                         .HasColumnType("character varying(16)")
-                        .HasMaxLength(16);
+                        .HasColumnName("PhoneNumber");
 
                     b.Property<bool>("PhoneNumberConfirmed")
                         .ValueGeneratedOnAdd()
-                        .HasColumnName("PhoneNumberConfirmed")
                         .HasColumnType("boolean")
-                        .HasDefaultValue(false);
+                        .HasDefaultValue(false)
+                        .HasColumnName("PhoneNumberConfirmed");
 
                     b.Property<string>("SecurityStamp")
                         .IsRequired()
-                        .HasColumnName("SecurityStamp")
+                        .HasMaxLength(256)
                         .HasColumnType("character varying(256)")
-                        .HasMaxLength(256);
+                        .HasColumnName("SecurityStamp");
 
                     b.Property<string>("Surname")
-                        .HasColumnName("Surname")
+                        .HasMaxLength(64)
                         .HasColumnType("character varying(64)")
-                        .HasMaxLength(64);
+                        .HasColumnName("Surname");
 
                     b.Property<Guid?>("TenantId")
-                        .HasColumnName("TenantId")
-                        .HasColumnType("uuid");
+                        .HasColumnType("uuid")
+                        .HasColumnName("TenantId");
 
                     b.Property<bool>("TwoFactorEnabled")
                         .ValueGeneratedOnAdd()
-                        .HasColumnName("TwoFactorEnabled")
                         .HasColumnType("boolean")
-                        .HasDefaultValue(false);
+                        .HasDefaultValue(false)
+                        .HasColumnName("TwoFactorEnabled");
 
                     b.Property<string>("UserName")
                         .IsRequired()
-                        .HasColumnName("UserName")
+                        .HasMaxLength(256)
                         .HasColumnType("character varying(256)")
-                        .HasMaxLength(256);
+                        .HasColumnName("UserName");
 
                     b.HasKey("Id");
 
@@ -777,16 +803,16 @@ namespace PostgeSqlDemo.Migrations
 
                     b.Property<string>("ClaimType")
                         .IsRequired()
-                        .HasColumnType("character varying(256)")
-                        .HasMaxLength(256);
+                        .HasMaxLength(256)
+                        .HasColumnType("character varying(256)");
 
                     b.Property<string>("ClaimValue")
-                        .HasColumnType("character varying(1024)")
-                        .HasMaxLength(1024);
+                        .HasMaxLength(1024)
+                        .HasColumnType("character varying(1024)");
 
                     b.Property<Guid?>("TenantId")
-                        .HasColumnName("TenantId")
-                        .HasColumnType("uuid");
+                        .HasColumnType("uuid")
+                        .HasColumnName("TenantId");
 
                     b.Property<Guid>("UserId")
                         .HasColumnType("uuid");
@@ -804,21 +830,21 @@ namespace PostgeSqlDemo.Migrations
                         .HasColumnType("uuid");
 
                     b.Property<string>("LoginProvider")
-                        .HasColumnType("character varying(64)")
-                        .HasMaxLength(64);
+                        .HasMaxLength(64)
+                        .HasColumnType("character varying(64)");
 
                     b.Property<string>("ProviderDisplayName")
-                        .HasColumnType("character varying(128)")
-                        .HasMaxLength(128);
+                        .HasMaxLength(128)
+                        .HasColumnType("character varying(128)");
 
                     b.Property<string>("ProviderKey")
                         .IsRequired()
-                        .HasColumnType("character varying(196)")
-                        .HasMaxLength(196);
+                        .HasMaxLength(196)
+                        .HasColumnType("character varying(196)");
 
                     b.Property<Guid?>("TenantId")
-                        .HasColumnName("TenantId")
-                        .HasColumnType("uuid");
+                        .HasColumnType("uuid")
+                        .HasColumnName("TenantId");
 
                     b.HasKey("UserId", "LoginProvider");
 
@@ -836,16 +862,16 @@ namespace PostgeSqlDemo.Migrations
                         .HasColumnType("uuid");
 
                     b.Property<DateTime>("CreationTime")
-                        .HasColumnName("CreationTime")
-                        .HasColumnType("timestamp without time zone");
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("CreationTime");
 
                     b.Property<Guid?>("CreatorId")
-                        .HasColumnName("CreatorId")
-                        .HasColumnType("uuid");
+                        .HasColumnType("uuid")
+                        .HasColumnName("CreatorId");
 
                     b.Property<Guid?>("TenantId")
-                        .HasColumnName("TenantId")
-                        .HasColumnType("uuid");
+                        .HasColumnType("uuid")
+                        .HasColumnName("TenantId");
 
                     b.HasKey("OrganizationUnitId", "UserId");
 
@@ -863,8 +889,8 @@ namespace PostgeSqlDemo.Migrations
                         .HasColumnType("uuid");
 
                     b.Property<Guid?>("TenantId")
-                        .HasColumnName("TenantId")
-                        .HasColumnType("uuid");
+                        .HasColumnType("uuid")
+                        .HasColumnName("TenantId");
 
                     b.HasKey("UserId", "RoleId");
 
@@ -879,16 +905,16 @@ namespace PostgeSqlDemo.Migrations
                         .HasColumnType("uuid");
 
                     b.Property<string>("LoginProvider")
-                        .HasColumnType("character varying(64)")
-                        .HasMaxLength(64);
+                        .HasMaxLength(64)
+                        .HasColumnType("character varying(64)");
 
                     b.Property<string>("Name")
-                        .HasColumnType("character varying(128)")
-                        .HasMaxLength(128);
+                        .HasMaxLength(128)
+                        .HasColumnType("character varying(128)");
 
                     b.Property<Guid?>("TenantId")
-                        .HasColumnName("TenantId")
-                        .HasColumnType("uuid");
+                        .HasColumnType("uuid")
+                        .HasColumnName("TenantId");
 
                     b.Property<string>("Value")
                         .HasColumnType("text");
@@ -906,62 +932,62 @@ namespace PostgeSqlDemo.Migrations
 
                     b.Property<string>("Code")
                         .IsRequired()
-                        .HasColumnName("Code")
+                        .HasMaxLength(95)
                         .HasColumnType("character varying(95)")
-                        .HasMaxLength(95);
+                        .HasColumnName("Code");
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
-                        .HasColumnName("ConcurrencyStamp")
+                        .HasMaxLength(40)
                         .HasColumnType("character varying(40)")
-                        .HasMaxLength(40);
+                        .HasColumnName("ConcurrencyStamp");
 
                     b.Property<DateTime>("CreationTime")
-                        .HasColumnName("CreationTime")
-                        .HasColumnType("timestamp without time zone");
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("CreationTime");
 
                     b.Property<Guid?>("CreatorId")
-                        .HasColumnName("CreatorId")
-                        .HasColumnType("uuid");
+                        .HasColumnType("uuid")
+                        .HasColumnName("CreatorId");
 
                     b.Property<Guid?>("DeleterId")
-                        .HasColumnName("DeleterId")
-                        .HasColumnType("uuid");
+                        .HasColumnType("uuid")
+                        .HasColumnName("DeleterId");
 
                     b.Property<DateTime?>("DeletionTime")
-                        .HasColumnName("DeletionTime")
-                        .HasColumnType("timestamp without time zone");
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("DeletionTime");
 
                     b.Property<string>("DisplayName")
                         .IsRequired()
-                        .HasColumnName("DisplayName")
+                        .HasMaxLength(128)
                         .HasColumnType("character varying(128)")
-                        .HasMaxLength(128);
+                        .HasColumnName("DisplayName");
 
                     b.Property<string>("ExtraProperties")
-                        .HasColumnName("ExtraProperties")
-                        .HasColumnType("text");
+                        .HasColumnType("text")
+                        .HasColumnName("ExtraProperties");
 
                     b.Property<bool>("IsDeleted")
                         .ValueGeneratedOnAdd()
-                        .HasColumnName("IsDeleted")
                         .HasColumnType("boolean")
-                        .HasDefaultValue(false);
+                        .HasDefaultValue(false)
+                        .HasColumnName("IsDeleted");
 
                     b.Property<DateTime?>("LastModificationTime")
-                        .HasColumnName("LastModificationTime")
-                        .HasColumnType("timestamp without time zone");
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("LastModificationTime");
 
                     b.Property<Guid?>("LastModifierId")
-                        .HasColumnName("LastModifierId")
-                        .HasColumnType("uuid");
+                        .HasColumnType("uuid")
+                        .HasColumnName("LastModifierId");
 
                     b.Property<Guid?>("ParentId")
                         .HasColumnType("uuid");
 
                     b.Property<Guid?>("TenantId")
-                        .HasColumnName("TenantId")
-                        .HasColumnType("uuid");
+                        .HasColumnType("uuid")
+                        .HasColumnName("TenantId");
 
                     b.HasKey("Id");
 
@@ -981,16 +1007,16 @@ namespace PostgeSqlDemo.Migrations
                         .HasColumnType("uuid");
 
                     b.Property<DateTime>("CreationTime")
-                        .HasColumnName("CreationTime")
-                        .HasColumnType("timestamp without time zone");
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("CreationTime");
 
                     b.Property<Guid?>("CreatorId")
-                        .HasColumnName("CreatorId")
-                        .HasColumnType("uuid");
+                        .HasColumnType("uuid")
+                        .HasColumnName("CreatorId");
 
                     b.Property<Guid?>("TenantId")
-                        .HasColumnName("TenantId")
-                        .HasColumnType("uuid");
+                        .HasColumnType("uuid")
+                        .HasColumnName("TenantId");
 
                     b.HasKey("OrganizationUnitId", "RoleId");
 
@@ -1005,64 +1031,68 @@ namespace PostgeSqlDemo.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
+                    b.Property<string>("AllowedAccessTokenSigningAlgorithms")
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)");
+
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
-                        .HasColumnName("ConcurrencyStamp")
+                        .HasMaxLength(40)
                         .HasColumnType("character varying(40)")
-                        .HasMaxLength(40);
+                        .HasColumnName("ConcurrencyStamp");
 
                     b.Property<DateTime>("CreationTime")
-                        .HasColumnName("CreationTime")
-                        .HasColumnType("timestamp without time zone");
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("CreationTime");
 
                     b.Property<Guid?>("CreatorId")
-                        .HasColumnName("CreatorId")
-                        .HasColumnType("uuid");
+                        .HasColumnType("uuid")
+                        .HasColumnName("CreatorId");
 
                     b.Property<Guid?>("DeleterId")
-                        .HasColumnName("DeleterId")
-                        .HasColumnType("uuid");
+                        .HasColumnType("uuid")
+                        .HasColumnName("DeleterId");
 
                     b.Property<DateTime?>("DeletionTime")
-                        .HasColumnName("DeletionTime")
-                        .HasColumnType("timestamp without time zone");
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("DeletionTime");
 
                     b.Property<string>("Description")
-                        .HasColumnType("character varying(1000)")
-                        .HasMaxLength(1000);
+                        .HasMaxLength(1000)
+                        .HasColumnType("character varying(1000)");
 
                     b.Property<string>("DisplayName")
-                        .HasColumnType("character varying(200)")
-                        .HasMaxLength(200);
+                        .HasMaxLength(200)
+                        .HasColumnType("character varying(200)");
 
                     b.Property<bool>("Enabled")
                         .HasColumnType("boolean");
 
                     b.Property<string>("ExtraProperties")
-                        .HasColumnName("ExtraProperties")
-                        .HasColumnType("text");
+                        .HasColumnType("text")
+                        .HasColumnName("ExtraProperties");
 
                     b.Property<bool>("IsDeleted")
                         .ValueGeneratedOnAdd()
-                        .HasColumnName("IsDeleted")
                         .HasColumnType("boolean")
-                        .HasDefaultValue(false);
+                        .HasDefaultValue(false)
+                        .HasColumnName("IsDeleted");
 
                     b.Property<DateTime?>("LastModificationTime")
-                        .HasColumnName("LastModificationTime")
-                        .HasColumnType("timestamp without time zone");
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("LastModificationTime");
 
                     b.Property<Guid?>("LastModifierId")
-                        .HasColumnName("LastModifierId")
-                        .HasColumnType("uuid");
+                        .HasColumnType("uuid")
+                        .HasColumnName("LastModifierId");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("character varying(200)")
-                        .HasMaxLength(200);
+                        .HasMaxLength(200)
+                        .HasColumnType("character varying(200)");
 
-                    b.Property<string>("Properties")
-                        .HasColumnType("text");
+                    b.Property<bool>("ShowInDiscoveryDocument")
+                        .HasColumnType("boolean");
 
                     b.HasKey("Id");
 
@@ -1075,33 +1105,135 @@ namespace PostgeSqlDemo.Migrations
                         .HasColumnType("uuid");
 
                     b.Property<string>("Type")
-                        .HasColumnType("character varying(200)")
-                        .HasMaxLength(200);
+                        .HasMaxLength(200)
+                        .HasColumnType("character varying(200)");
 
                     b.HasKey("ApiResourceId", "Type");
 
-                    b.ToTable("IdentityServerApiClaims");
+                    b.ToTable("IdentityServerApiResourceClaims");
                 });
 
-            modelBuilder.Entity("Volo.Abp.IdentityServer.ApiResources.ApiScope", b =>
+            modelBuilder.Entity("Volo.Abp.IdentityServer.ApiResources.ApiResourceProperty", b =>
                 {
                     b.Property<Guid>("ApiResourceId")
                         .HasColumnType("uuid");
 
-                    b.Property<string>("Name")
-                        .HasColumnType("character varying(200)")
-                        .HasMaxLength(200);
+                    b.Property<string>("Key")
+                        .HasMaxLength(250)
+                        .HasColumnType("character varying(250)");
+
+                    b.Property<string>("Value")
+                        .HasMaxLength(2000)
+                        .HasColumnType("character varying(2000)");
+
+                    b.HasKey("ApiResourceId", "Key", "Value");
+
+                    b.ToTable("IdentityServerApiResourceProperties");
+                });
+
+            modelBuilder.Entity("Volo.Abp.IdentityServer.ApiResources.ApiResourceScope", b =>
+                {
+                    b.Property<Guid>("ApiResourceId")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Scope")
+                        .HasMaxLength(200)
+                        .HasColumnType("character varying(200)");
+
+                    b.HasKey("ApiResourceId", "Scope");
+
+                    b.ToTable("IdentityServerApiResourceScopes");
+                });
+
+            modelBuilder.Entity("Volo.Abp.IdentityServer.ApiResources.ApiResourceSecret", b =>
+                {
+                    b.Property<Guid>("ApiResourceId")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Type")
+                        .HasMaxLength(250)
+                        .HasColumnType("character varying(250)");
+
+                    b.Property<string>("Value")
+                        .HasMaxLength(4000)
+                        .HasColumnType("character varying(4000)");
 
                     b.Property<string>("Description")
-                        .HasColumnType("character varying(1000)")
-                        .HasMaxLength(1000);
+                        .HasMaxLength(1000)
+                        .HasColumnType("character varying(1000)");
+
+                    b.Property<DateTime?>("Expiration")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.HasKey("ApiResourceId", "Type", "Value");
+
+                    b.ToTable("IdentityServerApiResourceSecrets");
+                });
+
+            modelBuilder.Entity("Volo.Abp.IdentityServer.ApiScopes.ApiScope", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .HasMaxLength(40)
+                        .HasColumnType("character varying(40)")
+                        .HasColumnName("ConcurrencyStamp");
+
+                    b.Property<DateTime>("CreationTime")
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("CreationTime");
+
+                    b.Property<Guid?>("CreatorId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("CreatorId");
+
+                    b.Property<Guid?>("DeleterId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("DeleterId");
+
+                    b.Property<DateTime?>("DeletionTime")
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("DeletionTime");
+
+                    b.Property<string>("Description")
+                        .HasMaxLength(1000)
+                        .HasColumnType("character varying(1000)");
 
                     b.Property<string>("DisplayName")
-                        .HasColumnType("character varying(200)")
-                        .HasMaxLength(200);
+                        .HasMaxLength(200)
+                        .HasColumnType("character varying(200)");
 
                     b.Property<bool>("Emphasize")
                         .HasColumnType("boolean");
+
+                    b.Property<bool>("Enabled")
+                        .HasColumnType("boolean");
+
+                    b.Property<string>("ExtraProperties")
+                        .HasColumnType("text")
+                        .HasColumnName("ExtraProperties");
+
+                    b.Property<bool>("IsDeleted")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("boolean")
+                        .HasDefaultValue(false)
+                        .HasColumnName("IsDeleted");
+
+                    b.Property<DateTime?>("LastModificationTime")
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("LastModificationTime");
+
+                    b.Property<Guid?>("LastModifierId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("LastModifierId");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("character varying(200)");
 
                     b.Property<bool>("Required")
                         .HasColumnType("boolean");
@@ -1109,52 +1241,41 @@ namespace PostgeSqlDemo.Migrations
                     b.Property<bool>("ShowInDiscoveryDocument")
                         .HasColumnType("boolean");
 
-                    b.HasKey("ApiResourceId", "Name");
+                    b.HasKey("Id");
 
                     b.ToTable("IdentityServerApiScopes");
                 });
 
-            modelBuilder.Entity("Volo.Abp.IdentityServer.ApiResources.ApiScopeClaim", b =>
+            modelBuilder.Entity("Volo.Abp.IdentityServer.ApiScopes.ApiScopeClaim", b =>
                 {
-                    b.Property<Guid>("ApiResourceId")
+                    b.Property<Guid>("ApiScopeId")
                         .HasColumnType("uuid");
 
-                    b.Property<string>("Name")
-                        .HasColumnType("character varying(200)")
-                        .HasMaxLength(200);
-
                     b.Property<string>("Type")
-                        .HasColumnType("character varying(200)")
-                        .HasMaxLength(200);
+                        .HasMaxLength(200)
+                        .HasColumnType("character varying(200)");
 
-                    b.HasKey("ApiResourceId", "Name", "Type");
+                    b.HasKey("ApiScopeId", "Type");
 
                     b.ToTable("IdentityServerApiScopeClaims");
                 });
 
-            modelBuilder.Entity("Volo.Abp.IdentityServer.ApiResources.ApiSecret", b =>
+            modelBuilder.Entity("Volo.Abp.IdentityServer.ApiScopes.ApiScopeProperty", b =>
                 {
-                    b.Property<Guid>("ApiResourceId")
+                    b.Property<Guid>("ApiScopeId")
                         .HasColumnType("uuid");
 
-                    b.Property<string>("Type")
-                        .HasColumnType("character varying(250)")
-                        .HasMaxLength(250);
+                    b.Property<string>("Key")
+                        .HasMaxLength(250)
+                        .HasColumnType("character varying(250)");
 
                     b.Property<string>("Value")
-                        .HasColumnType("character varying(4000)")
-                        .HasMaxLength(4000);
+                        .HasMaxLength(2000)
+                        .HasColumnType("character varying(2000)");
 
-                    b.Property<string>("Description")
-                        .HasColumnType("character varying(2000)")
-                        .HasMaxLength(2000);
+                    b.HasKey("ApiScopeId", "Key", "Value");
 
-                    b.Property<DateTime?>("Expiration")
-                        .HasColumnType("timestamp without time zone");
-
-                    b.HasKey("ApiResourceId", "Type", "Value");
-
-                    b.ToTable("IdentityServerApiSecrets");
+                    b.ToTable("IdentityServerApiScopeProperties");
                 });
 
             modelBuilder.Entity("Volo.Abp.IdentityServer.Clients.Client", b =>
@@ -1184,6 +1305,10 @@ namespace PostgeSqlDemo.Migrations
                     b.Property<bool>("AllowRememberConsent")
                         .HasColumnType("boolean");
 
+                    b.Property<string>("AllowedIdentityTokenSigningAlgorithms")
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)");
+
                     b.Property<bool>("AlwaysIncludeUserClaimsInIdToken")
                         .HasColumnType("boolean");
 
@@ -1197,54 +1322,54 @@ namespace PostgeSqlDemo.Migrations
                         .HasColumnType("boolean");
 
                     b.Property<string>("BackChannelLogoutUri")
-                        .HasColumnType("character varying(2000)")
-                        .HasMaxLength(2000);
+                        .HasMaxLength(2000)
+                        .HasColumnType("character varying(2000)");
 
                     b.Property<string>("ClientClaimsPrefix")
-                        .HasColumnType("character varying(200)")
-                        .HasMaxLength(200);
+                        .HasMaxLength(200)
+                        .HasColumnType("character varying(200)");
 
                     b.Property<string>("ClientId")
                         .IsRequired()
-                        .HasColumnType("character varying(200)")
-                        .HasMaxLength(200);
+                        .HasMaxLength(200)
+                        .HasColumnType("character varying(200)");
 
                     b.Property<string>("ClientName")
-                        .HasColumnType("character varying(200)")
-                        .HasMaxLength(200);
+                        .HasMaxLength(200)
+                        .HasColumnType("character varying(200)");
 
                     b.Property<string>("ClientUri")
-                        .HasColumnType("character varying(2000)")
-                        .HasMaxLength(2000);
+                        .HasMaxLength(2000)
+                        .HasColumnType("character varying(2000)");
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
-                        .HasColumnName("ConcurrencyStamp")
+                        .HasMaxLength(40)
                         .HasColumnType("character varying(40)")
-                        .HasMaxLength(40);
+                        .HasColumnName("ConcurrencyStamp");
 
                     b.Property<int?>("ConsentLifetime")
                         .HasColumnType("integer");
 
                     b.Property<DateTime>("CreationTime")
-                        .HasColumnName("CreationTime")
-                        .HasColumnType("timestamp without time zone");
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("CreationTime");
 
                     b.Property<Guid?>("CreatorId")
-                        .HasColumnName("CreatorId")
-                        .HasColumnType("uuid");
+                        .HasColumnType("uuid")
+                        .HasColumnName("CreatorId");
 
                     b.Property<Guid?>("DeleterId")
-                        .HasColumnName("DeleterId")
-                        .HasColumnType("uuid");
+                        .HasColumnType("uuid")
+                        .HasColumnName("DeleterId");
 
                     b.Property<DateTime?>("DeletionTime")
-                        .HasColumnName("DeletionTime")
-                        .HasColumnType("timestamp without time zone");
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("DeletionTime");
 
                     b.Property<string>("Description")
-                        .HasColumnType("character varying(1000)")
-                        .HasMaxLength(1000);
+                        .HasMaxLength(1000)
+                        .HasColumnType("character varying(1000)");
 
                     b.Property<int>("DeviceCodeLifetime")
                         .HasColumnType("integer");
@@ -1256,15 +1381,15 @@ namespace PostgeSqlDemo.Migrations
                         .HasColumnType("boolean");
 
                     b.Property<string>("ExtraProperties")
-                        .HasColumnName("ExtraProperties")
-                        .HasColumnType("text");
+                        .HasColumnType("text")
+                        .HasColumnName("ExtraProperties");
 
                     b.Property<bool>("FrontChannelLogoutSessionRequired")
                         .HasColumnType("boolean");
 
                     b.Property<string>("FrontChannelLogoutUri")
-                        .HasColumnType("character varying(2000)")
-                        .HasMaxLength(2000);
+                        .HasMaxLength(2000)
+                        .HasColumnType("character varying(2000)");
 
                     b.Property<int>("IdentityTokenLifetime")
                         .HasColumnType("integer");
@@ -1274,30 +1399,30 @@ namespace PostgeSqlDemo.Migrations
 
                     b.Property<bool>("IsDeleted")
                         .ValueGeneratedOnAdd()
-                        .HasColumnName("IsDeleted")
                         .HasColumnType("boolean")
-                        .HasDefaultValue(false);
+                        .HasDefaultValue(false)
+                        .HasColumnName("IsDeleted");
 
                     b.Property<DateTime?>("LastModificationTime")
-                        .HasColumnName("LastModificationTime")
-                        .HasColumnType("timestamp without time zone");
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("LastModificationTime");
 
                     b.Property<Guid?>("LastModifierId")
-                        .HasColumnName("LastModifierId")
-                        .HasColumnType("uuid");
+                        .HasColumnType("uuid")
+                        .HasColumnName("LastModifierId");
 
                     b.Property<string>("LogoUri")
-                        .HasColumnType("character varying(2000)")
-                        .HasMaxLength(2000);
+                        .HasMaxLength(2000)
+                        .HasColumnType("character varying(2000)");
 
                     b.Property<string>("PairWiseSubjectSalt")
-                        .HasColumnType("character varying(200)")
-                        .HasMaxLength(200);
+                        .HasMaxLength(200)
+                        .HasColumnType("character varying(200)");
 
                     b.Property<string>("ProtocolType")
                         .IsRequired()
-                        .HasColumnType("character varying(200)")
-                        .HasMaxLength(200);
+                        .HasMaxLength(200)
+                        .HasColumnType("character varying(200)");
 
                     b.Property<int>("RefreshTokenExpiration")
                         .HasColumnType("integer");
@@ -1314,6 +1439,9 @@ namespace PostgeSqlDemo.Migrations
                     b.Property<bool>("RequirePkce")
                         .HasColumnType("boolean");
 
+                    b.Property<bool>("RequireRequestObject")
+                        .HasColumnType("boolean");
+
                     b.Property<int>("SlidingRefreshTokenLifetime")
                         .HasColumnType("integer");
 
@@ -1321,8 +1449,8 @@ namespace PostgeSqlDemo.Migrations
                         .HasColumnType("boolean");
 
                     b.Property<string>("UserCodeType")
-                        .HasColumnType("character varying(100)")
-                        .HasMaxLength(100);
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)");
 
                     b.Property<int?>("UserSsoLifetime")
                         .HasColumnType("integer");
@@ -1340,12 +1468,12 @@ namespace PostgeSqlDemo.Migrations
                         .HasColumnType("uuid");
 
                     b.Property<string>("Type")
-                        .HasColumnType("character varying(250)")
-                        .HasMaxLength(250);
+                        .HasMaxLength(250)
+                        .HasColumnType("character varying(250)");
 
                     b.Property<string>("Value")
-                        .HasColumnType("character varying(250)")
-                        .HasMaxLength(250);
+                        .HasMaxLength(250)
+                        .HasColumnType("character varying(250)");
 
                     b.HasKey("ClientId", "Type", "Value");
 
@@ -1358,8 +1486,8 @@ namespace PostgeSqlDemo.Migrations
                         .HasColumnType("uuid");
 
                     b.Property<string>("Origin")
-                        .HasColumnType("character varying(150)")
-                        .HasMaxLength(150);
+                        .HasMaxLength(150)
+                        .HasColumnType("character varying(150)");
 
                     b.HasKey("ClientId", "Origin");
 
@@ -1372,8 +1500,8 @@ namespace PostgeSqlDemo.Migrations
                         .HasColumnType("uuid");
 
                     b.Property<string>("GrantType")
-                        .HasColumnType("character varying(250)")
-                        .HasMaxLength(250);
+                        .HasMaxLength(250)
+                        .HasColumnType("character varying(250)");
 
                     b.HasKey("ClientId", "GrantType");
 
@@ -1386,8 +1514,8 @@ namespace PostgeSqlDemo.Migrations
                         .HasColumnType("uuid");
 
                     b.Property<string>("Provider")
-                        .HasColumnType("character varying(200)")
-                        .HasMaxLength(200);
+                        .HasMaxLength(200)
+                        .HasColumnType("character varying(200)");
 
                     b.HasKey("ClientId", "Provider");
 
@@ -1400,8 +1528,8 @@ namespace PostgeSqlDemo.Migrations
                         .HasColumnType("uuid");
 
                     b.Property<string>("PostLogoutRedirectUri")
-                        .HasColumnType("character varying(2000)")
-                        .HasMaxLength(2000);
+                        .HasMaxLength(2000)
+                        .HasColumnType("character varying(2000)");
 
                     b.HasKey("ClientId", "PostLogoutRedirectUri");
 
@@ -1414,15 +1542,14 @@ namespace PostgeSqlDemo.Migrations
                         .HasColumnType("uuid");
 
                     b.Property<string>("Key")
-                        .HasColumnType("character varying(250)")
-                        .HasMaxLength(250);
+                        .HasMaxLength(250)
+                        .HasColumnType("character varying(250)");
 
                     b.Property<string>("Value")
-                        .IsRequired()
-                        .HasColumnType("character varying(2000)")
-                        .HasMaxLength(2000);
+                        .HasMaxLength(2000)
+                        .HasColumnType("character varying(2000)");
 
-                    b.HasKey("ClientId", "Key");
+                    b.HasKey("ClientId", "Key", "Value");
 
                     b.ToTable("IdentityServerClientProperties");
                 });
@@ -1433,8 +1560,8 @@ namespace PostgeSqlDemo.Migrations
                         .HasColumnType("uuid");
 
                     b.Property<string>("RedirectUri")
-                        .HasColumnType("character varying(2000)")
-                        .HasMaxLength(2000);
+                        .HasMaxLength(2000)
+                        .HasColumnType("character varying(2000)");
 
                     b.HasKey("ClientId", "RedirectUri");
 
@@ -1447,8 +1574,8 @@ namespace PostgeSqlDemo.Migrations
                         .HasColumnType("uuid");
 
                     b.Property<string>("Scope")
-                        .HasColumnType("character varying(200)")
-                        .HasMaxLength(200);
+                        .HasMaxLength(200)
+                        .HasColumnType("character varying(200)");
 
                     b.HasKey("ClientId", "Scope");
 
@@ -1461,16 +1588,16 @@ namespace PostgeSqlDemo.Migrations
                         .HasColumnType("uuid");
 
                     b.Property<string>("Type")
-                        .HasColumnType("character varying(250)")
-                        .HasMaxLength(250);
+                        .HasMaxLength(250)
+                        .HasColumnType("character varying(250)");
 
                     b.Property<string>("Value")
-                        .HasColumnType("character varying(4000)")
-                        .HasMaxLength(4000);
+                        .HasMaxLength(4000)
+                        .HasColumnType("character varying(4000)");
 
                     b.Property<string>("Description")
-                        .HasColumnType("character varying(2000)")
-                        .HasMaxLength(2000);
+                        .HasMaxLength(2000)
+                        .HasColumnType("character varying(2000)");
 
                     b.Property<DateTime?>("Expiration")
                         .HasColumnType("timestamp without time zone");
@@ -1488,49 +1615,57 @@ namespace PostgeSqlDemo.Migrations
 
                     b.Property<string>("ClientId")
                         .IsRequired()
-                        .HasColumnType("character varying(200)")
-                        .HasMaxLength(200);
+                        .HasMaxLength(200)
+                        .HasColumnType("character varying(200)");
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
-                        .HasColumnName("ConcurrencyStamp")
+                        .HasMaxLength(40)
                         .HasColumnType("character varying(40)")
-                        .HasMaxLength(40);
+                        .HasColumnName("ConcurrencyStamp");
 
                     b.Property<DateTime>("CreationTime")
-                        .HasColumnName("CreationTime")
-                        .HasColumnType("timestamp without time zone");
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("CreationTime");
 
                     b.Property<Guid?>("CreatorId")
-                        .HasColumnName("CreatorId")
-                        .HasColumnType("uuid");
+                        .HasColumnType("uuid")
+                        .HasColumnName("CreatorId");
 
                     b.Property<string>("Data")
                         .IsRequired()
-                        .HasColumnType("character varying(50000)")
-                        .HasMaxLength(50000);
+                        .HasMaxLength(50000)
+                        .HasColumnType("character varying(50000)");
+
+                    b.Property<string>("Description")
+                        .HasMaxLength(200)
+                        .HasColumnType("character varying(200)");
 
                     b.Property<string>("DeviceCode")
                         .IsRequired()
-                        .HasColumnType("character varying(200)")
-                        .HasMaxLength(200);
+                        .HasMaxLength(200)
+                        .HasColumnType("character varying(200)");
 
                     b.Property<DateTime?>("Expiration")
                         .IsRequired()
                         .HasColumnType("timestamp without time zone");
 
                     b.Property<string>("ExtraProperties")
-                        .HasColumnName("ExtraProperties")
-                        .HasColumnType("text");
+                        .HasColumnType("text")
+                        .HasColumnName("ExtraProperties");
+
+                    b.Property<string>("SessionId")
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)");
 
                     b.Property<string>("SubjectId")
-                        .HasColumnType("character varying(200)")
-                        .HasMaxLength(200);
+                        .HasMaxLength(200)
+                        .HasColumnType("character varying(200)");
 
                     b.Property<string>("UserCode")
                         .IsRequired()
-                        .HasColumnType("character varying(200)")
-                        .HasMaxLength(200);
+                        .HasMaxLength(200)
+                        .HasColumnType("character varying(200)");
 
                     b.HasKey("Id");
 
@@ -1539,8 +1674,7 @@ namespace PostgeSqlDemo.Migrations
 
                     b.HasIndex("Expiration");
 
-                    b.HasIndex("UserCode")
-                        .IsUnique();
+                    b.HasIndex("UserCode");
 
                     b.ToTable("IdentityServerDeviceFlowCodes");
                 });
@@ -1548,46 +1682,57 @@ namespace PostgeSqlDemo.Migrations
             modelBuilder.Entity("Volo.Abp.IdentityServer.Grants.PersistedGrant", b =>
                 {
                     b.Property<string>("Key")
-                        .HasColumnType("character varying(200)")
-                        .HasMaxLength(200);
+                        .HasMaxLength(200)
+                        .HasColumnType("character varying(200)");
 
                     b.Property<string>("ClientId")
                         .IsRequired()
-                        .HasColumnType("character varying(200)")
-                        .HasMaxLength(200);
+                        .HasMaxLength(200)
+                        .HasColumnType("character varying(200)");
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
-                        .HasColumnName("ConcurrencyStamp")
+                        .HasMaxLength(40)
                         .HasColumnType("character varying(40)")
-                        .HasMaxLength(40);
+                        .HasColumnName("ConcurrencyStamp");
+
+                    b.Property<DateTime?>("ConsumedTime")
+                        .HasColumnType("timestamp without time zone");
 
                     b.Property<DateTime>("CreationTime")
                         .HasColumnType("timestamp without time zone");
 
                     b.Property<string>("Data")
                         .IsRequired()
-                        .HasColumnType("character varying(50000)")
-                        .HasMaxLength(50000);
+                        .HasMaxLength(50000)
+                        .HasColumnType("character varying(50000)");
+
+                    b.Property<string>("Description")
+                        .HasMaxLength(200)
+                        .HasColumnType("character varying(200)");
 
                     b.Property<DateTime?>("Expiration")
                         .HasColumnType("timestamp without time zone");
 
                     b.Property<string>("ExtraProperties")
-                        .HasColumnName("ExtraProperties")
-                        .HasColumnType("text");
+                        .HasColumnType("text")
+                        .HasColumnName("ExtraProperties");
 
                     b.Property<Guid>("Id")
                         .HasColumnType("uuid");
 
+                    b.Property<string>("SessionId")
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)");
+
                     b.Property<string>("SubjectId")
-                        .HasColumnType("character varying(200)")
-                        .HasMaxLength(200);
+                        .HasMaxLength(200)
+                        .HasColumnType("character varying(200)");
 
                     b.Property<string>("Type")
                         .IsRequired()
-                        .HasColumnType("character varying(50)")
-                        .HasMaxLength(50);
+                        .HasMaxLength(50)
+                        .HasColumnType("character varying(50)");
 
                     b.HasKey("Key");
 
@@ -1595,21 +1740,9 @@ namespace PostgeSqlDemo.Migrations
 
                     b.HasIndex("SubjectId", "ClientId", "Type");
 
+                    b.HasIndex("SubjectId", "SessionId", "Type");
+
                     b.ToTable("IdentityServerPersistedGrants");
-                });
-
-            modelBuilder.Entity("Volo.Abp.IdentityServer.IdentityResources.IdentityClaim", b =>
-                {
-                    b.Property<Guid>("IdentityResourceId")
-                        .HasColumnType("uuid");
-
-                    b.Property<string>("Type")
-                        .HasColumnType("character varying(200)")
-                        .HasMaxLength(200);
-
-                    b.HasKey("IdentityResourceId", "Type");
-
-                    b.ToTable("IdentityServerIdentityClaims");
                 });
 
             modelBuilder.Entity("Volo.Abp.IdentityServer.IdentityResources.IdentityResource", b =>
@@ -1620,33 +1753,33 @@ namespace PostgeSqlDemo.Migrations
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
-                        .HasColumnName("ConcurrencyStamp")
+                        .HasMaxLength(40)
                         .HasColumnType("character varying(40)")
-                        .HasMaxLength(40);
+                        .HasColumnName("ConcurrencyStamp");
 
                     b.Property<DateTime>("CreationTime")
-                        .HasColumnName("CreationTime")
-                        .HasColumnType("timestamp without time zone");
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("CreationTime");
 
                     b.Property<Guid?>("CreatorId")
-                        .HasColumnName("CreatorId")
-                        .HasColumnType("uuid");
+                        .HasColumnType("uuid")
+                        .HasColumnName("CreatorId");
 
                     b.Property<Guid?>("DeleterId")
-                        .HasColumnName("DeleterId")
-                        .HasColumnType("uuid");
+                        .HasColumnType("uuid")
+                        .HasColumnName("DeleterId");
 
                     b.Property<DateTime?>("DeletionTime")
-                        .HasColumnName("DeletionTime")
-                        .HasColumnType("timestamp without time zone");
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("DeletionTime");
 
                     b.Property<string>("Description")
-                        .HasColumnType("character varying(1000)")
-                        .HasMaxLength(1000);
+                        .HasMaxLength(1000)
+                        .HasColumnType("character varying(1000)");
 
                     b.Property<string>("DisplayName")
-                        .HasColumnType("character varying(200)")
-                        .HasMaxLength(200);
+                        .HasMaxLength(200)
+                        .HasColumnType("character varying(200)");
 
                     b.Property<bool>("Emphasize")
                         .HasColumnType("boolean");
@@ -1655,30 +1788,27 @@ namespace PostgeSqlDemo.Migrations
                         .HasColumnType("boolean");
 
                     b.Property<string>("ExtraProperties")
-                        .HasColumnName("ExtraProperties")
-                        .HasColumnType("text");
+                        .HasColumnType("text")
+                        .HasColumnName("ExtraProperties");
 
                     b.Property<bool>("IsDeleted")
                         .ValueGeneratedOnAdd()
-                        .HasColumnName("IsDeleted")
                         .HasColumnType("boolean")
-                        .HasDefaultValue(false);
+                        .HasDefaultValue(false)
+                        .HasColumnName("IsDeleted");
 
                     b.Property<DateTime?>("LastModificationTime")
-                        .HasColumnName("LastModificationTime")
-                        .HasColumnType("timestamp without time zone");
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("LastModificationTime");
 
                     b.Property<Guid?>("LastModifierId")
-                        .HasColumnName("LastModifierId")
-                        .HasColumnType("uuid");
+                        .HasColumnType("uuid")
+                        .HasColumnName("LastModifierId");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("character varying(200)")
-                        .HasMaxLength(200);
-
-                    b.Property<string>("Properties")
-                        .HasColumnType("text");
+                        .HasMaxLength(200)
+                        .HasColumnType("character varying(200)");
 
                     b.Property<bool>("Required")
                         .HasColumnType("boolean");
@@ -1691,6 +1821,38 @@ namespace PostgeSqlDemo.Migrations
                     b.ToTable("IdentityServerIdentityResources");
                 });
 
+            modelBuilder.Entity("Volo.Abp.IdentityServer.IdentityResources.IdentityResourceClaim", b =>
+                {
+                    b.Property<Guid>("IdentityResourceId")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Type")
+                        .HasMaxLength(200)
+                        .HasColumnType("character varying(200)");
+
+                    b.HasKey("IdentityResourceId", "Type");
+
+                    b.ToTable("IdentityServerIdentityResourceClaims");
+                });
+
+            modelBuilder.Entity("Volo.Abp.IdentityServer.IdentityResources.IdentityResourceProperty", b =>
+                {
+                    b.Property<Guid>("IdentityResourceId")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Key")
+                        .HasMaxLength(250)
+                        .HasColumnType("character varying(250)");
+
+                    b.Property<string>("Value")
+                        .HasMaxLength(2000)
+                        .HasColumnType("character varying(2000)");
+
+                    b.HasKey("IdentityResourceId", "Key", "Value");
+
+                    b.ToTable("IdentityServerIdentityResourceProperties");
+                });
+
             modelBuilder.Entity("Volo.Abp.PermissionManagement.PermissionGrant", b =>
                 {
                     b.Property<Guid>("Id")
@@ -1699,22 +1861,22 @@ namespace PostgeSqlDemo.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("character varying(128)")
-                        .HasMaxLength(128);
+                        .HasMaxLength(128)
+                        .HasColumnType("character varying(128)");
 
                     b.Property<string>("ProviderKey")
                         .IsRequired()
-                        .HasColumnType("character varying(64)")
-                        .HasMaxLength(64);
+                        .HasMaxLength(64)
+                        .HasColumnType("character varying(64)");
 
                     b.Property<string>("ProviderName")
                         .IsRequired()
-                        .HasColumnType("character varying(64)")
-                        .HasMaxLength(64);
+                        .HasMaxLength(64)
+                        .HasColumnType("character varying(64)");
 
                     b.Property<Guid?>("TenantId")
-                        .HasColumnName("TenantId")
-                        .HasColumnType("uuid");
+                        .HasColumnType("uuid")
+                        .HasColumnName("TenantId");
 
                     b.HasKey("Id");
 
@@ -1731,21 +1893,21 @@ namespace PostgeSqlDemo.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("character varying(128)")
-                        .HasMaxLength(128);
+                        .HasMaxLength(128)
+                        .HasColumnType("character varying(128)");
 
                     b.Property<string>("ProviderKey")
-                        .HasColumnType("character varying(64)")
-                        .HasMaxLength(64);
+                        .HasMaxLength(64)
+                        .HasColumnType("character varying(64)");
 
                     b.Property<string>("ProviderName")
-                        .HasColumnType("character varying(64)")
-                        .HasMaxLength(64);
+                        .HasMaxLength(64)
+                        .HasColumnType("character varying(64)");
 
                     b.Property<string>("Value")
                         .IsRequired()
-                        .HasColumnType("character varying(2048)")
-                        .HasMaxLength(2048);
+                        .HasMaxLength(2048)
+                        .HasColumnType("character varying(2048)");
 
                     b.HasKey("Id");
 
@@ -1762,48 +1924,48 @@ namespace PostgeSqlDemo.Migrations
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
-                        .HasColumnName("ConcurrencyStamp")
+                        .HasMaxLength(40)
                         .HasColumnType("character varying(40)")
-                        .HasMaxLength(40);
+                        .HasColumnName("ConcurrencyStamp");
 
                     b.Property<DateTime>("CreationTime")
-                        .HasColumnName("CreationTime")
-                        .HasColumnType("timestamp without time zone");
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("CreationTime");
 
                     b.Property<Guid?>("CreatorId")
-                        .HasColumnName("CreatorId")
-                        .HasColumnType("uuid");
+                        .HasColumnType("uuid")
+                        .HasColumnName("CreatorId");
 
                     b.Property<Guid?>("DeleterId")
-                        .HasColumnName("DeleterId")
-                        .HasColumnType("uuid");
+                        .HasColumnType("uuid")
+                        .HasColumnName("DeleterId");
 
                     b.Property<DateTime?>("DeletionTime")
-                        .HasColumnName("DeletionTime")
-                        .HasColumnType("timestamp without time zone");
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("DeletionTime");
 
                     b.Property<string>("ExtraProperties")
-                        .HasColumnName("ExtraProperties")
-                        .HasColumnType("text");
+                        .HasColumnType("text")
+                        .HasColumnName("ExtraProperties");
 
                     b.Property<bool>("IsDeleted")
                         .ValueGeneratedOnAdd()
-                        .HasColumnName("IsDeleted")
                         .HasColumnType("boolean")
-                        .HasDefaultValue(false);
+                        .HasDefaultValue(false)
+                        .HasColumnName("IsDeleted");
 
                     b.Property<DateTime?>("LastModificationTime")
-                        .HasColumnName("LastModificationTime")
-                        .HasColumnType("timestamp without time zone");
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("LastModificationTime");
 
                     b.Property<Guid?>("LastModifierId")
-                        .HasColumnName("LastModifierId")
-                        .HasColumnType("uuid");
+                        .HasColumnType("uuid")
+                        .HasColumnName("LastModifierId");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("character varying(64)")
-                        .HasMaxLength(64);
+                        .HasMaxLength(64)
+                        .HasColumnType("character varying(64)");
 
                     b.HasKey("Id");
 
@@ -1818,13 +1980,13 @@ namespace PostgeSqlDemo.Migrations
                         .HasColumnType("uuid");
 
                     b.Property<string>("Name")
-                        .HasColumnType("character varying(64)")
-                        .HasMaxLength(64);
+                        .HasMaxLength(64)
+                        .HasColumnType("character varying(64)");
 
                     b.Property<string>("Value")
                         .IsRequired()
-                        .HasColumnType("character varying(1024)")
-                        .HasMaxLength(1024);
+                        .HasMaxLength(1024)
+                        .HasColumnType("character varying(1024)");
 
                     b.HasKey("TenantId", "Name");
 
@@ -1955,7 +2117,16 @@ namespace PostgeSqlDemo.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Volo.Abp.IdentityServer.ApiResources.ApiScope", b =>
+            modelBuilder.Entity("Volo.Abp.IdentityServer.ApiResources.ApiResourceProperty", b =>
+                {
+                    b.HasOne("Volo.Abp.IdentityServer.ApiResources.ApiResource", null)
+                        .WithMany("Properties")
+                        .HasForeignKey("ApiResourceId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Volo.Abp.IdentityServer.ApiResources.ApiResourceScope", b =>
                 {
                     b.HasOne("Volo.Abp.IdentityServer.ApiResources.ApiResource", null)
                         .WithMany("Scopes")
@@ -1964,20 +2135,29 @@ namespace PostgeSqlDemo.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Volo.Abp.IdentityServer.ApiResources.ApiScopeClaim", b =>
-                {
-                    b.HasOne("Volo.Abp.IdentityServer.ApiResources.ApiScope", null)
-                        .WithMany("UserClaims")
-                        .HasForeignKey("ApiResourceId", "Name")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("Volo.Abp.IdentityServer.ApiResources.ApiSecret", b =>
+            modelBuilder.Entity("Volo.Abp.IdentityServer.ApiResources.ApiResourceSecret", b =>
                 {
                     b.HasOne("Volo.Abp.IdentityServer.ApiResources.ApiResource", null)
                         .WithMany("Secrets")
                         .HasForeignKey("ApiResourceId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Volo.Abp.IdentityServer.ApiScopes.ApiScopeClaim", b =>
+                {
+                    b.HasOne("Volo.Abp.IdentityServer.ApiScopes.ApiScope", null)
+                        .WithMany("UserClaims")
+                        .HasForeignKey("ApiScopeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Volo.Abp.IdentityServer.ApiScopes.ApiScopeProperty", b =>
+                {
+                    b.HasOne("Volo.Abp.IdentityServer.ApiScopes.ApiScope", null)
+                        .WithMany("Properties")
+                        .HasForeignKey("ApiScopeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -2063,10 +2243,19 @@ namespace PostgeSqlDemo.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Volo.Abp.IdentityServer.IdentityResources.IdentityClaim", b =>
+            modelBuilder.Entity("Volo.Abp.IdentityServer.IdentityResources.IdentityResourceClaim", b =>
                 {
                     b.HasOne("Volo.Abp.IdentityServer.IdentityResources.IdentityResource", null)
                         .WithMany("UserClaims")
+                        .HasForeignKey("IdentityResourceId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Volo.Abp.IdentityServer.IdentityResources.IdentityResourceProperty", b =>
+                {
+                    b.HasOne("Volo.Abp.IdentityServer.IdentityResources.IdentityResource", null)
+                        .WithMany("Properties")
                         .HasForeignKey("IdentityResourceId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -2079,6 +2268,92 @@ namespace PostgeSqlDemo.Migrations
                         .HasForeignKey("TenantId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("Volo.Abp.AuditLogging.AuditLog", b =>
+                {
+                    b.Navigation("Actions");
+
+                    b.Navigation("EntityChanges");
+                });
+
+            modelBuilder.Entity("Volo.Abp.AuditLogging.EntityChange", b =>
+                {
+                    b.Navigation("PropertyChanges");
+                });
+
+            modelBuilder.Entity("Volo.Abp.Identity.IdentityRole", b =>
+                {
+                    b.Navigation("Claims");
+                });
+
+            modelBuilder.Entity("Volo.Abp.Identity.IdentityUser", b =>
+                {
+                    b.Navigation("Claims");
+
+                    b.Navigation("Logins");
+
+                    b.Navigation("OrganizationUnits");
+
+                    b.Navigation("Roles");
+
+                    b.Navigation("Tokens");
+                });
+
+            modelBuilder.Entity("Volo.Abp.Identity.OrganizationUnit", b =>
+                {
+                    b.Navigation("Roles");
+                });
+
+            modelBuilder.Entity("Volo.Abp.IdentityServer.ApiResources.ApiResource", b =>
+                {
+                    b.Navigation("Properties");
+
+                    b.Navigation("Scopes");
+
+                    b.Navigation("Secrets");
+
+                    b.Navigation("UserClaims");
+                });
+
+            modelBuilder.Entity("Volo.Abp.IdentityServer.ApiScopes.ApiScope", b =>
+                {
+                    b.Navigation("Properties");
+
+                    b.Navigation("UserClaims");
+                });
+
+            modelBuilder.Entity("Volo.Abp.IdentityServer.Clients.Client", b =>
+                {
+                    b.Navigation("AllowedCorsOrigins");
+
+                    b.Navigation("AllowedGrantTypes");
+
+                    b.Navigation("AllowedScopes");
+
+                    b.Navigation("Claims");
+
+                    b.Navigation("ClientSecrets");
+
+                    b.Navigation("IdentityProviderRestrictions");
+
+                    b.Navigation("PostLogoutRedirectUris");
+
+                    b.Navigation("Properties");
+
+                    b.Navigation("RedirectUris");
+                });
+
+            modelBuilder.Entity("Volo.Abp.IdentityServer.IdentityResources.IdentityResource", b =>
+                {
+                    b.Navigation("Properties");
+
+                    b.Navigation("UserClaims");
+                });
+
+            modelBuilder.Entity("Volo.Abp.TenantManagement.Tenant", b =>
+                {
+                    b.Navigation("ConnectionStrings");
                 });
 #pragma warning restore 612, 618
         }

@@ -34,7 +34,7 @@ export class BookService {
   getAuthorLookup = () =>
     this.restService.request<any, ListResultDto<AuthorLookupDto>>({
       method: 'GET',
-      url: `/api/app/book/authorLookup`,
+      url: `/api/app/book/author-lookup`,
     },
     { apiName: this.apiName });
 
@@ -42,7 +42,7 @@ export class BookService {
     this.restService.request<any, PagedResultDto<BookDto>>({
       method: 'GET',
       url: `/api/app/book`,
-      params: { sorting: input.sorting, skipCount: input.skipCount, maxResultCount: input.maxResultCount },
+      params: { skipCount: input.skipCount, maxResultCount: input.maxResultCount, sorting: input.sorting },
     },
     { apiName: this.apiName });
 

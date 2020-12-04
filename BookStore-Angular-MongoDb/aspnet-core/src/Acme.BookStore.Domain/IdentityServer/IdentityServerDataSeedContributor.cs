@@ -8,11 +8,14 @@ using Volo.Abp.Data;
 using Volo.Abp.DependencyInjection;
 using Volo.Abp.Guids;
 using Volo.Abp.IdentityServer.ApiResources;
+using Volo.Abp.IdentityServer.ApiScopes;
 using Volo.Abp.IdentityServer.Clients;
 using Volo.Abp.IdentityServer.IdentityResources;
+using Volo.Abp.MultiTenancy;
 using Volo.Abp.PermissionManagement;
 using Volo.Abp.Uow;
 using ApiResource = Volo.Abp.IdentityServer.ApiResources.ApiResource;
+using ApiScope = Volo.Abp.IdentityServer.ApiScopes.ApiScope;
 using Client = Volo.Abp.IdentityServer.Clients.Client;
 
 namespace Acme.BookStore.IdentityServer
@@ -20,34 +23,49 @@ namespace Acme.BookStore.IdentityServer
     public class IdentityServerDataSeedContributor : IDataSeedContributor, ITransientDependency
     {
         private readonly IApiResourceRepository _apiResourceRepository;
+        private readonly IApiScopeRepository _apiScopeRepository;
         private readonly IClientRepository _clientRepository;
         private readonly IIdentityResourceDataSeeder _identityResourceDataSeeder;
         private readonly IGuidGenerator _guidGenerator;
         private readonly IPermissionDataSeeder _permissionDataSeeder;
         private readonly IConfiguration _configuration;
+        private readonly ICurrentTenant _currentTenant;
 
         public IdentityServerDataSeedContributor(
             IClientRepository clientRepository,
             IApiResourceRepository apiResourceRepository,
+            IApiScopeRepository apiScopeRepository,
             IIdentityResourceDataSeeder identityResourceDataSeeder,
             IGuidGenerator guidGenerator,
             IPermissionDataSeeder permissionDataSeeder,
-            IConfiguration configuration)
+            IConfiguration configuration,
+            ICurrentTenant currentTenant)
         {
             _clientRepository = clientRepository;
             _apiResourceRepository = apiResourceRepository;
+            _apiScopeRepository = apiScopeRepository;
             _identityResourceDataSeeder = identityResourceDataSeeder;
             _guidGenerator = guidGenerator;
             _permissionDataSeeder = permissionDataSeeder;
             _configuration = configuration;
+            _currentTenant = currentTenant;
         }
 
         [UnitOfWork]
         public virtual async Task SeedAsync(DataSeedContext context)
         {
-            await _identityResourceDataSeeder.CreateStandardResourcesAsync();
-            await CreateApiResourcesAsync();
-            await CreateClientsAsync();
+            using (_currentTenant.Change(context?.TenantId))
+            {
+                await _identityResourceDataSeeder.CreateStandardResourcesAsync();
+                await CreateApiResourcesAsync();
+                await CreateApiScopesAsync();
+                await CreateClientsAsync();
+            }
+        }
+
+        private async Task CreateApiScopesAsync()
+        {
+            await CreateApiScopeAsync("BookStore");
         }
 
         private async Task CreateApiResourcesAsync()
@@ -91,6 +109,24 @@ namespace Acme.BookStore.IdentityServer
             return await _apiResourceRepository.UpdateAsync(apiResource);
         }
 
+        private async Task<ApiScope> CreateApiScopeAsync(string name)
+        {
+            var apiScope = await _apiScopeRepository.GetByNameAsync(name);
+            if (apiScope == null)
+            {
+                apiScope = await _apiScopeRepository.InsertAsync(
+                    new ApiScope(
+                        _guidGenerator.Create(),
+                        name,
+                        name + " API"
+                    ),
+                    autoSave: true
+                );
+            }
+
+            return apiScope;
+        }
+
         private async Task CreateClientsAsync()
         {
             var commonScopes = new[]
@@ -118,23 +154,65 @@ namespace Acme.BookStore.IdentityServer
                 await CreateClientAsync(
                     name: webClientId,
                     scopes: commonScopes,
-                    grantTypes: new[] {"hybrid"},
+                    grantTypes: new[] { "hybrid" },
                     secret: (configurationSection["BookStore_Web:ClientSecret"] ?? "1q2w3e*").Sha256(),
                     redirectUri: $"{webClientRootUrl}signin-oidc",
                     postLogoutRedirectUri: $"{webClientRootUrl}signout-callback-oidc",
-                    frontChannelLogoutUri: $"{webClientRootUrl}Account/FrontChannelLogout"
+                    frontChannelLogoutUri: $"{webClientRootUrl}Account/FrontChannelLogout",
+                    corsOrigins: new[] { webClientRootUrl.RemovePostFix("/") }
                 );
             }
 
-            //Console Test Client
-            var consoleClientId = configurationSection["BookStore_App:ClientId"];
-            if (!consoleClientId.IsNullOrWhiteSpace())
+            //Console Test / Angular Client
+            var consoleAndAngularClientId = configurationSection["BookStore_App:ClientId"];
+            if (!consoleAndAngularClientId.IsNullOrWhiteSpace())
             {
+                var webClientRootUrl = configurationSection["BookStore_App:RootUrl"]?.TrimEnd('/');
+
                 await CreateClientAsync(
-                    name: consoleClientId,
+                    name: consoleAndAngularClientId,
                     scopes: commonScopes,
-                    grantTypes: new[] {"password", "client_credentials"},
-                    secret: (configurationSection["BookStore_App:ClientSecret"] ?? "1q2w3e*").Sha256()
+                    grantTypes: new[] { "password", "client_credentials", "authorization_code" },
+                    secret: (configurationSection["BookStore_App:ClientSecret"] ?? "1q2w3e*").Sha256(),
+                    requireClientSecret: false,
+                    redirectUri: webClientRootUrl,
+                    postLogoutRedirectUri: webClientRootUrl,
+                    corsOrigins: new[] { webClientRootUrl.RemovePostFix("/") }
+                );
+            }
+
+            // Blazor Client
+            var blazorClientId = configurationSection["BookStore_Blazor:ClientId"];
+            if (!blazorClientId.IsNullOrWhiteSpace())
+            {
+                var blazorRootUrl = configurationSection["BookStore_Blazor:RootUrl"].TrimEnd('/');
+
+                await CreateClientAsync(
+                    name: blazorClientId,
+                    scopes: commonScopes,
+                    grantTypes: new[] { "authorization_code" },
+                    secret: configurationSection["BookStore_Blazor:ClientSecret"]?.Sha256(),
+                    requireClientSecret: false,
+                    redirectUri: $"{blazorRootUrl}/authentication/login-callback",
+                    postLogoutRedirectUri: $"{blazorRootUrl}/authentication/logout-callback",
+                    corsOrigins: new[] { blazorRootUrl.RemovePostFix("/") }
+                );
+            }
+
+            // Swagger Client
+            var swaggerClientId = configurationSection["BookStore_Swagger:ClientId"];
+            if (!swaggerClientId.IsNullOrWhiteSpace())
+            {
+                var swaggerRootUrl = configurationSection["BookStore_Swagger:RootUrl"].TrimEnd('/');
+
+                await CreateClientAsync(
+                    name: swaggerClientId,
+                    scopes: commonScopes,
+                    grantTypes: new[] { "authorization_code" },
+                    secret: configurationSection["BookStore_Swagger:ClientSecret"]?.Sha256(),
+                    requireClientSecret: false,
+                    redirectUri: $"{swaggerRootUrl}/swagger/oauth2-redirect.html",
+                    corsOrigins: new[] { swaggerRootUrl.RemovePostFix("/") }
                 );
             }
         }
@@ -143,13 +221,16 @@ namespace Acme.BookStore.IdentityServer
             string name,
             IEnumerable<string> scopes,
             IEnumerable<string> grantTypes,
-            string secret,
+            string secret = null,
             string redirectUri = null,
             string postLogoutRedirectUri = null,
             string frontChannelLogoutUri = null,
-            IEnumerable<string> permissions = null)
+            bool requireClientSecret = true,
+            bool requirePkce = false,
+            IEnumerable<string> permissions = null,
+            IEnumerable<string> corsOrigins = null)
         {
-            var client = await _clientRepository.FindByCliendIdAsync(name);
+            var client = await _clientRepository.FindByClientIdAsync(name);
             if (client == null)
             {
                 client = await _clientRepository.InsertAsync(
@@ -168,7 +249,9 @@ namespace Acme.BookStore.IdentityServer
                         AuthorizationCodeLifetime = 300,
                         IdentityTokenLifetime = 300,
                         RequireConsent = false,
-                        FrontChannelLogoutUri = frontChannelLogoutUri
+                        FrontChannelLogoutUri = frontChannelLogoutUri,
+                        RequireClientSecret = requireClientSecret,
+                        RequirePkce = requirePkce
                     },
                     autoSave: true
                 );
@@ -190,9 +273,12 @@ namespace Acme.BookStore.IdentityServer
                 }
             }
 
-            if (client.FindSecret(secret) == null)
+            if (!secret.IsNullOrEmpty())
             {
-                client.AddSecret(secret);
+                if (client.FindSecret(secret) == null)
+                {
+                    client.AddSecret(secret);
+                }
             }
 
             if (redirectUri != null)
@@ -216,8 +302,20 @@ namespace Acme.BookStore.IdentityServer
                 await _permissionDataSeeder.SeedAsync(
                     ClientPermissionValueProvider.ProviderName,
                     name,
-                    permissions
+                    permissions,
+                    null
                 );
+            }
+
+            if (corsOrigins != null)
+            {
+                foreach (var origin in corsOrigins)
+                {
+                    if (!origin.IsNullOrWhiteSpace() && client.FindCorsOrigin(origin) == null)
+                    {
+                        client.AddCorsOrigin(origin);
+                    }
+                }
             }
 
             return await _clientRepository.UpdateAsync(client);

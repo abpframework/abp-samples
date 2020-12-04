@@ -100,12 +100,5 @@ namespace Acme.BookStore.Blazor
                 options.AddMaps<BookStoreBlazorModule>();
             });
         }
-
-        public override void OnApplicationInitialization(ApplicationInitializationContext context)
-        {
-            context.ServiceProvider
-                .UseBootstrapProviders()
-                .UseFontAwesomeIcons();
-        }
     }
 }

@@ -1,32 +1,11 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace Acme.BookStore.Migrations
+namespace Acme.BookStore.DbMigrationsForSecondDb.Migrations
 {
-    public partial class Removed_Audit_Setting_Permission_Modules : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
-        {
-            migrationBuilder.DropTable(
-                name: "AbpAuditLogActions");
-
-            migrationBuilder.DropTable(
-                name: "AbpEntityPropertyChanges");
-
-            migrationBuilder.DropTable(
-                name: "AbpPermissionGrants");
-
-            migrationBuilder.DropTable(
-                name: "AbpSettings");
-
-            migrationBuilder.DropTable(
-                name: "AbpEntityChanges");
-
-            migrationBuilder.DropTable(
-                name: "AbpAuditLogs");
-        }
-
-        protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
                 name: "AbpAuditLogs",
@@ -34,26 +13,26 @@ namespace Acme.BookStore.Migrations
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     ApplicationName = table.Column<string>(type: "nvarchar(96)", maxLength: 96, nullable: true),
-                    BrowserInfo = table.Column<string>(type: "nvarchar(512)", maxLength: 512, nullable: true),
-                    ClientId = table.Column<string>(type: "nvarchar(64)", maxLength: 64, nullable: true),
-                    ClientIpAddress = table.Column<string>(type: "nvarchar(64)", maxLength: 64, nullable: true),
-                    ClientName = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: true),
-                    Comments = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
-                    ConcurrencyStamp = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CorrelationId = table.Column<string>(type: "nvarchar(64)", maxLength: 64, nullable: true),
-                    Exceptions = table.Column<string>(type: "nvarchar(4000)", maxLength: 4000, nullable: true),
-                    ExecutionDuration = table.Column<int>(type: "int", nullable: false),
-                    ExecutionTime = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    ExtraProperties = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    HttpMethod = table.Column<string>(type: "nvarchar(16)", maxLength: 16, nullable: true),
-                    HttpStatusCode = table.Column<int>(type: "int", nullable: true),
-                    ImpersonatorTenantId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    ImpersonatorUserId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     TenantId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     TenantName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ImpersonatorUserId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    ImpersonatorTenantId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    ExecutionTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ExecutionDuration = table.Column<int>(type: "int", nullable: false),
+                    ClientIpAddress = table.Column<string>(type: "nvarchar(64)", maxLength: 64, nullable: true),
+                    ClientName = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: true),
+                    ClientId = table.Column<string>(type: "nvarchar(64)", maxLength: 64, nullable: true),
+                    CorrelationId = table.Column<string>(type: "nvarchar(64)", maxLength: 64, nullable: true),
+                    BrowserInfo = table.Column<string>(type: "nvarchar(512)", maxLength: 512, nullable: true),
+                    HttpMethod = table.Column<string>(type: "nvarchar(16)", maxLength: 16, nullable: true),
                     Url = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
-                    UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true)
+                    Exceptions = table.Column<string>(type: "nvarchar(4000)", maxLength: 4000, nullable: true),
+                    Comments = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
+                    HttpStatusCode = table.Column<int>(type: "int", nullable: true),
+                    ExtraProperties = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ConcurrencyStamp = table.Column<string>(type: "nvarchar(40)", maxLength: 40, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -65,10 +44,10 @@ namespace Acme.BookStore.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    TenantId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     Name = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
-                    ProviderKey = table.Column<string>(type: "nvarchar(64)", maxLength: 64, nullable: false),
                     ProviderName = table.Column<string>(type: "nvarchar(64)", maxLength: 64, nullable: false),
-                    TenantId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
+                    ProviderKey = table.Column<string>(type: "nvarchar(64)", maxLength: 64, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -81,9 +60,9 @@ namespace Acme.BookStore.Migrations
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
-                    ProviderKey = table.Column<string>(type: "nvarchar(64)", maxLength: 64, nullable: true),
+                    Value = table.Column<string>(type: "nvarchar(2048)", maxLength: 2048, nullable: false),
                     ProviderName = table.Column<string>(type: "nvarchar(64)", maxLength: 64, nullable: true),
-                    Value = table.Column<string>(type: "nvarchar(2048)", maxLength: 2048, nullable: false)
+                    ProviderKey = table.Column<string>(type: "nvarchar(64)", maxLength: 64, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -95,14 +74,14 @@ namespace Acme.BookStore.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    TenantId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     AuditLogId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    ExecutionDuration = table.Column<int>(type: "int", nullable: false),
-                    ExecutionTime = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    ExtraProperties = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ServiceName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     MethodName = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: true),
                     Parameters = table.Column<string>(type: "nvarchar(2000)", maxLength: 2000, nullable: true),
-                    ServiceName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
-                    TenantId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
+                    ExecutionTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ExecutionDuration = table.Column<int>(type: "int", nullable: false),
+                    ExtraProperties = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -121,13 +100,13 @@ namespace Acme.BookStore.Migrations
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     AuditLogId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    TenantId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     ChangeTime = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ChangeType = table.Column<byte>(type: "tinyint", nullable: false),
-                    EntityId = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
                     EntityTenantId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    EntityId = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
                     EntityTypeFullName = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
-                    ExtraProperties = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    TenantId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
+                    ExtraProperties = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -145,12 +124,12 @@ namespace Acme.BookStore.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    TenantId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     EntityChangeId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     NewValue = table.Column<string>(type: "nvarchar(512)", maxLength: 512, nullable: true),
                     OriginalValue = table.Column<string>(type: "nvarchar(512)", maxLength: 512, nullable: true),
                     PropertyName = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
-                    PropertyTypeFullName = table.Column<string>(type: "nvarchar(64)", maxLength: 64, nullable: false),
-                    TenantId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
+                    PropertyTypeFullName = table.Column<string>(type: "nvarchar(64)", maxLength: 64, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -207,6 +186,27 @@ namespace Acme.BookStore.Migrations
                 name: "IX_AbpSettings_Name_ProviderName_ProviderKey",
                 table: "AbpSettings",
                 columns: new[] { "Name", "ProviderName", "ProviderKey" });
+        }
+
+        protected override void Down(MigrationBuilder migrationBuilder)
+        {
+            migrationBuilder.DropTable(
+                name: "AbpAuditLogActions");
+
+            migrationBuilder.DropTable(
+                name: "AbpEntityPropertyChanges");
+
+            migrationBuilder.DropTable(
+                name: "AbpPermissionGrants");
+
+            migrationBuilder.DropTable(
+                name: "AbpSettings");
+
+            migrationBuilder.DropTable(
+                name: "AbpEntityChanges");
+
+            migrationBuilder.DropTable(
+                name: "AbpAuditLogs");
         }
     }
 }

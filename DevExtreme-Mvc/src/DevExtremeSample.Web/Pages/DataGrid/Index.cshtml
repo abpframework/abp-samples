@@ -28,7 +28,7 @@
                 .InsertAction("InsertOrder")
                 .UpdateAction("UpdateOrder")
                 .DeleteAction("DeleteOrder")
-                .Key("OrderID")
+                .Key("orderID")
             )
             .RemoteOperations(true)
             .Columns(columns => {
@@ -68,7 +68,7 @@
                         .DataSource(d => d.Mvc()
                             .Controller("Order")
                             .LoadAction("GetSampleOrderDetails")
-                            .LoadParams(new { orderID = new JS("data.OrderID") })
+                            .LoadParams(new { orderID = new JS("data.orderID") })
                         )
                         .ShowBorders(true)
                     )

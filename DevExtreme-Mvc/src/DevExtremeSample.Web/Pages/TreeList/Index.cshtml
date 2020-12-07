@@ -43,10 +43,10 @@
             .WordWrapEnabled(true)
             .ShowBorders(true)
             .Columns(columns => {
-                columns.AddFor(m => m.Task_Subject)
+                columns.AddFor(m => m.task_Subject)
                     .Width(300);
         
-                columns.AddFor(m => m.Task_Assigned_Employee_ID)
+                columns.AddFor(m => m.task_Assigned_Employee_ID)
                     .MinWidth(200)
                     .AllowSorting(false)
                     .CssClass("employee")
@@ -64,7 +64,7 @@
                         .DisplayExpr("Name")
                     );
         
-                columns.AddFor(m => m.Task_Status)
+                columns.AddFor(m => m.task_Status)
                     .MinWidth(100)
                     .Lookup(lookup => lookup
                         .DataSource(new[] {
@@ -76,20 +76,20 @@
                         })
                     );
         
-                columns.AddFor(m => m.Task_Priority)
+                columns.AddFor(m => m.task_Priority)
                     .Lookup(lookup => lookup
                     .DataSource(Enum.GetNames(typeof(Priority))))
                     .Caption("Priority")
                     .Visible(false);
         
-                columns.AddFor(m => m.Task_Completion)
+                columns.AddFor(m => m.task_Completion)
                     .Caption("% Completed")
                     .CustomizeText("completion_customizeText")
                     .Visible(false);
         
-                columns.AddFor(m => m.Task_Start_Date);
+                columns.AddFor(m => m.task_Start_Date);
         
-                columns.AddFor(m => m.Task_Due_Date);
+                columns.AddFor(m => m.task_Due_Date);
             })
         )
         

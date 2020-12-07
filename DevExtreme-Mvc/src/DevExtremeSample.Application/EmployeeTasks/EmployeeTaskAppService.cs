@@ -24,13 +24,13 @@ namespace DevExtremeSample.EmployeeTasks
                     Task_ID = d.Task_ID,
                     Task_Parent_ID = d.Task_Parent_ID,
                     Task_Owner_ID = d.Task_Owner_ID,
-                    Task_Assigned_Employee_ID = d.Task_Assigned_Employee_ID,
-                    Task_Completion = d.Task_Completion,
-                    Task_Priority = d.Task_Priority,
-                    Task_Status = d.Task_Status,
-                    Task_Subject = d.Task_Subject,
-                    Task_Start_Date = d.Task_Start_Date,
-                    Task_Due_Date = d.Task_Due_Date,
+                    task_Assigned_Employee_ID = d.task_Assigned_Employee_ID,
+                    task_Completion = d.task_Completion,
+                    task_Priority = d.task_Priority,
+                    task_Status = d.task_Status,
+                    task_Subject = d.task_Subject,
+                    task_Start_Date = d.task_Start_Date,
+                    task_Due_Date = d.task_Due_Date,
                     Has_Items = _dataService.Tasks.Count(task => task.Task_Parent_ID == d.Task_ID) > 0
                 };
 
@@ -44,14 +44,14 @@ namespace DevExtremeSample.EmployeeTasks
                     Task_ID = d.Task_ID,
                     Task_Parent_ID = d.Task_Parent_ID,
                     Task_Owner_ID = d.Task_Owner_ID,
-                    Task_Assigned_Employee_ID = d.Task_Assigned_Employee_ID,
-                    Task_Assigned_Employee = _dataService.Employees.FirstOrDefault(employee => employee.ID == d.Task_Assigned_Employee_ID),
-                    Task_Completion = d.Task_Completion,
-                    Task_Priority = d.Task_Priority,
-                    Task_Status = d.Task_Status,
-                    Task_Subject = d.Task_Subject,
-                    Task_Start_Date = d.Task_Start_Date,
-                    Task_Due_Date = d.Task_Due_Date
+                    task_Assigned_Employee_ID = d.task_Assigned_Employee_ID,
+                    Task_Assigned_Employee = _dataService.Employees.FirstOrDefault(employee => employee.ID == d.task_Assigned_Employee_ID),
+                    task_Completion = d.task_Completion,
+                    task_Priority = d.task_Priority,
+                    task_Status = d.task_Status,
+                    task_Subject = d.task_Subject,
+                    task_Start_Date = d.task_Start_Date,
+                    task_Due_Date = d.task_Due_Date
                 };
 
             return DataSourceLoader.Load(tasks, loadOptions);

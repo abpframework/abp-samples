@@ -15,7 +15,7 @@ namespace DevExtremeSample.EmployeeTasks
         [Required]
         [Display(Name = "Assigned")]
         [JsonProperty("task_Assigned_Employee_ID")]
-        public int Task_Assigned_Employee_ID { set; get; }
+        public int task_Assigned_Employee_ID { set; get; }
 
         [JsonProperty("task_Assigned_Employee")]
         public TaskEmployee Task_Assigned_Employee { set; get; }
@@ -26,25 +26,25 @@ namespace DevExtremeSample.EmployeeTasks
         [Required]
         [Display(Name = "task Subject")]
         [JsonProperty("Task_Subject")]
-        public string Task_Subject { set; get; }
+        public string task_Subject { set; get; }
 
         [Display(Name = "Start Date")]
         [JsonProperty("task_Start_Date")]
-        public DateTime Task_Start_Date { set; get; }
+        public DateTime task_Start_Date { set; get; }
 
         [Display(Name = "Due Date")]
         [JsonProperty("task_Due_Date")]
-        public DateTime Task_Due_Date { set; get; }
+        public DateTime task_Due_Date { set; get; }
 
         [Display(Name = "Status")]
         [JsonProperty("task_Status")]
-        public string Task_Status { set; get; }
+        public string task_Status { set; get; }
 
         [JsonProperty("task_Priority")]
-        public Priority Task_Priority { set; get; }
+        public Priority task_Priority { set; get; }
 
         [JsonProperty("task_Completion")]
-        public int Task_Completion { set; get; }
+        public int task_Completion { set; get; }
 
         [JsonProperty("has_Items")]
         public bool Has_Items { get; set; }

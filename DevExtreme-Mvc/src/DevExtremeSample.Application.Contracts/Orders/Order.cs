@@ -11,14 +11,14 @@ namespace DevExtremeSample.Orders
         
         [Display(Name = "Customer")]
         [JsonProperty("CustomerID")]
-        public string CustomerID { get; set; } 
+        public string customerID { get; set; } 
         
         [JsonProperty("EmployeeID")]
         public int EmployeeID { get; set; } 
         
         [Display(Name = "Order Date")]
         [JsonProperty("OrderDate")]
-        public DateTime OrderDate { get; set; } 
+        public DateTime orderDate { get; set; } 
         
         [JsonProperty("RequiredDate")]
         public DateTime RequiredDate { get; set; } 
@@ -28,10 +28,10 @@ namespace DevExtremeSample.Orders
         
         [Display(Name = "Shipping Company")]
         [JsonProperty("ShipVia")]
-        public int ShipVia { get; set; } 
+        public int shipVia { get; set; } 
         
         [JsonProperty("Freight")]
-        public float Freight { get; set; } 
+        public float freight { get; set; } 
         
         [JsonProperty("ShipName")]
         public string ShipName { get; set; } 
@@ -50,7 +50,7 @@ namespace DevExtremeSample.Orders
         
         [Display(Name = "Ship Country")]
         [JsonProperty("ShipCountry")]
-        public string ShipCountry { get; set; } 
+        public string shipCountry { get; set; } 
         
         [JsonProperty("Customer")]
         public string Customer { get; set; } 

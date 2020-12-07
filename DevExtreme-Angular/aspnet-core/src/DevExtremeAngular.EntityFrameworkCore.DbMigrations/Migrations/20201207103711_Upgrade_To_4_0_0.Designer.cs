@@ -4,15 +4,17 @@ using DevExtremeAngular.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Volo.Abp.EntityFrameworkCore;
 
 namespace DevExtremeAngular.Migrations
 {
     [DbContext(typeof(DevExtremeAngularMigrationsDbContext))]
-    partial class DevExtremeAngularMigrationsDbContextModelSnapshot : ModelSnapshot
+    [Migration("20201207103711_Upgrade_To_4_0_0")]
+    partial class Upgrade_To_4_0_0
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

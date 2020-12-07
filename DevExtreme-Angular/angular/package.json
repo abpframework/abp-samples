@@ -12,11 +12,10 @@
   },
   "private": true,
   "dependencies": {
-    "@abp/ng.account": "~3.2.0-rc.2",
-    "@abp/ng.identity": "~3.2.0-rc.2",
-    "@abp/ng.setting-management": "~3.2.0-rc.2",
-    "@abp/ng.tenant-management": "~3.2.0-rc.2",
-    "@abp/ng.theme.basic": "~3.2.0-rc.2",
+    "@abp/ng.identity": "~4.0.0",
+    "@abp/ng.setting-management": "~4.0.0",
+    "@abp/ng.tenant-management": "~4.0.0",
+    "@abp/ng.theme.basic": "~4.0.0",
     "@angular/animations": "~10.0.10",
     "@angular/common": "~10.0.10",
     "@angular/compiler": "~10.0.10",
@@ -32,7 +31,7 @@
     "zone.js": "~0.10.2"
   },
   "devDependencies": {
-    "@abp/ng.schematics": "~3.2.0-rc.2",
+    "@abp/ng.schematics": "~4.0.0",
     "@angular-devkit/build-angular": "~0.1000.6",
     "@angular-devkit/build-ng-packagr": "~0.1000.6",
     "@angular/cli": "~10.0.6",

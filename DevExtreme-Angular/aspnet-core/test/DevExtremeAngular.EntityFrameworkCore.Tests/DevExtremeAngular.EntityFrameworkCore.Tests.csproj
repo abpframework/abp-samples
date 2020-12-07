@@ -3,14 +3,14 @@
   <Import Project="..\..\common.props" />
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>net5.0</TargetFramework>
     <RootNamespace>DevExtremeAngular</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\src\DevExtremeAngular.EntityFrameworkCore.DbMigrations\DevExtremeAngular.EntityFrameworkCore.DbMigrations.csproj" />
     <ProjectReference Include="..\DevExtremeAngular.TestBase\DevExtremeAngular.TestBase.csproj" />
-    <PackageReference Include="Volo.Abp.EntityFrameworkCore.Sqlite" Version="3.2.1" />
+    <PackageReference Include="Volo.Abp.EntityFrameworkCore.Sqlite" Version="4.0.0" />
   </ItemGroup>
 
   <ItemGroup>

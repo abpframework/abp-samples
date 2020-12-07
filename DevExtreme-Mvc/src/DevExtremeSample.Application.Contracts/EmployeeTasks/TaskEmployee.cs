@@ -4,13 +4,13 @@ namespace DevExtremeSample.EmployeeTasks
 {
     public class TaskEmployee {
 
-        [JsonProperty("ID")]
+        [JsonProperty("id")]
         public int ID { set; get; }
 
-        [JsonProperty("Name")]
+        [JsonProperty("name")]
         public string Name { set; get; }
 
-        [JsonProperty("Picture")]
+        [JsonProperty("picture")]
         public string Picture { set; get; }
     }
 }

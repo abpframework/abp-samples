@@ -4,6 +4,7 @@ using Volo.Abp.Identity;
 using Volo.Abp.Modularity;
 using Volo.Abp.PermissionManagement;
 using Volo.Abp.TenantManagement;
+using Volo.Abp.Account;
 
 namespace DashboardDemo
 {
@@ -12,6 +13,7 @@ namespace DashboardDemo
         typeof(AbpIdentityHttpApiClientModule),
         typeof(AbpPermissionManagementHttpApiClientModule),
         typeof(AbpTenantManagementHttpApiClientModule),
+        typeof(AbpAccountHttpApiClientModule),
         typeof(AbpFeatureManagementHttpApiClientModule)
     )]
     public class DashboardDemoHttpApiClientModule : AbpModule

@@ -3,7 +3,7 @@
   "name": "my-app",
   "private": true,
   "dependencies": {
-    "@abp/aspnetcore.mvc.ui.theme.basic": "~3.2.1",
-    "@abp/chart.js": "~3.2.1"
+    "@abp/aspnetcore.mvc.ui.theme.basic": "~4.0.0",
+    "@abp/chart.js": "~4.0.0"
   }
 }

@@ -27,6 +27,6 @@
             $('#MessageList')
                 .append('<li><i class="fas fa-long-arrow-alt-left"></i> ' + abp.currentUser.userName + ': ' + message + '</li>');
         });
-      
+
     });
 });

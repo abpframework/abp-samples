@@ -44,7 +44,7 @@ namespace SignalRTieredDemo
             var configuration = context.Services.GetConfiguration();
             var hostingEnvironment = context.Services.GetHostingEnvironment();
 
-            ConfigureConventionalControllers();
+            //ConfigureConventionalControllers();
             ConfigureAuthentication(context, configuration);
             ConfigureLocalization();
             ConfigureCache(configuration);
@@ -181,7 +181,7 @@ namespace SignalRTieredDemo
             app.UseRouting();
             app.UseCors(DefaultCorsPolicyName);
             app.UseAuthentication();
-            
+
             if (MultiTenancyConsts.IsEnabled)
             {
                 app.UseMultiTenancy();

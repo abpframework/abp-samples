@@ -41,6 +41,10 @@ namespace ClientSimulationDemo.Blazor
             ConfigureUI(builder);
             ConfigureMenu(context);
             ConfigureAutoMapper(context);
+
+            context.Services
+                .AddBootstrapProviders()
+                .AddFontAwesomeIcons();
         }
 
         private void ConfigureRouter(ServiceConfigurationContext context)
@@ -99,13 +103,6 @@ namespace ClientSimulationDemo.Blazor
             {
                 options.AddMaps<ClientSimulationDemoBlazorModule>();
             });
-        }
-
-        public override void OnApplicationInitialization(ApplicationInitializationContext context)
-        {
-            context.ServiceProvider
-                .UseBootstrapProviders()
-                .UseFontAwesomeIcons();
         }
     }
 }

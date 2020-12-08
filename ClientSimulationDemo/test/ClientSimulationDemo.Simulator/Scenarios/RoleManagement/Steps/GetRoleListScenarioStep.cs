@@ -14,7 +14,7 @@ namespace ClientSimulationDemo.Simulator.Scenarios.RoleManagement.Steps
         {
             var roleAppService = context.ServiceProvider.GetRequiredService<IIdentityRoleAppService>();
 
-            await roleAppService.GetListAsync(new PagedAndSortedResultRequestDto { MaxResultCount = 10 });
+            await roleAppService.GetListAsync(new GetIdentityRolesInput { MaxResultCount = 10 });
         }
     }
 }

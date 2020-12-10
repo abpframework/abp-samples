@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using StoredProcedureDemo.EntityFrameworkCore;
 using Volo.Abp.EntityFrameworkCore;
@@ -10,9 +11,10 @@ using Volo.Abp.EntityFrameworkCore;
 namespace StoredProcedureDemo.Migrations
 {
     [DbContext(typeof(StoredProcedureDemoMigrationsDbContext))]
-    partial class StoredProcedureDemoMigrationsDbContextModelSnapshot : ModelSnapshot
+    [Migration("20201210153348_Upgraded_To_Abp_4_0_0")]
+    partial class Upgraded_To_Abp_4_0_0
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

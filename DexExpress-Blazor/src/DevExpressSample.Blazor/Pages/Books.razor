@@ -1,0 +1,37 @@
+@page "/books"
+@using DevExpressSample.Books
+@inherits DevExpressSampleComponentBase
+@using DevExpressSample.Localization
+@using Microsoft.Extensions.Localization
+@using System.Globalization
+@inject IStringLocalizer<DevExpressSampleResource> L
+
+<h3>Books</h3>
+
+@if (BookList.Count > 0)
+{
+    <DxDataGrid
+        Data="@BookList"
+        RowInsertingAsync="@CreateBookAsync"
+        RowUpdatingAsync="@UpdateBookAsync"
+        RowRemovingAsync="@DeleteBookAsync"
+        ShowFilterRow="true"
+        PagerPageSizeSelectorVisible="true"
+        PagerAllDataRowsItemVisible="true"
+        PagerAllowedPageSizes=@(new int[] {5,10,20,40})
+        PagerNavigationMode=PagerNavigationMode.InputBox
+        CssClass="mw-1100">
+        <DxDataGridCommandColumn Width="100px"/>
+        <DxDataGridColumn Field="@nameof(BookDto.Name)"/>
+        <DxDataGridSpinEditColumn Field="@nameof(BookDto.Price)">
+            <DisplayTemplate>
+                @(((context as BookDto)!.Price).ToString("C2", new CultureInfo("en-US")))
+            </DisplayTemplate>
+        </DxDataGridSpinEditColumn>
+        <DxDataGridDateEditColumn Field="@nameof(BookDto.PublishDate)" DisplayFormat="D" EditorFormat="d" EditorDisplayFormat="D"/>
+    </DxDataGrid>
+}
+else
+{
+    <span>Loading...</span>
+}

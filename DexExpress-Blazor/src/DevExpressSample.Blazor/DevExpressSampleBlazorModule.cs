@@ -41,6 +41,8 @@ namespace DevExpressSample.Blazor
             ConfigureUI(builder);
             ConfigureMenu(context);
             ConfigureAutoMapper(context);
+
+            builder.Services.AddDevExpressBlazor();
         }
 
         private void ConfigureRouter(ServiceConfigurationContext context)

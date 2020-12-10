@@ -1,0 +1,39 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <Import Project="..\..\common.props" />
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+    <RootNamespace>DevExpressSample</RootNamespace>
+    <PreserveCompilationReferences>true</PreserveCompilationReferences>
+    <UserSecretsId>DevExpressSample-4681b4fd-151f-4221-84a4-929d86723e4c</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Serilog.AspNetCore" Version="3.2.0" />
+    <PackageReference Include="Serilog.Sinks.Async" Version="1.4.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="5.5.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="5.0.0" />
+    <PackageReference Include="Volo.Abp.AspNetCore.MultiTenancy" Version="4.0.0" />
+    <PackageReference Include="Volo.Abp.Autofac" Version="4.0.0" />
+    <PackageReference Include="Volo.Abp.AspNetCore.Mvc.UI.Theme.Basic" Version="4.0.0" />
+    <PackageReference Include="Volo.Abp.AspNetCore.Authentication.JwtBearer" Version="4.0.0" />
+    <PackageReference Include="Volo.Abp.AspNetCore.Serilog" Version="4.0.0" />
+    <PackageReference Include="Volo.Abp.Swashbuckle" Version="4.0.0" />
+    <PackageReference Include="Volo.Abp.Account.Web.IdentityServer" Version="4.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\DevExpressSample.Application\DevExpressSample.Application.csproj" />
+    <ProjectReference Include="..\DevExpressSample.EntityFrameworkCore.DbMigrations\DevExpressSample.EntityFrameworkCore.DbMigrations.csproj" />
+    <ProjectReference Include="..\DevExpressSample.HttpApi\DevExpressSample.HttpApi.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Logs\**" />
+    <Content Remove="Logs\**" />
+    <EmbeddedResource Remove="Logs\**" />
+    <None Remove="Logs\**" />
+  </ItemGroup>
+
+</Project>

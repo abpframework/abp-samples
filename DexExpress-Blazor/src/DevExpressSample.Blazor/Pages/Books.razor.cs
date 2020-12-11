@@ -13,15 +13,15 @@ namespace DevExpressSample.Blazor.Pages
 
         private IReadOnlyList<BookDto> BookList { get; set; }
         private int TotalCount { get; set; }
-        private CreateUpdateBook NewBook { get; set; }
-        private CreateUpdateBook EditingBook { get; set; }
+        private CreateUpdateBookDto NewBookDto { get; set; }
+        private CreateUpdateBookDto EditingBookDto { get; set; }
 
 
         public Books()
         {
             BookList = new List<BookDto>();
-            NewBook = new CreateUpdateBook();
-            EditingBook = new CreateUpdateBook();
+            NewBookDto = new CreateUpdateBookDto();
+            EditingBookDto = new CreateUpdateBookDto();
         }
         protected override async Task OnInitializedAsync()
         {
@@ -37,21 +37,21 @@ namespace DevExpressSample.Blazor.Pages
         
         private async Task CreateBookAsync(IDictionary<string, object> input)
         {
-            NewBook.Name = input.GetOrDefault("Name").ToString();
-            NewBook.Price = (float) input.GetOrDefault("Price");
-            NewBook.PublishDate = (DateTime) input.GetOrDefault("PublishDate");
+            NewBookDto.Name = input.GetOrDefault("Name").ToString();
+            NewBookDto.Price = (float) input.GetOrDefault("Price");
+            NewBookDto.PublishDate = (DateTime) input.GetOrDefault("PublishDate");
             Console.WriteLine(input.GetOrDefault("Type") == null ? "null" : input.GetOrDefault("Type") );
-            await BookAppService.CreateAsync(NewBook);
+            await BookAppService.CreateAsync(NewBookDto);
             
             await GetBooksAsync();
         }
         
         private async Task UpdateBookAsync(BookDto book, IDictionary<string, object> input)
         {
-            EditingBook.Name = input.GetOrDefault("Name") == null ? book.Name : input.GetOrDefault("Name").ToString();
-            EditingBook.Price = input.GetOrDefault("Price") == null ? book.Price : (float) input.GetOrDefault("Price");
-            EditingBook.PublishDate = input.GetOrDefault("PublishDate") == null ? book.PublishDate : (DateTime)  input.GetOrDefault("PublishDate");
-            await BookAppService.UpdateAsync(book.Id, EditingBook);
+            EditingBookDto.Name = input.GetOrDefault("Name") == null ? book.Name : input.GetOrDefault("Name").ToString();
+            EditingBookDto.Price = input.GetOrDefault("Price") == null ? book.Price : (float) input.GetOrDefault("Price");
+            EditingBookDto.PublishDate = input.GetOrDefault("PublishDate") == null ? book.PublishDate : (DateTime)  input.GetOrDefault("PublishDate");
+            await BookAppService.UpdateAsync(book.Id, EditingBookDto);
            
             await GetBooksAsync();
         }

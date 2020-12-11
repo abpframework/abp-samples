@@ -27,7 +27,7 @@ namespace DevExpressSample.Books
             return book;
         }
 
-        public async Task<BookDto> CreateAsync(CreateUpdateBook input)
+        public async Task<BookDto> CreateAsync(CreateUpdateBookDto input)
         {
             var newBook = new BookDto
             {
@@ -42,7 +42,7 @@ namespace DevExpressSample.Books
             return newBook;
         }
         
-        public async Task<BookDto> UpdateAsync(Guid id, CreateUpdateBook input)
+        public async Task<BookDto> UpdateAsync(Guid id, CreateUpdateBookDto input)
         {
             var book = await Task.Run(() => _sampleBookDataService.GetBook(id));
 

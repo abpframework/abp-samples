@@ -11,9 +11,9 @@ namespace DevExpressSample.Books
         
         Task<BookDto> GetAsync(Guid id);
 
-        Task<BookDto> CreateAsync(CreateUpdateBook input);
+        Task<BookDto> CreateAsync(CreateUpdateBookDto input);
 
-        Task<BookDto> UpdateAsync(Guid id, CreateUpdateBook input);
+        Task<BookDto> UpdateAsync(Guid id, CreateUpdateBookDto input);
         
         Task DeleteAsync(Guid id);
     }

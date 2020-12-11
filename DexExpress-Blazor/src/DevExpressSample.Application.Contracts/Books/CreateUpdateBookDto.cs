@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace DevExpressSample.Books
 {
-    public class CreateUpdateBook
+    public class CreateUpdateBookDto
     {
         [Required]
         [StringLength(128)]

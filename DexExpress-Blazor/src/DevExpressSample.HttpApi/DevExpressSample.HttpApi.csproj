@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="..\..\common.props" />
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+    <RootNamespace>DevExpressSample</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\DevExpressSample.Application.Contracts\DevExpressSample.Application.Contracts.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Volo.Abp.Account.HttpApi" Version="4.0.0" />
+    <PackageReference Include="Volo.Abp.Identity.HttpApi" Version="4.0.0" />
+    <PackageReference Include="Volo.Abp.PermissionManagement.HttpApi" Version="4.0.0" />
+    <PackageReference Include="Volo.Abp.TenantManagement.HttpApi" Version="4.0.0" />
+    <PackageReference Include="Volo.Abp.FeatureManagement.HttpApi" Version="4.0.0" />
+  </ItemGroup>
+
+</Project>

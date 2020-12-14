@@ -103,9 +103,7 @@ namespace EventOrganizer.Blazor
 
         public override void OnApplicationInitialization(ApplicationInitializationContext context)
         {
-            context.ServiceProvider
-                .UseBootstrapProviders()
-                .UseFontAwesomeIcons();
+            
         }
     }
 }

@@ -2,7 +2,7 @@
 
 namespace EventOrganizer.Blazor
 {
-    public class EventOrganizerBundleContributer : IBundleContributer
+    public class EventOrganizerBundleContributer : IBundleContributor
     {
         public void AddScripts(BundleContext context)
         {

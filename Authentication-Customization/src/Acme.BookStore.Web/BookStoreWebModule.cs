@@ -40,7 +40,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
-using Microsoft.AspNetCore.Authentication.AzureAD.UI;
+using Microsoft.Identity.Web;
 using Microsoft.IdentityModel.Protocols.OpenIdConnect;
 using Microsoft.AspNetCore.Identity;
 using System.Threading.Tasks;
@@ -59,7 +59,7 @@ namespace Acme.BookStore.Web
         typeof(AbpAspNetCoreAuthenticationJwtBearerModule),
         typeof(AbpTenantManagementWebModule),
         typeof(AbpAspNetCoreSerilogModule)
-        )]
+    )]
     public class BookStoreWebModule : AbpModule
     {
         public override void PreConfigureServices(ServiceConfigurationContext context)
@@ -116,59 +116,39 @@ namespace Acme.BookStore.Web
                     options.Authority = configuration["AuthServer:Authority"];
                     options.RequireHttpsMetadata = false;
                     options.ApiName = "Acme.BookStore";
-                })
-            //.AddAzureAD(options => configuration.Bind("AzureAd", options)); // Use AddAzureAD
-
-            //context.Services.Configure<OpenIdConnectOptions>(AzureADDefaults.OpenIdScheme, options =>
-            //{
-            //    //options.Authority = options.Authority + "/v2.0/"; //Comment this to use old endpoint for more claims like ip address
-            //    options.ClientId = configuration["AzureAd:ClientId"];
-            //    options.CallbackPath = configuration["AzureAd:CallbackPath"];
-            //    options.ResponseType = OpenIdConnectResponseType.IdToken;
-            //    options.RequireHttpsMetadata = false;
-
-            //    options.TokenValidationParameters.ValidateIssuer = false; // accept several tenants (here simplified)
-            //    options.GetClaimsFromUserInfoEndpoint = true;
-            //    options.SaveTokens = true;
-            //    options.SignInScheme = IdentityConstants.ExternalScheme;
-
-            //    options.Scope.Add("email");
-
-            //    options.Events.OnTokenValidated = (async context =>
-            //    {
-            //        var debugIdentityPrincipal = context.Principal.Identity;
-            //        var claimsFromOidcProvider = context.Principal.Claims.ToList();
-            //        await Task.CompletedTask;
-            //    });
-            //});
+                });
+            
+            context.Services.AddMicrosoftIdentityWebAppAuthentication(
+                configuration: configuration,
+                configSectionName: "AzureAd",
+                openIdConnectScheme:"AzureAD",
+                cookieScheme:null);
+            
             //Use standart openid connection
-            .AddOpenIdConnect("AzureOpenId", "AzureAD", options =>
-             {
-                 options.Authority = "https://login.microsoftonline.com/" + configuration["AzureAd:TenantId"] + "/v2.0/";
-                 options.ClientId = configuration["AzureAd:ClientId"];
-                 options.ResponseType = OpenIdConnectResponseType.IdToken;
-                 options.CallbackPath = configuration["AzureAd:CallbackPath"];
-                 options.RequireHttpsMetadata = false;
-                 options.SaveTokens = true;
-                 options.GetClaimsFromUserInfoEndpoint = true;
-
-                 options.Scope.Add("email"); // If you are using v2.0 azure endpoint, you need to request this scope for user creation
-
-                 options.Events.OnTokenValidated = (async context =>
-                 {
-                     var debugIdentityPrincipal = context.Principal.Identity;
-                     var claimsFromOidcProvider = context.Principal.Claims.ToList();
-                     await Task.CompletedTask;
-                 });
-             });
+            // .AddOpenIdConnect("AzureOpenId", "AzureAD", options =>
+            //  {
+            //      options.Authority = "https://login.microsoftonline.com/" + configuration["AzureAd:TenantId"] + "/v2.0/";
+            //      options.ClientId = configuration["AzureAd:ClientId"];
+            //      options.ResponseType = OpenIdConnectResponseType.IdToken;
+            //      options.CallbackPath = configuration["AzureAd:CallbackPath"];
+            //      options.RequireHttpsMetadata = false;
+            //      options.SaveTokens = true;
+            //      options.GetClaimsFromUserInfoEndpoint = true;
+            //
+            //      options.Scope.Add("email"); // If you are using v2.0 azure endpoint, you need to request this scope for user creation
+            //
+            //      options.Events.OnTokenValidated = (async context =>
+            //      {
+            //          var debugIdentityPrincipal = context.Principal.Identity;
+            //          var claimsFromOidcProvider = context.Principal.Claims.ToList();
+            //          await Task.CompletedTask;
+            //      });
+            //  });
         }
 
         private void ConfigureAutoMapper()
         {
-            Configure<AbpAutoMapperOptions>(options =>
-            {
-                options.AddMaps<BookStoreWebModule>();
-            });
+            Configure<AbpAutoMapperOptions>(options => { options.AddMaps<BookStoreWebModule>(); });
         }
 
         private void ConfigureVirtualFileSystem(IWebHostEnvironment hostingEnvironment)
@@ -177,10 +157,18 @@ namespace Acme.BookStore.Web
             {
                 Configure<AbpVirtualFileSystemOptions>(options =>
                 {
-                    options.FileSets.ReplaceEmbeddedByPhysical<BookStoreDomainSharedModule>(Path.Combine(hostingEnvironment.ContentRootPath, $"..{Path.DirectorySeparatorChar}Acme.BookStore.Domain.Shared"));
-                    options.FileSets.ReplaceEmbeddedByPhysical<BookStoreDomainModule>(Path.Combine(hostingEnvironment.ContentRootPath, $"..{Path.DirectorySeparatorChar}Acme.BookStore.Domain"));
-                    options.FileSets.ReplaceEmbeddedByPhysical<BookStoreApplicationContractsModule>(Path.Combine(hostingEnvironment.ContentRootPath, $"..{Path.DirectorySeparatorChar}Acme.BookStore.Application.Contracts"));
-                    options.FileSets.ReplaceEmbeddedByPhysical<BookStoreApplicationModule>(Path.Combine(hostingEnvironment.ContentRootPath, $"..{Path.DirectorySeparatorChar}Acme.BookStore.Application"));
+                    options.FileSets.ReplaceEmbeddedByPhysical<BookStoreDomainSharedModule>(
+                        Path.Combine(hostingEnvironment.ContentRootPath,
+                            $"..{Path.DirectorySeparatorChar}Acme.BookStore.Domain.Shared"));
+                    options.FileSets.ReplaceEmbeddedByPhysical<BookStoreDomainModule>(
+                        Path.Combine(hostingEnvironment.ContentRootPath,
+                            $"..{Path.DirectorySeparatorChar}Acme.BookStore.Domain"));
+                    options.FileSets.ReplaceEmbeddedByPhysical<BookStoreApplicationContractsModule>(
+                        Path.Combine(hostingEnvironment.ContentRootPath,
+                            $"..{Path.DirectorySeparatorChar}Acme.BookStore.Application.Contracts"));
+                    options.FileSets.ReplaceEmbeddedByPhysical<BookStoreApplicationModule>(
+                        Path.Combine(hostingEnvironment.ContentRootPath,
+                            $"..{Path.DirectorySeparatorChar}Acme.BookStore.Application"));
                     options.FileSets.ReplaceEmbeddedByPhysical<BookStoreWebModule>(hostingEnvironment.ContentRootPath);
                 });
             }
@@ -226,7 +214,7 @@ namespace Acme.BookStore.Web
             services.AddSwaggerGen(
                 options =>
                 {
-                    options.SwaggerDoc("v1", new OpenApiInfo { Title = "BookStore API", Version = "v1" });
+                    options.SwaggerDoc("v1", new OpenApiInfo {Title = "BookStore API", Version = "v1"});
                     options.DocInclusionPredicate((docName, description) => true);
                     options.CustomSchemaIds(type => type.FullName);
                 }
@@ -248,6 +236,7 @@ namespace Acme.BookStore.Web
             {
                 app.UseErrorPage();
             }
+
             app.UseVirtualFiles();
             app.UseRouting();
             app.UseAuthentication();
@@ -257,14 +246,12 @@ namespace Acme.BookStore.Web
             {
                 app.UseMultiTenancy();
             }
+
             app.UseIdentityServer();
             app.UseAuthorization();
             app.UseAbpRequestLocalization();
             app.UseSwagger();
-            app.UseSwaggerUI(options =>
-            {
-                options.SwaggerEndpoint("/swagger/v1/swagger.json", "BookStore API");
-            });
+            app.UseSwaggerUI(options => { options.SwaggerEndpoint("/swagger/v1/swagger.json", "BookStore API"); });
             app.UseAuditing();
             app.UseAbpSerilogEnrichers();
             app.UseConfiguredEndpoints();

@@ -148,7 +148,7 @@ namespace ClientSimulationDemo.IdentityServer
             {
                 var webClientRootUrl = configurationSection["ClientSimulationDemo_Web:RootUrl"].EnsureEndsWith('/');
 
-                /* MyProjectName_Web client is only needed if you created a tiered
+                /* ClientSimulationDemo_Web client is only needed if you created a tiered
                  * solution. Otherwise, you can delete this client. */
 
                 await CreateClientAsync(
@@ -167,7 +167,7 @@ namespace ClientSimulationDemo.IdentityServer
             var consoleAndAngularClientId = configurationSection["ClientSimulationDemo_App:ClientId"];
             if (!consoleAndAngularClientId.IsNullOrWhiteSpace())
             {
-                var webClientRootUrl = configurationSection["MyProjectName_App:RootUrl"]?.TrimEnd('/');
+                var webClientRootUrl = configurationSection["ClientSimulationDemo_App:RootUrl"]?.TrimEnd('/');
 
                 await CreateClientAsync(
                     name: consoleAndAngularClientId,

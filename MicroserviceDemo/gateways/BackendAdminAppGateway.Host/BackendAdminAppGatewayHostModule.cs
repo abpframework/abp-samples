@@ -124,7 +124,9 @@ namespace BackendAdminAppGateway.Host
 
             app.MapWhen(
                 ctx => ctx.Request.Path.ToString().StartsWith("/api/abp/") ||
-                       ctx.Request.Path.ToString().StartsWith("/Abp/"),
+                       ctx.Request.Path.ToString().StartsWith("/Abp/") ||
+                       ctx.Request.Path.ToString().StartsWith("/api/permission-management/")||
+                       ctx.Request.Path.ToString().StartsWith("/api/feature-management/"),
                 app2 =>
                 {
                     app2.UseRouting();

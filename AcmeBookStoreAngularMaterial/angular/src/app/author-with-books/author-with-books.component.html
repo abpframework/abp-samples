@@ -1,34 +1,33 @@
 <mat-vertical-stepper linear>
   <mat-step [label]="'::AuthorInfo' | abpLocalization" [stepControl]="form.get('author')" state="author">
     <form [formGroup]="form.get('author')" class="form-container">
-      <mat-form-field class="full-width">
+      <mat-form-field class="w-100">
         <mat-label>{{'::Name' | abpLocalization}} <span> * </span></mat-label>
         <input matInput id="author-name" formControlName="name" autofocus>
       </mat-form-field>
 
-      <mat-form-field class="full-width">
+      <mat-form-field class="w-100">
         <mat-label>{{'::BirthDate' | abpLocalization}}<span> * </span></mat-label>
-        <input matInput [matDatepicker]="picker"  formControlName="birthDate">
+        <input matInput [matDatepicker]="picker" formControlName="birthDate">
         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-datepicker #picker></mat-datepicker>
       </mat-form-field>
     </form>
   </mat-step>
   <mat-step [label]="'::BookInfo' | abpLocalization" [stepControl]="form.get('books')" state="book">
-
     <ng-container *ngFor="let book of bookFormArray.controls; index as i">
       <form [formGroup]="bookFormArray.at(i)" class="form-container book-form">
-        <mat-form-field class="full-width">
+        <mat-form-field class="w-100">
           <mat-label>{{'::Name' | abpLocalization}} <span> * </span></mat-label>
           <input type="text" id="book-name" matInput formControlName="name" autofocus>
         </mat-form-field>
 
-        <mat-form-field class="full-width">
+        <mat-form-field class="w-100">
           <mat-label>{{'::Price' | abpLocalization}} <span> * </span></mat-label>
           <input type="number" id="book-price" matInput formControlName="price">
         </mat-form-field>
 
-        <mat-form-field class="full-width">
+        <mat-form-field class="w-100">
           <mat-label>{{'::Type' | abpLocalization}}<span> * </span></mat-label>
           <mat-select id="book-type" formControlName="type">
             <mat-option [value]="null">{{'::SelectBookType' | abpLocalization}}</mat-option>
@@ -36,21 +35,20 @@
           </mat-select>
         </mat-form-field>
 
-        <mat-form-field class="full-width">
+        <mat-form-field class="w-100">
           <mat-label>{{'::PublishDate' | abpLocalization}} <span> * </span></mat-label>
           <input matInput [matDatepicker]="picker" formControlName="publishDate">
           <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
           <mat-datepicker #picker></mat-datepicker>
         </mat-form-field>
-        <button type="button" mat-raised-button color="warn" (click)="deleteBook(i)">{{'::Delete' | abpLocalization}}</button>
       </form>
+      <button type="button" mat-raised-button color="warn" (click)="deleteBook(i)">{{'::Delete' | abpLocalization}}</button>
     </ng-container>
     <div class="button-container">
       <button mat-raised-button color="primary" (click)="addBook()">{{'::AddBook' | abpLocalization}}</button>
       <button *ngIf="bookFormArray.controls.length" mat-raised-button color="primary"  [disabled]="form.invalid" (click)="save()">{{'::Submit' | abpLocalization}}</button>
     </div>
   </mat-step>
-
   <ng-template matStepperIcon="author">
     <mat-icon>person</mat-icon>
   </ng-template>

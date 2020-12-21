@@ -1,6 +1,5 @@
 using System;
 using System.ComponentModel.DataAnnotations;
-using Acme.BookStore.Books;
 using Volo.Abp.Application.Dtos;
 
 namespace Acme.BookStore.AngularMaterial.Books

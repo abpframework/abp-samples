@@ -30,4 +30,12 @@ export class AuthorDialogComponent implements OnInit{
       birthDate: [this.data?.birthDate, Validators.required],
     });
   }
+
+  getFormValue() {
+    const {birthDate} = this.form.value;
+    return {
+      ...this.form.value,
+      publishDate: `${birthDate?.getFullYear()}-${birthDate?.getMonth() + 1}-${birthDate?.getDate()}`
+    };
+  }
 }

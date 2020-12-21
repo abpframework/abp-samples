@@ -6,7 +6,7 @@ import { PageEvent } from '@angular/material/paginator';
 import { Sort } from '@angular/material/sort';
 import { MatDialog } from '@angular/material/dialog';
 import { AuthorDialogComponent } from './components/author-dialog/author-dialog.component';
-import { ConfirmationDialogComponent } from '../shared/confirmation-dialog/confirmation-dialog.component';
+import { ConfirmationDialogComponent } from '../shared/components/confirmation-dialog/confirmation-dialog.component';
 
 @Component({
   selector: 'app-author',
@@ -16,8 +16,6 @@ import { ConfirmationDialogComponent } from '../shared/confirmation-dialog/confi
 })
 export class AuthorComponent implements OnInit {
   author = { items: [], totalCount: 0 } as PagedResultDto<AuthorDto>;
-
-  isModalOpen = false;
 
   form: FormGroup;
 

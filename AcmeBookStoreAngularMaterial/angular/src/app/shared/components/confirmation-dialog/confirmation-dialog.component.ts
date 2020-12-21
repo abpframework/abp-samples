@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material/dialog';
 
 export interface ConfirmationDialogData {
@@ -10,15 +10,10 @@ export interface ConfirmationDialogData {
   templateUrl: './confirmation-dialog.component.html',
   styleUrls: ['./confirmation-dialog.component.scss'],
   providers: [
-    {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: true, width: "450px" }}
+    {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: true, width: '450px' }}
 
   ]
 })
-export class ConfirmationDialogComponent implements OnInit {
-
+export class ConfirmationDialogComponent {
   constructor(@Inject(MAT_DIALOG_DATA) public data: ConfirmationDialogData) { }
-
-  ngOnInit(): void {
-  }
-
 }

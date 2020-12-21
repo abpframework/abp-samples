@@ -1,14 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { BookService, CreateAuthorWithBookDto } from '@proxy/books';
+import { BookService, bookTypeOptions, CreateAuthorWithBookDto } from '@proxy/books';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { bookTypeOptions } from '@proxy/acme/book-store/books';
 import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
 import { ToasterService } from '@abp/ng.theme.shared';
 
 @Component({
   selector: 'app-author-with-book',
-  templateUrl: './author-with-book.component.html',
-  styleUrls: ['./author-with-book.component.css'],
+  templateUrl: './author-with-books.component.html',
+  styleUrls: ['./author-with-books.component.scss'],
   providers: [
     {
       provide: STEPPER_GLOBAL_OPTIONS,
@@ -16,7 +15,7 @@ import { ToasterService } from '@abp/ng.theme.shared';
     }
   ]
 })
-export class AuthorWithBookComponent implements OnInit {
+export class AuthorWithBooksComponent implements OnInit {
 
   form: FormGroup;
 
@@ -39,10 +38,7 @@ export class AuthorWithBookComponent implements OnInit {
         birthDate: [null, Validators.required]
       }),
       books: this.fb.array([this.getBookForm()])
-      });
-  }
-  addBook(){
-    (this.form.get('books') as FormArray).push(this.getBookForm());
+    });
   }
 
   getBookForm(){
@@ -52,6 +48,14 @@ export class AuthorWithBookComponent implements OnInit {
       publishDate: [null, Validators.required],
       price: [null, Validators.required],
     });
+  }
+
+  addBook(){
+    this.bookFormArray.push(this.getBookForm());
+  }
+
+  deleteBook(i: number) {
+    this.bookFormArray.removeAt(i);
   }
 
   save() {
@@ -65,10 +69,5 @@ export class AuthorWithBookComponent implements OnInit {
     this.bookService.createAuthorWithBooks(authorWithBook).subscribe((res) => {
       this.toasterService.success('::AuthorWithBook:Success', '', {messageLocalizationParams: [res.name]});
     });
-  }
-
-  deleteBook(i: number) {
-    this.bookFormArray.removeAt(i);
-
   }
 }

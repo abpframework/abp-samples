@@ -4,7 +4,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using Acme.BookStore.AngularMaterial.Authors;
 using Acme.BookStore.AngularMaterial.Permissions;
-using Acme.BookStore.Books;
 using Microsoft.AspNetCore.Authorization;
 using Volo.Abp.Application.Dtos;
 using Volo.Abp.Application.Services;

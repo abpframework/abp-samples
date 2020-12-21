@@ -108,6 +108,11 @@ namespace BloggingService.Host
                 options.ApplicationName = "BloggingService";
             });
 
+            Configure<AbpUnitOfWorkDefaultOptions>(options =>
+            {
+                options.TransactionBehavior = UnitOfWorkTransactionBehavior.Disabled;
+            });
+
             var redis = ConnectionMultiplexer.Connect(configuration["Redis:Configuration"]);
             context.Services.AddDataProtection()
                 .PersistKeysToStackExchangeRedis(redis, "MsDemo-DataProtection-Keys");

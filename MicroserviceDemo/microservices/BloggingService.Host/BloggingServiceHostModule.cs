@@ -36,6 +36,7 @@ using Volo.Blogging;
 using Volo.Blogging.Blogs;
 using Volo.Blogging.Files;
 using Volo.Blogging.MongoDB;
+using Volo.Abp.Uow;
 
 namespace BloggingService.Host
 {

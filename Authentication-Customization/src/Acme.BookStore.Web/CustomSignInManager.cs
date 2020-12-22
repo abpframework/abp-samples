@@ -10,6 +10,7 @@ namespace Acme.BookStore.Web
     {
         private const string LoginProviderKey = "LoginProvider";
         private const string XsrfKey = "XsrfId";
+
         public CustomSignInManager(
             UserManager<Volo.Abp.Identity.IdentityUser> userManager,
             Microsoft.AspNetCore.Http.IHttpContextAccessor contextAccessor,
@@ -17,10 +18,12 @@ namespace Acme.BookStore.Web
             Microsoft.Extensions.Options.IOptions<IdentityOptions> optionsAccessor,
             Microsoft.Extensions.Logging.ILogger<SignInManager<Volo.Abp.Identity.IdentityUser>> logger,
             Microsoft.AspNetCore.Authentication.IAuthenticationSchemeProvider schemes,
-            IUserConfirmation<Volo.Abp.Identity.IdentityUser> confirmation) : base(userManager, contextAccessor, claimsFactory, optionsAccessor, logger, schemes, confirmation)
+            IUserConfirmation<Volo.Abp.Identity.IdentityUser> confirmation) : base(userManager, contextAccessor,
+            claimsFactory, optionsAccessor, logger, schemes, confirmation)
         {
         }
-        // https://github.com/aspnet/Identity/blob/feedcb5c53444f716ef5121d3add56e11c7b71e5/src/Identity/SignInManager.cs#L589-L624
+
+        // https://github.com/dotnet/aspnetcore/blob/master/src/Identity/Core/src/SignInManager.cs#L648-L684
         public override async Task<ExternalLoginInfo> GetExternalLoginInfoAsync(string expectedXsrf = null)
         {
             var auth = await Context.AuthenticateAsync(IdentityConstants.ExternalScheme);
@@ -36,6 +39,7 @@ namespace Acme.BookStore.Web
                 {
                     return null;
                 }
+
                 var userId = items[XsrfKey] as string;
                 if (userId != expectedXsrf)
                 {
@@ -50,14 +54,14 @@ namespace Acme.BookStore.Web
                 return null;
             }
 
-            var providerDisplayName = (await GetExternalAuthenticationSchemesAsync()).FirstOrDefault(p => p.Name == provider)?.DisplayName
+            var providerDisplayName = (await GetExternalAuthenticationSchemesAsync())
+                                      .FirstOrDefault(p => p.Name == provider)?.DisplayName
                                       ?? provider;
             return new ExternalLoginInfo(auth.Principal, provider, providerKey, providerDisplayName)
             {
-                AuthenticationTokens = auth.Properties.GetTokens()
+                AuthenticationTokens = auth.Properties.GetTokens(),
+                AuthenticationProperties = auth.Properties
             };
         }
-
-
     }
 }

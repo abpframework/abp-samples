@@ -23,8 +23,15 @@
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.app.json",
             "aot": true,
-            "allowedCommonJsDependencies": ["chart.js", "js-sha256"],
-            "assets": ["src/favicon.ico", "src/assets"],
+            "extractCss": true,
+            "allowedCommonJsDependencies": [
+              "chart.js",
+              "js-sha256"
+            ],
+            "assets": [
+              "src/favicon.ico",
+              "src/assets"
+            ],
             "styles": [
               "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
               {
@@ -77,6 +84,7 @@
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
+              "extractCss": true,
               "namedChunks": false,
               "extractLicenses": true,
               "vendorChunk": false,
@@ -120,9 +128,12 @@
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.spec.json",
             "karmaConfig": "karma.conf.js",
-            "assets": ["src/favicon.ico", "src/assets"],
+            "assets": [
+              "src/favicon.ico",
+              "src/assets"
+            ],
             "styles": [
-              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
+              "./node_modules/@angular/material/prebuilt-themes/pink-bluegrey.css",
               {
                 "input": "node_modules/bootstrap/dist/css/bootstrap.min.css",
                 "inject": true,
@@ -146,8 +157,14 @@
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": ["tsconfig.app.json", "tsconfig.spec.json", "e2e/tsconfig.json"],
-            "exclude": ["**/node_modules/**"]
+            "tsConfig": [
+              "tsconfig.app.json",
+              "tsconfig.spec.json",
+              "e2e/tsconfig.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
           }
         },
         "e2e": {

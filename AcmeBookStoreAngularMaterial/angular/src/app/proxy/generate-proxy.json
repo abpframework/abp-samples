@@ -153,1170 +153,6 @@
         }
       }
     },
-    "featureManagement": {
-      "rootPath": "featureManagement",
-      "remoteServiceName": "AbpFeatureManagement",
-      "controllers": {
-        "Volo.Abp.FeatureManagement.FeaturesController": {
-          "controllerName": "Features",
-          "type": "Volo.Abp.FeatureManagement.FeaturesController",
-          "interfaces": [
-            {
-              "type": "Volo.Abp.FeatureManagement.IFeatureAppService"
-            }
-          ],
-          "actions": {
-            "GetAsyncByProviderNameAndProviderKey": {
-              "uniqueName": "GetAsyncByProviderNameAndProviderKey",
-              "name": "GetAsync",
-              "httpMethod": "GET",
-              "url": "api/feature-management/features",
-              "supportedVersions": [],
-              "parametersOnMethod": [
-                {
-                  "name": "providerName",
-                  "typeAsString": "System.String, System.Private.CoreLib",
-                  "type": "System.String",
-                  "typeSimple": "string",
-                  "isOptional": false,
-                  "defaultValue": null
-                },
-                {
-                  "name": "providerKey",
-                  "typeAsString": "System.String, System.Private.CoreLib",
-                  "type": "System.String",
-                  "typeSimple": "string",
-                  "isOptional": false,
-                  "defaultValue": null
-                }
-              ],
-              "parameters": [
-                {
-                  "nameOnMethod": "providerName",
-                  "name": "providerName",
-                  "type": "System.String",
-                  "typeSimple": "string",
-                  "isOptional": false,
-                  "defaultValue": null,
-                  "constraintTypes": null,
-                  "bindingSourceId": "ModelBinding",
-                  "descriptorName": ""
-                },
-                {
-                  "nameOnMethod": "providerKey",
-                  "name": "providerKey",
-                  "type": "System.String",
-                  "typeSimple": "string",
-                  "isOptional": false,
-                  "defaultValue": null,
-                  "constraintTypes": null,
-                  "bindingSourceId": "ModelBinding",
-                  "descriptorName": ""
-                }
-              ],
-              "returnValue": {
-                "type": "Volo.Abp.FeatureManagement.GetFeatureListResultDto",
-                "typeSimple": "Volo.Abp.FeatureManagement.GetFeatureListResultDto"
-              }
-            },
-            "UpdateAsyncByProviderNameAndProviderKeyAndInput": {
-              "uniqueName": "UpdateAsyncByProviderNameAndProviderKeyAndInput",
-              "name": "UpdateAsync",
-              "httpMethod": "PUT",
-              "url": "api/feature-management/features",
-              "supportedVersions": [],
-              "parametersOnMethod": [
-                {
-                  "name": "providerName",
-                  "typeAsString": "System.String, System.Private.CoreLib",
-                  "type": "System.String",
-                  "typeSimple": "string",
-                  "isOptional": false,
-                  "defaultValue": null
-                },
-                {
-                  "name": "providerKey",
-                  "typeAsString": "System.String, System.Private.CoreLib",
-                  "type": "System.String",
-                  "typeSimple": "string",
-                  "isOptional": false,
-                  "defaultValue": null
-                },
-                {
-                  "name": "input",
-                  "typeAsString": "Volo.Abp.FeatureManagement.UpdateFeaturesDto, Volo.Abp.FeatureManagement.Application.Contracts",
-                  "type": "Volo.Abp.FeatureManagement.UpdateFeaturesDto",
-                  "typeSimple": "Volo.Abp.FeatureManagement.UpdateFeaturesDto",
-                  "isOptional": false,
-                  "defaultValue": null
-                }
-              ],
-              "parameters": [
-                {
-                  "nameOnMethod": "providerName",
-                  "name": "providerName",
-                  "type": "System.String",
-                  "typeSimple": "string",
-                  "isOptional": false,
-                  "defaultValue": null,
-                  "constraintTypes": null,
-                  "bindingSourceId": "ModelBinding",
-                  "descriptorName": ""
-                },
-                {
-                  "nameOnMethod": "providerKey",
-                  "name": "providerKey",
-                  "type": "System.String",
-                  "typeSimple": "string",
-                  "isOptional": false,
-                  "defaultValue": null,
-                  "constraintTypes": null,
-                  "bindingSourceId": "ModelBinding",
-                  "descriptorName": ""
-                },
-                {
-                  "nameOnMethod": "input",
-                  "name": "input",
-                  "type": "Volo.Abp.FeatureManagement.UpdateFeaturesDto",
-                  "typeSimple": "Volo.Abp.FeatureManagement.UpdateFeaturesDto",
-                  "isOptional": false,
-                  "defaultValue": null,
-                  "constraintTypes": null,
-                  "bindingSourceId": "Body",
-                  "descriptorName": ""
-                }
-              ],
-              "returnValue": {
-                "type": "System.Void",
-                "typeSimple": "System.Void"
-              }
-            }
-          }
-        }
-      }
-    },
-    "multi-tenancy": {
-      "rootPath": "multi-tenancy",
-      "remoteServiceName": "AbpTenantManagement",
-      "controllers": {
-        "Volo.Abp.TenantManagement.TenantController": {
-          "controllerName": "Tenant",
-          "type": "Volo.Abp.TenantManagement.TenantController",
-          "interfaces": [
-            {
-              "type": "Volo.Abp.TenantManagement.ITenantAppService"
-            }
-          ],
-          "actions": {
-            "GetAsyncById": {
-              "uniqueName": "GetAsyncById",
-              "name": "GetAsync",
-              "httpMethod": "GET",
-              "url": "api/multi-tenancy/tenants/{id}",
-              "supportedVersions": [],
-              "parametersOnMethod": [
-                {
-                  "name": "id",
-                  "typeAsString": "System.Guid, System.Private.CoreLib",
-                  "type": "System.Guid",
-                  "typeSimple": "string",
-                  "isOptional": false,
-                  "defaultValue": null
-                }
-              ],
-              "parameters": [
-                {
-                  "nameOnMethod": "id",
-                  "name": "id",
-                  "type": "System.Guid",
-                  "typeSimple": "string",
-                  "isOptional": false,
-                  "defaultValue": null,
-                  "constraintTypes": [],
-                  "bindingSourceId": "Path",
-                  "descriptorName": ""
-                }
-              ],
-              "returnValue": {
-                "type": "Volo.Abp.TenantManagement.TenantDto",
-                "typeSimple": "Volo.Abp.TenantManagement.TenantDto"
-              }
-            },
-            "GetListAsyncByInput": {
-              "uniqueName": "GetListAsyncByInput",
-              "name": "GetListAsync",
-              "httpMethod": "GET",
-              "url": "api/multi-tenancy/tenants",
-              "supportedVersions": [],
-              "parametersOnMethod": [
-                {
-                  "name": "input",
-                  "typeAsString": "Volo.Abp.TenantManagement.GetTenantsInput, Volo.Abp.TenantManagement.Application.Contracts",
-                  "type": "Volo.Abp.TenantManagement.GetTenantsInput",
-                  "typeSimple": "Volo.Abp.TenantManagement.GetTenantsInput",
-                  "isOptional": false,
-                  "defaultValue": null
-                }
-              ],
-              "parameters": [
-                {
-                  "nameOnMethod": "input",
-                  "name": "Filter",
-                  "type": "System.String",
-                  "typeSimple": "string",
-                  "isOptional": false,
-                  "defaultValue": null,
-                  "constraintTypes": null,
-                  "bindingSourceId": "ModelBinding",
-                  "descriptorName": "input"
-                },
-                {
-                  "nameOnMethod": "input",
-                  "name": "Sorting",
-                  "type": "System.String",
-                  "typeSimple": "string",
-                  "isOptional": false,
-                  "defaultValue": null,
-                  "constraintTypes": null,
-                  "bindingSourceId": "ModelBinding",
-                  "descriptorName": "input"
-                },
-                {
-                  "nameOnMethod": "input",
-                  "name": "SkipCount",
-                  "type": "System.Int32",
-                  "typeSimple": "number",
-                  "isOptional": false,
-                  "defaultValue": null,
-                  "constraintTypes": null,
-                  "bindingSourceId": "ModelBinding",
-                  "descriptorName": "input"
-                },
-                {
-                  "nameOnMethod": "input",
-                  "name": "MaxResultCount",
-                  "type": "System.Int32",
-                  "typeSimple": "number",
-                  "isOptional": false,
-                  "defaultValue": null,
-                  "constraintTypes": null,
-                  "bindingSourceId": "ModelBinding",
-                  "descriptorName": "input"
-                }
-              ],
-              "returnValue": {
-                "type": "Volo.Abp.Application.Dtos.PagedResultDto<Volo.Abp.TenantManagement.TenantDto>",
-                "typeSimple": "Volo.Abp.Application.Dtos.PagedResultDto<Volo.Abp.TenantManagement.TenantDto>"
-              }
-            },
-            "CreateAsyncByInput": {
-              "uniqueName": "CreateAsyncByInput",
-              "name": "CreateAsync",
-              "httpMethod": "POST",
-              "url": "api/multi-tenancy/tenants",
-              "supportedVersions": [],
-              "parametersOnMethod": [
-                {
-                  "name": "input",
-                  "typeAsString": "Volo.Abp.TenantManagement.TenantCreateDto, Volo.Abp.TenantManagement.Application.Contracts",
-                  "type": "Volo.Abp.TenantManagement.TenantCreateDto",
-                  "typeSimple": "Volo.Abp.TenantManagement.TenantCreateDto",
-                  "isOptional": false,
-                  "defaultValue": null
-                }
-              ],
-              "parameters": [
-                {
-                  "nameOnMethod": "input",
-                  "name": "input",
-                  "type": "Volo.Abp.TenantManagement.TenantCreateDto",
-                  "typeSimple": "Volo.Abp.TenantManagement.TenantCreateDto",
-                  "isOptional": false,
-                  "defaultValue": null,
-                  "constraintTypes": null,
-                  "bindingSourceId": "Body",
-                  "descriptorName": ""
-                }
-              ],
-              "returnValue": {
-                "type": "Volo.Abp.TenantManagement.TenantDto",
-                "typeSimple": "Volo.Abp.TenantManagement.TenantDto"
-              }
-            },
-            "UpdateAsyncByIdAndInput": {
-              "uniqueName": "UpdateAsyncByIdAndInput",
-              "name": "UpdateAsync",
-              "httpMethod": "PUT",
-              "url": "api/multi-tenancy/tenants/{id}",
-              "supportedVersions": [],
-              "parametersOnMethod": [
-                {
-                  "name": "id",
-                  "typeAsString": "System.Guid, System.Private.CoreLib",
-                  "type": "System.Guid",
-                  "typeSimple": "string",
-                  "isOptional": false,
-                  "defaultValue": null
-                },
-                {
-                  "name": "input",
-                  "typeAsString": "Volo.Abp.TenantManagement.TenantUpdateDto, Volo.Abp.TenantManagement.Application.Contracts",
-                  "type": "Volo.Abp.TenantManagement.TenantUpdateDto",
-                  "typeSimple": "Volo.Abp.TenantManagement.TenantUpdateDto",
-                  "isOptional": false,
-                  "defaultValue": null
-                }
-              ],
-              "parameters": [
-                {
-                  "nameOnMethod": "id",
-                  "name": "id",
-                  "type": "System.Guid",
-                  "typeSimple": "string",
-                  "isOptional": false,
-                  "defaultValue": null,
-                  "constraintTypes": [],
-                  "bindingSourceId": "Path",
-                  "descriptorName": ""
-                },
-                {
-                  "nameOnMethod": "input",
-                  "name": "input",
-                  "type": "Volo.Abp.TenantManagement.TenantUpdateDto",
-                  "typeSimple": "Volo.Abp.TenantManagement.TenantUpdateDto",
-                  "isOptional": false,
-                  "defaultValue": null,
-                  "constraintTypes": null,
-                  "bindingSourceId": "Body",
-                  "descriptorName": ""
-                }
-              ],
-              "returnValue": {
-                "type": "Volo.Abp.TenantManagement.TenantDto",
-                "typeSimple": "Volo.Abp.TenantManagement.TenantDto"
-              }
-            },
-            "DeleteAsyncById": {
-              "uniqueName": "DeleteAsyncById",
-              "name": "DeleteAsync",
-              "httpMethod": "DELETE",
-              "url": "api/multi-tenancy/tenants/{id}",
-              "supportedVersions": [],
-              "parametersOnMethod": [
-                {
-                  "name": "id",
-                  "typeAsString": "System.Guid, System.Private.CoreLib",
-                  "type": "System.Guid",
-                  "typeSimple": "string",
-                  "isOptional": false,
-                  "defaultValue": null
-                }
-              ],
-              "parameters": [
-                {
-                  "nameOnMethod": "id",
-                  "name": "id",
-                  "type": "System.Guid",
-                  "typeSimple": "string",
-                  "isOptional": false,
-                  "defaultValue": null,
-                  "constraintTypes": [],
-                  "bindingSourceId": "Path",
-                  "descriptorName": ""
-                }
-              ],
-              "returnValue": {
-                "type": "System.Void",
-                "typeSimple": "System.Void"
-              }
-            },
-            "GetDefaultConnectionStringAsyncById": {
-              "uniqueName": "GetDefaultConnectionStringAsyncById",
-              "name": "GetDefaultConnectionStringAsync",
-              "httpMethod": "GET",
-              "url": "api/multi-tenancy/tenants/{id}/default-connection-string",
-              "supportedVersions": [],
-              "parametersOnMethod": [
-                {
-                  "name": "id",
-                  "typeAsString": "System.Guid, System.Private.CoreLib",
-                  "type": "System.Guid",
-                  "typeSimple": "string",
-                  "isOptional": false,
-                  "defaultValue": null
-                }
-              ],
-              "parameters": [
-                {
-                  "nameOnMethod": "id",
-                  "name": "id",
-                  "type": "System.Guid",
-                  "typeSimple": "string",
-                  "isOptional": false,
-                  "defaultValue": null,
-                  "constraintTypes": [],
-                  "bindingSourceId": "Path",
-                  "descriptorName": ""
-                }
-              ],
-              "returnValue": {
-                "type": "System.String",
-                "typeSimple": "string"
-              }
-            },
-            "UpdateDefaultConnectionStringAsyncByIdAndDefaultConnectionString": {
-              "uniqueName": "UpdateDefaultConnectionStringAsyncByIdAndDefaultConnectionString",
-              "name": "UpdateDefaultConnectionStringAsync",
-              "httpMethod": "PUT",
-              "url": "api/multi-tenancy/tenants/{id}/default-connection-string",
-              "supportedVersions": [],
-              "parametersOnMethod": [
-                {
-                  "name": "id",
-                  "typeAsString": "System.Guid, System.Private.CoreLib",
-                  "type": "System.Guid",
-                  "typeSimple": "string",
-                  "isOptional": false,
-                  "defaultValue": null
-                },
-                {
-                  "name": "defaultConnectionString",
-                  "typeAsString": "System.String, System.Private.CoreLib",
-                  "type": "System.String",
-                  "typeSimple": "string",
-                  "isOptional": false,
-                  "defaultValue": null
-                }
-              ],
-              "parameters": [
-                {
-                  "nameOnMethod": "id",
-                  "name": "id",
-                  "type": "System.Guid",
-                  "typeSimple": "string",
-                  "isOptional": false,
-                  "defaultValue": null,
-                  "constraintTypes": [],
-                  "bindingSourceId": "Path",
-                  "descriptorName": ""
-                },
-                {
-                  "nameOnMethod": "defaultConnectionString",
-                  "name": "defaultConnectionString",
-                  "type": "System.String",
-                  "typeSimple": "string",
-                  "isOptional": false,
-                  "defaultValue": null,
-                  "constraintTypes": null,
-                  "bindingSourceId": "ModelBinding",
-                  "descriptorName": ""
-                }
-              ],
-              "returnValue": {
-                "type": "System.Void",
-                "typeSimple": "System.Void"
-              }
-            },
-            "DeleteDefaultConnectionStringAsyncById": {
-              "uniqueName": "DeleteDefaultConnectionStringAsyncById",
-              "name": "DeleteDefaultConnectionStringAsync",
-              "httpMethod": "DELETE",
-              "url": "api/multi-tenancy/tenants/{id}/default-connection-string",
-              "supportedVersions": [],
-              "parametersOnMethod": [
-                {
-                  "name": "id",
-                  "typeAsString": "System.Guid, System.Private.CoreLib",
-                  "type": "System.Guid",
-                  "typeSimple": "string",
-                  "isOptional": false,
-                  "defaultValue": null
-                }
-              ],
-              "parameters": [
-                {
-                  "nameOnMethod": "id",
-                  "name": "id",
-                  "type": "System.Guid",
-                  "typeSimple": "string",
-                  "isOptional": false,
-                  "defaultValue": null,
-                  "constraintTypes": [],
-                  "bindingSourceId": "Path",
-                  "descriptorName": ""
-                }
-              ],
-              "returnValue": {
-                "type": "System.Void",
-                "typeSimple": "System.Void"
-              }
-            }
-          }
-        }
-      }
-    },
-    "app": {
-      "rootPath": "app",
-      "remoteServiceName": "Default",
-      "controllers": {
-        "Acme.BookStore.AngularMaterial.Books.BookAppService": {
-          "controllerName": "Book",
-          "type": "Acme.BookStore.AngularMaterial.Books.BookAppService",
-          "interfaces": [
-            {
-              "type": "Volo.Abp.Validation.IValidationEnabled"
-            },
-            {
-              "type": "Volo.Abp.Auditing.IAuditingEnabled"
-            },
-            {
-              "type": "Acme.BookStore.AngularMaterial.Books.IBookAppService"
-            }
-          ],
-          "actions": {
-            "GetAsyncById": {
-              "uniqueName": "GetAsyncById",
-              "name": "GetAsync",
-              "httpMethod": "GET",
-              "url": "api/app/book/{id}",
-              "supportedVersions": [],
-              "parametersOnMethod": [
-                {
-                  "name": "id",
-                  "typeAsString": "System.Guid, System.Private.CoreLib",
-                  "type": "System.Guid",
-                  "typeSimple": "string",
-                  "isOptional": false,
-                  "defaultValue": null
-                }
-              ],
-              "parameters": [
-                {
-                  "nameOnMethod": "id",
-                  "name": "id",
-                  "type": "System.Guid",
-                  "typeSimple": "string",
-                  "isOptional": false,
-                  "defaultValue": null,
-                  "constraintTypes": [],
-                  "bindingSourceId": "Path",
-                  "descriptorName": ""
-                }
-              ],
-              "returnValue": {
-                "type": "Acme.BookStore.AngularMaterial.Books.BookDto",
-                "typeSimple": "Acme.BookStore.AngularMaterial.Books.BookDto"
-              }
-            },
-            "GetListAsyncByInput": {
-              "uniqueName": "GetListAsyncByInput",
-              "name": "GetListAsync",
-              "httpMethod": "GET",
-              "url": "api/app/book",
-              "supportedVersions": [],
-              "parametersOnMethod": [
-                {
-                  "name": "input",
-                  "typeAsString": "Volo.Abp.Application.Dtos.PagedAndSortedResultRequestDto, Volo.Abp.Ddd.Application.Contracts",
-                  "type": "Volo.Abp.Application.Dtos.PagedAndSortedResultRequestDto",
-                  "typeSimple": "Volo.Abp.Application.Dtos.PagedAndSortedResultRequestDto",
-                  "isOptional": false,
-                  "defaultValue": null
-                }
-              ],
-              "parameters": [
-                {
-                  "nameOnMethod": "input",
-                  "name": "SkipCount",
-                  "type": "System.Int32",
-                  "typeSimple": "number",
-                  "isOptional": false,
-                  "defaultValue": null,
-                  "constraintTypes": null,
-                  "bindingSourceId": "ModelBinding",
-                  "descriptorName": "input"
-                },
-                {
-                  "nameOnMethod": "input",
-                  "name": "MaxResultCount",
-                  "type": "System.Int32",
-                  "typeSimple": "number",
-                  "isOptional": false,
-                  "defaultValue": null,
-                  "constraintTypes": null,
-                  "bindingSourceId": "ModelBinding",
-                  "descriptorName": "input"
-                },
-                {
-                  "nameOnMethod": "input",
-                  "name": "Sorting",
-                  "type": "System.String",
-                  "typeSimple": "string",
-                  "isOptional": false,
-                  "defaultValue": null,
-                  "constraintTypes": null,
-                  "bindingSourceId": "ModelBinding",
-                  "descriptorName": "input"
-                }
-              ],
-              "returnValue": {
-                "type": "Volo.Abp.Application.Dtos.PagedResultDto<Acme.BookStore.AngularMaterial.Books.BookDto>",
-                "typeSimple": "Volo.Abp.Application.Dtos.PagedResultDto<Acme.BookStore.AngularMaterial.Books.BookDto>"
-              }
-            },
-            "GetAuthorLookupAsync": {
-              "uniqueName": "GetAuthorLookupAsync",
-              "name": "GetAuthorLookupAsync",
-              "httpMethod": "GET",
-              "url": "api/app/book/author-lookup",
-              "supportedVersions": [],
-              "parametersOnMethod": [],
-              "parameters": [],
-              "returnValue": {
-                "type": "Volo.Abp.Application.Dtos.ListResultDto<Acme.BookStore.AngularMaterial.Books.AuthorLookupDto>",
-                "typeSimple": "Volo.Abp.Application.Dtos.ListResultDto<Acme.BookStore.AngularMaterial.Books.AuthorLookupDto>"
-              }
-            },
-            "CreateAuthorWithBooksAsyncByInput": {
-              "uniqueName": "CreateAuthorWithBooksAsyncByInput",
-              "name": "CreateAuthorWithBooksAsync",
-              "httpMethod": "POST",
-              "url": "api/app/book/author-with-books",
-              "supportedVersions": [],
-              "parametersOnMethod": [
-                {
-                  "name": "input",
-                  "typeAsString": "Acme.BookStore.AngularMaterial.Books.CreateAuthorWithBookDto, Acme.BookStore.AngularMaterial.Application.Contracts",
-                  "type": "Acme.BookStore.AngularMaterial.Books.CreateAuthorWithBookDto",
-                  "typeSimple": "Acme.BookStore.AngularMaterial.Books.CreateAuthorWithBookDto",
-                  "isOptional": false,
-                  "defaultValue": null
-                }
-              ],
-              "parameters": [
-                {
-                  "nameOnMethod": "input",
-                  "name": "input",
-                  "type": "Acme.BookStore.AngularMaterial.Books.CreateAuthorWithBookDto",
-                  "typeSimple": "Acme.BookStore.AngularMaterial.Books.CreateAuthorWithBookDto",
-                  "isOptional": false,
-                  "defaultValue": null,
-                  "constraintTypes": null,
-                  "bindingSourceId": "Body",
-                  "descriptorName": ""
-                }
-              ],
-              "returnValue": {
-                "type": "Acme.BookStore.AngularMaterial.Books.AuthorWithDetailsDto",
-                "typeSimple": "Acme.BookStore.AngularMaterial.Books.AuthorWithDetailsDto"
-              }
-            },
-            "CreateAsyncByInput": {
-              "uniqueName": "CreateAsyncByInput",
-              "name": "CreateAsync",
-              "httpMethod": "POST",
-              "url": "api/app/book",
-              "supportedVersions": [],
-              "parametersOnMethod": [
-                {
-                  "name": "input",
-                  "typeAsString": "Acme.BookStore.AngularMaterial.Books.CreateUpdateBookDto, Acme.BookStore.AngularMaterial.Application.Contracts",
-                  "type": "Acme.BookStore.AngularMaterial.Books.CreateUpdateBookDto",
-                  "typeSimple": "Acme.BookStore.AngularMaterial.Books.CreateUpdateBookDto",
-                  "isOptional": false,
-                  "defaultValue": null
-                }
-              ],
-              "parameters": [
-                {
-                  "nameOnMethod": "input",
-                  "name": "input",
-                  "type": "Acme.BookStore.AngularMaterial.Books.CreateUpdateBookDto",
-                  "typeSimple": "Acme.BookStore.AngularMaterial.Books.CreateUpdateBookDto",
-                  "isOptional": false,
-                  "defaultValue": null,
-                  "constraintTypes": null,
-                  "bindingSourceId": "Body",
-                  "descriptorName": ""
-                }
-              ],
-              "returnValue": {
-                "type": "Acme.BookStore.AngularMaterial.Books.BookDto",
-                "typeSimple": "Acme.BookStore.AngularMaterial.Books.BookDto"
-              }
-            },
-            "UpdateAsyncByIdAndInput": {
-              "uniqueName": "UpdateAsyncByIdAndInput",
-              "name": "UpdateAsync",
-              "httpMethod": "PUT",
-              "url": "api/app/book/{id}",
-              "supportedVersions": [],
-              "parametersOnMethod": [
-                {
-                  "name": "id",
-                  "typeAsString": "System.Guid, System.Private.CoreLib",
-                  "type": "System.Guid",
-                  "typeSimple": "string",
-                  "isOptional": false,
-                  "defaultValue": null
-                },
-                {
-                  "name": "input",
-                  "typeAsString": "Acme.BookStore.AngularMaterial.Books.CreateUpdateBookDto, Acme.BookStore.AngularMaterial.Application.Contracts",
-                  "type": "Acme.BookStore.AngularMaterial.Books.CreateUpdateBookDto",
-                  "typeSimple": "Acme.BookStore.AngularMaterial.Books.CreateUpdateBookDto",
-                  "isOptional": false,
-                  "defaultValue": null
-                }
-              ],
-              "parameters": [
-                {
-                  "nameOnMethod": "id",
-                  "name": "id",
-                  "type": "System.Guid",
-                  "typeSimple": "string",
-                  "isOptional": false,
-                  "defaultValue": null,
-                  "constraintTypes": [],
-                  "bindingSourceId": "Path",
-                  "descriptorName": ""
-                },
-                {
-                  "nameOnMethod": "input",
-                  "name": "input",
-                  "type": "Acme.BookStore.AngularMaterial.Books.CreateUpdateBookDto",
-                  "typeSimple": "Acme.BookStore.AngularMaterial.Books.CreateUpdateBookDto",
-                  "isOptional": false,
-                  "defaultValue": null,
-                  "constraintTypes": null,
-                  "bindingSourceId": "Body",
-                  "descriptorName": ""
-                }
-              ],
-              "returnValue": {
-                "type": "Acme.BookStore.AngularMaterial.Books.BookDto",
-                "typeSimple": "Acme.BookStore.AngularMaterial.Books.BookDto"
-              }
-            },
-            "DeleteAsyncById": {
-              "uniqueName": "DeleteAsyncById",
-              "name": "DeleteAsync",
-              "httpMethod": "DELETE",
-              "url": "api/app/book/{id}",
-              "supportedVersions": [],
-              "parametersOnMethod": [
-                {
-                  "name": "id",
-                  "typeAsString": "System.Guid, System.Private.CoreLib",
-                  "type": "System.Guid",
-                  "typeSimple": "string",
-                  "isOptional": false,
-                  "defaultValue": null
-                }
-              ],
-              "parameters": [
-                {
-                  "nameOnMethod": "id",
-                  "name": "id",
-                  "type": "System.Guid",
-                  "typeSimple": "string",
-                  "isOptional": false,
-                  "defaultValue": null,
-                  "constraintTypes": [],
-                  "bindingSourceId": "Path",
-                  "descriptorName": ""
-                }
-              ],
-              "returnValue": {
-                "type": "System.Void",
-                "typeSimple": "System.Void"
-              }
-            }
-          }
-        },
-        "Acme.BookStore.AngularMaterial.Authors.AuthorAppService": {
-          "controllerName": "Author",
-          "type": "Acme.BookStore.AngularMaterial.Authors.AuthorAppService",
-          "interfaces": [
-            {
-              "type": "Volo.Abp.Validation.IValidationEnabled"
-            },
-            {
-              "type": "Volo.Abp.Auditing.IAuditingEnabled"
-            },
-            {
-              "type": "Acme.BookStore.AngularMaterial.Authors.IAuthorAppService"
-            }
-          ],
-          "actions": {
-            "GetAsyncById": {
-              "uniqueName": "GetAsyncById",
-              "name": "GetAsync",
-              "httpMethod": "GET",
-              "url": "api/app/author/{id}",
-              "supportedVersions": [],
-              "parametersOnMethod": [
-                {
-                  "name": "id",
-                  "typeAsString": "System.Guid, System.Private.CoreLib",
-                  "type": "System.Guid",
-                  "typeSimple": "string",
-                  "isOptional": false,
-                  "defaultValue": null
-                }
-              ],
-              "parameters": [
-                {
-                  "nameOnMethod": "id",
-                  "name": "id",
-                  "type": "System.Guid",
-                  "typeSimple": "string",
-                  "isOptional": false,
-                  "defaultValue": null,
-                  "constraintTypes": [],
-                  "bindingSourceId": "Path",
-                  "descriptorName": ""
-                }
-              ],
-              "returnValue": {
-                "type": "Acme.BookStore.AngularMaterial.Authors.AuthorDto",
-                "typeSimple": "Acme.BookStore.AngularMaterial.Authors.AuthorDto"
-              }
-            },
-            "GetListAsyncByInput": {
-              "uniqueName": "GetListAsyncByInput",
-              "name": "GetListAsync",
-              "httpMethod": "GET",
-              "url": "api/app/author",
-              "supportedVersions": [],
-              "parametersOnMethod": [
-                {
-                  "name": "input",
-                  "typeAsString": "Acme.BookStore.AngularMaterial.Authors.GetAuthorListDto, Acme.BookStore.AngularMaterial.Application.Contracts",
-                  "type": "Acme.BookStore.AngularMaterial.Authors.GetAuthorListDto",
-                  "typeSimple": "Acme.BookStore.AngularMaterial.Authors.GetAuthorListDto",
-                  "isOptional": false,
-                  "defaultValue": null
-                }
-              ],
-              "parameters": [
-                {
-                  "nameOnMethod": "input",
-                  "name": "Filter",
-                  "type": "System.String",
-                  "typeSimple": "string",
-                  "isOptional": false,
-                  "defaultValue": null,
-                  "constraintTypes": null,
-                  "bindingSourceId": "ModelBinding",
-                  "descriptorName": "input"
-                },
-                {
-                  "nameOnMethod": "input",
-                  "name": "Sorting",
-                  "type": "System.String",
-                  "typeSimple": "string",
-                  "isOptional": false,
-                  "defaultValue": null,
-                  "constraintTypes": null,
-                  "bindingSourceId": "ModelBinding",
-                  "descriptorName": "input"
-                },
-                {
-                  "nameOnMethod": "input",
-                  "name": "SkipCount",
-                  "type": "System.Int32",
-                  "typeSimple": "number",
-                  "isOptional": false,
-                  "defaultValue": null,
-                  "constraintTypes": null,
-                  "bindingSourceId": "ModelBinding",
-                  "descriptorName": "input"
-                },
-                {
-                  "nameOnMethod": "input",
-                  "name": "MaxResultCount",
-                  "type": "System.Int32",
-                  "typeSimple": "number",
-                  "isOptional": false,
-                  "defaultValue": null,
-                  "constraintTypes": null,
-                  "bindingSourceId": "ModelBinding",
-                  "descriptorName": "input"
-                }
-              ],
-              "returnValue": {
-                "type": "Volo.Abp.Application.Dtos.PagedResultDto<Acme.BookStore.AngularMaterial.Authors.AuthorDto>",
-                "typeSimple": "Volo.Abp.Application.Dtos.PagedResultDto<Acme.BookStore.AngularMaterial.Authors.AuthorDto>"
-              }
-            },
-            "CreateAsyncByInput": {
-              "uniqueName": "CreateAsyncByInput",
-              "name": "CreateAsync",
-              "httpMethod": "POST",
-              "url": "api/app/author",
-              "supportedVersions": [],
-              "parametersOnMethod": [
-                {
-                  "name": "input",
-                  "typeAsString": "Acme.BookStore.AngularMaterial.Authors.CreateAuthorDto, Acme.BookStore.AngularMaterial.Application.Contracts",
-                  "type": "Acme.BookStore.AngularMaterial.Authors.CreateAuthorDto",
-                  "typeSimple": "Acme.BookStore.AngularMaterial.Authors.CreateAuthorDto",
-                  "isOptional": false,
-                  "defaultValue": null
-                }
-              ],
-              "parameters": [
-                {
-                  "nameOnMethod": "input",
-                  "name": "input",
-                  "type": "Acme.BookStore.AngularMaterial.Authors.CreateAuthorDto",
-                  "typeSimple": "Acme.BookStore.AngularMaterial.Authors.CreateAuthorDto",
-                  "isOptional": false,
-                  "defaultValue": null,
-                  "constraintTypes": null,
-                  "bindingSourceId": "Body",
-                  "descriptorName": ""
-                }
-              ],
-              "returnValue": {
-                "type": "Acme.BookStore.AngularMaterial.Authors.AuthorDto",
-                "typeSimple": "Acme.BookStore.AngularMaterial.Authors.AuthorDto"
-              }
-            },
-            "UpdateAsyncByIdAndInput": {
-              "uniqueName": "UpdateAsyncByIdAndInput",
-              "name": "UpdateAsync",
-              "httpMethod": "PUT",
-              "url": "api/app/author/{id}",
-              "supportedVersions": [],
-              "parametersOnMethod": [
-                {
-                  "name": "id",
-                  "typeAsString": "System.Guid, System.Private.CoreLib",
-                  "type": "System.Guid",
-                  "typeSimple": "string",
-                  "isOptional": false,
-                  "defaultValue": null
-                },
-                {
-                  "name": "input",
-                  "typeAsString": "Acme.BookStore.AngularMaterial.Authors.UpdateAuthorDto, Acme.BookStore.AngularMaterial.Application.Contracts",
-                  "type": "Acme.BookStore.AngularMaterial.Authors.UpdateAuthorDto",
-                  "typeSimple": "Acme.BookStore.AngularMaterial.Authors.UpdateAuthorDto",
-                  "isOptional": false,
-                  "defaultValue": null
-                }
-              ],
-              "parameters": [
-                {
-                  "nameOnMethod": "id",
-                  "name": "id",
-                  "type": "System.Guid",
-                  "typeSimple": "string",
-                  "isOptional": false,
-                  "defaultValue": null,
-                  "constraintTypes": [],
-                  "bindingSourceId": "Path",
-                  "descriptorName": ""
-                },
-                {
-                  "nameOnMethod": "input",
-                  "name": "input",
-                  "type": "Acme.BookStore.AngularMaterial.Authors.UpdateAuthorDto",
-                  "typeSimple": "Acme.BookStore.AngularMaterial.Authors.UpdateAuthorDto",
-                  "isOptional": false,
-                  "defaultValue": null,
-                  "constraintTypes": null,
-                  "bindingSourceId": "Body",
-                  "descriptorName": ""
-                }
-              ],
-              "returnValue": {
-                "type": "System.Void",
-                "typeSimple": "System.Void"
-              }
-            },
-            "DeleteAsyncById": {
-              "uniqueName": "DeleteAsyncById",
-              "name": "DeleteAsync",
-              "httpMethod": "DELETE",
-              "url": "api/app/author/{id}",
-              "supportedVersions": [],
-              "parametersOnMethod": [
-                {
-                  "name": "id",
-                  "typeAsString": "System.Guid, System.Private.CoreLib",
-                  "type": "System.Guid",
-                  "typeSimple": "string",
-                  "isOptional": false,
-                  "defaultValue": null
-                }
-              ],
-              "parameters": [
-                {
-                  "nameOnMethod": "id",
-                  "name": "id",
-                  "type": "System.Guid",
-                  "typeSimple": "string",
-                  "isOptional": false,
-                  "defaultValue": null,
-                  "constraintTypes": [],
-                  "bindingSourceId": "Path",
-                  "descriptorName": ""
-                }
-              ],
-              "returnValue": {
-                "type": "System.Void",
-                "typeSimple": "System.Void"
-              }
-            }
-          }
-        }
-      }
-    },
-    "permissionManagement": {
-      "rootPath": "permissionManagement",
-      "remoteServiceName": "AbpPermissionManagement",
-      "controllers": {
-        "Volo.Abp.PermissionManagement.PermissionsController": {
-          "controllerName": "Permissions",
-          "type": "Volo.Abp.PermissionManagement.PermissionsController",
-          "interfaces": [
-            {
-              "type": "Volo.Abp.PermissionManagement.IPermissionAppService"
-            }
-          ],
-          "actions": {
-            "GetAsyncByProviderNameAndProviderKey": {
-              "uniqueName": "GetAsyncByProviderNameAndProviderKey",
-              "name": "GetAsync",
-              "httpMethod": "GET",
-              "url": "api/permission-management/permissions",
-              "supportedVersions": [],
-              "parametersOnMethod": [
-                {
-                  "name": "providerName",
-                  "typeAsString": "System.String, System.Private.CoreLib",
-                  "type": "System.String",
-                  "typeSimple": "string",
-                  "isOptional": false,
-                  "defaultValue": null
-                },
-                {
-                  "name": "providerKey",
-                  "typeAsString": "System.String, System.Private.CoreLib",
-                  "type": "System.String",
-                  "typeSimple": "string",
-                  "isOptional": false,
-                  "defaultValue": null
-                }
-              ],
-              "parameters": [
-                {
-                  "nameOnMethod": "providerName",
-                  "name": "providerName",
-                  "type": "System.String",
-                  "typeSimple": "string",
-                  "isOptional": false,
-                  "defaultValue": null,
-                  "constraintTypes": null,
-                  "bindingSourceId": "ModelBinding",
-                  "descriptorName": ""
-                },
-                {
-                  "nameOnMethod": "providerKey",
-                  "name": "providerKey",
-                  "type": "System.String",
-                  "typeSimple": "string",
-                  "isOptional": false,
-                  "defaultValue": null,
-                  "constraintTypes": null,
-                  "bindingSourceId": "ModelBinding",
-                  "descriptorName": ""
-                }
-              ],
-              "returnValue": {
-                "type": "Volo.Abp.PermissionManagement.GetPermissionListResultDto",
-                "typeSimple": "Volo.Abp.PermissionManagement.GetPermissionListResultDto"
-              }
-            },
-            "UpdateAsyncByProviderNameAndProviderKeyAndInput": {
-              "uniqueName": "UpdateAsyncByProviderNameAndProviderKeyAndInput",
-              "name": "UpdateAsync",
-              "httpMethod": "PUT",
-              "url": "api/permission-management/permissions",
-              "supportedVersions": [],
-              "parametersOnMethod": [
-                {
-                  "name": "providerName",
-                  "typeAsString": "System.String, System.Private.CoreLib",
-                  "type": "System.String",
-                  "typeSimple": "string",
-                  "isOptional": false,
-                  "defaultValue": null
-                },
-                {
-                  "name": "providerKey",
-                  "typeAsString": "System.String, System.Private.CoreLib",
-                  "type": "System.String",
-                  "typeSimple": "string",
-                  "isOptional": false,
-                  "defaultValue": null
-                },
-                {
-                  "name": "input",
-                  "typeAsString": "Volo.Abp.PermissionManagement.UpdatePermissionsDto, Volo.Abp.PermissionManagement.Application.Contracts",
-                  "type": "Volo.Abp.PermissionManagement.UpdatePermissionsDto",
-                  "typeSimple": "Volo.Abp.PermissionManagement.UpdatePermissionsDto",
-                  "isOptional": false,
-                  "defaultValue": null
-                }
-              ],
-              "parameters": [
-                {
-                  "nameOnMethod": "providerName",
-                  "name": "providerName",
-                  "type": "System.String",
-                  "typeSimple": "string",
-                  "isOptional": false,
-                  "defaultValue": null,
-                  "constraintTypes": null,
-                  "bindingSourceId": "ModelBinding",
-                  "descriptorName": ""
-                },
-                {
-                  "nameOnMethod": "providerKey",
-                  "name": "providerKey",
-                  "type": "System.String",
-                  "typeSimple": "string",
-                  "isOptional": false,
-                  "defaultValue": null,
-                  "constraintTypes": null,
-                  "bindingSourceId": "ModelBinding",
-                  "descriptorName": ""
-                },
-                {
-                  "nameOnMethod": "input",
-                  "name": "input",
-                  "type": "Volo.Abp.PermissionManagement.UpdatePermissionsDto",
-                  "typeSimple": "Volo.Abp.PermissionManagement.UpdatePermissionsDto",
-                  "isOptional": false,
-                  "defaultValue": null,
-                  "constraintTypes": null,
-                  "bindingSourceId": "Body",
-                  "descriptorName": ""
-                }
-              ],
-              "returnValue": {
-                "type": "System.Void",
-                "typeSimple": "System.Void"
-              }
-            }
-          }
-        }
-      }
-    },
     "identity": {
       "rootPath": "identity",
       "remoteServiceName": "AbpIdentity",
@@ -2242,6 +1078,526 @@
         }
       }
     },
+    "app": {
+      "rootPath": "app",
+      "remoteServiceName": "Default",
+      "controllers": {
+        "Acme.BookStore.AngularMaterial.Books.BookAppService": {
+          "controllerName": "Book",
+          "type": "Acme.BookStore.AngularMaterial.Books.BookAppService",
+          "interfaces": [
+            {
+              "type": "Volo.Abp.Validation.IValidationEnabled"
+            },
+            {
+              "type": "Volo.Abp.Auditing.IAuditingEnabled"
+            },
+            {
+              "type": "Acme.BookStore.AngularMaterial.Books.IBookAppService"
+            }
+          ],
+          "actions": {
+            "GetAsyncById": {
+              "uniqueName": "GetAsyncById",
+              "name": "GetAsync",
+              "httpMethod": "GET",
+              "url": "api/app/book/{id}",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "id",
+                  "typeAsString": "System.Guid, System.Private.CoreLib",
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "id",
+                  "name": "id",
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": [],
+                  "bindingSourceId": "Path",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "Acme.BookStore.AngularMaterial.Books.BookDto",
+                "typeSimple": "Acme.BookStore.AngularMaterial.Books.BookDto"
+              }
+            },
+            "GetListAsyncByInput": {
+              "uniqueName": "GetListAsyncByInput",
+              "name": "GetListAsync",
+              "httpMethod": "GET",
+              "url": "api/app/book",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "input",
+                  "typeAsString": "Volo.Abp.Application.Dtos.PagedAndSortedResultRequestDto, Volo.Abp.Ddd.Application.Contracts",
+                  "type": "Volo.Abp.Application.Dtos.PagedAndSortedResultRequestDto",
+                  "typeSimple": "Volo.Abp.Application.Dtos.PagedAndSortedResultRequestDto",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "input",
+                  "name": "SkipCount",
+                  "type": "System.Int32",
+                  "typeSimple": "number",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "MaxResultCount",
+                  "type": "System.Int32",
+                  "typeSimple": "number",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "Sorting",
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                }
+              ],
+              "returnValue": {
+                "type": "Volo.Abp.Application.Dtos.PagedResultDto<Acme.BookStore.AngularMaterial.Books.BookDto>",
+                "typeSimple": "Volo.Abp.Application.Dtos.PagedResultDto<Acme.BookStore.AngularMaterial.Books.BookDto>"
+              }
+            },
+            "GetAuthorLookupAsync": {
+              "uniqueName": "GetAuthorLookupAsync",
+              "name": "GetAuthorLookupAsync",
+              "httpMethod": "GET",
+              "url": "api/app/book/author-lookup",
+              "supportedVersions": [],
+              "parametersOnMethod": [],
+              "parameters": [],
+              "returnValue": {
+                "type": "Volo.Abp.Application.Dtos.ListResultDto<Acme.BookStore.AngularMaterial.Books.AuthorLookupDto>",
+                "typeSimple": "Volo.Abp.Application.Dtos.ListResultDto<Acme.BookStore.AngularMaterial.Books.AuthorLookupDto>"
+              }
+            },
+            "CreateAuthorWithBooksAsyncByInput": {
+              "uniqueName": "CreateAuthorWithBooksAsyncByInput",
+              "name": "CreateAuthorWithBooksAsync",
+              "httpMethod": "POST",
+              "url": "api/app/book/author-with-books",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "input",
+                  "typeAsString": "Acme.BookStore.AngularMaterial.Books.CreateAuthorWithBookDto, Acme.BookStore.AngularMaterial.Application.Contracts",
+                  "type": "Acme.BookStore.AngularMaterial.Books.CreateAuthorWithBookDto",
+                  "typeSimple": "Acme.BookStore.AngularMaterial.Books.CreateAuthorWithBookDto",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "input",
+                  "name": "input",
+                  "type": "Acme.BookStore.AngularMaterial.Books.CreateAuthorWithBookDto",
+                  "typeSimple": "Acme.BookStore.AngularMaterial.Books.CreateAuthorWithBookDto",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "Body",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "Acme.BookStore.AngularMaterial.Books.AuthorWithDetailsDto",
+                "typeSimple": "Acme.BookStore.AngularMaterial.Books.AuthorWithDetailsDto"
+              }
+            },
+            "CreateAsyncByInput": {
+              "uniqueName": "CreateAsyncByInput",
+              "name": "CreateAsync",
+              "httpMethod": "POST",
+              "url": "api/app/book",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "input",
+                  "typeAsString": "Acme.BookStore.AngularMaterial.Books.CreateUpdateBookDto, Acme.BookStore.AngularMaterial.Application.Contracts",
+                  "type": "Acme.BookStore.AngularMaterial.Books.CreateUpdateBookDto",
+                  "typeSimple": "Acme.BookStore.AngularMaterial.Books.CreateUpdateBookDto",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "input",
+                  "name": "input",
+                  "type": "Acme.BookStore.AngularMaterial.Books.CreateUpdateBookDto",
+                  "typeSimple": "Acme.BookStore.AngularMaterial.Books.CreateUpdateBookDto",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "Body",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "Acme.BookStore.AngularMaterial.Books.BookDto",
+                "typeSimple": "Acme.BookStore.AngularMaterial.Books.BookDto"
+              }
+            },
+            "UpdateAsyncByIdAndInput": {
+              "uniqueName": "UpdateAsyncByIdAndInput",
+              "name": "UpdateAsync",
+              "httpMethod": "PUT",
+              "url": "api/app/book/{id}",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "id",
+                  "typeAsString": "System.Guid, System.Private.CoreLib",
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                },
+                {
+                  "name": "input",
+                  "typeAsString": "Acme.BookStore.AngularMaterial.Books.CreateUpdateBookDto, Acme.BookStore.AngularMaterial.Application.Contracts",
+                  "type": "Acme.BookStore.AngularMaterial.Books.CreateUpdateBookDto",
+                  "typeSimple": "Acme.BookStore.AngularMaterial.Books.CreateUpdateBookDto",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "id",
+                  "name": "id",
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": [],
+                  "bindingSourceId": "Path",
+                  "descriptorName": ""
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "input",
+                  "type": "Acme.BookStore.AngularMaterial.Books.CreateUpdateBookDto",
+                  "typeSimple": "Acme.BookStore.AngularMaterial.Books.CreateUpdateBookDto",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "Body",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "Acme.BookStore.AngularMaterial.Books.BookDto",
+                "typeSimple": "Acme.BookStore.AngularMaterial.Books.BookDto"
+              }
+            },
+            "DeleteAsyncById": {
+              "uniqueName": "DeleteAsyncById",
+              "name": "DeleteAsync",
+              "httpMethod": "DELETE",
+              "url": "api/app/book/{id}",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "id",
+                  "typeAsString": "System.Guid, System.Private.CoreLib",
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "id",
+                  "name": "id",
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": [],
+                  "bindingSourceId": "Path",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "System.Void",
+                "typeSimple": "System.Void"
+              }
+            }
+          }
+        },
+        "Acme.BookStore.AngularMaterial.Authors.AuthorAppService": {
+          "controllerName": "Author",
+          "type": "Acme.BookStore.AngularMaterial.Authors.AuthorAppService",
+          "interfaces": [
+            {
+              "type": "Volo.Abp.Validation.IValidationEnabled"
+            },
+            {
+              "type": "Volo.Abp.Auditing.IAuditingEnabled"
+            },
+            {
+              "type": "Acme.BookStore.AngularMaterial.Authors.IAuthorAppService"
+            }
+          ],
+          "actions": {
+            "GetAsyncById": {
+              "uniqueName": "GetAsyncById",
+              "name": "GetAsync",
+              "httpMethod": "GET",
+              "url": "api/app/author/{id}",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "id",
+                  "typeAsString": "System.Guid, System.Private.CoreLib",
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "id",
+                  "name": "id",
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": [],
+                  "bindingSourceId": "Path",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "Acme.BookStore.AngularMaterial.Authors.AuthorDto",
+                "typeSimple": "Acme.BookStore.AngularMaterial.Authors.AuthorDto"
+              }
+            },
+            "GetListAsyncByInput": {
+              "uniqueName": "GetListAsyncByInput",
+              "name": "GetListAsync",
+              "httpMethod": "GET",
+              "url": "api/app/author",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "input",
+                  "typeAsString": "Acme.BookStore.AngularMaterial.Authors.GetAuthorListDto, Acme.BookStore.AngularMaterial.Application.Contracts",
+                  "type": "Acme.BookStore.AngularMaterial.Authors.GetAuthorListDto",
+                  "typeSimple": "Acme.BookStore.AngularMaterial.Authors.GetAuthorListDto",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "input",
+                  "name": "Filter",
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "Sorting",
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "SkipCount",
+                  "type": "System.Int32",
+                  "typeSimple": "number",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "MaxResultCount",
+                  "type": "System.Int32",
+                  "typeSimple": "number",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                }
+              ],
+              "returnValue": {
+                "type": "Volo.Abp.Application.Dtos.PagedResultDto<Acme.BookStore.AngularMaterial.Authors.AuthorDto>",
+                "typeSimple": "Volo.Abp.Application.Dtos.PagedResultDto<Acme.BookStore.AngularMaterial.Authors.AuthorDto>"
+              }
+            },
+            "CreateAsyncByInput": {
+              "uniqueName": "CreateAsyncByInput",
+              "name": "CreateAsync",
+              "httpMethod": "POST",
+              "url": "api/app/author",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "input",
+                  "typeAsString": "Acme.BookStore.AngularMaterial.Authors.CreateAuthorDto, Acme.BookStore.AngularMaterial.Application.Contracts",
+                  "type": "Acme.BookStore.AngularMaterial.Authors.CreateAuthorDto",
+                  "typeSimple": "Acme.BookStore.AngularMaterial.Authors.CreateAuthorDto",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "input",
+                  "name": "input",
+                  "type": "Acme.BookStore.AngularMaterial.Authors.CreateAuthorDto",
+                  "typeSimple": "Acme.BookStore.AngularMaterial.Authors.CreateAuthorDto",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "Body",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "Acme.BookStore.AngularMaterial.Authors.AuthorDto",
+                "typeSimple": "Acme.BookStore.AngularMaterial.Authors.AuthorDto"
+              }
+            },
+            "UpdateAsyncByIdAndInput": {
+              "uniqueName": "UpdateAsyncByIdAndInput",
+              "name": "UpdateAsync",
+              "httpMethod": "PUT",
+              "url": "api/app/author/{id}",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "id",
+                  "typeAsString": "System.Guid, System.Private.CoreLib",
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                },
+                {
+                  "name": "input",
+                  "typeAsString": "Acme.BookStore.AngularMaterial.Authors.UpdateAuthorDto, Acme.BookStore.AngularMaterial.Application.Contracts",
+                  "type": "Acme.BookStore.AngularMaterial.Authors.UpdateAuthorDto",
+                  "typeSimple": "Acme.BookStore.AngularMaterial.Authors.UpdateAuthorDto",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "id",
+                  "name": "id",
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": [],
+                  "bindingSourceId": "Path",
+                  "descriptorName": ""
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "input",
+                  "type": "Acme.BookStore.AngularMaterial.Authors.UpdateAuthorDto",
+                  "typeSimple": "Acme.BookStore.AngularMaterial.Authors.UpdateAuthorDto",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "Body",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "System.Void",
+                "typeSimple": "System.Void"
+              }
+            },
+            "DeleteAsyncById": {
+              "uniqueName": "DeleteAsyncById",
+              "name": "DeleteAsync",
+              "httpMethod": "DELETE",
+              "url": "api/app/author/{id}",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "id",
+                  "typeAsString": "System.Guid, System.Private.CoreLib",
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "id",
+                  "name": "id",
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": [],
+                  "bindingSourceId": "Path",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "System.Void",
+                "typeSimple": "System.Void"
+              }
+            }
+          }
+        }
+      }
+    },
     "account": {
       "rootPath": "account",
       "remoteServiceName": "AbpAccount",
@@ -2433,6 +1789,650 @@
                   "name": "input",
                   "type": "Volo.Abp.Account.ResetPasswordDto",
                   "typeSimple": "Volo.Abp.Account.ResetPasswordDto",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "Body",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "System.Void",
+                "typeSimple": "System.Void"
+              }
+            }
+          }
+        }
+      }
+    },
+    "multi-tenancy": {
+      "rootPath": "multi-tenancy",
+      "remoteServiceName": "AbpTenantManagement",
+      "controllers": {
+        "Volo.Abp.TenantManagement.TenantController": {
+          "controllerName": "Tenant",
+          "type": "Volo.Abp.TenantManagement.TenantController",
+          "interfaces": [
+            {
+              "type": "Volo.Abp.TenantManagement.ITenantAppService"
+            }
+          ],
+          "actions": {
+            "GetAsyncById": {
+              "uniqueName": "GetAsyncById",
+              "name": "GetAsync",
+              "httpMethod": "GET",
+              "url": "api/multi-tenancy/tenants/{id}",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "id",
+                  "typeAsString": "System.Guid, System.Private.CoreLib",
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "id",
+                  "name": "id",
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": [],
+                  "bindingSourceId": "Path",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "Volo.Abp.TenantManagement.TenantDto",
+                "typeSimple": "Volo.Abp.TenantManagement.TenantDto"
+              }
+            },
+            "GetListAsyncByInput": {
+              "uniqueName": "GetListAsyncByInput",
+              "name": "GetListAsync",
+              "httpMethod": "GET",
+              "url": "api/multi-tenancy/tenants",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "input",
+                  "typeAsString": "Volo.Abp.TenantManagement.GetTenantsInput, Volo.Abp.TenantManagement.Application.Contracts",
+                  "type": "Volo.Abp.TenantManagement.GetTenantsInput",
+                  "typeSimple": "Volo.Abp.TenantManagement.GetTenantsInput",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "input",
+                  "name": "Filter",
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "Sorting",
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "SkipCount",
+                  "type": "System.Int32",
+                  "typeSimple": "number",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "MaxResultCount",
+                  "type": "System.Int32",
+                  "typeSimple": "number",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                }
+              ],
+              "returnValue": {
+                "type": "Volo.Abp.Application.Dtos.PagedResultDto<Volo.Abp.TenantManagement.TenantDto>",
+                "typeSimple": "Volo.Abp.Application.Dtos.PagedResultDto<Volo.Abp.TenantManagement.TenantDto>"
+              }
+            },
+            "CreateAsyncByInput": {
+              "uniqueName": "CreateAsyncByInput",
+              "name": "CreateAsync",
+              "httpMethod": "POST",
+              "url": "api/multi-tenancy/tenants",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "input",
+                  "typeAsString": "Volo.Abp.TenantManagement.TenantCreateDto, Volo.Abp.TenantManagement.Application.Contracts",
+                  "type": "Volo.Abp.TenantManagement.TenantCreateDto",
+                  "typeSimple": "Volo.Abp.TenantManagement.TenantCreateDto",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "input",
+                  "name": "input",
+                  "type": "Volo.Abp.TenantManagement.TenantCreateDto",
+                  "typeSimple": "Volo.Abp.TenantManagement.TenantCreateDto",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "Body",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "Volo.Abp.TenantManagement.TenantDto",
+                "typeSimple": "Volo.Abp.TenantManagement.TenantDto"
+              }
+            },
+            "UpdateAsyncByIdAndInput": {
+              "uniqueName": "UpdateAsyncByIdAndInput",
+              "name": "UpdateAsync",
+              "httpMethod": "PUT",
+              "url": "api/multi-tenancy/tenants/{id}",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "id",
+                  "typeAsString": "System.Guid, System.Private.CoreLib",
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                },
+                {
+                  "name": "input",
+                  "typeAsString": "Volo.Abp.TenantManagement.TenantUpdateDto, Volo.Abp.TenantManagement.Application.Contracts",
+                  "type": "Volo.Abp.TenantManagement.TenantUpdateDto",
+                  "typeSimple": "Volo.Abp.TenantManagement.TenantUpdateDto",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "id",
+                  "name": "id",
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": [],
+                  "bindingSourceId": "Path",
+                  "descriptorName": ""
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "input",
+                  "type": "Volo.Abp.TenantManagement.TenantUpdateDto",
+                  "typeSimple": "Volo.Abp.TenantManagement.TenantUpdateDto",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "Body",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "Volo.Abp.TenantManagement.TenantDto",
+                "typeSimple": "Volo.Abp.TenantManagement.TenantDto"
+              }
+            },
+            "DeleteAsyncById": {
+              "uniqueName": "DeleteAsyncById",
+              "name": "DeleteAsync",
+              "httpMethod": "DELETE",
+              "url": "api/multi-tenancy/tenants/{id}",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "id",
+                  "typeAsString": "System.Guid, System.Private.CoreLib",
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "id",
+                  "name": "id",
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": [],
+                  "bindingSourceId": "Path",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "System.Void",
+                "typeSimple": "System.Void"
+              }
+            },
+            "GetDefaultConnectionStringAsyncById": {
+              "uniqueName": "GetDefaultConnectionStringAsyncById",
+              "name": "GetDefaultConnectionStringAsync",
+              "httpMethod": "GET",
+              "url": "api/multi-tenancy/tenants/{id}/default-connection-string",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "id",
+                  "typeAsString": "System.Guid, System.Private.CoreLib",
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "id",
+                  "name": "id",
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": [],
+                  "bindingSourceId": "Path",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "System.String",
+                "typeSimple": "string"
+              }
+            },
+            "UpdateDefaultConnectionStringAsyncByIdAndDefaultConnectionString": {
+              "uniqueName": "UpdateDefaultConnectionStringAsyncByIdAndDefaultConnectionString",
+              "name": "UpdateDefaultConnectionStringAsync",
+              "httpMethod": "PUT",
+              "url": "api/multi-tenancy/tenants/{id}/default-connection-string",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "id",
+                  "typeAsString": "System.Guid, System.Private.CoreLib",
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                },
+                {
+                  "name": "defaultConnectionString",
+                  "typeAsString": "System.String, System.Private.CoreLib",
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "id",
+                  "name": "id",
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": [],
+                  "bindingSourceId": "Path",
+                  "descriptorName": ""
+                },
+                {
+                  "nameOnMethod": "defaultConnectionString",
+                  "name": "defaultConnectionString",
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "System.Void",
+                "typeSimple": "System.Void"
+              }
+            },
+            "DeleteDefaultConnectionStringAsyncById": {
+              "uniqueName": "DeleteDefaultConnectionStringAsyncById",
+              "name": "DeleteDefaultConnectionStringAsync",
+              "httpMethod": "DELETE",
+              "url": "api/multi-tenancy/tenants/{id}/default-connection-string",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "id",
+                  "typeAsString": "System.Guid, System.Private.CoreLib",
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "id",
+                  "name": "id",
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": [],
+                  "bindingSourceId": "Path",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "System.Void",
+                "typeSimple": "System.Void"
+              }
+            }
+          }
+        }
+      }
+    },
+    "permissionManagement": {
+      "rootPath": "permissionManagement",
+      "remoteServiceName": "AbpPermissionManagement",
+      "controllers": {
+        "Volo.Abp.PermissionManagement.PermissionsController": {
+          "controllerName": "Permissions",
+          "type": "Volo.Abp.PermissionManagement.PermissionsController",
+          "interfaces": [
+            {
+              "type": "Volo.Abp.PermissionManagement.IPermissionAppService"
+            }
+          ],
+          "actions": {
+            "GetAsyncByProviderNameAndProviderKey": {
+              "uniqueName": "GetAsyncByProviderNameAndProviderKey",
+              "name": "GetAsync",
+              "httpMethod": "GET",
+              "url": "api/permission-management/permissions",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "providerName",
+                  "typeAsString": "System.String, System.Private.CoreLib",
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                },
+                {
+                  "name": "providerKey",
+                  "typeAsString": "System.String, System.Private.CoreLib",
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "providerName",
+                  "name": "providerName",
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": ""
+                },
+                {
+                  "nameOnMethod": "providerKey",
+                  "name": "providerKey",
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "Volo.Abp.PermissionManagement.GetPermissionListResultDto",
+                "typeSimple": "Volo.Abp.PermissionManagement.GetPermissionListResultDto"
+              }
+            },
+            "UpdateAsyncByProviderNameAndProviderKeyAndInput": {
+              "uniqueName": "UpdateAsyncByProviderNameAndProviderKeyAndInput",
+              "name": "UpdateAsync",
+              "httpMethod": "PUT",
+              "url": "api/permission-management/permissions",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "providerName",
+                  "typeAsString": "System.String, System.Private.CoreLib",
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                },
+                {
+                  "name": "providerKey",
+                  "typeAsString": "System.String, System.Private.CoreLib",
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                },
+                {
+                  "name": "input",
+                  "typeAsString": "Volo.Abp.PermissionManagement.UpdatePermissionsDto, Volo.Abp.PermissionManagement.Application.Contracts",
+                  "type": "Volo.Abp.PermissionManagement.UpdatePermissionsDto",
+                  "typeSimple": "Volo.Abp.PermissionManagement.UpdatePermissionsDto",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "providerName",
+                  "name": "providerName",
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": ""
+                },
+                {
+                  "nameOnMethod": "providerKey",
+                  "name": "providerKey",
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": ""
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "input",
+                  "type": "Volo.Abp.PermissionManagement.UpdatePermissionsDto",
+                  "typeSimple": "Volo.Abp.PermissionManagement.UpdatePermissionsDto",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "Body",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "System.Void",
+                "typeSimple": "System.Void"
+              }
+            }
+          }
+        }
+      }
+    },
+    "featureManagement": {
+      "rootPath": "featureManagement",
+      "remoteServiceName": "AbpFeatureManagement",
+      "controllers": {
+        "Volo.Abp.FeatureManagement.FeaturesController": {
+          "controllerName": "Features",
+          "type": "Volo.Abp.FeatureManagement.FeaturesController",
+          "interfaces": [
+            {
+              "type": "Volo.Abp.FeatureManagement.IFeatureAppService"
+            }
+          ],
+          "actions": {
+            "GetAsyncByProviderNameAndProviderKey": {
+              "uniqueName": "GetAsyncByProviderNameAndProviderKey",
+              "name": "GetAsync",
+              "httpMethod": "GET",
+              "url": "api/feature-management/features",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "providerName",
+                  "typeAsString": "System.String, System.Private.CoreLib",
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                },
+                {
+                  "name": "providerKey",
+                  "typeAsString": "System.String, System.Private.CoreLib",
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "providerName",
+                  "name": "providerName",
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": ""
+                },
+                {
+                  "nameOnMethod": "providerKey",
+                  "name": "providerKey",
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "Volo.Abp.FeatureManagement.GetFeatureListResultDto",
+                "typeSimple": "Volo.Abp.FeatureManagement.GetFeatureListResultDto"
+              }
+            },
+            "UpdateAsyncByProviderNameAndProviderKeyAndInput": {
+              "uniqueName": "UpdateAsyncByProviderNameAndProviderKeyAndInput",
+              "name": "UpdateAsync",
+              "httpMethod": "PUT",
+              "url": "api/feature-management/features",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "providerName",
+                  "typeAsString": "System.String, System.Private.CoreLib",
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                },
+                {
+                  "name": "providerKey",
+                  "typeAsString": "System.String, System.Private.CoreLib",
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                },
+                {
+                  "name": "input",
+                  "typeAsString": "Volo.Abp.FeatureManagement.UpdateFeaturesDto, Volo.Abp.FeatureManagement.Application.Contracts",
+                  "type": "Volo.Abp.FeatureManagement.UpdateFeaturesDto",
+                  "typeSimple": "Volo.Abp.FeatureManagement.UpdateFeaturesDto",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "providerName",
+                  "name": "providerName",
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": ""
+                },
+                {
+                  "nameOnMethod": "providerKey",
+                  "name": "providerKey",
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": ""
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "input",
+                  "type": "Volo.Abp.FeatureManagement.UpdateFeaturesDto",
+                  "typeSimple": "Volo.Abp.FeatureManagement.UpdateFeaturesDto",
                   "isOptional": false,
                   "defaultValue": null,
                   "constraintTypes": null,
@@ -5086,8 +5086,8 @@
         },
         {
           "name": "Type",
-          "type": "Acme.BookStore.Books.BookType",
-          "typeSimple": "Acme.BookStore.Books.BookType",
+          "type": "Acme.BookStore.AngularMaterial.Books.BookType",
+          "typeSimple": "Acme.BookStore.AngularMaterial.Books.BookType",
           "isRequired": false
         },
         {
@@ -5187,7 +5187,7 @@
       "genericArguments": null,
       "properties": []
     },
-    "Acme.BookStore.Books.BookType": {
+    "Acme.BookStore.AngularMaterial.Books.BookType": {
       "baseType": "System.Enum",
       "isEnum": true,
       "enumNames": [
@@ -5287,8 +5287,8 @@
         },
         {
           "name": "Type",
-          "type": "Acme.BookStore.Books.BookType",
-          "typeSimple": "Acme.BookStore.Books.BookType",
+          "type": "Acme.BookStore.AngularMaterial.Books.BookType",
+          "typeSimple": "Acme.BookStore.AngularMaterial.Books.BookType",
           "isRequired": true
         },
         {
@@ -5316,7 +5316,7 @@
           "name": "Books",
           "type": "[Acme.BookStore.AngularMaterial.Books.BookDto]",
           "typeSimple": "[Acme.BookStore.AngularMaterial.Books.BookDto]",
-          "isRequired": false
+          "isRequired": true
         }
       ]
     },
@@ -5362,8 +5362,8 @@
         },
         {
           "name": "Type",
-          "type": "Acme.BookStore.Books.BookType",
-          "typeSimple": "Acme.BookStore.Books.BookType",
+          "type": "Acme.BookStore.AngularMaterial.Books.BookType",
+          "typeSimple": "Acme.BookStore.AngularMaterial.Books.BookType",
           "isRequired": true
         },
         {

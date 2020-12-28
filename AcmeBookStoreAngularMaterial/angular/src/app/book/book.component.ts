@@ -5,20 +5,18 @@ import { PageEvent } from '@angular/material/paginator';
 import { Sort } from '@angular/material/sort';
 import { MatDialog } from '@angular/material/dialog';
 import { BookDialogComponent } from './components/book-dialog/book-dialog.component';
-import { ConfirmationDialogComponent } from '../shared/confirmation-dialog/confirmation-dialog.component';
+import { ConfirmationDialogComponent } from '../shared/components/confirmation-dialog/confirmation-dialog.component';
 
 @Component({
   selector: 'app-book',
   templateUrl: './book.component.html',
-  styleUrls: ['./book.component.css'],
+  styleUrls: ['./book.component.scss'],
   providers: [ListService]
 })
 export class BookComponent implements OnInit {
 
   book = { items: [], totalCount: 0 } as PagedResultDto<BookDto>;
   columns: string[] = ['actions', 'name', 'type', 'price', 'authorName'];
-
-  isModalOpen = false;
 
   constructor(public readonly list: ListService, private bookService: BookService, public dialog: MatDialog) {
     this.list.maxResultCount = 2;
@@ -66,7 +64,6 @@ export class BookComponent implements OnInit {
       });
     });
   }
-
   deleteBook(id: string) {
     const confirmationDialogRef = this.dialog.open(ConfirmationDialogComponent, {
       data: {

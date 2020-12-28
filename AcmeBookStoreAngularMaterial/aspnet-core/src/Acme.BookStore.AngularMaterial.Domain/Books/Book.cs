@@ -1,7 +1,7 @@
 using System;
 using Volo.Abp.Domain.Entities.Auditing;
 
-namespace Acme.BookStore.Books
+namespace Acme.BookStore.AngularMaterial.Books
 {
     public class Book : AuditedAggregateRoot<Guid>
     {

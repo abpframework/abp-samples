@@ -1,4 +1,4 @@
-namespace Acme.BookStore.Books
+namespace Acme.BookStore.AngularMaterial.Books
 {
     public enum BookType
     {

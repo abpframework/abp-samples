@@ -8,41 +8,40 @@ import { MatCardModule } from '@angular/material/card';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
-import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
+import { MatDialogModule } from '@angular/material/dialog';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatNativeDateModule } from '@angular/material/core';
 import { MatInputModule } from '@angular/material/input';
-import { MatSelectModule } from '@angular/material/select';
-import { MatMenuModule } from '@angular/material/menu';
 import { MatIconModule } from '@angular/material/icon';
-import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-dialog.component';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatSelectModule } from '@angular/material/select';
+import { ConfirmationDialogComponent } from './components/confirmation-dialog/confirmation-dialog.component';
+import { MatStepperModule } from '@angular/material/stepper';
+import { MatNativeDateModule } from '@angular/material/core';
 
 @NgModule({
-  declarations: [ ConfirmationDialogComponent],
+  declarations: [ConfirmationDialogComponent],
   imports: [
     CoreModule,
     ThemeSharedModule,
     ThemeBasicModule,
     NgbDropdownModule,
     NgxValidateCoreModule,
-    // For Book List
     MatCardModule,
     MatTableModule,
     MatPaginatorModule,
     MatSortModule,
-    // For book form
-    MatDialogModule,
     MatButtonModule,
+    MatDialogModule,
     MatDatepickerModule,
-    MatFormFieldModule,
     MatNativeDateModule,
+    MatFormFieldModule,
     MatInputModule,
     MatSelectModule,
-    MatMenuModule,
     MatIconModule,
-
+    MatMenuModule,
+    MatStepperModule
   ],
   exports: [
     CoreModule,
@@ -50,23 +49,19 @@ import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-
     ThemeBasicModule,
     NgbDropdownModule,
     NgxValidateCoreModule,
-    // For Book List
     MatCardModule,
     MatTableModule,
     MatPaginatorModule,
     MatSortModule,
-    // For book form
-    MatDialogModule,
     MatButtonModule,
+    MatDialogModule,
     MatDatepickerModule,
     MatFormFieldModule,
-    MatNativeDateModule,
     MatInputModule,
     MatSelectModule,
-    MatMenuModule,
     MatIconModule,
-
-
-  ]
+    MatMenuModule,
+    MatStepperModule
+  ],
 })
 export class SharedModule {}

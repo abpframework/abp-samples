@@ -1,7 +1,5 @@
 using System;
 using System.ComponentModel.DataAnnotations;
-using Acme.BookStore.Books;
-
 namespace Acme.BookStore.AngularMaterial.Books
 {
     public class CreateUpdateBookDto

@@ -1,5 +1,5 @@
 ﻿using Acme.BookStore.AngularMaterial.Authors;
-using Acme.BookStore.Books;
+using Acme.BookStore.AngularMaterial.Books;
 using Microsoft.EntityFrameworkCore;
 using Volo.Abp;
 using Volo.Abp.EntityFrameworkCore.Modeling;

@@ -1,6 +1,5 @@
 ﻿using Acme.BookStore.AngularMaterial.Authors;
 using Acme.BookStore.AngularMaterial.Books;
-using Acme.BookStore.Books;
 using AutoMapper;
 
 namespace Acme.BookStore.AngularMaterial

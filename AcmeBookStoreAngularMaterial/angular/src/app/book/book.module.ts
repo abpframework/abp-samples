@@ -10,9 +10,8 @@ import { BookDialogComponent } from './components/book-dialog/book-dialog.compon
 @NgModule({
   declarations: [BookComponent, BookDialogComponent],
   imports: [
-    CommonModule,
     BookRoutingModule,
-    SharedModule,
-  ],
+    SharedModule
+  ]
 })
 export class BookModule { }

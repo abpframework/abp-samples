@@ -28,11 +28,11 @@ import { MatNativeDateModule } from '@angular/material/core';
     ThemeBasicModule,
     NgbDropdownModule,
     NgxValidateCoreModule,
-    MatCardModule, // added this line
-    MatTableModule, // added this line
-    MatPaginatorModule, // added this line
-    MatSortModule, // added this line
-    MatButtonModule, // added this line
+    MatCardModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule,
+    MatButtonModule,
     MatDialogModule,
     MatDatepickerModule,
     MatNativeDateModule,
@@ -49,11 +49,11 @@ import { MatNativeDateModule } from '@angular/material/core';
     ThemeBasicModule,
     NgbDropdownModule,
     NgxValidateCoreModule,
-    MatCardModule, // added this line
-    MatTableModule, // added this line
-    MatPaginatorModule, // added this line
-    MatSortModule, // added this line
-    MatButtonModule, // added this line
+    MatCardModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule,
+    MatButtonModule,
     MatDialogModule,
     MatDatepickerModule,
     MatFormFieldModule,

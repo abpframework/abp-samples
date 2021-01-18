@@ -23,7 +23,13 @@
     </div>
   </div>
   <div class="card-body">
-    <ngx-datatable [rows]="book.items" [count]="book.totalCount" [list]="list" default>
+    <ngx-datatable
+      data-testid="book-table"
+      [rows]="book.items"
+      [count]="book.totalCount"
+      [list]="list"
+      default
+    >
       <ngx-datatable-column
         [name]="'::Actions' | abpLocalization"
         [maxWidth]="150"
@@ -88,7 +94,7 @@
   </ng-template>
 
   <ng-template #abpBody>
-    <form [formGroup]="form" (ngSubmit)="save()">
+    <form id="book-form" [formGroup]="form" (ngSubmit)="save()">
       <div class="form-group">
         <label for="author-id">Author</label><span> * </span>
         <select class="form-control" id="author-id" formControlName="authorId">
@@ -118,13 +124,13 @@
       </div>
 
       <div class="form-group">
-        <label>Publish date</label><span> * </span>
+        <label for="book-publish-date">Publish date</label><span> * </span>
         <input
-          #datepicker="ngbDatepicker"
-          class="form-control"
-          name="datepicker"
-          formControlName="publishDate"
+          id="book-publish-date"
           ngbDatepicker
+          #datepicker="ngbDatepicker"
+          formControlName="publishDate"
+          class="form-control"
           (click)="datepicker.toggle()"
         />
       </div>
@@ -133,11 +139,12 @@
 
   <ng-template #abpFooter>
     <button type="button" class="btn btn-secondary" #abpClose>
-      {{ 'AbpAccount::Close' | abpLocalization }}
+      {{ '::Cancel' | abpLocalization }}
     </button>
-    <button class="btn btn-primary" (click)="save()" [disabled]="form.invalid">
+
+    <button form="book-form" class="btn btn-primary" [disabled]="form.invalid || form.pristine">
       <i class="fa fa-check mr-1"></i>
-      {{ 'AbpAccount::Save' | abpLocalization }}
+      {{ '::Save' | abpLocalization }}
     </button>
   </ng-template>
 </abp-modal>

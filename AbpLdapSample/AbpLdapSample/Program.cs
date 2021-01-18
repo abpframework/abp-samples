@@ -10,7 +10,7 @@ namespace AbpLdapSample
     {
         static async Task Main(string[] args)
         {
-            var server = "192.168.0.3";
+            var server = "your server ip";
             var serverPort = 389;
             var baseDc = "dc=abp,dc=io";
             var adminUserName = "admin";
@@ -26,14 +26,14 @@ namespace AbpLdapSample
                     await ldapConnection.BindAsync(Native.LdapAuthType.Simple, new LdapCredential
                     {
                         // Configure username according to your LDAP config:
-                        // cn=admin,dc=abp,dc=com
+                        // cn=admin,dc=abp,dc=com or just username.
                         UserName = $"cn={adminUserName},{baseDc}",
                         Password = adminPassword
                     });
                     Console.WriteLine($"{adminUserName} login success!");
 
                     // Configure filter according to your LDAP config:
-                    // (&(uid=admin))
+                    // (&(uid=admin)) or (&(objectClass=user)(sAMAccountName={admin}))
                     var searchResults = await ldapConnection.SearchAsync(baseDc, $"(&(uid={testUserName}))");
                     Console.WriteLine();
                     Console.WriteLine($"{testUserName} attributes:");

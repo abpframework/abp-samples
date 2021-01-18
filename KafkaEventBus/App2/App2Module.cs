@@ -20,7 +20,7 @@ namespace App2
 
             Configure<AbpKafkaEventBusOptions>(options =>
             {
-                options.GroupId = "MyGroupId";
+                options.GroupId = "MyGroupId2";
                 options.TopicName = "MyTopicName";
             });
         }

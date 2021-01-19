@@ -2,7 +2,7 @@ import { PagedAndSortedResultRequestDto } from '@abp/ng.core';
 import { clearPage, CoreTestingModule, wait } from '@abp/ng.core/testing';
 import { ThemeBasicTestingModule } from '@abp/ng.theme.basic/testing';
 import { ThemeSharedTestingModule } from '@abp/ng.theme.shared/testing';
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture } from '@angular/core/testing';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AuthorDto } from '@proxy/authors';
 import { BookDto, BookService, BookType, CreateUpdateBookDto } from '@proxy/books';
@@ -69,7 +69,11 @@ const deleteBookSpy = jasmine.createSpy().and.callFake((id: string) => {
   return of(null);
 });
 
-const getBook = (id: string) => items$.pipe(map(items => items.find(item => item.id === id)));
+const getBook = (id: string) =>
+  items$.pipe(
+    map(items => items.find(item => item.id === id)),
+    take(1)
+  );
 
 describe('BookComponent', () => {
   let component: BookComponent;
@@ -117,10 +121,6 @@ describe('BookComponent', () => {
 
   afterEach(() => {
     clearPage(fixture);
-  });
-
-  afterAll(() => {
-    TestBed.resetTestingModule();
   });
 
   it('should be created', () => {

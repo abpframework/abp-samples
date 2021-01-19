@@ -1,7 +1,7 @@
 import { clearPage, CoreTestingModule, wait } from '@abp/ng.core/testing';
 import { ThemeBasicTestingModule } from '@abp/ng.theme.basic/testing';
 import { ThemeSharedTestingModule } from '@abp/ng.theme.shared/testing';
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture } from '@angular/core/testing';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {
   AuthorDto,
@@ -57,7 +57,11 @@ const deleteAuthorSpy = jasmine.createSpy().and.callFake((id: string) => {
   return of(null);
 });
 
-const getAuthor = (id: string) => items$.pipe(map(items => items.find(item => item.id === id)));
+const getAuthor = (id: string) =>
+  items$.pipe(
+    map(items => items.find(item => item.id === id)),
+    take(1)
+  );
 
 describe('AuthorComponent', () => {
   let component: AuthorComponent;
@@ -94,10 +98,6 @@ describe('AuthorComponent', () => {
 
   afterEach(() => {
     clearPage(fixture);
-  });
-
-  afterAll(() => {
-    TestBed.resetTestingModule();
   });
 
   it('should be created', () => {

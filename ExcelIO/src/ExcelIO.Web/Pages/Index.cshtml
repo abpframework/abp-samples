@@ -1,0 +1,48 @@
+﻿@page
+@using Microsoft.AspNetCore.Mvc.Localization
+@using ExcelIO.Localization
+@using Volo.Abp.Users
+@model ExcelIO.Web.Pages.IndexModel
+@inject IHtmlLocalizer<ExcelIOResource> L
+@inject ICurrentUser CurrentUser
+@section styles {
+    <abp-style-bundle>
+        <abp-style src="/Pages/Index.css" />
+    </abp-style-bundle>
+}
+@section scripts {
+    <abp-script-bundle>
+        <abp-script src="/Pages/Index.js" />
+    </abp-script-bundle>
+}
+
+@if (Model.Users.Any())
+{
+<abp-card>
+    <abp-card-body>
+        <h3>Excel content:</h3>
+        @foreach (var userDto in Model.Users)
+        {
+            <p>@userDto.UserName , @userDto.Email , @userDto.LastModificationTime</p>
+        }
+    </abp-card-body>
+</abp-card>
+}
+
+<abp-card id="IdentityUsersWrapper">
+    <abp-card-body>
+
+        <h5>Select excel file to Import</h5>
+        <form method="POST" enctype="multipart/form-data" asp-page-handler="Import">
+            <input type="file" name="excel"/>
+            <abp-button button-type="Primary" type="Submit">Import user from excel</abp-button>
+        </form>
+
+        <form method="POST" asp-page-handler="Export">
+            <abp-button button-type="Primary" type="Submit">Export users to excel</abp-button>
+        </form>
+
+        <abp-table striped-rows="true" class="nowrap"></abp-table>
+
+    </abp-card-body>
+</abp-card>

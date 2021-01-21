@@ -1,0 +1,52 @@
+::ng-deep p-organizationChart {
+  .p-organizationchart .p-organizationchart-node-content {
+    background-color: #6d87f8;
+    color: #fff;
+  }
+
+  .p-organizationchart
+    .p-organizationchart-node-content.p-organizationchart-selectable-node:not(.p-highlight):hover {
+    background-color: #8ea2fd;
+    color: #fff;
+  }
+
+  .p-organizationchart .p-organizationchart-node-content.p-highlight {
+    border: 2px solid #fff;
+    outline: 3px solid #8ea2fd;
+    background-color: #4c6dff;
+    color: #fff;
+  }
+}
+
+::ng-deep p-table {
+  .p-inputtext {
+    height: 34px;
+    font-size: 15px;
+  }
+
+  .p-datatable {
+    .p-datatable-header {
+      background: #ffffff;
+    }
+
+    .p-datatable-thead > tr > th {
+      background: #ffffff;
+    }
+  }
+
+  .p-datatable .p-datatable-tbody > tr:nth-child(odd) {
+    background: #f7f7f7;
+  }
+}
+
+::ng-deep p-autoComplete {
+  .p-autocomplete {
+    width: 100%;
+    max-width: 500px;
+  }
+
+  .p-autocomplete-dd .p-autocomplete-input,
+  .p-autocomplete-dd .p-autocomplete-multiple-container {
+    width: 100%;
+  }
+}

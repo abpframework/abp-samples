@@ -1,0 +1,113 @@
+<div class="card">
+  <div class="card-header">
+    <p-breadcrumb [model]="breadcrumbItems"></p-breadcrumb>
+  </div>
+  <div class="card-body">
+    <p-organizationChart
+      [value]="organizationUnits"
+      selectionMode="single"
+      [(selection)]="selectedUnit"
+    ></p-organizationChart>
+
+    <div class="p-3" *ngIf="selectedUnit">
+      <div class="d-flex align-items-center justify-content-between mb-2">
+        <h6>Members of {{ selectedUnit.label }}</h6>
+
+        <button
+          pButton
+          type="button"
+          icon="pi pi-plus"
+          class="p-button-rounded p-button-outlined p-button-success p-button-sm"
+          label="New member"
+          (click)="newMember()"
+        ></button>
+      </div>
+
+      <p-table
+        #table
+        [value]="tableData"
+        [globalFilterFields]="['fullName', 'username', 'email', 'phone']"
+      >
+        <ng-template pTemplate="caption">
+          <div class="d-flex justify-content-end">
+            <span class="p-input-icon-left">
+              <i class="pi pi-search"></i>
+              <input
+                pInputText
+                type="text"
+                (input)="table.filterGlobal($event.target.value, 'contains')"
+                placeholder="Search keyword"
+              />
+            </span>
+          </div>
+        </ng-template>
+        <ng-template pTemplate="header">
+          <tr>
+            <th pSortableColumn="fullName">Name <p-sortIcon field="code"></p-sortIcon></th>
+            <th pSortableColumn="username">Username <p-sortIcon field="code"></p-sortIcon></th>
+            <th pSortableColumn="email">Email <p-sortIcon field="code"></p-sortIcon></th>
+            <th pSortableColumn="phone">Phone <p-sortIcon field="code"></p-sortIcon></th>
+            <th style="width: 80px"></th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-member>
+          <tr>
+            <td>
+              <p-avatar
+                [label]="member.fullName.substr(0, 1)"
+                styleClass="mr-2"
+                shape="circle"
+              ></p-avatar>
+
+              {{ member.fullName }}
+            </td>
+            <td>{{ member.username }}</td>
+            <td>{{ member.email }}</td>
+            <td>{{ member.phone }}</td>
+            <td class="text-danger">
+              <i
+                class="fas fa-trash text-danger pointer"
+                (click)="removeMember(member, $event)"
+              ></i>
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+  </div>
+</div>
+
+<p-dialog *ngIf="isDialogVisible" header="New member" [(visible)]="isDialogVisible" [modal]="true">
+  <p-autoComplete
+    [style]="{ maxWidth: '500px' }"
+    [dropdown]="true"
+    [(ngModel)]="memberAutocompleteData"
+    field="fullName"
+    [suggestions]="filteredMembers"
+    (completeMethod)="filterMember($event)"
+    [multiple]="true"
+    appendTo="body"
+  >
+  </p-autoComplete>
+
+  <ng-template pTemplate="footer">
+    <button
+      pButton
+      pRipple
+      label="Cancel"
+      icon="pi pi-times"
+      class="p-button-text"
+      (click)="isDialogVisible = false"
+    ></button>
+    <button
+      pButton
+      pRipple
+      label="Save"
+      icon="pi pi-check"
+      class="p-button-text"
+      (click)="addMember()"
+    ></button>
+  </ng-template>
+</p-dialog>
+
+<p-confirmPopup></p-confirmPopup>

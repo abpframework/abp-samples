@@ -56,9 +56,12 @@ namespace Acme.BookStore.Books
                 input.Sorting = nameof(Book.Name);
             }
 
+            //Get the IQueryable<Book> from the repository
+            var queryable = await Repository.GetQueryableAsync();
+
             //Get the books
             var books = await AsyncExecuter.ToListAsync(
-                Repository
+                queryable
                     .OrderBy(input.Sorting)
                     .Skip(input.SkipCount)
                     .Take(input.MaxResultCount)
@@ -98,8 +101,10 @@ namespace Acme.BookStore.Books
                 .Distinct()
                 .ToArray();
 
+            var queryable = await _authorRepository.GetQueryableAsync();
+
             var authors = await AsyncExecuter.ToListAsync(
-                _authorRepository.Where(a => authorIds.Contains(a.Id))
+                queryable.Where(a => authorIds.Contains(a.Id))
             );
 
             return authors.ToDictionary(x => x.Id, x => x);

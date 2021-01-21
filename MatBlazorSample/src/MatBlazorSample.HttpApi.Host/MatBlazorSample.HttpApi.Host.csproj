@@ -1,0 +1,39 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <Import Project="..\..\common.props" />
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+    <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
+    <RootNamespace>MatBlazorSample</RootNamespace>
+    <PreserveCompilationReferences>true</PreserveCompilationReferences>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Serilog.AspNetCore" Version="3.2.0" />
+    <PackageReference Include="Serilog.Sinks.Async" Version="1.4.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.Google" Version="3.1.8" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.MicrosoftAccount" Version="3.1.8" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.Twitter" Version="3.1.8" />
+    <PackageReference Include="Volo.Abp.AspNetCore.MultiTenancy" Version="4.1.2" />
+    <PackageReference Include="Volo.Abp.Autofac" Version="4.1.2" />
+    <PackageReference Include="Volo.Abp.AspNetCore.Authentication.JwtBearer" Version="4.1.2" />
+    <PackageReference Include="Volo.Abp.Swashbuckle" Version="4.1.2" />
+    <PackageReference Include="Volo.Abp.Account.Pro.Public.Web.IdentityServer" Version="4.1.2" />
+    <PackageReference Include="Volo.Abp.AspNetCore.Mvc.UI.Theme.Lepton" Version="4.1.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\MatBlazorSample.Application\MatBlazorSample.Application.csproj" />
+    <ProjectReference Include="..\MatBlazorSample.EntityFrameworkCore.DbMigrations\MatBlazorSample.EntityFrameworkCore.DbMigrations.csproj" />
+    <ProjectReference Include="..\MatBlazorSample.HttpApi\MatBlazorSample.HttpApi.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Logs\**" />
+    <Content Remove="Logs\**" />
+    <EmbeddedResource Remove="Logs\**" />
+    <None Remove="Logs\**" />
+  </ItemGroup>
+
+</Project>

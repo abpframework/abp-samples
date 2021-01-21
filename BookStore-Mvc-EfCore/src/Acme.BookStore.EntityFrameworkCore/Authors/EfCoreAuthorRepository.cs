@@ -22,7 +22,8 @@ namespace Acme.BookStore.Authors
 
         public async Task<Author> FindByNameAsync(string name)
         {
-            return await DbSet.FirstOrDefaultAsync(author => author.Name == name);
+            var dbSet = await GetDbSetAsync();
+            return await dbSet.FirstOrDefaultAsync(author => author.Name == name);
         }
 
         public async Task<List<Author>> GetListAsync(
@@ -31,7 +32,8 @@ namespace Acme.BookStore.Authors
             string sorting,
             string filter = null)
         {
-            return await DbSet
+            var dbSet = await GetDbSetAsync();
+            return await dbSet
                 .WhereIf(
                     !filter.IsNullOrWhiteSpace(),
                     author => author.Name.Contains(filter)

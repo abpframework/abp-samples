@@ -32,9 +32,8 @@ namespace Acme.BookStore.MongoDB.Samples
             await WithUnitOfWorkAsync(async () =>
             {
                 //Act
-                var adminUser = await _appUserRepository
-                    .GetMongoQueryable()
-                    .FirstOrDefaultAsync(u => u.UserName == "admin");
+                var queryable = await _appUserRepository.GetMongoQueryableAsync();
+                var adminUser = await queryable.FirstOrDefaultAsync(u => u.UserName == "admin");
 
                 //Assert
                 adminUser.ShouldNotBeNull();

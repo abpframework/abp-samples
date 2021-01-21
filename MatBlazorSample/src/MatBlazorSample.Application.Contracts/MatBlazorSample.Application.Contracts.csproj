@@ -1,0 +1,28 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="..\..\common.props" />
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <RootNamespace>MatBlazorSample</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\MatBlazorSample.Domain.Shared\MatBlazorSample.Domain.Shared.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Volo.Abp.PermissionManagement.Application.Contracts" Version="4.1.2" />
+    <PackageReference Include="Volo.Abp.FeatureManagement.Application.Contracts" Version="4.1.2" />
+    <PackageReference Include="Volo.Saas.Host.Application.Contracts" Version="4.1.2" />
+    <PackageReference Include="Volo.Abp.AuditLogging.Application.Contracts" Version="4.1.2" />
+    <PackageReference Include="Volo.Abp.Identity.Pro.Application.Contracts" Version="4.1.2" />
+    <PackageReference Include="Volo.Abp.IdentityServer.Application.Contracts" Version="4.1.2" />
+    <PackageReference Include="Volo.Abp.Account.Pro.Public.Application.Contracts" Version="4.1.2" />
+    <PackageReference Include="Volo.Abp.Account.Pro.Admin.Application.Contracts" Version="4.1.2" />
+    <PackageReference Include="Volo.Abp.LanguageManagement.Application.Contracts" Version="4.1.2" />
+    <PackageReference Include="Volo.Abp.TextTemplateManagement.Application.Contracts" Version="4.1.2" />
+    <PackageReference Include="Volo.Abp.LeptonTheme.Management.Application.Contracts" Version="4.1.2" />
+  </ItemGroup>
+
+</Project>

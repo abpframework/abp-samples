@@ -1,0 +1,14 @@
+{
+  "culture": "de-DE",
+  "texts": {
+    "Menu:Home": "Home",
+    "Home": "Home",
+    "Welcome": "Willkommen",
+    "LongWelcomeMessage": "Willkommen in der Anwendung. Dies ist ein Startup-Projekt basierend auf dem ABP-Framework. Weitere Informationen finden Sie unter abp.io.",
+    "EndDate": "Enddatum",
+    "StartDate": "Startdatum",
+    "Permission:Dashboard": "Dashboard",
+    "Menu:Dashboard": "Dashboard",
+    "Dashboard": "Dashboard"
+  }
+}

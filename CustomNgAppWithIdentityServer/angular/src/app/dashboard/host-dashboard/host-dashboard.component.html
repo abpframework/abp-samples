@@ -1,0 +1,120 @@
+<div class="row entry-row">
+  <div class="col-auto">
+    <h1 class="content-header-title">{{ '::Menu:Dashboard' | abpLocalization }}</h1>
+  </div>
+  <div class="col-lg-auto pl-lg-0">
+    <abp-breadcrumb></abp-breadcrumb>
+  </div>
+  <div class="col">
+    <div class="text-lg-right pt-2" id="AbpContentToolbar"></div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-body">
+    <form id="DashboardFilterForm">
+      <div id="datepicker" class="input-daterange row align-items-center justify-content-center">
+        <div class="col-12 col-lg-5 col-md-6 mb-3 mb-lg-0">
+          <div class="form-group mb-0">
+            <div class="input-group">
+              <label class="input-group-text">{{ '::StartDate' | abpLocalization }}</label>
+              <input
+                #datepicker="ngbDatepicker"
+                class="form-control"
+                name="start-date"
+                readonly
+                [(ngModel)]="startDate"
+                [dayTemplate]="dayTemplate"
+                ngbDatepicker
+                (click)="datepicker.toggle()"
+              />
+              <ng-template
+                #dayTemplate
+                let-date
+                let-focused="focused"
+                let-selected="selected"
+                let-currentMonth="currentMonth"
+              >
+                <div
+                  class="btn-light custom-day"
+                  [class.bg-primary]="selected"
+                  [class.text-white]="selected"
+                  [class.text-muted]="currentMonth !== date.month"
+                  [class.ng-range]="date.after(this.startDate) && date.before(this.endDate)"
+                  [class.ng-range-end]="date.equals(endDate)"
+                >
+                  {{ date.day }}
+                </div>
+              </ng-template>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-lg-5 col-md-6 mb-3 mb-lg-0">
+          <div class="form-group mb-0">
+            <div class="input-group">
+              <label class="input-group-text">{{ '::EndDate' | abpLocalization }}</label>
+              <input
+                #datepicker2="ngbDatepicker"
+                class="form-control"
+                name="datepicker2"
+                readonly
+                [(ngModel)]="endDate"
+                [dayTemplate]="dayTemplate2"
+                ngbDatepicker
+                (click)="datepicker2.toggle()"
+              />
+
+              <ng-template
+                #dayTemplate2
+                let-date
+                let-focused="focused"
+                let-selected="selected"
+                let-currentMonth="currentMonth"
+              >
+                <div
+                  class="btn-light custom-day"
+                  [class.bg-primary]="selected"
+                  [class.text-white]="selected"
+                  [class.text-muted]="currentMonth !== date.month"
+                  [class.ng-range]="date.after(this.startDate) && date.before(this.endDate)"
+                  [class.ng-range-end]="date.equals(startDate)"
+                >
+                  {{ date.day }}
+                </div>
+              </ng-template>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-lg-2 col-md-12">
+          <button type="submit" class="btn btn-primary btn-block" (click)="refresh()">
+            <i class="fa fa-refresh mr-1"></i>
+            <span>{{ 'AbpAuditLogging::Refresh' | abpLocalization }}</span>
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div id="DashboardWidgetsArea">
+  <div class="row">
+    <div class="col col-md-12 col-lg-6" *abpPermission="'AuditLogging.AuditLogs'">
+      <abp-error-rate-widget #errorRateWidget [height]="250"></abp-error-rate-widget>
+    </div>
+
+    <div class="col col-md-12 col-lg-6" *abpPermission="'AuditLogging.AuditLogs'">
+      <abp-average-execution-duration-widget
+        #averageExecutionDurationWidget
+        [height]="250"
+      ></abp-average-execution-duration-widget>
+    </div>
+
+    <div class="col col-md-12 col-lg-6" *abpPermission="'Saas.Tenants'">
+      <abp-editions-usage-widget #editionsUsageWidget [height]="250"></abp-editions-usage-widget>
+    </div>
+
+    <div class="col col-md-12 col-lg-6" *abpPermission="'Saas.Tenants'">
+      <abp-latest-tenants-widget #latestTenantsWidget [minHeight]="250"></abp-latest-tenants-widget>
+    </div>
+  </div>
+</div>

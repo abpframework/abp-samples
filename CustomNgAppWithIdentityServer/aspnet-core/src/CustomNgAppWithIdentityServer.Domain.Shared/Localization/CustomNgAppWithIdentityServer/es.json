@@ -1,0 +1,23 @@
+{
+  "Culture": "es",
+  "Texts": {
+    "Menu:Home": "Hogar",
+    "Home": "Hogar",
+    "Welcome": "Bienvenido",
+    "LongWelcomeMessage": "Bienvenido a la aplicacion. Este es un proyecto de inicio basado en el marco ABP. Para obtener mas informacion, visite abp.io.",
+    "EndDate": "Fecha de finalizaci�n",
+    "StartDate": "Fecha de inicio",
+    "Permission:Dashboard": "Panel de control",
+    "Menu:Dashboard": "Panel de control",
+    "Dashboard": "Panel de control",
+    "ExternalProvider:Google": "Google",
+    "ExternalProvider:Google:ClientId": "ID de cliente",
+    "ExternalProvider:Google:ClientSecret": "Client Secret",
+    "ExternalProvider:Microsoft": "Microsoft",
+    "ExternalProvider:Microsoft:ClientId": "ID de cliente",
+    "ExternalProvider:Microsoft:ClientSecret": "Client Secret",
+    "ExternalProvider:Twitter": "Twitter",
+    "ExternalProvider:Twitter:ConsumerKey": "Clave de consumidor",
+    "ExternalProvider:Twitter:ConsumerSecret": "Consumer Secret"
+  }
+}

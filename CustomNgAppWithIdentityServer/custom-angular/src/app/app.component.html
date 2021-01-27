@@ -1,0 +1,13 @@
+<button (click)="initLogin()">Login</button>
+
+<div *ngIf="hasLoggedIn">
+  <hr />
+
+  <button (click)="retrieveUsers()">Retrieve users</button>
+
+  <ul>
+    <li *ngFor="let user of users">
+      {{ user.name }}
+    </li>
+  </ul>
+</div>

@@ -1,0 +1,27 @@
+<div class="row entry-row">
+  <div class="col-auto">
+    <h1 class="content-header-title">{{ '::Menu:Home' | abpLocalization }}</h1>
+  </div>
+  <div class="col-lg-auto pl-lg-0">
+    <abp-breadcrumb></abp-breadcrumb>
+  </div>
+  <div class="col">
+    <div class="text-lg-right pt-2" id="AbpContentToolbar"></div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-header">{{ '::Welcome' | abpLocalization }}</div>
+  <div class="card-body">
+    <p>
+      {{ '::LongWelcomeMessage' | abpLocalization }}
+    </p>
+    <p *ngIf="!hasLoggedIn">
+      <a (click)="login()" class="btn btn-primary" role="button"
+        ><i class="fa fa-sign-in mr-1"></i>{{ 'AbpAccount::Login' | abpLocalization }}</a
+      >
+    </p>
+    <hr />
+    <p class="text-right"><a href="https://abp.io?ref=tmpl" target="_blank">abp.io</a></p>
+  </div>
+</div>

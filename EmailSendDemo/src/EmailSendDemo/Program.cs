@@ -21,7 +21,7 @@ namespace EmailSendDemo
             {
                 options.Host = "smtp.sendgrid.net";
                 options.Port = 587;
-                options.UserName = "apikey";
+                options.UserName = "your username";
                 options.Password = "your password";
                 options.Domain = "";
                 options.EnableSsl = false;
@@ -34,7 +34,7 @@ namespace EmailSendDemo
             {
                 options.Host = "smtp.sendgrid.net";
                 options.Port = 465;
-                options.UserName = "apikey";
+                options.UserName = "your username";
                 options.Password = "your password";
                 options.Domain = "";
                 options.EnableSsl = true;

@@ -22,7 +22,7 @@ namespace EmailSendDemo
                 options.Host = "smtp.sendgrid.net";
                 options.Port = 587;
                 options.UserName = "apikey";
-                options.Password = "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";
+                options.Password = "your password";
                 options.Domain = "";
                 options.EnableSsl = false;
                 options.UseDefaultCredentials = false;
@@ -35,7 +35,7 @@ namespace EmailSendDemo
                 options.Host = "smtp.sendgrid.net";
                 options.Port = 465;
                 options.UserName = "apikey";
-                options.Password = "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";
+                options.Password = "your password";
                 options.Domain = "";
                 options.EnableSsl = true;
                 options.UseDefaultCredentials = false;
@@ -65,8 +65,8 @@ namespace EmailSendDemo
 
         public async Task RunAsync()
         {
-            await _smtpEmailSender.SendAsync("liming.ma@volosoft.com", "hi, i'm smtp", "how are you?");
-            await _mailKitSmtpEmailSender.SendAsync("liming.ma@volosoft.com", "hi, i'm mailKit", "how are you?");
+            await _smtpEmailSender.SendAsync("youremail@example.com", "hi, i'm smtp", "how are you?");
+            await _mailKitSmtpEmailSender.SendAsync("youremail@example.com", "hi, i'm mailKit", "how are you?");
             Console.WriteLine("hello world!");
         }
     }

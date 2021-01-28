@@ -35,5 +35,6 @@ $solutionPaths = (
     "../StoredProcedureDemo",
     "../TextTemplateDemo",
     "../AbpLdapSample",
-    "../ExcelIO"
+    "../ExcelIO",
+    "../EmailSendDemo"
 )

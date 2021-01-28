@@ -9,10 +9,14 @@ namespace EmailSendDemo.AbpEmailingServices
 {
     public class MailKitSmtpEmailSender : EmailSenderBase
     {
-        public MailKitSmtpEmailSender(IOptionsSnapshot<MailConfigOptions> settings)
+        private readonly AbpMailKitOptions _mailKitOptions;
+
+        public MailKitSmtpEmailSender(
+            IOptionsSnapshot<MailConfigOptions> settings,
+            IOptions<AbpMailKitOptions> mailKitOptions)
             : base(settings.Get("MailKit"))
         {
-
+            _mailKitOptions = mailKitOptions.Value;
         }
 
         protected override async Task SendEmailAsync(MailMessage mail)
@@ -46,7 +50,7 @@ namespace EmailSendDemo.AbpEmailingServices
             await client.ConnectAsync(
                 ConfigOptions.Host,
                 ConfigOptions.Port,
-                SecureSocketOptions.SslOnConnect // or SecureSocketOptions.xx
+                GetSecureSocketOption()
             );
 
             if (ConfigOptions.UseDefaultCredentials)
@@ -58,6 +62,18 @@ namespace EmailSendDemo.AbpEmailingServices
                 ConfigOptions.UserName,
                 ConfigOptions.Password
             );
+        }
+
+        protected virtual SecureSocketOptions GetSecureSocketOption()
+        {
+            if (_mailKitOptions.SecureSocketOption.HasValue)
+            {
+                return _mailKitOptions.SecureSocketOption.Value;
+            }
+
+            return ConfigOptions.EnableSsl
+                ? SecureSocketOptions.SslOnConnect
+                : SecureSocketOptions.StartTlsWhenAvailable;
         }
     }
 }

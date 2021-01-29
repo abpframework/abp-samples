@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { AuthService, RestService } from '@abp/ng.core';
 import { OAuthService } from 'angular-oauth2-oidc';
+import { IdentityUserService } from './proxy/volo/abp/identity';
 
 @Component({
   selector: 'app-root',
@@ -19,7 +20,7 @@ export class AppComponent {
   constructor(
     private oAuthService: OAuthService,
     private authService: AuthService,
-    private restService: RestService
+    private identityService: IdentityUserService
   ) {}
 
   initLogin() {
@@ -27,13 +28,8 @@ export class AppComponent {
   }
 
   retrieveUsers() {
-    this.restService
-      .request<any, any>({
-        method: 'GET',
-        url: '/api/identity/users',
-      })
-      .subscribe((result) => {
-        this.users = result.items;
-      });
+    this.identityService.getList({ maxResultCount: 10 }).subscribe((result) => {
+      this.users = result.items;
+    });
   }
 }

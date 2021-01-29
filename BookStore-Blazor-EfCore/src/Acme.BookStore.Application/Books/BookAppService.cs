@@ -39,10 +39,11 @@ namespace Acme.BookStore.Books
 
         public override async Task<BookDto> GetAsync(Guid id)
         {
-            await CheckGetPolicyAsync();
+            //Get the IQueryable<Book> from the repository
+            var queryable = await Repository.GetQueryableAsync();
 
             //Prepare a query to join books and authors
-            var query = from book in Repository
+            var query = from book in queryable
                 join author in _authorRepository on book.AuthorId equals author.Id
                 where book.Id == id
                 select new { book, author };
@@ -62,14 +63,16 @@ namespace Acme.BookStore.Books
         public override async Task<PagedResultDto<BookDto>> GetListAsync(
             PagedAndSortedResultRequestDto input)
         {
-            await CheckGetListPolicyAsync();
+            //Get the IQueryable<Book> from the repository
+            var queryable = await Repository.GetQueryableAsync();
 
             //Prepare a query to join books and authors
-            var query = from book in Repository
+            var query = from book in queryable
                 join author in _authorRepository on book.AuthorId equals author.Id
                 orderby input.Sorting
                 select new {book, author};
 
+            //Paging
             query = query
                 .Skip(input.SkipCount)
                 .Take(input.MaxResultCount);

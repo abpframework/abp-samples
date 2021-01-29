@@ -23,8 +23,8 @@ namespace Acme.BookStore.Authors
 
         public async Task<Author> FindByNameAsync(string name)
         {
-            return await GetMongoQueryable()
-                .FirstOrDefaultAsync(author => author.Name == name);
+            var queryable = await GetMongoQueryableAsync();
+            return await queryable.FirstOrDefaultAsync(author => author.Name == name);
         }
 
         public async Task<List<Author>> GetListAsync(
@@ -33,7 +33,8 @@ namespace Acme.BookStore.Authors
             string sorting,
             string filter = null)
         {
-            return await GetMongoQueryable()
+            var queryable = await GetMongoQueryableAsync();
+            return await queryable
                 .WhereIf<Author, IMongoQueryable<Author>>(
                     !filter.IsNullOrWhiteSpace(),
                     author => author.Name.Contains(filter)

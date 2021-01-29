@@ -30,6 +30,7 @@ namespace AbpLdapSample
                         UserName = $"cn={adminUserName},{baseDc}",
                         Password = adminPassword
                     });
+                    
                     Console.WriteLine($"{adminUserName} login success!");
 
                     // Configure filter according to your LDAP config:
@@ -37,6 +38,7 @@ namespace AbpLdapSample
                     var searchResults = await ldapConnection.SearchAsync(baseDc, $"(&(uid={testUserName}))");
                     Console.WriteLine();
                     Console.WriteLine($"{testUserName} attributes:");
+                    
                     var userEntry = searchResults.First();
                     Console.WriteLine(string.Join(", ", userEntry.ToDirectoryEntry().Attributes));
 
@@ -45,14 +47,16 @@ namespace AbpLdapSample
                         UserName = userEntry.Dn,
                         Password = testPassword
                     });
+                    
                     Console.WriteLine();
                     Console.WriteLine($"{testUserName} login success!");
                 }
                 catch (Exception e)
                 {
                     Console.WriteLine(e);
-                    throw;
                 }
+                
+                Console.ReadKey();
             }
         }
     }

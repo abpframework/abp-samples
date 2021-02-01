@@ -8,8 +8,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Blazorise.Bootstrap" Version="0.9.3-preview3" />
-    <PackageReference Include="Blazorise.Icons.FontAwesome" Version="0.9.3-preview3" />
+    <PackageReference Include="Blazorise.Bootstrap" Version="0.9.3-preview8" />
+    <PackageReference Include="Blazorise.Icons.FontAwesome" Version="0.9.3-preview8" />
     <PackageReference Include="Blazorise.Components" Version="0.9.3-preview3" />
     <PackageReference Include="MatBlazor" Version="2.8.0" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="5.0.*" />

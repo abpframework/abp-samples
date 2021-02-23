@@ -7,6 +7,9 @@
 
   <ItemGroup>
     <None Remove="appsettings.json" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Include="appsettings.json">
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -14,7 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Volo.Abp.Http.Client.IdentityModel" Version="4.1.2" />
+    <PackageReference Include="Volo.Abp.Http.Client.IdentityModel" Version="4.2.1" />
     <ProjectReference Include="..\..\src\MatBlazorSample.HttpApi.Client\MatBlazorSample.HttpApi.Client.csproj" />
   </ItemGroup>
 

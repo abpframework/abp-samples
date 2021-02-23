@@ -1,15 +1,8 @@
-namespace MatBlazorSample.Permissions
+﻿namespace MatBlazorSample.Permissions
 {
     public static class MatBlazorSamplePermissions
     {
         public const string GroupName = "MatBlazorSample";
-
-        public static class Dashboard
-        {
-            public const string DashboardGroup = GroupName + ".Dashboard";
-            public const string Host = DashboardGroup + ".Host";
-            public const string Tenant = DashboardGroup + ".Tenant";
-        }
 
         //Add your own permission names. Example:
         //public const string MyPermission1 = GroupName + ".MyPermission1";

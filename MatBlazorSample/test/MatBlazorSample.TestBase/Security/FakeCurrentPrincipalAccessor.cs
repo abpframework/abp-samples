@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Security.Claims;
 using Volo.Abp.DependencyInjection;
 using Volo.Abp.Security.Claims;
@@ -7,9 +6,13 @@ using Volo.Abp.Security.Claims;
 namespace MatBlazorSample.Security
 {
     [Dependency(ReplaceServices = true)]
-    public class FakeCurrentPrincipalAccessor : ICurrentPrincipalAccessor, ISingletonDependency
+    public class FakeCurrentPrincipalAccessor : ThreadCurrentPrincipalAccessor
     {
-        public ClaimsPrincipal Principal => GetPrincipal();
+        protected override ClaimsPrincipal GetClaimsPrincipal()
+        {
+            return GetPrincipal();
+        }
+
         private ClaimsPrincipal _principal;
 
         private ClaimsPrincipal GetPrincipal()
@@ -35,12 +38,6 @@ namespace MatBlazorSample.Security
             }
 
             return _principal;
-        }
-
-        public IDisposable Change(ClaimsPrincipal principal)
-        {
-            _principal = principal;
-            return null;
         }
     }
 }

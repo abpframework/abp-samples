@@ -4,33 +4,26 @@
     <TargetFramework>net5.0</TargetFramework>
     <BlazorWebAssemblyLoadAllGlobalizationData>true</BlazorWebAssemblyLoadAllGlobalizationData>
     <BlazorWebAssemblyEnableLinking>false</BlazorWebAssemblyEnableLinking>
-    <PublishTrimmed>false</PublishTrimmed>	
+    <PublishTrimmed>false</PublishTrimmed>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Blazorise.Bootstrap" Version="0.9.3-preview8" />
     <PackageReference Include="Blazorise.Icons.FontAwesome" Version="0.9.3-preview8" />
-    <PackageReference Include="Blazorise.Components" Version="0.9.3-preview3" />
+    <PackageReference Include="Blazorise.Components" Version="0.9.3-preview8" />
     <PackageReference Include="MatBlazor" Version="2.8.0" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="5.0.*" />
-    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="5.0.*" PrivateAssets="all" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="5.0.*" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Volo.Abp.Autofac.WebAssembly" Version="4.1.2" />
-    <PackageReference Include="Volo.Abp.AspNetCore.Components.WebAssembly.LeptonTheme" Version="4.1.2" />
+    <PackageReference Include="Volo.Abp.Autofac.WebAssembly" Version="4.2.1" />
+    <PackageReference Include="Volo.Abp.AspNetCore.Components.WebAssembly.BasicTheme" Version="4.2.1" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Volo.Abp.SettingManagement.Blazor" Version="4.1.2" />
-    <PackageReference Include="Volo.Abp.Identity.Pro.Blazor" Version="4.1.2" />
-    <PackageReference Include="Volo.Saas.Host.Blazor" Version="4.1.2" />
-    <PackageReference Include="Volo.Abp.LeptonTheme.Management.Blazor" Version="4.1.2" />
-    <PackageReference Include="Volo.Abp.Account.Pro.Admin.Blazor" Version="4.1.2" />
-    <PackageReference Include="Volo.Abp.TextTemplateManagement.Blazor" Version="4.1.2" />
-    <PackageReference Include="Volo.Abp.AuditLogging.Blazor" Version="4.1.2" />
-	<PackageReference Include="Volo.Abp.LanguageManagement.Blazor" Version="4.1.2" />
-	<PackageReference Include="Volo.Abp.IdentityServer.Blazor" Version="4.1.2" />
+    <PackageReference Include="Volo.Abp.Identity.Blazor" Version="4.2.1" />
+    <PackageReference Include="Volo.Abp.TenantManagement.Blazor" Version="4.2.1" />
   </ItemGroup>
 
   <ItemGroup>

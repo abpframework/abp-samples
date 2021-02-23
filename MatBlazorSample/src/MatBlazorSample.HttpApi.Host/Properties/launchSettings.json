@@ -3,8 +3,8 @@
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
     "iisExpress": {
-      "applicationUrl": "https://localhost:44362",
-      "sslPort": 44362
+      "applicationUrl": "https://localhost:44334",
+      "sslPort": 44334
     }
   },
   "profiles": {
@@ -18,7 +18,7 @@
     "MatBlazorSample.HttpApi.Host": {
       "commandName": "Project",
       "launchBrowser": true,
-      "applicationUrl": "https://localhost:44362",
+      "applicationUrl": "https://localhost:44334",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }

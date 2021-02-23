@@ -5,7 +5,7 @@ namespace MatBlazorSample.EntityFrameworkCore
 {
     [DependsOn(
         typeof(MatBlazorSampleEntityFrameworkCoreModule)
-    )]
+        )]
     public class MatBlazorSampleEntityFrameworkCoreDbMigrationsModule : AbpModule
     {
         public override void ConfigureServices(ServiceConfigurationContext context)

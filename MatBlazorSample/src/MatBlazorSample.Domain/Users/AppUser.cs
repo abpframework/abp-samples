@@ -42,12 +42,11 @@ namespace MatBlazorSample.Users
 
         /* Add your own properties here. Example:
          *
-         * public virtual string MyProperty { get; set; }
          * public string MyProperty { get; set; }
          *
          * If you add a property and using the EF Core, remember these;
          *
-         * 1. update MatBlazorSampleDbContext.OnModelCreating
+         * 1. Update MatBlazorSampleDbContext.OnModelCreating
          * to configure the mapping for your new property
          * 2. Update MatBlazorSampleEfCoreEntityExtensionMappings to extend the IdentityUser entity
          * and add your new property to the migration.

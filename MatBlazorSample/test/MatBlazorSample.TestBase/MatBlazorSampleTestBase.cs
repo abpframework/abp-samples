@@ -8,6 +8,8 @@ using Volo.Abp.Testing;
 
 namespace MatBlazorSample
 {
+    /* All test classes are derived from this class, directly or indirectly.
+     */
     public abstract class MatBlazorSampleTestBase<TStartupModule> : AbpIntegratedTest<TStartupModule> 
         where TStartupModule : IAbpModule
     {
@@ -15,7 +17,7 @@ namespace MatBlazorSample
         {
             options.UseAutofac();
         }
-        
+
         protected virtual Task WithUnitOfWorkAsync(Func<Task> func)
         {
             return WithUnitOfWorkAsync(new AbpUnitOfWorkOptions(), func);
@@ -35,7 +37,7 @@ namespace MatBlazorSample
                 }
             }
         }
-        
+
         protected virtual Task<TResult> WithUnitOfWorkAsync<TResult>(Func<Task<TResult>> func)
         {
             return WithUnitOfWorkAsync(new AbpUnitOfWorkOptions(), func);

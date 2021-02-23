@@ -7,42 +7,26 @@ using IdentityModel;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using MatBlazorSample.Blazor.Components.Layout;
-using MatBlazorSample.Blazor.Navigation;
 using Volo.Abp;
-using Volo.Abp.Account.Pro.Admin.Blazor;
-using Volo.Abp.AspNetCore.Components.WebAssembly.LeptonTheme;
-using Volo.Abp.AspNetCore.Components.WebAssembly.LeptonTheme.Components;
+using Volo.Abp.AspNetCore.Components.WebAssembly.BasicTheme;
+using Volo.Abp.AspNetCore.Components.WebAssembly.BasicTheme.Themes.Basic;
 using Volo.Abp.AspNetCore.Components.WebAssembly.Theming.Routing;
-using Volo.Abp.AuditLogging.Blazor;
 using Volo.Abp.Autofac.WebAssembly;
-using Volo.Abp.AutoMapper;
-using Volo.Abp.Identity.Pro.Blazor;
-using Volo.Abp.IdentityServer.Blazor;
-using Volo.Abp.LeptonTheme.Management.Blazor;
 using Volo.Abp.Modularity;
-using Volo.Abp.TextTemplateManagement.Blazor;
-using Volo.Abp.SettingManagement.Blazor;
 using Volo.Abp.UI.Navigation;
-using Volo.Saas.Host.Blazor;
-using Volo.Abp.LanguageManagement.Blazor;
-using MatBlazor;
+using Volo.Abp.Identity.Blazor;
+using Volo.Abp.AutoMapper;
+using Volo.Abp.TenantManagement.Blazor;
+using MatBlazorSample.Blazor.Menus;
 
 namespace MatBlazorSample.Blazor
 {
     [DependsOn(
         typeof(AbpAutofacWebAssemblyModule),
         typeof(MatBlazorSampleHttpApiClientModule),
-        typeof(AbpAspNetCoreComponentsWebAssemblyLeptonThemeModule),
-        typeof(AbpIdentityProBlazorModule),
-        typeof(SaasHostBlazorModule),
-        typeof(AbpSettingManagementBlazorModule),
-        typeof(LeptonThemeManagementBlazorModule),
-        typeof(AbpAccountAdminBlazorModule),
-        typeof(AbpAuditLoggingBlazorModule),
-        typeof(TextTemplateManagementBlazorModule),
-        typeof(LanguageManagementBlazorModule),
-        typeof(AbpIdentityServerBlazorModule)
+        typeof(AbpAspNetCoreComponentsWebAssemblyBasicThemeModule),
+        typeof(AbpIdentityBlazorModule),
+        typeof(AbpTenantManagementBlazorModule)
     )]
     public class MatBlazorSampleBlazorModule : AbpModule
     {
@@ -58,9 +42,6 @@ namespace MatBlazorSample.Blazor
             ConfigureUI(builder);
             ConfigureMenu(context);
             ConfigureAutoMapper(context);
-            ConfigureLeptonTheme(context);
-
-            builder.Services.AddMatBlazor();
         }
 
         private void ConfigureRouter(ServiceConfigurationContext context)
@@ -117,14 +98,6 @@ namespace MatBlazorSample.Blazor
             Configure<AbpAutoMapperOptions>(options =>
             {
                 options.AddMaps<MatBlazorSampleBlazorModule>();
-            });
-        }
-
-        private void ConfigureLeptonTheme(ServiceConfigurationContext context)
-        {
-            Configure<LeptonThemeOptions>(options =>
-            {
-                options.FooterComponent = typeof(MainFooterComponent);
             });
         }
     }

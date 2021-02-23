@@ -30,7 +30,7 @@ namespace MatBlazorSample
                 identityServerBuilder.AddDeveloperSigningCredential(false, System.Guid.NewGuid().ToString());
             });
         }
-        
+
         public override void ConfigureServices(ServiceConfigurationContext context)
         {
             Configure<AbpBackgroundJobOptions>(options =>

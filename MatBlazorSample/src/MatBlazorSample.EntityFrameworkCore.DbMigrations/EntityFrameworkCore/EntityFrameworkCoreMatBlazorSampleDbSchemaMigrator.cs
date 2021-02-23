@@ -12,7 +12,8 @@ namespace MatBlazorSample.EntityFrameworkCore
     {
         private readonly IServiceProvider _serviceProvider;
 
-        public EntityFrameworkCoreMatBlazorSampleDbSchemaMigrator(IServiceProvider serviceProvider)
+        public EntityFrameworkCoreMatBlazorSampleDbSchemaMigrator(
+            IServiceProvider serviceProvider)
         {
             _serviceProvider = serviceProvider;
         }

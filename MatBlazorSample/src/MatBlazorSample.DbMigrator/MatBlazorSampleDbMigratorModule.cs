@@ -9,15 +9,12 @@ namespace MatBlazorSample.DbMigrator
         typeof(AbpAutofacModule),
         typeof(MatBlazorSampleEntityFrameworkCoreDbMigrationsModule),
         typeof(MatBlazorSampleApplicationContractsModule)
-    )]
+        )]
     public class MatBlazorSampleDbMigratorModule : AbpModule
     {
         public override void ConfigureServices(ServiceConfigurationContext context)
         {
-            Configure<AbpBackgroundJobOptions>(options =>
-            {
-                options.IsJobExecutionEnabled = false;
-            });
+            Configure<AbpBackgroundJobOptions>(options => options.IsJobExecutionEnabled = false);
         }
     }
 }

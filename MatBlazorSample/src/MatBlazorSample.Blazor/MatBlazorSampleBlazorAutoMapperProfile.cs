@@ -1,10 +1,10 @@
-using AutoMapper;
+﻿using AutoMapper;
 
 namespace MatBlazorSample.Blazor
 {
     public class MatBlazorSampleBlazorAutoMapperProfile : Profile
     {
-        public MatBlazorSampleBlazorAutoMapperProfile() 
+        public MatBlazorSampleBlazorAutoMapperProfile()
         {
             //Define your AutoMapper configuration here for the Blazor project.
         }

@@ -8,21 +8,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="appsettings.json" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Content Include="appsettings.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-  </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="Volo.Abp.TestBase" Version="4.1.2" />
-    <PackageReference Include="Volo.Abp.Autofac" Version="4.1.2" />
-    <PackageReference Include="Volo.Abp.Authorization" Version="4.1.2" />
+    <PackageReference Include="Volo.Abp.TestBase" Version="4.2.1" />
+    <PackageReference Include="Volo.Abp.Autofac" Version="4.2.1" />
+    <PackageReference Include="Volo.Abp.Authorization" Version="4.2.1" />
     <ProjectReference Include="..\..\src\MatBlazorSample.Domain\MatBlazorSample.Domain.csproj" />
   </ItemGroup>
 

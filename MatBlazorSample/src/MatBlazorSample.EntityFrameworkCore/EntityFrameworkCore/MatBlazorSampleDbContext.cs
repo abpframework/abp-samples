@@ -1,4 +1,4 @@
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using MatBlazorSample.Users;
 using Volo.Abp.Data;
 using Volo.Abp.EntityFrameworkCore;
@@ -41,12 +41,12 @@ namespace MatBlazorSample.EntityFrameworkCore
             builder.Entity<AppUser>(b =>
             {
                 b.ToTable(AbpIdentityDbProperties.DbTablePrefix + "Users"); //Sharing the same table "AbpUsers" with the IdentityUser
-
+                
                 b.ConfigureByConvention();
                 b.ConfigureAbpUser();
 
-                /* Configure mappings for your additional properties.
-                 * Also see the MatBlazorSampleEfCoreEntityExtensionMappings class.
+                /* Configure mappings for your additional properties
+                 * Also see the MatBlazorSampleEfCoreEntityExtensionMappings class
                  */
             });
 

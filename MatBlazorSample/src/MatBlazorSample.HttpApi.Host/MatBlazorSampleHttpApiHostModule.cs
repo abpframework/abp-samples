@@ -1,10 +1,8 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
-using Microsoft.AspNetCore.Authentication.Google;
-using Microsoft.AspNetCore.Authentication.MicrosoftAccount;
-using Microsoft.AspNetCore.Authentication.Twitter;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.Extensions.Configuration;
@@ -12,24 +10,23 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using MatBlazorSample.EntityFrameworkCore;
 using MatBlazorSample.MultiTenancy;
+using Volo.Abp.AspNetCore.Mvc.UI.Theme.Basic;
 using Microsoft.OpenApi.Models;
 using Volo.Abp;
 using Volo.Abp.Account.Web;
 using Volo.Abp.AspNetCore.Authentication.JwtBearer;
 using Volo.Abp.AspNetCore.MultiTenancy;
 using Volo.Abp.AspNetCore.Mvc;
+using Volo.Abp.AspNetCore.Mvc.UI.Bundling;
+using Volo.Abp.AspNetCore.Mvc.UI.Theme.Basic.Bundling;
+using Volo.Abp.AspNetCore.Mvc.UI.Theme.Shared;
+using Volo.Abp.AspNetCore.Serilog;
 using Volo.Abp.Autofac;
 using Volo.Abp.Localization;
 using Volo.Abp.Modularity;
+using Volo.Abp.Swashbuckle;
 using Volo.Abp.UI.Navigation.Urls;
 using Volo.Abp.VirtualFileSystem;
-using Volo.Abp.Account;
-using Volo.Abp.Account.Public.Web.ExternalProviders;
-using Volo.Abp.AspNetCore.Mvc.UI.Bundling;
-using Volo.Abp.AspNetCore.Mvc.UI.Theme.Lepton;
-using Volo.Abp.AspNetCore.Mvc.UI.Theme.Lepton.Bundling;
-using Volo.Abp.AspNetCore.Mvc.UI.Theme.Shared;
-using Volo.Abp.Swashbuckle;
 
 namespace MatBlazorSample
 {
@@ -39,11 +36,12 @@ namespace MatBlazorSample
         typeof(AbpAspNetCoreMultiTenancyModule),
         typeof(MatBlazorSampleApplicationModule),
         typeof(MatBlazorSampleEntityFrameworkCoreDbMigrationsModule),
-        typeof(AbpAspNetCoreMvcUiLeptonThemeModule),
+        typeof(AbpAspNetCoreMvcUiBasicThemeModule),
         typeof(AbpAspNetCoreAuthenticationJwtBearerModule),
-        typeof(AbpAccountPublicWebIdentityServerModule),
+        typeof(AbpAccountWebIdentityServerModule),
+        typeof(AbpAspNetCoreSerilogModule),
         typeof(AbpSwashbuckleModule)
-        )]
+    )]
     public class MatBlazorSampleHttpApiHostModule : AbpModule
     {
         private const string DefaultCorsPolicyName = "Default";
@@ -53,26 +51,14 @@ namespace MatBlazorSample
             var configuration = context.Services.GetConfiguration();
             var hostingEnvironment = context.Services.GetHostingEnvironment();
 
-            ConfigureUrls(configuration);
             ConfigureBundles();
+            ConfigureUrls(configuration);
             ConfigureConventionalControllers();
             ConfigureAuthentication(context, configuration);
-            ConfigureSwagger(context);
             ConfigureLocalization();
             ConfigureVirtualFileSystem(context);
             ConfigureCors(context, configuration);
-            ConfigureExternalProviders(context);
-        }
-
-        private void ConfigureUrls(IConfiguration configuration)
-        {
-            Configure<AppUrlOptions>(options =>
-            {
-                options.Applications["MVC"].RootUrl = configuration["App:SelfUrl"];
-                options.Applications["Angular"].RootUrl = configuration["App:ClientUrl"];
-                options.Applications["Angular"].Urls[AccountUrlNames.PasswordReset] = "account/reset-password";
-                options.Applications["Angular"].Urls[AccountUrlNames.EmailConfirmation] = "account/email-confirmation";
-            });
+            ConfigureSwaggerServices(context, configuration);
         }
 
         private void ConfigureBundles()
@@ -80,12 +66,18 @@ namespace MatBlazorSample
             Configure<AbpBundlingOptions>(options =>
             {
                 options.StyleBundles.Configure(
-                    LeptonThemeBundles.Styles.Global,
-                    bundle =>
-                    {
-                        bundle.AddFiles("/global-styles.css");
-                    }
+                    BasicThemeBundles.Styles.Global,
+                    bundle => { bundle.AddFiles("/global-styles.css"); }
                 );
+            });
+        }
+
+        private void ConfigureUrls(IConfiguration configuration)
+        {
+            Configure<AppUrlOptions>(options =>
+            {
+                options.Applications["MVC"].RootUrl = configuration["App:SelfUrl"];
+                options.RedirectAllowedUrls.AddRange(configuration["App:RedirectAllowedUrls"].Split(','));
             });
         }
 
@@ -97,10 +89,18 @@ namespace MatBlazorSample
             {
                 Configure<AbpVirtualFileSystemOptions>(options =>
                 {
-                    options.FileSets.ReplaceEmbeddedByPhysical<MatBlazorSampleDomainSharedModule>(Path.Combine(hostingEnvironment.ContentRootPath, $"..{Path.DirectorySeparatorChar}MatBlazorSample.Domain.Shared"));
-                    options.FileSets.ReplaceEmbeddedByPhysical<MatBlazorSampleDomainModule>(Path.Combine(hostingEnvironment.ContentRootPath, $"..{Path.DirectorySeparatorChar}MatBlazorSample.Domain"));
-                    options.FileSets.ReplaceEmbeddedByPhysical<MatBlazorSampleApplicationContractsModule>(Path.Combine(hostingEnvironment.ContentRootPath, $"..{Path.DirectorySeparatorChar}MatBlazorSample.Application.Contracts"));
-                    options.FileSets.ReplaceEmbeddedByPhysical<MatBlazorSampleApplicationModule>(Path.Combine(hostingEnvironment.ContentRootPath, $"..{Path.DirectorySeparatorChar}MatBlazorSample.Application"));
+                    options.FileSets.ReplaceEmbeddedByPhysical<MatBlazorSampleDomainSharedModule>(
+                        Path.Combine(hostingEnvironment.ContentRootPath,
+                            $"..{Path.DirectorySeparatorChar}MatBlazorSample.Domain.Shared"));
+                    options.FileSets.ReplaceEmbeddedByPhysical<MatBlazorSampleDomainModule>(
+                        Path.Combine(hostingEnvironment.ContentRootPath,
+                            $"..{Path.DirectorySeparatorChar}MatBlazorSample.Domain"));
+                    options.FileSets.ReplaceEmbeddedByPhysical<MatBlazorSampleApplicationContractsModule>(
+                        Path.Combine(hostingEnvironment.ContentRootPath,
+                            $"..{Path.DirectorySeparatorChar}MatBlazorSample.Application.Contracts"));
+                    options.FileSets.ReplaceEmbeddedByPhysical<MatBlazorSampleApplicationModule>(
+                        Path.Combine(hostingEnvironment.ContentRootPath,
+                            $"..{Path.DirectorySeparatorChar}MatBlazorSample.Application"));
                 });
             }
         }
@@ -119,18 +119,24 @@ namespace MatBlazorSample
                 .AddJwtBearer(options =>
                 {
                     options.Authority = configuration["AuthServer:Authority"];
-                    options.RequireHttpsMetadata = Convert.ToBoolean(configuration["AuthServer:RequireHttpsMetadata"]); ;
+                    options.RequireHttpsMetadata = Convert.ToBoolean(configuration["AuthServer:RequireHttpsMetadata"]);
                     options.Audience = "MatBlazorSample";
-                    options.BackchannelHttpHandler = new HttpClientHandler()
+                    options.BackchannelHttpHandler = new HttpClientHandler
                     {
-                        ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator
+                        ServerCertificateCustomValidationCallback =
+                            HttpClientHandler.DangerousAcceptAnyServerCertificateValidator
                     };
                 });
         }
 
-        private static void ConfigureSwagger(ServiceConfigurationContext context)
+        private static void ConfigureSwaggerServices(ServiceConfigurationContext context, IConfiguration configuration)
         {
-            context.Services.AddSwaggerGen(
+            context.Services.AddAbpSwaggerGenWithOAuth(
+                configuration["AuthServer:Authority"],
+                new Dictionary<string, string>
+                {
+                    {"MatBlazorSample", "MatBlazorSample API"}
+                },
                 options =>
                 {
                     options.SwaggerDoc("v1", new OpenApiInfo {Title = "MatBlazorSample API", Version = "v1"});
@@ -142,12 +148,18 @@ namespace MatBlazorSample
         {
             Configure<AbpLocalizationOptions>(options =>
             {
+                options.Languages.Add(new LanguageInfo("ar", "ar", "العربية"));
                 options.Languages.Add(new LanguageInfo("cs", "cs", "Čeština"));
                 options.Languages.Add(new LanguageInfo("en", "en", "English"));
-                options.Languages.Add(new LanguageInfo("sl", "sl", "Slovenščina"));
+                options.Languages.Add(new LanguageInfo("en-GB", "en-GB", "English (UK)"));
+                options.Languages.Add(new LanguageInfo("fr", "fr", "Français"));
+                options.Languages.Add(new LanguageInfo("hu", "hu", "Magyar"));
+                options.Languages.Add(new LanguageInfo("pt-BR", "pt-BR", "Português"));
+                options.Languages.Add(new LanguageInfo("ru", "ru", "Русский"));
                 options.Languages.Add(new LanguageInfo("tr", "tr", "Türkçe"));
                 options.Languages.Add(new LanguageInfo("zh-Hans", "zh-Hans", "简体中文"));
-                options.Languages.Add(new LanguageInfo("de-DE", "de-DE", "Deutsche", "de"));
+                options.Languages.Add(new LanguageInfo("zh-Hant", "zh-Hant", "繁體中文"));
+                options.Languages.Add(new LanguageInfo("de-DE", "de-DE", "Deutsch", "de"));
                 options.Languages.Add(new LanguageInfo("es", "es", "Español", "es"));
             });
         }
@@ -174,43 +186,6 @@ namespace MatBlazorSample
             });
         }
 
-        private void ConfigureExternalProviders(ServiceConfigurationContext context)
-        {
-            context.Services.AddAuthentication()
-                .AddGoogle(GoogleDefaults.AuthenticationScheme, _ => { })
-                .WithDynamicOptions<GoogleOptions, GoogleHandler>(
-                    GoogleDefaults.AuthenticationScheme,
-                    options =>
-                    {
-                        options.WithProperty(x => x.ClientId);
-                        options.WithProperty(x => x.ClientSecret, isSecret: true);
-                    }
-                )
-                .AddMicrosoftAccount(MicrosoftAccountDefaults.AuthenticationScheme, options =>
-                {
-                    //Personal Microsoft accounts as an example.
-                    options.AuthorizationEndpoint = "https://login.microsoftonline.com/consumers/oauth2/v2.0/authorize";
-                    options.TokenEndpoint = "https://login.microsoftonline.com/consumers/oauth2/v2.0/token";
-                })
-                .WithDynamicOptions<MicrosoftAccountOptions, MicrosoftAccountHandler>(
-                    MicrosoftAccountDefaults.AuthenticationScheme,
-                    options =>
-                    {
-                        options.WithProperty(x => x.ClientId);
-                        options.WithProperty(x => x.ClientSecret, isSecret: true);
-                    }
-                )
-                .AddTwitter(TwitterDefaults.AuthenticationScheme, options => options.RetrieveUserDetails = true)
-                .WithDynamicOptions<TwitterOptions, TwitterHandler>(
-                    TwitterDefaults.AuthenticationScheme,
-                    options =>
-                    {
-                        options.WithProperty(x => x.ConsumerKey);
-                        options.WithProperty(x => x.ConsumerSecret, isSecret: true);
-                    }
-                );
-        }
-
         public override void OnApplicationInitialization(ApplicationInitializationContext context)
         {
             var app = context.GetApplicationBuilder();
@@ -228,10 +203,10 @@ namespace MatBlazorSample
                 app.UseErrorPage();
             }
 
-            app.UseCors(DefaultCorsPolicyName);
-
+            app.UseCorrelationId();
             app.UseVirtualFiles();
             app.UseRouting();
+            app.UseCors(DefaultCorsPolicyName);
             app.UseAuthentication();
             app.UseJwtTokenMiddleware();
 
@@ -240,14 +215,22 @@ namespace MatBlazorSample
                 app.UseMultiTenancy();
             }
 
+            app.UseUnitOfWork();
             app.UseIdentityServer();
             app.UseAuthorization();
+
             app.UseSwagger();
-            app.UseAbpSwaggerUI(options =>
+            app.UseAbpSwaggerUI(c =>
             {
-                options.SwaggerEndpoint("/swagger/v1/swagger.json", "MatBlazorSample API");
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "MatBlazorSample API");
+
+                var configuration = context.ServiceProvider.GetRequiredService<IConfiguration>();
+                c.OAuthClientId(configuration["AuthServer:SwaggerClientId"]);
+                c.OAuthClientSecret(configuration["AuthServer:SwaggerClientSecret"]);
             });
+
             app.UseAuditing();
+            app.UseAbpSerilogEnrichers();
             app.UseConfiguredEndpoints();
         }
     }

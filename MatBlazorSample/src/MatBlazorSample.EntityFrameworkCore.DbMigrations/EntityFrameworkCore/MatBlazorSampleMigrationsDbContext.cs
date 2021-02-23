@@ -1,16 +1,14 @@
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Volo.Abp.AuditLogging.EntityFrameworkCore;
 using Volo.Abp.BackgroundJobs.EntityFrameworkCore;
 using Volo.Abp.EntityFrameworkCore;
 using Volo.Abp.FeatureManagement.EntityFrameworkCore;
+using Volo.Abp.Identity;
 using Volo.Abp.Identity.EntityFrameworkCore;
 using Volo.Abp.IdentityServer.EntityFrameworkCore;
-using Volo.Abp.LanguageManagement.EntityFrameworkCore;
 using Volo.Abp.PermissionManagement.EntityFrameworkCore;
 using Volo.Abp.SettingManagement.EntityFrameworkCore;
-using Volo.Abp.TextTemplateManagement.EntityFrameworkCore;
-using Volo.Saas.EntityFrameworkCore;
-using Volo.Abp.BlobStoring.Database.EntityFrameworkCore;
+using Volo.Abp.TenantManagement.EntityFrameworkCore;
 
 namespace MatBlazorSample.EntityFrameworkCore
 {
@@ -40,10 +38,7 @@ namespace MatBlazorSample.EntityFrameworkCore
             builder.ConfigureIdentity();
             builder.ConfigureIdentityServer();
             builder.ConfigureFeatureManagement();
-            builder.ConfigureLanguageManagement();
-            builder.ConfigureSaas();
-            builder.ConfigureTextTemplateManagement();
-            builder.ConfigureBlobStoring();
+            builder.ConfigureTenantManagement();
 
             /* Configure your own tables/entities inside the ConfigureMatBlazorSample method */
 

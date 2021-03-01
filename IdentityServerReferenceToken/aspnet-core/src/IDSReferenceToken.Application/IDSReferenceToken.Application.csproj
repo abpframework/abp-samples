@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="..\..\common.props" />
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+    <RootNamespace>IDSReferenceToken</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\IDSReferenceToken.Domain\IDSReferenceToken.Domain.csproj" />
+    <ProjectReference Include="..\IDSReferenceToken.Application.Contracts\IDSReferenceToken.Application.Contracts.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Volo.Abp.Account.Application" Version="4.2.1" />
+    <PackageReference Include="Volo.Abp.Identity.Application" Version="4.2.1" />
+    <PackageReference Include="Volo.Abp.PermissionManagement.Application" Version="4.2.1" />
+    <PackageReference Include="Volo.Abp.TenantManagement.Application" Version="4.2.1" />
+    <PackageReference Include="Volo.Abp.FeatureManagement.Application" Version="4.2.1" />
+  </ItemGroup>
+
+</Project>

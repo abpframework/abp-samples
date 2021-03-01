@@ -80,10 +80,15 @@ namespace IDSReferenceToken.IdentityServer
                 "role"
             };
 
-            await CreateApiResourceAsync("IDSReferenceToken", commonApiUserClaims);
+            var apiApiResourceSecrets = new[]
+            {
+                ("1q2w3e*").Sha256()
+            };
+
+            await CreateApiResourceAsync("IDSReferenceToken", commonApiUserClaims, apiApiResourceSecrets);
         }
 
-        private async Task<ApiResource> CreateApiResourceAsync(string name, IEnumerable<string> claims)
+        private async Task<ApiResource> CreateApiResourceAsync(string name, IEnumerable<string> claims, IEnumerable<string> secrets)
         {
             var apiResource = await _apiResourceRepository.FindByNameAsync(name);
             if (apiResource == null)
@@ -103,6 +108,14 @@ namespace IDSReferenceToken.IdentityServer
                 if (apiResource.FindClaim(claim) == null)
                 {
                     apiResource.AddUserClaim(claim);
+                }
+            }
+
+            foreach (var secret in secrets)
+            {
+                if (apiResource.FindSecret(secret) == null)
+                {
+                    apiResource.AddSecret(secret);
                 }
             }
 
@@ -251,7 +264,8 @@ namespace IDSReferenceToken.IdentityServer
                         RequireConsent = false,
                         FrontChannelLogoutUri = frontChannelLogoutUri,
                         RequireClientSecret = requireClientSecret,
-                        RequirePkce = requirePkce
+                        RequirePkce = requirePkce,
+                        AccessTokenType = (int) AccessTokenType.Reference
                     },
                     autoSave: true
                 );

@@ -126,6 +126,15 @@ namespace IDSReferenceToken
                         ServerCertificateCustomValidationCallback =
                             HttpClientHandler.DangerousAcceptAnyServerCertificateValidator
                     };
+
+                    // if token does not contain a dot, it is a reference token
+                    options.ForwardDefaultSelector = SchemeSelector.ForwardReferenceToken("introspection");
+                }).AddOAuth2Introspection("introspection", options =>
+                {
+                    options.Authority = configuration["AuthServer:Authority"];
+
+                    options.ClientId = "IDSReferenceToken"; //this is name of ApiResources not client id.
+                    options.ClientSecret = "1q2w3e*";       //this is secret of ApiResources not client.
                 });
         }
 

@@ -9,14 +9,10 @@ namespace TodoApp.EntityFrameworkCore
         {
             Check.NotNull(builder, nameof(builder));
 
-            /* Configure your own tables/entities inside here */
-
-            //builder.Entity<YourEntity>(b =>
-            //{
-            //    b.ToTable(TodoAppConsts.DbTablePrefix + "YourEntities", TodoAppConsts.DbSchema);
-            //    b.ConfigureByConvention(); //auto configure for the base class props
-            //    //...
-            //});
+            builder.Entity<TodoItem>(b =>
+            {
+                b.ToTable("TodoItems");
+            });
         }
     }
 }

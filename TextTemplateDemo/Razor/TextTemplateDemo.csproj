@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Demos\**\*.cshtml" />
+    <EmbeddedResource Include="Localization\*.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="D:/Github/volo/abp/framework/src/Volo.Abp.TextTemplating.Razor/Volo.Abp.TextTemplating.Razor.csproj" />
+    <ProjectReference Include="D:/Github/volo/abp/framework/src/Volo.Abp.TextTemplating.Razor/Volo.Abp.TextTemplating.Razor.csproj" />
+    <ProjectReference Include="D:/Github/volo/abp/framework/src/Volo.Abp.TextTemplating.Razor/Volo.Abp.TextTemplating.Razor.csproj" />
+    <ProjectReference Include="D:/Github/volo/abp/framework/src/Volo.Abp.Autofac/Volo.Abp.Autofac.csproj" />
+    <ProjectReference Include="D:/Github/volo/abp/framework/src/Volo.Abp.Localization/Volo.Abp.Localization.csproj" />
+  </ItemGroup>
+
+</Project>

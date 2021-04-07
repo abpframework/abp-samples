@@ -21,6 +21,7 @@ namespace TodoApp.EntityFrameworkCore
     public class TodoAppDbContext : AbpDbContext<TodoAppDbContext>
     {
         public DbSet<AppUser> Users { get; set; }
+        public DbSet<TodoItem> TodoItems { get; set; }
 
         /* Add DbSet properties for your Aggregate Roots / Entities here.
          * Also map them inside TodoAppDbContextModelCreatingExtensions.ConfigureTodoApp

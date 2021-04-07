@@ -10,6 +10,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using TodoApp.Blazor.Menus;
 using TodoApp.Localization;
+using TodoApp.MongoDB;
 using TodoApp.MultiTenancy;
 using Volo.Abp;
 using Volo.Abp.Account.Web;
@@ -54,7 +55,8 @@ namespace TodoApp.Blazor
         typeof(AbpAspNetCoreComponentsServerBasicThemeModule),
         typeof(AbpIdentityBlazorServerModule),
         typeof(AbpTenantManagementBlazorServerModule),
-        typeof(AbpSettingManagementBlazorServerModule)
+        typeof(AbpSettingManagementBlazorServerModule),
+        typeof(TodoAppMongoDbModule)
        )]
     public class TodoAppBlazorModule : AbpModule
     {

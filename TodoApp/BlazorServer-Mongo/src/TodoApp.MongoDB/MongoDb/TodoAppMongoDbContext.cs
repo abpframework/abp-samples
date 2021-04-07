@@ -9,6 +9,7 @@ namespace TodoApp.MongoDB
     public class TodoAppMongoDbContext : AbpMongoDbContext
     {
         public IMongoCollection<AppUser> Users => Collection<AppUser>();
+        public IMongoCollection<TodoItem> TodoItems => Collection<TodoItem>();
 
         protected override void CreateModel(IMongoModelBuilder modelBuilder)
         {
@@ -19,6 +20,11 @@ namespace TodoApp.MongoDB
                 /* Sharing the same "AbpUsers" collection
                  * with the Identity module's IdentityUser class. */
                 b.CollectionName = "AbpUsers";
+            });
+
+            modelBuilder.Entity<TodoItem>(b =>
+            {
+                b.CollectionName = "TodoItems";
             });
         }
     }

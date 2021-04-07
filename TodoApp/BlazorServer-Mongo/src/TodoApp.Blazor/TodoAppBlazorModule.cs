@@ -120,6 +120,8 @@ namespace TodoApp.Blazor
                     bundle =>
                     {
                         bundle.AddFiles("/blazor-global-styles.css");
+                        //You can remove the following line if you don't use Blazor CSS isolation for components
+                        bundle.AddFiles("/TodoApp.Blazor.styles.css");
                     }
                 );
             });

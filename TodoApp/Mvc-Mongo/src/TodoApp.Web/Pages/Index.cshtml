@@ -1,0 +1,37 @@
+﻿@page
+@model TodoApp.Web.Pages.IndexModel
+@section styles {
+    <abp-style src="/Pages/Index.css" />
+}
+@section scripts {
+    <abp-script src="/Pages/Index.js" />
+}
+<div class="container">
+    <abp-card>
+        <abp-card-header>
+            <abp-card-title>
+                TODO LIST
+            </abp-card-title>
+        </abp-card-header>
+        <abp-card-body>
+            <!-- FORM FOR NEW TODO ITEMS -->
+            <form id="NewItemForm" class="form-inline">
+                <input id="NewItemText"
+                       type="text"
+                       class="form-control mr-2"
+                       placeholder="enter text...">
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+
+            <!-- TODO ITEMS LIST -->
+            <ul id="TodoList">
+                @foreach (var todoItem in Model.TodoItems)
+                {
+                    <li data-id="@todoItem.Id">
+                        <i class="fa fa-trash-o"></i> @todoItem.Text
+                    </li>
+                }
+            </ul>
+        </abp-card-body>
+    </abp-card>
+</div>

@@ -1,0 +1,29 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="..\..\common.props" />
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <RootNamespace>SyncfusionSample</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SyncfusionSample.Application.Contracts\SyncfusionSample.Application.Contracts.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Volo.Abp.PermissionManagement.HttpApi.Client" Version="4.3.0" />
+    <PackageReference Include="Volo.Abp.FeatureManagement.HttpApi.Client" Version="4.3.0" />
+    <PackageReference Include="Volo.Abp.SettingManagement.HttpApi.Client" Version="4.3.0" />
+    <PackageReference Include="Volo.Saas.Host.HttpApi.Client" Version="4.3.0" />
+    <PackageReference Include="Volo.Abp.AuditLogging.HttpApi.Client" Version="4.3.0" />
+    <PackageReference Include="Volo.Abp.Identity.Pro.HttpApi.Client" Version="4.3.0" />
+    <PackageReference Include="Volo.Abp.Account.Pro.Admin.HttpApi.Client" Version="4.3.0" />
+    <PackageReference Include="Volo.Abp.Account.Pro.Public.HttpApi.Client" Version="4.3.0" />
+    <PackageReference Include="Volo.Abp.IdentityServer.HttpApi.Client" Version="4.3.0" />
+    <PackageReference Include="Volo.Abp.LanguageManagement.HttpApi.Client" Version="4.3.0" />
+    <PackageReference Include="Volo.Abp.LeptonTheme.Management.HttpApi.Client" Version="4.3.0" />
+    <PackageReference Include="Volo.Abp.TextTemplateManagement.HttpApi.Client" Version="4.3.0" />
+  </ItemGroup>
+
+</Project>

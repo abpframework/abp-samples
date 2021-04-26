@@ -1,0 +1,25 @@
+{
+  "culture": "tr",
+  "texts": {
+    "Menu:Home": "Ana sayfa",
+    "Menu:ContactUs": "Bize Ulaşın",
+    "Menu:ArticleSample":"Yazı Örneği",
+    "Home": "Ana sayfa",
+    "Welcome": "Hoşgeldiniz",
+    "LongWelcomeMessage": "Uygulamaya hoşgeldiniz. Bu, ABP framework'ü üzerine bina edilmiş bir başlangıç projesidir. Daha fazla bilgi için abp.io adresini ziyaret edebilirsiniz.",
+    "EndDate": "Bitiş tarihi",
+    "StartDate": "Başlangıç tarihi",
+    "Permission:Dashboard": "Genel görünüm",
+    "Menu:Dashboard": "Genel görünüm",
+    "Dashboard": "Genel görünüm",
+    "ExternalProvider:Google":"Google",
+    "ExternalProvider:Google:ClientId":"Client ID",
+    "ExternalProvider:Google:ClientSecret":"Client Secret",
+    "ExternalProvider:Microsoft":"Microsoft",
+    "ExternalProvider:Microsoft:ClientId":"Client ID",
+    "ExternalProvider:Microsoft:ClientSecret":"Client Secret",
+    "ExternalProvider:Twitter":"Twitter",
+    "ExternalProvider:Twitter:ConsumerKey":"Consumer Key",
+    "ExternalProvider:Twitter:ConsumerSecret":"Consumer Secret"
+  }
+}

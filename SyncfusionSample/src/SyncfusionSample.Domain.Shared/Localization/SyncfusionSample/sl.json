@@ -1,0 +1,14 @@
+{
+  "Culture": "sl",
+  "Texts": {
+    "Menu:Home": "Domov",
+    "Home": "Domov",
+    "Welcome": "Dobrodošli",
+    "LongWelcomeMessage": "Dobrodošli v aplikaciji. To je osnovni projekt, ki temelji na razvojnem okolju ABP. Za več informacij obiščite abp.io.",
+    "EndDate": "Končni datum",
+    "StartDate": "Začetni datum",
+    "Permission:Dashboard": "Nadzorna plošča",
+    "Menu:Dashboard": "Nadzorna plošča",
+    "Dashboard": "Nadzorna plošča"
+  }
+}

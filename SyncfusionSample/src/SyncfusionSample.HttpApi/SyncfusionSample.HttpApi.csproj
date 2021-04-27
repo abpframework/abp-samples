@@ -12,18 +12,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Volo.Abp.Account.HttpApi" Version="4.3.0" />
+    <PackageReference Include="Volo.Abp.Identity.HttpApi" Version="4.3.0" />
     <PackageReference Include="Volo.Abp.PermissionManagement.HttpApi" Version="4.3.0" />
+    <PackageReference Include="Volo.Abp.TenantManagement.HttpApi" Version="4.3.0" />
     <PackageReference Include="Volo.Abp.FeatureManagement.HttpApi" Version="4.3.0" />
     <PackageReference Include="Volo.Abp.SettingManagement.HttpApi" Version="4.3.0" />
-    <PackageReference Include="Volo.Abp.AuditLogging.HttpApi" Version="4.3.0" />
-    <PackageReference Include="Volo.Abp.Identity.Pro.HttpApi" Version="4.3.0" />
-    <PackageReference Include="Volo.Abp.Account.Pro.Admin.HttpApi" Version="4.3.0" />
-    <PackageReference Include="Volo.Abp.Account.Pro.Public.HttpApi" Version="4.3.0" />
-    <PackageReference Include="Volo.Abp.IdentityServer.HttpApi" Version="4.3.0" />
-    <PackageReference Include="Volo.Abp.LanguageManagement.HttpApi" Version="4.3.0" />
-    <PackageReference Include="Volo.Saas.Host.HttpApi" Version="4.3.0" />
-    <PackageReference Include="Volo.Abp.LeptonTheme.Management.HttpApi" Version="4.3.0" />
-    <PackageReference Include="Volo.Abp.TextTemplateManagement.HttpApi" Version="4.3.0" />
   </ItemGroup>
 
 </Project>

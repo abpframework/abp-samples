@@ -1,18 +1,10 @@
-﻿using System;
-using System.Threading.Tasks;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
+﻿using System.Threading.Tasks;
 using SyncfusionSample.Localization;
-using Volo.Abp.Account.Localization;
-using Volo.Abp.AuditLogging.Blazor.Menus;
-using Volo.Abp.Identity.Pro.Blazor.Navigation;
-using Volo.Abp.IdentityServer.Blazor.Navigation;
-using Volo.Abp.LanguageManagement.Blazor.Menus;
+using SyncfusionSample.MultiTenancy;
+using Volo.Abp.Identity.Blazor;
 using Volo.Abp.SettingManagement.Blazor.Menus;
-using Volo.Abp.TextTemplateManagement.Blazor.Menus;
+using Volo.Abp.TenantManagement.Blazor.Navigation;
 using Volo.Abp.UI.Navigation;
-using Volo.Abp.Users;
-using Volo.Saas.Host.Blazor.Navigation;
 
 namespace SyncfusionSample.Blazor.Menus
 {
@@ -28,6 +20,7 @@ namespace SyncfusionSample.Blazor.Menus
 
         private Task ConfigureMainMenuAsync(MenuConfigurationContext context)
         {
+            var administration = context.Menu.GetAdministration();
             var l = context.GetLocalizer<SyncfusionSampleResource>();
 
             context.Menu.Items.Insert(
@@ -37,7 +30,7 @@ namespace SyncfusionSample.Blazor.Menus
                     l["Menu:Home"],
                     "/",
                     icon: "fas fa-home",
-                    order: 1
+                    order: 0
                 )
             );
 
@@ -55,29 +48,17 @@ namespace SyncfusionSample.Blazor.Menus
                 )
             );
 
-            context.Menu.SetSubItemOrder(SaasHostMenus.GroupName, 2);
+            if (MultiTenancyConsts.IsEnabled)
+            {
+                administration.SetSubItemOrder(TenantManagementMenuNames.GroupName, 1);
+            }
+            else
+            {
+                administration.TryRemoveMenuItem(TenantManagementMenuNames.GroupName);
+            }
 
-            //Administration
-            var administration = context.Menu.GetAdministration();
-            administration.Order = 4;
-
-            //Administration->Identity
-            administration.SetSubItemOrder(IdentityProMenus.GroupName, 1);
-
-            //Administration->Identity Server
-            administration.SetSubItemOrder(AbpIdentityServerMenuNames.GroupName, 2);
-
-            //Administration->Language Management
-            administration.SetSubItemOrder(LanguageManagementMenus.GroupName, 3);
-
-            //Administration->Text Template Management
-            administration.SetSubItemOrder(TextTemplateManagementMenus.GroupName, 4);
-
-            //Administration->Audit Logs
-            administration.SetSubItemOrder(AbpAuditLoggingMenus.GroupName, 5);
-
-            //Administration->Settings
-            administration.SetSubItemOrder(SettingManagementMenus.GroupName, 6);
+            administration.SetSubItemOrder(IdentityMenuNames.GroupName, 2);
+            administration.SetSubItemOrder(SettingManagementMenus.GroupName, 3);
 
             return Task.CompletedTask;
         }

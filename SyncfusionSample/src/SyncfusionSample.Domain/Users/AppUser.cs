@@ -42,12 +42,11 @@ namespace SyncfusionSample.Users
 
         /* Add your own properties here. Example:
          *
-         * public virtual string MyProperty { get; set; }
          * public string MyProperty { get; set; }
          *
          * If you add a property and using the EF Core, remember these;
          *
-         * 1. update SyncfusionSampleDbContext.OnModelCreating
+         * 1. Update SyncfusionSampleDbContext.OnModelCreating
          * to configure the mapping for your new property
          * 2. Update SyncfusionSampleEfCoreEntityExtensionMappings to extend the IdentityUser entity
          * and add your new property to the migration.

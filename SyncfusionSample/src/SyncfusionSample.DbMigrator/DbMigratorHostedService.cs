@@ -20,23 +20,22 @@ namespace SyncfusionSample.DbMigrator
         public async Task StartAsync(CancellationToken cancellationToken)
         {
             using (var application = AbpApplicationFactory.Create<SyncfusionSampleDbMigratorModule>(options =>
-                {
-                    options.UseAutofac();
-                    options.Services.AddLogging(c => c.AddSerilog());
-                }))
-                {
-                    application.Initialize();
+            {
+                options.UseAutofac();
+                options.Services.AddLogging(c => c.AddSerilog());
+            }))
+            {
+                application.Initialize();
 
-                    await application
-                        .ServiceProvider
-                        .GetRequiredService<SyncfusionSampleDbMigrationService>()
-                        .MigrateAsync();
+                await application
+                    .ServiceProvider
+                    .GetRequiredService<SyncfusionSampleDbMigrationService>()
+                    .MigrateAsync();
 
-                    application.Shutdown();
+                application.Shutdown();
 
-                    _hostApplicationLifetime.StopApplication();
-                }
-
+                _hostApplicationLifetime.StopApplication();
+            }
         }
 
         public Task StopAsync(CancellationToken cancellationToken) => Task.CompletedTask;

@@ -11,7 +11,7 @@ using Volo.Abp.Data;
 using Volo.Abp.DependencyInjection;
 using Volo.Abp.Identity;
 using Volo.Abp.MultiTenancy;
-using Volo.Saas.Tenants;
+using Volo.Abp.TenantManagement;
 
 namespace SyncfusionSample.Data
 {
@@ -26,14 +26,14 @@ namespace SyncfusionSample.Data
 
         public SyncfusionSampleDbMigrationService(
             IDataSeeder dataSeeder,
+            IEnumerable<ISyncfusionSampleDbSchemaMigrator> dbSchemaMigrators,
             ITenantRepository tenantRepository,
-            ICurrentTenant currentTenant,
-            IEnumerable<ISyncfusionSampleDbSchemaMigrator> dbSchemaMigrators)
+            ICurrentTenant currentTenant)
         {
             _dataSeeder = dataSeeder;
+            _dbSchemaMigrators = dbSchemaMigrators;
             _tenantRepository = tenantRepository;
             _currentTenant = currentTenant;
-            _dbSchemaMigrators = dbSchemaMigrators;
 
             Logger = NullLogger<SyncfusionSampleDbMigrationService>.Instance;
         }
@@ -101,10 +101,8 @@ namespace SyncfusionSample.Data
             Logger.LogInformation($"Executing {(tenant == null ? "host" : tenant.Name + " tenant")} database seed...");
 
             await _dataSeeder.SeedAsync(new DataSeedContext(tenant?.Id)
-                .WithProperty(IdentityDataSeedContributor.AdminEmailPropertyName,
-                    SyncfusionSampleConsts.AdminEmailDefaultValue)
-                .WithProperty(IdentityDataSeedContributor.AdminPasswordPropertyName,
-                    SyncfusionSampleConsts.AdminPasswordDefaultValue)
+                .WithProperty(IdentityDataSeedContributor.AdminEmailPropertyName, IdentityDataSeedContributor.AdminEmailDefaultValue)
+                .WithProperty(IdentityDataSeedContributor.AdminPasswordPropertyName, IdentityDataSeedContributor.AdminPasswordDefaultValue)
             );
         }
 

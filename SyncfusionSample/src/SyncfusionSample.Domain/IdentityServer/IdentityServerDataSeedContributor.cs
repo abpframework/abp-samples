@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using IdentityServer4.Models;
@@ -142,9 +142,7 @@ namespace SyncfusionSample.IdentityServer
 
             var configurationSection = _configuration.GetSection("IdentityServer:Clients");
 
-            
-            
-            
+
             //Console Test / Angular Client
             var consoleAndAngularClientId = configurationSection["SyncfusionSample_App:ClientId"];
             if (!consoleAndAngularClientId.IsNullOrWhiteSpace())
@@ -154,7 +152,7 @@ namespace SyncfusionSample.IdentityServer
                 await CreateClientAsync(
                     name: consoleAndAngularClientId,
                     scopes: commonScopes,
-                    grantTypes: new[] { "password", "client_credentials", "authorization_code", "LinkLogin" },
+                    grantTypes: new[] { "password", "client_credentials", "authorization_code" },
                     secret: (configurationSection["SyncfusionSample_App:ClientSecret"] ?? "1q2w3e*").Sha256(),
                     requireClientSecret: false,
                     redirectUri: webClientRootUrl,
@@ -164,7 +162,7 @@ namespace SyncfusionSample.IdentityServer
             }
             
             
-
+            
             // Swagger Client
             var swaggerClientId = configurationSection["SyncfusionSample_Swagger:ClientId"];
             if (!swaggerClientId.IsNullOrWhiteSpace())
@@ -175,7 +173,7 @@ namespace SyncfusionSample.IdentityServer
                     name: swaggerClientId,
                     scopes: commonScopes,
                     grantTypes: new[] { "authorization_code" },
-                    secret: (configurationSection["SyncfusionSample_Swagger:ClientSecret"] ?? "1q2w3e*").Sha256(),
+                    secret: configurationSection["SyncfusionSample_Swagger:ClientSecret"]?.Sha256(),
                     requireClientSecret: false,
                     redirectUri: $"{swaggerRootUrl}/swagger/oauth2-redirect.html",
                     corsOrigins: new[] { swaggerRootUrl.RemovePostFix("/") }

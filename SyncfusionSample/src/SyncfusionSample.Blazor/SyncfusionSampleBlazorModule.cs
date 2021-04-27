@@ -1,52 +1,47 @@
 ﻿using System;
 using System.IO;
+using System.Net.Http;
 using Blazorise.Bootstrap;
 using Blazorise.Icons.FontAwesome;
-using Microsoft.AspNetCore.Authentication.Google;
-using Microsoft.AspNetCore.Authentication.MicrosoftAccount;
-using Microsoft.AspNetCore.Authentication.Twitter;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.OpenApi.Models;
+using Syncfusion.Blazor;
 using SyncfusionSample.Blazor.Menus;
 using SyncfusionSample.EntityFrameworkCore;
 using SyncfusionSample.Localization;
 using SyncfusionSample.MultiTenancy;
-using Microsoft.OpenApi.Models;
-using SyncfusionSample.Blazor.Components.Layout;
 using Volo.Abp;
-using Volo.Abp.Account.Pro.Admin.Blazor.Server;
-using Volo.Abp.Account.Public.Web.ExternalProviders;
 using Volo.Abp.Account.Web;
 using Volo.Abp.AspNetCore.Authentication.JwtBearer;
-using Volo.Abp.AspNetCore.Components.Server.LeptonTheme;
-using Volo.Abp.AspNetCore.Components.Server.LeptonTheme.Bundling;
+using Volo.Abp.AspNetCore.Components.Server.BasicTheme;
+using Volo.Abp.AspNetCore.Components.Server.BasicTheme.Bundling;
 using Volo.Abp.AspNetCore.Components.Web.Theming.Routing;
 using Volo.Abp.AspNetCore.Mvc;
 using Volo.Abp.AspNetCore.Mvc.Localization;
+using Volo.Abp.AspNetCore.Mvc.UI;
+using Volo.Abp.AspNetCore.Mvc.UI.Bootstrap;
 using Volo.Abp.AspNetCore.Mvc.UI.Bundling;
-using Volo.Abp.AspNetCore.Mvc.UI.Theme.Lepton;
-using Volo.Abp.AspNetCore.Mvc.UI.Theme.Lepton.Bundling;
+using Volo.Abp.AspNetCore.Mvc.UI.MultiTenancy;
+using Volo.Abp.AspNetCore.Mvc.UI.Theme.Basic;
+using Volo.Abp.AspNetCore.Mvc.UI.Theme.Basic.Bundling;
 using Volo.Abp.AspNetCore.Mvc.UI.Theme.Shared;
 using Volo.Abp.AspNetCore.Serilog;
-using Volo.Abp.AuditLogging.Blazor.Server;
 using Volo.Abp.Autofac;
 using Volo.Abp.AutoMapper;
-using Volo.Abp.Identity.Pro.Blazor.Server;
-using Volo.Abp.IdentityServer.Blazor.Server;
-using Volo.Abp.LanguageManagement.Blazor.Server;
-using Volo.Abp.LeptonTheme.Management.Blazor.Server;
+using Volo.Abp.Identity.Blazor.Server;
 using Volo.Abp.Localization;
 using Volo.Abp.Modularity;
+using Volo.Abp.SettingManagement.Blazor.Server;
 using Volo.Abp.Swashbuckle;
-using Volo.Abp.TextTemplateManagement.Blazor.Server;
+using Volo.Abp.TenantManagement.Blazor.Server;
+using Volo.Abp.UI;
 using Volo.Abp.UI.Navigation;
 using Volo.Abp.UI.Navigation.Urls;
 using Volo.Abp.VirtualFileSystem;
-using Volo.Saas.Host.Blazor.Server;
-using Syncfusion.Blazor;
 
 namespace SyncfusionSample.Blazor
 {
@@ -54,21 +49,16 @@ namespace SyncfusionSample.Blazor
         typeof(SyncfusionSampleApplicationModule),
         typeof(SyncfusionSampleEntityFrameworkCoreDbMigrationsModule),
         typeof(SyncfusionSampleHttpApiModule),
-        typeof(AbpAspNetCoreMvcUiLeptonThemeModule),
+        typeof(AbpAspNetCoreMvcUiBasicThemeModule),
         typeof(AbpAutofacModule),
         typeof(AbpSwashbuckleModule),
         typeof(AbpAspNetCoreAuthenticationJwtBearerModule),
         typeof(AbpAspNetCoreSerilogModule),
-        typeof(AbpAspNetCoreComponentsServerLeptonThemeModule),
-        typeof(AbpAccountPublicWebIdentityServerModule),
-        typeof(AbpAccountAdminBlazorServerModule),
-        typeof(AbpAuditLoggingBlazorServerModule),
-        typeof(AbpIdentityProBlazorServerModule),
-        typeof(LeptonThemeManagementBlazorServerModule),
-        typeof(AbpIdentityServerBlazorServerModule),
-        typeof(LanguageManagementBlazorServerModule),
-        typeof(SaasHostBlazorServerModule),
-        typeof(TextTemplateManagementBlazorServerModule)
+        typeof(AbpAccountWebIdentityServerModule),
+        typeof(AbpAspNetCoreComponentsServerBasicThemeModule),
+        typeof(AbpIdentityBlazorServerModule),
+        typeof(AbpTenantManagementBlazorServerModule),
+        typeof(AbpSettingManagementBlazorServerModule)
        )]
     public class SyncfusionSampleBlazorModule : AbpModule
     {
@@ -99,15 +89,13 @@ namespace SyncfusionSample.Blazor
             ConfigureVirtualFileSystem(hostingEnvironment);
             ConfigureLocalizationServices();
             ConfigureSwaggerServices(context.Services);
-            ConfigureExternalProviders(context);
             ConfigureAutoApiControllers();
+            ConfigureHttpClient(context);
             ConfigureBlazorise(context);
             ConfigureRouter(context);
             ConfigureMenu(context);
-            ConfigureLeptonTheme();
 
             context.Services.AddSyncfusionBlazor();
-
             Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense( "YOUR LICENSE KEY" );
         }
 
@@ -125,16 +113,16 @@ namespace SyncfusionSample.Blazor
             {
                 // MVC UI
                 options.StyleBundles.Configure(
-                    LeptonThemeBundles.Styles.Global,
+                    BasicThemeBundles.Styles.Global,
                     bundle =>
                     {
                         bundle.AddFiles("/global-styles.css");
                     }
                 );
 
-                // Blazor UI
+                //BLAZOR UI
                 options.StyleBundles.Configure(
-                    BlazorLeptonThemeBundles.Styles.Global,
+                    BlazorBasicThemeBundles.Styles.Global,
                     bundle =>
                     {
                         bundle.AddFiles("/blazor-global-styles.css");
@@ -171,55 +159,6 @@ namespace SyncfusionSample.Blazor
             }
         }
 
-        private void ConfigureSwaggerServices(IServiceCollection services)
-        {
-            services.AddSwaggerGen(
-                options =>
-                {
-                    options.SwaggerDoc("v1", new OpenApiInfo { Title = "SyncfusionSample API", Version = "v1" });
-                    options.DocInclusionPredicate((docName, description) => true);
-                    options.CustomSchemaIds(type => type.FullName);
-                }
-            );
-        }
-
-        private void ConfigureExternalProviders(ServiceConfigurationContext context)
-        {
-            context.Services.AddAuthentication()
-                .AddGoogle(GoogleDefaults.AuthenticationScheme, _ => {})
-                .WithDynamicOptions<GoogleOptions, GoogleHandler>(
-                    GoogleDefaults.AuthenticationScheme,
-                    options =>
-                    {
-                        options.WithProperty(x => x.ClientId);
-                        options.WithProperty(x => x.ClientSecret, isSecret: true);
-                    }
-                )
-                .AddMicrosoftAccount(MicrosoftAccountDefaults.AuthenticationScheme, options =>
-                {
-                    //Personal Microsoft accounts as an example.
-                    options.AuthorizationEndpoint = "https://login.microsoftonline.com/consumers/oauth2/v2.0/authorize";
-                    options.TokenEndpoint = "https://login.microsoftonline.com/consumers/oauth2/v2.0/token";
-                })
-                .WithDynamicOptions<MicrosoftAccountOptions, MicrosoftAccountHandler>(
-                    MicrosoftAccountDefaults.AuthenticationScheme,
-                    options =>
-                    {
-                        options.WithProperty(x => x.ClientId);
-                        options.WithProperty(x => x.ClientSecret, isSecret: true);
-                    }
-                )
-                .AddTwitter(TwitterDefaults.AuthenticationScheme, options => options.RetrieveUserDetails = true)
-                .WithDynamicOptions<TwitterOptions, TwitterHandler>(
-                    TwitterDefaults.AuthenticationScheme,
-                    options =>
-                    {
-                        options.WithProperty(x => x.ConsumerKey);
-                        options.WithProperty(x => x.ConsumerSecret, isSecret: true);
-                    }
-                );
-        }
-
         private void ConfigureLocalizationServices()
         {
             Configure<AbpLocalizationOptions>(options =>
@@ -240,6 +179,25 @@ namespace SyncfusionSample.Blazor
             });
         }
 
+        private void ConfigureSwaggerServices(IServiceCollection services)
+        {
+            services.AddSwaggerGen(
+                options =>
+                {
+                    options.SwaggerDoc("v1", new OpenApiInfo { Title = "SyncfusionSample API", Version = "v1" });
+                    options.DocInclusionPredicate((docName, description) => true);
+                    options.CustomSchemaIds(type => type.FullName);
+                }
+            );
+        }
+
+        private static void ConfigureHttpClient(ServiceConfigurationContext context)
+        {
+            context.Services.AddTransient(sp => new HttpClient
+            {
+                BaseAddress = new Uri("/")
+            });
+        }
 
         private void ConfigureBlazorise(ServiceConfigurationContext context)
         {
@@ -253,14 +211,6 @@ namespace SyncfusionSample.Blazor
             Configure<AbpNavigationOptions>(options =>
             {
                 options.MenuContributors.Add(new SyncfusionSampleMenuContributor());
-            });
-        }
-        
-        private void ConfigureLeptonTheme()
-        {
-            Configure<Volo.Abp.AspNetCore.Components.Web.LeptonTheme.LeptonThemeOptions>(options =>
-            {
-                options.FooterComponent = typeof(MainFooterComponent);
             });
         }
 
@@ -293,16 +243,15 @@ namespace SyncfusionSample.Blazor
             var env = context.GetEnvironment();
             var app = context.GetApplicationBuilder();
 
+            app.UseAbpRequestLocalization();
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
-
-            app.UseAbpRequestLocalization();
-
-            if (!env.IsDevelopment())
+            else
             {
-                app.UseErrorPage();
+                app.UseExceptionHandler("/Error");
                 app.UseHsts();
             }
 
@@ -326,8 +275,6 @@ namespace SyncfusionSample.Blazor
             {
                 options.SwaggerEndpoint("/swagger/v1/swagger.json", "SyncfusionSample API");
             });
-            app.UseAuditing();
-            app.UseAbpSerilogEnrichers();
             app.UseConfiguredEndpoints();
         }
     }

@@ -12,7 +12,8 @@ namespace SyncfusionSample.EntityFrameworkCore
     {
         private readonly IServiceProvider _serviceProvider;
 
-        public EntityFrameworkCoreSyncfusionSampleDbSchemaMigrator(IServiceProvider serviceProvider)
+        public EntityFrameworkCoreSyncfusionSampleDbSchemaMigrator(
+            IServiceProvider serviceProvider)
         {
             _serviceProvider = serviceProvider;
         }

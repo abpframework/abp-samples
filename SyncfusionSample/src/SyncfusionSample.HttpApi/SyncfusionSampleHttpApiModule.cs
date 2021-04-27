@@ -1,35 +1,24 @@
 ﻿using Localization.Resources.AbpUi;
 using SyncfusionSample.Localization;
 using Volo.Abp.Account;
-using Volo.Abp.AuditLogging;
 using Volo.Abp.FeatureManagement;
 using Volo.Abp.Identity;
-using Volo.Abp.IdentityServer;
-using Volo.Abp.LanguageManagement;
+using Volo.Abp.Localization;
 using Volo.Abp.Modularity;
 using Volo.Abp.PermissionManagement.HttpApi;
-using Volo.Saas.Host;
-using Volo.Abp.LeptonTheme;
-using Volo.Abp.Localization;
 using Volo.Abp.SettingManagement;
-using Volo.Abp.TextTemplateManagement;
+using Volo.Abp.TenantManagement;
 
 namespace SyncfusionSample
 {
     [DependsOn(
         typeof(SyncfusionSampleApplicationContractsModule),
+        typeof(AbpAccountHttpApiModule),
         typeof(AbpIdentityHttpApiModule),
         typeof(AbpPermissionManagementHttpApiModule),
+        typeof(AbpTenantManagementHttpApiModule),
         typeof(AbpFeatureManagementHttpApiModule),
-        typeof(AbpSettingManagementHttpApiModule),
-        typeof(AbpAuditLoggingHttpApiModule),
-        typeof(AbpIdentityServerHttpApiModule),
-        typeof(AbpAccountAdminHttpApiModule),
-        typeof(AbpAccountPublicHttpApiModule),
-        typeof(LanguageManagementHttpApiModule),
-        typeof(SaasHostHttpApiModule),
-        typeof(LeptonThemeManagementHttpApiModule),
-        typeof(TextTemplateManagementHttpApiModule)
+        typeof(AbpSettingManagementHttpApiModule)
         )]
     public class SyncfusionSampleHttpApiModule : AbpModule
     {

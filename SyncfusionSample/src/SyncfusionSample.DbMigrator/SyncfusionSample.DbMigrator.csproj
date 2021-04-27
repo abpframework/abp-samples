@@ -8,6 +8,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="appsettings.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="appsettings.json">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Serilog.Extensions.Logging" Version="3.0.1" />
     <PackageReference Include="Serilog.Sinks.Async" Version="1.4.0" />
     <PackageReference Include="Serilog.Sinks.File" Version="4.1.0" />
@@ -16,23 +27,15 @@
 
   <ItemGroup>
     <PackageReference Include="Volo.Abp.Autofac" Version="4.3.0" />
-    <ProjectReference Include="..\SyncfusionSample.EntityFrameworkCore.DbMigrations\SyncfusionSample.EntityFrameworkCore.DbMigrations.csproj" />
     <ProjectReference Include="..\SyncfusionSample.Application.Contracts\SyncfusionSample.Application.Contracts.csproj" />
+    <ProjectReference Include="..\SyncfusionSample.EntityFrameworkCore.DbMigrations\SyncfusionSample.EntityFrameworkCore.DbMigrations.csproj" />
   </ItemGroup>
-
+  
   <ItemGroup>
     <Compile Remove="Logs\**" />
     <Content Remove="Logs\**" />
     <EmbeddedResource Remove="Logs\**" />
     <None Remove="Logs\**" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Remove="appsettings.json" />
-    <Content Include="appsettings.json">
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
   </ItemGroup>
 
 </Project>

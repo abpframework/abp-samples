@@ -1,16 +1,14 @@
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Volo.Abp.AuditLogging.EntityFrameworkCore;
 using Volo.Abp.BackgroundJobs.EntityFrameworkCore;
 using Volo.Abp.EntityFrameworkCore;
 using Volo.Abp.FeatureManagement.EntityFrameworkCore;
+using Volo.Abp.Identity;
 using Volo.Abp.Identity.EntityFrameworkCore;
 using Volo.Abp.IdentityServer.EntityFrameworkCore;
-using Volo.Abp.LanguageManagement.EntityFrameworkCore;
 using Volo.Abp.PermissionManagement.EntityFrameworkCore;
 using Volo.Abp.SettingManagement.EntityFrameworkCore;
-using Volo.Abp.TextTemplateManagement.EntityFrameworkCore;
-using Volo.Saas.EntityFrameworkCore;
-using Volo.Abp.BlobStoring.Database.EntityFrameworkCore;
+using Volo.Abp.TenantManagement.EntityFrameworkCore;
 
 namespace SyncfusionSample.EntityFrameworkCore
 {
@@ -21,7 +19,7 @@ namespace SyncfusionSample.EntityFrameworkCore
      */
     public class SyncfusionSampleMigrationsDbContext : AbpDbContext<SyncfusionSampleMigrationsDbContext>
     {
-        public SyncfusionSampleMigrationsDbContext(DbContextOptions<SyncfusionSampleMigrationsDbContext> options)
+        public SyncfusionSampleMigrationsDbContext(DbContextOptions<SyncfusionSampleMigrationsDbContext> options) 
             : base(options)
         {
 
@@ -37,13 +35,10 @@ namespace SyncfusionSample.EntityFrameworkCore
             builder.ConfigureSettingManagement();
             builder.ConfigureBackgroundJobs();
             builder.ConfigureAuditLogging();
-            builder.ConfigureIdentityPro();
+            builder.ConfigureIdentity();
             builder.ConfigureIdentityServer();
             builder.ConfigureFeatureManagement();
-            builder.ConfigureLanguageManagement();
-            builder.ConfigureSaas();
-            builder.ConfigureTextTemplateManagement();
-            builder.ConfigureBlobStoring();
+            builder.ConfigureTenantManagement();
 
             /* Configure your own tables/entities inside the ConfigureSyncfusionSample method */
 

@@ -254,8 +254,6 @@ paket-files/
 # SyncfusionSample
 src/SyncfusionSample.Web/Logs/*
 src/SyncfusionSample.Web.Host/Logs/*
-src/SyncfusionSample.Web.Public/Logs/*
-src/SyncfusionSample.Web.Public.Host/Logs/*
 src/SyncfusionSample.IdentityServer/Logs/*
 src/SyncfusionSample.HttpApi.Host/Logs/*
 src/SyncfusionSample.HttpApi.HostWithIds/Logs/*

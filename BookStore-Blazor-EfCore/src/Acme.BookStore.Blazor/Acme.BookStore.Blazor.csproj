@@ -7,20 +7,20 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Blazorise.Bootstrap" Version="0.9.3-preview8" />
-    <PackageReference Include="Blazorise.Icons.FontAwesome" Version="0.9.3-preview8" />
+    <PackageReference Include="Blazorise.Bootstrap" Version="0.9.3.5" />
+    <PackageReference Include="Blazorise.Icons.FontAwesome" Version="0.9.3.5" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="5.0.*" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="5.0.*" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Volo.Abp.Autofac.WebAssembly" Version="4.2.0" />
-    <PackageReference Include="Volo.Abp.AspNetCore.Components.WebAssembly.BasicTheme" Version="4.2.0" />
+    <PackageReference Include="Volo.Abp.Autofac.WebAssembly" Version="4.3.0" />
+    <PackageReference Include="Volo.Abp.AspNetCore.Components.WebAssembly.BasicTheme" Version="4.3.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Volo.Abp.Identity.Blazor" Version="4.2.0" />
-    <PackageReference Include="Volo.Abp.TenantManagement.Blazor" Version="4.2.0" />
+    <PackageReference Include="Volo.Abp.Identity.Blazor" Version="4.3.0" />
+    <PackageReference Include="Volo.Abp.TenantManagement.Blazor" Version="4.3.0" />
   </ItemGroup>
 
   <ItemGroup>

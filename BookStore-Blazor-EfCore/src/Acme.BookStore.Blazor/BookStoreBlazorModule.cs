@@ -13,9 +13,9 @@ using Volo.Abp.AspNetCore.Components.WebAssembly.BasicTheme;
 using Volo.Abp.Autofac.WebAssembly;
 using Volo.Abp.Modularity;
 using Volo.Abp.UI.Navigation;
-using Volo.Abp.Identity.Blazor;
 using Volo.Abp.AutoMapper;
-using Volo.Abp.TenantManagement.Blazor;
+using Volo.Abp.Identity.Blazor.WebAssembly;
+using Volo.Abp.TenantManagement.Blazor.WebAssembly;
 
 namespace Acme.BookStore.Blazor
 {
@@ -23,8 +23,8 @@ namespace Acme.BookStore.Blazor
         typeof(AbpAutofacWebAssemblyModule),
         typeof(BookStoreHttpApiClientModule),
         typeof(AbpAspNetCoreComponentsWebAssemblyBasicThemeModule),
-        typeof(AbpIdentityBlazorModule),
-        typeof(AbpTenantManagementBlazorModule)
+        typeof(AbpIdentityBlazorWebAssemblyModule),
+        typeof(AbpTenantManagementBlazorWebAssemblyModule)
     )]
     public class BookStoreBlazorModule : AbpModule
     {

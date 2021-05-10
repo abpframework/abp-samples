@@ -165,12 +165,12 @@ namespace Acme.BookStore
             }
 
             app.UseCorrelationId();
-            app.UseVirtualFiles();
+            app.UseStaticFiles();
             app.UseRouting();
             app.UseCors(DefaultCorsPolicyName);
             app.UseAuthentication();
-            app.UseJwtTokenMiddleware();    
-            
+            app.UseJwtTokenMiddleware();
+
             if (MultiTenancyConsts.IsEnabled)
             {
                 app.UseMultiTenancy();

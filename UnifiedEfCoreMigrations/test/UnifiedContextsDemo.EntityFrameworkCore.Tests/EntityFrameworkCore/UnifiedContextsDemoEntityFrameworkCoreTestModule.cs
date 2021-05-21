@@ -11,7 +11,7 @@ using Volo.Abp.Modularity;
 namespace UnifiedContextsDemo.EntityFrameworkCore
 {
     [DependsOn(
-        typeof(UnifiedContextsDemoEntityFrameworkCoreDbMigrationsModule),
+        typeof(UnifiedContextsDemoEntityFrameworkCoreModule),
         typeof(UnifiedContextsDemoTestBaseModule),
         typeof(AbpEntityFrameworkCoreSqliteModule)
         )]
@@ -47,11 +47,11 @@ namespace UnifiedContextsDemo.EntityFrameworkCore
             var connection = new SqliteConnection("Data Source=:memory:");
             connection.Open();
 
-            var options = new DbContextOptionsBuilder<UnifiedContextsDemoMigrationsDbContext>()
+            var options = new DbContextOptionsBuilder<UnifiedContextsDemoDbContext>()
                 .UseSqlite(connection)
                 .Options;
 
-            using (var context = new UnifiedContextsDemoMigrationsDbContext(options))
+            using (var context = new UnifiedContextsDemoDbContext(options))
             {
                 context.GetService<IRelationalDatabaseCreator>().CreateTables();
             }

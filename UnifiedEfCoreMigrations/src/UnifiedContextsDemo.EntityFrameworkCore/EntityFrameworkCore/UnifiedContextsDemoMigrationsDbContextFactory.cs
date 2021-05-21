@@ -5,20 +5,18 @@ using Microsoft.Extensions.Configuration;
 
 namespace UnifiedContextsDemo.EntityFrameworkCore
 {
-    /* This class is needed for EF Core console commands
-     * (like Add-Migration and Update-Database commands) */
-    public class UnifiedContextsDemoMigrationsDbContextFactory : IDesignTimeDbContextFactory<UnifiedContextsDemoMigrationsDbContext>
+    public class UnifiedContextsDemoDbContextFactory : IDesignTimeDbContextFactory<UnifiedContextsDemoDbContext>
     {
-        public UnifiedContextsDemoMigrationsDbContext CreateDbContext(string[] args)
+        public UnifiedContextsDemoDbContext CreateDbContext(string[] args)
         {
             UnifiedContextsDemoEfCoreEntityExtensionMappings.Configure();
 
             var configuration = BuildConfiguration();
 
-            var builder = new DbContextOptionsBuilder<UnifiedContextsDemoMigrationsDbContext>()
+            var builder = new DbContextOptionsBuilder<UnifiedContextsDemoDbContext>()
                 .UseSqlServer(configuration.GetConnectionString("Default"));
 
-            return new UnifiedContextsDemoMigrationsDbContext(builder.Options);
+            return new UnifiedContextsDemoDbContext(builder.Options);
         }
 
         private static IConfigurationRoot BuildConfiguration()

@@ -43,7 +43,7 @@ namespace UnifiedContextsDemo.Web
     [DependsOn(
         typeof(UnifiedContextsDemoHttpApiModule),
         typeof(UnifiedContextsDemoApplicationModule),
-        typeof(UnifiedContextsDemoEntityFrameworkCoreDbMigrationsModule),
+        typeof(UnifiedContextsDemoEntityFrameworkCoreModule),
         typeof(AbpAutofacModule),
         typeof(AbpIdentityWebModule),
         typeof(AbpSettingManagementWebModule),

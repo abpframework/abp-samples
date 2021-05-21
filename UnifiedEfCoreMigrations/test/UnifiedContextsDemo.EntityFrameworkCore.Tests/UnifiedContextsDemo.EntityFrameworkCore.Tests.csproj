@@ -8,8 +8,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\UnifiedContextsDemo.EntityFrameworkCore.DbMigrations\UnifiedContextsDemo.EntityFrameworkCore.DbMigrations.csproj" />
     <ProjectReference Include="..\UnifiedContextsDemo.TestBase\UnifiedContextsDemo.TestBase.csproj" />
+    <ProjectReference Include="..\..\src\UnifiedContextsDemo.EntityFrameworkCore\UnifiedContextsDemo.EntityFrameworkCore.csproj" />
     <PackageReference Include="Volo.Abp.EntityFrameworkCore.Sqlite" Version="4.3.1" />
   </ItemGroup>
 

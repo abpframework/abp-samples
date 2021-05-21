@@ -28,7 +28,7 @@
   <ItemGroup>
     <PackageReference Include="Volo.Abp.Autofac" Version="4.3.1" />
     <ProjectReference Include="..\UnifiedContextsDemo.Application.Contracts\UnifiedContextsDemo.Application.Contracts.csproj" />
-    <ProjectReference Include="..\UnifiedContextsDemo.EntityFrameworkCore.DbMigrations\UnifiedContextsDemo.EntityFrameworkCore.DbMigrations.csproj" />
+    <ProjectReference Include="..\UnifiedContextsDemo.EntityFrameworkCore\UnifiedContextsDemo.EntityFrameworkCore.csproj" />
   </ItemGroup>
   
   <ItemGroup>

@@ -1,32 +1,24 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using UnifiedContextsDemo.Users;
+using Volo.Abp.AuditLogging.EntityFrameworkCore;
+using Volo.Abp.BackgroundJobs.EntityFrameworkCore;
 using Volo.Abp.Data;
 using Volo.Abp.EntityFrameworkCore;
-using Volo.Abp.EntityFrameworkCore.Modeling;
-using Volo.Abp.Identity;
-using Volo.Abp.Users.EntityFrameworkCore;
+using Volo.Abp.FeatureManagement.EntityFrameworkCore;
+using Volo.Abp.Identity.EntityFrameworkCore;
+using Volo.Abp.IdentityServer.EntityFrameworkCore;
+using Volo.Abp.PermissionManagement.EntityFrameworkCore;
+using Volo.Abp.SettingManagement.EntityFrameworkCore;
+using Volo.Abp.TenantManagement.EntityFrameworkCore;
 
 namespace UnifiedContextsDemo.EntityFrameworkCore
 {
-    /* This is your actual DbContext used on runtime.
-     * It includes only your entities.
-     * It does not include entities of the used modules, because each module has already
-     * its own DbContext class. If you want to share some database tables with the used modules,
-     * just create a structure like done for AppUser.
-     *
-     * Don't use this DbContext for database migrations since it does not contain tables of the
-     * used modules (as explained above). See UnifiedContextsDemoMigrationsDbContext for migrations.
-     */
     [ConnectionStringName("Default")]
-    public class UnifiedContextsDemoDbContext : AbpDbContext<UnifiedContextsDemoDbContext>
+    public class UnifiedContextsDemoDbContext
+        : AbpDbContext<UnifiedContextsDemoDbContext>
     {
-        public DbSet<AppUser> Users { get; set; }
 
-        /* Add DbSet properties for your Aggregate Roots / Entities here.
-         * Also map them inside UnifiedContextsDemoDbContextModelCreatingExtensions.ConfigureUnifiedContextsDemo
-         */
-
-        public UnifiedContextsDemoDbContext(DbContextOptions<UnifiedContextsDemoDbContext> options)
+        public UnifiedContextsDemoDbContext(
+            DbContextOptions<UnifiedContextsDemoDbContext> options)
             : base(options)
         {
 
@@ -36,23 +28,23 @@ namespace UnifiedContextsDemo.EntityFrameworkCore
         {
             base.OnModelCreating(builder);
 
-            /* Configure the shared tables (with included modules) here */
+            builder.ConfigurePermissionManagement();
+            builder.ConfigureSettingManagement();
+            builder.ConfigureBackgroundJobs();
+            builder.ConfigureAuditLogging();
+            builder.ConfigureIdentity();
+            builder.ConfigureIdentityServer();
+            builder.ConfigureFeatureManagement();
+            builder.ConfigureTenantManagement();
+            
+            /* Configure your own tables/entities inside here */
 
-            builder.Entity<AppUser>(b =>
-            {
-                b.ToTable(AbpIdentityDbProperties.DbTablePrefix + "Users"); //Sharing the same table "AbpUsers" with the IdentityUser
-                
-                b.ConfigureByConvention();
-                b.ConfigureAbpUser();
-
-                /* Configure mappings for your additional properties
-                 * Also see the UnifiedContextsDemoEfCoreEntityExtensionMappings class
-                 */
-            });
-
-            /* Configure your own tables/entities inside the ConfigureUnifiedContextsDemo method */
-
-            builder.ConfigureUnifiedContextsDemo();
+            //builder.Entity<YourEntity>(b =>
+            //{
+            //    b.ToTable(UnifiedContextsDemoConsts.DbTablePrefix + "YourEntities", UnifiedContextsDemoConsts.DbSchema);
+            //    b.ConfigureByConvention(); //auto configure for the base class props
+            //    //...
+            //});
         }
     }
 }

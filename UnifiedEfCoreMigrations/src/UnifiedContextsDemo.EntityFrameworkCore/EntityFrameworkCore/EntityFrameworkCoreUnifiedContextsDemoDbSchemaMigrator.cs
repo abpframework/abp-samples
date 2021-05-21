@@ -27,7 +27,7 @@ namespace UnifiedContextsDemo.EntityFrameworkCore
              */
 
             await _serviceProvider
-                .GetRequiredService<UnifiedContextsDemoMigrationsDbContext>()
+                .GetRequiredService<UnifiedContextsDemoDbContext>()
                 .Database
                 .MigrateAsync();
         }

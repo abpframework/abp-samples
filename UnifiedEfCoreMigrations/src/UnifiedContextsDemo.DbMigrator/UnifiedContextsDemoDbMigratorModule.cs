@@ -7,7 +7,7 @@ namespace UnifiedContextsDemo.DbMigrator
 {
     [DependsOn(
         typeof(AbpAutofacModule),
-        typeof(UnifiedContextsDemoEntityFrameworkCoreDbMigrationsModule),
+        typeof(UnifiedContextsDemoEntityFrameworkCoreModule),
         typeof(UnifiedContextsDemoApplicationContractsModule)
         )]
     public class UnifiedContextsDemoDbMigratorModule : AbpModule

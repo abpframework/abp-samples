@@ -16,6 +16,15 @@ namespace UnifiedContextsDemo.EntityFrameworkCore
 
             OneTimeRunner.Run(() =>
             {
+                ObjectExtensionManager.Instance
+                    .MapEfCoreProperty<IdentityUser, string>(
+                        "SocialSecurityNumber",
+                        (entityBuilder, propertyBuilder) =>
+                        {
+                            propertyBuilder.HasMaxLength(64).IsRequired().HasDefaultValue("");
+                        }
+                    );
+                
                 /* You can configure extra properties for the
                  * entities defined in the modules used by your application.
                  *

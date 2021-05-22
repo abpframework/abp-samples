@@ -3,6 +3,7 @@ using Shouldly;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
+using Volo.Abp.Data;
 using Volo.Abp.Domain.Repositories;
 using Volo.Abp.Identity;
 using Xunit;
@@ -24,20 +25,35 @@ namespace UnifiedContextsDemo.EntityFrameworkCore.Samples
         }
 
         [Fact]
-        public async Task Should_Query_AppUser()
+        public async Task Should_Work_With_Custom_Properties()
         {
             /* Need to manually start Unit Of Work because
              * FirstOrDefaultAsync should be executed while db connection / context is available.
              */
             await WithUnitOfWorkAsync(async () =>
             {
-                //Act
                 var adminUser = await (await _appUserRepository.GetQueryableAsync())
                     .Where(u => u.UserName == "admin")
                     .FirstOrDefaultAsync();
 
-                //Assert
                 adminUser.ShouldNotBeNull();
+                
+                //It should be null by default since we haven't set it yet ("" is the default value)
+                adminUser.GetProperty("SocialSecurityNumber").ShouldBe("");
+
+                adminUser.SetProperty("SocialSecurityNumber", "1234");
+            });
+            
+            await WithUnitOfWorkAsync(async () =>
+            {
+                var adminUser = await (await _appUserRepository.GetQueryableAsync())
+                    .Where(u => u.UserName == "admin")
+                    .FirstOrDefaultAsync();
+
+                adminUser.ShouldNotBeNull();
+                
+                //We get the value that was set in the previous code block
+                adminUser.GetProperty("SocialSecurityNumber").ShouldBe("1234");
             });
         }
     }

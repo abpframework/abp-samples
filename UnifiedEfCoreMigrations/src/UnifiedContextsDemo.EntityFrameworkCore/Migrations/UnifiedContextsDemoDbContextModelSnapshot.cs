@@ -9,8 +9,8 @@ using Volo.Abp.EntityFrameworkCore;
 
 namespace UnifiedContextsDemo.Migrations
 {
-    [DbContext(typeof(UnifiedContextsDemoMigrationsDbContext))]
-    partial class UnifiedContextsDemoMigrationsDbContextModelSnapshot : ModelSnapshot
+    [DbContext(typeof(UnifiedContextsDemoDbContext))]
+    partial class UnifiedContextsDemoDbContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
         {

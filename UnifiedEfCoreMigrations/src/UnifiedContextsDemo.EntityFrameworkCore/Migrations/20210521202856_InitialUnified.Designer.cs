@@ -10,9 +10,9 @@ using Volo.Abp.EntityFrameworkCore;
 
 namespace UnifiedContextsDemo.Migrations
 {
-    [DbContext(typeof(UnifiedContextsDemoMigrationsDbContext))]
-    [Migration("20210521192729_Initial")]
-    partial class Initial
+    [DbContext(typeof(UnifiedContextsDemoDbContext))]
+    [Migration("20210521202856_InitialUnified")]
+    partial class InitialUnified
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

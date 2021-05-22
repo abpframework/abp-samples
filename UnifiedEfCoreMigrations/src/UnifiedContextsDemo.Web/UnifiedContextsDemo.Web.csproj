@@ -39,7 +39,7 @@
   <ItemGroup>
     <ProjectReference Include="..\UnifiedContextsDemo.Application\UnifiedContextsDemo.Application.csproj" />
     <ProjectReference Include="..\UnifiedContextsDemo.HttpApi\UnifiedContextsDemo.HttpApi.csproj" />
-    <ProjectReference Include="..\UnifiedContextsDemo.EntityFrameworkCore.DbMigrations\UnifiedContextsDemo.EntityFrameworkCore.DbMigrations.csproj" />
+    <ProjectReference Include="..\UnifiedContextsDemo.EntityFrameworkCore\UnifiedContextsDemo.EntityFrameworkCore.csproj" />
     <PackageReference Include="Volo.Abp.AspNetCore.Mvc.UI.Theme.Basic" Version="4.3.1" />
     <PackageReference Include="Volo.Abp.Autofac" Version="4.3.1" />
     <PackageReference Include="Volo.Abp.Swashbuckle" Version="4.3.1" />

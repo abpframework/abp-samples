@@ -1,5 +1,6 @@
 using System;
 using System.IO;
+using Elsa.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -9,6 +10,7 @@ using ElsaDemo.EntityFrameworkCore;
 using ElsaDemo.Localization;
 using ElsaDemo.MultiTenancy;
 using ElsaDemo.Web.Menus;
+using ElsaDemo.Web.Workflows;
 using Microsoft.OpenApi.Models;
 using Volo.Abp;
 using Volo.Abp.Account.Web;
@@ -85,6 +87,17 @@ namespace ElsaDemo.Web
             ConfigureNavigationServices();
             ConfigureAutoApiControllers();
             ConfigureSwaggerServices(context.Services);
+            ConfigureElsa(context);
+        }
+
+        private void ConfigureElsa(ServiceConfigurationContext context)
+        {
+            context.Services.AddElsa(options =>
+            {
+                options
+                    .AddConsoleActivities()
+                    .AddWorkflow<HelloWorld>();
+            });
         }
 
         private void ConfigureUrls(IConfiguration configuration)
@@ -230,6 +243,9 @@ namespace ElsaDemo.Web
             app.UseAuditing();
             app.UseAbpSerilogEnrichers();
             app.UseConfiguredEndpoints();
+            
+            var workflowRunner = context.ServiceProvider.GetRequiredService<IBuildsAndStartsWorkflow>();
+            workflowRunner.BuildAndStartWorkflowAsync<HelloWorld>();
         }
     }
 }

@@ -1,5 +1,7 @@
 using System;
 using System.IO;
+using Elsa;
+using Elsa.Persistence.EntityFramework.Core.Extensions;
 using Elsa.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -11,6 +13,7 @@ using ElsaDemo.Localization;
 using ElsaDemo.MultiTenancy;
 using ElsaDemo.Web.Menus;
 using ElsaDemo.Web.Workflows;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using Volo.Abp;
 using Volo.Abp.Account.Web;
@@ -39,6 +42,7 @@ using Volo.Abp.UI.Navigation.Urls;
 using Volo.Abp.UI;
 using Volo.Abp.UI.Navigation;
 using Volo.Abp.VirtualFileSystem;
+using DbContextOptionsBuilderExtensions = Elsa.Persistence.EntityFramework.SqlServer.DbContextOptionsBuilderExtensions;
 
 namespace ElsaDemo.Web
 {
@@ -87,19 +91,35 @@ namespace ElsaDemo.Web
             ConfigureNavigationServices();
             ConfigureAutoApiControllers();
             ConfigureSwaggerServices(context.Services);
-            ConfigureElsa(context);
+            ConfigureElsa(context, configuration);
         }
 
-        private void ConfigureElsa(ServiceConfigurationContext context)
+        private void ConfigureElsa(ServiceConfigurationContext context, IConfiguration configuration)
         {
-            context.Services.AddElsa(options =>
+            var elsaSection = configuration.GetSection("Elsa");
+            
+            context.Services.AddElsa(elsa =>
             {
-                options
+                elsa
+                    .UseEntityFrameworkPersistence(ef => DbContextOptionsBuilderExtensions.UseSqlServer(ef, configuration.GetConnectionString("Default")))
                     .AddConsoleActivities()
-                    .AddHttpActivities()
-                    .AddWorkflow<HelloWorldConsole>()
-                    .AddWorkflow<HelloWorldHttp>();
+                    .AddHttpActivities(elsaSection.GetSection("Server").Bind)
+                    .AddQuartzTemporalActivities()
+                    .AddJavaScriptActivities()
+                    .AddWorkflowsFrom<Startup>();
             });
+
+            context.Services.AddElsaApiEndpoints();
+            
+            context.Services.AddCors(cors => cors.AddDefaultPolicy(policy => policy
+                .AllowAnyHeader()
+                .AllowAnyMethod()
+                .AllowAnyOrigin()
+                .WithExposedHeaders("Content-Disposition"))
+            );
+            
+            //register controllers inside elsa
+            context.Services.AddAssemblyOf<Elsa.Server.Api.Endpoints.WorkflowRegistry.Get>();
         }
 
         private void ConfigureUrls(IConfiguration configuration)
@@ -216,6 +236,8 @@ namespace ElsaDemo.Web
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseCors();
+            
             app.UseAbpRequestLocalization();
 
             if (!env.IsDevelopment())

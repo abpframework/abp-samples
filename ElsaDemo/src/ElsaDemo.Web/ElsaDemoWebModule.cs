@@ -96,7 +96,9 @@ namespace ElsaDemo.Web
             {
                 options
                     .AddConsoleActivities()
-                    .AddWorkflow<HelloWorld>();
+                    .AddHttpActivities()
+                    .AddWorkflow<HelloWorldConsole>()
+                    .AddWorkflow<HelloWorldHttp>();
             });
         }
 
@@ -242,10 +244,11 @@ namespace ElsaDemo.Web
             });
             app.UseAuditing();
             app.UseAbpSerilogEnrichers();
+            app.UseHttpActivities();
             app.UseConfiguredEndpoints();
-            
+
             var workflowRunner = context.ServiceProvider.GetRequiredService<IBuildsAndStartsWorkflow>();
-            workflowRunner.BuildAndStartWorkflowAsync<HelloWorld>();
+            workflowRunner.BuildAndStartWorkflowAsync<HelloWorldConsole>();
         }
     }
 }

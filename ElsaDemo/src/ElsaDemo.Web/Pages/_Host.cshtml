@@ -1,7 +1,8 @@
 ﻿@page "/elsa"
 @using ElsaDemo.Permissions
 @using Microsoft.AspNetCore.Authorization
-@attribute [Authorize(ElsaDemoPermissions.ElsaDashboard)]
+@* disable authorization temporary to be able to work with postman *@
+@* @attribute [Authorize(ElsaDemoPermissions.ElsaDashboard)] *@
 @{
     var serverUrl = $"{Request.Scheme}://{Request.Host}";
     Layout = null;

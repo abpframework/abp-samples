@@ -2,6 +2,9 @@ using System;
 using System.IO;
 using Elsa;
 using Elsa.Persistence.EntityFramework.Core.Extensions;
+using Elsa.Server.Api;
+using Elsa.Server.Api.Mapping;
+using Elsa.Server.Api.Services;
 using Elsa.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -13,6 +16,10 @@ using ElsaDemo.Localization;
 using ElsaDemo.MultiTenancy;
 using ElsaDemo.Web.Menus;
 using ElsaDemo.Web.Workflows;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ApiExplorer;
+using Microsoft.AspNetCore.Mvc.Versioning;
+using Microsoft.AspNetCore.Routing;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using Volo.Abp;
@@ -111,7 +118,7 @@ namespace ElsaDemo.Web
                     .AddWorkflowsFrom<Startup>();
             });
 
-            context.Services.AddElsaApiEndpoints();
+            AddElsaApiEndpoints(context.Services);
             
             context.Services.AddCors(cors => cors.AddDefaultPolicy(policy => policy
                 .AllowAnyHeader()
@@ -122,6 +129,7 @@ namespace ElsaDemo.Web
             
             //register controllers inside elsa
             context.Services.AddAssemblyOf<Elsa.Server.Api.Endpoints.WorkflowRegistry.Get>();
+            context.Services.AddAssemblyOf<Elsa.Activities.Http.Endpoints.Signals.TriggerEndpoint>();
 
             //Disable antiforgery validation for elsa
             Configure<AbpAntiForgeryOptions>(options =>
@@ -129,6 +137,35 @@ namespace ElsaDemo.Web
                 options.AutoValidateFilter = type =>
                     type.Assembly != typeof(Elsa.Server.Api.Endpoints.WorkflowRegistry.Get).Assembly;
             });
+        }
+        
+        public static IServiceCollection AddElsaApiEndpoints(
+            IServiceCollection services,
+            Action<ElsaApiOptions>? configureApiOptions = null)
+        {
+            ElsaApiOptions elsaApiOptions = new ElsaApiOptions();
+            if (configureApiOptions != null)
+                configureApiOptions(elsaApiOptions);
+            Action<MvcNewtonsoftJsonOptions> setupAction = elsaApiOptions.SetupNewtonsoftJson ?? (Action<MvcNewtonsoftJsonOptions>) (_ => { });
+            services.AddControllers().AddNewtonsoftJson(setupAction);
+            services.AddRouting((Action<RouteOptions>) (options => options.LowercaseUrls = true));
+            /*services.AddVersionedApiExplorer((Action<ApiExplorerOptions>) (o =>
+            {
+                 //o.GroupNameFormat = "'v'VVV";
+                 //o.SubstituteApiVersionInUrl = true;
+            }));*/
+            services.AddApiVersioning((Action<ApiVersioningOptions>) (options =>
+            {
+                options.ReportApiVersions = true;
+                options.DefaultApiVersion = ApiVersion.Default;
+                options.AssumeDefaultVersionWhenUnspecified = true;
+            }));
+            services.AddSingleton<ConnectionConverter>();
+            services.AddSingleton<ActivityBlueprintConverter>();
+            services.AddSingleton<IWorkflowBlueprintMapper, WorkflowBlueprintMapper>();
+            services.AddSingleton<IEndpointContentSerializerSettingsProvider, EndpointContentSerializerSettingsProvider>();
+            services.AddAutoMapperProfile<AutoMapperProfile>();
+            return services;
         }
 
         private void ConfigureUrls(IConfiguration configuration)

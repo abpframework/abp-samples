@@ -105,6 +105,7 @@ namespace ElsaDemo.Web
                     .UseEntityFrameworkPersistence(ef => DbContextOptionsBuilderExtensions.UseSqlServer(ef, configuration.GetConnectionString("Default")))
                     .AddConsoleActivities()
                     .AddHttpActivities(elsaSection.GetSection("Server").Bind)
+                    .AddEmailActivities(elsaSection.GetSection("Smtp").Bind)
                     .AddQuartzTemporalActivities()
                     .AddJavaScriptActivities()
                     .AddWorkflowsFrom<Startup>();

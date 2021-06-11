@@ -1,6 +1,7 @@
 ﻿using System.Threading.Tasks;
 using ElsaDemo.Localization;
 using ElsaDemo.MultiTenancy;
+using ElsaDemo.Permissions;
 using Volo.Abp.Identity.Web.Navigation;
 using Volo.Abp.SettingManagement.Web.Navigation;
 using Volo.Abp.TenantManagement.Web.Navigation;
@@ -41,7 +42,8 @@ namespace ElsaDemo.Web.Menus
                     "Workflow",
                     "~/elsa",
                     icon: "fas fa-code-branch",
-                    order: 1
+                    order: 1,
+                    requiredPermissionName: ElsaDemoPermissions.ElsaDashboard
                 )
             );
             

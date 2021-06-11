@@ -10,8 +10,7 @@ namespace ElsaDemo.Permissions
         {
             var myGroup = context.AddGroup(ElsaDemoPermissions.GroupName);
 
-            //Define your own permissions here. Example:
-            //myGroup.AddPermission(ElsaDemoPermissions.MyPermission1, L("Permission:MyPermission1"));
+            myGroup.AddPermission(ElsaDemoPermissions.ElsaDashboard, L("Permission:ElsaDashboard"));
         }
 
         private static LocalizableString L(string name)

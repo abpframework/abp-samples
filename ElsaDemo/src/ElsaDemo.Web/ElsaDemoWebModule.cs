@@ -19,6 +19,7 @@ using Volo.Abp;
 using Volo.Abp.Account.Web;
 using Volo.Abp.AspNetCore.Authentication.JwtBearer;
 using Volo.Abp.AspNetCore.Mvc;
+using Volo.Abp.AspNetCore.Mvc.AntiForgery;
 using Volo.Abp.AspNetCore.Mvc.Localization;
 using Volo.Abp.AspNetCore.Mvc.UI;
 using Volo.Abp.AspNetCore.Mvc.UI.Bootstrap;
@@ -120,6 +121,13 @@ namespace ElsaDemo.Web
             
             //register controllers inside elsa
             context.Services.AddAssemblyOf<Elsa.Server.Api.Endpoints.WorkflowRegistry.Get>();
+
+            //Disable antiforgery validation for elsa
+            Configure<AbpAntiForgeryOptions>(options =>
+            {
+                options.AutoValidateFilter = type =>
+                    type.Assembly != typeof(Elsa.Server.Api.Endpoints.WorkflowRegistry.Get).Assembly;
+            });
         }
 
         private void ConfigureUrls(IConfiguration configuration)

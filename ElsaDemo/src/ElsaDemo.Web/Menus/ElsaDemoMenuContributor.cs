@@ -34,6 +34,17 @@ namespace ElsaDemo.Web.Menus
                 )
             );
             
+            context.Menu.Items.Insert(
+                1,
+                new ApplicationMenuItem(
+                    ElsaDemoMenus.Home,
+                    "Workflow",
+                    "~/elsa",
+                    icon: "fas fa-code-branch",
+                    order: 1
+                )
+            );
+            
             if (MultiTenancyConsts.IsEnabled)
             {
                 administration.SetSubItemOrder(TenantManagementMenuNames.GroupName, 1);

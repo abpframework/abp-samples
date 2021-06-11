@@ -267,7 +267,10 @@ namespace ElsaDemo.Web
             app.UseAuditing();
             app.UseAbpSerilogEnrichers();
             app.UseHttpActivities();
-            app.UseConfiguredEndpoints();
+            app.UseConfiguredEndpoints(endpoints =>
+            {
+                endpoints.MapFallbackToPage("/_Host");
+            });
 
             var workflowRunner = context.ServiceProvider.GetRequiredService<IBuildsAndStartsWorkflow>();
             workflowRunner.BuildAndStartWorkflowAsync<HelloWorldConsole>();

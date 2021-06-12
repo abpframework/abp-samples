@@ -116,7 +116,9 @@ namespace ElsaDemo.Web
             context.Services.AddElsa(elsa =>
             {
                 elsa
-                    .UseEntityFrameworkPersistence(ef => DbContextOptionsBuilderExtensions.UseSqlServer(ef, configuration.GetConnectionString("Default")))
+                    .UseEntityFrameworkPersistence(ef =>
+                        DbContextOptionsBuilderExtensions.UseSqlServer(ef,
+                            configuration.GetConnectionString("Default")))
                     .AddConsoleActivities()
                     .AddHttpActivities(elsaSection.GetSection("Server").Bind)
                     .AddEmailActivities(elsaSection.GetSection("Smtp").Bind)
@@ -125,7 +127,11 @@ namespace ElsaDemo.Web
                     .AddWorkflowsFrom<Startup>();
             });
 
-            AddElsaApiEndpoints(context.Services);
+            context.Services.AddElsaApiEndpoints();
+            context.Services.Configure<ApiVersioningOptions>(options =>
+            {
+                options.UseApiBehavior = false;
+            });
 
             context.Services.AddCors(cors => cors.AddDefaultPolicy(policy => policy
                 .AllowAnyHeader()
@@ -140,36 +146,6 @@ namespace ElsaDemo.Web
                 options.AutoValidateFilter = type =>
                     type.Assembly != typeof(Elsa.Server.Api.Endpoints.WorkflowRegistry.Get).Assembly;
             });
-        }
-
-        public static IServiceCollection AddElsaApiEndpoints(
-            IServiceCollection services,
-            Action<ElsaApiOptions>? configureApiOptions = null)
-        {
-            ElsaApiOptions elsaApiOptions = new ElsaApiOptions();
-            if (configureApiOptions != null)
-                configureApiOptions(elsaApiOptions);
-            Action<MvcNewtonsoftJsonOptions> setupAction = elsaApiOptions.SetupNewtonsoftJson ?? (Action<MvcNewtonsoftJsonOptions>) (_ => { });
-            services.AddControllers().AddNewtonsoftJson(setupAction);
-            services.AddRouting((Action<RouteOptions>) (options => options.LowercaseUrls = true));
-            services.AddVersionedApiExplorer((Action<ApiExplorerOptions>) (o =>
-            {
-                 o.GroupNameFormat = "'v'VVV";
-                 o.SubstituteApiVersionInUrl = true;
-            }));
-            services.AddApiVersioning((Action<ApiVersioningOptions>) (options =>
-            {
-                options.ReportApiVersions = true;
-                options.DefaultApiVersion = ApiVersion.Default;
-                options.AssumeDefaultVersionWhenUnspecified = true;
-                options.UseApiBehavior = false;
-            }));
-            services.AddSingleton<ConnectionConverter>();
-            services.AddSingleton<ActivityBlueprintConverter>();
-            services.AddSingleton<IWorkflowBlueprintMapper, WorkflowBlueprintMapper>();
-            services.AddSingleton<IEndpointContentSerializerSettingsProvider, EndpointContentSerializerSettingsProvider>();
-            services.AddAutoMapperProfile<AutoMapperProfile>();
-            return services;
         }
 
         private void ConfigureUrls(IConfiguration configuration)

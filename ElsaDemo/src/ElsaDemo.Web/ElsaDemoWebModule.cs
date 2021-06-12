@@ -72,6 +72,13 @@ namespace ElsaDemo.Web
     {
         public override void PreConfigureServices(ServiceConfigurationContext context)
         {
+            PreConfigure<IMvcBuilder>(mvcBuilder =>
+            {
+                //https://github.com/abpframework/abp/pull/9299
+                mvcBuilder.AddControllersAsServices();
+                mvcBuilder.AddViewComponentsAsServices();
+            });
+
             context.Services.PreConfigure<AbpMvcDataAnnotationsLocalizationOptions>(options =>
             {
                 options.AddAssemblyResource(
@@ -105,7 +112,7 @@ namespace ElsaDemo.Web
         private void ConfigureElsa(ServiceConfigurationContext context, IConfiguration configuration)
         {
             var elsaSection = configuration.GetSection("Elsa");
-            
+
             context.Services.AddElsa(elsa =>
             {
                 elsa
@@ -119,17 +126,13 @@ namespace ElsaDemo.Web
             });
 
             AddElsaApiEndpoints(context.Services);
-            
+
             context.Services.AddCors(cors => cors.AddDefaultPolicy(policy => policy
                 .AllowAnyHeader()
                 .AllowAnyMethod()
                 .AllowAnyOrigin()
                 .WithExposedHeaders("Content-Disposition"))
             );
-            
-            //register controllers inside elsa
-            context.Services.AddAssemblyOf<Elsa.Server.Api.Endpoints.WorkflowRegistry.Get>();
-            context.Services.AddAssemblyOf<Elsa.Activities.Http.Endpoints.Signals.TriggerEndpoint>();
 
             //Disable antiforgery validation for elsa
             Configure<AbpAntiForgeryOptions>(options =>
@@ -138,7 +141,7 @@ namespace ElsaDemo.Web
                     type.Assembly != typeof(Elsa.Server.Api.Endpoints.WorkflowRegistry.Get).Assembly;
             });
         }
-        
+
         public static IServiceCollection AddElsaApiEndpoints(
             IServiceCollection services,
             Action<ElsaApiOptions>? configureApiOptions = null)
@@ -283,7 +286,7 @@ namespace ElsaDemo.Web
             }
 
             app.UseCors();
-            
+
             app.UseAbpRequestLocalization();
 
             if (!env.IsDevelopment())

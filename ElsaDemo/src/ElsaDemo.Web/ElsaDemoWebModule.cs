@@ -152,16 +152,17 @@ namespace ElsaDemo.Web
             Action<MvcNewtonsoftJsonOptions> setupAction = elsaApiOptions.SetupNewtonsoftJson ?? (Action<MvcNewtonsoftJsonOptions>) (_ => { });
             services.AddControllers().AddNewtonsoftJson(setupAction);
             services.AddRouting((Action<RouteOptions>) (options => options.LowercaseUrls = true));
-            /*services.AddVersionedApiExplorer((Action<ApiExplorerOptions>) (o =>
+            services.AddVersionedApiExplorer((Action<ApiExplorerOptions>) (o =>
             {
-                 //o.GroupNameFormat = "'v'VVV";
-                 //o.SubstituteApiVersionInUrl = true;
-            }));*/
+                 o.GroupNameFormat = "'v'VVV";
+                 o.SubstituteApiVersionInUrl = true;
+            }));
             services.AddApiVersioning((Action<ApiVersioningOptions>) (options =>
             {
                 options.ReportApiVersions = true;
                 options.DefaultApiVersion = ApiVersion.Default;
                 options.AssumeDefaultVersionWhenUnspecified = true;
+                options.UseApiBehavior = false;
             }));
             services.AddSingleton<ConnectionConverter>();
             services.AddSingleton<ActivityBlueprintConverter>();

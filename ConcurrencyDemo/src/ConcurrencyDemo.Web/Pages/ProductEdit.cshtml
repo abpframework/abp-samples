@@ -5,7 +5,13 @@
 <div class="container">
     <div class="card mt-4 mb-5">
         <div class="card-body">
-            <abp-dynamic-form abp-model="Product" submit-button="true" />
+            <form method="post">
+                <input type="hidden" asp-for="Product.Id"/>
+                <input type="hidden" asp-for="Product.ConcurrencyStamp"/>
+                <abp-input asp-for="Product.Name" />
+                <abp-input asp-for="Product.Price" />
+                <abp-button type="submit" button-type="Primary" text="Save" />
+            </form>
         </div>
     </div>
 </div>

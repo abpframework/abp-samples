@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Volo.Abp;
+using Volo.Abp.EntityFrameworkCore.Modeling;
 
 namespace ConcurrencyDemo.EntityFrameworkCore
 {
@@ -9,14 +10,11 @@ namespace ConcurrencyDemo.EntityFrameworkCore
         {
             Check.NotNull(builder, nameof(builder));
 
-            /* Configure your own tables/entities inside here */
-
-            //builder.Entity<YourEntity>(b =>
-            //{
-            //    b.ToTable(ConcurrencyDemoConsts.DbTablePrefix + "YourEntities", ConcurrencyDemoConsts.DbSchema);
-            //    b.ConfigureByConvention(); //auto configure for the base class props
-            //    //...
-            //});
+            builder.Entity<Product>(b =>
+            {
+                b.ToTable("Products");
+                b.ConfigureByConvention();
+            });
         }
     }
 }

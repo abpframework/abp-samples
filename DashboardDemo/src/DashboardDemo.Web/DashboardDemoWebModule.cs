@@ -188,7 +188,7 @@ namespace DashboardDemo.Web
                 app.UseErrorPage();
             }
 
-            app.UseVirtualFiles();
+            app.UseStaticFiles();
             app.UseRouting();
             app.UseAuthentication();
             app.UseJwtTokenMiddleware();

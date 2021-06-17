@@ -10,7 +10,7 @@ namespace EventOrganizer.Blazor
 
         public void AddStyles(BundleContext context)
         {
-            context.Add("main.css");
+            context.Add("main.css", true);
         }
     }
 }

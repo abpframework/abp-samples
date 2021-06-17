@@ -17,7 +17,7 @@
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.6.1" />
     <ProjectReference Include="..\DevExtremeSample.Application.Tests\DevExtremeSample.Application.Tests.csproj" />
     <ProjectReference Include="..\..\src\DevExtremeSample.Web\DevExtremeSample.Web.csproj" />
-    <PackageReference Include="Volo.Abp.AspNetCore.TestBase" Version="4.0.0" />
+    <PackageReference Include="Volo.Abp.AspNetCore.TestBase" Version="4.3.2" />
   </ItemGroup>
 
   <ItemGroup>

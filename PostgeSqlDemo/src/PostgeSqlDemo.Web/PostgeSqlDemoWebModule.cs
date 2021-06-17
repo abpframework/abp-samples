@@ -189,7 +189,7 @@ namespace PostgeSqlDemo.Web
             {
                 app.UseErrorPage();
             }
-            app.UseVirtualFiles();
+            app.UseStaticFiles();
             app.UseRouting();
             app.UseAuthentication();
             app.UseJwtTokenMiddleware();

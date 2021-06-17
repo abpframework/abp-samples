@@ -48,7 +48,7 @@ namespace ClientSimulationDemo.Simulator
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseVirtualFiles();
+            app.UseStaticFiles();
             app.UseRouting();
             app.UseConfiguredEndpoints();
         }

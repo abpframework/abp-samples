@@ -12,9 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
-  <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="5.0.*" />
-  </ItemGroup>
   </ItemGroup>
 
 </Project>

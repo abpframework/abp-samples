@@ -6,8 +6,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Volo.Abp.Autofac" Version="4.0.0" />
-    <PackageReference Include="Volo.Abp.EventBus.Rebus" Version="4.0.0" />
+    <PackageReference Include="Volo.Abp.Autofac" Version="4.3.2" />
+    <PackageReference Include="Volo.Abp.EventBus.Rebus" Version="4.3.2" />
     <PackageReference Include="Rebus.RabbitMQ" Version="7.2.0" />
     <ProjectReference Include="..\SharedModule\SharedModule.csproj" />
   </ItemGroup>

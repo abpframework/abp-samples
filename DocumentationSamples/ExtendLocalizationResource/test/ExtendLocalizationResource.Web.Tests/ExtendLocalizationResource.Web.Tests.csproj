@@ -17,7 +17,7 @@
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.6.1" />
     <ProjectReference Include="..\ExtendLocalizationResource.Application.Tests\ExtendLocalizationResource.Application.Tests.csproj" />
     <ProjectReference Include="..\..\src\ExtendLocalizationResource.Web\ExtendLocalizationResource.Web.csproj" />
-    <PackageReference Include="Volo.Abp.AspNetCore.TestBase" Version="4.0.0" />
+    <PackageReference Include="Volo.Abp.AspNetCore.TestBase" Version="4.3.2" />
   </ItemGroup>
 
   <ItemGroup>

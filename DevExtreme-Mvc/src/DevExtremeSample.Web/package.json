@@ -3,7 +3,7 @@
   "name": "my-app",
   "private": true,
   "dependencies": {
-    "@abp/aspnetcore.mvc.ui.theme.basic": "~4.0.0",
+    "@abp/aspnetcore.mvc.ui.theme.basic": "~4.3.2",
     "devextreme": "^20.1.5",
     "devextreme-aspnet-data": "^2.6.2"
   }

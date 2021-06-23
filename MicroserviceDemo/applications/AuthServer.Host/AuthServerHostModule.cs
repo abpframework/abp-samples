@@ -93,7 +93,7 @@ namespace AuthServer.Host
             var app = context.GetApplicationBuilder();
 
             app.UseCorrelationId();
-            app.UseVirtualFiles();
+            app.UseStaticFiles();
             app.UseRouting();
             app.UseAbpRequestLocalization();
             app.UseAuthentication();

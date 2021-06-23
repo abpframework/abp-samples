@@ -66,7 +66,7 @@ namespace PublicWebSite.Host
                     options.Authority = configuration["AuthServer:Authority"];
                     options.ClientId = configuration["AuthServer:ClientId"];
                     options.ClientSecret = configuration["AuthServer:ClientSecret"];
-                    options.RequireHttpsMetadata = false;
+                    options.RequireHttpsMetadata = Convert.ToBoolean(configuration["AuthServer:RequireHttpsMetadata"]);
                     options.ResponseType = OpenIdConnectResponseType.CodeIdToken;
                     options.SaveTokens = true;
                     options.GetClaimsFromUserInfoEndpoint = true;
@@ -76,7 +76,7 @@ namespace PublicWebSite.Host
                     options.Scope.Add("PublicWebSiteGateway");
                     options.Scope.Add("ProductService");
                     options.Scope.Add("BloggingService");
-                    options.ClaimActions.MapAbpClaimTypes();
+                    
                 });
 
             context.Services.AddStackExchangeRedisCache(options =>
@@ -94,7 +94,7 @@ namespace PublicWebSite.Host
             var app = context.GetApplicationBuilder();
 
             app.UseCorrelationId();
-            app.UseVirtualFiles();
+            app.UseStaticFiles();
             app.UseRouting();
             app.UseAuthentication();
             

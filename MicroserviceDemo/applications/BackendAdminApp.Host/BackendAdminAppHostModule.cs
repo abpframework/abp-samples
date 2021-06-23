@@ -79,7 +79,7 @@ namespace BackendAdminApp.Host
                     options.Authority = configuration["AuthServer:Authority"];
                     options.ClientId = configuration["AuthServer:ClientId"];
                     options.ClientSecret = configuration["AuthServer:ClientSecret"];
-                    options.RequireHttpsMetadata = false;
+                    options.RequireHttpsMetadata = Convert.ToBoolean(configuration["AuthServer:RequireHttpsMetadata"]);
                     options.ResponseType = OpenIdConnectResponseType.CodeIdToken;
                     options.SaveTokens = true;
                     options.GetClaimsFromUserInfoEndpoint = true;
@@ -90,7 +90,7 @@ namespace BackendAdminApp.Host
                     options.Scope.Add("IdentityService");
                     options.Scope.Add("ProductService");
                     options.Scope.Add("TenantManagementService");
-                    options.ClaimActions.MapAbpClaimTypes();
+                    
                 });
 
             context.Services.AddSwaggerGen(
@@ -115,7 +115,7 @@ namespace BackendAdminApp.Host
             var app = context.GetApplicationBuilder();
 
             app.UseCorrelationId();
-            app.UseVirtualFiles();
+            app.UseStaticFiles();
             app.UseRouting();
             app.UseAuthentication();
             

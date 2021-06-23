@@ -1,3 +1,4 @@
+using System;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.DataProtection;
 using Microsoft.Extensions.DependencyInjection;
@@ -59,7 +60,7 @@ namespace TenantManagementService.Host
                 {
                     options.Authority = configuration["AuthServer:Authority"];
                     options.ApiName = configuration["AuthServer:ApiName"];
-                    options.RequireHttpsMetadata = false;
+                    options.RequireHttpsMetadata = Convert.ToBoolean(configuration["AuthServer:RequireHttpsMetadata"]);
                 });
 
             context.Services.AddSwaggerGen(options =>
@@ -105,7 +106,7 @@ namespace TenantManagementService.Host
             var app = context.GetApplicationBuilder();
 
             app.UseCorrelationId();
-            app.UseVirtualFiles();
+            app.UseStaticFiles();
             app.UseRouting();
             app.UseAuthentication();
             app.UseAbpClaimsMap();

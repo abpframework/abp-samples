@@ -7,11 +7,14 @@ using Volo.Abp.DependencyInjection;
 using Volo.Abp.Guids;
 using Volo.Abp.Identity;
 using Volo.Abp.IdentityServer.ApiResources;
+using Volo.Abp.IdentityServer.ApiScopes;
 using Volo.Abp.IdentityServer.Clients;
 using Volo.Abp.IdentityServer.IdentityResources;
 using Volo.Abp.PermissionManagement;
 using Volo.Abp.TenantManagement;
 using Volo.Abp.Uow;
+using ApiResource = Volo.Abp.IdentityServer.ApiResources.ApiResource;
+using Client = Volo.Abp.IdentityServer.Clients.Client;
 
 namespace AuthServer.Host
 {
@@ -19,6 +22,7 @@ namespace AuthServer.Host
     {
         private readonly IApiResourceRepository _apiResourceRepository;
         private readonly IClientRepository _clientRepository;
+        private readonly IApiScopeRepository _apiScopeRepository;
         private readonly IIdentityResourceDataSeeder _identityResourceDataSeeder;
         private readonly IGuidGenerator _guidGenerator;
         private readonly IPermissionDataSeeder _permissionDataSeeder;
@@ -28,21 +32,53 @@ namespace AuthServer.Host
             IApiResourceRepository apiResourceRepository,
             IIdentityResourceDataSeeder identityResourceDataSeeder,
             IGuidGenerator guidGenerator,
-            IPermissionDataSeeder permissionDataSeeder)
+            IPermissionDataSeeder permissionDataSeeder,
+            IApiScopeRepository apiScopeRepository)
         {
             _clientRepository = clientRepository;
             _apiResourceRepository = apiResourceRepository;
             _identityResourceDataSeeder = identityResourceDataSeeder;
             _guidGenerator = guidGenerator;
             _permissionDataSeeder = permissionDataSeeder;
+            _apiScopeRepository = apiScopeRepository;
         }
 
         [UnitOfWork]
         public virtual async Task SeedAsync(DataSeedContext context)
         {
             await _identityResourceDataSeeder.CreateStandardResourcesAsync();
+            await CreateApiScopesAsync();
             await CreateApiResourcesAsync();
             await CreateClientsAsync();
+        }
+
+        private async Task CreateApiScopesAsync()
+        {
+            await CreateApiScopeAsync("IdentityService");
+            await CreateApiScopeAsync("TenantManagementService");
+            await CreateApiScopeAsync("BloggingService");
+            await CreateApiScopeAsync("ProductService");
+            await CreateApiScopeAsync("InternalGateway");
+            await CreateApiScopeAsync("BackendAdminAppGateway");
+            await CreateApiScopeAsync("PublicWebSiteGateway");
+        }
+
+        private async Task<ApiScope> CreateApiScopeAsync(string name)
+        {
+            var apiScope = await _apiScopeRepository.GetByNameAsync(name);
+            if (apiScope == null)
+            {
+                apiScope = await _apiScopeRepository.InsertAsync(
+                    new ApiScope(
+                        _guidGenerator.Create(),
+                        name,
+                        name + " API"
+                    ),
+                    autoSave: true
+                );
+            }
+
+            return apiScope;
         }
 
         private async Task CreateApiResourcesAsync()
@@ -113,7 +149,7 @@ namespace AuthServer.Host
                 commonSecret,
                 permissions: new[] { IdentityPermissions.Users.Default, TenantManagementPermissions.Tenants.Default, "ProductManagement.Product" }
             );
-            
+
             await CreateClientAsync(
                 "backend-admin-app-client",
                 commonScopes.Union(new[] { "BackendAdminAppGateway", "IdentityService", "ProductService", "TenantManagementService" }),
@@ -151,7 +187,7 @@ namespace AuthServer.Host
             string postLogoutRedirectUri = null,
             IEnumerable<string> permissions = null)
         {
-            var client = await _clientRepository.FindByCliendIdAsync(name);
+            var client = await _clientRepository.FindByClientIdAsync(name);
             if (client == null)
             {
                 client = await _clientRepository.InsertAsync(
@@ -169,7 +205,8 @@ namespace AuthServer.Host
                         AccessTokenLifetime = 31536000, //365 days
                         AuthorizationCodeLifetime = 300,
                         IdentityTokenLifetime = 300,
-                        RequireConsent = false
+                        RequireConsent = false,
+                        RequirePkce = false
                     },
                     autoSave: true
                 );

@@ -1,0 +1,37 @@
+﻿@page "/"
+@inherits TodoAppComponentBase
+<div class="container">
+    <Card>
+        <CardHeader>
+            <CardTitle>
+                TODO LIST
+            </CardTitle>
+        </CardHeader>
+        <CardBody>
+
+            <!-- FORM FOR NEW TODO ITEMS -->
+            <form id="NewItemForm" 
+                  @onsubmit:preventDefault
+                  @onsubmit="() => Create()"
+                  class="form-inline">
+                <input type="text" 
+                       @bind-value="@NewTodoText"
+                       class="form-control mr-2" 
+                       placeholder="enter text...">
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+
+            <!-- TODO ITEMS LIST -->
+            <ul id="TodoList">
+                @foreach (var todoItem in TodoItems)
+                {
+                    <li data-id="@todoItem.Id">
+                        <i class="far fa-trash-alt"
+                           @onclick="() => Delete(todoItem)"
+                           ></i> @todoItem.Text
+                    </li>
+                }
+            </ul>
+        </CardBody>
+    </Card>
+</div>

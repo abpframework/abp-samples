@@ -1,0 +1,12 @@
+﻿{
+  "profiles": {
+    "Acme.BookStore.Web": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "applicationUrl": "https://web.getabp.net:44303",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    }
+  }
+}

@@ -68,6 +68,7 @@
       <ngx-datatable-column
         [name]="'::Author' | abpLocalization"
         prop="authorName"
+        [sortable]="false"
       ></ngx-datatable-column>
       <ngx-datatable-column [name]="'::Type' | abpLocalization" prop="type">
         <ng-template let-row="row" ngx-datatable-cell-template>

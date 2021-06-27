@@ -107,43 +107,51 @@ namespace Acme.BookStore.Web
 
         private void ConfigureAuthentication(ServiceConfigurationContext context, IConfiguration configuration)
         {
-            JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
-            // Mapping for GetExternalLoginInfoAsync
-            JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Add("sub", ClaimTypes.NameIdentifier);
             context.Services.AddAuthentication()
                 .AddIdentityServerAuthentication(options =>
                 {
                     options.Authority = configuration["AuthServer:Authority"];
                     options.RequireHttpsMetadata = false;
                     options.ApiName = "Acme.BookStore";
-                });
-            
-            context.Services.AddMicrosoftIdentityWebAppAuthentication(
-                configuration: configuration,
-                configSectionName: "AzureAd",
-                openIdConnectScheme:"AzureAD",
-                cookieScheme:null);
-            
+                })
+                // Microsoft.Identity.Web
+                .AddMicrosoftIdentityWebApp(configuration.GetSection("AzureAd"));
+            context.Services.Configure<OpenIdConnectOptions>(OpenIdConnectDefaults.AuthenticationScheme, options =>
+            {
+                options.Authority = "https://login.microsoftonline.com/" + configuration["AzureAd:TenantId"] +
+                                    "/v2.0/";
+                options.ClientId = configuration["AzureAd:ClientId"];
+                options.ResponseType = OpenIdConnectResponseType.CodeIdToken;
+                options.CallbackPath = configuration["AzureAd:CallbackPath"];
+                options.ClientSecret = configuration["AzureAd:ClientSecret"];
+                options.RequireHttpsMetadata = false;
+                options.SaveTokens = false;
+                options.GetClaimsFromUserInfoEndpoint = true;
+                options.Scope.Add("email");
+
+                options.SignInScheme = IdentityConstants.ExternalScheme;
+
+                options.ClaimActions.MapJsonKey(ClaimTypes.NameIdentifier, "sub");
+            });
+
             //Use standart openid connection
-            // .AddOpenIdConnect("AzureOpenId", "AzureAD", options =>
-            //  {
-            //      options.Authority = "https://login.microsoftonline.com/" + configuration["AzureAd:TenantId"] + "/v2.0/";
-            //      options.ClientId = configuration["AzureAd:ClientId"];
-            //      options.ResponseType = OpenIdConnectResponseType.IdToken;
-            //      options.CallbackPath = configuration["AzureAd:CallbackPath"];
-            //      options.RequireHttpsMetadata = false;
-            //      options.SaveTokens = true;
-            //      options.GetClaimsFromUserInfoEndpoint = true;
+            // context.Services.Configure<OpenIdConnectOptions>(OpenIdConnectDefaults.AuthenticationScheme, options =>
+            // {
+            //     options.Authority = "https://login.microsoftonline.com/" + configuration["AzureAd:TenantId"] +
+            //                         "/v2.0/";
+            //     options.ClientId = configuration["AzureAd:ClientId"];
+            //     options.ResponseType = OpenIdConnectResponseType.CodeIdToken;
+            //     options.CallbackPath = configuration["AzureAd:CallbackPath"];
+            //     options.ClientSecret = configuration["AzureAd:ClientSecret"];
+            //     options.RequireHttpsMetadata = false;
+            //     options.SaveTokens = false;
+            //     options.GetClaimsFromUserInfoEndpoint = true;
+            //     options.Scope.Add("email");
             //
-            //      options.Scope.Add("email"); // If you are using v2.0 azure endpoint, you need to request this scope for user creation
-            //
-            //      options.Events.OnTokenValidated = (async context =>
-            //      {
-            //          var debugIdentityPrincipal = context.Principal.Identity;
-            //          var claimsFromOidcProvider = context.Principal.Claims.ToList();
-            //          await Task.CompletedTask;
-            //      });
-            //  });
+            //     options.SignInScheme = IdentityConstants.ExternalScheme;
+            //     
+            //     options.ClaimActions.MapJsonKey(ClaimTypes.NameIdentifier, "sub");
+            // });
         }
 
         private void ConfigureAutoMapper()

@@ -14,10 +14,14 @@
             </abp-card-title>
         </abp-card-header>
         <abp-card-body>
+            
+            <!-- FORM FOR NEW TODO ITEMS -->
             <form id="NewItemForm" class="form-inline">
                 <input id="NewItemText" type="text" class="form-control mr-2" placeholder="enter text...">
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>
+            
+            <!-- TODO ITEMS LIST -->
             <ul id="TodoList">
                 @foreach (var todoItem in Model.TodoItems)
                 {

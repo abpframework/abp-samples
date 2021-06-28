@@ -2,12 +2,12 @@
 # yarn lockfile v1
 
 
-"@abp/ng.core@^4.1.2":
-  version "4.2.0"
-  resolved "https://registry.yarnpkg.com/@abp/ng.core/-/ng.core-4.2.0.tgz#cd6848291699b9bc60303c58162074d80a0c4428"
-  integrity sha512-HhTpOeK5RdzlfK5zy5t7v68DDqNqAB75if6E4Lt2CwgY8pQUuY0EIzD0+AXhkC5+bjyULNHV2/HW3q/Fm75TVg==
+"@abp/ng.core@~4.3.2":
+  version "4.3.2"
+  resolved "https://registry.yarnpkg.com/@abp/ng.core/-/ng.core-4.3.2.tgz#232d983d3b608377fdebdffd165fd7b0802efafa"
+  integrity sha512-p+JzBepMRhJNRAe+f1W2cJ1T/oMqAwXz1+Jb0ea8oGySUN1YFhvNNMgr3DGSfnR6UMfGED2pJAeBS/5TC3LC7g==
   dependencies:
-    "@abp/utils" "^4.2.0-rc.2"
+    "@abp/utils" "^4.3.1"
     "@angular/localize" "~10.0.10"
     "@ngxs/store" "^3.7.0"
     angular-oauth2-oidc "^10.0.0"
@@ -17,21 +17,22 @@
     ts-toolbelt "6.15.4"
     tslib "^2.0.0"
 
-"@abp/ng.schematics@^4.2.0":
-  version "4.2.0"
-  resolved "https://registry.yarnpkg.com/@abp/ng.schematics/-/ng.schematics-4.2.0.tgz#db1a8ae787cf028452774a51cb62e784a1670e25"
-  integrity sha512-44bDoLRqDzcJ/X75KH1O0AoQev7zKh0IkAe4N7KQNgjgRiIuWe3h/SQPfqTSlZNT2ZYo/SZMZyX5Nv8OSKXydg==
+"@abp/ng.schematics@~4.3.2":
+  version "4.3.2"
+  resolved "https://registry.yarnpkg.com/@abp/ng.schematics/-/ng.schematics-4.3.2.tgz#a792d8c9d99c0099f4a8d998be90721652f5efeb"
+  integrity sha512-gBV0f7vkbM9rs3HCeTxYDtnxCC6rXnSVrogtsOkZAqWR38riPMVDTK5u4yDeypCEFlMHaOF80QBj6lxpAr9Yrw==
   dependencies:
     "@angular-devkit/core" "~11.0.2"
     "@angular-devkit/schematics" "~11.0.2"
     got "^11.5.2"
     jsonc-parser "^2.3.0"
+    should-quote "^1.0.0"
     typescript "~3.9.2"
 
-"@abp/utils@^4.2.0-rc.2":
-  version "4.2.0"
-  resolved "https://registry.yarnpkg.com/@abp/utils/-/utils-4.2.0.tgz#073330e3e3f6ee61892f50260e48dbe1b05df35e"
-  integrity sha512-75qR3SdiAa75wqleAx9sUMXLj4m9duuBo5+2sVv7Y29GcEyKUPvm8B1s6tksvSGA0e3vnFTHeVEc10eD1xKHSQ==
+"@abp/utils@^4.3.1":
+  version "4.3.2"
+  resolved "https://registry.yarnpkg.com/@abp/utils/-/utils-4.3.2.tgz#ff8fa921aadf8ec6d1d8eb0572133907c19ac6e5"
+  integrity sha512-xUycN1bW+gTVfD0WJHXG5UbqAqAg/dVrZ/pXlnEGixp04vXwTI+o5oWTV2rQYiOyLbPzmpjSAZmxrkIcAgIQ1A==
   dependencies:
     just-compare "^1.3.0"
 
@@ -7758,6 +7759,11 @@ shebang-regex@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/shebang-regex/-/shebang-regex-1.0.0.tgz#da42f49740c0b42db2ca9728571cb190c98efea3"
   integrity sha1-2kL0l0DAtC2yypcoVxyxkMmO/qM=
+
+should-quote@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/should-quote/-/should-quote-1.0.0.tgz#18e58cb92a3fecb6e163cf92c8158847058589d7"
+  integrity sha512-mQN5Meec3CTPmykzwXfDGWDpi75HUD8NT21wRWaJ7oqxpFIhXq80Hiy4ziccUNOwzhWeFkT9/kNSZbaugL9jsA==
 
 signal-exit@^3.0.0, signal-exit@^3.0.2:
   version "3.0.3"

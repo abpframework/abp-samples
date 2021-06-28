@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="..\..\common.props" />
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+    <RootNamespace>ElsaDemo</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ElsaDemo.Application.Contracts\ElsaDemo.Application.Contracts.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Volo.Abp.Account.HttpApi" Version="4.3.2" />
+    <PackageReference Include="Volo.Abp.Identity.HttpApi" Version="4.3.2" />
+    <PackageReference Include="Volo.Abp.PermissionManagement.HttpApi" Version="4.3.2" />
+    <PackageReference Include="Volo.Abp.TenantManagement.HttpApi" Version="4.3.2" />
+    <PackageReference Include="Volo.Abp.FeatureManagement.HttpApi" Version="4.3.2" />
+    <PackageReference Include="Volo.Abp.SettingManagement.HttpApi" Version="4.3.2" />
+  </ItemGroup>
+
+</Project>

@@ -75,7 +75,7 @@ namespace DashboardDemo
 
             //app.UseErrorPage();
 
-            app.UseVirtualFiles();
+            app.UseStaticFiles();
             app.UseAuthentication();
 
             app.UseRequestLocalization(app.ApplicationServices.GetRequiredService<IOptions<RequestLocalizationOptions>>().Value);

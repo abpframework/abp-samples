@@ -19,25 +19,25 @@
     <PackageReference Include="Serilog.AspNetCore" Version="3.4.0" />
     <PackageReference Include="Serilog.Sinks.File" Version="4.1.0" />
     <PackageReference Include="Serilog.Sinks.Async" Version="1.4.0" />
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
-    <PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="5.0.0" />
-    <PackageReference Include="Microsoft.Extensions.Caching.StackExchangeRedis" Version="5.0.0" />
-    <PackageReference Include="Microsoft.AspNetCore.DataProtection.StackExchangeRedis" Version="5.0.0" />
-    <PackageReference Include="Volo.Abp.AspNetCore.SignalR" Version="4.0.0" />
-    <PackageReference Include="Volo.Abp.EventBus.RabbitMQ" Version="4.0.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.1.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="5.0.*" />
+    <PackageReference Include="Microsoft.Extensions.Caching.StackExchangeRedis" Version="5.0.*" />
+    <PackageReference Include="Microsoft.AspNetCore.DataProtection.StackExchangeRedis" Version="5.0.*" />
+    <PackageReference Include="Volo.Abp.AspNetCore.SignalR" Version="4.3.2" />
+    <PackageReference Include="Volo.Abp.EventBus.RabbitMQ" Version="4.3.2" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Volo.Abp.Autofac" Version="4.0.0" />
-    <PackageReference Include="Volo.Abp.AspNetCore.Mvc.Client" Version="4.0.0" />
-    <PackageReference Include="Volo.Abp.AspNetCore.Authentication.OAuth" Version="4.0.0" />
-    <PackageReference Include="Volo.Abp.AspNetCore.Mvc.UI.Theme.Basic" Version="4.0.0" />
-    <PackageReference Include="Volo.Abp.AspNetCore.Serilog" Version="4.0.0" />
-    <PackageReference Include="Volo.Abp.Http.Client.IdentityModel.Web" Version="4.0.0" />
-    <PackageReference Include="Volo.Abp.AspNetCore.Mvc.UI.Theme.Basic" Version="4.0.0" />
-    <PackageReference Include="Volo.Abp.Identity.Web" Version="4.0.0" />
-    <PackageReference Include="Volo.Abp.TenantManagement.Web" Version="4.0.0" />
-    <PackageReference Include="Volo.Abp.FeatureManagement.Web" Version="4.0.0" />
+    <PackageReference Include="Volo.Abp.Autofac" Version="4.3.2" />
+    <PackageReference Include="Volo.Abp.AspNetCore.Mvc.Client" Version="4.3.2" />
+    <PackageReference Include="Volo.Abp.AspNetCore.Authentication.OAuth" Version="4.3.2" />
+    <PackageReference Include="Volo.Abp.AspNetCore.Mvc.UI.Theme.Basic" Version="4.3.2" />
+    <PackageReference Include="Volo.Abp.AspNetCore.Serilog" Version="4.3.2" />
+    <PackageReference Include="Volo.Abp.Http.Client.IdentityModel.Web" Version="4.3.2" />
+    <PackageReference Include="Volo.Abp.AspNetCore.Mvc.UI.Theme.Basic" Version="4.3.2" />
+    <PackageReference Include="Volo.Abp.Identity.Web" Version="4.3.2" />
+    <PackageReference Include="Volo.Abp.TenantManagement.Web" Version="4.3.2" />
+    <PackageReference Include="Volo.Abp.FeatureManagement.Web" Version="4.3.2" />
     <ProjectReference Include="..\SignalRTieredDemo.HttpApi\SignalRTieredDemo.HttpApi.csproj" />
     <ProjectReference Include="..\SignalRTieredDemo.HttpApi.Client\SignalRTieredDemo.HttpApi.Client.csproj" />
   </ItemGroup>

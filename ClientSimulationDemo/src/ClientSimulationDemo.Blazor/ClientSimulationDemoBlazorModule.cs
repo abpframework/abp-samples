@@ -7,16 +7,16 @@ using IdentityModel;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Volo.Abp;
+using Volo.Abp.AspNetCore.Components.Web.BasicTheme.Themes.Basic;
+using Volo.Abp.AspNetCore.Components.Web.Theming.Routing;
 using Volo.Abp.AspNetCore.Components.WebAssembly.BasicTheme;
-using Volo.Abp.AspNetCore.Components.WebAssembly.BasicTheme.Themes.Basic;
-using Volo.Abp.AspNetCore.Components.WebAssembly.Theming.Routing;
 using Volo.Abp.Autofac.WebAssembly;
 using Volo.Abp.Modularity;
 using Volo.Abp.UI.Navigation;
-using Volo.Abp.Identity.Blazor;
 using Volo.Abp.AutoMapper;
-using Volo.Abp.TenantManagement.Blazor;
+using Volo.Abp.Identity.Blazor.WebAssembly;
+using Volo.Abp.SettingManagement.Blazor.WebAssembly;
+using Volo.Abp.TenantManagement.Blazor.WebAssembly;
 
 namespace ClientSimulationDemo.Blazor
 {
@@ -24,8 +24,9 @@ namespace ClientSimulationDemo.Blazor
         typeof(AbpAutofacWebAssemblyModule),
         typeof(ClientSimulationDemoHttpApiClientModule),
         typeof(AbpAspNetCoreComponentsWebAssemblyBasicThemeModule),
-        typeof(AbpIdentityBlazorModule),
-        typeof(AbpTenantManagementBlazorModule)
+        typeof(AbpIdentityBlazorWebAssemblyModule),
+        typeof(AbpTenantManagementBlazorWebAssemblyModule),
+        typeof(AbpSettingManagementBlazorWebAssemblyModule)
     )]
     public class ClientSimulationDemoBlazorModule : AbpModule
     {

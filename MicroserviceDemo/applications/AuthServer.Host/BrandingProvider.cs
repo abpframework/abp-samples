@@ -1,5 +1,5 @@
-﻿using Volo.Abp.AspNetCore.Mvc.UI.Theme.Shared.Components;
-using Volo.Abp.DependencyInjection;
+﻿using Volo.Abp.DependencyInjection;
+using Volo.Abp.Ui.Branding;
 
 namespace AuthServer.Host
 {

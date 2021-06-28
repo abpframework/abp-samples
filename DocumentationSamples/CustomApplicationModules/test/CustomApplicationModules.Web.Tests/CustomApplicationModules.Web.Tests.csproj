@@ -17,7 +17,7 @@
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.6.1" />
     <ProjectReference Include="..\CustomApplicationModules.Application.Tests\CustomApplicationModules.Application.Tests.csproj" />
     <ProjectReference Include="..\..\src\CustomApplicationModules.Web\CustomApplicationModules.Web.csproj" />
-    <PackageReference Include="Volo.Abp.AspNetCore.TestBase" Version="4.0.0" />
+    <PackageReference Include="Volo.Abp.AspNetCore.TestBase" Version="4.3.2" />
   </ItemGroup>
 
   <ItemGroup>

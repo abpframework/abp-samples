@@ -2,13 +2,13 @@
 using Volo.Abp.Autofac;
 using Volo.Abp.Localization;
 using Volo.Abp.Modularity;
-using Volo.Abp.TextTemplating;
+using Volo.Abp.TextTemplating.Scriban;
 using Volo.Abp.VirtualFileSystem;
 
 namespace TextTemplateDemo
 {
     [DependsOn(
-        typeof(AbpTextTemplatingModule),
+        typeof(AbpTextTemplatingScribanModule),
         typeof(AbpLocalizationModule),
         typeof(AbpAutofacModule)
     )]

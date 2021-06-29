@@ -3,7 +3,6 @@ using TextTemplateDemo.Localization;
 using Volo.Abp.Autofac;
 using Volo.Abp.Localization;
 using Volo.Abp.Modularity;
-using Volo.Abp.TextTemplating;
 using Volo.Abp.TextTemplating.Razor;
 using Volo.Abp.VirtualFileSystem;
 
@@ -32,7 +31,7 @@ namespace TextTemplateDemo
                 options.DefaultResourceType = typeof(DemoResource);
             });
 
-            Configure<CSharpCompilerOptions>(options =>
+            Configure<AbpRazorTemplateCSharpCompilerOptions>(options =>
             {
                 options.References.Add(MetadataReference.CreateFromFile(typeof(TextTemplateDemoModule).Assembly.Location));
             });

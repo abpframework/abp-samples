@@ -11,11 +11,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="D:/Github/volo/abp/framework/src/Volo.Abp.TextTemplating.Razor/Volo.Abp.TextTemplating.Razor.csproj" />
-    <ProjectReference Include="D:/Github/volo/abp/framework/src/Volo.Abp.TextTemplating.Razor/Volo.Abp.TextTemplating.Razor.csproj" />
-    <ProjectReference Include="D:/Github/volo/abp/framework/src/Volo.Abp.TextTemplating.Razor/Volo.Abp.TextTemplating.Razor.csproj" />
-    <ProjectReference Include="D:/Github/volo/abp/framework/src/Volo.Abp.Autofac/Volo.Abp.Autofac.csproj" />
-    <ProjectReference Include="D:/Github/volo/abp/framework/src/Volo.Abp.Localization/Volo.Abp.Localization.csproj" />
+    <PackageReference Include="Volo.Abp.Autofac" Version="4.4.0-rc.1" />
+    <PackageReference Include="Volo.Abp.TextTemplating.Razor" Version="4.4.0-rc.1" />
+    <PackageReference Include="Volo.Abp.Localization" Version="4.4.0-rc.1" />
   </ItemGroup>
 
 </Project>

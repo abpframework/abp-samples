@@ -1,8 +1,8 @@
-FROM mcr.microsoft.com/dotnet/core/aspnet:3.1-buster-slim AS base
+FROM mcr.microsoft.com/dotnet/aspnet:5.0 AS base
 WORKDIR /app
 EXPOSE 80
 
-FROM mcr.microsoft.com/dotnet/core/sdk:3.1-buster AS build
+FROM mcr.microsoft.com/dotnet/sdk:5.0 AS build
 WORKDIR /src
 COPY ["applications/PublicWebSite.Host/PublicWebSite.Host.csproj", "applications/PublicWebSite.Host/"]
 COPY ["modules/product/src/ProductManagement.HttpApi.Client/ProductManagement.HttpApi.Client.csproj", "modules/product/src/ProductManagement.HttpApi.Client/"]

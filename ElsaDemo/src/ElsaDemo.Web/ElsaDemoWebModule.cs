@@ -40,6 +40,8 @@ using Volo.Abp.Autofac;
 using Volo.Abp.AutoMapper;
 using Volo.Abp.FeatureManagement;
 using Volo.Abp.Identity.Web;
+using Volo.Abp.Json;
+using Volo.Abp.Json.SystemTextJson;
 using Volo.Abp.Localization;
 using Volo.Abp.Modularity;
 using Volo.Abp.PermissionManagement.Web;
@@ -72,6 +74,11 @@ namespace ElsaDemo.Web
     {
         public override void PreConfigureServices(ServiceConfigurationContext context)
         {
+            PreConfigure<AbpJsonOptions>(options =>
+            {
+                options.UseHybridSerializer = false;
+            });
+
             PreConfigure<IMvcBuilder>(mvcBuilder =>
             {
                 //https://github.com/abpframework/abp/pull/9299

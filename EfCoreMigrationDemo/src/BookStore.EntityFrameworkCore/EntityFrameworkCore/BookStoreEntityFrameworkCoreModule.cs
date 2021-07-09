@@ -41,6 +41,8 @@ namespace BookStore.EntityFrameworkCore
                 options.AddDefaultRepositories(includeAllEntities: true);
             });
 
+            context.Services.AddAbpDbContext<BookStoreSecondDbContext>();
+
             Configure<AbpDbContextOptions>(options =>
             {
                 /* The main point to change your DBMS.

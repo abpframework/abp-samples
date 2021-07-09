@@ -30,6 +30,11 @@ namespace BookStore.EntityFrameworkCore
                 .GetRequiredService<BookStoreDbContext>()
                 .Database
                 .MigrateAsync();
+
+            await _serviceProvider
+                .GetRequiredService<BookStoreSecondDbContext>()
+                .Database
+                .MigrateAsync();
         }
     }
 }

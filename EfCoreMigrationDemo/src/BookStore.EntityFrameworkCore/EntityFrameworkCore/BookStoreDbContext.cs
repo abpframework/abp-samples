@@ -64,10 +64,7 @@ namespace BookStore.EntityFrameworkCore
 
             /* Include modules to your migration db context */
 
-            builder.ConfigurePermissionManagement();
-            builder.ConfigureSettingManagement();
             builder.ConfigureBackgroundJobs();
-            builder.ConfigureAuditLogging();
             builder.ConfigureIdentity();
             builder.ConfigureIdentityServer();
             builder.ConfigureFeatureManagement();
@@ -75,12 +72,12 @@ namespace BookStore.EntityFrameworkCore
 
             /* Configure your own tables/entities inside here */
 
-        //builder.Entity<YourEntity>(b =>
-        //{
-        //    b.ToTable(BookStoreConsts.DbTablePrefix + "YourEntities", BookStoreConsts.DbSchema);
-        //    b.ConfigureByConvention(); //auto configure for the base class props
-        //    //...
-        //});
+            //builder.Entity<YourEntity>(b =>
+            //{
+            //    b.ToTable(BookStoreConsts.DbTablePrefix + "YourEntities", BookStoreConsts.DbSchema);
+            //    b.ConfigureByConvention(); //auto configure for the base class props
+            //    //...
+            //});
         }
     }
 }

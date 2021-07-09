@@ -56,6 +56,15 @@ namespace BookStore.EntityFrameworkCore
                 context.GetService<IRelationalDatabaseCreator>().CreateTables();
             }
 
+            var optionsForSecondDb = new DbContextOptionsBuilder<BookStoreSecondDbContext>()
+                .UseSqlite(connection)
+                .Options;
+
+            using (var context = new BookStoreSecondDbContext(optionsForSecondDb))
+            {
+                context.GetService<IRelationalDatabaseCreator>().CreateTables();
+            }
+
             return connection;
         }
     }

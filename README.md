@@ -6,7 +6,7 @@ Sample solutions built with the ABP Framework.
 
 ### Issues
 
-* Please create issues to the main repository: https://github.com/abpframework/abp
+Please create issues to the main repository: https://github.com/abpframework/abp
 
 ### Pull Requests
 

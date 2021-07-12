@@ -1,7 +1,6 @@
 ﻿using Acme.BookStore.Authors;
 using Acme.BookStore.Books;
 using Microsoft.EntityFrameworkCore;
-using Acme.BookStore.Users;
 using Volo.Abp.AuditLogging.EntityFrameworkCore;
 using Volo.Abp.BackgroundJobs.EntityFrameworkCore;
 using Volo.Abp.Data;
@@ -16,7 +15,6 @@ using Volo.Abp.PermissionManagement.EntityFrameworkCore;
 using Volo.Abp.SettingManagement.EntityFrameworkCore;
 using Volo.Abp.TenantManagement;
 using Volo.Abp.TenantManagement.EntityFrameworkCore;
-using Volo.Abp.Users.EntityFrameworkCore;
 
 namespace Acme.BookStore.EntityFrameworkCore
 {

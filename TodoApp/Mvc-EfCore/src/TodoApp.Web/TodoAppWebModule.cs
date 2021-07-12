@@ -42,7 +42,7 @@ namespace TodoApp.Web
     [DependsOn(
         typeof(TodoAppHttpApiModule),
         typeof(TodoAppApplicationModule),
-        typeof(TodoAppEntityFrameworkCoreDbMigrationsModule),
+        typeof(TodoAppEntityFrameworkCoreModule),
         typeof(AbpAutofacModule),
         typeof(AbpIdentityWebModule),
         typeof(AbpAccountWebIdentityServerModule),

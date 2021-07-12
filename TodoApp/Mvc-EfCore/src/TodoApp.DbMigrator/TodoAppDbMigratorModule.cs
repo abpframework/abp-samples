@@ -7,7 +7,7 @@ namespace TodoApp.DbMigrator
 {
     [DependsOn(
         typeof(AbpAutofacModule),
-        typeof(TodoAppEntityFrameworkCoreDbMigrationsModule),
+        typeof(TodoAppEntityFrameworkCoreModule),
         typeof(TodoAppApplicationContractsModule)
         )]
     public class TodoAppDbMigratorModule : AbpModule

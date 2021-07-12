@@ -11,7 +11,7 @@ using Volo.Abp.Modularity;
 namespace Acme.BookStore.EntityFrameworkCore
 {
     [DependsOn(
-        typeof(BookStoreEntityFrameworkCoreDbMigrationsModule),
+        typeof(BookStoreEntityFrameworkCoreModule),
         typeof(BookStoreTestBaseModule),
         typeof(AbpEntityFrameworkCoreSqliteModule)
         )]
@@ -47,11 +47,11 @@ namespace Acme.BookStore.EntityFrameworkCore
             var connection = new SqliteConnection("Data Source=:memory:");
             connection.Open();
 
-            var options = new DbContextOptionsBuilder<BookStoreMigrationsDbContext>()
+            var options = new DbContextOptionsBuilder<BookStoreDbContext>()
                 .UseSqlite(connection)
                 .Options;
 
-            using (var context = new BookStoreMigrationsDbContext(options))
+            using (var context = new BookStoreDbContext(options))
             {
                 context.GetService<IRelationalDatabaseCreator>().CreateTables();
             }

@@ -35,7 +35,7 @@ namespace Acme.BookStore
         typeof(AbpAutofacModule),
         typeof(AbpAspNetCoreMultiTenancyModule),
         typeof(BookStoreApplicationModule),
-        typeof(BookStoreEntityFrameworkCoreDbMigrationsModule),
+        typeof(BookStoreEntityFrameworkCoreModule),
         typeof(AbpAspNetCoreMvcUiBasicThemeModule),
         typeof(AbpAspNetCoreAuthenticationJwtBearerModule),
         typeof(AbpAccountWebIdentityServerModule),

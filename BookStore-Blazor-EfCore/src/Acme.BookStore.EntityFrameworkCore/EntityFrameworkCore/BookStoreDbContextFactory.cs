@@ -6,19 +6,19 @@ using Microsoft.Extensions.Configuration;
 namespace Acme.BookStore.EntityFrameworkCore
 {
     /* This class is needed for EF Core console commands
-     * (like Add-Migration and Update-Database commands) */
-    public class BookStoreMigrationsDbContextFactory : IDesignTimeDbContextFactory<BookStoreMigrationsDbContext>
+    * (like Add-Migration and Update-Database commands) */
+    public class MyProjectNameDbContextFactory : IDesignTimeDbContextFactory<BookStoreDbContext>
     {
-        public BookStoreMigrationsDbContext CreateDbContext(string[] args)
+        public BookStoreDbContext CreateDbContext(string[] args)
         {
             BookStoreEfCoreEntityExtensionMappings.Configure();
 
             var configuration = BuildConfiguration();
 
-            var builder = new DbContextOptionsBuilder<BookStoreMigrationsDbContext>()
+            var builder = new DbContextOptionsBuilder<BookStoreDbContext>()
                 .UseSqlServer(configuration.GetConnectionString("Default"));
 
-            return new BookStoreMigrationsDbContext(builder.Options);
+            return new BookStoreDbContext(builder.Options);
         }
 
         private static IConfigurationRoot BuildConfiguration()

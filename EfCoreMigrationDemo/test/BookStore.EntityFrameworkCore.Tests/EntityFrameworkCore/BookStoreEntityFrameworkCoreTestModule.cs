@@ -7,6 +7,7 @@ using Volo.Abp;
 using Volo.Abp.EntityFrameworkCore;
 using Volo.Abp.EntityFrameworkCore.Sqlite;
 using Volo.Abp.Modularity;
+using Volo.Abp.Uow;
 
 namespace BookStore.EntityFrameworkCore
 {
@@ -22,6 +23,11 @@ namespace BookStore.EntityFrameworkCore
         public override void ConfigureServices(ServiceConfigurationContext context)
         {
             ConfigureInMemorySqlite(context.Services);
+
+            Configure<AbpUnitOfWorkDefaultOptions>(options =>
+            {
+                options.TransactionBehavior = UnitOfWorkTransactionBehavior.Disabled;
+            });
         }
 
         private void ConfigureInMemorySqlite(IServiceCollection services)

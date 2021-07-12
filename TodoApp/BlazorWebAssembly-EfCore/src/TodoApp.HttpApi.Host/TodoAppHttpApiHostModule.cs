@@ -36,7 +36,7 @@ namespace TodoApp
         typeof(AbpAutofacModule),
         typeof(AbpAspNetCoreMultiTenancyModule),
         typeof(TodoAppApplicationModule),
-        typeof(TodoAppEntityFrameworkCoreDbMigrationsModule),
+        typeof(TodoAppEntityFrameworkCoreModule),
         typeof(AbpAspNetCoreMvcUiBasicThemeModule),
         typeof(AbpAspNetCoreAuthenticationJwtBearerModule),
         typeof(AbpAccountWebIdentityServerModule),

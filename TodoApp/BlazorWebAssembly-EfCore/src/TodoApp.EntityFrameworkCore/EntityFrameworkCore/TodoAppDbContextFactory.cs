@@ -6,19 +6,19 @@ using Microsoft.Extensions.Configuration;
 namespace TodoApp.EntityFrameworkCore
 {
     /* This class is needed for EF Core console commands
-     * (like Add-Migration and Update-Database commands) */
-    public class TodoAppMigrationsDbContextFactory : IDesignTimeDbContextFactory<TodoAppMigrationsDbContext>
+    * (like Add-Migration and Update-Database commands) */
+    public class TodoAppDbContextFactory : IDesignTimeDbContextFactory<TodoAppDbContext>
     {
-        public TodoAppMigrationsDbContext CreateDbContext(string[] args)
+        public TodoAppDbContext CreateDbContext(string[] args)
         {
             TodoAppEfCoreEntityExtensionMappings.Configure();
 
             var configuration = BuildConfiguration();
 
-            var builder = new DbContextOptionsBuilder<TodoAppMigrationsDbContext>()
+            var builder = new DbContextOptionsBuilder<TodoAppDbContext>()
                 .UseSqlServer(configuration.GetConnectionString("Default"));
 
-            return new TodoAppMigrationsDbContext(builder.Options);
+            return new TodoAppDbContext(builder.Options);
         }
 
         private static IConfigurationRoot BuildConfiguration()

@@ -44,7 +44,7 @@ namespace Acme.BookStore.EntityFrameworkCore
             Configure<AbpDbContextOptions>(options =>
             {
                 /* The main point to change your DBMS.
-                 * See also BookStoreMigrationsDbContextFactory for EF Core tooling. */
+                 * See also BookStoreDbContextFactory for EF Core tooling. */
                 options.UseSqlServer();
             });
         }

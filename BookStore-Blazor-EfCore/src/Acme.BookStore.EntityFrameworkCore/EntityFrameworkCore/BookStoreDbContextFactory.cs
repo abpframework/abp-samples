@@ -7,7 +7,7 @@ namespace Acme.BookStore.EntityFrameworkCore
 {
     /* This class is needed for EF Core console commands
     * (like Add-Migration and Update-Database commands) */
-    public class MyProjectNameDbContextFactory : IDesignTimeDbContextFactory<BookStoreDbContext>
+    public class BookStoreDbContextFactory : IDesignTimeDbContextFactory<BookStoreDbContext>
     {
         public BookStoreDbContext CreateDbContext(string[] args)
         {

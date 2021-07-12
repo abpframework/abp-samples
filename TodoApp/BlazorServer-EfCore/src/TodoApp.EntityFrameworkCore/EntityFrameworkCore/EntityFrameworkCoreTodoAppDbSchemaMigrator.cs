@@ -20,14 +20,14 @@ namespace TodoApp.EntityFrameworkCore
 
         public async Task MigrateAsync()
         {
-            /* We intentionally resolving the TodoAppMigrationsDbContext
+            /* We intentionally resolving the BookStoreDbContext
              * from IServiceProvider (instead of directly injecting it)
              * to properly get the connection string of the current tenant in the
              * current scope.
              */
 
             await _serviceProvider
-                .GetRequiredService<TodoAppMigrationsDbContext>()
+                .GetRequiredService<TodoAppDbContext>()
                 .Database
                 .MigrateAsync();
         }

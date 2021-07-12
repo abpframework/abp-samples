@@ -11,7 +11,7 @@ using Volo.Abp.Modularity;
 namespace TodoApp.EntityFrameworkCore
 {
     [DependsOn(
-        typeof(TodoAppEntityFrameworkCoreDbMigrationsModule),
+        typeof(TodoAppEntityFrameworkCoreModule),
         typeof(TodoAppTestBaseModule),
         typeof(AbpEntityFrameworkCoreSqliteModule)
         )]
@@ -47,11 +47,11 @@ namespace TodoApp.EntityFrameworkCore
             var connection = new SqliteConnection("Data Source=:memory:");
             connection.Open();
 
-            var options = new DbContextOptionsBuilder<TodoAppMigrationsDbContext>()
+            var options = new DbContextOptionsBuilder<TodoAppDbContext>()
                 .UseSqlite(connection)
                 .Options;
 
-            using (var context = new TodoAppMigrationsDbContext(options))
+            using (var context = new TodoAppDbContext(options))
             {
                 context.GetService<IRelationalDatabaseCreator>().CreateTables();
             }

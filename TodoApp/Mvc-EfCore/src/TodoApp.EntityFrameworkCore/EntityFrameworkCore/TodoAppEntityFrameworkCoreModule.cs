@@ -44,7 +44,7 @@ namespace TodoApp.EntityFrameworkCore
             Configure<AbpDbContextOptions>(options =>
             {
                 /* The main point to change your DBMS.
-                 * See also TodoAppMigrationsDbContextFactory for EF Core tooling. */
+                 * See also TodoAppDbContextFactory for EF Core tooling. */
                 options.UseSqlServer();
             });
         }

@@ -44,7 +44,7 @@ namespace Acme.BookStore.Web
     [DependsOn(
         typeof(BookStoreHttpApiModule),
         typeof(BookStoreApplicationModule),
-        typeof(BookStoreEntityFrameworkCoreDbMigrationsModule),
+        typeof(BookStoreEntityFrameworkCoreModule),
         typeof(AbpAutofacModule),
         typeof(AbpIdentityWebModule),
         typeof(AbpAccountWebIdentityServerModule),

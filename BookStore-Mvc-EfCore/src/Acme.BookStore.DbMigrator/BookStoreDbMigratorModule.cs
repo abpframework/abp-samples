@@ -7,7 +7,7 @@ namespace Acme.BookStore.DbMigrator
 {
     [DependsOn(
         typeof(AbpAutofacModule),
-        typeof(BookStoreEntityFrameworkCoreDbMigrationsModule),
+        typeof(BookStoreEntityFrameworkCoreModule),
         typeof(BookStoreApplicationContractsModule)
         )]
     public class BookStoreDbMigratorModule : AbpModule

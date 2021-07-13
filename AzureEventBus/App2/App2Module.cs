@@ -22,7 +22,7 @@ namespace App2
 
             Configure<AbpAzureServiceBusOptions>(options =>
             {
-                options.Connections.Default.ConnectionString = "Endpoint=sb://testabp.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=koFvICQA43KZ0yLfPHg0yPujh47GhJZ9fLIfm/7ePqw=";
+                options.Connections.Default.ConnectionString = "<azure servies bus connection string>";
             });
         }
     }

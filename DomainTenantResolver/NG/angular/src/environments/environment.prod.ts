@@ -1,6 +1,6 @@
 import { Environment } from '@abp/ng.core';
 
-const baseUrl = 'http://localhost:4200';
+const baseUrl = 'https://{0}.ng.getabp.net:4200';
 
 export const environment = {
   production: true,
@@ -10,15 +10,16 @@ export const environment = {
     logoUrl: '',
   },
   oAuthConfig: {
-    issuer: 'https://localhost:44365',
+    issuer: 'https://{0}.api.getabp.net:44301',
     redirectUri: baseUrl,
     clientId: 'BookStore_App',
+    skipIssuerCheck: true,
     responseType: 'code',
-    scope: 'offline_access BookStore',
+    scope: 'offline_access openid profile role email phone BookStore',
   },
   apis: {
     default: {
-      url: 'https://localhost:44365',
+      url: 'https://{0}.api.getabp.net:44301',
       rootNamespace: 'BookStore',
     },
   },

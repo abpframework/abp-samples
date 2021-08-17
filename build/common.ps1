@@ -39,5 +39,6 @@ $solutionPaths = (
     "../ExcelIO",
     "../EmailSendDemo",
 	"../IdentityServerReferenceToken/aspnet-core",
-	"../SignInWithoutSpecifyingTenant"
+	"../SignInWithoutSpecifyingTenant",
+	"../FileActionsDemo"
 )

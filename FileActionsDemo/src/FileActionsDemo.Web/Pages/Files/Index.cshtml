@@ -1,0 +1,41 @@
+﻿@page
+
+@model FileActionsDemo.Web.Pages.Files.Index
+
+@section scripts{
+    <abp-script src="/Pages/Files/index.js"/>
+}
+
+
+<abp-card>
+    <abp-card-header>
+        <h3>File Upload and Download</h3>
+    </abp-card-header>
+    <abp-card-body>
+        <abp-row>
+            <abp-column>
+                <h3>Upload File</h3>
+                <hr/>
+                <form method="post" enctype="multipart/form-data" id="UploadFileForm">
+                    <abp-input asp-for="UploadFileDto.Name"></abp-input>
+
+                    <abp-input asp-for="UploadFileDto.File"></abp-input>
+
+                    <input type="submit" class="btn btn-info" id="UploadFileInput"/>
+                </form>
+            </abp-column>
+
+            <abp-column style="border-left: 1px dotted gray">
+                <h3>Download File</h3>
+                <hr/>
+                <form id="DownloadFile">
+                    <div class="form-group">
+                        <label for="fileName">Filename</label><span> * </span>
+                        <input type="text" id="fileName" required name="fileName" class="form-control ">
+                    </div>
+                    <input type="submit" class="btn btn-info"/>
+                </form>
+            </abp-column>
+        </abp-row>
+    </abp-card-body>
+</abp-card>

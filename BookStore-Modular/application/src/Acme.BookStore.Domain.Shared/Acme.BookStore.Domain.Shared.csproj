@@ -8,10 +8,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\modules\book-management\src\Acme.BookStore.BookManagement.Domain.Shared\Acme.BookStore.BookManagement.Domain.Shared.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Volo.Abp.Identity.Domain.Shared" Version="4.3.2" />
     <PackageReference Include="Volo.Abp.IdentityServer.Domain.Shared" Version="4.3.2" />
     <PackageReference Include="Volo.Abp.BackgroundJobs.Domain.Shared" Version="4.3.2" />

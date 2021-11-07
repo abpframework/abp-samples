@@ -1,5 +1,4 @@
-﻿using Acme.BookStore.BookManagement.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Volo.Abp.AuditLogging.EntityFrameworkCore;
 using Volo.Abp.BackgroundJobs.EntityFrameworkCore;
 using Volo.Abp.EntityFrameworkCore;
@@ -40,7 +39,6 @@ namespace Acme.BookStore.EntityFrameworkCore
             builder.ConfigureIdentityServer();
             builder.ConfigureFeatureManagement();
             builder.ConfigureTenantManagement();
-            builder.ConfigureBookManagement();
 
             /* Configure your own tables/entities inside the ConfigureBookStore method */
 

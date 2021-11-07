@@ -9,7 +9,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Acme.BookStore.Application.Contracts\Acme.BookStore.Application.Contracts.csproj" />
-    <ProjectReference Include="..\..\..\modules\book-management\src\Acme.BookStore.BookManagement.HttpApi\Acme.BookStore.BookManagement.HttpApi.csproj" />
   </ItemGroup>
 
   <ItemGroup>

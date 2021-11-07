@@ -51,7 +51,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\modules\book-management\src\Acme.BookStore.BookManagement.Web\Acme.BookStore.BookManagement.Web.csproj" />
     <ProjectReference Include="..\Acme.BookStore.Application\Acme.BookStore.Application.csproj" />
     <ProjectReference Include="..\Acme.BookStore.HttpApi\Acme.BookStore.HttpApi.csproj" />
     <ProjectReference Include="..\Acme.BookStore.EntityFrameworkCore.DbMigrations\Acme.BookStore.EntityFrameworkCore.DbMigrations.csproj" />

@@ -1,5 +1,4 @@
-﻿using Acme.BookStore.BookManagement;
-using Volo.Abp.Account;
+﻿using Volo.Abp.Account;
 using Volo.Abp.AutoMapper;
 using Volo.Abp.FeatureManagement;
 using Volo.Abp.Identity;
@@ -16,8 +15,7 @@ namespace Acme.BookStore
         typeof(AbpIdentityApplicationModule),
         typeof(AbpPermissionManagementApplicationModule),
         typeof(AbpTenantManagementApplicationModule),
-        typeof(AbpFeatureManagementApplicationModule),
-        typeof(BookManagementApplicationModule)
+        typeof(AbpFeatureManagementApplicationModule)
         )]
     public class BookStoreApplicationModule : AbpModule
     {

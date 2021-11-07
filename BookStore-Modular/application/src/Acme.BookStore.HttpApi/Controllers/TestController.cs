@@ -16,7 +16,7 @@ namespace Acme.BookStore.Controllers
 
         [HttpGet]
         [Route("")]
-        public async Task<List<TestModel>> GetAsync()
+        public List<TestModel> GetAsync()
         {
             return new List<TestModel>
             {

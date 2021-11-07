@@ -1,5 +1,4 @@
-﻿using Acme.BookStore.BookManagement;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 using Volo.Abp.Account;
 using Volo.Abp.FeatureManagement;
 using Volo.Abp.Identity;
@@ -15,8 +14,7 @@ namespace Acme.BookStore
         typeof(AbpIdentityHttpApiClientModule),
         typeof(AbpPermissionManagementHttpApiClientModule),
         typeof(AbpTenantManagementHttpApiClientModule),
-        typeof(AbpFeatureManagementHttpApiClientModule),
-        typeof(BookManagementHttpApiClientModule)
+        typeof(AbpFeatureManagementHttpApiClientModule)
     )]
     public class BookStoreHttpApiClientModule : AbpModule
     {

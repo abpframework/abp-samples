@@ -18,7 +18,7 @@ SQL API of Cosmos DB isn't mature enough to handle queries of existing modules o
 
 ## Setting up Development Environment
 
-There a Cosmos DB Emulator for development purposes. It's easy to setup for development.
+There is a Cosmos DB Emulator for development purposes. It's easy to setup for development.
 
 
 

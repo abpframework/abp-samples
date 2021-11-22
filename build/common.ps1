@@ -36,6 +36,7 @@ $solutionPaths = (
     "../TextTemplateDemo/Razor",
     "../TextTemplateDemo/Scriban",
     "../AbpLdapSample",
+    "../MiniProfiler",
     "../ExcelIO",
     "../EmailSendDemo",
 	"../IdentityServerReferenceToken/aspnet-core",

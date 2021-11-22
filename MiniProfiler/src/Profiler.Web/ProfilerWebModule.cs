@@ -230,7 +230,6 @@ namespace Profiler.Web
             }
 
             app.UseMiniProfiler();
-            
             app.UseCorrelationId();
             app.UseStaticFiles();
             app.UseRouting();

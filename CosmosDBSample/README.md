@@ -71,7 +71,13 @@ mongodb://localhost:C2y6yDjf5%2FR%2Bob0N8A7Cgv30VRDJIWEHLM%2B4QDU5DE2nQ9nDuVTqob
 
 ### 3- Configure & Run Migrations
 
-Some more changes are required before running migrations. 
+Some more changes are required before running migrations. Firstly, creating collection isn't same with MongoDB. So, if you try to call collection creation method from MongoDB Driver or MongoDB Shell you'll get following response from Cosmos DB.
+
+```shell
+ MongoDB.Driver.MongoCommandException: Command create failed: Sorry, we are currently experiencing high demand in this region, and cannot fulfill your request at this time. We work continuously to bring more and more capacity online...
+```
+
+We can't use pre-created collections (containers) with Cosmos DB. So you need to remove migrating scheme for DbMigrator.
 
 - Go `BookStoreDbMigrationService.cs` file under **Acme.BookStore.Domain/Data** folder nd remove `MigrateDatabaseSchemaAsync`:
 

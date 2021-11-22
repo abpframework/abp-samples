@@ -6,7 +6,7 @@ There is a couple of ways to use Cosmos DB in C#. Cosmos DB has an SQL API and M
 
 ## Why to use MongoDB Driver?
 
-Cosmos DB already has its own SDK to perform database operations. But in this case, existing modules of ABP won't work on Cosmos DB, only your newly created project tables will use Cosmos DB. So, to run existing modules on Cosmos, choosing MongoDB Driver is the best choice right now.
+Cosmos DB already has its own SDK to perform database operations. But in this case, existing modules of ABP won't work on Cosmos DB, only your newly created project entities will use Cosmos DB. So, to run existing modules on Cosmos, choosing MongoDB Driver is the best choice right now.
 
 
 

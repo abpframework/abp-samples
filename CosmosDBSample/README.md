@@ -76,7 +76,7 @@ Some more changes are required before running migrations. Firstly, creating coll
 
 We can't use pre-created collections (containers) with Cosmos DB. So you need to remove migrating scheme for DbMigrator.
 
-- Go `BookStoreDbMigrationService.cs` file under **Acme.BookStore.Domain/Data** folder nd remove `MigrateDatabaseSchemaAsync`:
+- Go `BookStoreDbMigrationService.cs` file under **Acme.BookStore.Domain/Data** folder and remove MigrateDatabaseSchemaAsync method and its usages:
 
 ```csharp
 public async Task MigrateAsync()
@@ -102,7 +102,7 @@ public async Task MigrateAsync()
                     .ToList();
                     
 				// Remove following section
-                // if (!migratedDatabaseSchemas.IsSupersetOf(tenantConnectionStrings))
+				// if (!migratedDatabaseSchemas.IsSupersetOf(tenantConnectionStrings))
                 // {
                 //	  await MigrateDatabaseSchemaAsync(tenant);
                 //

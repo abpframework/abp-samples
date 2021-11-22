@@ -24,7 +24,7 @@ There a Cosmos DB Emulator for development purposes. It's easy to setup for deve
 
 You can follow those instructions to set up Cosmos DB for MongoDB Driver:
 
-​	[Install and develop locally with Azure Cosmos DB Emulator | Microsoft Docs]([Install and develop locally with Azure Cosmos DB Emulator | Microsoft Docs](https://docs.microsoft.com/en-us/azure/cosmos-db/local-emulator?tabs=ssl-netstd21#download-the-emulator))
+- [Install and develop locally with Azure Cosmos DB Emulator | Microsoft Docs](https://docs.microsoft.com/en-us/azure/cosmos-db/local-emulator?tabs=ssl-netstd21#download-the-emulator)
 
 > **Notice:** Do not forget to start emulator with `/EnableMongoDbEndpoint` parameter from CLI. The example is presented [here](https://docs.microsoft.com/en-us/azure/cosmos-db/local-emulator?tabs=ssl-netstd21#azure-cosmos-dbs-api-for-mongodb).
 

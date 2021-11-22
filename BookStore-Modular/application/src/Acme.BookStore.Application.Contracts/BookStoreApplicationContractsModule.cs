@@ -1,4 +1,5 @@
-﻿using Volo.Abp.Account;
+﻿using Acme.BookStore.BookManagement;
+using Volo.Abp.Account;
 using Volo.Abp.FeatureManagement;
 using Volo.Abp.Identity;
 using Volo.Abp.Modularity;
@@ -13,7 +14,8 @@ namespace Acme.BookStore
         typeof(AbpFeatureManagementApplicationContractsModule),
         typeof(AbpIdentityApplicationContractsModule),
         typeof(AbpPermissionManagementApplicationContractsModule),
-        typeof(AbpTenantManagementApplicationContractsModule)
+        typeof(AbpTenantManagementApplicationContractsModule),
+        typeof(BookManagementApplicationContractsModule)
     )]
     public class BookStoreApplicationContractsModule : AbpModule
     {

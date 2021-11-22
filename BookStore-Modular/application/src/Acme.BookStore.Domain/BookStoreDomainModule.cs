@@ -1,4 +1,5 @@
-﻿using Acme.BookStore.MultiTenancy;
+﻿using Acme.BookStore.BookManagement;
+using Acme.BookStore.MultiTenancy;
 using Volo.Abp.AuditLogging;
 using Volo.Abp.BackgroundJobs;
 using Volo.Abp.FeatureManagement;
@@ -23,7 +24,8 @@ namespace Acme.BookStore
         typeof(AbpIdentityServerDomainModule),
         typeof(AbpPermissionManagementDomainIdentityServerModule),
         typeof(AbpSettingManagementDomainModule),
-        typeof(AbpTenantManagementDomainModule)
+        typeof(AbpTenantManagementDomainModule),
+        typeof(BookManagementDomainModule)
         )]
     public class BookStoreDomainModule : AbpModule
     {

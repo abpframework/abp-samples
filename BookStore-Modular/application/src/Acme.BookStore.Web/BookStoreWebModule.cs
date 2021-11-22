@@ -1,4 +1,6 @@
 ﻿using System.IO;
+using Acme.BookStore.BookManagement;
+using Acme.BookStore.BookManagement.Web;
 using Localization.Resources.AbpUi;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -45,7 +47,8 @@ namespace Acme.BookStore.Web
         typeof(AbpAccountWebIdentityServerModule),
         typeof(AbpAspNetCoreMvcUiBasicThemeModule),
         typeof(AbpAspNetCoreAuthenticationJwtBearerModule),
-        typeof(AbpTenantManagementWebModule)
+        typeof(AbpTenantManagementWebModule),
+        typeof(BookManagementWebModule)
         )]
     public class BookStoreWebModule : AbpModule
     {
@@ -113,6 +116,7 @@ namespace Acme.BookStore.Web
             {
                 Configure<AbpVirtualFileSystemOptions>(options =>
                 {
+                    options.FileSets.ReplaceEmbeddedByPhysical<BookManagementWebModule>(Path.Combine(hostingEnvironment.ContentRootPath, $"..{Path.DirectorySeparatorChar}..{Path.DirectorySeparatorChar}..{Path.DirectorySeparatorChar}modules{Path.DirectorySeparatorChar}book-management{Path.DirectorySeparatorChar}src{Path.DirectorySeparatorChar}Acme.BookStore.BookManagement.Web"));
                     options.FileSets.ReplaceEmbeddedByPhysical<BookStoreDomainSharedModule>(Path.Combine(hostingEnvironment.ContentRootPath, $"..{Path.DirectorySeparatorChar}Acme.BookStore.Domain.Shared"));
                     options.FileSets.ReplaceEmbeddedByPhysical<BookStoreDomainModule>(Path.Combine(hostingEnvironment.ContentRootPath, $"..{Path.DirectorySeparatorChar}Acme.BookStore.Domain"));
                     options.FileSets.ReplaceEmbeddedByPhysical<BookStoreApplicationContractsModule>(Path.Combine(hostingEnvironment.ContentRootPath, $"..{Path.DirectorySeparatorChar}Acme.BookStore.Application.Contracts"));
@@ -152,6 +156,9 @@ namespace Acme.BookStore.Web
         {
             Configure<AbpAspNetCoreMvcOptions>(options =>
             {
+                options.ConventionalControllers
+                    .Create(typeof(BookManagementApplicationModule).Assembly);
+
                 options.ConventionalControllers
                     .Create(typeof(BookStoreApplicationModule).Assembly);
             });

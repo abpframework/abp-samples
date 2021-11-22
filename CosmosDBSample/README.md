@@ -4,7 +4,15 @@ There is a couple of ways to use Cosmos DB in C#. Cosmos DB has an SQL API and M
 
 
 
+## Why to use MongoDB Driver?
 
+Cosmos DB already has its own SDK to perform database operations. But in this case, existing modules of ABP won't work on Cosmos DB, only your newly created project tables will use Cosmos DB. So, to run existing modules on Cosmos, choosing MongoDB Driver is the best choice right now.
+
+
+
+### Why not to use Entity Framework Provider of Cosmos DB?
+
+SQL API of Cosmos DB isn't mature enough to handle queries of existing modules of ABP. Some operations in modules may not work. As you know Cosmos is a document based database and fits well to mongo driver. 
 
 
 
@@ -63,7 +71,7 @@ mongodb://localhost:C2y6yDjf5%2FR%2Bob0N8A7Cgv30VRDJIWEHLM%2B4QDU5DE2nQ9nDuVTqob
 
 ### 3- Configure & Run Migrations
 
-Some more changes are required before running migrations. Creating a scheme isn't required anymore.
+Some more changes are required before running migrations. 
 
 - Go `BookStoreDbMigrationService.cs` file under **Acme.BookStore.Domain/Data** folder nd remove `MigrateDatabaseSchemaAsync`:
 

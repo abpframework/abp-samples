@@ -14,7 +14,7 @@ Cosmos DB already has its own SDK to perform database operations. But in this ca
 
 SQL API of Cosmos DB isn't mature enough to handle queries of existing modules of ABP. Some operations in modules may not work. As you know Cosmos is a document based database and fits well to mongo driver. 
 
-
+---
 
 ## Setting up Development Environment
 

@@ -1,4 +1,5 @@
-﻿using Acme.BookStore.BookManagement.Books;
+﻿using Acme.BookStore.BookManagement.Authors;
+using Acme.BookStore.BookManagement.Books;
 using AutoMapper;
 
 namespace Acme.BookStore.BookManagement
@@ -8,7 +9,12 @@ namespace Acme.BookStore.BookManagement
         public BookManagementApplicationAutoMapperProfile()
         {
             CreateMap<Book, BookDto>();
+            
             CreateMap<CreateUpdateBookDto, Book>(MemberList.Source);
+            
+            CreateMap<Author, AuthorDto>();
+            
+            CreateMap<Author, AuthorLookupDto>();
         }
     }
 }

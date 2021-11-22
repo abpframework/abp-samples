@@ -1,0 +1,36 @@
+﻿@page
+@using Acme.BookStore.BookManagement.Localization
+@using Acme.BookStore.BookManagement.Permissions
+@using Microsoft.AspNetCore.Authorization
+@using Microsoft.Extensions.Localization
+@model Acme.BookStore.BookManagement.Web.Pages.Authors.IndexModel 
+@inject IStringLocalizer<BookManagementResource> L
+@inject IAuthorizationService AuthorizationService
+
+@section scripts
+{
+    <abp-script src="/Pages/Authors/Index.js"/>
+}
+
+<abp-card>
+    <abp-card-header>
+        <abp-row>
+            <abp-column size-md="_6">
+                <abp-card-title>@L["Authors"]</abp-card-title>
+            </abp-column>
+            <abp-column size-md="_6" class="text-right">
+                @if (await AuthorizationService
+                    .IsGrantedAsync(BookManagementPermissions.Authors.Create))
+                {
+                    <abp-button id="NewAuthorButton"
+                                text="@L["NewAuthor"].Value"
+                                icon="plus"
+                                button-type="Primary"/>
+                }
+            </abp-column>
+        </abp-row>
+    </abp-card-header>
+    <abp-card-body>
+        <abp-table striped-rows="true" id="AuthorsTable"></abp-table>
+    </abp-card-body>
+</abp-card>

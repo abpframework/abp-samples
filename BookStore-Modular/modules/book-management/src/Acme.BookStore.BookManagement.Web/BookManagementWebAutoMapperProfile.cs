@@ -1,4 +1,6 @@
-﻿using AutoMapper;
+﻿using Acme.BookStore.BookManagement.Authors;
+using Acme.BookStore.BookManagement.Books;
+using AutoMapper;
 
 namespace Acme.BookStore.BookManagement.Web
 {
@@ -6,9 +8,21 @@ namespace Acme.BookStore.BookManagement.Web
     {
         public BookManagementWebAutoMapperProfile()
         {
-            /* You can configure your AutoMapper mapping configuration here.
-             * Alternatively, you can split your mapping configurations
-             * into multiple profile classes for a better organization. */
+            CreateMap<BookDto, CreateUpdateBookDto>();
+            
+            CreateMap<Pages.Authors.CreateModalModel.CreateAuthorViewModel,
+                CreateAuthorDto>();
+            
+            CreateMap<AuthorDto, Pages.Authors.EditModalModel.EditAuthorViewModel>();
+            
+            CreateMap<Pages.Authors.EditModalModel.EditAuthorViewModel,
+                UpdateAuthorDto>();
+            
+            CreateMap<Pages.Books.CreateModalModel.CreateBookViewModel, CreateUpdateBookDto>();
+            
+            CreateMap<BookDto, Pages.Books.EditModalModel.EditBookViewModel>();
+            
+            CreateMap<Pages.Books.EditModalModel.EditBookViewModel, CreateUpdateBookDto>();
         }
     }
 }

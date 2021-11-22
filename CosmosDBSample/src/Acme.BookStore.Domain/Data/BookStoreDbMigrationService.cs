@@ -40,8 +40,9 @@ namespace Acme.BookStore.Data
 
         public async Task MigrateAsync()
         {
-
             Logger.LogInformation("Started database migrations...");
+
+            // MigrateDatabaseSchemaAsync and its usages are removed.
 
             await SeedDataAsync();
 
@@ -53,12 +54,7 @@ namespace Acme.BookStore.Data
             {
                 using (_currentTenant.Change(tenant.Id))
                 {
-                    if (tenant.ConnectionStrings.Any())
-                    {
-                        var tenantConnectionStrings = tenant.ConnectionStrings
-                            .Select(x => x.Value)
-                            .ToList();
-                    }
+                    // MigrateDatabaseSchemaAsync & usages were removed from here.
 
                     await SeedDataAsync(tenant);
                 }

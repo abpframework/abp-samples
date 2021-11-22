@@ -76,67 +76,72 @@ Some more changes are required before running migrations. Firstly, creating coll
 
 We can't use pre-created collections (containers) with Cosmos DB. So you need to remove migrating scheme for DbMigrator.
 
-- Go `BookStoreDbMigrationService.cs` file under **Acme.BookStore.Domain/Data** folder and remove MigrateDatabaseSchemaAsync method and its usages:
+- Go `BookStoreDbMigrationService.cs` file under **Acme.BookStore.Domain/Data** folder and remove MigrateDatabaseSchemaAsync method and its usages. At the end, your class should be look like below.
 
 ```csharp
-public async Task MigrateAsync()
+public class BookStoreDbMigrationService : ITransientDependency
 {
-    Logger.LogInformation("Started database migrations...");
-	
-    // await MigrateDatabaseSchemaAsync(); // Remove this line
-    await SeedDataAsync();
+    public ILogger<BookStoreDbMigrationService> Logger { get; set; }
 
-    Logger.LogInformation($"Successfully completed host database migrations.");
+    private readonly IDataSeeder _dataSeeder;
+    private readonly IEnumerable<IBookStoreDbSchemaMigrator> _dbSchemaMigrators;
+    private readonly ITenantRepository _tenantRepository;
+    private readonly ICurrentTenant _currentTenant;
 
-    var tenants = await _tenantRepository.GetListAsync(includeDetails: true);
-
-    // var migratedDatabaseSchemas = new HashSet<string>(); // Remove this line too
-    foreach (var tenant in tenants)
+    public BookStoreDbMigrationService(
+        IDataSeeder dataSeeder,
+        IEnumerable<IBookStoreDbSchemaMigrator> dbSchemaMigrators,
+        ITenantRepository tenantRepository,
+        ICurrentTenant currentTenant)
     {
-        using (_currentTenant.Change(tenant.Id))
+        _dataSeeder = dataSeeder;
+        _dbSchemaMigrators = dbSchemaMigrators;
+        _tenantRepository = tenantRepository;
+        _currentTenant = currentTenant;
+
+        Logger = NullLogger<BookStoreDbMigrationService>.Instance;
+    }
+
+    public async Task MigrateAsync()
+    {
+        Logger.LogInformation("Started database migrations...");
+
+        // MigrateDatabaseSchemaAsync was removed from here.
+
+        await SeedDataAsync();
+
+        Logger.LogInformation($"Successfully completed host database migrations.");
+
+        var tenants = await _tenantRepository.GetListAsync(includeDetails: true);
+
+        foreach (var tenant in tenants)
         {
-            if (tenant.ConnectionStrings.Any())
+            using (_currentTenant.Change(tenant.Id))
             {
-                var tenantConnectionStrings = tenant.ConnectionStrings
-                    .Select(x => x.Value)
-                    .ToList();
-                    
-		// Remove following section
-                // if (!migratedDatabaseSchemas.IsSupersetOf(tenantConnectionStrings))
-                // {
-                //	  await MigrateDatabaseSchemaAsync(tenant);
-                //
-                //	  migratedDatabaseSchemas.AddIfNotContains(tenantConnectionStrings);
-                // }
+                // MigrateDatabaseSchemaAsync was removed from here.
+                await SeedDataAsync(tenant);
             }
 
-            await SeedDataAsync(tenant);
+            Logger.LogInformation($"Successfully completed {tenant.Name} tenant database migrations.");
         }
 
-        Logger.LogInformation($"Successfully completed {tenant.Name} tenant database migrations.");
+        Logger.LogInformation("Successfully completed all database migrations.");
+        Logger.LogInformation("You can safely end this process...");
     }
 
-    Logger.LogInformation("Successfully completed all database migrations.");
-    Logger.LogInformation("You can safely end this process...");
-}
-```
-
-
-
-- Also you should remove entire method
-
-```csharp
-private async Task MigrateDatabaseSchemaAsync(Tenant tenant = null)
-{
-    Logger.LogInformation(
-    $"Migrating schema for {(tenant == null ? "host" : tenant.Name + " tenant")} database...");
-
-    foreach (var migrator in _dbSchemaMigrators)
+    private async Task SeedDataAsync(Tenant tenant = null)
     {
-    await migrator.MigrateAsync();
+        Logger.LogInformation($"Executing {(tenant == null ? "host" : tenant.Name + " tenant")} database seed...");
+
+        await _dataSeeder.SeedAsync(new DataSeedContext(tenant?.Id)
+                                    .WithProperty(IdentityDataSeedContributor.AdminEmailPropertyName, IdentityDataSeedContributor.AdminEmailDefaultValue)
+                                    .WithProperty(IdentityDataSeedContributor.AdminPasswordPropertyName, IdentityDataSeedContributor.AdminPasswordDefaultValue)
+                                   );
     }
 }
 ```
+
+
 
 - DbMigrator is ready to execute now. Run `Acme.BookStore.DbMigrator` project and complete data seeding.
 

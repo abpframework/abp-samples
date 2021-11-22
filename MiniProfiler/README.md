@@ -1,4 +1,4 @@
-# MiniProfiler
+# Using MiniProfiler with the ABP Framework
 
 `MiniProfiler` is a library and UI for profiling your application. By letting you see where your time is spent, which queries are run, and any other custom timings you want to add, MiniProfiler helps you debug issues and optimize performance.
 

@@ -101,8 +101,8 @@ public async Task MigrateAsync()
                     .Select(x => x.Value)
                     .ToList();
                     
-				// Remove following section
-				// if (!migratedDatabaseSchemas.IsSupersetOf(tenantConnectionStrings))
+		// Remove following section
+                // if (!migratedDatabaseSchemas.IsSupersetOf(tenantConnectionStrings))
                 // {
                 //	  await MigrateDatabaseSchemaAsync(tenant);
                 //

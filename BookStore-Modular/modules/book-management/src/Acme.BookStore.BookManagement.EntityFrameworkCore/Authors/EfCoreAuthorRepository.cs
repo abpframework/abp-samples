@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Dynamic.Core;
 using System.Threading.Tasks;
-using Acme.BookStore.BookManagement.Authors;
+using Acme.BookStore.BookManagement.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Volo.Abp.Domain.Repositories.EntityFrameworkCore;
 using Volo.Abp.EntityFrameworkCore;
 
-namespace Acme.BookStore.BookManagement.EntityFrameworkCore.Authors
+namespace Acme.BookStore.BookManagement.Authors
 {
     public class EfCoreAuthorRepository
         : EfCoreRepository<BookManagementDbContext, Author, Guid>,

@@ -24,7 +24,7 @@ namespace Acme.BookStore.BookManagement.Web.Menus
 
             var bookStoreMenu = new ApplicationMenuItem(
                 "BooksStore",
-                l["Menu:BookStore"],
+                l["Menu:BookManagement"],
                 icon: "fa fa-book"
             );
 

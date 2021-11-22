@@ -20,7 +20,7 @@
                                 {
                                     text: l('Edit'),
                                     visible:
-                                        abp.auth.isGranted('BookStore.Authors.Edit'),
+                                        abp.auth.isGranted('BookManagement.Authors.Edit'),
                                     action: function (data) {
                                         editModal.open({ id: data.record.id });
                                     }
@@ -28,7 +28,7 @@
                                 {
                                     text: l('Delete'),
                                     visible:
-                                        abp.auth.isGranted('BookStore.Authors.Delete'),
+                                        abp.auth.isGranted('BookManagement.Authors.Delete'),
                                     confirmMessage: function (data) {
                                         return l(
                                             'AuthorDeletionConfirmationMessage',

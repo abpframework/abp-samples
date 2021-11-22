@@ -8,7 +8,8 @@ namespace Acme.BookStore.BookManagement
     {
         public BookManagementApplicationAutoMapperProfile()
         {
-            CreateMap<Book, BookDto>();
+            CreateMap<Book, BookDto>()
+                .ForMember(x => x.AuthorName, opt => opt.Ignore());
             
             CreateMap<CreateUpdateBookDto, Book>(MemberList.Source);
             

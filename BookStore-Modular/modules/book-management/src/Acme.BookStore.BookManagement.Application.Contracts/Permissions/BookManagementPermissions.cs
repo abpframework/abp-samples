@@ -1,6 +1,4 @@
-﻿using Volo.Abp.Reflection;
-
-namespace Acme.BookStore.BookManagement.Permissions
+﻿namespace Acme.BookStore.BookManagement.Permissions
 {
     public class BookManagementPermissions
     {

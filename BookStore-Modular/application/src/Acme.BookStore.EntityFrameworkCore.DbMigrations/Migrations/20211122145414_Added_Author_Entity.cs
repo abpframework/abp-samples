@@ -14,12 +14,6 @@ namespace Acme.BookStore.Migrations
                 nullable: false,
                 defaultValue: new Guid("00000000-0000-0000-0000-000000000000"));
 
-            migrationBuilder.AddColumn<string>(
-                name: "AuthorName",
-                table: "BmBooks",
-                type: "nvarchar(max)",
-                nullable: true);
-
             migrationBuilder.CreateTable(
                 name: "BmAuthors",
                 columns: table => new
@@ -77,10 +71,6 @@ namespace Acme.BookStore.Migrations
 
             migrationBuilder.DropColumn(
                 name: "AuthorId",
-                table: "BmBooks");
-
-            migrationBuilder.DropColumn(
-                name: "AuthorName",
                 table: "BmBooks");
         }
     }

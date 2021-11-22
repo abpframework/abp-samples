@@ -11,8 +11,8 @@ using Volo.Abp.EntityFrameworkCore;
 namespace Acme.BookStore.BookManagement.Migrations
 {
     [DbContext(typeof(MyProjectHttpApiHostMigrationsDbContext))]
-    [Migration("20211122115636_Added_AuthorId_To_Book")]
-    partial class Added_AuthorId_To_Book
+    [Migration("20211122145219_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

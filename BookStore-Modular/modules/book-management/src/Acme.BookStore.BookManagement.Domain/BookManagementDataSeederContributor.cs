@@ -40,8 +40,7 @@ namespace Acme.BookStore.BookManagement
                     "George Orwell",
                     new DateTime(1903, 06, 25),
                     "Orwell produced literary criticism and poetry, fiction and polemical journalism; and is best known for the allegorical novella Animal Farm (1945) and the dystopian novel Nineteen Eighty-Four (1949)."
-                ),
-                autoSave: true
+                )
             );
             
             var douglas = await _authorRepository.InsertAsync(
@@ -49,14 +48,13 @@ namespace Acme.BookStore.BookManagement
                     "Douglas Adams",
                     new DateTime(1952, 03, 11),
                     "Douglas Adams was an English author, screenwriter, essayist, humorist, satirist and dramatist. Adams was an advocate for environmentalism and conservation, a lover of fast cars, technological innovation and the Apple Macintosh, and a self-proclaimed 'radical atheist'."
-                ),
-                autoSave: true
+                )
             );
             
             await _bookRepository.InsertAsync(
                 new Book
                 {
-                    AuthorId = orwell.Id, // SET THE AUTHOR
+                    AuthorId = orwell.Id, 
                     Name = "1984",
                     Type = BookType.Dystopia,
                     PublishDate = new DateTime(1949, 6, 8),
@@ -68,7 +66,7 @@ namespace Acme.BookStore.BookManagement
             await _bookRepository.InsertAsync(
                 new Book
                 {
-                    AuthorId = douglas.Id, // SET THE AUTHOR
+                    AuthorId = douglas.Id, 
                     Name = "The Hitchhiker's Guide to the Galaxy",
                     Type = BookType.ScienceFiction,
                     PublishDate = new DateTime(1995, 9, 27),

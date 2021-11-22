@@ -9,7 +9,7 @@ namespace Acme.BookStore.BookManagement.Permissions
     {
         public override void Define(IPermissionDefinitionContext context)
         {
-            var bookStoreGroup = context.AddGroup(BookManagementPermissions.GroupName, L("Permission:BookStore"));
+            var bookStoreGroup = context.AddGroup(BookManagementPermissions.GroupName, L("Permission:BookManagement"));
 
             var booksPermission = bookStoreGroup.AddPermission(BookManagementPermissions.Books.Default, L("Permission:Books"));
             booksPermission.AddChild(BookManagementPermissions.Books.Create, L("Permission:Books.Create"));

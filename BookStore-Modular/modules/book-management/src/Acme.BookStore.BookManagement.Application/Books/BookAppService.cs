@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Dynamic.Core;
 using System.Threading.Tasks;
 using Acme.BookStore.BookManagement.Authors;
 using Acme.BookStore.BookManagement.Permissions;
+using Microsoft.AspNetCore.Authorization;
 using Volo.Abp.Application.Dtos;
 using Volo.Abp.Application.Services;
 using Volo.Abp.Domain.Entities;
@@ -11,6 +13,7 @@ using Volo.Abp.Domain.Repositories;
 
 namespace Acme.BookStore.BookManagement.Books
 {
+    [Authorize(BookManagementPermissions.Books.Default)]
     public class BookAppService :
         CrudAppService<
             Book, //The Book entity
@@ -22,7 +25,9 @@ namespace Acme.BookStore.BookManagement.Books
     {
         private readonly IAuthorRepository _authorRepository;
         
-        public BookAppService(IRepository<Book, Guid> repository, IAuthorRepository authorRepository)
+        public BookAppService(
+            IRepository<Book, Guid> repository, 
+            IAuthorRepository authorRepository)
             : base(repository)
         {
             _authorRepository = authorRepository;
@@ -64,12 +69,12 @@ namespace Acme.BookStore.BookManagement.Books
 
             //Prepare a query to join books and authors
             var query = from book in queryable
-                join author in (await _authorRepository.GetQueryableAsync()) on book.AuthorId equals author.Id
+                join author in _authorRepository on book.AuthorId equals author.Id
                 select new {book, author};
 
             //Paging
             query = query
-                // .OrderBy(input.Sorting ?? nameof(Book.Name))
+                .OrderBy(NormalizeSorting(input.Sorting))
                 .Skip(input.SkipCount)
                 .Take(input.MaxResultCount);
 

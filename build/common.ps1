@@ -14,6 +14,7 @@ $solutionPaths = (
     "../BookStore-Modular/application",
     "../BookStore-Mvc-EfCore",
     "../ClientSimulationDemo",
+    "../CosmosDBSample",
     "../DashboardDemo",
     # "../DevExpress-Blazor",
     # "../DevExtreme-Angular/aspnet-core",

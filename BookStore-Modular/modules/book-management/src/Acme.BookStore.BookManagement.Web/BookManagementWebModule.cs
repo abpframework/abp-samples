@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.DependencyInjection;
 using Acme.BookStore.BookManagement.Localization;
+using Acme.BookStore.BookManagement.Permissions;
+using Acme.BookStore.BookManagement.Web.Menus;
 using Volo.Abp.AspNetCore.Mvc.Localization;
 using Volo.Abp.AspNetCore.Mvc.UI.Theme.Shared;
 using Volo.Abp.AutoMapper;
@@ -44,8 +46,11 @@ namespace Acme.BookStore.BookManagement.Web
 
             Configure<RazorPagesOptions>(options =>
             {
-                //Configure authorization.
+                options.Conventions.AuthorizePage("/Books/Index", BookManagementPermissions.Books.Default);
+                options.Conventions.AuthorizePage("/Books/CreateModal", BookManagementPermissions.Books.Create);
+                options.Conventions.AuthorizePage("/Books/EditModal", BookManagementPermissions.Books.Edit);
             });
+
         }
     }
 }

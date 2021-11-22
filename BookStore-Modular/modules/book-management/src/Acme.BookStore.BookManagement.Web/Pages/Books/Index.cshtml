@@ -1,0 +1,31 @@
+﻿@page
+@model Acme.BookStore.BookManagement.Web.Pages.Books.IndexModel
+@using Acme.BookStore.BookManagement.Permissions
+@using Microsoft.AspNetCore.Authorization
+@inherits Acme.BookStore.BookManagement.Web.Pages.BookManagementPage
+@inject IAuthorizationService AuthorizationService
+@section scripts
+{
+    <abp-script src="/Pages/Books/index.js" />
+}
+<abp-card>
+    <abp-card-header>
+        <abp-row>
+            <abp-column size-md="_6">
+                <h2>@L["Books"]</h2>
+            </abp-column>
+            <abp-column size-md="_6" class="text-right">
+                @if (await AuthorizationService.IsGrantedAsync(BookManagementPermissions.Books.Create))
+                {
+                    <abp-button id="NewBookButton"
+                                text="@L["NewBook"].Value"
+                                icon="plus"
+                                button-type="Primary"/>
+                }
+            </abp-column>
+        </abp-row>
+    </abp-card-header>
+    <abp-card-body>
+        <abp-table striped-rows="true" id="BooksTable"></abp-table>
+    </abp-card-body>
+</abp-card>

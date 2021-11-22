@@ -1,11 +1,11 @@
 ﻿@page
-@model Acme.BookStore.BookManagement.Web.Pages.BookManagement.Books.CreateModalModel
+@model Acme.BookStore.BookManagement.Web.Pages.Books.CreateModalModel
 @inherits Acme.BookStore.BookManagement.Web.Pages.BookManagementPage
 @using Volo.Abp.AspNetCore.Mvc.UI.Bootstrap.TagHelpers.Modal
 @{
     Layout = null;
 }
-<abp-dynamic-form abp-model="Book" data-ajaxForm="true" asp-page="/BookManagement/Books/CreateModal">
+<abp-dynamic-form abp-model="Book" data-ajaxForm="true" asp-page="/Books/CreateModal">
     <abp-modal>
         <abp-modal-header title="@L["NewBook"].Value"></abp-modal-header>
         <abp-modal-body>

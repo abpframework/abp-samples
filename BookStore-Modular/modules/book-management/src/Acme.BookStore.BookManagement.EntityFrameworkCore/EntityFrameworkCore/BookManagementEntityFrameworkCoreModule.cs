@@ -19,7 +19,7 @@ namespace Acme.BookStore.BookManagement.EntityFrameworkCore
         {
             context.Services.AddAbpDbContext<BookManagementDbContext>(options =>
             {
-                options.AddDefaultRepositories<IBookManagementDbContext>();
+                options.AddDefaultRepositories<BookManagementDbContext>(includeAllEntities: true);
                 /* Add custom repositories here. Example:
                  * options.AddRepository<Question, EfCoreQuestionRepository>();
                  */

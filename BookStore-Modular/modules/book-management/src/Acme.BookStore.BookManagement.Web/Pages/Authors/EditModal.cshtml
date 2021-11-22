@@ -1,0 +1,21 @@
+﻿@page
+@using Acme.BookStore.BookManagement.Localization
+@using Microsoft.Extensions.Localization
+@using Volo.Abp.AspNetCore.Mvc.UI.Bootstrap.TagHelpers.Modal
+@model Acme.BookStore.BookManagement.Web.Pages.Authors.EditModalModel
+@inject IStringLocalizer<BookManagementResource> L
+@{
+    Layout = null;
+}
+<form asp-page="/Authors/EditModal">
+    <abp-modal>
+        <abp-modal-header title="@L["Update"].Value"></abp-modal-header>
+        <abp-modal-body>
+            <abp-input asp-for="Author.Id" />
+            <abp-input asp-for="Author.Name" />
+            <abp-input asp-for="Author.BirthDate" />
+            <abp-input asp-for="Author.ShortBio" />
+        </abp-modal-body>
+        <abp-modal-footer buttons="@(AbpModalButtons.Cancel|AbpModalButtons.Save)"></abp-modal-footer>
+    </abp-modal>
+</form>

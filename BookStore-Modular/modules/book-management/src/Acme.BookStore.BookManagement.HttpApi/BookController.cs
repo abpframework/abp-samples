@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Acme.BookStore.BookManagement.Books;
+using Acme.BookStore.BookManagement.Controllers;
 using Microsoft.AspNetCore.Mvc;
 using Volo.Abp;
 using Volo.Abp.Application.Dtos;
 
 namespace Acme.BookStore.BookManagement
 {
-    [RemoteService]
+    [RemoteService(Name = "Books")]
     [Route("api/BookManagement/book")]
     public class BookController : BookManagementController, IBookAppService
     {
@@ -49,6 +50,13 @@ namespace Acme.BookStore.BookManagement
         public Task DeleteAsync(Guid id)
         {
             return _bookAppService.DeleteAsync(id);
+        }
+
+        [HttpGet]
+        [Route("author-lookup")]
+        public Task<ListResultDto<AuthorLookupDto>> GetAuthorLookupAsync()
+        {
+            return _bookAppService.GetAuthorLookupAsync();
         }
     }
 }

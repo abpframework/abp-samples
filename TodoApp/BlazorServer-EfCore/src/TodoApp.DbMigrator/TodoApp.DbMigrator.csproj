@@ -4,7 +4,7 @@
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>net5.0</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
@@ -26,7 +26,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Volo.Abp.Autofac" Version="4.4.0" />
+    <PackageReference Include="Volo.Abp.Autofac" Version="5.0.0-rc.1" />
     <ProjectReference Include="..\TodoApp.Application.Contracts\TodoApp.Application.Contracts.csproj" />
     <ProjectReference Include="..\TodoApp.EntityFrameworkCore\TodoApp.EntityFrameworkCore.csproj" />
   </ItemGroup>

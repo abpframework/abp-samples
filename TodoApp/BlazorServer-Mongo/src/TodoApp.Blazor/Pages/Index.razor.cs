@@ -12,7 +12,7 @@ namespace TodoApp.Blazor.Pages
         private List<TodoItemDto> TodoItems { get; set; } = new List<TodoItemDto>();
         private string NewTodoText { get; set; }
 
-        protected async override Task OnInitializedAsync()
+        protected override async Task OnInitializedAsync()
         {
             TodoItems = await TodoAppService.GetListAsync();
         }

@@ -1,0 +1,34 @@
+﻿@page
+@using Microsoft.AspNetCore.Mvc.Localization
+@using Acme.BookStore.Localization
+@using Acme.BookStore.Web.Bundling.Reporting.DocumentDesigner
+@using DevExpress.AspNetCore
+@using Volo.Abp.Users
+@model Acme.BookStore.Web.Pages.IndexModel
+@inject IHtmlLocalizer<BookStoreResource> L
+@inject ICurrentUser CurrentUser
+@section styles {
+    <abp-style src="/Pages/Index.css" />
+}
+<div class="container">
+    <div class="p-5 text-center">
+        <a abp-button="Primary" href="~/Account/Login" ><i class="fa fa-sign-in"></i> @L["Document Viewer"]</a>
+    </div>
+    <div class="card">
+        <div class="card-body">
+            @{
+                    var designerRender = Html.DevExpress().ReportDesigner("reportDesigner")
+                        .Height("1000px");
+                    @designerRender.RenderHtml()
+                }
+        </div>
+    </div>
+</div>
+
+@section scripts {
+    <abp-script src="/Pages/Index.js"/>
+    <abp-style type="typeof(DevExpressDocumentDesignerStyleContributor)"/>
+
+    <abp-script type="typeof(DevExpressDocumentDesignerScriptContributor)"/>
+    @designerRender.RenderScripts()
+}

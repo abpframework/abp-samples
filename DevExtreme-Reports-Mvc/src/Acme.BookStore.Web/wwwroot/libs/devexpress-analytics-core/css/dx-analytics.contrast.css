@@ -1,0 +1,322 @@
+﻿/**
+* DevExpress Analytics (dist\css\dx-analytics.contrast.css)
+* Version:  21.2.3
+* Build date: Oct 28, 2021
+* Copyright (c) 2012 - 2021 Developer Express Inc. ALL RIGHTS RESERVED
+* License: https://www.devexpress.com/Support/EULAs/universal.xml
+*/
+.dx-designer-viewport {
+  /* Borders -------------------------*/
+  /* Icons -------------------------*/
+  /* Text -------------------------*/
+  /* Background -------------------------*/
+  /* Customization -------------------------*/
+  /* AceEditor -------------------------*/
+  /* DevExtreme -------------------------*/
+}
+.dx-designer-viewport .dxd-border-primary {
+  border-color: #FFFFFF;
+}
+.dx-designer-viewport .dxd-border-secondary {
+  border-color: #FFFFFF;
+}
+.dx-designer-viewport .dxd-border-accented {
+  border-color: #3806FF;
+}
+.dx-designer-viewport .dxd-back-contrast .dxd-border-primary {
+  border-color: #000000;
+}
+.dx-designer-viewport .dxd-back-secondary-invariant .dxd-border-primary {
+  border-color: #000000;
+}
+.dx-designer-viewport .dx-accessibility-border-accented {
+  outline-color: #3806FF;
+}
+.dx-designer-viewport .dx-accessibility-focus-border-accented,
+.dx-designer-viewport .dx-accessibility-focus-border-accented:focus {
+  outline-color: #3806FF;
+}
+.dx-designer-viewport .dxd-icon-accented .dxd-icon-fill,
+.dx-designer-viewport .dxd-icon-highlighted:hover .dxd-icon-fill {
+  fill: #3806FF;
+}
+.dx-designer-viewport .dxd-icon-fill {
+  fill: #FFFFFF;
+}
+.dx-designer-viewport .dxd-back-contrast .dxd-icon-fill {
+  fill: #000000;
+}
+.dx-designer-viewport .dxd-state-active .dxd-icon-fill,
+.dx-designer-viewport .dxd-back-contrast .dxd-back-highlighted:hover .dxd-icon-fill,
+.dx-designer-viewport .dx-menu-item.dx-state-focused .dxd-icon-fill {
+  fill: #000000;
+}
+.dx-designer-viewport .dxd-text-primary {
+  color: #FFFFFF;
+}
+.dx-designer-viewport .dxd-text-info {
+  color: #CF00D7;
+}
+.dx-designer-viewport .dxd-text-accented {
+  color: #3806FF;
+}
+.dx-designer-viewport .dxd-state-active .dxd-text-primary,
+.dx-designer-viewport .dxd-back-contrast .dxd-text-primary {
+  color: #000000;
+}
+.dx-designer-viewport .dxd-back-primary {
+  background-color: #363636;
+}
+.dx-designer-viewport .dxd-back-primary-invariant {
+  background-color: #FFFFFF;
+}
+.dx-designer-viewport .dxd-back-primary2-invariant {
+  background-color: #000000;
+}
+.dx-designer-viewport .dxd-back-secondary-invariant {
+  background-color: #363636;
+}
+.dx-designer-viewport .dxd-back-primary2 {
+  background-color: #000000;
+}
+.dx-designer-viewport .dxd-back-secondary {
+  background-color: #FFFFFF;
+}
+.dx-designer-viewport .dxd-back-highlighted.dxd-state-normal:hover:not(.dxd-state-no-hover) {
+  background-color: #FFFFFF;
+}
+.dx-designer-viewport .dxd-back-highlighted:hover:not(.dxd-state-no-hover) {
+  background-color: #363636;
+}
+.dx-designer-viewport .dxd-back-highlighted.dxd-state-selected,
+.dx-designer-viewport .dxd-back-highlighted.dxd-state-selected:hover {
+  background-color: #FFFFFF;
+}
+.dx-designer-viewport .dxd-back-highlighted.dxd-state-active {
+  background-color: #000000;
+}
+.dx-designer-viewport .dxd-back-highlighted.dxd-state-active:hover:not(.dxd-state-no-hover) {
+  background-color: #FFFFFF;
+}
+.dx-designer-viewport .dxd-back-contrast {
+  background-color: #FFFFFF;
+}
+.dx-designer-viewport .dxd-back-contrast .dxd-back-highlighted.dxd-state-active,
+.dx-designer-viewport .dxd-back-contrast .dxd-back-highlighted.dxd-state-active:hover {
+  background-color: #CF00D7;
+}
+.dx-designer-viewport .dxd-back-contrast .dxd-back-highlighted:hover {
+  background-color: #3806FF;
+}
+.dx-designer-viewport .dxd-back-contrast .dxd-state-active .dxd-back-highlighted:hover {
+  background-color: #FFFFFF;
+}
+.dx-designer-viewport .dxd-back-contrast .dxd-state-active .dxd-back-secondary {
+  background-color: #000000;
+}
+.dx-designer-viewport .dxd-back-accented {
+  background-color: #3806FF;
+}
+.dx-designer-viewport .dxd-scrollbar-color {
+  scrollbar-face-color: #FFFFFF;
+  scrollbar-track-color: #000000;
+  scrollbar-arrow-color: #FFFFFF;
+  -ms-scrollbar-face-color: #FFFFFF;
+  -ms-scrollbar-track-color: #000000;
+  -ms-scrollbar-arrow-color: #FFFFFF;
+}
+.dx-designer-viewport .dxd-scrollbar-color ::-webkit-scrollbar-corner {
+  background-color: #FFFFFF;
+}
+.dx-designer-viewport .dxd-scrollbar-color ::-webkit-scrollbar {
+  background-color: #FFFFFF;
+}
+.dx-designer-viewport .dxd-scrollbar-color ::-webkit-scrollbar-thumb {
+  background-color: #000000;
+}
+.dx-designer-viewport .dxrd-scripts-editor.ace_editor,
+.dx-designer-viewport .dx-sql_editor.ace_editor,
+.dx-designer-viewport .dx-expressioneditor-textarea.ace_editor,
+.dx-designer-viewport .dx-filtereditor-ace.ace_editor {
+  background-color: #000000;
+}
+.dx-designer-viewport .dxrd-scripts-editor.ace_editor .ace_gutter,
+.dx-designer-viewport .dx-sql_editor.ace_editor .ace_gutter,
+.dx-designer-viewport .dx-expressioneditor-textarea.ace_editor .ace_gutter,
+.dx-designer-viewport .dx-filtereditor-ace.ace_editor .ace_gutter {
+  background-color: #363636;
+  color: #FFFFFF;
+  border-color: #FFFFFF;
+}
+.dx-designer-viewport .dxrd-navigation-panel-wrapper .dx-tab {
+  background-color: #000000;
+  border-color: #000000;
+  color: #FFFFFF;
+}
+.dx-designer-viewport .dxrd-navigation-panel-wrapper .dx-tab:hover {
+  background-color: #363636;
+}
+.dx-designer-viewport .dxrd-navigation-panel-wrapper .dx-icon {
+  color: #CF00D7;
+}
+.dx-designer-viewport .dxrd-navigation-panel-wrapper .dx-tab.dx-tab-selected {
+  color: #000000;
+}
+.dx-designer-viewport .dxrd-navigation-panel-wrapper .dx-tab.dx-tab-selected,
+.dx-designer-viewport .dxrd-navigation-panel-wrapper .dx-tab.dx-tab-selected:hover {
+  background-color: #000000;
+}
+.dx-designer-viewport .dxrd-navigation-panel-wrapper .dx-tab.dx-tab-selected .dx-icon {
+  color: #000000;
+}
+/* FilterEditor -------------------------*/
+.dx-filtereditor .dxd-filter-editor-group-back-color {
+  background-color: #cf00d7;
+}
+.dx-filtereditor .dxd-filter-editor-group-back-color:hover:not(.dxd-state-no-hover) {
+  background-color: #cf00d7;
+}
+.dx-filtereditor .dxd-filter-editor-group-back-color.dxd-state-selected {
+  background-color: #cf00d7;
+}
+.dx-filtereditor .dxd-filter-editor-field-back-color {
+  background-color: #3806ff;
+}
+.dx-filtereditor .dxd-filter-editor-field-back-color:hover:not(.dxd-state-no-hover) {
+  background-color: #3806ff;
+}
+.dx-filtereditor .dxd-filter-editor-field-back-color.dxd-state-selected {
+  background-color: #3806ff;
+}
+.dx-filtereditor .dxd-filter-editor-parameter-back-color {
+  background-color: #ffb277;
+}
+.dx-filtereditor .dxd-filter-editor-parameter-back-color:hover:not(.dxd-state-no-hover) {
+  background-color: #ffb277;
+}
+.dx-filtereditor .dxd-filter-editor-parameter-back-color.dxd-state-selected {
+  background-color: #ffb277;
+}
+.dx-filtereditor .dxd-filter-editor-operator-back-color {
+  background-color: #008709;
+}
+.dx-filtereditor .dxd-filter-editor-operator-back-color:hover:not(.dxd-state-no-hover) {
+  background-color: #008709;
+}
+.dx-filtereditor .dxd-filter-editor-operator-back-color.dxd-state-selected {
+  background-color: #008709;
+}
+.dx-filtereditor .dxd-filter-editor-value-back-color {
+  background-color: transparent;
+}
+.dx-filtereditor .dxd-filter-editor-value-back-color:hover:not(.dxd-state-no-hover) {
+  background-color: transparent;
+}
+.dx-filtereditor .dxd-filter-editor-text-color {
+  color: #fff;
+  fill: #fff;
+}
+.dx-filtereditor .dxd-filter-editor-text-color.dxd-state-selected {
+  color: #fff;
+}
+.dx-filtereditor .dxd-state-selected .dxd-filter-editor-text-color {
+  color: #fff;
+}
+.dx-filtereditor .dxd-filter-editor-add-icon-fill-color {
+  fill: #008709;
+}
+.dx-filtereditor .dxd-filter-editor-remove-icon-fill-color {
+  fill: #cf00d7;
+}
+/* QueryBuilder -------------------------*/
+.dx-querybuilder .dxd-qb-relationship-line-color {
+  stroke: #000000;
+}
+.dx-querybuilder .dxdd-connector.dxd-state-selected .dxd-qb-relationship-line-color {
+  stroke: #3806FF;
+}
+/* Wizard -------------------------*/
+.dx-designer-viewport .dxd-back-secondary {
+  background-color: #CF00D7;
+}
+.dx-designer-viewport .dx-background-inheritor.dxd-back-highlighted .dxd-back-secondary {
+  background-color: #FFFFFF;
+}
+.dx-designer-viewport .dxd-back-highlighted.dxd-state-normal:hover:not(.dxd-state-no-hover) {
+  background-color: #CF00D7;
+}
+.dx-designer-viewport .dxd-back-highlighted:hover:not(.dxd-state-no-hover) {
+  background-color: #CF00D7;
+}
+.dx-designer-viewport .dxd-back-highlighted.dxd-state-selected {
+  background-color: #FFFFFF;
+}
+.dx-designer-viewport .dxd-back-highlighted.dxd-state-selected:hover {
+  background-color: #CF00D7;
+}
+.dx-designer-viewport .dxd-back-highlighted.dxd-state-active {
+  background-color: #FFFFFF;
+}
+.dx-designer-viewport .dxd-back-highlighted.dxd-state-active:hover:not(.dxd-state-no-hover) {
+  background-color: #CF00D7;
+}
+.dx-designer-viewport .dxd-back-contrast .dxd-back-highlighted:not(.dxd-state-no-hover):hover,
+.dx-designer-viewport .dxd-back-contrast .dxd-back-highlighted.dxd-state-active {
+  background-color: #CF00D7;
+}
+.dx-designer-viewport .dxd-back-contrast .dxd-back-highlighted:not(.dxd-state-no-hover):hover .dxd-icon-fill,
+.dx-designer-viewport .dxd-back-contrast .dxd-back-highlighted.dxd-state-active .dxd-icon-fill {
+  fill: #FFFFFF;
+}
+.dx-designer-viewport .dxd-back-contrast .dxd-back-highlighted.dxd-state-active .dxd-text-primary {
+  color: #FFFFFF;
+}
+.dx-designer-viewport .dxd-state-selected:not(.dx-background-inheritor),
+.dx-designer-viewport .dxd-state-active:not(.dx-background-inheritor) {
+  color: #000000;
+}
+.dx-designer-viewport .dxd-state-selected:not(.dx-background-inheritor) .dxd-text-primary,
+.dx-designer-viewport .dxd-state-active:not(.dx-background-inheritor) .dxd-text-primary {
+  color: #000000;
+}
+.dx-designer-viewport .dxd-state-selected:not(.dx-background-inheritor) .dxd-icon-fill,
+.dx-designer-viewport .dxd-state-active:not(.dx-background-inheritor) .dxd-icon-fill {
+  fill: #000000;
+}
+.dx-designer-viewport .dxd-state-selected:not(.dx-background-inheritor):hover:not(.dxd-state-no-hover),
+.dx-designer-viewport .dxd-state-active:not(.dx-background-inheritor):hover:not(.dxd-state-no-hover),
+.dx-designer-viewport .dxd-state-selected:not(.dx-background-inheritor) .dx-button,
+.dx-designer-viewport .dxd-state-active:not(.dx-background-inheritor) .dx-button,
+.dx-designer-viewport .dxd-state-selected:not(.dx-background-inheritor) .dx-overlay-content,
+.dx-designer-viewport .dxd-state-active:not(.dx-background-inheritor) .dx-overlay-content {
+  color: #FFFFFF;
+}
+.dx-designer-viewport .dxd-state-selected:not(.dx-background-inheritor):hover:not(.dxd-state-no-hover) .dxd-text-primary,
+.dx-designer-viewport .dxd-state-active:not(.dx-background-inheritor):hover:not(.dxd-state-no-hover) .dxd-text-primary,
+.dx-designer-viewport .dxd-state-selected:not(.dx-background-inheritor) .dx-button .dxd-text-primary,
+.dx-designer-viewport .dxd-state-active:not(.dx-background-inheritor) .dx-button .dxd-text-primary,
+.dx-designer-viewport .dxd-state-selected:not(.dx-background-inheritor) .dx-overlay-content .dxd-text-primary,
+.dx-designer-viewport .dxd-state-active:not(.dx-background-inheritor) .dx-overlay-content .dxd-text-primary {
+  color: #FFFFFF;
+}
+.dx-designer-viewport .dxd-state-selected:not(.dx-background-inheritor):hover:not(.dxd-state-no-hover) .dxd-icon-fill,
+.dx-designer-viewport .dxd-state-active:not(.dx-background-inheritor):hover:not(.dxd-state-no-hover) .dxd-icon-fill,
+.dx-designer-viewport .dxd-state-selected:not(.dx-background-inheritor) .dx-button .dxd-icon-fill,
+.dx-designer-viewport .dxd-state-active:not(.dx-background-inheritor) .dx-button .dxd-icon-fill,
+.dx-designer-viewport .dxd-state-selected:not(.dx-background-inheritor) .dx-overlay-content .dxd-icon-fill,
+.dx-designer-viewport .dxd-state-active:not(.dx-background-inheritor) .dx-overlay-content .dxd-icon-fill {
+  fill: #FFFFFF;
+}
+.dx-designer-viewport .dxrd-navigation-panel-wrapper .dx-tab {
+  border-color: #FFFFFF;
+}
+.dx-designer-viewport .dxrd-navigation-panel-wrapper .dx-tab:hover {
+  background-color: #CF00D7;
+}
+.dx-designer-viewport .dxrd-navigation-panel-wrapper .dx-tab.dx-tab-selected,
+.dx-designer-viewport .dxrd-navigation-panel-wrapper .dx-tab.dx-tab-selected:hover {
+  background-color: #FFFFFF;
+}
+.dx-querybuilder .dxd-qb-relationship-line-color {
+  stroke: #FFFFFF;
+}

@@ -1,0 +1,65 @@
+﻿@page
+@using Acme.BookStore.Web.Bundling.Reporting.DocumentDesigner
+@using DevExpress.AspNetCore
+@model Acme.BookStore.Web.Pages.Reporting.Designer
+@inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
+
+@functions{
+
+    public string GetAntiXsrfRequestToken()
+    {
+        return Xsrf.GetAndStoreTokens(HttpContext).RequestToken;
+    }
+
+}
+
+<script type="text/javascript">
+    function SetupJwt(bearerToken, xsrf) {
+        DevExpress.Analytics.Utils.ajaxSetup.ajaxSettings = {
+            headers: {
+                //'Authorization': 'Bearer ' + bearerToken,
+                'RequestVerificationToken': xsrf
+            }
+        }; 
+    }
+    
+    function AttachXSRFToken_OnExport(args, xsrf) {
+        args.FormData["__RequestVerificationToken"] = xsrf;
+    }
+
+    function WebDocumentViewer_BeforeRender(s, e) {
+        SetupJwt('bearer token can be passed here', "@GetAntiXsrfRequestToken()");
+        $(window).on('beforeunload', function(e) {
+            s.Close();
+        });
+    }
+    function OnViewerExport(_s, e) {
+        AttachXSRFToken_OnExport(e, "@GetAntiXsrfRequestToken()");
+    }
+</script>
+
+@{
+    var designerRender = Html.DevExpress().ReportDesigner("reportDesigner")
+        .Height("1000px")
+        .ClientSideEvents(x =>
+        {
+            x.BeforeRender("WebDocumentViewer_BeforeRender");
+            x.Preview(configure => { configure.OnExport("OnViewerExport"); });
+        })
+        .Bind(Model.DesignerModel.Report)
+        .DataSources(configureDS =>
+        {
+            foreach (var ds in Model.DesignerModel.DataSources)
+            {
+                configureDS.Add(ds.Key, ds.Value);
+            }
+        });
+    @designerRender.RenderHtml()
+}
+
+@section Scripts {
+    <abp-style type="typeof(DevExpressDocumentDesignerStyleContributor)"/>
+
+    <abp-script type="typeof(DevExpressDocumentDesignerScriptContributor)"/>
+    @designerRender.RenderScripts();
+}

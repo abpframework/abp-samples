@@ -11,7 +11,7 @@ using Volo.Abp.Modularity;
 namespace ElsaDemo.EntityFrameworkCore
 {
     [DependsOn(
-        typeof(ElsaDemoEntityFrameworkCoreDbMigrationsModule),
+        typeof(ElsaDemoEntityFrameworkCoreModule),
         typeof(ElsaDemoTestBaseModule),
         typeof(AbpEntityFrameworkCoreSqliteModule)
         )]
@@ -47,11 +47,11 @@ namespace ElsaDemo.EntityFrameworkCore
             var connection = new SqliteConnection("Data Source=:memory:");
             connection.Open();
 
-            var options = new DbContextOptionsBuilder<ElsaDemoMigrationsDbContext>()
+            var options = new DbContextOptionsBuilder<ElsaDemoDbContext>()
                 .UseSqlite(connection)
                 .Options;
 
-            using (var context = new ElsaDemoMigrationsDbContext(options))
+            using (var context = new ElsaDemoDbContext(options))
             {
                 context.GetService<IRelationalDatabaseCreator>().CreateTables();
             }

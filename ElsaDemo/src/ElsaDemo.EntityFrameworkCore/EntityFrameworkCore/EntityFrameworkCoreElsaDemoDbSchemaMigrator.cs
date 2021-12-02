@@ -27,7 +27,7 @@ namespace ElsaDemo.EntityFrameworkCore
              */
 
             await _serviceProvider
-                .GetRequiredService<ElsaDemoMigrationsDbContext>()
+                .GetRequiredService<ElsaDemoDbContext>()
                 .Database
                 .MigrateAsync();
         }

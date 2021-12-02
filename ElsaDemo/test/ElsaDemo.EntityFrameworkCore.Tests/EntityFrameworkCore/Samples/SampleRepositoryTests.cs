@@ -1,10 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using ElsaDemo.Users;
 using Shouldly;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
 using Volo.Abp.Domain.Repositories;
+using Volo.Abp.Identity;
 using Xunit;
 
 namespace ElsaDemo.EntityFrameworkCore.Samples
@@ -16,11 +16,11 @@ namespace ElsaDemo.EntityFrameworkCore.Samples
      */
     public class SampleRepositoryTests : ElsaDemoEntityFrameworkCoreTestBase
     {
-        private readonly IRepository<AppUser, Guid> _appUserRepository;
+        private readonly IRepository<IdentityUser, Guid> _appUserRepository;
 
         public SampleRepositoryTests()
         {
-            _appUserRepository = GetRequiredService<IRepository<AppUser, Guid>>();
+            _appUserRepository = GetRequiredService<IRepository<IdentityUser, Guid>>();
         }
 
         [Fact]

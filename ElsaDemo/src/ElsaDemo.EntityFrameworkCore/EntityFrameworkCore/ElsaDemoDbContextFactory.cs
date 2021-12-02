@@ -7,18 +7,18 @@ namespace ElsaDemo.EntityFrameworkCore
 {
     /* This class is needed for EF Core console commands
      * (like Add-Migration and Update-Database commands) */
-    public class ElsaDemoMigrationsDbContextFactory : IDesignTimeDbContextFactory<ElsaDemoMigrationsDbContext>
+    public class ElsaDemoDbContextFactory : IDesignTimeDbContextFactory<ElsaDemoDbContext>
     {
-        public ElsaDemoMigrationsDbContext CreateDbContext(string[] args)
+        public ElsaDemoDbContext CreateDbContext(string[] args)
         {
             ElsaDemoEfCoreEntityExtensionMappings.Configure();
 
             var configuration = BuildConfiguration();
 
-            var builder = new DbContextOptionsBuilder<ElsaDemoMigrationsDbContext>()
+            var builder = new DbContextOptionsBuilder<ElsaDemoDbContext>()
                 .UseSqlServer(configuration.GetConnectionString("Default"));
 
-            return new ElsaDemoMigrationsDbContext(builder.Options);
+            return new ElsaDemoDbContext(builder.Options);
         }
 
         private static IConfigurationRoot BuildConfiguration()

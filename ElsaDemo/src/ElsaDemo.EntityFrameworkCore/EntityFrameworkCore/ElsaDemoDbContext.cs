@@ -1,10 +1,15 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using ElsaDemo.Users;
+using Volo.Abp.AuditLogging.EntityFrameworkCore;
+using Volo.Abp.BackgroundJobs.EntityFrameworkCore;
 using Volo.Abp.Data;
 using Volo.Abp.EntityFrameworkCore;
-using Volo.Abp.EntityFrameworkCore.Modeling;
+using Volo.Abp.FeatureManagement.EntityFrameworkCore;
 using Volo.Abp.Identity;
-using Volo.Abp.Users.EntityFrameworkCore;
+using Volo.Abp.Identity.EntityFrameworkCore;
+using Volo.Abp.IdentityServer.EntityFrameworkCore;
+using Volo.Abp.PermissionManagement.EntityFrameworkCore;
+using Volo.Abp.SettingManagement.EntityFrameworkCore;
+using Volo.Abp.TenantManagement.EntityFrameworkCore;
 
 namespace ElsaDemo.EntityFrameworkCore
 {
@@ -20,7 +25,7 @@ namespace ElsaDemo.EntityFrameworkCore
     [ConnectionStringName("Default")]
     public class ElsaDemoDbContext : AbpDbContext<ElsaDemoDbContext>
     {
-        public DbSet<AppUser> Users { get; set; }
+        public DbSet<IdentityUser> Users { get; set; }
 
         /* Add DbSet properties for your Aggregate Roots / Entities here.
          * Also map them inside ElsaDemoDbContextModelCreatingExtensions.ConfigureElsaDemo
@@ -36,19 +41,16 @@ namespace ElsaDemo.EntityFrameworkCore
         {
             base.OnModelCreating(builder);
 
-            /* Configure the shared tables (with included modules) here */
+            /* Include modules to your migration db context */
 
-            builder.Entity<AppUser>(b =>
-            {
-                b.ToTable(AbpIdentityDbProperties.DbTablePrefix + "Users"); //Sharing the same table "AbpUsers" with the IdentityUser
-                
-                b.ConfigureByConvention();
-                b.ConfigureAbpUser();
-
-                /* Configure mappings for your additional properties
-                 * Also see the ElsaDemoEfCoreEntityExtensionMappings class
-                 */
-            });
+            builder.ConfigurePermissionManagement();
+            builder.ConfigureSettingManagement();
+            builder.ConfigureBackgroundJobs();
+            builder.ConfigureAuditLogging();
+            builder.ConfigureIdentity();
+            builder.ConfigureIdentityServer();
+            builder.ConfigureFeatureManagement();
+            builder.ConfigureTenantManagement();
 
             /* Configure your own tables/entities inside the ConfigureElsaDemo method */
 

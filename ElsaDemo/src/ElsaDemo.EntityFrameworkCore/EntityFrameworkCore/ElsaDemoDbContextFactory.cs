@@ -16,7 +16,7 @@ namespace ElsaDemo.EntityFrameworkCore
             var configuration = BuildConfiguration();
 
             var builder = new DbContextOptionsBuilder<ElsaDemoDbContext>()
-                .UseSqlServer(configuration.GetConnectionString("Default"));
+                .UseSqlite(configuration.GetConnectionString("Default"));
 
             return new ElsaDemoDbContext(builder.Options);
         }

@@ -38,7 +38,7 @@
     <PackageReference Include="Elsa.Activities.Http" Version="2.3.0" />
     <PackageReference Include="Elsa.Activities.Temporal.Quartz" Version="2.3.0" />
     <PackageReference Include="Elsa.Designer.Components.Web" Version="2.3.0" />
-    <PackageReference Include="Elsa.Persistence.EntityFramework.SqlServer" Version="2.3.0" />
+    <PackageReference Include="Elsa.Persistence.EntityFramework.Sqlite" Version="2.3.0" />
     <PackageReference Include="Elsa.Server.Api" Version="2.3.0" />
     <PackageReference Include="Serilog.AspNetCore" Version="4.1.0" />
     <PackageReference Include="Serilog.Sinks.Async" Version="1.4.0" />

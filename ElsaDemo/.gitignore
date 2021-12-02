@@ -252,6 +252,7 @@ paket-files/
 *.sln.iml
 
 # ElsaDemo
+elsa.sqlite.db
 src/ElsaDemo.Web/Logs/*
 src/ElsaDemo.Web.Host/Logs/*
 src/ElsaDemo.IdentityServer/Logs/*

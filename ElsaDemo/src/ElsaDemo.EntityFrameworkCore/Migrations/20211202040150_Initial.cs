@@ -11,28 +11,28 @@ namespace ElsaDemo.Migrations
                 name: "AbpAuditLogs",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    ApplicationName = table.Column<string>(type: "nvarchar(96)", maxLength: 96, nullable: true),
-                    UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
-                    TenantId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    TenantName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ImpersonatorUserId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    ImpersonatorTenantId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    ExecutionTime = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    ExecutionDuration = table.Column<int>(type: "int", nullable: false),
-                    ClientIpAddress = table.Column<string>(type: "nvarchar(64)", maxLength: 64, nullable: true),
-                    ClientName = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: true),
-                    ClientId = table.Column<string>(type: "nvarchar(64)", maxLength: 64, nullable: true),
-                    CorrelationId = table.Column<string>(type: "nvarchar(64)", maxLength: 64, nullable: true),
-                    BrowserInfo = table.Column<string>(type: "nvarchar(512)", maxLength: 512, nullable: true),
-                    HttpMethod = table.Column<string>(type: "nvarchar(16)", maxLength: 16, nullable: true),
-                    Url = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
-                    Exceptions = table.Column<string>(type: "nvarchar(4000)", maxLength: 4000, nullable: true),
-                    Comments = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
-                    HttpStatusCode = table.Column<int>(type: "int", nullable: true),
-                    ExtraProperties = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ConcurrencyStamp = table.Column<string>(type: "nvarchar(40)", maxLength: 40, nullable: true)
+                    Id = table.Column<Guid>(type: "TEXT", nullable: false),
+                    ApplicationName = table.Column<string>(type: "TEXT", maxLength: 96, nullable: true),
+                    UserId = table.Column<Guid>(type: "TEXT", nullable: true),
+                    UserName = table.Column<string>(type: "TEXT", maxLength: 256, nullable: true),
+                    TenantId = table.Column<Guid>(type: "TEXT", nullable: true),
+                    TenantName = table.Column<string>(type: "TEXT", nullable: true),
+                    ImpersonatorUserId = table.Column<Guid>(type: "TEXT", nullable: true),
+                    ImpersonatorTenantId = table.Column<Guid>(type: "TEXT", nullable: true),
+                    ExecutionTime = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    ExecutionDuration = table.Column<int>(type: "INTEGER", nullable: false),
+                    ClientIpAddress = table.Column<string>(type: "TEXT", maxLength: 64, nullable: true),
+                    ClientName = table.Column<string>(type: "TEXT", maxLength: 128, nullable: true),
+                    ClientId = table.Column<string>(type: "TEXT", maxLength: 64, nullable: true),
+                    CorrelationId = table.Column<string>(type: "TEXT", maxLength: 64, nullable: true),
+                    BrowserInfo = table.Column<string>(type: "TEXT", maxLength: 512, nullable: true),
+                    HttpMethod = table.Column<string>(type: "TEXT", maxLength: 16, nullable: true),
+                    Url = table.Column<string>(type: "TEXT", maxLength: 256, nullable: true),
+                    Exceptions = table.Column<string>(type: "TEXT", nullable: true),
+                    Comments = table.Column<string>(type: "TEXT", maxLength: 256, nullable: true),
+                    HttpStatusCode = table.Column<int>(type: "INTEGER", nullable: true),
+                    ExtraProperties = table.Column<string>(type: "TEXT", nullable: true),
+                    ConcurrencyStamp = table.Column<string>(type: "TEXT", maxLength: 40, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -43,17 +43,17 @@ namespace ElsaDemo.Migrations
                 name: "AbpBackgroundJobs",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    JobName = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
-                    JobArgs = table.Column<string>(type: "nvarchar(max)", maxLength: 1048576, nullable: false),
-                    TryCount = table.Column<short>(type: "smallint", nullable: false, defaultValue: (short)0),
-                    CreationTime = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    NextTryTime = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    LastTryTime = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    IsAbandoned = table.Column<bool>(type: "bit", nullable: false, defaultValue: false),
-                    Priority = table.Column<byte>(type: "tinyint", nullable: false, defaultValue: (byte)15),
-                    ExtraProperties = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ConcurrencyStamp = table.Column<string>(type: "nvarchar(40)", maxLength: 40, nullable: true)
+                    Id = table.Column<Guid>(type: "TEXT", nullable: false),
+                    JobName = table.Column<string>(type: "TEXT", maxLength: 128, nullable: false),
+                    JobArgs = table.Column<string>(type: "TEXT", maxLength: 1048576, nullable: false),
+                    TryCount = table.Column<short>(type: "INTEGER", nullable: false, defaultValue: (short)0),
+                    CreationTime = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    NextTryTime = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    LastTryTime = table.Column<DateTime>(type: "TEXT", nullable: true),
+                    IsAbandoned = table.Column<bool>(type: "INTEGER", nullable: false, defaultValue: false),
+                    Priority = table.Column<byte>(type: "INTEGER", nullable: false, defaultValue: (byte)15),
+                    ExtraProperties = table.Column<string>(type: "TEXT", nullable: true),
+                    ConcurrencyStamp = table.Column<string>(type: "TEXT", maxLength: 40, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -64,16 +64,16 @@ namespace ElsaDemo.Migrations
                 name: "AbpClaimTypes",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: false),
-                    Required = table.Column<bool>(type: "bit", nullable: false),
-                    IsStatic = table.Column<bool>(type: "bit", nullable: false),
-                    Regex = table.Column<string>(type: "nvarchar(512)", maxLength: 512, nullable: true),
-                    RegexDescription = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: true),
-                    Description = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
-                    ValueType = table.Column<int>(type: "int", nullable: false),
-                    ExtraProperties = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ConcurrencyStamp = table.Column<string>(type: "nvarchar(40)", maxLength: 40, nullable: true)
+                    Id = table.Column<Guid>(type: "TEXT", nullable: false),
+                    Name = table.Column<string>(type: "TEXT", maxLength: 256, nullable: false),
+                    Required = table.Column<bool>(type: "INTEGER", nullable: false),
+                    IsStatic = table.Column<bool>(type: "INTEGER", nullable: false),
+                    Regex = table.Column<string>(type: "TEXT", maxLength: 512, nullable: true),
+                    RegexDescription = table.Column<string>(type: "TEXT", maxLength: 128, nullable: true),
+                    Description = table.Column<string>(type: "TEXT", maxLength: 256, nullable: true),
+                    ValueType = table.Column<int>(type: "INTEGER", nullable: false),
+                    ExtraProperties = table.Column<string>(type: "TEXT", nullable: true),
+                    ConcurrencyStamp = table.Column<string>(type: "TEXT", maxLength: 40, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -84,11 +84,11 @@ namespace ElsaDemo.Migrations
                 name: "AbpFeatureValues",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
-                    Value = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
-                    ProviderName = table.Column<string>(type: "nvarchar(64)", maxLength: 64, nullable: true),
-                    ProviderKey = table.Column<string>(type: "nvarchar(64)", maxLength: 64, nullable: true)
+                    Id = table.Column<Guid>(type: "TEXT", nullable: false),
+                    Name = table.Column<string>(type: "TEXT", maxLength: 128, nullable: false),
+                    Value = table.Column<string>(type: "TEXT", maxLength: 128, nullable: false),
+                    ProviderName = table.Column<string>(type: "TEXT", maxLength: 64, nullable: true),
+                    ProviderKey = table.Column<string>(type: "TEXT", maxLength: 64, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -99,11 +99,11 @@ namespace ElsaDemo.Migrations
                 name: "AbpLinkUsers",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    SourceUserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    SourceTenantId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    TargetUserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    TargetTenantId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
+                    Id = table.Column<Guid>(type: "TEXT", nullable: false),
+                    SourceUserId = table.Column<Guid>(type: "TEXT", nullable: false),
+                    SourceTenantId = table.Column<Guid>(type: "TEXT", nullable: true),
+                    TargetUserId = table.Column<Guid>(type: "TEXT", nullable: false),
+                    TargetTenantId = table.Column<Guid>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -114,20 +114,20 @@ namespace ElsaDemo.Migrations
                 name: "AbpOrganizationUnits",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    TenantId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    ParentId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    Code = table.Column<string>(type: "nvarchar(95)", maxLength: 95, nullable: false),
-                    DisplayName = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
-                    ExtraProperties = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ConcurrencyStamp = table.Column<string>(type: "nvarchar(40)", maxLength: 40, nullable: true),
-                    CreationTime = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    CreatorId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    LastModificationTime = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    LastModifierId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    IsDeleted = table.Column<bool>(type: "bit", nullable: false, defaultValue: false),
-                    DeleterId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    DeletionTime = table.Column<DateTime>(type: "datetime2", nullable: true)
+                    Id = table.Column<Guid>(type: "TEXT", nullable: false),
+                    TenantId = table.Column<Guid>(type: "TEXT", nullable: true),
+                    ParentId = table.Column<Guid>(type: "TEXT", nullable: true),
+                    Code = table.Column<string>(type: "TEXT", maxLength: 95, nullable: false),
+                    DisplayName = table.Column<string>(type: "TEXT", maxLength: 128, nullable: false),
+                    ExtraProperties = table.Column<string>(type: "TEXT", nullable: true),
+                    ConcurrencyStamp = table.Column<string>(type: "TEXT", maxLength: 40, nullable: true),
+                    CreationTime = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    CreatorId = table.Column<Guid>(type: "TEXT", nullable: true),
+                    LastModificationTime = table.Column<DateTime>(type: "TEXT", nullable: true),
+                    LastModifierId = table.Column<Guid>(type: "TEXT", nullable: true),
+                    IsDeleted = table.Column<bool>(type: "INTEGER", nullable: false, defaultValue: false),
+                    DeleterId = table.Column<Guid>(type: "TEXT", nullable: true),
+                    DeletionTime = table.Column<DateTime>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -144,11 +144,11 @@ namespace ElsaDemo.Migrations
                 name: "AbpPermissionGrants",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    TenantId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    Name = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
-                    ProviderName = table.Column<string>(type: "nvarchar(64)", maxLength: 64, nullable: false),
-                    ProviderKey = table.Column<string>(type: "nvarchar(64)", maxLength: 64, nullable: false)
+                    Id = table.Column<Guid>(type: "TEXT", nullable: false),
+                    TenantId = table.Column<Guid>(type: "TEXT", nullable: true),
+                    Name = table.Column<string>(type: "TEXT", maxLength: 128, nullable: false),
+                    ProviderName = table.Column<string>(type: "TEXT", maxLength: 64, nullable: false),
+                    ProviderKey = table.Column<string>(type: "TEXT", maxLength: 64, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -159,15 +159,15 @@ namespace ElsaDemo.Migrations
                 name: "AbpRoles",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    TenantId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    Name = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: false),
-                    NormalizedName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: false),
-                    IsDefault = table.Column<bool>(type: "bit", nullable: false),
-                    IsStatic = table.Column<bool>(type: "bit", nullable: false),
-                    IsPublic = table.Column<bool>(type: "bit", nullable: false),
-                    ExtraProperties = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ConcurrencyStamp = table.Column<string>(type: "nvarchar(40)", maxLength: 40, nullable: true)
+                    Id = table.Column<Guid>(type: "TEXT", nullable: false),
+                    TenantId = table.Column<Guid>(type: "TEXT", nullable: true),
+                    Name = table.Column<string>(type: "TEXT", maxLength: 256, nullable: false),
+                    NormalizedName = table.Column<string>(type: "TEXT", maxLength: 256, nullable: false),
+                    IsDefault = table.Column<bool>(type: "INTEGER", nullable: false),
+                    IsStatic = table.Column<bool>(type: "INTEGER", nullable: false),
+                    IsPublic = table.Column<bool>(type: "INTEGER", nullable: false),
+                    ExtraProperties = table.Column<string>(type: "TEXT", nullable: true),
+                    ConcurrencyStamp = table.Column<string>(type: "TEXT", maxLength: 40, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -178,21 +178,21 @@ namespace ElsaDemo.Migrations
                 name: "AbpSecurityLogs",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    TenantId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    ApplicationName = table.Column<string>(type: "nvarchar(96)", maxLength: 96, nullable: true),
-                    Identity = table.Column<string>(type: "nvarchar(96)", maxLength: 96, nullable: true),
-                    Action = table.Column<string>(type: "nvarchar(96)", maxLength: 96, nullable: true),
-                    UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
-                    TenantName = table.Column<string>(type: "nvarchar(64)", maxLength: 64, nullable: true),
-                    ClientId = table.Column<string>(type: "nvarchar(64)", maxLength: 64, nullable: true),
-                    CorrelationId = table.Column<string>(type: "nvarchar(64)", maxLength: 64, nullable: true),
-                    ClientIpAddress = table.Column<string>(type: "nvarchar(64)", maxLength: 64, nullable: true),
-                    BrowserInfo = table.Column<string>(type: "nvarchar(512)", maxLength: 512, nullable: true),
-                    CreationTime = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    ExtraProperties = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ConcurrencyStamp = table.Column<string>(type: "nvarchar(40)", maxLength: 40, nullable: true)
+                    Id = table.Column<Guid>(type: "TEXT", nullable: false),
+                    TenantId = table.Column<Guid>(type: "TEXT", nullable: true),
+                    ApplicationName = table.Column<string>(type: "TEXT", maxLength: 96, nullable: true),
+                    Identity = table.Column<string>(type: "TEXT", maxLength: 96, nullable: true),
+                    Action = table.Column<string>(type: "TEXT", maxLength: 96, nullable: true),
+                    UserId = table.Column<Guid>(type: "TEXT", nullable: true),
+                    UserName = table.Column<string>(type: "TEXT", maxLength: 256, nullable: true),
+                    TenantName = table.Column<string>(type: "TEXT", maxLength: 64, nullable: true),
+                    ClientId = table.Column<string>(type: "TEXT", maxLength: 64, nullable: true),
+                    CorrelationId = table.Column<string>(type: "TEXT", maxLength: 64, nullable: true),
+                    ClientIpAddress = table.Column<string>(type: "TEXT", maxLength: 64, nullable: true),
+                    BrowserInfo = table.Column<string>(type: "TEXT", maxLength: 512, nullable: true),
+                    CreationTime = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    ExtraProperties = table.Column<string>(type: "TEXT", nullable: true),
+                    ConcurrencyStamp = table.Column<string>(type: "TEXT", maxLength: 40, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -203,11 +203,11 @@ namespace ElsaDemo.Migrations
                 name: "AbpSettings",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
-                    Value = table.Column<string>(type: "nvarchar(2048)", maxLength: 2048, nullable: false),
-                    ProviderName = table.Column<string>(type: "nvarchar(64)", maxLength: 64, nullable: true),
-                    ProviderKey = table.Column<string>(type: "nvarchar(64)", maxLength: 64, nullable: true)
+                    Id = table.Column<Guid>(type: "TEXT", nullable: false),
+                    Name = table.Column<string>(type: "TEXT", maxLength: 128, nullable: false),
+                    Value = table.Column<string>(type: "TEXT", maxLength: 2048, nullable: false),
+                    ProviderName = table.Column<string>(type: "TEXT", maxLength: 64, nullable: true),
+                    ProviderKey = table.Column<string>(type: "TEXT", maxLength: 64, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -218,17 +218,17 @@ namespace ElsaDemo.Migrations
                 name: "AbpTenants",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(64)", maxLength: 64, nullable: false),
-                    ExtraProperties = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ConcurrencyStamp = table.Column<string>(type: "nvarchar(40)", maxLength: 40, nullable: true),
-                    CreationTime = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    CreatorId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    LastModificationTime = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    LastModifierId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    IsDeleted = table.Column<bool>(type: "bit", nullable: false, defaultValue: false),
-                    DeleterId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    DeletionTime = table.Column<DateTime>(type: "datetime2", nullable: true)
+                    Id = table.Column<Guid>(type: "TEXT", nullable: false),
+                    Name = table.Column<string>(type: "TEXT", maxLength: 64, nullable: false),
+                    ExtraProperties = table.Column<string>(type: "TEXT", nullable: true),
+                    ConcurrencyStamp = table.Column<string>(type: "TEXT", maxLength: 40, nullable: true),
+                    CreationTime = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    CreatorId = table.Column<Guid>(type: "TEXT", nullable: true),
+                    LastModificationTime = table.Column<DateTime>(type: "TEXT", nullable: true),
+                    LastModifierId = table.Column<Guid>(type: "TEXT", nullable: true),
+                    IsDeleted = table.Column<bool>(type: "INTEGER", nullable: false, defaultValue: false),
+                    DeleterId = table.Column<Guid>(type: "TEXT", nullable: true),
+                    DeletionTime = table.Column<DateTime>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -239,33 +239,33 @@ namespace ElsaDemo.Migrations
                 name: "AbpUsers",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    TenantId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: false),
-                    NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(64)", maxLength: 64, nullable: true),
-                    Surname = table.Column<string>(type: "nvarchar(64)", maxLength: 64, nullable: true),
-                    Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: false),
-                    NormalizedEmail = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: false),
-                    EmailConfirmed = table.Column<bool>(type: "bit", nullable: false, defaultValue: false),
-                    PasswordHash = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
-                    SecurityStamp = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: false),
-                    IsExternal = table.Column<bool>(type: "bit", nullable: false, defaultValue: false),
-                    PhoneNumber = table.Column<string>(type: "nvarchar(16)", maxLength: 16, nullable: true),
-                    PhoneNumberConfirmed = table.Column<bool>(type: "bit", nullable: false, defaultValue: false),
-                    TwoFactorEnabled = table.Column<bool>(type: "bit", nullable: false, defaultValue: false),
-                    LockoutEnd = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true),
-                    LockoutEnabled = table.Column<bool>(type: "bit", nullable: false, defaultValue: false),
-                    AccessFailedCount = table.Column<int>(type: "int", nullable: false, defaultValue: 0),
-                    ExtraProperties = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ConcurrencyStamp = table.Column<string>(type: "nvarchar(40)", maxLength: 40, nullable: true),
-                    CreationTime = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    CreatorId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    LastModificationTime = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    LastModifierId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    IsDeleted = table.Column<bool>(type: "bit", nullable: false, defaultValue: false),
-                    DeleterId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    DeletionTime = table.Column<DateTime>(type: "datetime2", nullable: true)
+                    Id = table.Column<Guid>(type: "TEXT", nullable: false),
+                    TenantId = table.Column<Guid>(type: "TEXT", nullable: true),
+                    UserName = table.Column<string>(type: "TEXT", maxLength: 256, nullable: false),
+                    NormalizedUserName = table.Column<string>(type: "TEXT", maxLength: 256, nullable: false),
+                    Name = table.Column<string>(type: "TEXT", maxLength: 64, nullable: true),
+                    Surname = table.Column<string>(type: "TEXT", maxLength: 64, nullable: true),
+                    Email = table.Column<string>(type: "TEXT", maxLength: 256, nullable: false),
+                    NormalizedEmail = table.Column<string>(type: "TEXT", maxLength: 256, nullable: false),
+                    EmailConfirmed = table.Column<bool>(type: "INTEGER", nullable: false, defaultValue: false),
+                    PasswordHash = table.Column<string>(type: "TEXT", maxLength: 256, nullable: true),
+                    SecurityStamp = table.Column<string>(type: "TEXT", maxLength: 256, nullable: false),
+                    IsExternal = table.Column<bool>(type: "INTEGER", nullable: false, defaultValue: false),
+                    PhoneNumber = table.Column<string>(type: "TEXT", maxLength: 16, nullable: true),
+                    PhoneNumberConfirmed = table.Column<bool>(type: "INTEGER", nullable: false, defaultValue: false),
+                    TwoFactorEnabled = table.Column<bool>(type: "INTEGER", nullable: false, defaultValue: false),
+                    LockoutEnd = table.Column<DateTimeOffset>(type: "TEXT", nullable: true),
+                    LockoutEnabled = table.Column<bool>(type: "INTEGER", nullable: false, defaultValue: false),
+                    AccessFailedCount = table.Column<int>(type: "INTEGER", nullable: false, defaultValue: 0),
+                    ExtraProperties = table.Column<string>(type: "TEXT", nullable: true),
+                    ConcurrencyStamp = table.Column<string>(type: "TEXT", maxLength: 40, nullable: true),
+                    CreationTime = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    CreatorId = table.Column<Guid>(type: "TEXT", nullable: true),
+                    LastModificationTime = table.Column<DateTime>(type: "TEXT", nullable: true),
+                    LastModifierId = table.Column<Guid>(type: "TEXT", nullable: true),
+                    IsDeleted = table.Column<bool>(type: "INTEGER", nullable: false, defaultValue: false),
+                    DeleterId = table.Column<Guid>(type: "TEXT", nullable: true),
+                    DeletionTime = table.Column<DateTime>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -276,22 +276,22 @@ namespace ElsaDemo.Migrations
                 name: "IdentityServerApiResources",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
-                    DisplayName = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: true),
-                    Description = table.Column<string>(type: "nvarchar(1000)", maxLength: 1000, nullable: true),
-                    Enabled = table.Column<bool>(type: "bit", nullable: false),
-                    AllowedAccessTokenSigningAlgorithms = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
-                    ShowInDiscoveryDocument = table.Column<bool>(type: "bit", nullable: false),
-                    ExtraProperties = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ConcurrencyStamp = table.Column<string>(type: "nvarchar(40)", maxLength: 40, nullable: true),
-                    CreationTime = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    CreatorId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    LastModificationTime = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    LastModifierId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    IsDeleted = table.Column<bool>(type: "bit", nullable: false, defaultValue: false),
-                    DeleterId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    DeletionTime = table.Column<DateTime>(type: "datetime2", nullable: true)
+                    Id = table.Column<Guid>(type: "TEXT", nullable: false),
+                    Name = table.Column<string>(type: "TEXT", maxLength: 200, nullable: false),
+                    DisplayName = table.Column<string>(type: "TEXT", maxLength: 200, nullable: true),
+                    Description = table.Column<string>(type: "TEXT", maxLength: 1000, nullable: true),
+                    Enabled = table.Column<bool>(type: "INTEGER", nullable: false),
+                    AllowedAccessTokenSigningAlgorithms = table.Column<string>(type: "TEXT", maxLength: 100, nullable: true),
+                    ShowInDiscoveryDocument = table.Column<bool>(type: "INTEGER", nullable: false),
+                    ExtraProperties = table.Column<string>(type: "TEXT", nullable: true),
+                    ConcurrencyStamp = table.Column<string>(type: "TEXT", maxLength: 40, nullable: true),
+                    CreationTime = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    CreatorId = table.Column<Guid>(type: "TEXT", nullable: true),
+                    LastModificationTime = table.Column<DateTime>(type: "TEXT", nullable: true),
+                    LastModifierId = table.Column<Guid>(type: "TEXT", nullable: true),
+                    IsDeleted = table.Column<bool>(type: "INTEGER", nullable: false, defaultValue: false),
+                    DeleterId = table.Column<Guid>(type: "TEXT", nullable: true),
+                    DeletionTime = table.Column<DateTime>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -302,23 +302,23 @@ namespace ElsaDemo.Migrations
                 name: "IdentityServerApiScopes",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Enabled = table.Column<bool>(type: "bit", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
-                    DisplayName = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: true),
-                    Description = table.Column<string>(type: "nvarchar(1000)", maxLength: 1000, nullable: true),
-                    Required = table.Column<bool>(type: "bit", nullable: false),
-                    Emphasize = table.Column<bool>(type: "bit", nullable: false),
-                    ShowInDiscoveryDocument = table.Column<bool>(type: "bit", nullable: false),
-                    ExtraProperties = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ConcurrencyStamp = table.Column<string>(type: "nvarchar(40)", maxLength: 40, nullable: true),
-                    CreationTime = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    CreatorId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    LastModificationTime = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    LastModifierId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    IsDeleted = table.Column<bool>(type: "bit", nullable: false, defaultValue: false),
-                    DeleterId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    DeletionTime = table.Column<DateTime>(type: "datetime2", nullable: true)
+                    Id = table.Column<Guid>(type: "TEXT", nullable: false),
+                    Enabled = table.Column<bool>(type: "INTEGER", nullable: false),
+                    Name = table.Column<string>(type: "TEXT", maxLength: 200, nullable: false),
+                    DisplayName = table.Column<string>(type: "TEXT", maxLength: 200, nullable: true),
+                    Description = table.Column<string>(type: "TEXT", maxLength: 1000, nullable: true),
+                    Required = table.Column<bool>(type: "INTEGER", nullable: false),
+                    Emphasize = table.Column<bool>(type: "INTEGER", nullable: false),
+                    ShowInDiscoveryDocument = table.Column<bool>(type: "INTEGER", nullable: false),
+                    ExtraProperties = table.Column<string>(type: "TEXT", nullable: true),
+                    ConcurrencyStamp = table.Column<string>(type: "TEXT", maxLength: 40, nullable: true),
+                    CreationTime = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    CreatorId = table.Column<Guid>(type: "TEXT", nullable: true),
+                    LastModificationTime = table.Column<DateTime>(type: "TEXT", nullable: true),
+                    LastModifierId = table.Column<Guid>(type: "TEXT", nullable: true),
+                    IsDeleted = table.Column<bool>(type: "INTEGER", nullable: false, defaultValue: false),
+                    DeleterId = table.Column<Guid>(type: "TEXT", nullable: true),
+                    DeletionTime = table.Column<DateTime>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -329,55 +329,55 @@ namespace ElsaDemo.Migrations
                 name: "IdentityServerClients",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    ClientId = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
-                    ClientName = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: true),
-                    Description = table.Column<string>(type: "nvarchar(1000)", maxLength: 1000, nullable: true),
-                    ClientUri = table.Column<string>(type: "nvarchar(2000)", maxLength: 2000, nullable: true),
-                    LogoUri = table.Column<string>(type: "nvarchar(2000)", maxLength: 2000, nullable: true),
-                    Enabled = table.Column<bool>(type: "bit", nullable: false),
-                    ProtocolType = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
-                    RequireClientSecret = table.Column<bool>(type: "bit", nullable: false),
-                    RequireConsent = table.Column<bool>(type: "bit", nullable: false),
-                    AllowRememberConsent = table.Column<bool>(type: "bit", nullable: false),
-                    AlwaysIncludeUserClaimsInIdToken = table.Column<bool>(type: "bit", nullable: false),
-                    RequirePkce = table.Column<bool>(type: "bit", nullable: false),
-                    AllowPlainTextPkce = table.Column<bool>(type: "bit", nullable: false),
-                    RequireRequestObject = table.Column<bool>(type: "bit", nullable: false),
-                    AllowAccessTokensViaBrowser = table.Column<bool>(type: "bit", nullable: false),
-                    FrontChannelLogoutUri = table.Column<string>(type: "nvarchar(2000)", maxLength: 2000, nullable: true),
-                    FrontChannelLogoutSessionRequired = table.Column<bool>(type: "bit", nullable: false),
-                    BackChannelLogoutUri = table.Column<string>(type: "nvarchar(2000)", maxLength: 2000, nullable: true),
-                    BackChannelLogoutSessionRequired = table.Column<bool>(type: "bit", nullable: false),
-                    AllowOfflineAccess = table.Column<bool>(type: "bit", nullable: false),
-                    IdentityTokenLifetime = table.Column<int>(type: "int", nullable: false),
-                    AllowedIdentityTokenSigningAlgorithms = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
-                    AccessTokenLifetime = table.Column<int>(type: "int", nullable: false),
-                    AuthorizationCodeLifetime = table.Column<int>(type: "int", nullable: false),
-                    ConsentLifetime = table.Column<int>(type: "int", nullable: true),
-                    AbsoluteRefreshTokenLifetime = table.Column<int>(type: "int", nullable: false),
-                    SlidingRefreshTokenLifetime = table.Column<int>(type: "int", nullable: false),
-                    RefreshTokenUsage = table.Column<int>(type: "int", nullable: false),
-                    UpdateAccessTokenClaimsOnRefresh = table.Column<bool>(type: "bit", nullable: false),
-                    RefreshTokenExpiration = table.Column<int>(type: "int", nullable: false),
-                    AccessTokenType = table.Column<int>(type: "int", nullable: false),
-                    EnableLocalLogin = table.Column<bool>(type: "bit", nullable: false),
-                    IncludeJwtId = table.Column<bool>(type: "bit", nullable: false),
-                    AlwaysSendClientClaims = table.Column<bool>(type: "bit", nullable: false),
-                    ClientClaimsPrefix = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: true),
-                    PairWiseSubjectSalt = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: true),
-                    UserSsoLifetime = table.Column<int>(type: "int", nullable: true),
-                    UserCodeType = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
-                    DeviceCodeLifetime = table.Column<int>(type: "int", nullable: false),
-                    ExtraProperties = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ConcurrencyStamp = table.Column<string>(type: "nvarchar(40)", maxLength: 40, nullable: true),
-                    CreationTime = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    CreatorId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    LastModificationTime = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    LastModifierId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    IsDeleted = table.Column<bool>(type: "bit", nullable: false, defaultValue: false),
-                    DeleterId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    DeletionTime = table.Column<DateTime>(type: "datetime2", nullable: true)
+                    Id = table.Column<Guid>(type: "TEXT", nullable: false),
+                    ClientId = table.Column<string>(type: "TEXT", maxLength: 200, nullable: false),
+                    ClientName = table.Column<string>(type: "TEXT", maxLength: 200, nullable: true),
+                    Description = table.Column<string>(type: "TEXT", maxLength: 1000, nullable: true),
+                    ClientUri = table.Column<string>(type: "TEXT", maxLength: 2000, nullable: true),
+                    LogoUri = table.Column<string>(type: "TEXT", maxLength: 2000, nullable: true),
+                    Enabled = table.Column<bool>(type: "INTEGER", nullable: false),
+                    ProtocolType = table.Column<string>(type: "TEXT", maxLength: 200, nullable: false),
+                    RequireClientSecret = table.Column<bool>(type: "INTEGER", nullable: false),
+                    RequireConsent = table.Column<bool>(type: "INTEGER", nullable: false),
+                    AllowRememberConsent = table.Column<bool>(type: "INTEGER", nullable: false),
+                    AlwaysIncludeUserClaimsInIdToken = table.Column<bool>(type: "INTEGER", nullable: false),
+                    RequirePkce = table.Column<bool>(type: "INTEGER", nullable: false),
+                    AllowPlainTextPkce = table.Column<bool>(type: "INTEGER", nullable: false),
+                    RequireRequestObject = table.Column<bool>(type: "INTEGER", nullable: false),
+                    AllowAccessTokensViaBrowser = table.Column<bool>(type: "INTEGER", nullable: false),
+                    FrontChannelLogoutUri = table.Column<string>(type: "TEXT", maxLength: 2000, nullable: true),
+                    FrontChannelLogoutSessionRequired = table.Column<bool>(type: "INTEGER", nullable: false),
+                    BackChannelLogoutUri = table.Column<string>(type: "TEXT", maxLength: 2000, nullable: true),
+                    BackChannelLogoutSessionRequired = table.Column<bool>(type: "INTEGER", nullable: false),
+                    AllowOfflineAccess = table.Column<bool>(type: "INTEGER", nullable: false),
+                    IdentityTokenLifetime = table.Column<int>(type: "INTEGER", nullable: false),
+                    AllowedIdentityTokenSigningAlgorithms = table.Column<string>(type: "TEXT", maxLength: 100, nullable: true),
+                    AccessTokenLifetime = table.Column<int>(type: "INTEGER", nullable: false),
+                    AuthorizationCodeLifetime = table.Column<int>(type: "INTEGER", nullable: false),
+                    ConsentLifetime = table.Column<int>(type: "INTEGER", nullable: true),
+                    AbsoluteRefreshTokenLifetime = table.Column<int>(type: "INTEGER", nullable: false),
+                    SlidingRefreshTokenLifetime = table.Column<int>(type: "INTEGER", nullable: false),
+                    RefreshTokenUsage = table.Column<int>(type: "INTEGER", nullable: false),
+                    UpdateAccessTokenClaimsOnRefresh = table.Column<bool>(type: "INTEGER", nullable: false),
+                    RefreshTokenExpiration = table.Column<int>(type: "INTEGER", nullable: false),
+                    AccessTokenType = table.Column<int>(type: "INTEGER", nullable: false),
+                    EnableLocalLogin = table.Column<bool>(type: "INTEGER", nullable: false),
+                    IncludeJwtId = table.Column<bool>(type: "INTEGER", nullable: false),
+                    AlwaysSendClientClaims = table.Column<bool>(type: "INTEGER", nullable: false),
+                    ClientClaimsPrefix = table.Column<string>(type: "TEXT", maxLength: 200, nullable: true),
+                    PairWiseSubjectSalt = table.Column<string>(type: "TEXT", maxLength: 200, nullable: true),
+                    UserSsoLifetime = table.Column<int>(type: "INTEGER", nullable: true),
+                    UserCodeType = table.Column<string>(type: "TEXT", maxLength: 100, nullable: true),
+                    DeviceCodeLifetime = table.Column<int>(type: "INTEGER", nullable: false),
+                    ExtraProperties = table.Column<string>(type: "TEXT", nullable: true),
+                    ConcurrencyStamp = table.Column<string>(type: "TEXT", maxLength: 40, nullable: true),
+                    CreationTime = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    CreatorId = table.Column<Guid>(type: "TEXT", nullable: true),
+                    LastModificationTime = table.Column<DateTime>(type: "TEXT", nullable: true),
+                    LastModifierId = table.Column<Guid>(type: "TEXT", nullable: true),
+                    IsDeleted = table.Column<bool>(type: "INTEGER", nullable: false, defaultValue: false),
+                    DeleterId = table.Column<Guid>(type: "TEXT", nullable: true),
+                    DeletionTime = table.Column<DateTime>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -388,19 +388,19 @@ namespace ElsaDemo.Migrations
                 name: "IdentityServerDeviceFlowCodes",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    DeviceCode = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
-                    UserCode = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
-                    SubjectId = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: true),
-                    SessionId = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
-                    ClientId = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: true),
-                    Expiration = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Data = table.Column<string>(type: "nvarchar(max)", maxLength: 50000, nullable: false),
-                    ExtraProperties = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ConcurrencyStamp = table.Column<string>(type: "nvarchar(40)", maxLength: 40, nullable: true),
-                    CreationTime = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    CreatorId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
+                    Id = table.Column<Guid>(type: "TEXT", nullable: false),
+                    DeviceCode = table.Column<string>(type: "TEXT", maxLength: 200, nullable: false),
+                    UserCode = table.Column<string>(type: "TEXT", maxLength: 200, nullable: false),
+                    SubjectId = table.Column<string>(type: "TEXT", maxLength: 200, nullable: true),
+                    SessionId = table.Column<string>(type: "TEXT", maxLength: 100, nullable: true),
+                    ClientId = table.Column<string>(type: "TEXT", maxLength: 200, nullable: false),
+                    Description = table.Column<string>(type: "TEXT", maxLength: 200, nullable: true),
+                    Expiration = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    Data = table.Column<string>(type: "TEXT", maxLength: 50000, nullable: false),
+                    ExtraProperties = table.Column<string>(type: "TEXT", nullable: true),
+                    ConcurrencyStamp = table.Column<string>(type: "TEXT", maxLength: 40, nullable: true),
+                    CreationTime = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    CreatorId = table.Column<Guid>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -411,23 +411,23 @@ namespace ElsaDemo.Migrations
                 name: "IdentityServerIdentityResources",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
-                    DisplayName = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: true),
-                    Description = table.Column<string>(type: "nvarchar(1000)", maxLength: 1000, nullable: true),
-                    Enabled = table.Column<bool>(type: "bit", nullable: false),
-                    Required = table.Column<bool>(type: "bit", nullable: false),
-                    Emphasize = table.Column<bool>(type: "bit", nullable: false),
-                    ShowInDiscoveryDocument = table.Column<bool>(type: "bit", nullable: false),
-                    ExtraProperties = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ConcurrencyStamp = table.Column<string>(type: "nvarchar(40)", maxLength: 40, nullable: true),
-                    CreationTime = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    CreatorId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    LastModificationTime = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    LastModifierId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    IsDeleted = table.Column<bool>(type: "bit", nullable: false, defaultValue: false),
-                    DeleterId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    DeletionTime = table.Column<DateTime>(type: "datetime2", nullable: true)
+                    Id = table.Column<Guid>(type: "TEXT", nullable: false),
+                    Name = table.Column<string>(type: "TEXT", maxLength: 200, nullable: false),
+                    DisplayName = table.Column<string>(type: "TEXT", maxLength: 200, nullable: true),
+                    Description = table.Column<string>(type: "TEXT", maxLength: 1000, nullable: true),
+                    Enabled = table.Column<bool>(type: "INTEGER", nullable: false),
+                    Required = table.Column<bool>(type: "INTEGER", nullable: false),
+                    Emphasize = table.Column<bool>(type: "INTEGER", nullable: false),
+                    ShowInDiscoveryDocument = table.Column<bool>(type: "INTEGER", nullable: false),
+                    ExtraProperties = table.Column<string>(type: "TEXT", nullable: true),
+                    ConcurrencyStamp = table.Column<string>(type: "TEXT", maxLength: 40, nullable: true),
+                    CreationTime = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    CreatorId = table.Column<Guid>(type: "TEXT", nullable: true),
+                    LastModificationTime = table.Column<DateTime>(type: "TEXT", nullable: true),
+                    LastModifierId = table.Column<Guid>(type: "TEXT", nullable: true),
+                    IsDeleted = table.Column<bool>(type: "INTEGER", nullable: false, defaultValue: false),
+                    DeleterId = table.Column<Guid>(type: "TEXT", nullable: true),
+                    DeletionTime = table.Column<DateTime>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -438,19 +438,19 @@ namespace ElsaDemo.Migrations
                 name: "IdentityServerPersistedGrants",
                 columns: table => new
                 {
-                    Key = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
-                    Type = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    SubjectId = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: true),
-                    SessionId = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
-                    ClientId = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: true),
-                    CreationTime = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Expiration = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    ConsumedTime = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    Data = table.Column<string>(type: "nvarchar(max)", maxLength: 50000, nullable: false),
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    ExtraProperties = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ConcurrencyStamp = table.Column<string>(type: "nvarchar(40)", maxLength: 40, nullable: true)
+                    Key = table.Column<string>(type: "TEXT", maxLength: 200, nullable: false),
+                    Type = table.Column<string>(type: "TEXT", maxLength: 50, nullable: false),
+                    SubjectId = table.Column<string>(type: "TEXT", maxLength: 200, nullable: true),
+                    SessionId = table.Column<string>(type: "TEXT", maxLength: 100, nullable: true),
+                    ClientId = table.Column<string>(type: "TEXT", maxLength: 200, nullable: false),
+                    Description = table.Column<string>(type: "TEXT", maxLength: 200, nullable: true),
+                    CreationTime = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    Expiration = table.Column<DateTime>(type: "TEXT", nullable: true),
+                    ConsumedTime = table.Column<DateTime>(type: "TEXT", nullable: true),
+                    Data = table.Column<string>(type: "TEXT", maxLength: 50000, nullable: false),
+                    Id = table.Column<Guid>(type: "TEXT", nullable: false),
+                    ExtraProperties = table.Column<string>(type: "TEXT", nullable: true),
+                    ConcurrencyStamp = table.Column<string>(type: "TEXT", maxLength: 40, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -461,15 +461,15 @@ namespace ElsaDemo.Migrations
                 name: "AbpAuditLogActions",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    TenantId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    AuditLogId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    ServiceName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
-                    MethodName = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: true),
-                    Parameters = table.Column<string>(type: "nvarchar(2000)", maxLength: 2000, nullable: true),
-                    ExecutionTime = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    ExecutionDuration = table.Column<int>(type: "int", nullable: false),
-                    ExtraProperties = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    Id = table.Column<Guid>(type: "TEXT", nullable: false),
+                    TenantId = table.Column<Guid>(type: "TEXT", nullable: true),
+                    AuditLogId = table.Column<Guid>(type: "TEXT", nullable: false),
+                    ServiceName = table.Column<string>(type: "TEXT", maxLength: 256, nullable: true),
+                    MethodName = table.Column<string>(type: "TEXT", maxLength: 128, nullable: true),
+                    Parameters = table.Column<string>(type: "TEXT", maxLength: 2000, nullable: true),
+                    ExecutionTime = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    ExecutionDuration = table.Column<int>(type: "INTEGER", nullable: false),
+                    ExtraProperties = table.Column<string>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -486,15 +486,15 @@ namespace ElsaDemo.Migrations
                 name: "AbpEntityChanges",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    AuditLogId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    TenantId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    ChangeTime = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    ChangeType = table.Column<byte>(type: "tinyint", nullable: false),
-                    EntityTenantId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    EntityId = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
-                    EntityTypeFullName = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
-                    ExtraProperties = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    Id = table.Column<Guid>(type: "TEXT", nullable: false),
+                    AuditLogId = table.Column<Guid>(type: "TEXT", nullable: false),
+                    TenantId = table.Column<Guid>(type: "TEXT", nullable: true),
+                    ChangeTime = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    ChangeType = table.Column<byte>(type: "INTEGER", nullable: false),
+                    EntityTenantId = table.Column<Guid>(type: "TEXT", nullable: true),
+                    EntityId = table.Column<string>(type: "TEXT", maxLength: 128, nullable: false),
+                    EntityTypeFullName = table.Column<string>(type: "TEXT", maxLength: 128, nullable: false),
+                    ExtraProperties = table.Column<string>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -511,11 +511,11 @@ namespace ElsaDemo.Migrations
                 name: "AbpOrganizationUnitRoles",
                 columns: table => new
                 {
-                    RoleId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    OrganizationUnitId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    TenantId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    CreationTime = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    CreatorId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
+                    RoleId = table.Column<Guid>(type: "TEXT", nullable: false),
+                    OrganizationUnitId = table.Column<Guid>(type: "TEXT", nullable: false),
+                    TenantId = table.Column<Guid>(type: "TEXT", nullable: true),
+                    CreationTime = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    CreatorId = table.Column<Guid>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -538,11 +538,11 @@ namespace ElsaDemo.Migrations
                 name: "AbpRoleClaims",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    RoleId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    TenantId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    ClaimType = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: false),
-                    ClaimValue = table.Column<string>(type: "nvarchar(1024)", maxLength: 1024, nullable: true)
+                    Id = table.Column<Guid>(type: "TEXT", nullable: false),
+                    RoleId = table.Column<Guid>(type: "TEXT", nullable: false),
+                    TenantId = table.Column<Guid>(type: "TEXT", nullable: true),
+                    ClaimType = table.Column<string>(type: "TEXT", maxLength: 256, nullable: false),
+                    ClaimValue = table.Column<string>(type: "TEXT", maxLength: 1024, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -559,9 +559,9 @@ namespace ElsaDemo.Migrations
                 name: "AbpTenantConnectionStrings",
                 columns: table => new
                 {
-                    TenantId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(64)", maxLength: 64, nullable: false),
-                    Value = table.Column<string>(type: "nvarchar(1024)", maxLength: 1024, nullable: false)
+                    TenantId = table.Column<Guid>(type: "TEXT", nullable: false),
+                    Name = table.Column<string>(type: "TEXT", maxLength: 64, nullable: false),
+                    Value = table.Column<string>(type: "TEXT", maxLength: 1024, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -578,11 +578,11 @@ namespace ElsaDemo.Migrations
                 name: "AbpUserClaims",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    TenantId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    ClaimType = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: false),
-                    ClaimValue = table.Column<string>(type: "nvarchar(1024)", maxLength: 1024, nullable: true)
+                    Id = table.Column<Guid>(type: "TEXT", nullable: false),
+                    UserId = table.Column<Guid>(type: "TEXT", nullable: false),
+                    TenantId = table.Column<Guid>(type: "TEXT", nullable: true),
+                    ClaimType = table.Column<string>(type: "TEXT", maxLength: 256, nullable: false),
+                    ClaimValue = table.Column<string>(type: "TEXT", maxLength: 1024, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -599,11 +599,11 @@ namespace ElsaDemo.Migrations
                 name: "AbpUserLogins",
                 columns: table => new
                 {
-                    UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    LoginProvider = table.Column<string>(type: "nvarchar(64)", maxLength: 64, nullable: false),
-                    TenantId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    ProviderKey = table.Column<string>(type: "nvarchar(196)", maxLength: 196, nullable: false),
-                    ProviderDisplayName = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: true)
+                    UserId = table.Column<Guid>(type: "TEXT", nullable: false),
+                    LoginProvider = table.Column<string>(type: "TEXT", maxLength: 64, nullable: false),
+                    TenantId = table.Column<Guid>(type: "TEXT", nullable: true),
+                    ProviderKey = table.Column<string>(type: "TEXT", maxLength: 196, nullable: false),
+                    ProviderDisplayName = table.Column<string>(type: "TEXT", maxLength: 128, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -620,11 +620,11 @@ namespace ElsaDemo.Migrations
                 name: "AbpUserOrganizationUnits",
                 columns: table => new
                 {
-                    UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    OrganizationUnitId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    TenantId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    CreationTime = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    CreatorId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
+                    UserId = table.Column<Guid>(type: "TEXT", nullable: false),
+                    OrganizationUnitId = table.Column<Guid>(type: "TEXT", nullable: false),
+                    TenantId = table.Column<Guid>(type: "TEXT", nullable: true),
+                    CreationTime = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    CreatorId = table.Column<Guid>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -647,9 +647,9 @@ namespace ElsaDemo.Migrations
                 name: "AbpUserRoles",
                 columns: table => new
                 {
-                    UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    RoleId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    TenantId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
+                    UserId = table.Column<Guid>(type: "TEXT", nullable: false),
+                    RoleId = table.Column<Guid>(type: "TEXT", nullable: false),
+                    TenantId = table.Column<Guid>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -672,11 +672,11 @@ namespace ElsaDemo.Migrations
                 name: "AbpUserTokens",
                 columns: table => new
                 {
-                    UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    LoginProvider = table.Column<string>(type: "nvarchar(64)", maxLength: 64, nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
-                    TenantId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    Value = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    UserId = table.Column<Guid>(type: "TEXT", nullable: false),
+                    LoginProvider = table.Column<string>(type: "TEXT", maxLength: 64, nullable: false),
+                    Name = table.Column<string>(type: "TEXT", maxLength: 128, nullable: false),
+                    TenantId = table.Column<Guid>(type: "TEXT", nullable: true),
+                    Value = table.Column<string>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -693,8 +693,8 @@ namespace ElsaDemo.Migrations
                 name: "IdentityServerApiResourceClaims",
                 columns: table => new
                 {
-                    Type = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
-                    ApiResourceId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                    Type = table.Column<string>(type: "TEXT", maxLength: 200, nullable: false),
+                    ApiResourceId = table.Column<Guid>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -711,9 +711,9 @@ namespace ElsaDemo.Migrations
                 name: "IdentityServerApiResourceProperties",
                 columns: table => new
                 {
-                    ApiResourceId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Key = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: false),
-                    Value = table.Column<string>(type: "nvarchar(2000)", maxLength: 2000, nullable: false)
+                    ApiResourceId = table.Column<Guid>(type: "TEXT", nullable: false),
+                    Key = table.Column<string>(type: "TEXT", maxLength: 250, nullable: false),
+                    Value = table.Column<string>(type: "TEXT", maxLength: 2000, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -730,8 +730,8 @@ namespace ElsaDemo.Migrations
                 name: "IdentityServerApiResourceScopes",
                 columns: table => new
                 {
-                    ApiResourceId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Scope = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false)
+                    ApiResourceId = table.Column<Guid>(type: "TEXT", nullable: false),
+                    Scope = table.Column<string>(type: "TEXT", maxLength: 200, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -748,11 +748,11 @@ namespace ElsaDemo.Migrations
                 name: "IdentityServerApiResourceSecrets",
                 columns: table => new
                 {
-                    Type = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: false),
-                    Value = table.Column<string>(type: "nvarchar(4000)", maxLength: 4000, nullable: false),
-                    ApiResourceId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(1000)", maxLength: 1000, nullable: true),
-                    Expiration = table.Column<DateTime>(type: "datetime2", nullable: true)
+                    Type = table.Column<string>(type: "TEXT", maxLength: 250, nullable: false),
+                    Value = table.Column<string>(type: "TEXT", maxLength: 4000, nullable: false),
+                    ApiResourceId = table.Column<Guid>(type: "TEXT", nullable: false),
+                    Description = table.Column<string>(type: "TEXT", maxLength: 1000, nullable: true),
+                    Expiration = table.Column<DateTime>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -769,8 +769,8 @@ namespace ElsaDemo.Migrations
                 name: "IdentityServerApiScopeClaims",
                 columns: table => new
                 {
-                    Type = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
-                    ApiScopeId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                    Type = table.Column<string>(type: "TEXT", maxLength: 200, nullable: false),
+                    ApiScopeId = table.Column<Guid>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -787,9 +787,9 @@ namespace ElsaDemo.Migrations
                 name: "IdentityServerApiScopeProperties",
                 columns: table => new
                 {
-                    ApiScopeId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Key = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: false),
-                    Value = table.Column<string>(type: "nvarchar(2000)", maxLength: 2000, nullable: false)
+                    ApiScopeId = table.Column<Guid>(type: "TEXT", nullable: false),
+                    Key = table.Column<string>(type: "TEXT", maxLength: 250, nullable: false),
+                    Value = table.Column<string>(type: "TEXT", maxLength: 2000, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -806,9 +806,9 @@ namespace ElsaDemo.Migrations
                 name: "IdentityServerClientClaims",
                 columns: table => new
                 {
-                    ClientId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Type = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: false),
-                    Value = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: false)
+                    ClientId = table.Column<Guid>(type: "TEXT", nullable: false),
+                    Type = table.Column<string>(type: "TEXT", maxLength: 250, nullable: false),
+                    Value = table.Column<string>(type: "TEXT", maxLength: 250, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -825,8 +825,8 @@ namespace ElsaDemo.Migrations
                 name: "IdentityServerClientCorsOrigins",
                 columns: table => new
                 {
-                    ClientId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Origin = table.Column<string>(type: "nvarchar(150)", maxLength: 150, nullable: false)
+                    ClientId = table.Column<Guid>(type: "TEXT", nullable: false),
+                    Origin = table.Column<string>(type: "TEXT", maxLength: 150, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -843,8 +843,8 @@ namespace ElsaDemo.Migrations
                 name: "IdentityServerClientGrantTypes",
                 columns: table => new
                 {
-                    ClientId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    GrantType = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: false)
+                    ClientId = table.Column<Guid>(type: "TEXT", nullable: false),
+                    GrantType = table.Column<string>(type: "TEXT", maxLength: 250, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -861,8 +861,8 @@ namespace ElsaDemo.Migrations
                 name: "IdentityServerClientIdPRestrictions",
                 columns: table => new
                 {
-                    ClientId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Provider = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false)
+                    ClientId = table.Column<Guid>(type: "TEXT", nullable: false),
+                    Provider = table.Column<string>(type: "TEXT", maxLength: 200, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -879,8 +879,8 @@ namespace ElsaDemo.Migrations
                 name: "IdentityServerClientPostLogoutRedirectUris",
                 columns: table => new
                 {
-                    ClientId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    PostLogoutRedirectUri = table.Column<string>(type: "nvarchar(2000)", maxLength: 2000, nullable: false)
+                    ClientId = table.Column<Guid>(type: "TEXT", nullable: false),
+                    PostLogoutRedirectUri = table.Column<string>(type: "TEXT", maxLength: 2000, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -897,9 +897,9 @@ namespace ElsaDemo.Migrations
                 name: "IdentityServerClientProperties",
                 columns: table => new
                 {
-                    ClientId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Key = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: false),
-                    Value = table.Column<string>(type: "nvarchar(2000)", maxLength: 2000, nullable: false)
+                    ClientId = table.Column<Guid>(type: "TEXT", nullable: false),
+                    Key = table.Column<string>(type: "TEXT", maxLength: 250, nullable: false),
+                    Value = table.Column<string>(type: "TEXT", maxLength: 2000, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -916,8 +916,8 @@ namespace ElsaDemo.Migrations
                 name: "IdentityServerClientRedirectUris",
                 columns: table => new
                 {
-                    ClientId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    RedirectUri = table.Column<string>(type: "nvarchar(2000)", maxLength: 2000, nullable: false)
+                    ClientId = table.Column<Guid>(type: "TEXT", nullable: false),
+                    RedirectUri = table.Column<string>(type: "TEXT", maxLength: 2000, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -934,8 +934,8 @@ namespace ElsaDemo.Migrations
                 name: "IdentityServerClientScopes",
                 columns: table => new
                 {
-                    ClientId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Scope = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false)
+                    ClientId = table.Column<Guid>(type: "TEXT", nullable: false),
+                    Scope = table.Column<string>(type: "TEXT", maxLength: 200, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -952,11 +952,11 @@ namespace ElsaDemo.Migrations
                 name: "IdentityServerClientSecrets",
                 columns: table => new
                 {
-                    Type = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: false),
-                    Value = table.Column<string>(type: "nvarchar(4000)", maxLength: 4000, nullable: false),
-                    ClientId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(2000)", maxLength: 2000, nullable: true),
-                    Expiration = table.Column<DateTime>(type: "datetime2", nullable: true)
+                    Type = table.Column<string>(type: "TEXT", maxLength: 250, nullable: false),
+                    Value = table.Column<string>(type: "TEXT", maxLength: 4000, nullable: false),
+                    ClientId = table.Column<Guid>(type: "TEXT", nullable: false),
+                    Description = table.Column<string>(type: "TEXT", maxLength: 2000, nullable: true),
+                    Expiration = table.Column<DateTime>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -973,8 +973,8 @@ namespace ElsaDemo.Migrations
                 name: "IdentityServerIdentityResourceClaims",
                 columns: table => new
                 {
-                    Type = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
-                    IdentityResourceId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                    Type = table.Column<string>(type: "TEXT", maxLength: 200, nullable: false),
+                    IdentityResourceId = table.Column<Guid>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -991,9 +991,9 @@ namespace ElsaDemo.Migrations
                 name: "IdentityServerIdentityResourceProperties",
                 columns: table => new
                 {
-                    IdentityResourceId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Key = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: false),
-                    Value = table.Column<string>(type: "nvarchar(2000)", maxLength: 2000, nullable: false)
+                    IdentityResourceId = table.Column<Guid>(type: "TEXT", nullable: false),
+                    Key = table.Column<string>(type: "TEXT", maxLength: 250, nullable: false),
+                    Value = table.Column<string>(type: "TEXT", maxLength: 2000, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -1010,13 +1010,13 @@ namespace ElsaDemo.Migrations
                 name: "AbpEntityPropertyChanges",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    TenantId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    EntityChangeId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    NewValue = table.Column<string>(type: "nvarchar(512)", maxLength: 512, nullable: true),
-                    OriginalValue = table.Column<string>(type: "nvarchar(512)", maxLength: 512, nullable: true),
-                    PropertyName = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
-                    PropertyTypeFullName = table.Column<string>(type: "nvarchar(64)", maxLength: 64, nullable: false)
+                    Id = table.Column<Guid>(type: "TEXT", nullable: false),
+                    TenantId = table.Column<Guid>(type: "TEXT", nullable: true),
+                    EntityChangeId = table.Column<Guid>(type: "TEXT", nullable: false),
+                    NewValue = table.Column<string>(type: "TEXT", maxLength: 512, nullable: true),
+                    OriginalValue = table.Column<string>(type: "TEXT", maxLength: 512, nullable: true),
+                    PropertyName = table.Column<string>(type: "TEXT", maxLength: 128, nullable: false),
+                    PropertyTypeFullName = table.Column<string>(type: "TEXT", maxLength: 64, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -1078,8 +1078,7 @@ namespace ElsaDemo.Migrations
                 name: "IX_AbpLinkUsers_SourceUserId_SourceTenantId_TargetUserId_TargetTenantId",
                 table: "AbpLinkUsers",
                 columns: new[] { "SourceUserId", "SourceTenantId", "TargetUserId", "TargetTenantId" },
-                unique: true,
-                filter: "[SourceTenantId] IS NOT NULL AND [TargetTenantId] IS NOT NULL");
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_AbpOrganizationUnitRoles_RoleId_OrganizationUnitId",

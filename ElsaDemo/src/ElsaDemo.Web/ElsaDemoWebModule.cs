@@ -52,7 +52,7 @@ using Volo.Abp.UI.Navigation.Urls;
 using Volo.Abp.UI;
 using Volo.Abp.UI.Navigation;
 using Volo.Abp.VirtualFileSystem;
-using DbContextOptionsBuilderExtensions = Elsa.Persistence.EntityFramework.Sqlite.DbContextOptionsBuilderExtensions;
+using DbContextOptionsBuilderExtensions = Elsa.Persistence.EntityFramework.SqlServer.DbContextOptionsBuilderExtensions;
 
 namespace ElsaDemo.Web
 {
@@ -124,7 +124,7 @@ namespace ElsaDemo.Web
             {
                 elsa
                     .UseEntityFrameworkPersistence(ef =>
-                        DbContextOptionsBuilderExtensions.UseSqlite(ef,
+                        DbContextOptionsBuilderExtensions.UseSqlServer(ef,
                             configuration.GetConnectionString("Default")))
                     .AddConsoleActivities()
                     .AddHttpActivities(elsaSection.GetSection("Server").Bind)

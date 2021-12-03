@@ -7,7 +7,7 @@ namespace ElsaDemo.DbMigrator
 {
     [DependsOn(
         typeof(AbpAutofacModule),
-        typeof(ElsaDemoEntityFrameworkCoreDbMigrationsModule),
+        typeof(ElsaDemoEntityFrameworkCoreModule),
         typeof(ElsaDemoApplicationContractsModule)
         )]
     public class ElsaDemoDbMigratorModule : AbpModule

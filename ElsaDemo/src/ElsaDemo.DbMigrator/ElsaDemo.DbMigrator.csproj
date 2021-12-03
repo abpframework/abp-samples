@@ -26,9 +26,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Volo.Abp.Autofac" Version="4.3.2" />
+    <PackageReference Include="Volo.Abp.Autofac" Version="4.4.4" />
     <ProjectReference Include="..\ElsaDemo.Application.Contracts\ElsaDemo.Application.Contracts.csproj" />
-    <ProjectReference Include="..\ElsaDemo.EntityFrameworkCore.DbMigrations\ElsaDemo.EntityFrameworkCore.DbMigrations.csproj" />
+    <ProjectReference Include="..\ElsaDemo.EntityFrameworkCore\ElsaDemo.EntityFrameworkCore.csproj" />
   </ItemGroup>
   
   <ItemGroup>

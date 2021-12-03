@@ -59,7 +59,7 @@ namespace ElsaDemo.Web
     [DependsOn(
         typeof(ElsaDemoHttpApiModule),
         typeof(ElsaDemoApplicationModule),
-        typeof(ElsaDemoEntityFrameworkCoreDbMigrationsModule),
+        typeof(ElsaDemoEntityFrameworkCoreModule),
         typeof(AbpAutofacModule),
         typeof(AbpIdentityWebModule),
         typeof(AbpSettingManagementWebModule),

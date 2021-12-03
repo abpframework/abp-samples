@@ -4,21 +4,23 @@ using ElsaDemo.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Volo.Abp.EntityFrameworkCore;
 
 namespace ElsaDemo.Migrations
 {
-    [DbContext(typeof(ElsaDemoMigrationsDbContext))]
-    partial class ElsaDemoMigrationsDbContextModelSnapshot : ModelSnapshot
+    [DbContext(typeof(ElsaDemoDbContext))]
+    [Migration("20211203163004_Initial")]
+    partial class Initial
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("_Abp_DatabaseProvider", EfCoreDatabaseProvider.SqlServer)
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("ProductVersion", "5.0.7")
+                .HasAnnotation("ProductVersion", "5.0.12")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("Volo.Abp.AuditLogging.AuditLog", b =>
@@ -69,9 +71,7 @@ namespace ElsaDemo.Migrations
                         .HasColumnName("CorrelationId");
 
                     b.Property<string>("Exceptions")
-                        .HasMaxLength(4000)
-                        .HasColumnType("nvarchar(4000)")
-                        .HasColumnName("Exceptions");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("ExecutionDuration")
                         .HasColumnType("int")
@@ -591,7 +591,6 @@ namespace ElsaDemo.Migrations
             modelBuilder.Entity("Volo.Abp.Identity.IdentityUser", b =>
                 {
                     b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("AccessFailedCount")

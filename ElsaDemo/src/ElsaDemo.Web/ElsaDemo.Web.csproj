@@ -32,31 +32,31 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Elsa" Version="2.0.0.159" />
-    <PackageReference Include="Elsa.Activities.Console" Version="2.0.0.159" />
-    <PackageReference Include="Elsa.Activities.Email" Version="2.0.0.159" />
-    <PackageReference Include="Elsa.Activities.Http" Version="2.0.0.159" />
-    <PackageReference Include="Elsa.Activities.Temporal.Quartz" Version="2.0.0.159" />
-    <PackageReference Include="Elsa.Designer.Components.Web" Version="2.0.0.159" />
-    <PackageReference Include="Elsa.Persistence.EntityFramework.SqlServer" Version="2.0.0.159" />
-    <PackageReference Include="Elsa.Server.Api" Version="2.0.0.159" />
+    <PackageReference Include="Elsa" Version="2.3.0" />
+    <PackageReference Include="Elsa.Activities.Console" Version="2.3.0" />
+    <PackageReference Include="Elsa.Activities.Email" Version="2.3.0" />
+    <PackageReference Include="Elsa.Activities.Http" Version="2.3.0" />
+    <PackageReference Include="Elsa.Activities.Temporal.Quartz" Version="2.3.0" />
+    <PackageReference Include="Elsa.Designer.Components.Web" Version="2.3.0" />
+    <PackageReference Include="Elsa.Persistence.EntityFramework.SqlServer" Version="2.3.0" />
+    <PackageReference Include="Elsa.Server.Api" Version="2.3.0" />
     <PackageReference Include="Serilog.AspNetCore" Version="4.1.0" />
     <PackageReference Include="Serilog.Sinks.Async" Version="1.4.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\ElsaDemo.Application\ElsaDemo.Application.csproj" />
+    <ProjectReference Include="..\ElsaDemo.EntityFrameworkCore\ElsaDemo.EntityFrameworkCore.csproj" />
     <ProjectReference Include="..\ElsaDemo.HttpApi\ElsaDemo.HttpApi.csproj" />
-    <ProjectReference Include="..\ElsaDemo.EntityFrameworkCore.DbMigrations\ElsaDemo.EntityFrameworkCore.DbMigrations.csproj" />
-    <PackageReference Include="Volo.Abp.AspNetCore.Mvc.UI.Theme.Basic" Version="4.3.2" />
-    <PackageReference Include="Volo.Abp.Autofac" Version="4.3.2" />
-    <PackageReference Include="Volo.Abp.Swashbuckle" Version="4.3.2" />
-    <PackageReference Include="Volo.Abp.AspNetCore.Authentication.JwtBearer" Version="4.3.2" />
-    <PackageReference Include="Volo.Abp.AspNetCore.Serilog" Version="4.3.2" />
-    <PackageReference Include="Volo.Abp.Identity.Web" Version="4.3.2" />
-    <PackageReference Include="Volo.Abp.Account.Web.IdentityServer" Version="4.3.2" />
-    <PackageReference Include="Volo.Abp.TenantManagement.Web" Version="4.3.2" />
-    <PackageReference Include="Volo.Abp.SettingManagement.Web" Version="4.3.2" />
+    <PackageReference Include="Volo.Abp.AspNetCore.Mvc.UI.Theme.Basic" Version="4.4.4" />
+    <PackageReference Include="Volo.Abp.Autofac" Version="4.4.4" />
+    <PackageReference Include="Volo.Abp.Swashbuckle" Version="4.4.4" />
+    <PackageReference Include="Volo.Abp.AspNetCore.Authentication.JwtBearer" Version="4.4.4" />
+    <PackageReference Include="Volo.Abp.AspNetCore.Serilog" Version="4.4.4" />
+    <PackageReference Include="Volo.Abp.Identity.Web" Version="4.4.4" />
+    <PackageReference Include="Volo.Abp.Account.Web.IdentityServer" Version="4.4.4" />
+    <PackageReference Include="Volo.Abp.TenantManagement.Web" Version="4.4.4" />
+    <PackageReference Include="Volo.Abp.SettingManagement.Web" Version="4.4.4" />
   </ItemGroup>
 
 </Project>

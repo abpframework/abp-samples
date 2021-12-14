@@ -1,6 +1,6 @@
 ﻿using Volo.Abp.Application.Dtos;
 
-namespace MyCompanyName.MyProjectName.Application.Todos.Dtos;
+namespace MyCompanyName.MyProjectName.Services.Dtos;
 
 public class TodoDto : EntityDto<Guid>
 {

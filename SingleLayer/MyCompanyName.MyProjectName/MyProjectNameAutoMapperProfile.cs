@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
-using MyCompanyName.MyProjectName.Application.Todos.Dtos;
-using MyCompanyName.MyProjectName.Domain.Todos;
+using MyCompanyName.MyProjectName.Entities.Todos;
+using MyCompanyName.MyProjectName.Services.Dtos;
 
 namespace MyCompanyName.MyProjectName;
 

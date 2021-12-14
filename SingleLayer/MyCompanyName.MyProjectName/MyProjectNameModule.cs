@@ -1,7 +1,6 @@
 ﻿using Microsoft.OpenApi.Models;
-using MyCompanyName.MyProjectName.Domain.Localization;
-using MyCompanyName.MyProjectName.EfCore;
-using MyCompanyName.MyProjectName.MultiTenancy;
+using MyCompanyName.MyProjectName.Data;
+using MyCompanyName.MyProjectName.Localization;
 using Volo.Abp;
 using Volo.Abp.Account;
 using Volo.Abp.Account.Web;
@@ -16,7 +15,6 @@ using Volo.Abp.AspNetCore.Serilog;
 using Volo.Abp.AuditLogging.EntityFrameworkCore;
 using Volo.Abp.Autofac;
 using Volo.Abp.AutoMapper;
-using Volo.Abp.BackgroundJobs.EntityFrameworkCore;
 using Volo.Abp.EntityFrameworkCore;
 using Volo.Abp.EntityFrameworkCore.SqlServer;
 using Volo.Abp.FeatureManagement;
@@ -28,6 +26,7 @@ using Volo.Abp.IdentityServer.EntityFrameworkCore;
 using Volo.Abp.Localization;
 using Volo.Abp.Localization.ExceptionHandling;
 using Volo.Abp.Modularity;
+using Volo.Abp.MultiTenancy;
 using Volo.Abp.PermissionManagement;
 using Volo.Abp.PermissionManagement.EntityFrameworkCore;
 using Volo.Abp.PermissionManagement.HttpApi;
@@ -47,12 +46,12 @@ namespace MyCompanyName.MyProjectName;
 [DependsOn(
     typeof(AbpAspNetCoreMvcModule),
     typeof(AbpAutofacModule),
+    typeof(AbpAutoMapperModule),
     typeof(AbpEntityFrameworkCoreSqlServerModule),
     typeof(AbpSwashbuckleModule),
     typeof(AbpAspNetCoreAuthenticationJwtBearerModule),
     typeof(AbpAspNetCoreSerilogModule),
     typeof(AbpAspNetCoreMvcUiBasicThemeModule),
-    typeof(AbpBackgroundJobsEntityFrameworkCoreModule),
     typeof(AbpAuditLoggingEntityFrameworkCoreModule),
     
     // Account
@@ -107,7 +106,8 @@ public class MyProjectNameModule : AbpModule
     {
         var hostingEnvironment = context.Services.GetHostingEnvironment();
         var configuration = context.Services.GetConfiguration();
-        
+
+        ConfigureMultiTenancy();
         ConfigureUrls(configuration);
         ConfigureBundles();
         ConfigureAutoMapper();
@@ -121,7 +121,16 @@ public class MyProjectNameModule : AbpModule
         ConfigureEfCore(context);
     }
 
-    
+    private void ConfigureMultiTenancy()
+    {
+        // remove if the application is not multi-tenant
+        Configure<AbpMultiTenancyOptions>(options =>
+        {
+            options.IsEnabled = true;
+        });
+    }
+
+
     private void ConfigureUrls(IConfiguration configuration)
     {
         Configure<AppUrlOptions>(options =>
@@ -162,7 +171,7 @@ public class MyProjectNameModule : AbpModule
             options.Resources
                 .Add<MyProjectNameResource>("en")
                 .AddBaseTypes(typeof(AbpValidationResource))
-                .AddVirtualJson("/Domain/Localization/MyProjectName");
+                .AddVirtualJson("/Localization/MyProjectName");
 
             options.DefaultResourceType = typeof(MyProjectNameResource);
             
@@ -265,10 +274,7 @@ public class MyProjectNameModule : AbpModule
         app.UseAuthentication();
         app.UseJwtTokenMiddleware();
 
-        if (MultiTenancyConsts.IsEnabled)
-        {
-            app.UseMultiTenancy();
-        }
+        app.UseMultiTenancy(); // remove if the application is not multi-tenant
 
         app.UseUnitOfWork();
         app.UseIdentityServer();

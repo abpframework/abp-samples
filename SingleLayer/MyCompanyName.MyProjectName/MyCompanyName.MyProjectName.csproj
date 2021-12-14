@@ -63,10 +63,6 @@
   </ItemGroup>
   
   <ItemGroup>
-    <PackageReference Include="Volo.Abp.BackgroundJobs.EntityFrameworkCore" Version="5.0.0-rc.*" />
-  </ItemGroup>
-  
-  <ItemGroup>
     <PackageReference Include="Volo.Abp.AuditLogging.EntityFrameworkCore" Version="5.0.0-rc.*" />
   </ItemGroup>
   
@@ -86,8 +82,23 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Remove="Domain\Localization\MyProjectName\*.json" />
-    <EmbeddedResource Include="Domain\Localization\MyProjectName\*.json" />
+    <Content Remove="Localization\MyProjectName\*.json" />
+    <EmbeddedResource Include="Localization\MyProjectName\*.json" />
   </ItemGroup>
   
+  <ItemGroup>
+    <Compile Remove="Logs\**" />
+    <Content Remove="Logs\**" />
+    <EmbeddedResource Remove="Logs\**" />
+    <None Remove="Logs\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Pages\**\*.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Pages\**\*.css">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
 </Project>

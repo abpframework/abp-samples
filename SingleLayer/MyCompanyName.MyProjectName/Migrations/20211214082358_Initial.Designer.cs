@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using MyCompanyName.MyProjectName.EfCore;
+using MyCompanyName.MyProjectName.Data;
 using Volo.Abp.EntityFrameworkCore;
 
 #nullable disable
@@ -13,7 +13,7 @@ using Volo.Abp.EntityFrameworkCore;
 namespace MyCompanyName.MyProjectName.Migrations
 {
     [DbContext(typeof(MyProjectNameDbContext))]
-    [Migration("20211213101225_Initial")]
+    [Migration("20211214082358_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -26,7 +26,7 @@ namespace MyCompanyName.MyProjectName.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
-            modelBuilder.Entity("MyCompanyName.MyProjectName.Domain.Todos.Todo", b =>
+            modelBuilder.Entity("MyCompanyName.MyProjectName.Entities.Todos.Todo", b =>
                 {
                     b.Property<Guid>("Id")
                         .HasColumnType("uniqueidentifier");
@@ -73,7 +73,8 @@ namespace MyCompanyName.MyProjectName.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(32)
+                        .HasColumnType("nvarchar(32)");
 
                     b.Property<Guid?>("TenantId")
                         .HasColumnType("uniqueidentifier")
@@ -332,64 +333,6 @@ namespace MyCompanyName.MyProjectName.Migrations
                     b.HasIndex("EntityChangeId");
 
                     b.ToTable("AbpEntityPropertyChanges", (string)null);
-                });
-
-            modelBuilder.Entity("Volo.Abp.BackgroundJobs.BackgroundJobRecord", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("ConcurrencyStamp")
-                        .IsConcurrencyToken()
-                        .HasMaxLength(40)
-                        .HasColumnType("nvarchar(40)")
-                        .HasColumnName("ConcurrencyStamp");
-
-                    b.Property<DateTime>("CreationTime")
-                        .HasColumnType("datetime2")
-                        .HasColumnName("CreationTime");
-
-                    b.Property<string>("ExtraProperties")
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("ExtraProperties");
-
-                    b.Property<bool>("IsAbandoned")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bit")
-                        .HasDefaultValue(false);
-
-                    b.Property<string>("JobArgs")
-                        .IsRequired()
-                        .HasMaxLength(1048576)
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("JobName")
-                        .IsRequired()
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
-
-                    b.Property<DateTime?>("LastTryTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("NextTryTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<byte>("Priority")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("tinyint")
-                        .HasDefaultValue((byte)15);
-
-                    b.Property<short>("TryCount")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("smallint")
-                        .HasDefaultValue((short)0);
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("IsAbandoned", "NextTryTime");
-
-                    b.ToTable("AbpBackgroundJobs", (string)null);
                 });
 
             modelBuilder.Entity("Volo.Abp.FeatureManagement.FeatureValue", b =>

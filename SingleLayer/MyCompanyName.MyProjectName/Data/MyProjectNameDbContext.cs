@@ -1,7 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using MyCompanyName.MyProjectName.Domain.Todos;
+using MyCompanyName.MyProjectName.Entities.Todos;
 using Volo.Abp.AuditLogging.EntityFrameworkCore;
-using Volo.Abp.BackgroundJobs.EntityFrameworkCore;
 using Volo.Abp.Data;
 using Volo.Abp.DependencyInjection;
 using Volo.Abp.EntityFrameworkCore;
@@ -15,7 +14,7 @@ using Volo.Abp.SettingManagement.EntityFrameworkCore;
 using Volo.Abp.TenantManagement;
 using Volo.Abp.TenantManagement.EntityFrameworkCore;
 
-namespace MyCompanyName.MyProjectName.EfCore;
+namespace MyCompanyName.MyProjectName.Data;
 
 [ReplaceDbContext(typeof(IIdentityDbContext))]
 [ReplaceDbContext(typeof(ITenantManagementDbContext))]
@@ -66,7 +65,6 @@ public class MyProjectNameDbContext :
 
         builder.ConfigurePermissionManagement();
         builder.ConfigureSettingManagement();
-        builder.ConfigureBackgroundJobs();
         builder.ConfigureAuditLogging();
         builder.ConfigureIdentity();
         builder.ConfigureIdentityServer();
@@ -79,7 +77,7 @@ public class MyProjectNameDbContext :
             
             b.ConfigureByConvention();
 
-            b.Property(x => x.Name).IsRequired();
+            b.Property(x => x.Name).IsRequired().HasMaxLength(Todo.MaxNameLength);
         });
     }
 }

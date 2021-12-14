@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace MyCompanyName.MyProjectName.Application.Todos.Dtos;
+namespace MyCompanyName.MyProjectName.Services.Dtos;
 
 public class CreateTodoDto
 {

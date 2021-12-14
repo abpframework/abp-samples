@@ -1,53 +1,43 @@
-﻿using MyCompanyName.MyProjectName.Domain.Data;
-using MyCompanyName.MyProjectName.Domain.Todos;
+﻿using Volo.Abp.Data;
 using Volo.Abp.DependencyInjection;
-using Volo.Abp.Domain.Repositories;
+using Volo.Abp.Identity;
 
 namespace MyCompanyName.MyProjectName
 {
     public class DbSeederMiddleware : IMiddleware, ISingletonDependency
     {
-        private bool Seeded = false;
-        
-        private readonly MyProjectNameDbMigrationService _dbMigrationService;
+        private bool _hostSeeded = false;
 
-        private readonly IBasicRepository<Todo, Guid> _todoRepository;
+        private readonly ILogger<DbSeederMiddleware> _logger;
+        private readonly IDataSeeder _dataSeeder;
 
-        public DbSeederMiddleware( 
-            MyProjectNameDbMigrationService dbMigrationService, 
-            IBasicRepository<Todo, Guid> todoRepository)
+        public DbSeederMiddleware(
+            ILogger<DbSeederMiddleware> logger,
+            IDataSeeder dataSeeder)
         {
-            _dbMigrationService = dbMigrationService;
-            _todoRepository = todoRepository;
+            _logger = logger;
+            _dataSeeder = dataSeeder;
         }
 
         public async Task InvokeAsync(HttpContext context, RequestDelegate next)
         {
-            if (await ShouldMigrateDbAsync())
+            if (!_hostSeeded)
             {
-                await _dbMigrationService.MigrateAsync();
-                Seeded = true;
+                _hostSeeded = true;
+                await SeedHostDataAsync();
             }
             
             await next(context);
         }
-        
-        private async Task<bool> ShouldMigrateDbAsync()
+
+        private Task SeedHostDataAsync()
         {
-            if (Seeded)
-            {
-                return false;
-            }
+            _logger.LogInformation($"Executing host database seed...");
             
-            try
-            {
-                var todos = await _todoRepository.GetPagedListAsync(0, 1, "");
-                return false;
-            }
-            catch (Exception e)
-            {
-                return true;
-            }
+            return _dataSeeder.SeedAsync(new DataSeedContext(null)
+                .WithProperty(IdentityDataSeedContributor.AdminEmailPropertyName, IdentityDataSeedContributor.AdminEmailDefaultValue)
+                .WithProperty(IdentityDataSeedContributor.AdminPasswordPropertyName, IdentityDataSeedContributor.AdminPasswordDefaultValue)
+            );
         }
     }
 }

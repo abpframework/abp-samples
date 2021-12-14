@@ -1,5 +1,6 @@
 ﻿$(function () {
-
+    var l = abp.localization.getResource("MyProjectName");
+    
     // DELETING ITEMS /////////////////////////////////////////
     $('#TodoList').on('click', 'li i', function(){
         var $li = $(this).parent();
@@ -7,7 +8,7 @@
 
         myCompanyName.myProjectName.services.todo.delete(id).then(function(){
             $li.remove();
-            abp.notify.info('Deleted the todo item.');
+            abp.notify.info(l('TodoDeleted'));
         });
     });
 

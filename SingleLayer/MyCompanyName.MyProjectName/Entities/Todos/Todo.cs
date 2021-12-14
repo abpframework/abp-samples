@@ -5,10 +5,9 @@ namespace MyCompanyName.MyProjectName.Entities.Todos;
 
 public class Todo : FullAuditedAggregateRoot<Guid>, IMultiTenant
 {
-    public const int MinNameLength = 2;
-    public const int MaxNameLength = 32;
+    public const int MaxTextLength = 32;
     
-    public string Name { get; set; }
+    public string Text { get; set; }
 
     public Guid? TenantId { get; set; }
 }

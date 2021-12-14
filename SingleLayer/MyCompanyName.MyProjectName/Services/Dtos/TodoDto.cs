@@ -4,5 +4,5 @@ namespace MyCompanyName.MyProjectName.Services.Dtos;
 
 public class TodoDto : EntityDto<Guid>
 {
-    public string Name { get; set; }
+    public string Text { get; set; }
 }

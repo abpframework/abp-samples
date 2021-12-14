@@ -4,20 +4,46 @@
 @using Volo.Abp.Users
 @inject IHtmlLocalizer<MyProjectNameResource> L
 @inject ICurrentUser CurrentUser
+@model MyCompanyName.MyProjectName.Pages.IndexModel
 
+@section styles {
+    <abp-style src="/Pages/index.css" />
+}
+@section scripts {
+    <abp-script src="/Pages/index.js" />
+}
 <div class="container">
-    <div class="p-5 text-center">
-        <div class="d-inline-block bg-success text-white p-1 h5 rounded mb-4 " role="alert">
-            <h5 class="m-1"> <i class="fas fa-rocket"></i> Congratulations, <strong>MyProjectName</strong> is successfully running!</h5>
-        </div>
-        <h1>Welcome to the Single Layer ABP Application</h1>
-
-        <p class="lead px-lg-5 mx-lg-5">@L["LongWelcomeMessage"]</p>
-
-        @if (!CurrentUser.IsAuthenticated)
-        {
-            <a abp-button="Primary" href="~/Account/Login" ><i class="fa fa-sign-in"></i> @L["Login"]</a>
-        }
-
-    </div>
+    <abp-card>
+        <abp-card-header>
+            <abp-card-title>
+                TODO LIST
+            </abp-card-title>
+        </abp-card-header>
+        <abp-card-body>            
+            <!-- FORM FOR NEW TODO ITEMS -->
+            <form id="NewItemForm" class="form-inline">
+                <abp-row>
+                    <abp-column size="_3">
+                        <input id="NewItemText" 
+                               type="text" 
+                               class="form-control mr-2" 
+                               placeholder="enter text...">
+                    </abp-column>
+                    <abp-column>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </abp-column>
+                </abp-row>
+            </form>
+            
+            <!-- TODO ITEMS LIST -->
+            <ul id="TodoList">
+                @foreach (var todoItem in Model.TodoItems)
+                {
+                    <li data-id="@todoItem.Id">
+                        <i class="fa fa-trash-o"></i> @todoItem.Text
+                    </li>
+                }
+            </ul>
+        </abp-card-body>
+    </abp-card>
 </div>

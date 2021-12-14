@@ -77,7 +77,7 @@ public class MyProjectNameDbContext :
             
             b.ConfigureByConvention();
 
-            b.Property(x => x.Name).IsRequired().HasMaxLength(Todo.MaxNameLength);
+            b.Property(x => x.Text).IsRequired().HasMaxLength(Todo.MaxTextLength);
         });
     }
 }

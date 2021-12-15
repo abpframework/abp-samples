@@ -3,14 +3,14 @@
   <Import Project="..\..\common.props" />
 
   <PropertyGroup>
-    <TargetFramework>net5.0</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
     <RootNamespace>AbpPrimengSample</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\src\AbpPrimengSample.EntityFrameworkCore.DbMigrations\AbpPrimengSample.EntityFrameworkCore.DbMigrations.csproj" />
     <ProjectReference Include="..\AbpPrimengSample.TestBase\AbpPrimengSample.TestBase.csproj" />
-    <PackageReference Include="Volo.Abp.EntityFrameworkCore.Sqlite" Version="4.3.2" />
+    <PackageReference Include="Volo.Abp.EntityFrameworkCore.Sqlite" Version="5.0.0" />
   </ItemGroup>
 
   <ItemGroup>

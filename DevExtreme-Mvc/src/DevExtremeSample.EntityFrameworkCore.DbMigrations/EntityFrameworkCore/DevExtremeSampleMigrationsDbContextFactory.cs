@@ -24,7 +24,7 @@ namespace DevExtremeSample.EntityFrameworkCore
         private static IConfigurationRoot BuildConfiguration()
         {
             var builder = new ConfigurationBuilder()
-                .SetBasePath(Directory.GetCurrentDirectory())
+                .SetBasePath(Directory.GetCurrentDirectory(), "../DevExtremeSample.DbMigrator/")
                 .AddJsonFile("appsettings.json", optional: false);
 
             return builder.Build();

@@ -20,7 +20,7 @@ namespace CustomApplicationModules
 
             await UnitOfWorkManager.Current.SaveChangesAsync();
 
-            return await _testRepository.Include(t => t.Creator).Include(t => t.LastModifier).ToListAsync();
+            return await (await _testRepository.GetQueryableAsync()).Include(t => t.Creator).Include(t => t.LastModifier).ToListAsync();
         }
     }
 }

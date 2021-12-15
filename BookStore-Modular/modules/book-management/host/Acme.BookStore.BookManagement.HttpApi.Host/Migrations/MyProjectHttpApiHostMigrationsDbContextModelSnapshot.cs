@@ -7,6 +7,8 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Volo.Abp.EntityFrameworkCore;
 
+#nullable disable
+
 namespace Acme.BookStore.BookManagement.Migrations
 {
     [DbContext(typeof(MyProjectHttpApiHostMigrationsDbContext))]
@@ -17,9 +19,10 @@ namespace Acme.BookStore.BookManagement.Migrations
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("_Abp_DatabaseProvider", EfCoreDatabaseProvider.SqlServer)
-                .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("ProductVersion", "5.0.12")
-                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                .HasAnnotation("ProductVersion", "6.0.0")
+                .HasAnnotation("Relational:MaxIdentifierLength", 128);
+
+            SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
             modelBuilder.Entity("Acme.BookStore.BookManagement.Authors.Author", b =>
                 {
@@ -82,7 +85,7 @@ namespace Acme.BookStore.BookManagement.Migrations
 
                     b.HasIndex("Name");
 
-                    b.ToTable("BmAuthors");
+                    b.ToTable("BmAuthors", (string)null);
                 });
 
             modelBuilder.Entity("Acme.BookStore.BookManagement.Books.Book", b =>
@@ -138,7 +141,7 @@ namespace Acme.BookStore.BookManagement.Migrations
 
                     b.HasIndex("AuthorId");
 
-                    b.ToTable("BmBooks");
+                    b.ToTable("BmBooks", (string)null);
                 });
 
             modelBuilder.Entity("Acme.BookStore.BookManagement.Books.Book", b =>

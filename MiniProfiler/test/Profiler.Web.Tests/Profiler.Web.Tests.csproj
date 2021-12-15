@@ -3,7 +3,7 @@
   <Import Project="..\..\common.props" />
 
   <PropertyGroup>
-    <TargetFramework>net5.0</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
     <OutputType>Exe</OutputType>
     <AssetTargetFallback>$(AssetTargetFallback);portable-net45+win8+wp8+wpa81;</AssetTargetFallback>
     <RootNamespace>Profiler</RootNamespace>
@@ -18,7 +18,7 @@
     <PackageReference Include="HtmlAgilityPack" Version="1.11.32" />
     <ProjectReference Include="..\Profiler.Application.Tests\Profiler.Application.Tests.csproj" />
     <ProjectReference Include="..\..\src\Profiler.Web\Profiler.Web.csproj" />
-    <PackageReference Include="Volo.Abp.AspNetCore.TestBase" Version="4.4.4" />
+    <PackageReference Include="Volo.Abp.AspNetCore.TestBase" Version="5.0.0" />
   </ItemGroup>
 
   <ItemGroup>

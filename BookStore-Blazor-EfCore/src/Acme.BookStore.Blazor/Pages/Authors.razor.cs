@@ -33,9 +33,9 @@ namespace Acme.BookStore.Blazor.Pages
         private Modal EditAuthorModal { get; set; }
 
         private Validations CreateValidationsRef;
-        
+
         private Validations EditValidationsRef;
-        
+
         public Authors()
         {
             NewAuthor = new CreateAuthorDto();
@@ -91,7 +91,7 @@ namespace Acme.BookStore.Blazor.Pages
         private void OpenCreateAuthorModal()
         {
             CreateValidationsRef.ClearAll();
-            
+
             NewAuthor = new CreateAuthorDto();
             CreateAuthorModal.Show();
         }
@@ -104,7 +104,7 @@ namespace Acme.BookStore.Blazor.Pages
         private void OpenEditAuthorModal(AuthorDto author)
         {
             EditValidationsRef.ClearAll();
-            
+
             EditingAuthorId = author.Id;
             EditingAuthor = ObjectMapper.Map<AuthorDto, UpdateAuthorDto>(author);
             EditAuthorModal.Show();
@@ -129,21 +129,21 @@ namespace Acme.BookStore.Blazor.Pages
 
         private async Task CreateAuthorAsync()
         {
-            if (CreateValidationsRef.ValidateAll())
+            if (await CreateValidationsRef.ValidateAll())
             {
                 await AuthorAppService.CreateAsync(NewAuthor);
                 await GetAuthorsAsync();
-                CreateAuthorModal.Hide();
+                await CreateAuthorModal.Hide();
             }
         }
 
         private async Task UpdateAuthorAsync()
         {
-            if (EditValidationsRef.ValidateAll())
+            if (await EditValidationsRef.ValidateAll())
             {
                 await AuthorAppService.UpdateAsync(EditingAuthorId, EditingAuthor);
                 await GetAuthorsAsync();
-                EditAuthorModal.Hide();
+                await EditAuthorModal.Hide();
             }
         }
     }

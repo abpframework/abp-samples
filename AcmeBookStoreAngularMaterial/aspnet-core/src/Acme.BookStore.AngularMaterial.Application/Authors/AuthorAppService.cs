@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Acme.BookStore.AngularMaterial.Permissions;
 using Microsoft.AspNetCore.Authorization;
 using Volo.Abp.Application.Dtos;
+using Volo.Abp.Domain.Repositories;
 
 namespace Acme.BookStore.AngularMaterial.Authors
 {
@@ -21,13 +22,13 @@ namespace Acme.BookStore.AngularMaterial.Authors
             _authorRepository = authorRepository;
             _authorManager = authorManager;
         }
-        
+
         public async Task<AuthorDto> GetAsync(Guid id)
         {
             var author = await _authorRepository.GetAsync(id);
             return ObjectMapper.Map<Author, AuthorDto>(author);
         }
-        
+
         public async Task<PagedResultDto<AuthorDto>> GetListAsync(GetAuthorListDto input)
         {
             if (input.Sorting.IsNullOrWhiteSpace())
@@ -43,7 +44,7 @@ namespace Acme.BookStore.AngularMaterial.Authors
             );
 
             var totalCount = await AsyncExecuter.CountAsync(
-                _authorRepository.WhereIf(
+                (await _authorRepository.GetQueryableAsync()).WhereIf(
                     !input.Filter.IsNullOrWhiteSpace(),
                     author => author.Name.Contains(input.Filter)
                 )
@@ -54,7 +55,7 @@ namespace Acme.BookStore.AngularMaterial.Authors
                 ObjectMapper.Map<List<Author>, List<AuthorDto>>(authors)
             );
         }
-        
+
         [Authorize(AngularMaterialPermissions.Authors.Create)]
         public async Task<AuthorDto> CreateAsync(CreateAuthorDto input)
         {
@@ -68,7 +69,7 @@ namespace Acme.BookStore.AngularMaterial.Authors
 
             return ObjectMapper.Map<Author, AuthorDto>(author);
         }
-        
+
         [Authorize(AngularMaterialPermissions.Authors.Edit)]
         public async Task UpdateAsync(Guid id, UpdateAuthorDto input)
         {
@@ -84,7 +85,7 @@ namespace Acme.BookStore.AngularMaterial.Authors
 
             await _authorRepository.UpdateAsync(author);
         }
-        
+
         [Authorize(AngularMaterialPermissions.Authors.Delete)]
         public async Task DeleteAsync(Guid id)
         {

@@ -25,7 +25,7 @@ namespace Acme.BookStore.AngularMaterial.Books
         private readonly IAuthorRepository _authorRepository;
         private readonly AuthorManager _authorManager;
         public BookAppService(
-            IRepository<Book, Guid> repository,            
+            IRepository<Book, Guid> repository,
             IAuthorRepository authorRepository,
             AuthorManager authorManager)
 
@@ -39,14 +39,14 @@ namespace Acme.BookStore.AngularMaterial.Books
             UpdatePolicyName = AngularMaterialPermissions.Books.Edit;
             DeletePolicyName = AngularMaterialPermissions.Books.Delete;
         }
-        
+
          public override async Task<BookDto> GetAsync(Guid id)
         {
             await CheckGetPolicyAsync();
 
             //Prepare a query to join books and authors
-            var query = from book in Repository
-                join author in _authorRepository on book.AuthorId equals author.Id
+            var query = from book in await Repository.GetQueryableAsync()
+                join author in await _authorRepository.GetQueryableAsync() on book.AuthorId equals author.Id
                 where book.Id == id
                 select new { book, author };
 
@@ -68,8 +68,8 @@ namespace Acme.BookStore.AngularMaterial.Books
             await CheckGetListPolicyAsync();
 
             //Prepare a query to join books and authors
-            var query = from book in Repository
-                join author in _authorRepository on book.AuthorId equals author.Id
+            var query = from book in await Repository.GetQueryableAsync()
+                join author in await _authorRepository.GetQueryableAsync() on book.AuthorId equals author.Id
                 orderby input.Sorting
                 select new {book, author};
 

@@ -65,7 +65,7 @@ namespace AuthServer.Host
 
         private async Task<ApiScope> CreateApiScopeAsync(string name)
         {
-            var apiScope = await _apiScopeRepository.GetByNameAsync(name);
+            var apiScope = await _apiScopeRepository.FindByNameAsync(name);
             if (apiScope == null)
             {
                 apiScope = await _apiScopeRepository.InsertAsync(

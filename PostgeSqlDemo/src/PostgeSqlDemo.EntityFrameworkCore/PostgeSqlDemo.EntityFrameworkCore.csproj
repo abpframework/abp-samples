@@ -3,21 +3,21 @@
   <Import Project="..\..\common.props" />
 
   <PropertyGroup>
-    <TargetFramework>net5.0</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
     <RootNamespace>PostgeSqlDemo</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\PostgeSqlDemo.Domain\PostgeSqlDemo.Domain.csproj" />
-    <PackageReference Include="Volo.Abp.EntityFrameworkCore.PostgreSql" Version="4.3.2" />
-    <PackageReference Include="Volo.Abp.PermissionManagement.EntityFrameworkCore" Version="4.3.2" />
-    <PackageReference Include="Volo.Abp.SettingManagement.EntityFrameworkCore" Version="4.3.2" />
-    <PackageReference Include="Volo.Abp.Identity.EntityFrameworkCore" Version="4.3.2" />
-    <PackageReference Include="Volo.Abp.IdentityServer.EntityFrameworkCore" Version="4.3.2" />
-    <PackageReference Include="Volo.Abp.BackgroundJobs.EntityFrameworkCore" Version="4.3.2" />
-    <PackageReference Include="Volo.Abp.AuditLogging.EntityFrameworkCore" Version="4.3.2" />
-    <PackageReference Include="Volo.Abp.TenantManagement.EntityFrameworkCore" Version="4.3.2" />
-    <PackageReference Include="Volo.Abp.FeatureManagement.EntityFrameworkCore" Version="4.3.2" />
+    <PackageReference Include="Volo.Abp.EntityFrameworkCore.PostgreSql" Version="5.0.0" />
+    <PackageReference Include="Volo.Abp.PermissionManagement.EntityFrameworkCore" Version="5.0.0" />
+    <PackageReference Include="Volo.Abp.SettingManagement.EntityFrameworkCore" Version="5.0.0" />
+    <PackageReference Include="Volo.Abp.Identity.EntityFrameworkCore" Version="5.0.0" />
+    <PackageReference Include="Volo.Abp.IdentityServer.EntityFrameworkCore" Version="5.0.0" />
+    <PackageReference Include="Volo.Abp.BackgroundJobs.EntityFrameworkCore" Version="5.0.0" />
+    <PackageReference Include="Volo.Abp.AuditLogging.EntityFrameworkCore" Version="5.0.0" />
+    <PackageReference Include="Volo.Abp.TenantManagement.EntityFrameworkCore" Version="5.0.0" />
+    <PackageReference Include="Volo.Abp.FeatureManagement.EntityFrameworkCore" Version="5.0.0" />
   </ItemGroup>
 
 </Project>

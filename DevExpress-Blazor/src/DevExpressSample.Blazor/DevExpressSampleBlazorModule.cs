@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Net.Http;
 using Blazorise;
-using Blazorise.Bootstrap;
+using Blazorise.Bootstrap5;
 using Blazorise.Icons.FontAwesome;
 using IdentityModel;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
@@ -69,7 +69,7 @@ namespace DevExpressSample.Blazor
         private void ConfigureBlazorise(ServiceConfigurationContext context)
         {
             context.Services
-                .AddBootstrapProviders()
+                .AddBootstrap5Providers()
                 .AddFontAwesomeIcons();
         }
 

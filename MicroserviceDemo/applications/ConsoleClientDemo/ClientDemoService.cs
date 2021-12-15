@@ -5,8 +5,8 @@ using System.Threading.Tasks;
 using Microsoft.Extensions.Options;
 using Volo.Abp.DependencyInjection;
 using Volo.Abp.Http.Client;
-using Volo.Abp.Identity;
-using Volo.Abp.IdentityModel;
+using Volo.Abp.Account;
+using Volo.Abp.AccountModel;
 using Volo.Abp.TenantManagement;
 
 namespace ConsoleClientDemo

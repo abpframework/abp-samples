@@ -1,0 +1,10 @@
+{
+  "culture": "tr",
+  "texts": {
+    "Menu:Home": "Ana sayfa",
+    "TodoList": "YAPILACAKLAR LİSTESİ",
+    "EnterText": "metin giriniz...",
+    "Submit": "Gönder",
+    "TodoDeleted": "Yapılacak silindi."
+  }
+}

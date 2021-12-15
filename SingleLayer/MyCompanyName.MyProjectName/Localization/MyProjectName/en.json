@@ -1,0 +1,10 @@
+{
+  "culture": "en",
+  "texts": {
+    "Menu:Home": "Home",
+    "TodoList": "TODO LIST",
+    "EnterText": "enter text...",
+    "Submit": "Submit",
+    "TodoDeleted": "Deleted the todo item."
+  }
+}

@@ -1,0 +1,49 @@
+﻿@page
+@using Microsoft.AspNetCore.Mvc.Localization
+@using MyCompanyName.MyProjectName.Localization
+@using Volo.Abp.Users
+@inject IHtmlLocalizer<MyProjectNameResource> L
+@inject ICurrentUser CurrentUser
+@model MyCompanyName.MyProjectName.Pages.IndexModel
+
+@section styles {
+    <abp-style src="/Pages/index.css" />
+}
+@section scripts {
+    <abp-script src="/Pages/index.js" />
+}
+<div class="container">
+    <abp-card>
+        <abp-card-header>
+            <abp-card-title>
+                @L["TodoList"]
+            </abp-card-title>
+        </abp-card-header>
+        <abp-card-body>            
+            <!-- FORM FOR NEW TODO ITEMS -->
+            <form id="NewItemForm" class="form-inline">
+                <abp-row>
+                    <abp-column size="_3">
+                        <input id="NewItemText" 
+                               type="text" 
+                               class="form-control mr-2" 
+                               placeholder="@L["EnterText"]">
+                    </abp-column>
+                    <abp-column>
+                        <button type="submit" class="btn btn-primary">@L["Submit"]</button>
+                    </abp-column>
+                </abp-row>
+            </form>
+            
+            <!-- TODO ITEMS LIST -->
+            <ul id="TodoList">
+                @foreach (var todoItem in Model.TodoItems)
+                {
+                    <li data-id="@todoItem.Id">
+                        <i class="fa fa-trash-o"></i> @todoItem.Text
+                    </li>
+                }
+            </ul>
+        </abp-card-body>
+    </abp-card>
+</div>

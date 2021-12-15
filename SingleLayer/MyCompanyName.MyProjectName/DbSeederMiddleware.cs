@@ -6,7 +6,7 @@ namespace MyCompanyName.MyProjectName
 {
     public class DbSeederMiddleware : IMiddleware, ISingletonDependency
     {
-        private bool _hostSeeded = false;
+        private bool _hostSeeded;
 
         private readonly ILogger<DbSeederMiddleware> _logger;
         private readonly IDataSeeder _dataSeeder;
@@ -23,8 +23,8 @@ namespace MyCompanyName.MyProjectName
         {
             if (!_hostSeeded)
             {
-                _hostSeeded = true;
                 await SeedHostDataAsync();
+                _hostSeeded = true;
             }
             
             await next(context);
@@ -32,9 +32,9 @@ namespace MyCompanyName.MyProjectName
 
         private Task SeedHostDataAsync()
         {
-            _logger.LogInformation($"Executing host database seed...");
+            _logger.LogInformation($"Executing database seed...");
             
-            return _dataSeeder.SeedAsync(new DataSeedContext(null)
+            return _dataSeeder.SeedAsync(new DataSeedContext()
                 .WithProperty(IdentityDataSeedContributor.AdminEmailPropertyName, IdentityDataSeedContributor.AdminEmailDefaultValue)
                 .WithProperty(IdentityDataSeedContributor.AdminPasswordPropertyName, IdentityDataSeedContributor.AdminPasswordDefaultValue)
             );

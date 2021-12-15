@@ -115,9 +115,7 @@ public class MyProjectNameModule : AbpModule
         ConfigureAutoApiControllers();
         ConfigureVirtualFiles(hostingEnvironment);
         ConfigureLocalizationServices();
-        
         ConfigureAuthentication(context, configuration);
-        
         ConfigureEfCore(context);
     }
 
@@ -240,8 +238,6 @@ public class MyProjectNameModule : AbpModule
         
         Configure<AbpDbContextOptions>(options =>
         {
-            /* The main point to change your DBMS.
-             * See also AbpCommercialDemoMigrationsDbContextFactory for EF Core tooling. */
             options.Configure(configurationContext =>
             {
                 configurationContext.UseSqlServer();

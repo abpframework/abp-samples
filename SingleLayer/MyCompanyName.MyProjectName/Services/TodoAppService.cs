@@ -1,4 +1,4 @@
-﻿using MyCompanyName.MyProjectName.Entities.Todos;
+﻿using MyCompanyName.MyProjectName.Entities;
 using MyCompanyName.MyProjectName.Services.Dtos;
 using Volo.Abp.Application.Services;
 using Volo.Abp.Domain.Repositories;

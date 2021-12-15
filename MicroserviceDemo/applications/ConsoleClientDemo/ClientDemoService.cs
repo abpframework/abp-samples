@@ -5,8 +5,8 @@ using System.Threading.Tasks;
 using Microsoft.Extensions.Options;
 using Volo.Abp.DependencyInjection;
 using Volo.Abp.Http.Client;
-using Volo.Abp.Account;
-using Volo.Abp.AccountModel;
+using Volo.Abp.Identity;
+using Volo.Abp.IdentityModel;
 using Volo.Abp.TenantManagement;
 
 namespace ConsoleClientDemo
@@ -22,7 +22,7 @@ namespace ConsoleClientDemo
         public ClientDemoService(
             IIdentityUserAppService userAppService,
             IProductAppService productAppService,
-            IIdentityModelAuthenticationService authenticator, 
+            IIdentityModelAuthenticationService authenticator,
             IOptions<AbpRemoteServiceOptions> remoteServiceOptions,
             ITenantAppService tenantAppService)
         {

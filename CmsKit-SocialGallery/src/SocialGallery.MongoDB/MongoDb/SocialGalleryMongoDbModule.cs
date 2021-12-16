@@ -10,6 +10,7 @@ using Volo.Abp.SettingManagement.MongoDB;
 using Volo.Abp.TenantManagement.MongoDB;
 using Volo.Abp.Uow;
 using Volo.Abp.BlobStoring.Database.MongoDB;
+using Volo.CmsKit.MongoDB;
 
 namespace SocialGallery.MongoDB
 {
@@ -25,6 +26,7 @@ namespace SocialGallery.MongoDB
         typeof(AbpFeatureManagementMongoDbModule)
         )]
     [DependsOn(typeof(BlobStoringDatabaseMongoDbModule))]
+    [DependsOn(typeof(CmsKitMongoDbModule))]
     public class SocialGalleryMongoDbModule : AbpModule
     {
         public override void ConfigureServices(ServiceConfigurationContext context)

@@ -13,6 +13,7 @@ using Volo.Abp.TenantManagement;
 using Volo.Abp.Validation.Localization;
 using Volo.Abp.VirtualFileSystem;
 using Volo.Abp.BlobStoring.Database;
+using Volo.CmsKit;
 
 namespace SocialGallery
 {
@@ -27,6 +28,7 @@ namespace SocialGallery
         typeof(AbpTenantManagementDomainSharedModule)
         )]
     [DependsOn(typeof(BlobStoringDatabaseDomainSharedModule))]
+    [DependsOn(typeof(CmsKitDomainSharedModule))]
     public class SocialGalleryDomainSharedModule : AbpModule
     {
         public override void PreConfigureServices(ServiceConfigurationContext context)

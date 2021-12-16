@@ -18,6 +18,7 @@
     <PackageReference Include="Volo.Abp.TenantManagement.HttpApi.Client" Version="5.0.0" />
     <PackageReference Include="Volo.Abp.FeatureManagement.HttpApi.Client" Version="5.0.0" />
     <PackageReference Include="Volo.Abp.SettingManagement.HttpApi.Client" Version="5.0.0" />
+    <PackageReference Include="Volo.CmsKit.HttpApi.Client" Version="5.0.0" />
   </ItemGroup>
 
   <ItemGroup>

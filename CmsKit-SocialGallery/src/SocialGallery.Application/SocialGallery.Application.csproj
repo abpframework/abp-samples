@@ -19,6 +19,7 @@
     <PackageReference Include="Volo.Abp.TenantManagement.Application" Version="5.0.0" />
     <PackageReference Include="Volo.Abp.FeatureManagement.Application" Version="5.0.0" />
     <PackageReference Include="Volo.Abp.SettingManagement.Application" Version="5.0.0" />
+    <PackageReference Include="Volo.CmsKit.Application" Version="5.0.0" />
   </ItemGroup>
 
 </Project>

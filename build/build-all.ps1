@@ -1,4 +1,6 @@
-. ".\common.ps1"
+$a = $args[0] 
+
+. ".\common.ps1" $a
 
 # Build all solutions
 

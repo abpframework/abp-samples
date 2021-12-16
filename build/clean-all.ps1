@@ -2,14 +2,14 @@ $a = $args[0]
 
 . ".\common.ps1" $a
 
-# Test all solutions
+# Clean all solutions
 
 foreach ($solutionPath in $solutionPaths) {    
     $solutionAbsPath = (Join-Path $rootFolder $solutionPath)
     Set-Location $solutionAbsPath
-    dotnet test --no-build --no-restore
+    dotnet clean
     if (-Not $?) {
-        Write-Host ("Test failed for the solution: " + $solutionPath)
+        Write-Host ("Clean failed for the solution: " + $solutionPath)
         Set-Location $rootFolder
         exit $LASTEXITCODE
     }

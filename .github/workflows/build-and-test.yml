@@ -29,11 +29,11 @@ jobs:
       shell: powershell
 
     - name: Build All
-      run: .\build-all2.ps1 -b
+      run: .\build-all.ps1 -b
       working-directory: .\build
       shell: powershell
 
     - name: Test All
-      run: .\test-all2.ps1 -b
+      run: .\test-all.ps1 -b
       working-directory: .\build
       shell: powershell

@@ -32,7 +32,7 @@ namespace ClientSimulationDemo.EntityFrameworkCore.Samples
             await WithUnitOfWorkAsync(async () =>
             {
                 //Act
-                var adminUser = await _appUserRepository
+                var adminUser = await (await _appUserRepository.GetQueryableAsync())
                     .Where(u => u.UserName == "admin")
                     .FirstOrDefaultAsync();
 

@@ -25,7 +25,7 @@ namespace OrganizationUnitSample.Products
         public virtual async Task<List<Product>> GetProductsInOuWithDefaultRepositoryMethodAsync(
             OrganizationUnit organizationUnit)
         {
-            return await AsyncExecuter.ToListAsync(_productRepository.Where(p =>
+            return await AsyncExecuter.ToListAsync((await _productRepository.GetQueryableAsync()).Where(p =>
                 p.OrganizationUnitId == organizationUnit.Id));
         }
 
@@ -49,7 +49,7 @@ namespace OrganizationUnitSample.Products
         {
             var ouIds = (await _organizationUnitRepository.GetListAsync())
                 .Where(ou => ou.Code.StartsWith(organizationUnit.Code)).Select(ou => ou.Id).ToList();
-            return await AsyncExecuter.ToListAsync(_productRepository.Where(p => ouIds.Contains(p.OrganizationUnitId)));
+            return await AsyncExecuter.ToListAsync((await _productRepository.GetQueryableAsync()).Where(p => ouIds.Contains(p.OrganizationUnitId)));
 
         }
 
@@ -58,7 +58,7 @@ namespace OrganizationUnitSample.Products
             var ouIds = (await _organizationUnitRepository.GetAllChildrenWithParentCodeAsync(
                 code: organizationUnit.Code,
                 parentId: organizationUnit.ParentId)).Select(ou => ou.Id).ToList();
-            return await AsyncExecuter.ToListAsync(_productRepository.Where(p => ouIds.Contains(p.OrganizationUnitId)));
+            return await AsyncExecuter.ToListAsync((await _productRepository.GetQueryableAsync()).Where(p => ouIds.Contains(p.OrganizationUnitId)));
 
         }
 

@@ -22,7 +22,7 @@ namespace ConsoleClientDemo
         public ClientDemoService(
             IIdentityUserAppService userAppService,
             IProductAppService productAppService,
-            IIdentityModelAuthenticationService authenticator, 
+            IIdentityModelAuthenticationService authenticator,
             IOptions<AbpRemoteServiceOptions> remoteServiceOptions,
             ITenantAppService tenantAppService)
         {

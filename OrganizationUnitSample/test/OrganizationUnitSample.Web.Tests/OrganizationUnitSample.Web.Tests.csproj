@@ -3,7 +3,7 @@
   <Import Project="..\..\common.props" />
 
   <PropertyGroup>
-    <TargetFramework>net5.0</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
     <OutputType>Exe</OutputType>
     <AssetTargetFallback>$(AssetTargetFallback);portable-net45+win8+wp8+wpa81;</AssetTargetFallback>
     <RootNamespace>OrganizationUnitSample</RootNamespace>
@@ -17,7 +17,7 @@
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.8.3" />
     <ProjectReference Include="..\OrganizationUnitSample.Application.Tests\OrganizationUnitSample.Application.Tests.csproj" />
     <ProjectReference Include="..\..\src\OrganizationUnitSample.Web\OrganizationUnitSample.Web.csproj" />
-    <PackageReference Include="Volo.Abp.AspNetCore.TestBase" Version="4.3.2" />
+    <PackageReference Include="Volo.Abp.AspNetCore.TestBase" Version="5.0.0" />
   </ItemGroup>
 
   <ItemGroup>

@@ -24,14 +24,14 @@ namespace Acme.BookStore.BookManagement.Books
         IBookAppService //implement the IBookAppService
     {
         private readonly IAuthorRepository _authorRepository;
-        
+
         public BookAppService(
-            IRepository<Book, Guid> repository, 
+            IRepository<Book, Guid> repository,
             IAuthorRepository authorRepository)
             : base(repository)
         {
             _authorRepository = authorRepository;
-            
+
             GetPolicyName = BookManagementPermissions.Books.Default;
             GetListPolicyName = BookManagementPermissions.Books.Default;
             CreatePolicyName = BookManagementPermissions.Books.Create;
@@ -46,7 +46,7 @@ namespace Acme.BookStore.BookManagement.Books
 
             //Prepare a query to join books and authors
             var query = from book in queryable
-                join author in _authorRepository on book.AuthorId equals author.Id
+                join author in await _authorRepository.GetQueryableAsync() on book.AuthorId equals author.Id
                 where book.Id == id
                 select new { book, author };
 
@@ -69,7 +69,7 @@ namespace Acme.BookStore.BookManagement.Books
 
             //Prepare a query to join books and authors
             var query = from book in queryable
-                join author in _authorRepository on book.AuthorId equals author.Id
+                join author in await _authorRepository.GetQueryableAsync() on book.AuthorId equals author.Id
                 select new {book, author};
 
             //Paging
@@ -113,7 +113,7 @@ namespace Acme.BookStore.BookManagement.Books
             {
                 return $"book.{nameof(Book.Name)}";
             }
-            
+
             if (sorting.Contains("authorName"))
             {
                 return sorting.Replace(

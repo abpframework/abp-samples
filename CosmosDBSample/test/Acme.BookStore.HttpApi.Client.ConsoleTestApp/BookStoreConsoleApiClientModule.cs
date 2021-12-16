@@ -5,10 +5,12 @@ using Volo.Abp.Autofac;
 using Volo.Abp.Http.Client;
 using Volo.Abp.Http.Client.IdentityModel;
 using Volo.Abp.Modularity;
+using Volo.Abp.Autofac;
 
 namespace Acme.BookStore.HttpApi.Client.ConsoleTestApp
 {
     [DependsOn(
+        typeof(AbpAutofacModule),
         typeof(AbpAutofacModule),
         typeof(BookStoreHttpApiClientModule),
         typeof(AbpHttpClientIdentityModelModule)

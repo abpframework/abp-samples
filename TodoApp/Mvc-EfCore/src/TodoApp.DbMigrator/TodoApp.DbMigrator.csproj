@@ -27,7 +27,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Volo.Abp.Autofac" Version="5.0.0-rc.1" />
+    <PackageReference Include="Volo.Abp.Autofac" Version="5.0.0" />
     <ProjectReference Include="..\TodoApp.Application.Contracts\TodoApp.Application.Contracts.csproj" />
     <ProjectReference Include="..\TodoApp.EntityFrameworkCore\TodoApp.EntityFrameworkCore.csproj" />
   </ItemGroup>

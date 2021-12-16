@@ -4,10 +4,12 @@ using Polly;
 using Volo.Abp.Http.Client;
 using Volo.Abp.Http.Client.IdentityModel;
 using Volo.Abp.Modularity;
+using Volo.Abp.Autofac;
 
 namespace BookStore.HttpApi.Client.ConsoleTestApp
 {
     [DependsOn(
+        typeof(AbpAutofacModule),
         typeof(BookStoreHttpApiClientModule),
         typeof(AbpHttpClientIdentityModelModule)
         )]

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Volo.Abp.DependencyInjection;
-using Volo.Abp.Identity;
+using Volo.Abp.Account;
 
 namespace DevExtremeAngular.HttpApi.Client.ConsoleTestApp
 {

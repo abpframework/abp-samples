@@ -1,4 +1,5 @@
-﻿using Acme.BookStore.BookManagement.Books;
+﻿using Acme.BookStore.BookManagement.Authors;
+using Acme.BookStore.BookManagement.Books;
 using MongoDB.Driver;
 using Volo.Abp.Data;
 using Volo.Abp.MongoDB;
@@ -11,6 +12,7 @@ namespace Acme.BookStore.BookManagement.MongoDB
         public static string CollectionPrefix { get; set; } = BookManagementConsts.DefaultDbTablePrefix;
 
         public IMongoCollection<Book> Books => Collection<Book>();
+        public IMongoCollection<Author> Authors => Collection<Author>();
 
         /* Add mongo collections here. Example:
          * public IMongoCollection<Question> Questions => Collection<Question>();

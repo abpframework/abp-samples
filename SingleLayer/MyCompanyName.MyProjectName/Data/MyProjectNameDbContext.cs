@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using MyCompanyName.MyProjectName.Entities;
 using Volo.Abp.AuditLogging.EntityFrameworkCore;
 using Volo.Abp.EntityFrameworkCore;
 using Volo.Abp.EntityFrameworkCore.Modeling;
@@ -14,8 +13,6 @@ namespace MyCompanyName.MyProjectName.Data;
 
 public class MyProjectNameDbContext : AbpDbContext<MyProjectNameDbContext>
 {
-    public DbSet<Todo> Todos { get; set; }
-    
     public MyProjectNameDbContext(DbContextOptions<MyProjectNameDbContext> options)
         : base(options)
     {
@@ -35,13 +32,6 @@ public class MyProjectNameDbContext : AbpDbContext<MyProjectNameDbContext>
         builder.ConfigureFeatureManagement();
         builder.ConfigureTenantManagement();
         
-        /* Configure your own entities below */
-        
-        builder.Entity<Todo>(b =>
-        {
-            b.ToTable("Todos");
-            b.ConfigureByConvention();
-            b.Property(x => x.Text).IsRequired().HasMaxLength(128);
-        });
+        /* Configure your own entities here */
     }
 }

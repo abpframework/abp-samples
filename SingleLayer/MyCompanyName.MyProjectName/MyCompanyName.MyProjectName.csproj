@@ -101,4 +101,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Entities" />
+    <Folder Include="Services\Dtos" />
+  </ItemGroup>
 </Project>

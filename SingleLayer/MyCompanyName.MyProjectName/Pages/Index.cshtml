@@ -1,7 +1,6 @@
 ﻿@page
 @using Microsoft.AspNetCore.Mvc.Localization
 @using MyCompanyName.MyProjectName.Localization
-@using Volo.Abp.Users
 @inject IHtmlLocalizer<MyProjectNameResource> L
 @model MyCompanyName.MyProjectName.Pages.IndexModel
 
@@ -15,34 +14,11 @@
     <abp-card>
         <abp-card-header>
             <abp-card-title>
-                @L["TodoList"]
+                Welcome
             </abp-card-title>
         </abp-card-header>
         <abp-card-body>            
-            <!-- FORM FOR NEW TODO ITEMS -->
-            <form id="NewItemForm" class="form-inline">
-                <abp-row>
-                    <abp-column size="_3">
-                        <input id="NewItemText" 
-                               type="text" 
-                               class="form-control mr-2" 
-                               placeholder="@L["EnterText"]">
-                    </abp-column>
-                    <abp-column>
-                        <button type="submit" class="btn btn-primary">@L["Submit"]</button>
-                    </abp-column>
-                </abp-row>
-            </form>
-            
-            <!-- TODO ITEMS LIST -->
-            <ul id="TodoList">
-                @foreach (var todoItem in Model.TodoItems)
-                {
-                    <li data-id="@todoItem.Id">
-                        <i class="fa fa-trash-o"></i> @todoItem.Text
-                    </li>
-                }
-            </ul>
+            This is a minimalist, single layer application startup template for the ABP Framework.
         </abp-card-body>
     </abp-card>
 </div>

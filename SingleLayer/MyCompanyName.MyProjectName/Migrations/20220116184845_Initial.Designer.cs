@@ -13,8 +13,8 @@ using Volo.Abp.EntityFrameworkCore;
 namespace MyCompanyName.MyProjectName.Migrations
 {
     [DbContext(typeof(MyProjectNameDbContext))]
-    [Migration("20220116184022_Added_Todo")]
-    partial class Added_Todo
+    [Migration("20220116184845_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -25,21 +25,6 @@ namespace MyCompanyName.MyProjectName.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
-
-            modelBuilder.Entity("MyCompanyName.MyProjectName.Entities.Todo", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Text")
-                        .IsRequired()
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Todos", (string)null);
-                });
 
             modelBuilder.Entity("Volo.Abp.AuditLogging.AuditLog", b =>
                 {

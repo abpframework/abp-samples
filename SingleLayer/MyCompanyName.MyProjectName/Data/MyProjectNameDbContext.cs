@@ -53,7 +53,8 @@ public class MyProjectNameDbContext :
 
     #endregion
     
-    public MyProjectNameDbContext(DbContextOptions<MyProjectNameDbContext> options) : base(options)
+    public MyProjectNameDbContext(DbContextOptions<MyProjectNameDbContext> options)
+        : base(options)
     {
     }
 
@@ -71,12 +72,12 @@ public class MyProjectNameDbContext :
         builder.ConfigureFeatureManagement();
         builder.ConfigureTenantManagement();
         
+        /* Configure your own entities below */
+        
         builder.Entity<Todo>(b =>
         {
             b.ToTable("Todos");
-            
             b.ConfigureByConvention();
-
             b.Property(x => x.Text).IsRequired().HasMaxLength(Todo.MaxTextLength);
         });
     }

@@ -6,7 +6,5 @@ This template is total representation of ABP Framework DDD layered template.
 
 ## How to run?
 
-1. Download the template.
-2. Open the project directory with terminal.
-3. Cast `dotnet ef database update` command.
+1. Run `dotnet ef database update` command in the folder of the `MyCompanyName.MyProjectName` project.
 4. Run the project.

@@ -21,6 +21,10 @@ namespace MyCompanyName.MyProjectName
 
         public async Task InvokeAsync(HttpContext context, RequestDelegate next)
         {
+            /* This logic is not safe if you are running multiple instances of your
+             * application in parallel. In that case, a distributed lock usage is suggested,
+             * or you can create another application for database migration/seed.
+             */
             if (!_hostSeeded)
             {
                 await SeedHostDataAsync();

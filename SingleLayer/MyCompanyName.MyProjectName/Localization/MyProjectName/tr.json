@@ -1,10 +1,7 @@
 {
   "culture": "tr",
   "texts": {
-    "Menu:Home": "Ana sayfa",
-    "TodoList": "YAPILACAKLAR LİSTESİ",
-    "EnterText": "metin giriniz...",
-    "Submit": "Gönder",
-    "TodoDeleted": "Yapılacak silindi."
+    "Welcome_Title": "Hoşgeldiniz",
+    "Welcome_Text": "Bu proje tek katmanlı ABP uygulamaları yapmak için bir başlangıç şablonudur."
   }
 }

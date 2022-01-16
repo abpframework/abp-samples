@@ -1,10 +1,7 @@
 {
   "culture": "en",
   "texts": {
-    "Menu:Home": "Home",
-    "TodoList": "TODO LIST",
-    "EnterText": "enter text...",
-    "Submit": "Submit",
-    "TodoDeleted": "Deleted the todo item."
+    "Welcome_Title": "Welcome",
+    "Welcome_Text": "This is a minimalist, single layer application startup template for the ABP Framework."
   }
 }

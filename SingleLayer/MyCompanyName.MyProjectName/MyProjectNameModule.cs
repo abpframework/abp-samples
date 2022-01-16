@@ -44,6 +44,7 @@ using Volo.Abp.VirtualFileSystem;
 namespace MyCompanyName.MyProjectName;
 
 [DependsOn(
+    // ABP Framework packages
     typeof(AbpAspNetCoreMvcModule),
     typeof(AbpAutofacModule),
     typeof(AbpAutoMapperModule),
@@ -52,46 +53,50 @@ namespace MyCompanyName.MyProjectName;
     typeof(AbpAspNetCoreAuthenticationJwtBearerModule),
     typeof(AbpAspNetCoreSerilogModule),
     typeof(AbpAspNetCoreMvcUiBasicThemeModule),
-    typeof(AbpAuditLoggingEntityFrameworkCoreModule),
     
-    // Account
+    // Account module packages
     typeof(AbpAccountApplicationModule),
     typeof(AbpAccountHttpApiModule),
     typeof(AbpAccountWebIdentityServerModule),
     
-    // Identity
+    // Identity module packages
     typeof(AbpIdentityApplicationModule),
     typeof(AbpIdentityHttpApiModule),
     typeof(AbpIdentityEntityFrameworkCoreModule),
     typeof(AbpIdentityServerEntityFrameworkCoreModule),
     typeof(AbpIdentityWebModule),
     
-    // Permission Management
+    // Audit logging module packages
+    typeof(AbpAuditLoggingEntityFrameworkCoreModule),
+    
+    // Permission Management module packages
     typeof(AbpPermissionManagementApplicationModule),
     typeof(AbpPermissionManagementHttpApiModule),
     typeof(AbpPermissionManagementEntityFrameworkCoreModule),
     
-    // Tenant Management
+    // Tenant Management module packages
     typeof(AbpTenantManagementApplicationModule),
     typeof(AbpTenantManagementHttpApiModule),
     typeof(AbpTenantManagementEntityFrameworkCoreModule),
     typeof(AbpTenantManagementWebModule),
     
-    // Feature Management
+    // Feature Management module packages
     typeof(AbpFeatureManagementApplicationModule),
     typeof(AbpFeatureManagementEntityFrameworkCoreModule),
     typeof(AbpFeatureManagementHttpApiModule),
     typeof(AbpFeatureManagementWebModule),
     
-    // Setting Management
+    // Setting Management module packages
     typeof(AbpSettingManagementApplicationModule),
     typeof(AbpSettingManagementEntityFrameworkCoreModule),
     typeof(AbpSettingManagementHttpApiModule),
     typeof(AbpSettingManagementWebModule)
-
-    )]
+)]
 public class MyProjectNameModule : AbpModule
 {
+    /* Single point to enable/disable multi-tenancy */
+    private const bool IsMultiTenant = true;
+    
     public override void PreConfigureServices(ServiceConfigurationContext context)
     {
         context.Services.PreConfigure<AbpMvcDataAnnotationsLocalizationOptions>(options =>
@@ -111,20 +116,19 @@ public class MyProjectNameModule : AbpModule
         ConfigureUrls(configuration);
         ConfigureBundles();
         ConfigureAutoMapper();
-        ConfigureSwaggerServices(context.Services);
+        ConfigureSwagger(context.Services);
         ConfigureAutoApiControllers();
         ConfigureVirtualFiles(hostingEnvironment);
-        ConfigureLocalizationServices();
-        ConfigureAuthentication(context, configuration);
+        ConfigureLocalization();
+        ConfigureAuthentication(context.Services, configuration);
         ConfigureEfCore(context);
     }
 
     private void ConfigureMultiTenancy()
     {
-        // remove if the application is not multi-tenant
         Configure<AbpMultiTenancyOptions>(options =>
         {
-            options.IsEnabled = true;
+            options.IsEnabled = IsMultiTenant;
         });
     }
 
@@ -151,9 +155,9 @@ public class MyProjectNameModule : AbpModule
         });
     }
     
-    private void ConfigureAuthentication(ServiceConfigurationContext context, IConfiguration configuration)
+    private void ConfigureAuthentication(IServiceCollection services, IConfiguration configuration)
     {
-        context.Services.AddAuthentication()
+        services.AddAuthentication()
             .AddJwtBearer(options =>
             {
                 options.Authority = configuration["AuthServer:Authority"];
@@ -162,7 +166,7 @@ public class MyProjectNameModule : AbpModule
             });
     }
 
-    private void ConfigureLocalizationServices()
+    private void ConfigureLocalization()
     {
         Configure<AbpLocalizationOptions>(options =>
         {
@@ -188,15 +192,12 @@ public class MyProjectNameModule : AbpModule
         Configure<AbpVirtualFileSystemOptions>(options =>
         {
             options.FileSets.AddEmbedded<MyProjectNameModule>();
-        });
-        
-        if (hostingEnvironment.IsDevelopment())
-        {
-            Configure<AbpVirtualFileSystemOptions>(options =>
+            if (hostingEnvironment.IsDevelopment())
             {
+                /* Using physical files in development, so we don't need to recompile on changes */
                 options.FileSets.ReplaceEmbeddedByPhysical<MyProjectNameModule>(hostingEnvironment.ContentRootPath);
-            });
-        }
+            }
+        });
     }
 
     private void ConfigureAutoApiControllers()
@@ -207,7 +208,7 @@ public class MyProjectNameModule : AbpModule
         });
     }
 
-    private void ConfigureSwaggerServices(IServiceCollection services)
+    private void ConfigureSwagger(IServiceCollection services)
     {
         services.AddAbpSwaggerGen(
             options =>
@@ -223,7 +224,11 @@ public class MyProjectNameModule : AbpModule
     {
         Configure<AbpAutoMapperOptions>(options =>
         {
-            options.AddMaps<MyProjectNameModule>();
+            /* Uncomment `validate: true` if you want to enable the Configuration Validation feature.
+             * See AutoMapper's documentation to learn what it is:
+             * https://docs.automapper.org/en/stable/Configuration-validation.html
+             */
+            options.AddMaps<MyProjectNameModule>(/* validate: true */);
         });
     }
 
@@ -231,8 +236,10 @@ public class MyProjectNameModule : AbpModule
     {
         context.Services.AddAbpDbContext<MyProjectNameDbContext>(options =>
         {
-            /* Remove "includeAllEntities: true" to create
-             * default repositories only for aggregate roots */
+            /* You can remove "includeAllEntities: true" to create
+             * default repositories only for aggregate roots
+             * Documentation: https://docs.abp.io/en/abp/latest/Entity-Framework-Core#add-default-repositories
+             */
             options.AddDefaultRepositories(includeAllEntities: true);
         });
         
@@ -263,23 +270,27 @@ public class MyProjectNameModule : AbpModule
         }
 
         app.UseMiddleware<DbSeederMiddleware>();
-        
         app.UseCorrelationId();
         app.UseStaticFiles();
         app.UseRouting();
         app.UseAuthentication();
         app.UseJwtTokenMiddleware();
-
-        app.UseMultiTenancy(); // remove if the application is not multi-tenant
-
+        
+        if (IsMultiTenant)
+        {
+            app.UseMultiTenancy();
+        }
+        
         app.UseUnitOfWork();
         app.UseIdentityServer();
         app.UseAuthorization();
+        
         app.UseSwagger();
         app.UseAbpSwaggerUI(options =>
         {
             options.SwaggerEndpoint("/swagger/v1/swagger.json", "MyProjectName API");
         });
+        
         app.UseAuditing();
         app.UseAbpSerilogEnrichers();
         app.UseConfiguredEndpoints();

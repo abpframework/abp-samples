@@ -1,8 +1,6 @@
 # Single Layer ABP Template
 
-This is a template that contains only one .NET project with includes all ABP Framework features.
-
-This template is total representation of ABP Framework DDD layered template.
+This is a solution template to get started with the ABP Framework with a single project and single layer, instead of a layered solution with multiple projects.
 
 ## How to run?
 

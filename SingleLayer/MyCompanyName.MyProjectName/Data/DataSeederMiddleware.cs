@@ -2,17 +2,17 @@
 using Volo.Abp.DependencyInjection;
 using Volo.Abp.Identity;
 
-namespace MyCompanyName.MyProjectName
+namespace MyCompanyName.MyProjectName.Data
 {
-    public class DbSeederMiddleware : IMiddleware, ISingletonDependency
+    public class DataSeederMiddleware : IMiddleware, ISingletonDependency
     {
         private bool _hostSeeded;
 
-        private readonly ILogger<DbSeederMiddleware> _logger;
+        private readonly ILogger<DataSeederMiddleware> _logger;
         private readonly IDataSeeder _dataSeeder;
 
-        public DbSeederMiddleware(
-            ILogger<DbSeederMiddleware> logger,
+        public DataSeederMiddleware(
+            ILogger<DataSeederMiddleware> logger,
             IDataSeeder dataSeeder)
         {
             _logger = logger;

@@ -17,10 +17,10 @@ namespace App1
             {
                 options.Configurer = configure =>
                 {
-                    configure.Transport(x => x.UseRabbitMq("amqp://user:bitnami@192.168.0.3", "eventbus"));
+                    configure.Transport(x => x.UseRabbitMq("amqp://localhost", "eventbus1"));
                 };
 
-                options.InputQueueName = "eventbus";
+                options.InputQueueName = "eventbus1";
             });
         }
     }

@@ -8,7 +8,7 @@ namespace App1
     [DependsOn(
         typeof(AbpEventBusAzureModule),
         typeof(AbpAutofacModule)
-        )]
+    )]
     public class App1Module : AbpModule
     {
         public override void ConfigureServices(ServiceConfigurationContext context)
@@ -16,7 +16,7 @@ namespace App1
             Configure<AbpAzureEventBusOptions>(options =>
             {
                 options.ConnectionName = "Default";
-                options.SubscriberName = "MySubscriberName";
+                options.SubscriberName = "MySubscriberName1";
                 options.TopicName = "MyTopicName";
             });
 

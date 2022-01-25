@@ -16,7 +16,7 @@ namespace App2
             Configure<AbpAzureEventBusOptions>(options =>
             {
                 options.ConnectionName = "Default";
-                options.SubscriberName = "MySubscriberName";
+                options.SubscriberName = "MySubscriberName2";
                 options.TopicName = "MyTopicName";
             });
 

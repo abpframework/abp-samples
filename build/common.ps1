@@ -32,7 +32,6 @@ if ($a -eq "-a")
         "../EfCoreMigrationDemo",
         "../EventOrganizer",
         "../GrpcDemo",
-        "../KafkaEventBus",
         "../MatBlazorSample"
         #"../MicroserviceDemo",
     )
@@ -44,8 +43,6 @@ else
         "../PasswordlessAuthentication",
         "../PostgeSqlDemo",
         "../PrimengSample/aspnet-core",
-        "../RabbitMqEventBus",
-        "../RebusEventBus",
         "../SignalRDemo",
         "../SignalRTieredDemo",
         "../SingleLayer",

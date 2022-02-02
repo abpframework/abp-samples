@@ -251,6 +251,7 @@ namespace ElsaDemo.Migrations
                     PasswordHash = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     SecurityStamp = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: false),
                     IsExternal = table.Column<bool>(type: "bit", nullable: false, defaultValue: false),
+                    IsActive = table.Column<bool>(type: "bit", nullable: false, defaultValue: true),
                     PhoneNumber = table.Column<string>(type: "nvarchar(16)", maxLength: 16, nullable: true),
                     PhoneNumberConfirmed = table.Column<bool>(type: "bit", nullable: false, defaultValue: false),
                     TwoFactorEnabled = table.Column<bool>(type: "bit", nullable: false, defaultValue: false),

@@ -1,0 +1,55 @@
+﻿@page "/Posts"
+@using TelerikBlazorSample.Posts
+
+@inject IPostAppService PostAppService
+
+<TelerikRootComponent>
+    <h3>Posts</h3>
+
+    <TelerikGrid Data="@GridData"
+                 OnUpdate="@UpdateHandler"
+                 OnDelete="@DeleteHandler"
+                 OnCreate="@CreateHandler"
+                 @ref="@Grid"
+                 Pageable="true"
+                 Groupable="true"
+                 Sortable="true"
+                 FilterMode="GridFilterMode.FilterMenu"
+                 Resizable="true"
+                 Reorderable="true"
+                 EditMode="GridEditMode.Popup"
+                 SelectionMode="GridSelectionMode.Single"
+                 PageSize="5"
+                 Navigable="true">
+        <GridColumns>
+            <GridColumn Field="@nameof(Post.Title)" />
+            <GridColumn Field="@nameof(Post.Body)" />
+            <GridCommandColumn Width="190px">
+                <GridCommandButton Command="Save" Icon="save" ShowInEdit="true">Update</GridCommandButton>
+                <GridCommandButton Command="Edit" Icon="edit">Edit</GridCommandButton>
+                <GridCommandButton Command="Delete" Icon="delete" Primary="true">Delete</GridCommandButton>
+                <GridCommandButton Icon="window" OnClick="(e) => PostDetailAsync(e)">Display Comment</GridCommandButton>
+                <GridCommandButton Command="Cancel" Icon="cancel" ShowInEdit="true">Cancel</GridCommandButton>
+            </GridCommandColumn>
+        </GridColumns>
+        <GridToolBar>
+            <GridCommandButton Command="Add" Icon="add">Add Post</GridCommandButton>
+        </GridToolBar>
+    </TelerikGrid>
+
+    @* Modal *@
+    <TelerikWindow Class="demo-window" Width="500px" Height="250px" Centered="true" @bind-Visible=@ModalVisible Modal="true">
+        <WindowTitle>
+            <strong>Comment</strong>
+        </WindowTitle>
+        <WindowActions>
+            <WindowAction Name="Close" />
+        </WindowActions>
+        <WindowContent>
+            <p><b>Email:</b> @Comment.Email</p>
+            <p>
+                <b>Message:</b> @Comment.Body
+            </p>
+        </WindowContent>
+    </TelerikWindow>
+</TelerikRootComponent>

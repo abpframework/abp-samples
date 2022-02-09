@@ -1,0 +1,7 @@
+{
+  "modules": {
+    "BookStore": {
+      "path": "BookStore.abpmdl.json"
+    }
+  }
+}

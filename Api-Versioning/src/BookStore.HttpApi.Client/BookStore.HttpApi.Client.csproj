@@ -8,7 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Volo.Abp.Http.Client" Version="5.1.3" />
+    <ProjectReference Include="C:\Github\volo\abp\framework\src\Volo.Abp.Http.Client\Volo.Abp.Http.Client.csproj" />
     <ProjectReference Include="..\BookStore.Application.Contracts\BookStore.Application.Contracts.csproj" />
   </ItemGroup>
 

@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
@@ -6,15 +5,11 @@ using Microsoft.Extensions.Hosting;
 using BookStore.EntityFrameworkCore;
 using BookStore.Swagger;
 using BookStore.Web;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
-using Microsoft.AspNetCore.Mvc.Versioning;
 using Microsoft.Extensions.Options;
-using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using Volo.Abp;
-using Volo.Abp.AspNetCore.Mvc.ApiExploring;
-using Volo.Abp.AspNetCore.Mvc.Conventions;
+using Volo.Abp.AspNetCore.Mvc;
 using Volo.Abp.AspNetCore.Mvc.UI.Theme.Basic;
 using Volo.Abp.AspNetCore.Mvc.UI.Theme.Shared;
 using Volo.Abp.AspNetCore.Serilog;
@@ -93,6 +88,11 @@ public class BookStoreWebUnifiedModule : AbpModule
 
                 options.CustomSchemaIds(type => type.FullName);
             });
+
+        Configure<AbpAspNetCoreMvcOptions>(options =>
+        {
+            options.ChangeControllerModelApiExplorerGroupName = false;
+        });
     }
 
     public override async Task OnApplicationInitializationAsync(ApplicationInitializationContext context)

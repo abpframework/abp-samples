@@ -9,7 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Volo.Abp.Validation" Version="5.1.3" />
+    <ProjectReference Include="C:\Github\volo\abp\framework\src\Volo.Abp.Validation\Volo.Abp.Validation.csproj" />
   </ItemGroup>
 
   <ItemGroup>

@@ -28,14 +28,14 @@
 
     bookStore.books.bookV2.get = function(ajaxParams) {
       return abp.ajax($.extend(true, {
-        url: abp.appPath + 'api/v2/BookV',
+        url: abp.appPath + 'api/v2/Book',
         type: 'GET'
       }, ajaxParams));
     };
 
     bookStore.books.bookV2.getAsyncByIsbn = function(isbn, ajaxParams) {
       return abp.ajax($.extend(true, {
-        url: abp.appPath + 'api/v2/BookV/' + isbn + '',
+        url: abp.appPath + 'api/v2/Book/' + isbn + '',
         type: 'GET'
       }, ajaxParams));
     };
@@ -50,21 +50,21 @@
 
     bookStore.books.bookV3.get = function(ajaxParams) {
       return abp.ajax($.extend(true, {
-        url: abp.appPath + 'api/v3/BookV',
+        url: abp.appPath + 'api/v3/Book',
         type: 'GET'
       }, ajaxParams));
     };
 
     bookStore.books.bookV3.getAsyncByIsbn = function(isbn, ajaxParams) {
       return abp.ajax($.extend(true, {
-        url: abp.appPath + 'api/v3/BookV/' + isbn + '',
+        url: abp.appPath + 'api/v3/Book/' + isbn + '',
         type: 'GET'
       }, ajaxParams));
     };
 
     bookStore.books.bookV3['delete'] = function(title, ajaxParams) {
       return abp.ajax($.extend(true, {
-        url: abp.appPath + 'api/v3/BookV/' + title + '',
+        url: abp.appPath + 'api/v3/Book/' + title + '',
         type: 'POST',
         dataType: null
       }, ajaxParams));
@@ -80,8 +80,77 @@
 
     bookStore.books.bookV4.get = function(ajaxParams) {
       return abp.ajax($.extend(true, {
-        url: abp.appPath + 'api/v4/BookV',
+        url: abp.appPath + 'api/v4/Book',
         type: 'GET'
+      }, ajaxParams));
+    };
+
+  })();
+
+  // controller bookStore.books.bookV4
+
+  (function(){
+
+    abp.utils.createNamespace(window, 'bookStore.books.bookV4');
+
+    bookStore.books.bookV4.get = function(ajaxParams) {
+      return abp.ajax($.extend(true, {
+        url: abp.appPath + 'api/v5/Book',
+        type: 'GET'
+      }, ajaxParams));
+    };
+
+  })();
+
+  // controller bookStore.books.bookV4
+
+  (function(){
+
+    abp.utils.createNamespace(window, 'bookStore.books.bookV4');
+
+    bookStore.books.bookV4.get = function(ajaxParams) {
+      return abp.ajax($.extend(true, {
+        url: abp.appPath + 'api/v6/Book',
+        type: 'GET'
+      }, ajaxParams));
+    };
+
+  })();
+
+  // controller bookStore.books.bookV4
+
+  (function(){
+
+    abp.utils.createNamespace(window, 'bookStore.books.bookV4');
+
+    bookStore.books.bookV4.get = function(ajaxParams) {
+      return abp.ajax($.extend(true, {
+        url: abp.appPath + 'api/v7/Book',
+        type: 'GET'
+      }, ajaxParams));
+    };
+
+  })();
+
+  // controller bookStore.books.bookV8
+
+  (function(){
+
+    abp.utils.createNamespace(window, 'bookStore.books.bookV8');
+
+    bookStore.books.bookV8.get = function(api_version, ajaxParams) {
+      var api_version = '8.0';
+      return abp.ajax($.extend(true, {
+        url: abp.appPath + 'api/BookStore/Book' + abp.utils.buildQueryString([{ name: 'api-version', value: api_version }]) + '',
+        type: 'GET'
+      }, ajaxParams));
+    };
+
+    bookStore.books.bookV8.update = function(isbn, api_version, ajaxParams) {
+      var api_version = '8.0';
+      return abp.ajax($.extend(true, {
+        url: abp.appPath + 'api/BookStore/Book/' + isbn + '' + abp.utils.buildQueryString([{ name: 'api-version', value: api_version }]) + '',
+        type: 'PUT'
       }, ajaxParams));
     };
 

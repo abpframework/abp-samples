@@ -109,3 +109,40 @@ public class BookV4AppService : BookStoreAppService, IBookV4AppService
         );
     }
 }
+
+public class BookV8AppService : BookStoreAppService, IBookV8AppService
+{
+    private readonly IRequestedApiVersion _requestedApiVersion;
+
+    public BookV8AppService(IRequestedApiVersion requestedApiVersion)
+    {
+        _requestedApiVersion = requestedApiVersion;
+    }
+
+    public Task<BookDto> GetAsync()
+    {
+        return Task.FromResult(
+            new BookDto
+            {
+                Title = $"Mastering ABP Framework V8",
+                ISBN = "978-1-80107-924-2"
+            }
+        );
+    }
+
+    public Task<BookDto> UpdateAsync(string isbn)
+    {
+        if (isbn == "978-1-80107-924-2")
+        {
+            return Task.FromResult(
+                new BookDto
+                {
+                    Title = $"Mastering ABP Framework V8 Updated",
+                    ISBN = "978-1-80107-924-2"
+                }
+            );
+        }
+
+        throw new EntityNotFoundException();
+    }
+}

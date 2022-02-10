@@ -9,8 +9,9 @@ namespace BookStore.Controllers.V1.Controllers;
 [ApiController]
 [ApiVersion( "1.0" )]
 [ApiVersion( "0.9", Deprecated = true )]
-[Route( "api/[controller]" )]
-public class OrdersController : ControllerBase
+[Route( "api/Orders" )]
+[ControllerName("Orders")]
+public class OrdersV1Controller : ControllerBase
 {
     /// <summary>
     /// Gets a single order.

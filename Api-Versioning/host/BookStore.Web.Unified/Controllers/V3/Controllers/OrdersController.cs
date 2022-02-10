@@ -10,8 +10,9 @@ namespace BookStore.Controllers.V3.Controllers;
 /// </summary>
 [ApiController]
 [ApiVersion( "3.0" )]
-[Route( "api/[controller]" )]
-public class OrdersController : ControllerBase
+[Route( "api/Orders" )]
+[ControllerName("Orders")]
+public class OrdersV3Controller : ControllerBase
 {
     /// <summary>
     /// Retrieves all orders.

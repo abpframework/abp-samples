@@ -9,8 +9,9 @@ namespace BookStore.Controllers.V1.Controllers;
 [ApiController]
 [ApiVersion( "1.0" )]
 [ApiVersion( "0.9", Deprecated = true )]
-[Route( "api/v{version:apiVersion}/[controller]" )]
-public class PeopleController : ControllerBase
+[Route( "api/v{version:apiVersion}/People" )]
+[ControllerName("People")]
+public class PeopleV1Controller : ControllerBase
 {
     /// <summary>
     /// Gets a single person.

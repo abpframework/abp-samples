@@ -28,3 +28,10 @@ public interface IBookV4AppService : IApplicationService
 {
     Task<BookDto> GetAsync();
 }
+
+public interface IBookV8AppService : IApplicationService
+{
+    Task<BookDto> GetAsync();
+
+    Task<BookDto> UpdateAsync(string isbn);
+}

@@ -4,7 +4,7 @@
       "rootPath": "bookStore",
       "remoteServiceName": "BookStore",
       "controllers": {
-        "BookStore.Books.BookController": {
+        "v1.BookStore.Books.BookController": {
           "controllerName": "Book",
           "controllerGroupName": "Book",
           "type": "BookStore.Books.BookController",
@@ -33,7 +33,7 @@
             }
           }
         },
-        "BookStore.Books.BookV2Controller": {
+        "v2.BookStore.Books.BookV2Controller": {
           "controllerName": "BookV2",
           "controllerGroupName": "Book",
           "type": "BookStore.Books.BookV2Controller",
@@ -47,7 +47,7 @@
               "uniqueName": "GetAsync",
               "name": "GetAsync",
               "httpMethod": "GET",
-              "url": "api/v2/BookV",
+              "url": "api/v2/Book",
               "supportedVersions": [
                 "2.0"
               ],
@@ -64,7 +64,7 @@
               "uniqueName": "GetAsyncByIsbn",
               "name": "GetAsync",
               "httpMethod": "GET",
-              "url": "api/v2/BookV/{isbn}",
+              "url": "api/v2/Book/{isbn}",
               "supportedVersions": [
                 "2.0"
               ],
@@ -101,7 +101,7 @@
             }
           }
         },
-        "BookStore.Books.BookV3Controller": {
+        "v3.BookStore.Books.BookV3Controller": {
           "controllerName": "BookV3",
           "controllerGroupName": "Book",
           "type": "BookStore.Books.BookV3Controller",
@@ -115,7 +115,7 @@
               "uniqueName": "GetAsync",
               "name": "GetAsync",
               "httpMethod": "GET",
-              "url": "api/v3/BookV",
+              "url": "api/v3/Book",
               "supportedVersions": [
                 "3.0"
               ],
@@ -132,7 +132,7 @@
               "uniqueName": "GetAsyncByIsbn",
               "name": "GetAsync",
               "httpMethod": "GET",
-              "url": "api/v3/BookV/{isbn}",
+              "url": "api/v3/Book/{isbn}",
               "supportedVersions": [
                 "3.0"
               ],
@@ -171,7 +171,7 @@
               "uniqueName": "DeleteAsyncByTitle",
               "name": "DeleteAsync",
               "httpMethod": "POST",
-              "url": "api/v3/BookV/{title}",
+              "url": "api/v3/Book/{title}",
               "supportedVersions": [
                 "3.0"
               ],
@@ -208,7 +208,7 @@
             }
           }
         },
-        "BookStore.Books.BookV4Controller": {
+        "v4.BookStore.Books.BookV4Controller": {
           "controllerName": "BookV4",
           "controllerGroupName": "Book",
           "type": "BookStore.Books.BookV4Controller",
@@ -222,13 +222,12 @@
               "uniqueName": "GetAsync",
               "name": "GetAsync",
               "httpMethod": "GET",
-              "url": "api/v4/BookV",
+              "url": "api/v4/Book",
               "supportedVersions": [
                 "4.0",
                 "5.0",
                 "6.0",
-                "7.0",
-                "8.0"
+                "7.0"
               ],
               "parametersOnMethod": [],
               "parameters": [],
@@ -238,6 +237,195 @@
               },
               "allowAnonymous": null,
               "implementFrom": "BookStore.Books.IBookV4AppService"
+            }
+          }
+        },
+        "v5.BookStore.Books.BookV4Controller": {
+          "controllerName": "BookV4",
+          "controllerGroupName": "Book",
+          "type": "BookStore.Books.BookV4Controller",
+          "interfaces": [
+            {
+              "type": "BookStore.Books.IBookV4AppService"
+            }
+          ],
+          "actions": {
+            "GetAsync": {
+              "uniqueName": "GetAsync",
+              "name": "GetAsync",
+              "httpMethod": "GET",
+              "url": "api/v5/Book",
+              "supportedVersions": [
+                "4.0",
+                "5.0",
+                "6.0",
+                "7.0"
+              ],
+              "parametersOnMethod": [],
+              "parameters": [],
+              "returnValue": {
+                "type": "BookStore.Books.BookDto",
+                "typeSimple": "BookStore.Books.BookDto"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "BookStore.Books.IBookV4AppService"
+            }
+          }
+        },
+        "v6.BookStore.Books.BookV4Controller": {
+          "controllerName": "BookV4",
+          "controllerGroupName": "Book",
+          "type": "BookStore.Books.BookV4Controller",
+          "interfaces": [
+            {
+              "type": "BookStore.Books.IBookV4AppService"
+            }
+          ],
+          "actions": {
+            "GetAsync": {
+              "uniqueName": "GetAsync",
+              "name": "GetAsync",
+              "httpMethod": "GET",
+              "url": "api/v6/Book",
+              "supportedVersions": [
+                "4.0",
+                "5.0",
+                "6.0",
+                "7.0"
+              ],
+              "parametersOnMethod": [],
+              "parameters": [],
+              "returnValue": {
+                "type": "BookStore.Books.BookDto",
+                "typeSimple": "BookStore.Books.BookDto"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "BookStore.Books.IBookV4AppService"
+            }
+          }
+        },
+        "v7.BookStore.Books.BookV4Controller": {
+          "controllerName": "BookV4",
+          "controllerGroupName": "Book",
+          "type": "BookStore.Books.BookV4Controller",
+          "interfaces": [
+            {
+              "type": "BookStore.Books.IBookV4AppService"
+            }
+          ],
+          "actions": {
+            "GetAsync": {
+              "uniqueName": "GetAsync",
+              "name": "GetAsync",
+              "httpMethod": "GET",
+              "url": "api/v7/Book",
+              "supportedVersions": [
+                "4.0",
+                "5.0",
+                "6.0",
+                "7.0"
+              ],
+              "parametersOnMethod": [],
+              "parameters": [],
+              "returnValue": {
+                "type": "BookStore.Books.BookDto",
+                "typeSimple": "BookStore.Books.BookDto"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "BookStore.Books.IBookV4AppService"
+            }
+          }
+        },
+        "v8.BookStore.Books.BookV8Controller": {
+          "controllerName": "BookV8",
+          "controllerGroupName": "Book",
+          "type": "BookStore.Books.BookV8Controller",
+          "interfaces": [
+            {
+              "type": "BookStore.Books.IBookV8AppService"
+            }
+          ],
+          "actions": {
+            "GetAsync": {
+              "uniqueName": "GetAsync",
+              "name": "GetAsync",
+              "httpMethod": "GET",
+              "url": "api/BookStore/Book",
+              "supportedVersions": [
+                "8.0"
+              ],
+              "parametersOnMethod": [],
+              "parameters": [
+                {
+                  "nameOnMethod": "api-version",
+                  "name": "api-version",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "Query",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "BookStore.Books.BookDto",
+                "typeSimple": "BookStore.Books.BookDto"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "BookStore.Books.IBookV8AppService"
+            },
+            "UpdateAsyncByIsbn": {
+              "uniqueName": "UpdateAsyncByIsbn",
+              "name": "UpdateAsync",
+              "httpMethod": "PUT",
+              "url": "api/BookStore/Book/{isbn}",
+              "supportedVersions": [
+                "8.0"
+              ],
+              "parametersOnMethod": [
+                {
+                  "name": "isbn",
+                  "typeAsString": "System.String, System.Private.CoreLib",
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "isbn",
+                  "name": "isbn",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": [],
+                  "bindingSourceId": "Path",
+                  "descriptorName": ""
+                },
+                {
+                  "nameOnMethod": "api-version",
+                  "name": "api-version",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "Query",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "BookStore.Books.BookDto",
+                "typeSimple": "BookStore.Books.BookDto"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "BookStore.Books.IBookV8AppService"
             }
           }
         }

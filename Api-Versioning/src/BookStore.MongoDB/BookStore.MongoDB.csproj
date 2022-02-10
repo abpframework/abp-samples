@@ -8,7 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Volo.Abp.MongoDB" Version="5.1.3" />
+    <ProjectReference Include="C:\Github\volo\abp\framework\src\Volo.Abp.MongoDB\Volo.Abp.MongoDB.csproj" />
     <ProjectReference Include="..\BookStore.Domain\BookStore.Domain.csproj" />
   </ItemGroup>
 

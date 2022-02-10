@@ -32,7 +32,7 @@ public class BookController : BookStoreController, IBookAppService
 [ApiVersion("2.0")]
 [ApiController]
 [ControllerName("Book")]
-[Route( "api/v{version:apiVersion}/[controller]" )]
+[Route( "api/v{version:apiVersion}/Book" )]
 public class BookV2Controller : BookStoreController, IBookV2AppService
 {
     private readonly IBookV2AppService _bookAppService;
@@ -61,7 +61,7 @@ public class BookV2Controller : BookStoreController, IBookV2AppService
 [ApiVersion("3.0")]
 [ApiController]
 [ControllerName("Book")]
-[Route( "api/v{version:apiVersion}/[controller]" )]
+[Route( "api/v{version:apiVersion}/Book" )]
 public class BookV3Controller : BookStoreController, IBookV3AppService
 {
     private readonly IBookV3AppService _bookAppService;
@@ -98,10 +98,9 @@ public class BookV3Controller : BookStoreController, IBookV3AppService
 [ApiVersion("5.0")]
 [ApiVersion("6.0")]
 [ApiVersion("7.0")]
-[ApiVersion("8.0")]
 [ApiController]
 [ControllerName("Book")]
-[Route("api/v{version:apiVersion}/[controller]")]
+[Route("api/v{version:apiVersion}/Book")]
 public class BookV4Controller : BookStoreController, IBookV4AppService
 {
     private readonly IBookV4AppService _bookAppService;
@@ -115,5 +114,34 @@ public class BookV4Controller : BookStoreController, IBookV4AppService
     public async Task<BookDto> GetAsync()
     {
         return await _bookAppService.GetAsync();
+    }
+}
+
+[Area(BookStoreRemoteServiceConsts.ModuleName)]
+[RemoteService(Name = BookStoreRemoteServiceConsts.RemoteServiceName)]
+[ApiVersion("8.0")]
+[ApiController]
+[ControllerName("Book")]
+[Route("api/BookStore/Book")]
+public class BookV8Controller : BookStoreController, IBookV8AppService
+{
+    private readonly IBookV8AppService _bookAppService;
+
+    public BookV8Controller(IBookV8AppService bookAppService)
+    {
+        _bookAppService = bookAppService;
+    }
+
+    [HttpGet]
+    public async Task<BookDto> GetAsync()
+    {
+        return await _bookAppService.GetAsync();
+    }
+
+    [HttpPut]
+    [Route("{isbn}")]
+    public async Task<BookDto> UpdateAsync(string isbn)
+    {
+        return await _bookAppService.UpdateAsync(isbn);
     }
 }

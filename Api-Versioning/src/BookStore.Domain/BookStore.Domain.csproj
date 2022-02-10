@@ -8,7 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Volo.Abp.Ddd.Domain" Version="5.1.3" />
+    <ProjectReference Include="C:\Github\volo\abp\framework\src\Volo.Abp.Ddd.Domain\Volo.Abp.Ddd.Domain.csproj" />
     <ProjectReference Include="..\BookStore.Domain.Shared\BookStore.Domain.Shared.csproj" />
   </ItemGroup>
 

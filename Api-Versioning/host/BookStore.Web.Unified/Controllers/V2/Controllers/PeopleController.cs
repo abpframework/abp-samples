@@ -9,8 +9,9 @@ namespace BookStore.Controllers.V2.Controllers;
 /// </summary>
 [ApiController]
 [ApiVersion( "2.0" )]
-[Route( "api/v{version:apiVersion}/[controller]" )]
-public class PeopleController : ControllerBase
+[Route( "api/v{version:apiVersion}/People" )]
+[ControllerName("People")]
+public class PeopleV2Controller : ControllerBase
 {
     /// <summary>
     /// Gets all people.

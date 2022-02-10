@@ -11,9 +11,10 @@
 
     abp.utils.createNamespace(window, 'bookStore.books.book');
 
-    bookStore.books.book.get = function(ajaxParams) {
+    bookStore.books.book.get = function(api_version, ajaxParams) {
+      var api_version = '1.0';
       return abp.ajax($.extend(true, {
-        url: abp.appPath + 'api/v1/Book',
+        url: abp.appPath + 'api/BookStore/Book' + abp.utils.buildQueryString([{ name: 'api-version', value: api_version }]) + '',
         type: 'GET'
       }, ajaxParams));
     };
@@ -26,16 +27,18 @@
 
     abp.utils.createNamespace(window, 'bookStore.books.bookV2');
 
-    bookStore.books.bookV2.get = function(ajaxParams) {
+    bookStore.books.bookV2.get = function(api_version, ajaxParams) {
+      var api_version = '2.0';
       return abp.ajax($.extend(true, {
-        url: abp.appPath + 'api/v2/Book',
+        url: abp.appPath + 'api/BookStore/Book' + abp.utils.buildQueryString([{ name: 'api-version', value: api_version }]) + '',
         type: 'GET'
       }, ajaxParams));
     };
 
-    bookStore.books.bookV2.getAsyncByIsbn = function(isbn, ajaxParams) {
+    bookStore.books.bookV2.getAsyncByIsbn = function(isbn, api_version, ajaxParams) {
+      var api_version = '2.0';
       return abp.ajax($.extend(true, {
-        url: abp.appPath + 'api/v2/Book/' + isbn + '',
+        url: abp.appPath + 'api/BookStore/Book/' + isbn + '' + abp.utils.buildQueryString([{ name: 'api-version', value: api_version }]) + '',
         type: 'GET'
       }, ajaxParams));
     };
@@ -48,23 +51,26 @@
 
     abp.utils.createNamespace(window, 'bookStore.books.bookV3');
 
-    bookStore.books.bookV3.get = function(ajaxParams) {
+    bookStore.books.bookV3.get = function(api_version, ajaxParams) {
+      var api_version = '3.0';
       return abp.ajax($.extend(true, {
-        url: abp.appPath + 'api/v3/Book',
+        url: abp.appPath + 'api/BookStore/Book' + abp.utils.buildQueryString([{ name: 'api-version', value: api_version }]) + '',
         type: 'GET'
       }, ajaxParams));
     };
 
-    bookStore.books.bookV3.getAsyncByIsbn = function(isbn, ajaxParams) {
+    bookStore.books.bookV3.getAsyncByIsbn = function(isbn, api_version, ajaxParams) {
+      var api_version = '3.0';
       return abp.ajax($.extend(true, {
-        url: abp.appPath + 'api/v3/Book/' + isbn + '',
+        url: abp.appPath + 'api/BookStore/Book/' + isbn + '' + abp.utils.buildQueryString([{ name: 'api-version', value: api_version }]) + '',
         type: 'GET'
       }, ajaxParams));
     };
 
-    bookStore.books.bookV3['delete'] = function(title, ajaxParams) {
+    bookStore.books.bookV3['delete'] = function(title, api_version, ajaxParams) {
+      var api_version = '3.0';
       return abp.ajax($.extend(true, {
-        url: abp.appPath + 'api/v3/Book/' + title + '',
+        url: abp.appPath + 'api/BookStore/Book/' + title + '' + abp.utils.buildQueryString([{ name: 'api-version', value: api_version }]) + '',
         type: 'POST',
         dataType: null
       }, ajaxParams));
@@ -78,76 +84,32 @@
 
     abp.utils.createNamespace(window, 'bookStore.books.bookV4');
 
-    bookStore.books.bookV4.get = function(ajaxParams) {
-      return abp.ajax($.extend(true, {
-        url: abp.appPath + 'api/v4/Book',
-        type: 'GET'
-      }, ajaxParams));
-    };
-
-  })();
-
-  // controller bookStore.books.bookV4
-
-  (function(){
-
-    abp.utils.createNamespace(window, 'bookStore.books.bookV4');
-
-    bookStore.books.bookV4.get = function(ajaxParams) {
-      return abp.ajax($.extend(true, {
-        url: abp.appPath + 'api/v5/Book',
-        type: 'GET'
-      }, ajaxParams));
-    };
-
-  })();
-
-  // controller bookStore.books.bookV4
-
-  (function(){
-
-    abp.utils.createNamespace(window, 'bookStore.books.bookV4');
-
-    bookStore.books.bookV4.get = function(ajaxParams) {
-      return abp.ajax($.extend(true, {
-        url: abp.appPath + 'api/v6/Book',
-        type: 'GET'
-      }, ajaxParams));
-    };
-
-  })();
-
-  // controller bookStore.books.bookV4
-
-  (function(){
-
-    abp.utils.createNamespace(window, 'bookStore.books.bookV4');
-
-    bookStore.books.bookV4.get = function(ajaxParams) {
-      return abp.ajax($.extend(true, {
-        url: abp.appPath + 'api/v7/Book',
-        type: 'GET'
-      }, ajaxParams));
-    };
-
-  })();
-
-  // controller bookStore.books.bookV8
-
-  (function(){
-
-    abp.utils.createNamespace(window, 'bookStore.books.bookV8');
-
-    bookStore.books.bookV8.get = function(api_version, ajaxParams) {
-      var api_version = '8.0';
+    bookStore.books.bookV4.get = function(api_version, ajaxParams) {
+      var api_version = '4.1';
       return abp.ajax($.extend(true, {
         url: abp.appPath + 'api/BookStore/Book' + abp.utils.buildQueryString([{ name: 'api-version', value: api_version }]) + '',
         type: 'GET'
       }, ajaxParams));
     };
 
-    bookStore.books.bookV8.update = function(isbn, api_version, ajaxParams) {
-      var api_version = '8.0';
+  })();
+
+  // controller bookStore.books.bookV5
+
+  (function(){
+
+    abp.utils.createNamespace(window, 'bookStore.books.bookV5');
+
+    bookStore.books.bookV5.get = function(api_version, ajaxParams) {
+      var api_version = '5.0';
+      return abp.ajax($.extend(true, {
+        url: abp.appPath + 'api/BookStore/Book' + abp.utils.buildQueryString([{ name: 'api-version', value: api_version }]) + '',
+        type: 'GET'
+      }, ajaxParams));
+    };
+
+    bookStore.books.bookV5.update = function(isbn, api_version, ajaxParams) {
+      var api_version = '5.0';
       return abp.ajax($.extend(true, {
         url: abp.appPath + 'api/BookStore/Book/' + isbn + '' + abp.utils.buildQueryString([{ name: 'api-version', value: api_version }]) + '',
         type: 'PUT'

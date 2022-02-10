@@ -10,7 +10,7 @@ namespace BookStore.Books;
 [ApiVersion("1.0", Deprecated = true)]
 [ApiController]
 [ControllerName("Book")]
-[Route( "api/v{version:apiVersion}/[controller]" )]
+[Route("api/BookStore/Book")]
 public class BookController : BookStoreController, IBookAppService
 {
     private readonly IBookAppService _bookAppService;
@@ -32,7 +32,7 @@ public class BookController : BookStoreController, IBookAppService
 [ApiVersion("2.0")]
 [ApiController]
 [ControllerName("Book")]
-[Route( "api/v{version:apiVersion}/Book" )]
+[Route("api/BookStore/Book")]
 public class BookV2Controller : BookStoreController, IBookV2AppService
 {
     private readonly IBookV2AppService _bookAppService;
@@ -61,7 +61,7 @@ public class BookV2Controller : BookStoreController, IBookV2AppService
 [ApiVersion("3.0")]
 [ApiController]
 [ControllerName("Book")]
-[Route( "api/v{version:apiVersion}/Book" )]
+[Route("api/BookStore/Book")]
 public class BookV3Controller : BookStoreController, IBookV3AppService
 {
     private readonly IBookV3AppService _bookAppService;
@@ -95,12 +95,10 @@ public class BookV3Controller : BookStoreController, IBookV3AppService
 [Area(BookStoreRemoteServiceConsts.ModuleName)]
 [RemoteService(Name = BookStoreRemoteServiceConsts.RemoteServiceName)]
 [ApiVersion("4.0")]
-[ApiVersion("5.0")]
-[ApiVersion("6.0")]
-[ApiVersion("7.0")]
+[ApiVersion("4.1")]
 [ApiController]
 [ControllerName("Book")]
-[Route("api/v{version:apiVersion}/Book")]
+[Route("api/BookStore/Book")]
 public class BookV4Controller : BookStoreController, IBookV4AppService
 {
     private readonly IBookV4AppService _bookAppService;
@@ -119,15 +117,15 @@ public class BookV4Controller : BookStoreController, IBookV4AppService
 
 [Area(BookStoreRemoteServiceConsts.ModuleName)]
 [RemoteService(Name = BookStoreRemoteServiceConsts.RemoteServiceName)]
-[ApiVersion("8.0")]
+[ApiVersion("5.0")]
 [ApiController]
 [ControllerName("Book")]
 [Route("api/BookStore/Book")]
-public class BookV8Controller : BookStoreController, IBookV8AppService
+public class BookV5Controller : BookStoreController, IBookV5AppService
 {
-    private readonly IBookV8AppService _bookAppService;
+    private readonly IBookV5AppService _bookAppService;
 
-    public BookV8Controller(IBookV8AppService bookAppService)
+    public BookV5Controller(IBookV5AppService bookAppService)
     {
         _bookAppService = bookAppService;
     }

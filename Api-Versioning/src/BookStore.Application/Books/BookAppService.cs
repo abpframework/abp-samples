@@ -110,11 +110,11 @@ public class BookV4AppService : BookStoreAppService, IBookV4AppService
     }
 }
 
-public class BookV8AppService : BookStoreAppService, IBookV8AppService
+public class BookV5AppService : BookStoreAppService, IBookV5AppService
 {
     private readonly IRequestedApiVersion _requestedApiVersion;
 
-    public BookV8AppService(IRequestedApiVersion requestedApiVersion)
+    public BookV5AppService(IRequestedApiVersion requestedApiVersion)
     {
         _requestedApiVersion = requestedApiVersion;
     }

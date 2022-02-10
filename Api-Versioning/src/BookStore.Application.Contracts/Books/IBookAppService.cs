@@ -29,7 +29,7 @@ public interface IBookV4AppService : IApplicationService
     Task<BookDto> GetAsync();
 }
 
-public interface IBookV8AppService : IApplicationService
+public interface IBookV5AppService : IApplicationService
 {
     Task<BookDto> GetAsync();
 

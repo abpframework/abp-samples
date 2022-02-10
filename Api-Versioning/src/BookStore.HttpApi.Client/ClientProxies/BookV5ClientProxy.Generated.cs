@@ -12,8 +12,8 @@ using BookStore.Books;
 namespace BookStore.Books.ClientProxies;
 
 [Dependency(ReplaceServices = true)]
-[ExposeServices(typeof(IBookV8AppService), typeof(BookV8ClientProxy))]
-public partial class BookV8ClientProxy : ClientProxyBase<IBookV8AppService>, IBookV8AppService
+[ExposeServices(typeof(IBookV5AppService), typeof(BookV5ClientProxy))]
+public partial class BookV5ClientProxy : ClientProxyBase<IBookV5AppService>, IBookV5AppService
 {
     public virtual async Task<BookDto> GetAsync()
     {

@@ -23,7 +23,7 @@ public class BookController : BookStoreController, IBookAppService
     [HttpGet]
     public async Task<BookDto> GetAsync()
     {
-        return await this.As<IBookAppService>().GetAsync();
+        return await _bookAppService.GetAsync();
     }
 }
 

@@ -1,5 +1,4 @@
 ﻿using System.Threading.Tasks;
-using Volo.Abp.ApiVersioning;
 using Volo.Abp.Domain.Entities;
 
 namespace BookStore.Books;
@@ -11,7 +10,7 @@ public class BookAppService : BookStoreAppService, IBookAppService
         return Task.FromResult(
             new BookDto
             {
-                Title = "Mastering ABP Framework",
+                Title = $"Mastering ABP Framework V{RequestedApiVersion.Current}",
                 ISBN = "978-1-80107-924-2"
             }
         );
@@ -25,7 +24,7 @@ public class BookV2AppService : BookStoreAppService, IBookV2AppService
         return Task.FromResult(
             new BookDto
             {
-                Title = "Mastering ABP Framework V2",
+                Title = $"Mastering ABP Framework V{RequestedApiVersion.Current}",
                 ISBN = "978-1-80107-924-2"
             }
         );
@@ -38,7 +37,7 @@ public class BookV2AppService : BookStoreAppService, IBookV2AppService
             return Task.FromResult(
                 new BookDto
                 {
-                    Title = "Mastering ABP Framework V2",
+                    Title = $"Mastering ABP Framework V{RequestedApiVersion.Current}",
                     ISBN = "978-1-80107-924-2"
                 }
             );
@@ -55,7 +54,7 @@ public class BookV3AppService : BookStoreAppService, IBookV3AppService
         return Task.FromResult(
             new BookDto
             {
-                Title = "Mastering ABP Framework V2",
+                Title = $"Mastering ABP Framework V{RequestedApiVersion.Current}",
                 ISBN = "978-1-80107-924-2"
             }
         );
@@ -68,7 +67,7 @@ public class BookV3AppService : BookStoreAppService, IBookV3AppService
             return Task.FromResult(
                 new BookDto
                 {
-                    Title = "Mastering ABP Framework V2",
+                    Title = $"Mastering ABP Framework V{RequestedApiVersion.Current}",
                     ISBN = "978-1-80107-924-2"
                 }
             );
@@ -91,19 +90,12 @@ public class BookV3AppService : BookStoreAppService, IBookV3AppService
 
 public class BookV4AppService : BookStoreAppService, IBookV4AppService
 {
-    private readonly IRequestedApiVersion _requestedApiVersion;
-
-    public BookV4AppService(IRequestedApiVersion requestedApiVersion)
-    {
-        _requestedApiVersion = requestedApiVersion;
-    }
-
     public Task<BookDto> GetAsync()
     {
         return Task.FromResult(
             new BookDto
             {
-                Title = $"Mastering ABP Framework V{_requestedApiVersion.Current}",
+                Title = $"Mastering ABP Framework V{RequestedApiVersion.Current}",
                 ISBN = "978-1-80107-924-2"
             }
         );
@@ -112,19 +104,12 @@ public class BookV4AppService : BookStoreAppService, IBookV4AppService
 
 public class BookV5AppService : BookStoreAppService, IBookV5AppService
 {
-    private readonly IRequestedApiVersion _requestedApiVersion;
-
-    public BookV5AppService(IRequestedApiVersion requestedApiVersion)
-    {
-        _requestedApiVersion = requestedApiVersion;
-    }
-
     public Task<BookDto> GetAsync()
     {
         return Task.FromResult(
             new BookDto
             {
-                Title = $"Mastering ABP Framework V8",
+                Title = $"Mastering ABP Framework V{RequestedApiVersion.Current}",
                 ISBN = "978-1-80107-924-2"
             }
         );
@@ -137,7 +122,7 @@ public class BookV5AppService : BookStoreAppService, IBookV5AppService
             return Task.FromResult(
                 new BookDto
                 {
-                    Title = $"Mastering ABP Framework V8 Updated",
+                    Title = $"Mastering ABP Framework V{RequestedApiVersion.Current} Updated",
                     ISBN = "978-1-80107-924-2"
                 }
             );

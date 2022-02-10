@@ -3,11 +3,14 @@ using BookStore.Books;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 using Serilog;
 using Serilog.Events;
 using Volo.Abp;
 using Volo.Abp.Autofac;
 using Volo.Abp.Http.Client;
+using Volo.Abp.Http.Client.ClientProxying;
+using Volo.Abp.Http.ProxyScripting.Generators;
 using Volo.Abp.Modularity;
 
 Log.Logger = new LoggerConfiguration()
@@ -64,7 +67,7 @@ public class BookStoreHostedService : IHostedService
 
     public async Task StartAsync(CancellationToken cancellationToken)
     {
-        _abpApplication =  await AbpApplicationFactory.CreateAsync<BookStoreConsoleModule>(options =>
+        _abpApplication = await AbpApplicationFactory.CreateAsync<BookStoreConsoleModule>(options =>
         {
             options.Services.ReplaceConfiguration(_configuration);
             options.Services.AddSingleton(_hostEnvironment);
@@ -75,8 +78,45 @@ public class BookStoreHostedService : IHostedService
 
         await _abpApplication.InitializeAsync();
 
+        var logger = _abpApplication.ServiceProvider.GetRequiredService<ILogger<BookStoreHostedService>>();
+        var currentApiVersionInfo = _abpApplication.ServiceProvider.GetRequiredService<ICurrentApiVersionInfo>();
+
+        logger.LogInformation("----------------------------------------------------------------------");
+        var bookAppService = _abpApplication.ServiceProvider.GetRequiredService<IBookAppService>();
+        var book = await bookAppService.GetAsync();
+        logger.LogWarning(book.Title);
+        logger.LogWarning(book.ISBN);
+
+        var bookV2AppService = _abpApplication.ServiceProvider.GetRequiredService<IBookV2AppService>();
+        book = await bookV2AppService.GetAsync();
+        logger.LogWarning(book.Title);
+        logger.LogWarning(book.ISBN);
+
+        var bookV3AppService = _abpApplication.ServiceProvider.GetRequiredService<IBookV3AppService>();
+        book = await bookV3AppService.GetAsync();
+        logger.LogWarning(book.Title);
+        logger.LogWarning(book.ISBN);
+
+        var bookV4AppService = _abpApplication.ServiceProvider.GetRequiredService<IBookV4AppService>();
+        using (currentApiVersionInfo.Change(new ApiVersionInfo(ParameterBindingSources.Query, "4.0")))
+        {
+            book = await bookV4AppService.GetAsync();
+            logger.LogWarning(book.Title);
+            logger.LogWarning(book.ISBN);
+        }
+
+        using (currentApiVersionInfo.Change(new ApiVersionInfo(ParameterBindingSources.Query, "4.1")))
+        {
+            book = await bookV4AppService.GetAsync();
+            logger.LogWarning(book.Title);
+            logger.LogWarning(book.ISBN);
+        }
+
         var bookV5AppService = _abpApplication.ServiceProvider.GetRequiredService<IBookV5AppService>();
-        var book = await bookV5AppService.GetAsync();
+        book = await bookV5AppService.GetAsync();
+        logger.LogWarning(book.Title);
+        logger.LogWarning(book.ISBN);
+        logger.LogInformation("----------------------------------------------------------------------");
     }
 
     public async Task StopAsync(CancellationToken cancellationToken)

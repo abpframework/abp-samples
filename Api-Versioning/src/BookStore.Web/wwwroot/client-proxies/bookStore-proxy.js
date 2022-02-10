@@ -12,7 +12,7 @@
     abp.utils.createNamespace(window, 'bookStore.books.book');
 
     bookStore.books.book.get = function(api_version, ajaxParams) {
-      var api_version = '1.0';
+      var api_version = api_version ? api_version : '1.0';
       return abp.ajax($.extend(true, {
         url: abp.appPath + 'api/BookStore/Book' + abp.utils.buildQueryString([{ name: 'api-version', value: api_version }]) + '',
         type: 'GET'
@@ -28,7 +28,7 @@
     abp.utils.createNamespace(window, 'bookStore.books.bookV2');
 
     bookStore.books.bookV2.get = function(api_version, ajaxParams) {
-      var api_version = '2.0';
+      var api_version = api_version ? api_version : '2.0';
       return abp.ajax($.extend(true, {
         url: abp.appPath + 'api/BookStore/Book' + abp.utils.buildQueryString([{ name: 'api-version', value: api_version }]) + '',
         type: 'GET'
@@ -36,7 +36,7 @@
     };
 
     bookStore.books.bookV2.getAsyncByIsbn = function(isbn, api_version, ajaxParams) {
-      var api_version = '2.0';
+      var api_version = api_version ? api_version : '2.0';
       return abp.ajax($.extend(true, {
         url: abp.appPath + 'api/BookStore/Book/' + isbn + '' + abp.utils.buildQueryString([{ name: 'api-version', value: api_version }]) + '',
         type: 'GET'
@@ -52,7 +52,7 @@
     abp.utils.createNamespace(window, 'bookStore.books.bookV3');
 
     bookStore.books.bookV3.get = function(api_version, ajaxParams) {
-      var api_version = '3.0';
+      var api_version = api_version ? api_version : '3.0';
       return abp.ajax($.extend(true, {
         url: abp.appPath + 'api/BookStore/Book' + abp.utils.buildQueryString([{ name: 'api-version', value: api_version }]) + '',
         type: 'GET'
@@ -60,7 +60,7 @@
     };
 
     bookStore.books.bookV3.getAsyncByIsbn = function(isbn, api_version, ajaxParams) {
-      var api_version = '3.0';
+      var api_version = api_version ? api_version : '3.0';
       return abp.ajax($.extend(true, {
         url: abp.appPath + 'api/BookStore/Book/' + isbn + '' + abp.utils.buildQueryString([{ name: 'api-version', value: api_version }]) + '',
         type: 'GET'
@@ -68,7 +68,7 @@
     };
 
     bookStore.books.bookV3['delete'] = function(title, api_version, ajaxParams) {
-      var api_version = '3.0';
+      var api_version = api_version ? api_version : '3.0';
       return abp.ajax($.extend(true, {
         url: abp.appPath + 'api/BookStore/Book/' + title + '' + abp.utils.buildQueryString([{ name: 'api-version', value: api_version }]) + '',
         type: 'POST',
@@ -85,7 +85,7 @@
     abp.utils.createNamespace(window, 'bookStore.books.bookV4');
 
     bookStore.books.bookV4.get = function(api_version, ajaxParams) {
-      var api_version = '4.1';
+      var api_version = api_version ? api_version : '4.1';
       return abp.ajax($.extend(true, {
         url: abp.appPath + 'api/BookStore/Book' + abp.utils.buildQueryString([{ name: 'api-version', value: api_version }]) + '',
         type: 'GET'
@@ -101,7 +101,7 @@
     abp.utils.createNamespace(window, 'bookStore.books.bookV5');
 
     bookStore.books.bookV5.get = function(api_version, ajaxParams) {
-      var api_version = '5.0';
+      var api_version = api_version ? api_version : '5.0';
       return abp.ajax($.extend(true, {
         url: abp.appPath + 'api/BookStore/Book' + abp.utils.buildQueryString([{ name: 'api-version', value: api_version }]) + '',
         type: 'GET'
@@ -109,7 +109,7 @@
     };
 
     bookStore.books.bookV5.update = function(isbn, api_version, ajaxParams) {
-      var api_version = '5.0';
+      var api_version = api_version ? api_version : '5.0';
       return abp.ajax($.extend(true, {
         url: abp.appPath + 'api/BookStore/Book/' + isbn + '' + abp.utils.buildQueryString([{ name: 'api-version', value: api_version }]) + '',
         type: 'PUT'

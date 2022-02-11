@@ -1,9 +1,9 @@
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using BookStore.Swagger;
 using BookStore.Web;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Microsoft.Extensions.Options;
 using Swashbuckle.AspNetCore.SwaggerGen;
@@ -11,10 +11,7 @@ using Volo.Abp;
 using Volo.Abp.AspNetCore.Mvc;
 using Volo.Abp.AspNetCore.Mvc.UI.Theme.Basic;
 using Volo.Abp.AspNetCore.Mvc.UI.Theme.Shared;
-using Volo.Abp.AspNetCore.Serilog;
 using Volo.Abp.Autofac;
-using Volo.Abp.Data;
-using Volo.Abp.Localization;
 using Volo.Abp.Modularity;
 using Volo.Abp.Swashbuckle;
 
@@ -26,34 +23,47 @@ namespace BookStore;
     typeof(BookStoreHttpApiModule),
     typeof(AbpAutofacModule),
     typeof(AbpAspNetCoreMvcUiBasicThemeModule),
-    typeof(AbpAspNetCoreSerilogModule),
     typeof(AbpSwashbuckleModule)
     )]
 public class BookStoreWebAppModule : AbpModule
 {
-    public override void ConfigureServices(ServiceConfigurationContext context)
+    public override void PreConfigureServices(ServiceConfigurationContext context)
     {
-        ConfigureApiVersioning(context);
-
-        Configure<AbpLocalizationOptions>(options =>
+        PreConfigure<AbpAspNetCoreMvcOptions>(options =>
         {
-            options.Languages.Add(new LanguageInfo("en", "en", "English"));
+            //2.0 Version
+            options.ConventionalControllers.Create(typeof(BookStoreWebAppModule).Assembly, opts =>
+            {
+                opts.TypePredicate = t => t.Namespace == typeof(BookStore.Controllers.ConventionalControllers.v2.TodoAppService).Namespace;
+                opts.ApiVersions.Add(new ApiVersion(2, 0));
+            });
+
+            //1.0 Compatibility version
+            options.ConventionalControllers.Create(typeof(BookStoreWebAppModule).Assembly, opts =>
+            {
+                opts.TypePredicate = t => t.Namespace == typeof(BookStore.Controllers.ConventionalControllers.v1.TodoAppService).Namespace;
+                opts.ApiVersions.Add(new ApiVersion(1, 0));
+            });
         });
     }
 
-    private void ConfigureApiVersioning(ServiceConfigurationContext context)
+    public override void ConfigureServices(ServiceConfigurationContext context)
     {
+        var preActions = context.Services.GetPreConfigureActions<AbpAspNetCoreMvcOptions>();
+        Configure<AbpAspNetCoreMvcOptions>(options =>
+        {
+            preActions.Configure(options);
+        });
+
         context.Services.AddAbpApiVersioning(options =>
         {
+            // Show neutral/versionless APIs.
             options.UseApiBehavior = false;
 
             options.ReportApiVersions = true;
             options.AssumeDefaultVersionWhenUnspecified = true;
 
-            //options.ApiVersionReader = new HeaderApiVersionReader("api-version"); //Supports header too
-            //options.ApiVersionReader = new MediaTypeApiVersionReader(); //Supports accept header too
-
-            //options.ConfigureAbp(preActions.Configure());
+            options.ConfigureAbp(preActions.Configure());
         });
 
         context.Services.AddVersionedApiExplorer(
@@ -85,7 +95,7 @@ public class BookStoreWebAppModule : AbpModule
         });
     }
 
-    public override async Task OnApplicationInitializationAsync(ApplicationInitializationContext context)
+    public override void OnApplicationInitialization(ApplicationInitializationContext context)
     {
         var app = context.GetApplicationBuilder();
         var env = context.GetEnvironment();
@@ -103,10 +113,7 @@ public class BookStoreWebAppModule : AbpModule
         app.UseHttpsRedirection();
         app.UseStaticFiles();
         app.UseRouting();
-        app.UseAuthentication();
-
         app.UseAbpRequestLocalization();
-        app.UseAuthorization();
 
         app.UseSwagger();
         app.UseSwaggerUI(
@@ -120,8 +127,6 @@ public class BookStoreWebAppModule : AbpModule
                 }
             });
 
-        app.UseAuditing();
-        app.UseAbpSerilogEnrichers();
         app.UseConfiguredEndpoints();
     }
 }

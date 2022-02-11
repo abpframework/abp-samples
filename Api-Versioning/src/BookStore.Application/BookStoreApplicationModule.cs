@@ -6,7 +6,6 @@ using Volo.Abp.Application;
 namespace BookStore;
 
 [DependsOn(
-    typeof(BookStoreDomainModule),
     typeof(BookStoreApplicationContractsModule),
     typeof(AbpDddApplicationModule),
     typeof(AbpAutoMapperModule)

@@ -54,7 +54,7 @@ finally
 
 public class BookStoreHostedService : IHostedService
 {
-    private IAbpApplicationWithInternalServiceProvider _abpApplication;
+    private IAbpApplicationWithInternalServiceProvider? _abpApplication;
 
     private readonly IConfiguration _configuration;
     private readonly IHostEnvironment _hostEnvironment;
@@ -121,7 +121,7 @@ public class BookStoreHostedService : IHostedService
 
     public async Task StopAsync(CancellationToken cancellationToken)
     {
-        await _abpApplication.ShutdownAsync();
+        await _abpApplication?.ShutdownAsync()!;
     }
 }
 

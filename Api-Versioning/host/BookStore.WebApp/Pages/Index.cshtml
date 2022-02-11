@@ -1,0 +1,49 @@
+﻿@page
+@using BookStore.Pages
+@model IndexModel
+
+@section scripts {
+<abp-script src="/client-proxies/bookStore-proxy.js"/>
+
+<script>
+(function ($) {
+
+    var output = $("#output");
+    bookStore.books.book.get().done(function(data){
+        output.html("<pre>bookStore.books.book.get() &#9&#9 Title: " + data.title + "</pre>");
+    });
+
+    bookStore.books.bookV2.get().done(function(data){
+        output.html(output.html() + "<pre><br\>bookStore.books.bookV2.get() &#9&#9 Title: " + data.title + "</pre>");
+    });
+
+    bookStore.books.bookV3.get().done(function(data){
+        output.html(output.html() + "<pre><br\>bookStore.books.bookV3.get() &#9&#9 Title: " + data.title + "</pre>");
+    });
+
+    bookStore.books.bookV4.get("4.0").done(function(data){
+        output.html(output.html() + "<pre><br\>bookStore.books.bookV4.get(\"4.0\") 	 Title: " + data.title + "</pre>");
+    });
+
+    bookStore.books.bookV4.get().done(function(data){
+        output.html(output.html() + "<pre><br\>bookStore.books.bookV4.get() &#9&#9 Title: " + data.title + "</pre>");
+    });
+
+    bookStore.books.bookV5.get().done(function(data){
+        output.html(output.html() + "<pre><br\>bookStore.books.bookV5.get() &#9&#9 Title: " + data.title + "</pre>");
+    });
+})(jQuery);
+</script>
+}
+
+<div>
+    <h2><a href="/swagger" target="_blank">Swagger</a></h2>
+</div>
+
+<div>
+    <h2><a href="/api/abp/api-definition" target="_blank">API Definition</a></h2>
+</div>
+
+<div id="output" class="mt-4">
+
+</div>

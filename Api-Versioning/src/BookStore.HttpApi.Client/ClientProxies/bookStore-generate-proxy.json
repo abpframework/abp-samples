@@ -4,7 +4,7 @@
       "rootPath": "bookStore",
       "remoteServiceName": "BookStore",
       "controllers": {
-        "v1.BookStore.Books.BookController": {
+        "1.0.BookStore.Books.BookController": {
           "controllerName": "Book",
           "controllerGroupName": "Book",
           "type": "BookStore.Books.BookController",
@@ -46,7 +46,7 @@
             }
           }
         },
-        "v2.BookStore.Books.BookV2Controller": {
+        "2.0.BookStore.Books.BookV2Controller": {
           "controllerName": "BookV2",
           "controllerGroupName": "Book",
           "type": "BookStore.Books.BookV2Controller",
@@ -139,7 +139,7 @@
             }
           }
         },
-        "v3.BookStore.Books.BookV3Controller": {
+        "3.0.BookStore.Books.BookV3Controller": {
           "controllerName": "BookV3",
           "controllerGroupName": "Book",
           "type": "BookStore.Books.BookV3Controller",
@@ -283,7 +283,7 @@
             }
           }
         },
-        "v4.BookStore.Books.BookV4Controller": {
+        "4.0.BookStore.Books.BookV4Controller": {
           "controllerName": "BookV4",
           "controllerGroupName": "Book",
           "type": "BookStore.Books.BookV4Controller",
@@ -326,7 +326,7 @@
             }
           }
         },
-        "v5.BookStore.Books.BookV5Controller": {
+        "5.0.BookStore.Books.BookV5Controller": {
           "controllerName": "BookV5",
           "controllerGroupName": "Book",
           "type": "BookStore.Books.BookV5Controller",

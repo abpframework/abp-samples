@@ -1,0 +1,71 @@
+/*!
+ * Copyright 2022 Progress Software Corporation and/or one of its subsidiaries or affiliates. All rights reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+// Treeview
+.k-treeview {
+    background: none;
+    .fill(
+        @kendo-treeview-text;
+        @kendo-treeview-bg;
+        @kendo-treeview-border;
+    );
+}
+
+
+// Treeview group
+.k-treeview-group {
+    background: none !important;
+}
+
+
+// Treeview item
+.k-treeview-item {}
+
+
+// Treeview leaf
+.k-treeview-leaf {
+
+    // Hover state
+    &:hover,
+    &.k-hover {
+        .fill(
+            @kendo-treeview-item-hover-text;
+            @kendo-treeview-item-hover-bg;
+            @kendo-treeview-item-hover-border;
+            @kendo-treeview-item-hover-gradient;
+        );
+    }
+
+    // Focus state
+    &:focus,
+    &.k-focus {
+        .box-shadow( @kendo-treeview-item-focus-shadow );
+    }
+
+    // Selected state
+    &.k-selected {
+        .fill(
+            @kendo-treeview-item-selected-text;
+            @kendo-treeview-item-selected-bg;
+            @kendo-treeview-item-selected-border;
+            @kendo-treeview-item-selected-gradient;
+        );
+    }
+    &.k-selected:hover,
+    &.k-selected.k-hover {
+        color: @kendo-treeview-item-selected-text;
+        background-color: shade( @kendo-treeview-item-selected-bg, 8% );
+    }
+}

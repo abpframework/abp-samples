@@ -1,0 +1,56 @@
+/*!
+ * Copyright 2022 Progress Software Corporation and/or one of its subsidiaries or affiliates. All rights reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+// OrgChart
+.k-widget.k-orgchart {
+    .fill (
+        @orgchart-text,
+        @orgchart-bg,
+        @orgchart-border
+    );
+}
+
+// Card
+.k-orgchart-card {
+    .k-card-body {
+        .fill( @border: transparent );
+    }
+
+    &:focus,
+    &.k-state-focus {
+        .box-shadow( @orgchart-card-focus-shadow );
+    }
+}
+
+// Group
+.k-orgchart-node-group-container {
+    .fill (
+        @orgchart-node-group-text,
+        @orgchart-node-group-bg,
+        @orgchart-node-group-border
+    );
+}
+.k-orgchart-node-group-container:focus,
+.k-orgchart-node-group-container.k-state-focus,
+.k-orgchart-node-group-container.k-state-focused {
+    .box-shadow( @orgchart-node-group-focus-shadow );
+    .fill ( @border: @orgchart-node-group-focus-border );
+}
+
+// Lines
+.k-orgchart-line-h,
+.k-orgchart-line-v {
+    .fill( @text: @orgchart-line-fill );
+}

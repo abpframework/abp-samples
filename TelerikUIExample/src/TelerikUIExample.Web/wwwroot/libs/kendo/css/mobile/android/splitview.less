@@ -1,0 +1,38 @@
+/*!
+ * Copyright 2022 Progress Software Corporation and/or one of its subsidiaries or affiliates. All rights reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+@import "../common/splitview.less";
+@import "base.less";
+
+// SplitView
+
+.km-android .km-popup.km-pane .km-view,
+.km-android .km-scrollview .km-pane:last-child .km-content
+{
+    border-width: @android-border-width;
+    border-style: solid;
+    .box-sizing(border-box);
+    background-clip: padding-box;
+}
+
+.km-android .km-pane
+{
+    z-index: 1;
+}
+
+.km-android .km-pane:first-child
+{
+    z-index: 0;
+}

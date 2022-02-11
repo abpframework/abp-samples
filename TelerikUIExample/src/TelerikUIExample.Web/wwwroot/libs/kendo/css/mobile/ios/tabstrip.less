@@ -1,0 +1,62 @@
+/*!
+ * Copyright 2022 Progress Software Corporation and/or one of its subsidiaries or affiliates. All rights reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+@import "../common/icons.less";
+@import "../common/tabstrip.less";
+@import "base.less";
+
+.km-ios .km-tabstrip
+{
+    padding: .1em 0;
+    border-top-width: 1px;
+    border-top-style: solid;
+}
+
+.km-phone .km-ios .km-tabstrip
+{
+    display: table;
+    border-collapse: separate;
+    border-spacing: 3px 0;
+}
+
+.km-phone .km-ios .km-tabstrip .km-button
+{
+    display: table-cell;
+}
+
+.km-root .km-ios .km-tabstrip
+{
+    border-spacing: 0;
+    padding: 0;
+}
+
+.km-ios .km-tabstrip .km-button
+{
+    .box-shadow(none);
+    background: transparent;
+    border: 0;
+    font-size: .7em;
+    min-width: 6em;
+    text-shadow: inherit;
+    margin: 0;
+    padding: .1em .3em .4em;
+    border-radius: 0;
+}
+
+.km-ios .km-tabstrip .km-button:last-child
+{
+    .box-shadow(none);
+}
+

@@ -1,0 +1,116 @@
+/*!
+ * Copyright 2022 Progress Software Corporation and/or one of its subsidiaries or affiliates. All rights reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+.k-menu:not(.k-context-menu) {
+    .fill(
+        @menu-text,
+        @menu-bg,
+        @menu-border,
+        @menu-gradient
+    );
+
+    // .k-link {
+    //     .fill( @text: @menu-text );
+    // }
+
+    > .k-item {
+        .fill(
+            @menu-item-text,
+            @menu-item-bg,
+            @menu-item-border,
+            @menu-item-gradient
+        );
+
+        &:hover,
+        &.k-hover {
+            .fill(
+                @menu-item-hover-text,
+                @menu-item-hover-bg,
+                @menu-item-hover-border,
+                @menu-item-hover-gradient
+            );
+        }
+
+        &:active,
+        &.k-active {
+            .fill(
+                @menu-item-expanded-text,
+                @menu-item-expanded-bg,
+                @menu-item-expanded-border,
+                @menu-item-expanded-gradient
+            );
+        }
+
+        &:focus,
+        &.k-focus {
+            .box-shadow( @menu-item-focus-shadow );
+        }
+    }
+}
+
+.k-menu-group,
+.k-menu.k-context-menu {
+    .fill(
+        @menu-popup-text,
+        @menu-popup-bg,
+        @menu-popup-border,
+        @menu-popup-gradient
+    );
+
+    .k-item > .k-link {
+        .fill(
+            @menu-popup-item-text,
+            @menu-popup-item-bg,
+            @menu-popup-item-border,
+            @menu-popup-item-gradient
+        );
+
+        &:hover,
+        &.k-hover {
+            .fill(
+                @menu-popup-item-hover-text,
+                @menu-popup-item-hover-bg,
+                @menu-popup-item-hover-border,
+                @menu-popup-item-hover-gradient
+            );
+        }
+
+        &:active,
+        &.k-active,
+        &.k-selected {
+            .fill(
+                @menu-popup-item-expanded-text,
+                @menu-popup-item-expanded-bg,
+                @menu-popup-item-expanded-border,
+                @menu-popup-item-expanded-gradient
+            );
+        }
+
+        &:focus,
+        &.k-focus {
+            .box-shadow( @menu-popup-item-focus-shadow );
+        }
+    }
+
+    .k-item:focus,
+    .k-item.k-focus {
+        .box-shadow( @menu-popup-item-focus-shadow );
+    }
+
+    .k-separator { .fill( @border: @component-border ); }
+}
+
+.k-menu-horizontal .k-link { .fill ( @border: @component-border ); }

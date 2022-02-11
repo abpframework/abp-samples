@@ -1,0 +1,67 @@
+/*!
+ * Copyright 2022 Progress Software Corporation and/or one of its subsidiaries or affiliates. All rights reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+@import "../common/splitview.less";
+@import "base.less";
+
+// SplitView
+
+.km-ios .km-splitview > .km-split-content > .km-pane
+{
+    border-radius: 5px;
+}
+
+.km-ios .km-split-vertical > .km-split-content > .km-pane
+{
+    border-right: 0;
+}
+
+.km-ios .km-splitview > .km-split-content > .km-pane
+{
+    border-right-width: 1px;
+    border-right-style: solid;
+}
+
+.km-ios .km-split-vertical > .km-split-content > .km-pane
+{
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+}
+
+.km-ios .km-splitview .km-navbar,
+.km-ios .km-splitview .km-toolbar,
+.km-ios .km-modalview > :first-child,
+.km-ios .km-splitview .km-view > :first-child
+{
+    border-radius: 5px 5px 0 0;
+}
+
+.km-ios .km-splitview .km-tabstrip,
+.km-ios .km-modalview > :last-child,
+.km-ios .km-splitview .km-view > :last-child
+{
+    border-radius: 0 0 5px 5px;
+}
+
+.km-ios .km-modalview > :first-child:last-child,
+.km-ios .km-pane > .km-view > :first-child:last-child
+{
+    border-radius: 5px;
+}
+
+.km-ios .km-splitview .km-pane:last-child
+{
+    border: 0;
+}

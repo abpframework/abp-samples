@@ -1,0 +1,72 @@
+/*!
+ * Copyright 2022 Progress Software Corporation and/or one of its subsidiaries or affiliates. All rights reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+@accent: #008886;
+@base: #0e0e0e;
+@background: #0e0e0e;
+
+@border-radius: 0;
+@icon-size: 16px;
+
+@normal-background: #0e0e0e;
+@normal-text-color: #fff;
+@normal-gradient: none;
+@hover-background: #00aba9;
+@hover-text-color: #fff;
+@hover-gradient: none;
+@selected-background: #00aba9;
+@selected-text-color: #fff;
+@selected-gradient: none;
+
+@is-dark-theme: boolean( luma(@background) < 50% );
+
+@primary: @accent;
+@secondary: @base;
+@tertiary: #00aba9;
+@info: #0c779b;
+@success: #2b893c;
+@warning: #ffb137;
+@error: #e20000;
+@dark: #000000;
+@light: #ffffff;
+@inverse: if(@is-dark-theme, @light, @dark);
+
+
+@theme-colors: {
+    primary: @primary;
+    secondary: @secondary;
+    tertiary: @tertiary;
+    info: @info;
+    success: @success;
+    warning: @warning;
+    error: @error;
+    dark: @dark;
+    light: @light;
+    inverse: @inverse;
+}
+
+@series-a: #00aba9;
+@series-b: #309b46;
+@series-c: #8ebc00;
+@series-d: #ff6900;
+@series-e: #e61e26;
+@series-f: #d8e404;
+
+// graphics
+@image-folder: "MetroBlack";
+@texture: none;
+@fallback-texture: none;
+
+@import "type-metro.less";

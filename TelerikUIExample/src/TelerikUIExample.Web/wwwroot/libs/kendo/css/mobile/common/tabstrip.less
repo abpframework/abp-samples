@@ -1,0 +1,70 @@
+/*!
+ * Copyright 2022 Progress Software Corporation and/or one of its subsidiaries or affiliates. All rights reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+@import "button.less";
+
+.km-tabstrip
+{
+    padding: .4rem .7rem;
+}
+
+.km-horizontal .km-tabstrip
+{
+    padding: .2rem .7rem;
+}
+
+.km-tabstrip
+{
+    .flex-align(start);
+    .flex-direction(row);
+    -moz-box-pack: start;
+    padding: 0;
+    text-align: center;
+    word-spacing: -1em;
+}
+
+.km-tabstrip .km-button
+{
+    word-spacing: normal;
+    .box-shadow(none);
+    vertical-align: bottom;
+}
+
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+    .km-tabstrip { word-spacing: normal; width: 100%; }
+}
+
+.km-tabstrip .km-button
+{
+    font-family: Arial, Helvetica, sans-serif;
+    color: #a8a8a8;
+    padding: .4em .8em;
+    border-width: 0;
+    border-color: transparent;
+    background: none;
+    margin: 0;
+    text-align: center;
+}
+
+.km-tabstrip .km-button:first-child
+{
+    border-left: 0;
+}
+
+.km-tabstrip .km-button:last-child
+{
+    border-right: 0;
+}
+

@@ -1,0 +1,100 @@
+/*!
+ * Copyright 2022 Progress Software Corporation and/or one of its subsidiaries or affiliates. All rights reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+@import "button.less";
+
+.km-buttongroup
+{
+    padding: .4rem .7rem;
+    -webkit-margin-collapse: separate;
+    margin-collapse: separate;
+    margin: .5em auto;
+}
+
+.km-widget.km-buttongroup
+{
+    padding: 0;
+    border-color: transparent;
+    background: none;
+    white-space: nowrap;
+    display: table;
+}
+
+.km-buttongroup > .km-button
+{
+    display: table-cell;
+}
+
+.km-buttongroup .km-badge
+{
+    z-index: 1;
+}
+
+.km-widget.km-buttongroup .km-button
+{
+    margin: 0;
+    border-width: 1px 0 1px 1px;
+    padding: .48em .9em .44em;
+}
+
+.km-tablet .km-buttongroup .km-button
+{
+    padding: .4em .8em .34em;
+}
+
+.km-widget.km-navbar .km-buttongroup
+{
+    font-size: .95rem;
+    line-height: 1em;
+    margin: 0 0 .2em;
+    display: inline-block;
+    height: 1.5em;
+    top: -2px;
+}
+
+.k-toolbar .km-buttongroup
+{
+    margin: 0;
+    display: inline-block;
+}
+
+.km-tablet .km-navbar .km-buttongroup
+{
+    top: -1px;
+}
+
+.km-widget.km-navbar .km-buttongroup > .km-button
+{
+    font-size: 1em;
+    min-width: 4rem;
+    text-align: center;
+}
+
+.km-tablet .km-navbar .km-buttongroup > .km-button
+{
+    min-width: 6rem;
+}
+
+.km-view .km-buttongroup .km-button:last-child
+{
+    border-right-width: 1px;
+}
+
+.km-ios .km-buttongroup .km-button
+{
+    font-size: 1.2em;
+    font-weight: bold;
+}
+

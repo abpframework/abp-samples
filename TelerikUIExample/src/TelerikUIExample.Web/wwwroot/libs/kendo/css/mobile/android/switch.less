@@ -1,0 +1,77 @@
+/*!
+ * Copyright 2022 Progress Software Corporation and/or one of its subsidiaries or affiliates. All rights reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+@import "../common/switch.less";
+@import "base.less";
+
+// Switch
+
+.km-android .km-switch-background,
+.km-android .km-slider-background
+{
+    display: none;
+}
+
+.km-android .km-switch
+{
+    background: transparent;
+    width: 7em;
+    height: 1.8em;
+    line-height: 1.8em;
+}
+
+.km-android .km-switch-container
+{
+    overflow: hidden;
+    border-radius: 0;
+    border: 2px solid transparent;
+    border-left-width: 1px;
+}
+
+.km-android .km-switch-handle
+{
+    width: 3em;
+    margin: 0 3px 1px 1px;
+    border-width: @android-border-width;
+    border-style: solid;
+    border-radius: 2px;
+    .box-shadow(none);
+    .box-sizing(border-box);
+}
+
+.km-android2 .km-switch-handle
+{
+    border-radius: 0;
+}
+
+.km-android .km-switch-label-on,
+.km-android .km-switch-label-off
+{
+    font-size: .8em;
+    left: 0;
+    width: 100%;
+    line-height: 1.9em;
+    height: 100%;
+    text-align: center;
+    text-shadow: none;
+    position: absolute;
+    z-index: 1;
+}
+
+.km-android .km-switch-off .km-switch-label-on,
+.km-android .km-switch-on .km-switch-label-off
+{
+    display: none;
+}

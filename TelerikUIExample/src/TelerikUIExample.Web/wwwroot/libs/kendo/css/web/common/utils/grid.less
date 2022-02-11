@@ -1,0 +1,53 @@
+/*!
+ * Copyright 2022 Progress Software Corporation and/or one of its subsidiaries or affiliates. All rights reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+// Grid layout
+.k-d-grid                   { display: grid; }
+.k-grid-cols-none           { grid-template-columns: none; }
+.k-grid-rows-none           { grid-template-rows: none; }
+
+
+// Grid flow
+.k-grid-flow-col            { grid-auto-flow: column; }
+.k-grid-flow-col-dense      { grid-auto-flow: column dense; }
+.k-grid-flow-row            { grid-auto-flow: row; }
+.k-grid-flow-row-dense      { grid-auto-flow: row dense; }
+
+
+// Columns
+.k-colspan-all              { grid-column: 1 / -1; }
+.k-colspan-auto             { grid-column: auto; }
+
+
+// Rows
+.k-rowspan-all              { grid-row: 1 / -1; }
+.k-rowspan-auto             { grid-row: auto; }
+
+
+// Grid utilities
+@grid-cols: 12;
+@grid-rows: 10;
+each( range(1, @grid-cols), {
+    .k-grid-cols-@{value}   { grid-template-columns: repeat(@value, minmax(0, 1fr)); }
+    .k-colspan-@{value}     { grid-column: span @value; }
+    .k-col-start-@{value}   { grid-column-start: @value; }
+    .k-col-end-@{value}     { grid-column-end: @value; }
+});
+each( range(1, @grid-rows), {
+    .k-grid-rows-@{value}   { grid-template-rows: repeat(@value, minmax(0, 1fr)); }
+    .k-rowspan-@{value}     { grid-row: span @value; }
+    .k-row-start-@{value}   { grid-row-start: @value; }
+    .k-row-end-@{value}     { grid-row-end: @value; }
+});

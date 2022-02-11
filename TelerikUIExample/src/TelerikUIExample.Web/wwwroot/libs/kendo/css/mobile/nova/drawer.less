@@ -1,0 +1,89 @@
+/*!
+ * Copyright 2022 Progress Software Corporation and/or one of its subsidiaries or affiliates. All rights reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+@import "../common/drawer.less";
+@import "base.less";
+
+.km-nova .km-drawer {
+    width: 16.801rem;
+}
+
+.km-nova .km-drawer > .km-scroll-wrapper,
+.km-nova .km-drawer .km-scroll-container {
+    height: 100%;
+}
+
+.km-nova .km-drawer-vertical-tabstrip {
+    width: 4.86rem;
+}
+
+.km-nova .km-drawer .km-scroll-container {
+    display: flex;
+    display: -webkit-flex;
+    flex-direction: column;
+    -webkit-flex-direction: column;
+    justify-content: center;
+    -webkit-justify-content: center;
+}
+
+.km-nova .km-drawer .km-vertical-tabstrip {
+    display: flex;
+    display: -webkit-flex;
+    flex-direction: column;
+    -webkit-flex-direction: column;
+    justify-content: center;
+    -webkit-justify-content: center;
+}
+
+.km-nova .km-vertical-tabstrip .km-button {
+    display: block;
+    width: 100%;
+    font-size: .6em;
+    padding: 1.25em 0;
+}
+
+.km-nova .km-vertical-tabstrip .km-button.km-state-active:before,
+.km-nova .km-drawer .km-listview li.km-state-active:before {
+    content: "";
+    width: 3px;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.km-nova .km-drawer .km-list:not(.km-virtual-list) > li:first-child {
+    border-top-width: 1px;
+}
+
+.km-nova .km-drawer .km-list:not(.km-virtual-list) > li:last-child {
+    border-bottom-width: 1px;
+}
+
+.km-nova .km-drawer .km-listview li .km-badge {
+    top: 50%;
+    transform: translateY(-50%);
+    -webkit-transform: translateY(-50%);
+    right: 4em;
+}
+
+.km-nova .km-right-drawer .km-listview-link:after,
+.km-nova .km-right-drawer .km-listview-label:after {
+    display: none;
+}
+
+.km-nova .km-drawer.km-left-drawer {
+    transform: translate3d(0, 0px, 0px);
+}

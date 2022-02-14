@@ -1,0 +1,119 @@
+/*!
+ * Copyright 2022 Progress Software Corporation and/or one of its subsidiaries or affiliates. All rights reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+// Solid input
+.k-widget.k-input,
+.k-input {
+    .fill(
+        @input-text,
+        @input-bg,
+        @input-border
+    );
+
+    // Hover
+    &:hover,
+    &.k-hover {
+        .fill(
+            @input-hover-text,
+            @input-hover-bg,
+            @input-hover-border
+        );
+    }
+
+    // Focus
+    &:focus,
+    &.k-focus {
+        .fill (
+            @input-focus-text,
+            @input-focus-bg,
+            @input-focus-border
+        );
+        .box-shadow( @input-focus-shadow );
+    }
+    &:focus-within {
+        .fill (
+            @input-focus-text,
+            @input-focus-bg,
+            @input-focus-border
+        );
+        .box-shadow( @input-focus-shadow );
+    }
+
+    // Invalid
+    &.k-invalid {
+        .fill( @border: @error );
+
+        .k-input-validation-icon {
+            color: @error;
+        }
+    }
+
+}
+
+
+// Solid picker
+.k-widget.k-picker,
+.k-picker {
+    .fill(
+        @button-text-color,
+        @button-background-color,
+        @button-border-color,
+        @button-gradient
+    );
+
+    // Hover
+    &:hover,
+    &.k-hover {
+        .fill(
+            @button-hover-text-color,
+            @button-hover-background-color,
+            @button-hover-border-color,
+            @button-hover-gradient
+        );
+    }
+
+    // Focus
+    &:focus,
+    &.k-focus {
+        .fill ( @border: @button-focused-border-color );
+        .box-shadow( @button-focused-shadow );
+    }
+    &:focus-within {
+        .fill ( @border: @button-focused-border-color );
+        .box-shadow( @button-focused-shadow );
+    }
+
+    // Invalid
+    &.k-invalid {
+        .fill( @border: @error );
+
+        .k-input-validation-icon {
+            color: @error;
+        }
+    }
+}
+
+// Inner input
+.k-input-inner {
+    // Placeholder text
+    &::placeholder {
+        color: @input-placeholder-text;
+        opacity: @input-placeholder-opacity;
+        user-select: none;
+    }
+    &:-ms-input-placeholder {
+        color: @input-placeholder-text;
+    }
+}

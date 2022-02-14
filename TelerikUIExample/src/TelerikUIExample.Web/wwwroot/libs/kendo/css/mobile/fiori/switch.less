@@ -1,0 +1,96 @@
+/*!
+ * Copyright 2022 Progress Software Corporation and/or one of its subsidiaries or affiliates. All rights reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+@import "../common/switch.less";
+@import "base.less";
+
+// Switch
+
+.km-fiori .km-switch
+{
+    width: 5rem;
+    height: 2.4rem;
+    line-height: 2.2rem;
+    overflow: hidden;
+}
+
+.km-fiori .km-switch-wrapper
+{
+    overflow: hidden;
+}
+
+.km-fiori .km-switch-background,
+.km-fiori .k-slider-selection
+{
+    background-position: 4.25em 0;
+    background-repeat: no-repeat;
+    background-color: currentcolor;
+    margin-left: -3.4rem;
+}
+
+.km-fiori .km-switch-container
+{
+    padding: 1px 0 1px 1px;
+    border-width: 0;
+}
+
+.km-fiori .km-switch-handle
+{
+    width: 2em;
+    margin: 0 4px 0 0;
+    border-width: @fiori-border-width;
+    border-style: solid;
+}
+
+.km-fiori .km-switch-label-off
+{
+    left: 1.5em;
+}
+
+.km-fiori .km-switch-label-on
+{
+    left: -2.8em;
+}
+
+.km-fiori .km-switch-label-on,
+.km-fiori .km-switch-label-off
+{
+    text-shadow: none;
+    width: 185%;
+    font-size: 1em;
+    line-height: 2em;
+    vertical-align: middle;
+}
+
+.km-fiori .km-switch-wrapper,
+.km-fiori .km-switch-container,
+.km-fiori .km-switch-background
+{
+    border-radius: 1.1rem;
+}
+
+.km-fiori .km-switch-handle
+{
+    border-radius: 50%;
+}
+
+.km-fiori .km-switch-container,
+.km-fiori .km-switch-wrapper
+{
+    .box-sizing(border-box);
+    border-width: @fiori-border-width;
+    border-style: solid;
+    background-clip: content-box;
+}

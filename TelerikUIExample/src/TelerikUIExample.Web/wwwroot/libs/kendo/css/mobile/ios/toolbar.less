@@ -1,0 +1,110 @@
+/*!
+ * Copyright 2022 Progress Software Corporation and/or one of its subsidiaries or affiliates. All rights reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+@import "../common/navbar.less";
+@import "../../common/transitions.less";
+@import "base.less";
+
+// ToolBar
+
+.km-ios .k-toolbar > .km-button,
+.km-ios .k-toolbar .k-split-button > .km-button,
+.km-ios .k-toolbar .km-buttongroup,
+.km-ios .k-toolbar .k-split-button
+{
+    padding-top: 0;
+    padding-bottom: 1px;
+    font-size: 1em;
+}
+
+.km-ios .k-toolbar .km-buttongroup .km-button
+{
+    padding: 0 .8em;
+}
+
+.km-ios .k-toolbar .k-button-icon .km-icon,
+.km-ios .k-toolbar .k-button-icontext .km-icon,
+.km-ios .k-split-button .km-arrowdown
+{
+    width: 1em;
+    height: 1em;
+    font-size: 1.2em;
+    margin-top: -8px;
+    margin-bottom: -5px;
+    vertical-align: middle;
+}
+
+.km-ios .k-split-button .km-arrowdown
+{
+    margin-left: 2px;
+    margin-right: 1px;
+}
+
+.km-ios .k-split-button .km-button:first-child
+{
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.km-ios .k-split-button-arrow
+{
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+.km-ios .km-actionsheet.k-split-container > li > .km-button,
+.km-ios .km-actionsheet.k-overflow-container > li > .km-button
+{
+    min-width: 10em;
+    text-align: center;
+    font-size: 1.1em;
+    border-radius: @ios-button-border-radius;
+    margin: .4em 0;
+    padding: .35em .6em;
+    text-shadow: none;
+}
+
+.km-ios .km-actionsheet.k-split-container > li > .km-button
+{
+    min-width: 5em;
+}
+
+.km-ios .k-split-wrapper .km-popup-wrapper,
+.km-ios .k-overflow-wrapper .km-popup-wrapper
+{
+    padding: 7px;
+}
+
+.km-ios .k-split-wrapper .km-actionsheet-wrapper,
+.km-ios .k-overflow-wrapper .km-actionsheet-wrapper
+{
+    border-radius: @ios-border-radius;
+    padding: .4em 1em .7em;
+}
+
+html .km-ios .k-split-container.km-actionsheet > li,
+html .km-ios .k-overflow-container.km-actionsheet > li
+{
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.km-ios .k-split-container.km-actionsheet,
+.km-ios .k-overflow-container.km-actionsheet
+{
+    border-top: 0;
+    background: none;
+    padding: 0;
+}

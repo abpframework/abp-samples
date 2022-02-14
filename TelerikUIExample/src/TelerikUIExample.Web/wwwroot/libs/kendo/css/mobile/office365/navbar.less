@@ -1,0 +1,88 @@
+/*!
+ * Copyright 2022 Progress Software Corporation and/or one of its subsidiaries or affiliates. All rights reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+@import "../common/navbar.less";
+@import "base.less";
+
+// NavBar
+
+.km-office365 .km-navbar
+{
+    border: @office365-border-width solid @office365-inverse-background;
+}
+
+.km-office365 .km-header .km-navbar
+{
+    border-width: 0 0 @office365-border-width;
+}
+
+.km-office365 .km-footer .km-navbar
+{
+    border-width: @office365-border-width 0 0;
+}
+
+.km-office365 .km-modalview .km-footer .km-navbar {
+    border-top: 0;
+}
+
+.km-office365 .km-toolbar,
+.km-office365 .km-navbar,
+.km-office365 .km-tabstrip,
+.km-office365 .km-tabstrip .km-button
+{
+    border-radius: 0;
+}
+
+.km-office365 .km-navbar .km-icon + .km-text {
+    display: none;
+}
+
+.km-office365 .km-leftitem .km-button,
+.km-office365 .km-rightitem .km-button
+{
+    border: 0;
+    padding: .5em 0;
+    margin-top: .125em;
+    margin-bottom: 0;
+}
+
+.km-office365 .km-popup .km-navbar .km-view-title,
+.km-office365 .km-modalview .km-header .km-navbar .km-view-title
+{
+    text-align: left;
+    padding-left: .73em;
+}
+
+
+.km-office365 .km-modalview .km-footer .km-rightitem
+{
+    width: 100%;
+    right: 0;
+}
+
+.km-office365 .km-modalview .km-footer .km-rightitem .km-button
+{
+    width: 50%;
+    height: 100%;
+    border-radius: 0;
+    margin: 0;
+    padding: .882em 1.25em;
+
+}
+
+.km-office365 .km-navbar .km-no-title {
+    padding-top: .45rem;
+    padding-bottom: .4rem;
+}

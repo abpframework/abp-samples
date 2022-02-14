@@ -1,0 +1,82 @@
+/*!
+ * Copyright 2022 Progress Software Corporation and/or one of its subsidiaries or affiliates. All rights reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+@import "../common/icons.less";
+@import "../common/buttongroup.less";
+@import "base.less";
+
+// ButtonGroup
+
+.km-blackberry .km-buttongroup
+{
+    padding: .25em;
+    border-radius: (@blackberry-border-radius + 1px);
+    border-collapse: separate;
+    background-image: none;
+    border-color: transparent;
+}
+
+.km-blackberry .km-navbar .km-buttongroup
+{
+    font-size: .8em;
+    text-shadow: none;
+    top: 0;
+    margin-top: .16em;
+    height: auto;
+    line-height: 1.2em;
+}
+
+.km-blackberry .km-buttongroup > .km-button
+{
+    display: inline-block;
+    border-right-width: 1px;
+    float: left;
+    .box-shadow(none);
+}
+
+.km-blackberry .km-content .km-buttongroup > .km-button
+{
+    margin: 0 5px 0 0;
+}
+
+.km-blackberry .km-buttongroup > .km-button:after,
+.km-blackberry .km-buttongroup > .km-button:before
+{
+    display: none;
+}
+
+.km-blackberry .km-header > .km-buttongroup .km-button,
+.km-blackberry .km-footer > .km-buttongroup .km-button,
+.km-blackberry .km-content .km-buttongroup .km-button
+{
+    padding: .3em 1.5em;
+}
+
+.km-root .km-blackberry .km-view .km-buttongroup > .km-state-active
+{
+    border-radius: @blackberry-border-radius;
+    background: transparent;
+}
+
+.km-blackberry .km-buttongroup > .km-button:not(.km-state-active)
+{
+    border-color: transparent;
+    background: transparent;
+}
+
+.km-blackberry .km-buttongroup > .km-button:last-child
+{
+    margin-right: 0;
+}

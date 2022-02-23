@@ -20,32 +20,32 @@ public class AccessTokenRemoteServiceHttpClientAuthenticator : IRemoteServiceHtt
 
     public async Task Authenticate(RemoteServiceHttpClientAuthenticateContext context)
     {
-        if (App.Current.Properties.TryGetValue(OidcConsts.AccessTokenKeyName, out object currentTokenValue) && currentTokenValue != null)
-        {
-            var currentAccessToken = currentTokenValue?.ToString();
+        var currentAccessToken = await SecureStorage.GetAsync(OidcConsts.AccessTokenKeyName);
 
+        if (!currentAccessToken.IsNullOrEmpty())
+        {
             // TODO: Find better way to find if token is expired instead of parsing it.
             var jwtToken = new JwtSecurityTokenHandler().ReadJwtToken(currentAccessToken) as JwtSecurityToken;
-            if(jwtToken.ValidTo <= DateTime.UtcNow)
+            if (jwtToken.ValidTo <= DateTime.UtcNow)
             {
-                if (App.Current.Properties.TryGetValue(OidcConsts.RefreshTokenKeyName, out object refreshTokenValue) && refreshTokenValue != null)
+                var refreshToken = await SecureStorage.GetAsync(OidcConsts.RefreshTokenKeyName);
+                if (!refreshToken.IsNullOrEmpty())
                 {
-                    var refreshResult = await OidcClient.RefreshTokenAsync(refreshTokenValue?.ToString());
+                    var refreshResult = await OidcClient.RefreshTokenAsync(refreshToken);
 
-                    App.Current.Properties[OidcConsts.AccessTokenKeyName] = refreshResult.AccessToken;
-                    App.Current.Properties[OidcConsts.RefreshTokenKeyName] = refreshResult.RefreshToken;
-                    await App.Current.SavePropertiesAsync();
+                    await SecureStorage.SetAsync(OidcConsts.AccessTokenKeyName, refreshResult.AccessToken);
+                    await SecureStorage.SetAsync(OidcConsts.RefreshTokenKeyName, refreshResult.RefreshToken);
 
                     context.Request.SetBearerToken(refreshResult.AccessToken);
                 }
                 else
                 {
-                    var result = await OidcClient.LoginAsync(new LoginRequest());
+                    var loginResult = await OidcClient.LoginAsync(new LoginRequest());
 
-                    App.Current.Properties[OidcConsts.AccessTokenKeyName] = result.AccessToken;
-                    App.Current.Properties[OidcConsts.RefreshTokenKeyName] = result.RefreshToken;
-                    await App.Current.SavePropertiesAsync();
-                    context.Request.SetBearerToken(result.AccessToken);
+                    await SecureStorage.SetAsync(OidcConsts.AccessTokenKeyName, loginResult.AccessToken);
+                    await SecureStorage.SetAsync(OidcConsts.RefreshTokenKeyName, loginResult.RefreshToken);
+
+                    context.Request.SetBearerToken(loginResult.AccessToken);
                 }
             }
 

@@ -158,6 +158,23 @@ As a first step, Dependency Injection will be changed with module initalization.
 
     Now application is runnable and all behaviors are the same with previos state. But it uses power of ABP right now.
 
+    ### Switching to SecureStorage
+    .Net MAUI supports a secure storage by default. Before we go further, we need to switch to secure storage instead of using app properties. Just update login method as below at **MainPage.xaml.cs**
+
+    ```csharp
+    private async void OnLoginClicked(object sender, EventArgs e)
+    {
+        var loginResult = await OidcClient.LoginAsync(new LoginRequest());
+        if (loginResult.IsError)
+        {
+            await DisplayAlert("Error", loginResult.Error, "Close");
+            return;
+        }
+
+        await SecureStorage.SetAsync(OidcConsts.AccessTokenKeyName, loginResult.AccessToken);
+        await SecureStorage.SetAsync(OidcConsts.RefreshTokenKeyName, loginResult.RefreshToken);
+    }
+    ```
 
 
 ## Configuring Client Proxies
@@ -169,60 +186,313 @@ ABP Client-Proxies don't use HttpClient directly. They use `IHttpClientFactory` 
 
 - Add **AccessTokenRemoteServiceHttpClientAuthenticator.cs** instead.
 
-```csharp
-using IdentityModel.Client;
-using IdentityModel.OidcClient;
-using System.IdentityModel.Tokens.Jwt;
-using Volo.Abp.DependencyInjection;
-using Volo.Abp.Http.Client.Authentication;
-using DependencyAttribute = Volo.Abp.DependencyInjection.DependencyAttribute;
+    ```csharp
+    using IdentityModel.Client;
+    using IdentityModel.OidcClient;
+    using System.IdentityModel.Tokens.Jwt;
+    using Volo.Abp.DependencyInjection;
+    using Volo.Abp.Http.Client.Authentication;
+    using DependencyAttribute = Volo.Abp.DependencyInjection.DependencyAttribute;
 
-namespace Acme.BookStore.MauiClient;
+    namespace Acme.BookStore.MauiClient;
 
-[Dependency(ReplaceServices = true)]
-[ExposeServices(typeof(IRemoteServiceHttpClientAuthenticator))]
-public class AccessTokenRemoteServiceHttpClientAuthenticator : IRemoteServiceHttpClientAuthenticator, ITransientDependency
-{
-    protected OidcClient OidcClient { get; }
-
-    public AccessTokenRemoteServiceHttpClientAuthenticator(OidcClient oidcClient)
+    [Dependency(ReplaceServices = true)]
+    [ExposeServices(typeof(IRemoteServiceHttpClientAuthenticator))]
+    public class AccessTokenRemoteServiceHttpClientAuthenticator : IRemoteServiceHttpClientAuthenticator, ITransientDependency
     {
-        OidcClient = oidcClient;
+        protected OidcClient OidcClient { get; }
+
+        public AccessTokenRemoteServiceHttpClientAuthenticator(OidcClient oidcClient)
+        {
+            OidcClient = oidcClient;
+        }
+
+        public async Task Authenticate(RemoteServiceHttpClientAuthenticateContext context)
+        {
+            var currentAccessToken = await SecureStorage.GetAsync(OidcConsts.AccessTokenKeyName);
+
+            if (!currentAccessToken.IsNullOrEmpty())
+            {
+                // TODO: Find better way to find if token is expired instead of parsing it.
+                var jwtToken = new JwtSecurityTokenHandler().ReadJwtToken(currentAccessToken) as JwtSecurityToken;
+                if (jwtToken.ValidTo <= DateTime.UtcNow)
+                {
+                    var refreshToken = await SecureStorage.GetAsync(OidcConsts.RefreshTokenKeyName);
+                    if (!refreshToken.IsNullOrEmpty())
+                    {
+                        var refreshResult = await OidcClient.RefreshTokenAsync(refreshToken);
+
+                        await SecureStorage.SetAsync(OidcConsts.AccessTokenKeyName, refreshResult.AccessToken);
+                        await SecureStorage.SetAsync(OidcConsts.RefreshTokenKeyName, refreshResult.RefreshToken);
+
+                        context.Request.SetBearerToken(refreshResult.AccessToken);
+                    }
+                    else
+                    {
+                        var loginResult = await OidcClient.LoginAsync(new LoginRequest());
+
+                        await SecureStorage.SetAsync(OidcConsts.AccessTokenKeyName, loginResult.AccessToken);
+                        await SecureStorage.SetAsync(OidcConsts.RefreshTokenKeyName, loginResult.RefreshToken);
+
+                        context.Request.SetBearerToken(loginResult.AccessToken);
+                    }
+                }
+
+                context.Request.SetBearerToken(currentAccessToken);
+            }
+        }
+    }
+    ```
+
+- Now we are ready to inject IAppServices to communicate with backend.
+
+## Displaying Data in UI
+
+- Go back to **Acme.BookStore.Domain** project and add a simple data seed contributor to generate some example data for users.
+
+```csharp
+public class UsersDataSeederContributor : IDataSeedContributor, ITransientDependency
+{
+    protected IIdentityUserRepository repository;
+
+    protected IGuidGenerator guidGenerator;
+    public UsersDataSeederContributor(IIdentityUserRepository repository, IGuidGenerator guidGenerator)
+    {
+        this.repository = repository;
+        this.guidGenerator = guidGenerator;
     }
 
-    public async Task Authenticate(RemoteServiceHttpClientAuthenticateContext context)
+    public async Task SeedAsync(DataSeedContext context)
     {
-        if (App.Current.Properties.TryGetValue(OidcConsts.AccessTokenKeyName, out object currentTokenValue) && currentTokenValue != null)
+        var count = await repository.GetCountAsync();
+        if(count <= 1) // Not sure 'admin' user was seeded before or not.
         {
-            var currentAccessToken = currentTokenValue?.ToString();
-
-            // TODO: Find better way to find if token is expired instead of parsing it.
-            var jwtToken = new JwtSecurityTokenHandler().ReadJwtToken(currentAccessToken) as JwtSecurityToken;
-            if(jwtToken.ValidTo <= DateTime.UtcNow)
-            {
-                if (App.Current.Properties.TryGetValue(OidcConsts.RefreshTokenKeyName, out object refreshTokenValue) && refreshTokenValue != null)
-                {
-                    var refreshResult = await OidcClient.RefreshTokenAsync(refreshTokenValue?.ToString());
-
-                    App.Current.Properties[OidcConsts.AccessTokenKeyName] = refreshResult.AccessToken;
-                    App.Current.Properties[OidcConsts.RefreshTokenKeyName] = refreshResult.RefreshToken;
-                    await App.Current.SavePropertiesAsync();
-
-                    context.Request.SetBearerToken(refreshResult.AccessToken);
-                }
-                else
-                {
-                    var result = await OidcClient.LoginAsync(new LoginRequest());
-
-                    App.Current.Properties[OidcConsts.AccessTokenKeyName] = result.AccessToken;
-                    App.Current.Properties[OidcConsts.RefreshTokenKeyName] = result.RefreshToken;
-                    await App.Current.SavePropertiesAsync();
-                    context.Request.SetBearerToken(result.AccessToken);
-                }
-            }
-
-            context.Request.SetBearerToken(currentAccessToken);
+            // All the names below were generated by https://www.name-generator.org.uk/quick/
+            // The names does not represent real people.
+            await repository.InsertManyAsync(new []{
+                new IdentityUser(guidGenerator.Create(), "john.doe", "john.doe@abp.io"),
+                new IdentityUser(guidGenerator.Create(), "Zane.Frost", "Zane.Frost@abp.io"),
+                new IdentityUser(guidGenerator.Create(), "Oscar.Landry", "Oscar.Landry@abp.io"),
+                new IdentityUser(guidGenerator.Create(), "Yasemin.Roberts", "Yasemin.Roberts@abp.io"),
+                new IdentityUser(guidGenerator.Create(), "Yasmine.Perez", "Yasmine.Perez@abp.io"),
+                new IdentityUser(guidGenerator.Create(), "Tobi.Becker", "Tobi.Becker@abp.io"),
+                new IdentityUser(guidGenerator.Create(), "Fox.Gilmore", "Fox.Gilmore@abp.io"),
+                new IdentityUser(guidGenerator.Create(), "Benny.Burris", "Benny.Burris@abp.io"),
+                new IdentityUser(guidGenerator.Create(), "Chad.Camacho", "Chad.Camacho@abp.io"),
+            });
         }
     }
 }
 ```
+
+- Run the **Acme.BookStore.DbMigrator** project.
+
+- Turn back to MAUI app, and create a folder named **ViewModels** and add a simple `UsersViewModel.cs` under it.
+
+    ```csharp
+    public class UsersViewModel : BindableObject, ITransientDependency
+    {
+        protected IIdentityUserAppService IdentityUserAppService { get; }
+
+        public GetIdentityUsersInput Input { get; } = new();
+
+        public ObservableCollection<IdentityUserDto> Items { get; } = new();
+
+        public Command RefreshCommand { get; }
+
+        private bool isBusy;
+        public bool IsBusy { get => isBusy; set => SetProperty(ref isBusy, value); }
+
+        public UsersViewModel(IIdentityUserAppService identityUserAppService)
+        {
+            IdentityUserAppService = identityUserAppService;
+            GetUsersAsync();
+            RefreshCommand = new Command(GetUsersAsync);
+        }
+
+        protected async void GetUsersAsync()
+        {
+            if (IsBusy)
+            {
+                return; // For preventing parallel request while searching.
+            }
+
+            IsBusy = true;
+
+            Items.Clear();
+
+            var result = await IdentityUserAppService.GetListAsync(Input);
+            foreach (var user in result.Items)
+            {
+                Items.Add(user);
+            }
+
+            IsBusy = false;
+        }
+
+        protected void SetProperty<T>(ref T backField, T value, [CallerMemberName] string propertyName = null)
+        {
+            backField = value;
+            OnPropertyChanged(propertyName);
+        }
+    }
+    ```
+
+- Create a folder named **Pages** and add a content page named `UsersPage`.
+
+    _(Make sure you're adding MAUI Content Page)_
+
+    ![net-maui-abp-contentpage-template](art/net-maui-contentpage-template.png)
+
+- And inject `UsersViewModel` into it.
+
+    ```csharp
+    public partial class UsersPage : ContentPage, ITransientDependency
+    {
+        public UsersViewModel ViewModel { get; }
+
+        public UsersPage(UsersViewModel viewModel)
+        {
+            ViewModel = viewModel;
+            InitializeComponent();
+        }
+    }
+    ```
+
+- And use that ViewModel in XAML design page.
+
+    ```xml
+    <?xml version="1.0" encoding="utf-8" ?>
+    <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                x:Class="Acme.BookStore.MauiClient.UsersPage"
+                Title="UsersPage"
+                x:Name="page"
+                BindingContext="{Binding ViewModel, Source={x:Reference page}}">
+        <StackLayout>
+            <ListView 
+                IsPullToRefreshEnabled="True"
+                ItemsSource="{Binding Items}"
+                IsRefreshing="{Binding IsBusy}"
+                RefreshCommand="{Binding RefreshCommand}">
+                <ListView.Header>
+                    <SearchBar Text="{Binding Input.Filter}" SearchCommand="{Binding RefreshCommand}" />
+                </ListView.Header>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <TextCell 
+                            Text="{Binding UserName, StringFormat='@{0}'}"
+                            Detail="{Binding Email}"/>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </ContentPage>
+    ```
+
+    > I've used binding while setting **BindingContext** as **ViewModel** because of IntelliSense support. With this method, you'll see intellisense will suggest properties from your VieWModel.
+    >
+    > ![abp-maui-demo-xaml-intellisense](art/xaml-intellisense.png)
+
+
+After a couple of try, I realized, only AppShell supports dependency injection while navigating between pages. So, adding a new AppShell will help to build app menus and navigating with route. We can pass parameters with querystring with this way.
+
+- Add `Shell Pagae (MAUI)` to root of your application with name **AppShell.xaml**.
+
+    _I've got some help for design of shell page from microsoft's articles._
+
+    ```xml
+    <?xml version="1.0" encoding="utf-8" ?>
+    <Shell x:Class="Acme.BookStore.MauiClient.AppShell"
+        xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+        xmlns:local="clr-namespace:Acme.BookStore.MauiClient">
+        <Shell.Resources>
+            <ResourceDictionary>
+                <Color x:Key="Primary">#512BD4</Color>
+                <Style x:Key="BaseStyle" TargetType="Element">
+                    <Setter Property="Shell.BackgroundColor" Value="{StaticResource Primary}" />
+                    <Setter Property="Shell.ForegroundColor" Value="White" />
+                    <Setter Property="Shell.TitleColor" Value="White" />
+                    <Setter Property="Shell.DisabledColor" Value="#B4FFFFFF" />
+                    <Setter Property="Shell.UnselectedColor" Value="#95FFFFFF" />
+                    <Setter Property="Shell.TabBarBackgroundColor" Value="{StaticResource Primary}" />
+                    <Setter Property="Shell.TabBarForegroundColor" Value="White"/>
+                    <Setter Property="Shell.TabBarUnselectedColor" Value="#95FFFFFF"/>
+                    <Setter Property="Shell.TabBarTitleColor" Value="White"/>
+                </Style>
+                <Style TargetType="TabBar" BasedOn="{StaticResource BaseStyle}" />
+                <Style TargetType="FlyoutItem" BasedOn="{StaticResource BaseStyle}" />
+                <Style Class="FlyoutItemLabelStyle" TargetType="Label">
+                    <Setter Property="TextColor" Value="White"></Setter>
+                    <Setter Property="Margin" Value="16"></Setter>
+                </Style>
+                <Style Class="FlyoutItemLayoutStyle" TargetType="Layout" ApplyToDerivedTypes="True">
+                    <Setter Property="VisualStateManager.VisualStateGroups">
+                        <VisualStateGroupList>
+                            <VisualStateGroup x:Name="CommonStates">
+                                <VisualState x:Name="Normal">
+                                    <VisualState.Setters>
+                                        <Setter Property="BackgroundColor" Value="{x:OnPlatform UWP=Transparent, iOS=White, Android=White}" />
+                                        <Setter TargetName="FlyoutItemLabel" Property="Label.TextColor" Value="{StaticResource Primary}" />
+                                    </VisualState.Setters>
+                                </VisualState>
+                                <VisualState x:Name="Selected">
+                                    <VisualState.Setters>
+                                        <Setter Property="BackgroundColor" Value="{StaticResource Primary}" />
+                                    </VisualState.Setters>
+                                </VisualState>
+                            </VisualStateGroup>
+                        </VisualStateGroupList>
+                    </Setter>
+                </Style>
+
+                <Style Class="MenuItemLayoutStyle" TargetType="Layout" ApplyToDerivedTypes="True">
+                    <Setter Property="VisualStateManager.VisualStateGroups">
+                        <VisualStateGroupList>
+                            <VisualStateGroup x:Name="CommonStates">
+                                <VisualState x:Name="Normal">
+                                    <VisualState.Setters>
+                                        <Setter TargetName="FlyoutItemLabel" Property="Label.TextColor" Value="{StaticResource Primary}" />
+                                    </VisualState.Setters>
+                                </VisualState>
+                            </VisualStateGroup>
+                        </VisualStateGroupList>
+                    </Setter>
+                </Style>
+            </ResourceDictionary>
+        </Shell.Resources>
+        
+        <FlyoutItem Title="Home">
+            <ShellContent ContentTemplate="{DataTemplate local:MainPage}" Route="main" />
+        </FlyoutItem>
+
+        <FlyoutItem Title="Users">
+            <ShellContent ContentTemplate="{DataTemplate local:UsersPage}" Route="UsersPage" />
+        </FlyoutItem>
+
+        <Shell.FlyoutHeader>
+            <StackLayout>
+                <Image 
+                    Source="abp_logo.svg"
+                    HorizontalOptions="Center"
+                    Margin="25"/>
+            </StackLayout>
+        </Shell.FlyoutHeader>
+
+    </Shell>
+    ```
+
+- One more step is required. Go to **App.xaml.cs** and replace MainPage with AppShell.
+
+    ```csharp
+    public partial class App : Application
+    {
+        public App()
+        {
+            InitializeComponent();
+
+            MainPage = new AppShell();
+        }
+    }
+    ```

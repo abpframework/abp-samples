@@ -1,11 +1,7 @@
 ﻿using IdentityModel.OidcClient;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Http;
 using Microsoft.Extensions.Options;
-using Volo.Abp;
 using Volo.Abp.Autofac;
 using Volo.Abp.Http.Client.IdentityModel;
-using Volo.Abp.Http.Client.Proxying;
 using Volo.Abp.Modularity;
 
 namespace Acme.BookStore.MauiClient;

@@ -59,6 +59,7 @@
 
 	<ItemGroup>
 	  <None Remove="appsettings.json" />
+	  <None Remove="Resources\Images\abp_logo.svg" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -75,5 +76,14 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\aspnet-core\src\Acme.BookStore.HttpApi.Client\Acme.BookStore.HttpApi.Client.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <MauiXaml Update="AppShell.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
+    <MauiXaml Update="Pages\UsersPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
   </ItemGroup>
 </Project>

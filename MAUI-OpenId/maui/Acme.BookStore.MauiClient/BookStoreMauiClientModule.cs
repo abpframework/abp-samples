@@ -1,8 +1,11 @@
 ﻿using IdentityModel.OidcClient;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Http;
 using Microsoft.Extensions.Options;
+using Volo.Abp;
 using Volo.Abp.Autofac;
 using Volo.Abp.Http.Client.IdentityModel;
+using Volo.Abp.Http.Client.Proxying;
 using Volo.Abp.Modularity;
 
 namespace Acme.BookStore.MauiClient;
@@ -26,12 +29,5 @@ public class BookStoreMauiClientModule : AbpModule
             options.Browser = sp.GetRequiredService<WebAuthenticatorBrowser>();
             return new OidcClient(options);
         });
-
-        context.Services.AddTransient<HttpClient>(sp =>
-            new HttpClient(sp.GetRequiredService<AccessTokenHttpMessageHandler>())
-            {
-                // Temporarily. We'll use ABP's Proxy for sendind requests.
-                BaseAddress = new Uri(configuration.GetValue<string>("RemoteServices:Default:BaseUrl"))
-            });
     }
 }

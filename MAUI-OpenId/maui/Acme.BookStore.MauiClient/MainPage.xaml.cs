@@ -1,5 +1,6 @@
 ﻿using IdentityModel.OidcClient;
 using Volo.Abp.DependencyInjection;
+using Volo.Abp.Identity;
 
 namespace Acme.BookStore.MauiClient;
 
@@ -9,11 +10,17 @@ public partial class MainPage : ContentPage, ITransientDependency
 
     protected OidcClient OidcClient { get; }
 
-    public MainPage(OidcClient oidcClient, HttpClient httpClient)
+    public IIdentityUserAppService IdentityUserAppService { get; }
+
+    public MainPage(
+        OidcClient oidcClient,
+        HttpClient httpClient,
+        IIdentityUserAppService identityUserAppService)
     {
         InitializeComponent();
         OidcClient = oidcClient;
         this.httpClient = httpClient;
+        IdentityUserAppService = identityUserAppService;
     }
 
     private async void OnLoginClicked(object sender, EventArgs e)
@@ -35,5 +42,10 @@ public partial class MainPage : ContentPage, ITransientDependency
         {
             await DisplayAlert("Error", ex.ToString(), "ok");
         }
+    }
+
+    private async void OnGetUsersClicked(object sender, EventArgs e)
+    {
+        var result = await IdentityUserAppService.GetListAsync(new GetIdentityUsersInput());
     }
 }

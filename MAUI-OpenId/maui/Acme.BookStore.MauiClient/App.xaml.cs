@@ -2,7 +2,7 @@
 
 public partial class App : Application
 {
-	public App(MainPage mainPage)
+	public App(MainPage mainPage, IHttpClientFactory httpClientFactory)
 	{
 		InitializeComponent();
 

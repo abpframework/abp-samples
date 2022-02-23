@@ -11,10 +11,7 @@ public static class MauiProgram
     public static MauiApp CreateMauiApp()
     {
         var builder = MauiApp.CreateBuilder();
-        builder.ConfigureContainer(new AbpAutofacServiceProviderFactory(new Autofac.ContainerBuilder()), containerBuilder =>
-        {
-
-        });
+        builder.ConfigureContainer(new AbpAutofacServiceProviderFactory(new Autofac.ContainerBuilder()));
         builder
             .UseMauiApp<App>()
             .ConfigureFonts(fonts =>

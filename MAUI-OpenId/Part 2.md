@@ -396,7 +396,7 @@ ABP Client-Proxies don't use HttpClient directly. They use `IHttpClientFactory` 
     </ContentPage>
     ```
 
-    > I've used binding while setting **BindingContext** as **ViewModel** because of IntelliSense support. With this method, you'll see intellisense will suggest properties from your VieWModel.
+    > I've used binding while setting **BindingContext** as **ViewModel** because of IntelliSense support. With this method, you'll see intellisense will suggest properties from your ViewModel.
     >
     > ![abp-maui-demo-xaml-intellisense](art/xaml-intellisense.png)
 

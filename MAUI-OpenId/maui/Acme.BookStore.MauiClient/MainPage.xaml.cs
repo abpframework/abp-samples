@@ -26,9 +26,4 @@ public partial class MainPage : ContentPage, ITransientDependency
         await SecureStorage.SetAsync(OidcConsts.AccessTokenKeyName, loginResult.AccessToken);
         await SecureStorage.SetAsync(OidcConsts.RefreshTokenKeyName, loginResult.RefreshToken);
     }
-
-    private async void OnGetUsersClicked(object sender, EventArgs e)
-    {
-        await Shell.Current.GoToAsync("/UsersPage");
-    }
 }

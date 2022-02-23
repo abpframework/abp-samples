@@ -8,7 +8,6 @@
 
             <Button Text="Click to Log In" Clicked="OnLoginClicked" HorizontalOptions="Center"/>
 
-            <Button Text="Get Users" Clicked="OnGetUsersClicked" HorizontalOptions="Center" />
         </StackLayout>
     </ScrollView>
 </ContentPage>

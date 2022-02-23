@@ -401,6 +401,7 @@ After a couple of try, I realized, only AppShell supports dependency injection w
 
     _I've got some help for design of shell page from microsoft's articles._
 
+    _Additionally, you might want to put [abp_icon.svg](maui/Acme.BookStore.MauiClient/Resources/Images/abp_logo.svg) file under your **Resources/Images** folder._
     ```xml
     <?xml version="1.0" encoding="utf-8" ?>
     <Shell x:Class="Acme.BookStore.MauiClient.AppShell"

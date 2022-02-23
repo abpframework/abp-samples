@@ -497,3 +497,17 @@ After a couple of try, I realized, only AppShell supports dependency injection w
         }
     }
     ```
+
+- Run the application. 
+
+- Login once if you haven't done before.
+
+- Navigate to Users page with hamburger menu at the right top.
+
+| Android| iOS|
+| --- | --- |
+| ![](art/android-users-demo.gif) | - |
+
+| UWP | MacCatalyst |
+| --- | --- |
+| - | - |

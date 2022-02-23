@@ -8,6 +8,10 @@ Before we start, I offer my special thanks to [@hikalkan](https://github.com/hik
 In this article, we'll work on an application that was built on previous article: [Integrating MAUI Client via Using OpenID Connect](https://community.abp.io/posts/integrating-maui-client-via-using-openid-connect-aqjjwsdf).
 
 
+## Source Code
+Source code is available on GitHub: TODO ??
+
+
 ## Configuring ABP Core
 
 As a first step, Dependency Injection will be changed with module initalization. We have to inialize our application as an ABP Module first.
@@ -520,4 +524,5 @@ After a couple of try, I realized, only AppShell supports dependency injection w
 
 
 ## Conclusion
-TODO
+ABP Framework can be implemented any platform that runs on dotnet without suffer. ABP provides reusable abstractions layers and HttpApi Clients. In this article we've used powerful ABP core features such as Dependency Injection, Client Proxies, Validation and more. 
+

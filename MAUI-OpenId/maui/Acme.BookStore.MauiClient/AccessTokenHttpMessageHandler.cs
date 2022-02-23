@@ -1,9 +1,10 @@
 ﻿using IdentityModel.Client;
 using IdentityModel.OidcClient;
+using Volo.Abp.DependencyInjection;
 
 namespace Acme.BookStore.MauiClient;
 
-public class AccessTokenHttpMessageHandler : DelegatingHandler
+public class AccessTokenHttpMessageHandler : DelegatingHandler, ISingletonDependency
 {
     protected OidcClient OidcClient { get; }
 

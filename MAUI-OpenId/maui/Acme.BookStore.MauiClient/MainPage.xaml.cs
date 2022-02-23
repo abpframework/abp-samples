@@ -1,8 +1,9 @@
 ﻿using IdentityModel.OidcClient;
+using Volo.Abp.DependencyInjection;
 
 namespace Acme.BookStore.MauiClient;
 
-public partial class MainPage : ContentPage
+public partial class MainPage : ContentPage, ITransientDependency
 {
     private readonly HttpClient httpClient;
 

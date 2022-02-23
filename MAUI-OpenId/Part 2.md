@@ -89,7 +89,7 @@ As a first step, Dependency Injection will be changed with module initalization.
     public class AccessTokenHttpMessageHandler : DelegatingHandler, ISingletonDependency
     ```
 
-- Add `appsettings.json` file to root path of your application and make it as **Embedded resource**
+- Add `appsettings.json` file to root path of your application and mark it as **Embedded resource**.
 
     ```json
     {

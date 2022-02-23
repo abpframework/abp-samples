@@ -506,8 +506,8 @@ After a couple of try, I realized, only AppShell supports dependency injection w
 
 | Android| iOS|
 | --- | --- |
-| ![](art/android-users-demo.gif) | - |
+| ![abp-maui-android-appservice](art/android-users-demo.gif) | - |
 
 | UWP | MacCatalyst |
 | --- | --- |
-| - | - |
+| ![abp-maui-uwp-appservice](art/uwp-users-demo.gif) | - |

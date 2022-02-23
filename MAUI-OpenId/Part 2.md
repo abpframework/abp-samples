@@ -176,6 +176,8 @@ As a first step, Dependency Injection will be changed with module initalization.
     }
     ```
 
+    > Additionally, please configure each platform according to [Secure Storage documentation](https://docs.microsoft.com/en-us/xamarin/essentials/secure-storage?tabs=android) 
+
 
 ## Configuring Client Proxies
 

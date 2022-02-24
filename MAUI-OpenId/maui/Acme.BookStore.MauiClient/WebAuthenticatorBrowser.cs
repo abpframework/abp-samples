@@ -1,9 +1,10 @@
 ﻿using IdentityModel.OidcClient.Browser;
 using System.Diagnostics;
+using Volo.Abp.DependencyInjection;
 
 namespace Acme.BookStore.MauiClient;
 
-internal class WebAuthenticatorBrowser : IBrowser
+internal class WebAuthenticatorBrowser : IBrowser, ITransientDependency
 {
     public async Task<BrowserResult> InvokeAsync(BrowserOptions options, CancellationToken cancellationToken = default)
     {

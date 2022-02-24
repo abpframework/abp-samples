@@ -1,5 +1,8 @@
-﻿using IdentityModel.Client;
-using IdentityModel.OidcClient;
+﻿using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.FileProviders;
+using System.Reflection;
+using Volo.Abp;
+using Volo.Abp.Autofac;
 
 namespace Acme.BookStore.MauiClient;
 
@@ -8,6 +11,7 @@ public static class MauiProgram
     public static MauiApp CreateMauiApp()
     {
         var builder = MauiApp.CreateBuilder();
+        builder.ConfigureContainer(new AbpAutofacServiceProviderFactory(new Autofac.ContainerBuilder()));
         builder
             .UseMauiApp<App>()
             .ConfigureFonts(fonts =>
@@ -15,30 +19,24 @@ public static class MauiProgram
                 fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
             });
 
-        builder.Services.AddTransient<WebAuthenticatorBrowser>();
+        ConfigureConfiguration(builder);
 
-        builder.Services.AddTransient<OidcClient>(sp =>
-            new OidcClient(new OidcClientOptions
-            {
-                // Use your own ngrok url:
-                Authority = "https://46fd-45-156-29-175.ngrok.io",
-                ClientId = "BookStore_Maui",
-                RedirectUri = "bookstore://",
-                Scope = "openid email profile role BookStore offline_access",
-                ClientSecret = "1q2w3E*",
-                Browser = sp.GetRequiredService<WebAuthenticatorBrowser>(),
-            })
-        );
+        builder.Services.AddApplication<BookStoreMauiClientModule>(options =>
+        {
+            options.Services.ReplaceConfiguration(builder.Configuration);
+        });
 
-        builder.Services.AddSingleton<AccessTokenHttpMessageHandler>();
-        builder.Services.AddTransient<HttpClient>(sp =>
-            new HttpClient(sp.GetRequiredService<AccessTokenHttpMessageHandler>())
-            {
-                BaseAddress = new Uri("https://46fd-45-156-29-175.ngrok.io")
-            });
+        var app = builder.Build();
 
-        builder.Services.AddTransient<MainPage>();
+        app.Services.GetRequiredService<IAbpApplicationWithExternalServiceProvider>()
+            .Initialize(app.Services);
 
-        return builder.Build();
+        return app;
+    }
+
+    private static void ConfigureConfiguration(MauiAppBuilder builder)
+    {
+        var assembly = typeof(App).GetTypeInfo().Assembly;
+        builder.Configuration.AddJsonFile(new EmbeddedFileProvider(assembly), "appsettings.json", optional: false, false);
     }
 }

@@ -3,11 +3,11 @@
              x:Class="Acme.BookStore.MauiClient.MainPage">
 
     <ScrollView>
-        <Grid RowSpacing="25" RowDefinitions="Auto,Auto,Auto,Auto,*"
-              Padding="{OnPlatform iOS='30,60,30,30', Default='30'}">
+        <StackLayout Spacing="25"
+                     VerticalOptions="CenterAndExpand">
 
-            <Button Text="Click to Log In" Clicked="OnLoginClicked" VerticalOptions="CenterAndExpand" HorizontalOptions="Center"/>
+            <Button Text="Click to Log In" Clicked="OnLoginClicked" HorizontalOptions="Center"/>
 
-        </Grid>
+        </StackLayout>
     </ScrollView>
 </ContentPage>

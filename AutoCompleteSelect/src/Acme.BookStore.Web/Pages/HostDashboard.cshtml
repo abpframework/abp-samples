@@ -1,0 +1,95 @@
+﻿@page
+@using System.Globalization
+@using Microsoft.AspNetCore.Mvc.Localization
+@using Microsoft.AspNetCore.Mvc.Rendering
+@using Acme.BookStore.Localization
+@using Acme.BookStore.Web.Menus
+@using Volo.Abp.AspNetCore.Mvc.UI.Layout
+@using Volo.Abp.AspNetCore.Mvc.UI.Widgets
+@using Volo.Abp.AuditLogging.Web.Pages.Shared.Components.AverageExecutionDurationPerDayWidget
+@using Volo.Abp.AuditLogging.Web.Pages.Shared.Components.ErrorRateWidget
+@using Volo.Saas.Host.Pages.Shared.Components.SaasEditionPercentageWidget
+@using Volo.Saas.Host.Pages.Shared.Components.SaasLatestTenantsWidget
+@inject IHtmlLocalizer<BookStoreResource> L
+@inject IWidgetManager WidgetManager
+@model Acme.BookStore.Web.Pages.HostDashboardModel
+@{
+    ViewBag.PageTitle = "Dashboard";
+}
+@inject IPageLayout PageLayout
+@{
+    PageLayout.Content.Title = L["Dashboard"].Value;
+    PageLayout.Content.MenuItemName = BookStoreMenus.HostDashboard;
+}
+
+@section scripts {
+    <abp-script src="/Pages/HostDashboard.js" />
+}
+
+@section styles {
+    <abp-style src="/Pages/HostDashboard.css" />
+}
+
+<abp-card>
+    <abp-card-body>
+        <form method="get" id="DashboardFilterForm">
+            <abp-row h-align="Center" v-align="Center" id="datepicker" class="input-daterange">
+                <div class="col-12 col-lg-5 col-md-6 mb-3 mb-lg-0">
+                    <div class="mb-0">
+                        <div class="input-group">
+                            <span class="input-group-text">@L["StartDate"].Value</span>
+                            <input type="text"
+                                   class="form-control"
+                                   name="StartDate"
+                                   value="@DateTime.Now.AddMonths(-1).Date.ToString(CultureInfo.CurrentUICulture.DateTimeFormat.ShortDatePattern)" />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-5 col-md-6 mb-3 mb-lg-0">
+                    <div class="mb-0">
+                        <div class="input-group">
+                            <span class="input-group-text">@L["EndDate"].Value</span>
+                            <input type="text"
+                                   class="form-control"
+                                   name="EndDate"
+                                   value="@DateTime.Now.Date.ToString(CultureInfo.CurrentUICulture.DateTimeFormat.ShortDatePattern)" />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-2 col-md-12">
+                    <div class="d-grid gap-2">
+                        <abp-button button-type="Primary" icon="refresh" type="Submit" text="@L["Refresh"].Value" />
+                    </div>
+                </div>
+            </abp-row>
+        </form>
+    </abp-card-body>
+</abp-card>
+<div id="HostDashboardWidgetsArea" data-widget-filter="#DashboardFilterForm">
+    <abp-row>
+        @if (await WidgetManager.IsGrantedAsync(typeof(AuditLoggingErrorRateWidgetViewComponent)))
+        {
+            <abp-column size-md="_12" size-lg="_6">
+                @await Component.InvokeAsync(typeof(AuditLoggingErrorRateWidgetViewComponent))
+            </abp-column>
+        }
+        @if (await WidgetManager.IsGrantedAsync(typeof(AuditLoggingAverageExecutionDurationPerDayWidgetViewComponent)))
+        {
+            <abp-column size-md="_12" size-lg="_6">
+                @await Component.InvokeAsync(typeof(AuditLoggingAverageExecutionDurationPerDayWidgetViewComponent))
+            </abp-column>
+        }
+        @if (await WidgetManager.IsGrantedAsync(typeof(SaasEditionPercentageWidgetViewComponent)))
+        {
+            <abp-column size-md="_12" size-lg="_6">
+                @await Component.InvokeAsync(typeof(SaasEditionPercentageWidgetViewComponent))
+            </abp-column>
+        }
+        @if (await WidgetManager.IsGrantedAsync(typeof(SaasLatestTenantsWidgetViewComponent)))
+        {
+            <abp-column size-md="_12" size-lg="_6">
+                @await Component.InvokeAsync(typeof(SaasLatestTenantsWidgetViewComponent))
+            </abp-column>
+        }
+    </abp-row>
+</div>

@@ -1,89 +1,62 @@
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Localization;
 using Acme.BookStore.Localization;
+using Acme.BookStore.MultiTenancy;
 using Acme.BookStore.Permissions;
-using Volo.Abp.AuditLogging.Web.Navigation;
-using Volo.Abp.Identity.Web.Navigation;
-using Volo.Abp.IdentityServer.Web.Navigation;
-using Volo.Abp.LanguageManagement.Navigation;
-using Volo.Abp.SettingManagement.Web.Navigation;
-using Volo.Abp.TextTemplateManagement.Web.Navigation;
-using Volo.Abp.Authorization.Permissions;
+using Volo.Abp.TenantManagement.Web.Navigation;
 using Volo.Abp.UI.Navigation;
-using Volo.Saas.Host.Navigation;
 
-namespace Acme.BookStore.Web.Menus;
-
-public class BookStoreMenuContributor : IMenuContributor
+namespace Acme.BookStore.Web.Menus
 {
-    public async Task ConfigureMenuAsync(MenuConfigurationContext context)
+    public class BookStoreMenuContributor : IMenuContributor
     {
-        if (context.Menu.Name == StandardMenus.Main)
+        public async Task ConfigureMenuAsync(MenuConfigurationContext context)
         {
-            await ConfigureMainMenuAsync(context);
+            if (context.Menu.Name == StandardMenus.Main)
+            {
+                await ConfigureMainMenuAsync(context);
+            }
         }
-    }
 
-    private static Task ConfigureMainMenuAsync(MenuConfigurationContext context)
-    {
-        var l = context.GetLocalizer<BookStoreResource>();
+        private async Task ConfigureMainMenuAsync(MenuConfigurationContext context)
+        {
+            if (!MultiTenancyConsts.IsEnabled)
+            {
+                var administration = context.Menu.GetAdministration();
+                administration.TryRemoveMenuItem(TenantManagementMenuNames.GroupName);
+            }
 
-        //Home
-        context.Menu.AddItem(
-            new ApplicationMenuItem(
-                BookStoreMenus.Home,
-                l["Menu:Home"],
-                "~/",
-                icon: "fa fa-home",
-                order: 1
-            )
-        );
+            var l = context.GetLocalizer<BookStoreResource>();
 
-        //HostDashboard
-        context.Menu.AddItem(
-            new ApplicationMenuItem(
-                BookStoreMenus.HostDashboard,
-                l["Menu:Dashboard"],
-                "~/HostDashboard",
-                icon: "fa fa-line-chart",
-                order: 2
-            ).RequirePermissions(BookStorePermissions.Dashboard.Host)
-        );
+            context.Menu.Items.Insert(0, new ApplicationMenuItem("BookStore.Home", l["Menu:Home"], "~/"));
 
-        //TenantDashboard
-        context.Menu.AddItem(
-            new ApplicationMenuItem(
-                BookStoreMenus.TenantDashboard,
-                l["Menu:Dashboard"],
-                "~/Dashboard",
-                icon: "fa fa-line-chart",
-                order: 2
-            ).RequirePermissions(BookStorePermissions.Dashboard.Tenant)
-        );
+            var bookStoreMenu = new ApplicationMenuItem(
+                "BooksStore",
+                l["Menu:BookStore"],
+                icon: "fa fa-book"
+            );
 
-        context.Menu.SetSubItemOrder(SaasHostMenuNames.GroupName, 3);
+            context.Menu.AddItem(bookStoreMenu);
 
-        //Administration
-        var administration = context.Menu.GetAdministration();
-        administration.Order = 5;
+            //CHECK the PERMISSION
+            if (await context.IsGrantedAsync(BookStorePermissions.Books.Default))
+            {
+                bookStoreMenu.AddItem(new ApplicationMenuItem(
+                    "BooksStore.Books",
+                    l["Menu:Books"],
+                    url: "/Books"
+                ));
+            }
 
-        //Administration->Identity
-        administration.SetSubItemOrder(IdentityMenuNames.GroupName, 1);
-
-        //Administration->Identity Server
-        administration.SetSubItemOrder(AbpIdentityServerMenuNames.GroupName, 2);
-
-        //Administration->Language Management
-        administration.SetSubItemOrder(LanguageManagementMenuNames.GroupName, 3);
-
-        //Administration->Text Template Management
-        administration.SetSubItemOrder(TextTemplateManagementMainMenuNames.GroupName, 4);
-
-        //Administration->Audit Logs
-        administration.SetSubItemOrder(AbpAuditLoggingMainMenuNames.GroupName, 5);
-
-        //Administration->Settings
-        administration.SetSubItemOrder(SettingManagementMenuNames.GroupName, 6);
-
-        return Task.CompletedTask;
+            if (await context.IsGrantedAsync(BookStorePermissions.Authors.Default))
+            {
+                bookStoreMenu.AddItem(new ApplicationMenuItem(
+                    "BooksStore.Authors",
+                    l["Menu:Authors"],
+                    url: "/Authors"
+                ));
+            }
+        }
     }
 }

@@ -1,49 +1,31 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Volo.Abp.Account;
-using Volo.Abp.AuditLogging;
 using Volo.Abp.FeatureManagement;
 using Volo.Abp.Identity;
-using Volo.Abp.IdentityServer;
-using Volo.Abp.LanguageManagement;
-using Volo.Abp.LeptonTheme.Management;
 using Volo.Abp.Modularity;
 using Volo.Abp.PermissionManagement;
-using Volo.Abp.TextTemplateManagement;
-using Volo.Abp.SettingManagement;
-using Volo.Saas.Host;
-using Volo.Abp.VirtualFileSystem;
+using Volo.Abp.TenantManagement;
 
-namespace Acme.BookStore;
-
-[DependsOn(
-    typeof(BookStoreApplicationContractsModule),
-    typeof(AbpIdentityHttpApiClientModule),
-    typeof(AbpPermissionManagementHttpApiClientModule),
-    typeof(AbpFeatureManagementHttpApiClientModule),
-    typeof(AbpSettingManagementHttpApiClientModule),
-    typeof(SaasHostHttpApiClientModule),
-    typeof(AbpAuditLoggingHttpApiClientModule),
-    typeof(AbpIdentityServerHttpApiClientModule),
-    typeof(AbpAccountAdminHttpApiClientModule),
-    typeof(AbpAccountPublicHttpApiClientModule),
-    typeof(LanguageManagementHttpApiClientModule),
-    typeof(LeptonThemeManagementHttpApiClientModule),
-    typeof(TextTemplateManagementHttpApiClientModule)
-)]
-public class BookStoreHttpApiClientModule : AbpModule
+namespace Acme.BookStore
 {
-    public const string RemoteServiceName = "Default";
-
-    public override void ConfigureServices(ServiceConfigurationContext context)
+    [DependsOn(
+        typeof(BookStoreApplicationContractsModule),
+        typeof(AbpAccountHttpApiClientModule),
+        typeof(AbpIdentityHttpApiClientModule),
+        typeof(AbpPermissionManagementHttpApiClientModule),
+        typeof(AbpTenantManagementHttpApiClientModule),
+        typeof(AbpFeatureManagementHttpApiClientModule)
+    )]
+    public class BookStoreHttpApiClientModule : AbpModule
     {
-        context.Services.AddHttpClientProxies(
-            typeof(BookStoreApplicationContractsModule).Assembly,
-            RemoteServiceName
-        );
+        public const string RemoteServiceName = "Default";
 
-        Configure<AbpVirtualFileSystemOptions>(options =>
+        public override void ConfigureServices(ServiceConfigurationContext context)
         {
-            options.FileSets.AddEmbedded<BookStoreHttpApiClientModule>();
-        });
+            context.Services.AddHttpClientProxies(
+                typeof(BookStoreApplicationContractsModule).Assembly,
+                RemoteServiceName
+            );
+        }
     }
 }

@@ -1,8 +1,9 @@
+using System;
 using System.IO;
-using Microsoft.AspNetCore.Authentication.Google;
+using Localization.Resources.AbpUi;
+using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -11,303 +12,213 @@ using Acme.BookStore.Localization;
 using Acme.BookStore.MultiTenancy;
 using Acme.BookStore.Permissions;
 using Acme.BookStore.Web.Menus;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.OpenApi.Models;
+using Swashbuckle.AspNetCore.Swagger;
 using Volo.Abp;
-using Volo.Abp.Account.Admin.Web;
-using Volo.Abp.Account.Public.Web;
-using Volo.Abp.Account.Public.Web.ExternalProviders;
 using Volo.Abp.Account.Web;
+using Volo.Abp.AspNetCore.Authentication.JwtBearer;
 using Volo.Abp.AspNetCore.Mvc;
 using Volo.Abp.AspNetCore.Mvc.Localization;
 using Volo.Abp.AspNetCore.Mvc.UI;
 using Volo.Abp.AspNetCore.Mvc.UI.Bootstrap;
-using Volo.Abp.AspNetCore.Mvc.UI.Theme.Commercial;
-using Volo.Abp.AspNetCore.Mvc.UI.Theme.Lepton;
+using Volo.Abp.AspNetCore.Mvc.UI.MultiTenancy;
+using Volo.Abp.AspNetCore.Mvc.UI.Theme.Basic;
 using Volo.Abp.AspNetCore.Mvc.UI.Theme.Shared;
-using Volo.Abp.AuditLogging.Web;
+using Volo.Abp.AspNetCore.Serilog;
 using Volo.Abp.Autofac;
 using Volo.Abp.AutoMapper;
+using Volo.Abp.FeatureManagement;
 using Volo.Abp.Identity.Web;
-using Volo.Abp.IdentityServer.Web;
-using Volo.Abp.LanguageManagement;
-using Volo.Abp.LeptonTheme.Management;
+using Volo.Abp.Localization;
 using Volo.Abp.Modularity;
 using Volo.Abp.PermissionManagement.Web;
-using Volo.Abp.TextTemplateManagement.Web;
+using Volo.Abp.TenantManagement.Web;
 using Volo.Abp.UI.Navigation.Urls;
 using Volo.Abp.UI;
 using Volo.Abp.UI.Navigation;
 using Volo.Abp.VirtualFileSystem;
-using Volo.Saas.Host;
-using System;
-using Microsoft.AspNetCore.Authentication.MicrosoftAccount;
-using Microsoft.AspNetCore.Authentication.Twitter;
-using Acme.BookStore.Web.HealthChecks;
-using Volo.Abp.AspNetCore.Mvc.UI.Bundling;
-using Volo.Abp.AspNetCore.Mvc.UI.Theme.Lepton.Bundling;
-using Volo.Abp.AspNetCore.Mvc.UI.Theme.Shared.Toolbars;
-using Volo.Abp.AspNetCore.Serilog;
-using Volo.Abp.Identity;
-using Volo.Abp.Swashbuckle;
 
-namespace Acme.BookStore.Web;
-
-[DependsOn(
-    typeof(BookStoreHttpApiModule),
-    typeof(BookStoreApplicationModule),
-    typeof(BookStoreEntityFrameworkCoreModule),
-    typeof(AbpAutofacModule),
-    typeof(AbpIdentityWebModule),
-    typeof(AbpAccountPublicWebIdentityServerModule),
-    typeof(AbpAuditLoggingWebModule),
-    typeof(LeptonThemeManagementWebModule),
-    typeof(SaasHostWebModule),
-    typeof(AbpAccountAdminWebModule),
-    typeof(AbpIdentityServerWebModule),
-    typeof(LanguageManagementWebModule),
-    typeof(AbpAspNetCoreMvcUiLeptonThemeModule),
-    typeof(TextTemplateManagementWebModule),
-    typeof(AbpSwashbuckleModule),
-    typeof(AbpAspNetCoreSerilogModule)
-    )]
-public class BookStoreWebModule : AbpModule
+namespace Acme.BookStore.Web
 {
-    public override void PreConfigureServices(ServiceConfigurationContext context)
+    [DependsOn(
+        typeof(BookStoreHttpApiModule),
+        typeof(BookStoreApplicationModule),
+        typeof(BookStoreEntityFrameworkCoreModule),
+        typeof(AbpAutofacModule),
+        typeof(AbpIdentityWebModule),
+        typeof(AbpAccountWebIdentityServerModule),
+        typeof(AbpAspNetCoreMvcUiBasicThemeModule),
+        typeof(AbpAspNetCoreAuthenticationJwtBearerModule),
+        typeof(AbpTenantManagementWebModule),
+        typeof(AbpAspNetCoreSerilogModule)
+        )]
+    public class BookStoreWebModule : AbpModule
     {
-        context.Services.PreConfigure<AbpMvcDataAnnotationsLocalizationOptions>(options =>
+        public override void PreConfigureServices(ServiceConfigurationContext context)
         {
-            options.AddAssemblyResource(
-                typeof(BookStoreResource),
-                typeof(BookStoreDomainModule).Assembly,
-                typeof(BookStoreDomainSharedModule).Assembly,
-                typeof(BookStoreApplicationModule).Assembly,
-                typeof(BookStoreApplicationContractsModule).Assembly,
-                typeof(BookStoreWebModule).Assembly
-            );
-        });
-    }
-
-    public override void ConfigureServices(ServiceConfigurationContext context)
-    {
-        var hostingEnvironment = context.Services.GetHostingEnvironment();
-        var configuration = context.Services.GetConfiguration();
-
-        ConfigureBundles();
-        ConfigureUrls(configuration);
-        ConfigurePages(configuration);
-        ConfigureAuthentication(context, configuration);
-        ConfigureImpersonation(context, configuration);
-        ConfigureAutoMapper();
-        ConfigureVirtualFileSystem(hostingEnvironment);
-        ConfigureNavigationServices();
-        ConfigureAutoApiControllers();
-        ConfigureSwaggerServices(context.Services);
-        ConfigureExternalProviders(context);
-        ConfigureHealthChecks(context);
-    }
-
-    private void ConfigureHealthChecks(ServiceConfigurationContext context)
-    {
-        context.Services.AddBookStoreHealthChecks();
-    }
-
-    private void ConfigureBundles()
-    {
-        Configure<AbpBundlingOptions>(options =>
-        {
-            options.StyleBundles.Configure(
-                LeptonThemeBundles.Styles.Global,
-                bundle =>
-                {
-                    bundle.AddFiles("/global-styles.css");
-                }
-            );
-        });
-    }
-
-    private void ConfigurePages(IConfiguration configuration)
-    {
-        Configure<RazorPagesOptions>(options =>
-        {
-            options.Conventions.AuthorizePage("/HostDashboard", BookStorePermissions.Dashboard.Host);
-            options.Conventions.AuthorizePage("/TenantDashboard", BookStorePermissions.Dashboard.Tenant);
-        });
-    }
-
-    private void ConfigureUrls(IConfiguration configuration)
-    {
-        Configure<AppUrlOptions>(options =>
-        {
-            options.Applications["MVC"].RootUrl = configuration["App:SelfUrl"];
-        });
-    }
-
-    private void ConfigureAuthentication(ServiceConfigurationContext context, IConfiguration configuration)
-    {
-        context.Services.AddAuthentication()
-            .AddJwtBearer(options =>
+            context.Services.PreConfigure<AbpMvcDataAnnotationsLocalizationOptions>(options =>
             {
-                options.Authority = configuration["AuthServer:Authority"];
-                options.RequireHttpsMetadata = Convert.ToBoolean(configuration["AuthServer:RequireHttpsMetadata"]); ;
-                options.Audience = "BookStore";
+                options.AddAssemblyResource(
+                    typeof(BookStoreResource),
+                    typeof(BookStoreDomainModule).Assembly,
+                    typeof(BookStoreDomainSharedModule).Assembly,
+                    typeof(BookStoreApplicationModule).Assembly,
+                    typeof(BookStoreApplicationContractsModule).Assembly,
+                    typeof(BookStoreWebModule).Assembly
+                );
             });
-    }
+        }
 
-    private void ConfigureImpersonation(ServiceConfigurationContext context, IConfiguration configuration)
-    {
-        context.Services.Configure<AbpSaasHostWebOptions>(options =>
+        public override void ConfigureServices(ServiceConfigurationContext context)
         {
-            options.EnableTenantImpersonation = true;
-        });
-        context.Services.Configure<AbpIdentityWebOptions>(options =>
-        {
-            options.EnableUserImpersonation = true;
-        });
-        context.Services.Configure<AbpAccountOptions>(options =>
-        {
-            options.TenantAdminUserName = "admin";
-            options.ImpersonationTenantPermission = SaasHostPermissions.Tenants.Impersonation;
-            options.ImpersonationUserPermission = IdentityPermissions.Users.Impersonation;
-        });
-    }
+            var hostingEnvironment = context.Services.GetHostingEnvironment();
+            var configuration = context.Services.GetConfiguration();
 
-    private void ConfigureAutoMapper()
-    {
-        Configure<AbpAutoMapperOptions>(options =>
-        {
-            options.AddMaps<BookStoreWebModule>();
-        });
-    }
+            ConfigureUrls(configuration);
+            ConfigureAuthentication(context, configuration);
+            ConfigureAutoMapper();
+            ConfigureVirtualFileSystem(hostingEnvironment);
+            ConfigureLocalizationServices();
+            ConfigureNavigationServices();
+            ConfigureAutoApiControllers();
+            ConfigureSwaggerServices(context.Services);
 
-    private void ConfigureVirtualFileSystem(IWebHostEnvironment hostingEnvironment)
-    {
-        Configure<AbpVirtualFileSystemOptions>(options =>
-        {
-            options.FileSets.AddEmbedded<BookStoreWebModule>();
+            Configure<RazorPagesOptions>(options =>
+            {
+                options.Conventions.AuthorizePage("/Books/Index", BookStorePermissions.Books.Default);
+                options.Conventions.AuthorizePage("/Books/CreateModal", BookStorePermissions.Books.Create);
+                options.Conventions.AuthorizePage("/Books/EditModal", BookStorePermissions.Books.Edit);
+            });
+        }
 
+        private void ConfigureUrls(IConfiguration configuration)
+        {
+            Configure<AppUrlOptions>(options =>
+            {
+                options.Applications["MVC"].RootUrl = configuration["App:SelfUrl"];
+            });
+        }
+
+        private void ConfigureAuthentication(ServiceConfigurationContext context, IConfiguration configuration)
+        {
+            context.Services.AddAuthentication()
+                .AddJwtBearer(options =>
+                {
+                    options.Authority = configuration["AuthServer:Authority"];
+                    options.RequireHttpsMetadata = Convert.ToBoolean(configuration["AuthServer:RequireHttpsMetadata"]);
+                    options.Audience = "BookStore";
+                });
+        }
+
+        private void ConfigureAutoMapper()
+        {
+            Configure<AbpAutoMapperOptions>(options =>
+            {
+                options.AddMaps<BookStoreWebModule>();
+            });
+        }
+
+        private void ConfigureVirtualFileSystem(IWebHostEnvironment hostingEnvironment)
+        {
             if (hostingEnvironment.IsDevelopment())
             {
-                    options.FileSets.ReplaceEmbeddedByPhysical<BookStoreDomainSharedModule>(Path.Combine(hostingEnvironment.ContentRootPath, string.Format("..{0}Acme.BookStore.Domain.Shared", Path.DirectorySeparatorChar)));
-                options.FileSets.ReplaceEmbeddedByPhysical<BookStoreDomainModule>(Path.Combine(hostingEnvironment.ContentRootPath, string.Format("..{0}Acme.BookStore.Domain", Path.DirectorySeparatorChar)));
-                options.FileSets.ReplaceEmbeddedByPhysical<BookStoreApplicationContractsModule>(Path.Combine(hostingEnvironment.ContentRootPath, string.Format("..{0}Acme.BookStore.Application.Contracts", Path.DirectorySeparatorChar)));
-                options.FileSets.ReplaceEmbeddedByPhysical<BookStoreApplicationModule>(Path.Combine(hostingEnvironment.ContentRootPath, string.Format("..{0}Acme.BookStore.Application", Path.DirectorySeparatorChar)));
-                options.FileSets.ReplaceEmbeddedByPhysical<BookStoreHttpApiModule>(Path.Combine(hostingEnvironment.ContentRootPath, string.Format("..{0}..{0}src{0}Acme.BookStore.HttpApi", Path.DirectorySeparatorChar)));
-                options.FileSets.ReplaceEmbeddedByPhysical<BookStoreWebModule>(hostingEnvironment.ContentRootPath);
+                Configure<AbpVirtualFileSystemOptions>(options =>
+                {
+                    options.FileSets.ReplaceEmbeddedByPhysical<BookStoreDomainSharedModule>(Path.Combine(hostingEnvironment.ContentRootPath, $"..{Path.DirectorySeparatorChar}Acme.BookStore.Domain.Shared"));
+                    options.FileSets.ReplaceEmbeddedByPhysical<BookStoreDomainModule>(Path.Combine(hostingEnvironment.ContentRootPath, $"..{Path.DirectorySeparatorChar}Acme.BookStore.Domain"));
+                    options.FileSets.ReplaceEmbeddedByPhysical<BookStoreApplicationContractsModule>(Path.Combine(hostingEnvironment.ContentRootPath, $"..{Path.DirectorySeparatorChar}Acme.BookStore.Application.Contracts"));
+                    options.FileSets.ReplaceEmbeddedByPhysical<BookStoreApplicationModule>(Path.Combine(hostingEnvironment.ContentRootPath, $"..{Path.DirectorySeparatorChar}Acme.BookStore.Application"));
+                    options.FileSets.ReplaceEmbeddedByPhysical<BookStoreWebModule>(hostingEnvironment.ContentRootPath);
+                });
             }
-        });
-    }
+        }
 
-    private void ConfigureNavigationServices()
-    {
-        Configure<AbpNavigationOptions>(options =>
+        private void ConfigureLocalizationServices()
         {
-            options.MenuContributors.Add(new BookStoreMenuContributor());
-        });
-
-        Configure<AbpToolbarOptions>(options =>
-        {
-            options.Contributors.Add(new BookStoreToolbarContributor());
-        });
-    }
-
-    private void ConfigureAutoApiControllers()
-    {
-        Configure<AbpAspNetCoreMvcOptions>(options =>
-        {
-            options.ConventionalControllers.Create(typeof(BookStoreApplicationModule).Assembly);
-        });
-    }
-
-    private void ConfigureSwaggerServices(IServiceCollection services)
-    {
-        services.AddAbpSwaggerGen(
-            options =>
+            Configure<AbpLocalizationOptions>(options =>
             {
-                options.SwaggerDoc("v1", new OpenApiInfo { Title = "BookStore API", Version = "v1" });
-                options.DocInclusionPredicate((docName, description) => true);
-                options.CustomSchemaIds(type => type.FullName);
-            }
-        );
-    }
+                options.Resources
+                    .Get<BookStoreResource>()
+                    .AddBaseTypes(
+                        typeof(AbpUiResource)
+                    );
 
-    private void ConfigureExternalProviders(ServiceConfigurationContext context)
-    {
-        context.Services.AddAuthentication()
-            .AddGoogle(GoogleDefaults.AuthenticationScheme, _ => { })
-            .WithDynamicOptions<GoogleOptions, GoogleHandler>(
-                GoogleDefaults.AuthenticationScheme,
-                options =>
-                {
-                    options.WithProperty(x => x.ClientId);
-                    options.WithProperty(x => x.ClientSecret, isSecret: true);
-                }
-            )
-            .AddMicrosoftAccount(MicrosoftAccountDefaults.AuthenticationScheme, options =>
+                options.Languages.Add(new LanguageInfo("ar", "ar", "العربية"));
+                options.Languages.Add(new LanguageInfo("cs", "cs", "Čeština"));
+                options.Languages.Add(new LanguageInfo("en", "en", "English"));
+                options.Languages.Add(new LanguageInfo("pt-BR", "pt-BR", "Português"));
+                options.Languages.Add(new LanguageInfo("ru", "ru", "Русский"));
+                options.Languages.Add(new LanguageInfo("tr", "tr", "Türkçe"));
+                options.Languages.Add(new LanguageInfo("zh-Hans", "zh-Hans", "简体中文"));
+                options.Languages.Add(new LanguageInfo("zh-Hant", "zh-Hant", "繁體中文"));
+            });
+        }
+
+        private void ConfigureNavigationServices()
+        {
+            Configure<AbpNavigationOptions>(options =>
             {
-                    //Personal Microsoft accounts as an example.
-                    options.AuthorizationEndpoint = "https://login.microsoftonline.com/consumers/oauth2/v2.0/authorize";
-                options.TokenEndpoint = "https://login.microsoftonline.com/consumers/oauth2/v2.0/token";
-            })
-            .WithDynamicOptions<MicrosoftAccountOptions, MicrosoftAccountHandler>(
-                MicrosoftAccountDefaults.AuthenticationScheme,
+                options.MenuContributors.Add(new BookStoreMenuContributor());
+            });
+        }
+
+        private void ConfigureAutoApiControllers()
+        {
+            Configure<AbpAspNetCoreMvcOptions>(options =>
+            {
+                options.ConventionalControllers.Create(typeof(BookStoreApplicationModule).Assembly);
+            });
+        }
+
+        private void ConfigureSwaggerServices(IServiceCollection services)
+        {
+            services.AddSwaggerGen(
                 options =>
                 {
-                    options.WithProperty(x => x.ClientId);
-                    options.WithProperty(x => x.ClientSecret, isSecret: true);
-                }
-            )
-            .AddTwitter(TwitterDefaults.AuthenticationScheme, options => options.RetrieveUserDetails = true)
-            .WithDynamicOptions<TwitterOptions, TwitterHandler>(
-                TwitterDefaults.AuthenticationScheme,
-                options =>
-                {
-                    options.WithProperty(x => x.ConsumerKey);
-                    options.WithProperty(x => x.ConsumerSecret, isSecret: true);
+                    options.SwaggerDoc("v1", new OpenApiInfo { Title = "BookStore API", Version = "v1" });
+                    options.DocInclusionPredicate((docName, description) => true);
+                    options.CustomSchemaIds(type => type.FullName);
                 }
             );
-    }
-
-
-    public override void OnApplicationInitialization(ApplicationInitializationContext context)
-    {
-        var app = context.GetApplicationBuilder();
-        var env = context.GetEnvironment();
-
-        if (env.IsDevelopment())
-        {
-            app.UseDeveloperExceptionPage();
         }
 
-        app.UseAbpRequestLocalization();
-
-        if (!env.IsDevelopment())
+        public override void OnApplicationInitialization(ApplicationInitializationContext context)
         {
-            app.UseErrorPage();
-            app.UseHsts();
+            var app = context.GetApplicationBuilder();
+            var env = context.GetEnvironment();
+
+            if (env.IsDevelopment())
+            {
+                app.UseDeveloperExceptionPage();
+            }
+            else
+            {
+                app.UseErrorPage();
+            }
+
+            app.UseCorrelationId();
+            app.UseStaticFiles();
+            app.UseRouting();
+            app.UseAuthentication();
+            app.UseJwtTokenMiddleware();
+
+            if (MultiTenancyConsts.IsEnabled)
+            {
+                app.UseMultiTenancy();
+            }
+
+            app.UseAbpRequestLocalization();
+            app.UseIdentityServer();
+            app.UseAuthorization();
+            app.UseSwagger();
+            app.UseSwaggerUI(options =>
+            {
+                options.SwaggerEndpoint("/swagger/v1/swagger.json", "BookStore API");
+            });
+            app.UseAuditing();
+            app.UseAbpSerilogEnrichers();
+            app.UseConfiguredEndpoints();
         }
-
-        app.UseHttpsRedirection();
-        app.UseCorrelationId();
-        app.UseStaticFiles();
-        app.UseRouting();
-        app.UseAuthentication();
-        app.UseJwtTokenMiddleware();
-
-        if (MultiTenancyConsts.IsEnabled)
-        {
-            app.UseMultiTenancy();
-        }
-
-        app.UseUnitOfWork();
-        app.UseIdentityServer();
-        app.UseAuthorization();
-        app.UseSwagger();
-        app.UseAbpSwaggerUI(options =>
-        {
-            options.SwaggerEndpoint("/swagger/v1/swagger.json", "BookStore API");
-        });
-        app.UseAuditing();
-        app.UseAbpSerilogEnrichers();
-        app.UseConfiguredEndpoints();
     }
 }

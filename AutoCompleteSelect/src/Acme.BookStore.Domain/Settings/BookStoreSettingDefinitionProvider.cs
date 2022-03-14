@@ -1,12 +1,13 @@
 ﻿using Volo.Abp.Settings;
 
-namespace Acme.BookStore.Settings;
-
-public class BookStoreSettingDefinitionProvider : SettingDefinitionProvider
+namespace Acme.BookStore.Settings
 {
-    public override void Define(ISettingDefinitionContext context)
+    public class BookStoreSettingDefinitionProvider : SettingDefinitionProvider
     {
-        //Define your own settings here. Example:
-        //context.Add(new SettingDefinition(BookStoreSettings.MySetting1));
+        public override void Define(ISettingDefinitionContext context)
+        {
+            //Define your own settings here. Example:
+            //context.Add(new SettingDefinition(BookStoreSettings.MySetting1));
+        }
     }
 }

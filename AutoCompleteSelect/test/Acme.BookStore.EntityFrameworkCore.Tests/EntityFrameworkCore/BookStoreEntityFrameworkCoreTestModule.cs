@@ -8,54 +8,55 @@ using Volo.Abp.EntityFrameworkCore;
 using Volo.Abp.EntityFrameworkCore.Sqlite;
 using Volo.Abp.Modularity;
 
-namespace Acme.BookStore.EntityFrameworkCore;
-
-[DependsOn(
-    typeof(BookStoreEntityFrameworkCoreModule),
-    typeof(BookStoreTestBaseModule),
-    typeof(AbpEntityFrameworkCoreSqliteModule)
-    )]
-public class BookStoreEntityFrameworkCoreTestModule : AbpModule
+namespace Acme.BookStore.EntityFrameworkCore
 {
-    private SqliteConnection _sqliteConnection;
-
-    public override void ConfigureServices(ServiceConfigurationContext context)
+    [DependsOn(
+        typeof(BookStoreEntityFrameworkCoreModule),
+        typeof(BookStoreTestBaseModule),
+        typeof(AbpEntityFrameworkCoreSqliteModule)
+        )]
+    public class BookStoreEntityFrameworkCoreTestModule : AbpModule
     {
-        ConfigureInMemorySqlite(context.Services);
-    }
+        private SqliteConnection _sqliteConnection;
 
-    private void ConfigureInMemorySqlite(IServiceCollection services)
-    {
-        _sqliteConnection = CreateDatabaseAndGetConnection();
-
-        services.Configure<AbpDbContextOptions>(options =>
+        public override void ConfigureServices(ServiceConfigurationContext context)
         {
-            options.Configure(context =>
-            {
-                context.DbContextOptions.UseSqlite(_sqliteConnection);
-            });
-        });
-    }
-
-    public override void OnApplicationShutdown(ApplicationShutdownContext context)
-    {
-        _sqliteConnection.Dispose();
-    }
-
-    private static SqliteConnection CreateDatabaseAndGetConnection()
-    {
-        var connection = new SqliteConnection("Data Source=:memory:");
-        connection.Open();
-
-        var options = new DbContextOptionsBuilder<BookStoreDbContext>()
-            .UseSqlite(connection)
-            .Options;
-
-        using (var context = new BookStoreDbContext(options))
-        {
-            context.GetService<IRelationalDatabaseCreator>().CreateTables();
+            ConfigureInMemorySqlite(context.Services);
         }
 
-        return connection;
+        private void ConfigureInMemorySqlite(IServiceCollection services)
+        {
+            _sqliteConnection = CreateDatabaseAndGetConnection();
+
+            services.Configure<AbpDbContextOptions>(options =>
+            {
+                options.Configure(context =>
+                {
+                    context.DbContextOptions.UseSqlite(_sqliteConnection);
+                });
+            });
+        }
+
+        public override void OnApplicationShutdown(ApplicationShutdownContext context)
+        {
+            _sqliteConnection.Dispose();
+        }
+
+        private static SqliteConnection CreateDatabaseAndGetConnection()
+        {
+            var connection = new SqliteConnection("Data Source=:memory:");
+            connection.Open();
+
+            var options = new DbContextOptionsBuilder<BookStoreDbContext>()
+                .UseSqlite(connection)
+                .Options;
+
+            using (var context = new BookStoreDbContext(options))
+            {
+                context.GetService<IRelationalDatabaseCreator>().CreateTables();
+            }
+
+            return connection;
+        }
     }
 }

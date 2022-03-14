@@ -8,54 +8,55 @@ using Volo.Abp.IdentityServer;
 using Volo.Abp.Modularity;
 using Volo.Abp.Threading;
 
-namespace Acme.BookStore;
-
-[DependsOn(
-    typeof(AbpAutofacModule),
-    typeof(AbpTestBaseModule),
-    typeof(AbpAuthorizationModule),
-    typeof(BookStoreDomainModule)
-    )]
-public class BookStoreTestBaseModule : AbpModule
+namespace Acme.BookStore
 {
-    public override void PreConfigureServices(ServiceConfigurationContext context)
+    [DependsOn(
+        typeof(AbpAutofacModule),
+        typeof(AbpTestBaseModule),
+        typeof(AbpAuthorizationModule),
+        typeof(BookStoreDomainModule)
+        )]
+    public class BookStoreTestBaseModule : AbpModule
     {
-        PreConfigure<AbpIdentityServerBuilderOptions>(options =>
+        public override void PreConfigureServices(ServiceConfigurationContext context)
         {
-            options.AddDeveloperSigningCredential = false;
-        });
-
-        PreConfigure<IIdentityServerBuilder>(identityServerBuilder =>
-        {
-            identityServerBuilder.AddDeveloperSigningCredential(false, System.Guid.NewGuid().ToString());
-        });
-    }
-
-    public override void ConfigureServices(ServiceConfigurationContext context)
-    {
-        Configure<AbpBackgroundJobOptions>(options =>
-        {
-            options.IsJobExecutionEnabled = false;
-        });
-
-        context.Services.AddAlwaysAllowAuthorization();
-    }
-
-    public override void OnApplicationInitialization(ApplicationInitializationContext context)
-    {
-        SeedTestData(context);
-    }
-
-    private static void SeedTestData(ApplicationInitializationContext context)
-    {
-        AsyncHelper.RunSync(async () =>
-        {
-            using (var scope = context.ServiceProvider.CreateScope())
+            PreConfigure<AbpIdentityServerBuilderOptions>(options =>
             {
-                await scope.ServiceProvider
-                    .GetRequiredService<IDataSeeder>()
-                    .SeedAsync();
-            }
-        });
+                options.AddDeveloperSigningCredential = false;
+            });
+
+            PreConfigure<IIdentityServerBuilder>(identityServerBuilder =>
+            {
+                identityServerBuilder.AddDeveloperSigningCredential(false, System.Guid.NewGuid().ToString());
+            });
+        }
+
+        public override void ConfigureServices(ServiceConfigurationContext context)
+        {
+            Configure<AbpBackgroundJobOptions>(options =>
+            {
+                options.IsJobExecutionEnabled = false;
+            });
+
+            context.Services.AddAlwaysAllowAuthorization();
+        }
+
+        public override void OnApplicationInitialization(ApplicationInitializationContext context)
+        {
+            SeedTestData(context);
+        }
+
+        private static void SeedTestData(ApplicationInitializationContext context)
+        {
+            AsyncHelper.RunSync(async () =>
+            {
+                using (var scope = context.ServiceProvider.CreateScope())
+                {
+                    await scope.ServiceProvider
+                        .GetRequiredService<IDataSeeder>()
+                        .SeedAsync();
+                }
+            });
+        }
     }
 }

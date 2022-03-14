@@ -1,33 +1,21 @@
-﻿using System;
-using System.Threading.Tasks;
-using Microsoft.Extensions.Configuration;
+﻿using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
-using Volo.Abp;
+using Microsoft.Extensions.Hosting;
 
-namespace Acme.BookStore.HttpApi.Client.ConsoleTestApp;
-
-class Program
+namespace Acme.BookStore.HttpApi.Client.ConsoleTestApp
 {
-    static async Task Main(string[] args)
+    class Program
     {
-        using (var application = await AbpApplicationFactory.CreateAsync<BookStoreConsoleApiClientModule>(options =>
+        static async Task Main(string[] args)
         {
-           var builder = new ConfigurationBuilder();
-           builder.AddJsonFile("appsettings.json", false);
-           builder.AddJsonFile("appsettings.secrets.json", true);
-           options.Services.ReplaceConfiguration(builder.Build());
-           options.UseAutofac();
-        }))
-        {
-            await application.InitializeAsync();
-
-            var demo = application.ServiceProvider.GetRequiredService<ClientDemoService>();
-            await demo.RunAsync();
-
-            Console.WriteLine("Press ENTER to stop application...");
-            Console.ReadLine();
-
-            await application.ShutdownAsync();
+            await CreateHostBuilder(args).RunConsoleAsync();
         }
+
+        public static IHostBuilder CreateHostBuilder(string[] args) =>
+            Host.CreateDefaultBuilder(args)
+                .ConfigureServices((hostContext, services) =>
+                {
+                    services.AddHostedService<ConsoleTestAppHostedService>();
+                });
     }
 }

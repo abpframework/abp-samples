@@ -1,25 +1,29 @@
-using Acme.BookStore.Localization;
+﻿using Acme.BookStore.Localization;
 using Volo.Abp.Authorization.Permissions;
 using Volo.Abp.Localization;
-using Volo.Abp.MultiTenancy;
 
-namespace Acme.BookStore.Permissions;
-
-public class BookStorePermissionDefinitionProvider : PermissionDefinitionProvider
+namespace Acme.BookStore.Permissions
 {
-    public override void Define(IPermissionDefinitionContext context)
+    public class BookStorePermissionDefinitionProvider : PermissionDefinitionProvider
     {
-        var myGroup = context.AddGroup(BookStorePermissions.GroupName);
+        public override void Define(IPermissionDefinitionContext context)
+        {
+            var bookStoreGroup = context.AddGroup(BookStorePermissions.GroupName, L("Permission:BookStore"));
 
-        myGroup.AddPermission(BookStorePermissions.Dashboard.Host, L("Permission:Dashboard"), MultiTenancySides.Host);
-        myGroup.AddPermission(BookStorePermissions.Dashboard.Tenant, L("Permission:Dashboard"), MultiTenancySides.Tenant);
+            var booksPermission = bookStoreGroup.AddPermission(BookStorePermissions.Books.Default, L("Permission:Books"));
+            booksPermission.AddChild(BookStorePermissions.Books.Create, L("Permission:Books.Create"));
+            booksPermission.AddChild(BookStorePermissions.Books.Edit, L("Permission:Books.Edit"));
+            booksPermission.AddChild(BookStorePermissions.Books.Delete, L("Permission:Books.Delete"));
 
-        //Define your own permissions here. Example:
-        //myGroup.AddPermission(BookStorePermissions.MyPermission1, L("Permission:MyPermission1"));
-    }
+            var authorsPermission = bookStoreGroup.AddPermission(BookStorePermissions.Authors.Default, L("Permission:Authors"));
+            authorsPermission.AddChild(BookStorePermissions.Authors.Create, L("Permission:Authors.Create"));
+            authorsPermission.AddChild(BookStorePermissions.Authors.Edit, L("Permission:Authors.Edit"));
+            authorsPermission.AddChild(BookStorePermissions.Authors.Delete, L("Permission:Authors.Delete"));
+        }
 
-    private static LocalizableString L(string name)
-    {
-        return LocalizableString.Create<BookStoreResource>(name);
+        private static LocalizableString L(string name)
+        {
+            return LocalizableString.Create<BookStoreResource>(name);
+        }
     }
 }

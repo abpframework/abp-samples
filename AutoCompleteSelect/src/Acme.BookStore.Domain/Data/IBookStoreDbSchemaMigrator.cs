@@ -1,8 +1,9 @@
 ﻿using System.Threading.Tasks;
 
-namespace Acme.BookStore.Data;
-
-public interface IBookStoreDbSchemaMigrator
+namespace Acme.BookStore.Data
 {
-    Task MigrateAsync();
+    public interface IBookStoreDbSchemaMigrator
+    {
+        Task MigrateAsync();
+    }
 }

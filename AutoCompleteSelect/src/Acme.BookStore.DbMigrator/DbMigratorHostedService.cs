@@ -1,49 +1,43 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Acme.BookStore.Data;
 using Serilog;
 using Volo.Abp;
 
-namespace Acme.BookStore.DbMigrator;
-
-public class DbMigratorHostedService : IHostedService
+namespace Acme.BookStore.DbMigrator
 {
-    private readonly IHostApplicationLifetime _hostApplicationLifetime;
-    private readonly IConfiguration _configuration;
-
-    public DbMigratorHostedService(IHostApplicationLifetime hostApplicationLifetime, IConfiguration configuration)
+    public class DbMigratorHostedService : IHostedService
     {
-        _hostApplicationLifetime = hostApplicationLifetime;
-        _configuration = configuration;
-    }
+        private readonly IHostApplicationLifetime _hostApplicationLifetime;
 
-    public async Task StartAsync(CancellationToken cancellationToken)
-    {
-        using (var application = await AbpApplicationFactory.CreateAsync<BookStoreDbMigratorModule>(options =>
+        public DbMigratorHostedService(IHostApplicationLifetime hostApplicationLifetime)
         {
-           options.Services.ReplaceConfiguration(_configuration);
-           options.UseAutofac();
-           options.Services.AddLogging(c => c.AddSerilog());
-        }))
-        {
-            await application.InitializeAsync();
-
-            await application
-                .ServiceProvider
-                .GetRequiredService<BookStoreDbMigrationService>()
-                .MigrateAsync();
-
-            await application.ShutdownAsync();
-
-            _hostApplicationLifetime.StopApplication();
+            _hostApplicationLifetime = hostApplicationLifetime;
         }
-    }
 
-    public Task StopAsync(CancellationToken cancellationToken)
-    {
-        return Task.CompletedTask;
+        public async Task StartAsync(CancellationToken cancellationToken)
+        {
+            using (var application = AbpApplicationFactory.Create<BookStoreDbMigratorModule>(options =>
+            {
+                options.UseAutofac();
+                options.Services.AddLogging(c => c.AddSerilog());
+            }))
+            {
+                application.Initialize();
+
+                await application
+                    .ServiceProvider
+                    .GetRequiredService<BookStoreDbMigrationService>()
+                    .MigrateAsync();
+
+                application.Shutdown();
+
+                _hostApplicationLifetime.StopApplication();
+            }
+        }
+
+        public Task StopAsync(CancellationToken cancellationToken) => Task.CompletedTask;
     }
 }

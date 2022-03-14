@@ -1,38 +1,26 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Volo.Abp.DependencyInjection;
-using Volo.Abp.Identity;
 using Volo.Abp.Account;
 
-namespace Acme.BookStore.HttpApi.Client.ConsoleTestApp;
-
-public class ClientDemoService : ITransientDependency
+namespace Acme.BookStore.HttpApi.Client.ConsoleTestApp
 {
-    private readonly IProfileAppService _profileAppService;
-    private readonly IIdentityUserAppService _identityUserAppService;
-
-    public ClientDemoService(
-        IProfileAppService profileAppService,
-        IIdentityUserAppService identityUserAppService)
+    public class ClientDemoService : ITransientDependency
     {
-        _profileAppService = profileAppService;
-        _identityUserAppService = identityUserAppService;
-    }
+        private readonly IProfileAppService _profileAppService;
 
-    public async Task RunAsync()
-    {
-        var profileDto = await _profileAppService.GetAsync();
-        Console.WriteLine($"UserName : {profileDto.UserName}");
-        Console.WriteLine($"Email    : {profileDto.Email}");
-        Console.WriteLine($"Name     : {profileDto.Name}");
-        Console.WriteLine($"Surname  : {profileDto.Surname}");
-        Console.WriteLine();
-
-        var resultDto = await _identityUserAppService.GetListAsync(new GetIdentityUsersInput());
-        Console.WriteLine($"Total users: {resultDto.TotalCount}");
-        foreach (var identityUserDto in resultDto.Items)
+        public ClientDemoService(IProfileAppService profileAppService)
         {
-            Console.WriteLine($"- [{identityUserDto.Id}] {identityUserDto.Name}");
+            _profileAppService = profileAppService;
+        }
+
+        public async Task RunAsync()
+        {
+            var output = await _profileAppService.GetAsync();
+            Console.WriteLine($"UserName : {output.UserName}");
+            Console.WriteLine($"Email    : {output.Email}");
+            Console.WriteLine($"Name     : {output.Name}");
+            Console.WriteLine($"Surname  : {output.Surname}");
         }
     }
 }

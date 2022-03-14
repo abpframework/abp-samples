@@ -3,10 +3,6 @@
   "name": "my-app",
   "private": true,
   "dependencies": {
-    "@volo/abp.aspnetcore.mvc.ui.theme.lepton": "^5.2.0-rc.1",
-    "@volo/saas": "^5.2.0-rc.1",
-    "@volo/audit-logging": "^5.2.0-rc.1",
-    "@volo/identity": "^5.2.0-rc.1",
-    "@volo/account": "^5.2.0-rc.1"
+    "@abp/aspnetcore.mvc.ui.theme.basic": "~5.0.0"
   }
 }

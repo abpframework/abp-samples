@@ -16,9 +16,9 @@ namespace Acme.BookStore.Web.Pages.Books
         [BindProperty]
         public EditBookViewModel Book { get; set; }
 
-        public List<SelectListItem> Authors { get; set; }
-
         private readonly IBookAppService _bookAppService;
+
+        public AuthorLookupDto CurrentAuthor { get; set; }
 
         public EditModalModel(IBookAppService bookAppService)
         {
@@ -30,10 +30,7 @@ namespace Acme.BookStore.Web.Pages.Books
             var bookDto = await _bookAppService.GetAsync(id);
             Book = ObjectMapper.Map<BookDto, EditBookViewModel>(bookDto);
 
-            var authorLookup = await _bookAppService.GetAuthorLookupAsync();
-            Authors = authorLookup.Items
-                .Select(x => new SelectListItem(x.Name, x.Id.ToString()))
-                .ToList();
+            CurrentAuthor = await _bookAppService.GetAuthorLookupAsync(Book.AuthorId);
         }
 
         public async Task<IActionResult> OnPostAsync()
@@ -51,7 +48,7 @@ namespace Acme.BookStore.Web.Pages.Books
             [HiddenInput]
             public Guid Id { get; set; }
 
-            [SelectItems(nameof(Authors))]
+            [DynamicFormIgnore]
             [DisplayName("Author")]
             public Guid AuthorId { get; set; }
 

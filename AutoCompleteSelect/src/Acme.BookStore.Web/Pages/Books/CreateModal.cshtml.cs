@@ -16,8 +16,6 @@ namespace Acme.BookStore.Web.Pages.Books
         [BindProperty]
         public CreateBookViewModel Book { get; set; }
 
-        public List<SelectListItem> Authors { get; set; }
-
         private readonly IBookAppService _bookAppService;
 
         public CreateModalModel(
@@ -29,11 +27,6 @@ namespace Acme.BookStore.Web.Pages.Books
         public async Task OnGetAsync()
         {
             Book = new CreateBookViewModel();
-
-            var authorLookup = await _bookAppService.GetAuthorLookupAsync();
-            Authors = authorLookup.Items
-                .Select(x => new SelectListItem(x.Name, x.Id.ToString()))
-                .ToList();
         }
 
         public async Task<IActionResult> OnPostAsync()
@@ -46,7 +39,7 @@ namespace Acme.BookStore.Web.Pages.Books
 
         public class CreateBookViewModel
         {
-            [SelectItems(nameof(Authors))]
+            [DynamicFormIgnore]
             [DisplayName("Author")]
             public Guid AuthorId { get; set; }
 

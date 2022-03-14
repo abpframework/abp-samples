@@ -124,5 +124,12 @@ namespace Acme.BookStore.Books
 
             return $"book.{sorting}";
         }
+
+        public async Task<AuthorLookupDto> GetAuthorLookupAsync(Guid id)
+        {
+            var author = await _authorRepository.GetAsync(id);
+
+            return ObjectMapper.Map<Author, AuthorLookupDto>(author);
+        }
     }
 }

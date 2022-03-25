@@ -4,6 +4,7 @@ using KeycloakDemo.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Volo.Abp.EntityFrameworkCore;
 
@@ -12,9 +13,10 @@ using Volo.Abp.EntityFrameworkCore;
 namespace KeycloakDemo.Migrations
 {
     [DbContext(typeof(KeycloakDemoDbContext))]
-    partial class KeycloakDemoDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220325150503_Removed_IdentityServer")]
+    partial class Removed_IdentityServer
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

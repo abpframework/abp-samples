@@ -10,6 +10,7 @@ using Microsoft.IdentityModel.Protocols.OpenIdConnect;
 using KeycloakDemo.Localization;
 using KeycloakDemo.MultiTenancy;
 using KeycloakDemo.Web.Menus;
+using Microsoft.AspNetCore.Authentication;
 using StackExchange.Redis;
 using Microsoft.OpenApi.Models;
 using Volo.Abp;
@@ -145,15 +146,14 @@ public class KeycloakDemoWebModule : AbpModule
             {
                 options.Authority = configuration["AuthServer:Authority"];
                 options.RequireHttpsMetadata = Convert.ToBoolean(configuration["AuthServer:RequireHttpsMetadata"]);
-                options.ResponseType = OpenIdConnectResponseType.CodeIdToken;
+                options.ResponseType = OpenIdConnectResponseType.Code;
 
                 options.ClientId = configuration["AuthServer:ClientId"];
-                options.ClientSecret = configuration["AuthServer:ClientSecret"];
 
                 options.SaveTokens = true;
                 options.GetClaimsFromUserInfoEndpoint = true;
 
-                options.Scope.Add("role");
+                options.Scope.Add("profile");
                 options.Scope.Add("email");
                 options.Scope.Add("phone");
                 options.Scope.Add("KeycloakDemo");

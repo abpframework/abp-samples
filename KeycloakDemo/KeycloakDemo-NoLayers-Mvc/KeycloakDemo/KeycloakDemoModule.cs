@@ -1,7 +1,10 @@
-﻿using Microsoft.OpenApi.Models;
+﻿using System.Security.Claims;
+using Microsoft.OpenApi.Models;
 using KeycloakDemo.Data;
 using KeycloakDemo.Localization;
 using KeycloakDemo.Menus;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.OAuth.Claims;
 using Microsoft.IdentityModel.Protocols.OpenIdConnect;
 using Volo.Abp;
 using Volo.Abp.Account;
@@ -33,6 +36,7 @@ using Volo.Abp.PermissionManagement;
 using Volo.Abp.PermissionManagement.EntityFrameworkCore;
 using Volo.Abp.PermissionManagement.HttpApi;
 using Volo.Abp.PermissionManagement.Identity;
+using Volo.Abp.Security.Claims;
 using Volo.Abp.SettingManagement;
 using Volo.Abp.SettingManagement.EntityFrameworkCore;
 using Volo.Abp.SettingManagement.Web;
@@ -175,7 +179,7 @@ public class KeycloakDemoModule : AbpModule
                 options.Authority = configuration["AuthServer:Authority"];
                 
                 options.RequireHttpsMetadata = Convert.ToBoolean(configuration["AuthServer:RequireHttpsMetadata"]);
-                options.ResponseType = OpenIdConnectResponseType.CodeIdToken;
+                options.ResponseType = OpenIdConnectResponseType.Code;
                 options.UsePkce = true;
                 options.SaveTokens = true;
                 options.GetClaimsFromUserInfoEndpoint = true;
@@ -185,6 +189,25 @@ public class KeycloakDemoModule : AbpModule
                 options.Scope.Add("profile");
                 options.Scope.Add("email");
                 options.Scope.Add("phone");
+                
+                /*
+                 * What I've done here will be built-in with ABP v5.3.0 (then we can delete the following code)
+                 * https://github.com/abpframework/abp/pull/12085
+                 */
+                                
+                if (AbpClaimTypes.Name != "given_name")
+                {
+                    options.ClaimActions.MapJsonKey(AbpClaimTypes.Name, "given_name");
+                    options.ClaimActions.DeleteClaim("given_name");
+                    options.ClaimActions.RemoveDuplicate(AbpClaimTypes.Name);
+                }
+                
+                if (AbpClaimTypes.SurName != "family_name")
+                {
+                    options.ClaimActions.MapJsonKey(AbpClaimTypes.SurName, "family_name");
+                    options.ClaimActions.DeleteClaim("family_name");
+                    options.ClaimActions.RemoveDuplicate(AbpClaimTypes.SurName);
+                }
             });
     }
 

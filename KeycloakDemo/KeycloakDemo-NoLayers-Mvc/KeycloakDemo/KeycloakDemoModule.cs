@@ -1,11 +1,16 @@
-﻿using Microsoft.OpenApi.Models;
+﻿using System.Security.Claims;
+using Microsoft.OpenApi.Models;
 using KeycloakDemo.Data;
 using KeycloakDemo.Localization;
 using KeycloakDemo.Menus;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.OAuth.Claims;
+using Microsoft.IdentityModel.Protocols.OpenIdConnect;
 using Volo.Abp;
 using Volo.Abp.Account;
 using Volo.Abp.Account.Web;
 using Volo.Abp.AspNetCore.Authentication.JwtBearer;
+using Volo.Abp.AspNetCore.Authentication.OpenIdConnect;
 using Volo.Abp.AspNetCore.Mvc;
 using Volo.Abp.AspNetCore.Mvc.Localization;
 using Volo.Abp.AspNetCore.Mvc.UI.Bundling;
@@ -31,6 +36,7 @@ using Volo.Abp.PermissionManagement;
 using Volo.Abp.PermissionManagement.EntityFrameworkCore;
 using Volo.Abp.PermissionManagement.HttpApi;
 using Volo.Abp.PermissionManagement.Identity;
+using Volo.Abp.Security.Claims;
 using Volo.Abp.SettingManagement;
 using Volo.Abp.SettingManagement.EntityFrameworkCore;
 using Volo.Abp.SettingManagement.Web;
@@ -53,6 +59,7 @@ namespace KeycloakDemo;
     typeof(AbpEntityFrameworkCoreSqlServerModule),
     typeof(AbpSwashbuckleModule),
     typeof(AbpAspNetCoreAuthenticationJwtBearerModule),
+    typeof(AbpAspNetCoreAuthenticationOpenIdConnectModule),
     typeof(AbpAspNetCoreSerilogModule),
     typeof(AbpAspNetCoreMvcUiBasicThemeModule),
 
@@ -166,6 +173,41 @@ public class KeycloakDemoModule : AbpModule
                 options.Authority = configuration["AuthServer:Authority"];
                 options.RequireHttpsMetadata = Convert.ToBoolean(configuration["AuthServer:RequireHttpsMetadata"]);
                 options.Audience = "KeycloakDemo";
+            })
+            .AddAbpOpenIdConnect(options =>
+            {
+                options.Authority = configuration["AuthServer:Authority"];
+                
+                options.RequireHttpsMetadata = Convert.ToBoolean(configuration["AuthServer:RequireHttpsMetadata"]);
+                options.ResponseType = OpenIdConnectResponseType.Code;
+                options.UsePkce = true;
+                options.SaveTokens = true;
+                options.GetClaimsFromUserInfoEndpoint = true;
+                
+                options.ClientId = configuration["AuthServer:ClientId"];
+                
+                options.Scope.Add("profile");
+                options.Scope.Add("email");
+                options.Scope.Add("phone");
+                
+                /*
+                 * What I've done here will be built-in with ABP v5.3.0 (then we can delete the following code)
+                 * https://github.com/abpframework/abp/pull/12085
+                 */
+                                
+                if (AbpClaimTypes.Name != "given_name")
+                {
+                    options.ClaimActions.MapJsonKey(AbpClaimTypes.Name, "given_name");
+                    options.ClaimActions.DeleteClaim("given_name");
+                    options.ClaimActions.RemoveDuplicate(AbpClaimTypes.Name);
+                }
+                
+                if (AbpClaimTypes.SurName != "family_name")
+                {
+                    options.ClaimActions.MapJsonKey(AbpClaimTypes.SurName, "family_name");
+                    options.ClaimActions.DeleteClaim("family_name");
+                    options.ClaimActions.RemoveDuplicate(AbpClaimTypes.SurName);
+                }
             });
     }
 

@@ -2,10 +2,12 @@
 using KeycloakDemo.Data;
 using KeycloakDemo.Localization;
 using KeycloakDemo.Menus;
+using Microsoft.IdentityModel.Protocols.OpenIdConnect;
 using Volo.Abp;
 using Volo.Abp.Account;
 using Volo.Abp.Account.Web;
 using Volo.Abp.AspNetCore.Authentication.JwtBearer;
+using Volo.Abp.AspNetCore.Authentication.OpenIdConnect;
 using Volo.Abp.AspNetCore.Mvc;
 using Volo.Abp.AspNetCore.Mvc.Localization;
 using Volo.Abp.AspNetCore.Mvc.UI.Bundling;
@@ -53,6 +55,7 @@ namespace KeycloakDemo;
     typeof(AbpEntityFrameworkCoreSqlServerModule),
     typeof(AbpSwashbuckleModule),
     typeof(AbpAspNetCoreAuthenticationJwtBearerModule),
+    typeof(AbpAspNetCoreAuthenticationOpenIdConnectModule),
     typeof(AbpAspNetCoreSerilogModule),
     typeof(AbpAspNetCoreMvcUiBasicThemeModule),
 
@@ -166,6 +169,22 @@ public class KeycloakDemoModule : AbpModule
                 options.Authority = configuration["AuthServer:Authority"];
                 options.RequireHttpsMetadata = Convert.ToBoolean(configuration["AuthServer:RequireHttpsMetadata"]);
                 options.Audience = "KeycloakDemo";
+            })
+            .AddAbpOpenIdConnect(options =>
+            {
+                options.Authority = configuration["AuthServer:Authority"];
+                
+                options.RequireHttpsMetadata = Convert.ToBoolean(configuration["AuthServer:RequireHttpsMetadata"]);
+                options.ResponseType = OpenIdConnectResponseType.CodeIdToken;
+                options.UsePkce = true;
+                options.SaveTokens = true;
+                options.GetClaimsFromUserInfoEndpoint = true;
+                
+                options.ClientId = configuration["AuthServer:ClientId"];
+                
+                options.Scope.Add("profile");
+                options.Scope.Add("email");
+                options.Scope.Add("phone");
             });
     }
 

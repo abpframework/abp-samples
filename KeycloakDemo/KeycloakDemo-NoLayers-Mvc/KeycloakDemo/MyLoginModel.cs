@@ -37,9 +37,10 @@ public class MyLoginModel : LoginModel
         if (!phoneNumber.IsNullOrWhiteSpace())
         {
             user.SetPhoneNumber(phoneNumber, phoneNumberConfirmed);
-            await UserManager.UpdateAsync(user);
         }
-        
+
+        await UserManager.UpdateAsync(user);
+
         return user;
     }
 }

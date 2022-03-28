@@ -186,6 +186,7 @@ public class KeycloakDemoModule : AbpModule
                 
                 options.ClientId = configuration["AuthServer:ClientId"];
                 
+                //options.Scope.Add("role");
                 options.Scope.Add("profile");
                 options.Scope.Add("email");
                 options.Scope.Add("phone");

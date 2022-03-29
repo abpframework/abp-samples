@@ -1,0 +1,36 @@
+2022-03-29 09:17:52 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "REALM" not found; SQL statement:
+select distinct realmentit0_.EVENTS_EXPIRATION as col_0_0_ from REALM realmentit0_ where realmentit0_.EVENTS_EXPIRATION>0 [42102-197]
+2022-03-29 09:17:52 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "CLIENT_INITIAL_ACCESS" not found; SQL statement:
+delete from CLIENT_INITIAL_ACCESS where EXPIRATION>0 and TIMESTAMP+EXPIRATION<? or REMAINING_COUNT=0 [42102-197]
+2022-03-29 09:17:52 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "REALM" not found; SQL statement:
+select realmentit0_.ID as col_0_0_ from REALM realmentit0_ [42102-197]
+2022-03-29 09:24:03 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "USER_ENTITY" not found; SQL statement:
+select userentity0_.ID as id1_72_0_, userentity0_.CREATED_TIMESTAMP as created_2_72_0_, userentity0_.EMAIL as email3_72_0_, userentity0_.EMAIL_CONSTRAINT as email_co4_72_0_, userentity0_.EMAIL_VERIFIED as email_ve5_72_0_, userentity0_.ENABLED as enabled6_72_0_, userentity0_.FEDERATION_LINK as federati7_72_0_, userentity0_.FIRST_NAME as first_na8_72_0_, userentity0_.LAST_NAME as last_nam9_72_0_, userentity0_.NOT_BEFORE as not_bef10_72_0_, userentity0_.REALM_ID as realm_i11_72_0_, userentity0_.SERVICE_ACCOUNT_CLIENT_LINK as service12_72_0_, userentity0_.USERNAME as usernam13_72_0_ from USER_ENTITY userentity0_ where userentity0_.ID=? [42102-197]
+2022-03-29 09:24:11 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "USER_ENTITY" not found; SQL statement:
+select userentity0_.ID as id1_72_0_, userentity0_.CREATED_TIMESTAMP as created_2_72_0_, userentity0_.EMAIL as email3_72_0_, userentity0_.EMAIL_CONSTRAINT as email_co4_72_0_, userentity0_.EMAIL_VERIFIED as email_ve5_72_0_, userentity0_.ENABLED as enabled6_72_0_, userentity0_.FEDERATION_LINK as federati7_72_0_, userentity0_.FIRST_NAME as first_na8_72_0_, userentity0_.LAST_NAME as last_nam9_72_0_, userentity0_.NOT_BEFORE as not_bef10_72_0_, userentity0_.REALM_ID as realm_i11_72_0_, userentity0_.SERVICE_ACCOUNT_CLIENT_LINK as service12_72_0_, userentity0_.USERNAME as usernam13_72_0_ from USER_ENTITY userentity0_ where userentity0_.ID=? [42102-197]
+2022-03-29 09:24:22 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "USER_ENTITY" not found; SQL statement:
+select userentity0_.ID as id1_72_0_, userentity0_.CREATED_TIMESTAMP as created_2_72_0_, userentity0_.EMAIL as email3_72_0_, userentity0_.EMAIL_CONSTRAINT as email_co4_72_0_, userentity0_.EMAIL_VERIFIED as email_ve5_72_0_, userentity0_.ENABLED as enabled6_72_0_, userentity0_.FEDERATION_LINK as federati7_72_0_, userentity0_.FIRST_NAME as first_na8_72_0_, userentity0_.LAST_NAME as last_nam9_72_0_, userentity0_.NOT_BEFORE as not_bef10_72_0_, userentity0_.REALM_ID as realm_i11_72_0_, userentity0_.SERVICE_ACCOUNT_CLIENT_LINK as service12_72_0_, userentity0_.USERNAME as usernam13_72_0_ from USER_ENTITY userentity0_ where userentity0_.ID=? [42102-197]
+2022-03-29 09:24:51 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "USER_ENTITY" not found; SQL statement:
+select userentity0_.ID as id1_72_0_, userentity0_.CREATED_TIMESTAMP as created_2_72_0_, userentity0_.EMAIL as email3_72_0_, userentity0_.EMAIL_CONSTRAINT as email_co4_72_0_, userentity0_.EMAIL_VERIFIED as email_ve5_72_0_, userentity0_.ENABLED as enabled6_72_0_, userentity0_.FEDERATION_LINK as federati7_72_0_, userentity0_.FIRST_NAME as first_na8_72_0_, userentity0_.LAST_NAME as last_nam9_72_0_, userentity0_.NOT_BEFORE as not_bef10_72_0_, userentity0_.REALM_ID as realm_i11_72_0_, userentity0_.SERVICE_ACCOUNT_CLIENT_LINK as service12_72_0_, userentity0_.USERNAME as usernam13_72_0_ from USER_ENTITY userentity0_ where userentity0_.ID=? [42102-197]
+2022-03-29 09:25:05 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "USER_ENTITY" not found; SQL statement:
+select userentity0_.ID as id1_72_0_, userentity0_.CREATED_TIMESTAMP as created_2_72_0_, userentity0_.EMAIL as email3_72_0_, userentity0_.EMAIL_CONSTRAINT as email_co4_72_0_, userentity0_.EMAIL_VERIFIED as email_ve5_72_0_, userentity0_.ENABLED as enabled6_72_0_, userentity0_.FEDERATION_LINK as federati7_72_0_, userentity0_.FIRST_NAME as first_na8_72_0_, userentity0_.LAST_NAME as last_nam9_72_0_, userentity0_.NOT_BEFORE as not_bef10_72_0_, userentity0_.REALM_ID as realm_i11_72_0_, userentity0_.SERVICE_ACCOUNT_CLIENT_LINK as service12_72_0_, userentity0_.USERNAME as usernam13_72_0_ from USER_ENTITY userentity0_ where userentity0_.ID=? [42102-197]
+2022-03-29 09:26:14 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "MIGRATION_MODEL" not found; SQL statement:
+SELECT VERSION FROM MIGRATION_MODEL ORDER BY UPDATE_TIME DESC [42102-197]
+2022-03-29 09:26:15 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "DATABASECHANGELOG" not found; SQL statement:
+SELECT COUNT(*) FROM PUBLIC.DATABASECHANGELOG [42102-197]
+2022-03-29 09:26:15 jdbc[4]: exception
+org.h2.jdbc.JdbcSQLException: Table "DATABASECHANGELOGLOCK" not found; SQL statement:
+SELECT COUNT(*) FROM PUBLIC.DATABASECHANGELOGLOCK [42102-197]
+2022-03-29 09:26:15 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "DATABASECHANGELOG" not found; SQL statement:
+SELECT COUNT(*) FROM PUBLIC.DATABASECHANGELOG [42102-197]

@@ -156,7 +156,7 @@ public class KeycloakDemoWebModule : AbpModule
                 options.Scope.Add("profile");
                 options.Scope.Add("email");
                 options.Scope.Add("phone");
-                options.Scope.Add("KeycloakDemo");
+                options.Scope.Add("roles");
             });
     }
 

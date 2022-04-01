@@ -37,6 +37,3 @@ public class MyLogoutModel : LogoutModel
         return Redirect(Configuration.GetValue<string>("AuthServer:Authority").EnsureEndsWith('/') + "protocol/openid-connect/logout?redirect_uri=" + ReturnUrl);
     }
 }
-
-
-///protocol/openid-connect/logout?redirect_uri=

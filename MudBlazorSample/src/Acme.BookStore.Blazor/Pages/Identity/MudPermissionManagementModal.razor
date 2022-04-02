@@ -1,0 +1,82 @@
+﻿@using Microsoft.Extensions.Localization
+@using Volo.Abp.PermissionManagement.Blazor.Components
+@using Volo.Abp.PermissionManagement.Localization
+@inherits PermissionManagementModal
+
+<MudDialog @bind-IsVisible="_isVisible"
+           Options="DialogOptions">
+    <TitleContent>
+        <MudText Typo="Typo.h6">                    
+            @L["Permissions"] - @_entityDisplayName
+        </MudText>
+    </TitleContent>
+    <DialogContent>
+        <MudContainer>
+            <MudCheckBox T="bool" @bind-Checked="@GrantAll">
+                @L["SelectAllInAllTabs"]
+            </MudCheckBox>
+            <MudDivider />
+            @if (_groups != null)
+            {
+                <MudTabs Position="MudBlazor.Position.Left" >
+                    <TabPanelHeader>
+                        <MudText>
+                            @* ?! *@
+                            &nbsp;&nbsp;&nbsp;&nbsp;
+                        </MudText>
+                    </TabPanelHeader>
+                    <ChildContent>
+                        @foreach (var group in _groups)
+                        {
+                            <MudTabPanel BadgeColor="MudBlazor.Color.Secondary"
+                                         BadgeData="@(group.Permissions.Count(x => x.IsGranted))"
+                                         Text="@(group.DisplayName)">
+                                <MudContainer Style="width: 400px; height: 400px; overflow-y: scroll">
+                                    <MudGrid>
+                                        <MudItem xs="12">
+                                            <MudText Typo="Typo.h6">@group.DisplayName</MudText>
+                                            <MudDivider />
+                                        </MudItem>
+                                        <MudItem xs="12">
+                                            <MudCheckBox T="bool"
+                                                        Checked="@(group.Permissions.All(x => x.IsGranted))"
+                                                        CheckedChanged="@(b => GroupGrantAllChanged(b, group))">
+                                            @L["SelectAllInThisTab"]
+                                        </MudCheckBox>
+                                        <MudDivider />
+                                        </MudItem>
+                                        @foreach (var permission in group.Permissions)
+                                        {
+                                            <MudItem xs="1">
+                                            </MudItem>
+                                            <MudItem xs="11">
+                                                <MudCheckBox T="bool"
+                                                                Style="padding-inline-start: 16px;"
+                                                                Disabled="@(IsDisabledPermission(permission))"
+                                                                Checked="@permission.IsGranted"
+                                                                CheckedChanged="@(b => PermissionChanged(b, group, permission))">
+                                                    @GetShownName(permission)
+                                                </MudCheckBox>
+                                            </MudItem>
+                                        }
+                                    </MudGrid>
+                                </MudContainer>
+                            </MudTabPanel>
+                        }
+                    </ChildContent>
+                </MudTabs>
+            }
+        </MudContainer>
+    </DialogContent>
+    <DialogActions>
+        <MudButton Color="MudBlazor.Color.Secondary" 
+                   OnClick="CloseModalAsync">
+            @L["Cancel"]
+        </MudButton>
+        <MudButton Variant="Variant.Filled" 
+                   Color="MudBlazor.Color.Primary" 
+                   OnClick="SaveAsync">
+            @L["Save"]
+        </MudButton>
+    </DialogActions>
+</MudDialog>

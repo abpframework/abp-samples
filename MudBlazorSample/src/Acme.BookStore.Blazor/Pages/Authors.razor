@@ -1,0 +1,129 @@
+﻿@page "/authors"
+@using Acme.BookStore.Authors
+@using Acme.BookStore.Localization
+@using Volo.Abp.AspNetCore.Components.Web
+@inherits BookStoreComponentBase
+@inject IAuthorAppService AuthorAppService
+@inject AbpBlazorMessageLocalizerHelper<BookStoreResource> LH
+
+<MudDataGrid T="AuthorDto"
+             @ref="_authorList"
+             Elevation="8"
+             Hideable="true"
+             Striped="true"
+             ServerData="LoadServerData">
+<ToolBarContent>
+    <MudText Typo="Typo.h5">@L["Authors"]</MudText>
+    <MudSpacer />
+    <MudButton Color="MudBlazor.Color.Primary"
+               Variant="Variant.Outlined"
+               Disabled="!CanCreateAuthor"
+               OnClick="OpenCreateAuthorModal">
+        @L["NewAuthor"]
+    </MudButton>
+</ToolBarContent>
+<Columns>
+    <MudBlazor.Column T="AuthorDto"
+                      Field="@nameof(AuthorDto.Id)"
+                      Hideable="false"
+                      Title="@L["Actions"]">
+        <CellTemplate>
+            @if (CanEditAuthor)
+            {
+                <MudIconButton Icon="fas fa-edit" 
+                               OnClick="@((e) => {OpenEditAuthorModal(context.Item);})"
+                               Size="MudBlazor.Size.Small" />
+            }
+            @if (CanDeleteAuthor)
+            {   
+                <MudIconButton Icon="fas fa-trash" 
+                               OnClick="@(async (e) => {await DeleteAuthorAsync(context.Item);})"
+                               Size="MudBlazor.Size.Small" />
+            }
+        </CellTemplate>
+    </MudBlazor.Column>
+    <MudBlazor.Column T="AuthorDto"
+                      Field="@nameof(AuthorDto.Name)"
+                      Hideable="false"
+                      Title="@L["Name"]" />
+    <MudBlazor.Column T="AuthorDto"
+                      Field="@nameof(AuthorDto.BirthDate)"
+                      Title="@L["BirthDate"]">
+        <CellTemplate>
+            @context.Item.BirthDate?.ToShortDateString()
+        </CellTemplate>
+    </MudBlazor.Column>
+</Columns>
+</MudDataGrid>
+
+<MudDialog @bind-IsVisible="_createAuthorDialogVisible">
+    <TitleContent>
+        <MudText Typo="Typo.h6">@L["NewAuthor"]</MudText>
+    </TitleContent>
+    <DialogContent>
+        <MudForm Model="@NewAuthor"
+                 @ref="_createForm">
+            <MudTextField @bind-Value="@NewAuthor.Name" 
+                          Label=@L["Name"]
+                          For=@(() => NewAuthor.Name) />
+            <br />
+            <MudDatePicker @bind-Date="@NewAuthor.BirthDate" 
+                           Editable="true"
+                           Mask="@(new DateMask("dd.MM.yyyy"))" 
+                           DateFormat="dd.MM.yyyy"
+                           Label=@L["BirthDate"] />
+            <br />
+            <MudTextField @bind-Value="@NewAuthor.ShortBio" 
+                          Label=@L["ShortBio"]
+                          Lines="5"
+                          For=@(() => NewAuthor.ShortBio) />
+        </MudForm>
+    </DialogContent>
+    <DialogActions>
+        <MudButton Color="MudBlazor.Color.Secondary" 
+                   OnClick="CloseCreateAuthorModal">
+            @L["Cancel"]
+        </MudButton>
+        <MudButton Variant="Variant.Filled" 
+                   Color="MudBlazor.Color.Primary" 
+                   OnClick="CreateAuthorAsync">
+            @L["Save"]
+        </MudButton>
+    </DialogActions>
+</MudDialog>
+
+<MudDialog @bind-IsVisible="_editAuthorDialogVisible">
+    <TitleContent>
+        <MudText Typo="Typo.h6">@EditingAuthor.Name</MudText>
+    </TitleContent>
+    <DialogContent>
+        <MudForm Model="@EditingAuthor"
+                 @ref="_editForm">
+            <MudTextField @bind-Value="@EditingAuthor.Name" 
+                          Label=@L["Name"]
+                          For=@(() => EditingAuthor.Name) />
+            <br />
+            <MudDatePicker @bind-Date="@EditingAuthor.BirthDate" 
+                           Editable="true"
+                           Mask="@(new DateMask("dd.MM.yyyy"))" 
+                           DateFormat="dd.MM.yyyy"
+                           Label=@L["BirthDate"] />
+            <br />
+            <MudTextField @bind-Value="@EditingAuthor.ShortBio" 
+                          Label=@L["ShortBio"]
+                          Lines="5"
+                          For=@(() => EditingAuthor.ShortBio) />
+        </MudForm>
+    </DialogContent>
+    <DialogActions>
+        <MudButton Color="MudBlazor.Color.Secondary" 
+                   OnClick="CloseEditAuthorModal">
+            @L["Cancel"]
+        </MudButton>
+        <MudButton Variant="Variant.Filled" 
+                   Color="MudBlazor.Color.Primary" 
+                   OnClick="UpdateAuthorAsync">
+            @L["Save"]
+        </MudButton>
+    </DialogActions>
+</MudDialog>

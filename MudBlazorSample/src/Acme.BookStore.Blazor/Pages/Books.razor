@@ -1,0 +1,223 @@
+﻿@page "/books"
+@attribute [Authorize(BookStorePermissions.Books.Default)]
+@using Acme.BookStore.Permissions
+@using Microsoft.AspNetCore.Authorization
+@using Volo.Abp.Application.Dtos
+@using Acme.BookStore.Books
+@using Acme.BookStore.Localization
+@using Microsoft.Extensions.Localization
+@using Volo.Abp.AspNetCore.Components.Web.BasicTheme.Components
+@inherits MudCrudPageBase<IBookAppService, BookDto, Guid, PagedAndSortedResultRequestDto, CreateUpdateBookDto>
+@inject AbpBlazorMessageLocalizerHelper<BookStoreResource> LH
+
+<MudDataGrid T="BookDto"
+             @ref="DataGrid"
+             Striped="true"
+             Hideable="true"
+             Elevation="8"
+             ServerData="LoadServerData">
+<ToolBarContent>
+    <MudText Typo="Typo.h5">@L["Books"]</MudText>
+    <MudSpacer />
+    <MudButton Color="MudBlazor.Color.Primary"
+               Variant="Variant.Outlined"
+               Disabled="!HasCreatePermission"
+               OnClick="OpenCreateModalAsync">
+        @L["NewBook"]
+    </MudButton>
+</ToolBarContent>
+<Columns>
+    <MudBlazor.Column T="BookDto"
+                      Field="@nameof(BookDto.Id)"
+                      Hideable="false"
+                      Title="@L["Actions"]">
+        <CellTemplate>
+            @if (HasUpdatePermission)
+            {
+                <MudIconButton Icon="fas fa-edit" 
+                               OnClick="@(async (_) => { await OpenEditModalAsync(context.Item); })"
+                               Size="MudBlazor.Size.Small" />
+            }
+            @if (HasDeletePermission)
+            {   
+                <MudIconButton Icon="fas fa-trash" 
+                               OnClick="@(async (_) => { await DeleteEntityAsync(context.Item);} )"
+                               Size="MudBlazor.Size.Small" />
+            }
+        </CellTemplate>
+    </MudBlazor.Column>
+    <MudBlazor.Column T="BookDto"
+                      Field="@nameof(BookDto.Name)"
+                      Hideable="false"
+                      Title=@L["Name"] />
+    <MudBlazor.Column T="BookDto"
+                      Field="@nameof(BookDto.Type)"
+                      Title=@L["Type"]>
+        <CellTemplate>
+            @L[$"Enum:BookType:{(int)context.Item.Type}"]
+        </CellTemplate>
+    </MudBlazor.Column>
+    <MudBlazor.Column T="BookDto"
+                      Field="@nameof(BookDto.AuthorName)"
+                      Title=@L["AuthorName"] />
+    <MudBlazor.Column T="BookDto"
+                      Field="@nameof(BookDto.PublishDate)"
+                      Title=@L["PublishDate"]>
+        <CellTemplate>
+            @if (@context.Item.PublishDate.HasValue)
+                @context.Item.PublishDate.Value.ToShortDateString()
+        </CellTemplate>
+    </MudBlazor.Column>
+    <MudBlazor.Column T="BookDto"
+                      Field="@nameof(BookDto.Price)"
+                      Title=@L["Price"] />
+</Columns>
+</MudDataGrid>
+
+<MudDialog @bind-IsVisible="CreateDialogVisible" 
+           Options="DialogOptions">
+    <TitleContent>
+        <MudText Typo="Typo.h6">@L["NewBook"]</MudText>
+    </TitleContent>
+    <DialogContent>
+        <MudForm Model="@NewEntity"
+                 @ref="CreateForm">
+            <MudSelect T="Guid" 
+                       @bind-Value="NewEntity.AuthorId"
+                       Label=@L["Author"]>
+                <MudSelectItem Value="@Guid.Empty">
+                    @L["PickAnAuthor"]
+                </MudSelectItem>
+                @foreach (var author in authorList)
+                {
+                    <MudSelectItem Value="@author.Id">
+                        @author.Name
+                    </MudSelectItem>
+                }
+            </MudSelect>
+            <br />
+            <MudTextField @bind-Value="@NewEntity.Name" 
+                          Label=@L["Name"]
+                          For=@(() => NewEntity.Name) />
+            <br />
+            <MudSelect T="BookType" 
+                       @bind-Value="NewEntity.Type"
+                       Label=@L["Type"]>
+                @foreach (BookType bookTypeValue in Enum.GetValues(typeof(BookType)))
+                {
+                    <MudSelectItem Value="@bookTypeValue">
+                        @L[$"Enum:BookType:{(int)bookTypeValue}"]
+                    </MudSelectItem>
+                }
+            </MudSelect>
+            <br />
+            <MudDatePicker @bind-Date="@NewEntity.PublishDate" 
+                           Editable="true"
+                           Mask="@(new DateMask("dd.MM.yyyy"))" 
+                           DateFormat="dd.MM.yyyy"
+                           Label=@L["PublishDate"] />
+            <br />
+            <MudNumericField @bind-Value="@NewEntity.Price" 
+                             Label=@L["Price"]
+                             Min=0f
+                             HideSpinButtons="true"
+                             For=@(() => NewEntity.Price) />
+        </MudForm>
+    </DialogContent>
+    <DialogActions>
+        <MudButton Color="MudBlazor.Color.Secondary" 
+                   OnClick="CloseCreateModalAsync">
+            @L["Cancel"]
+        </MudButton>
+        <MudButton Variant="Variant.Filled" 
+                   Color="MudBlazor.Color.Primary" 
+                   OnClick="CreateEntityAsync">
+            @L["Save"]
+        </MudButton>
+    </DialogActions>
+</MudDialog>
+
+<MudDialog @bind-IsVisible="EditDialogVisible"
+           Options="DialogOptions">
+    <TitleContent>
+        <MudText Typo="Typo.h6">@EditingEntity.Name</MudText>
+    </TitleContent>
+    <DialogContent>
+        <MudForm Model="@EditingEntity"
+                 @ref="EditForm">
+            <MudSelect T="Guid" 
+                       @bind-Value="EditingEntity.AuthorId"
+                       Label=@L["Author"]>
+                <MudSelectItem Value="@Guid.Empty">
+                    @L["PickAnAuthor"]
+                </MudSelectItem>
+                @foreach (var author in authorList)
+                {
+                    <MudSelectItem Value="@author.Id">
+                        @author.Name
+                    </MudSelectItem>
+                }
+            </MudSelect>
+            <br />
+            <MudTextField @bind-Value="@EditingEntity.Name" 
+                          Label=@L["Name"]
+                          For=@(() => EditingEntity.Name) />
+            <br />
+            <MudSelect T="BookType" 
+                       @bind-Value="EditingEntity.Type"
+                       Label=@L["Type"]>
+                @foreach (BookType bookTypeValue in Enum.GetValues(typeof(BookType)))
+                {
+                    <MudSelectItem Value="@bookTypeValue">
+                        @L[$"Enum:BookType:{(int)bookTypeValue}"]
+                    </MudSelectItem>
+                }
+            </MudSelect>
+            <br />
+            <MudDatePicker @bind-Date="@EditingEntity.PublishDate" 
+                           Editable="true"
+                           Mask="@(new DateMask("dd.MM.yyyy"))" 
+                           DateFormat="dd.MM.yyyy"
+                           Label=@L["PublishDate"] />
+            <br />
+            <MudNumericField @bind-Value="@EditingEntity.Price" 
+                             Label=@L["Price"]
+                             Min=0f
+                             HideSpinButtons="true"
+                             For=@(() => EditingEntity.Price) />
+        </MudForm>
+    </DialogContent>
+    <DialogActions>
+        <MudButton Color="MudBlazor.Color.Secondary" 
+                   OnClick="CloseEditModalAsync">
+            @L["Cancel"]
+        </MudButton>
+        <MudButton Variant="Variant.Filled" 
+                   Color="MudBlazor.Color.Primary" 
+                   OnClick="UpdateEntityAsync">
+            @L["Save"]
+        </MudButton>
+    </DialogActions>
+</MudDialog>
+
+@code
+{
+    //ADDED A NEW FIELD
+    IReadOnlyList<AuthorLookupDto> authorList = Array.Empty<AuthorLookupDto>();
+
+    public Books() // Constructor
+    {
+        LocalizationResource = typeof(BookStoreResource);
+
+        CreatePolicyName = BookStorePermissions.Books.Create;
+        UpdatePolicyName = BookStorePermissions.Books.Edit;
+        DeletePolicyName = BookStorePermissions.Books.Delete;
+    }
+
+    //GET AUTHORS ON INITIALIZATION
+    protected override async Task OnInitializedAsync()
+    {
+        await base.OnInitializedAsync();
+        authorList = (await AppService.GetAuthorLookupAsync()).Items;
+    }
+}

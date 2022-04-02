@@ -1,0 +1,179 @@
+﻿@using MudBlazor;
+@using Blazorise
+@using Blazorise.DataGrid
+@using Volo.Abp.BlazoriseUI
+@using Volo.Abp.BlazoriseUI.Components
+@using Volo.Abp.Identity
+@using Microsoft.AspNetCore.Authorization
+@using Volo.Abp.PermissionManagement.Blazor.Components
+@using Volo.Abp.Identity.Localization
+@using Volo.Abp.AspNetCore.Components.Web
+@using Volo.Abp.AspNetCore.Components.Web.Theming
+@using Volo.Abp.BlazoriseUI.Components.ObjectExtending
+@using Volo.Abp.AspNetCore.Components.Web.Theming.Layout
+@using Volo.Abp.DependencyInjection
+@using Volo.Abp.Identity.Blazor.Pages.Identity
+@attribute [Authorize(IdentityPermissions.Roles.Default)]
+@attribute [ExposeServices(typeof(RoleManagement))]
+@attribute [Dependency(ReplaceServices = true)]
+@inject AbpBlazorMessageLocalizerHelper<IdentityResource> LH
+
+@inherits RoleManagement
+
+@* ************************* DATA GRID ************************* *@
+<MudDataGrid T="IdentityRoleDto"
+             @ref="@_dataGrid"
+             Elevation="8"
+             Hideable="true"
+             Striped="true"
+             ServerData="LoadServerData">
+    <ToolBarContent>
+        <MudText Typo="Typo.h5">@L["Roles"]</MudText>
+        <MudSpacer />
+        <MudButton Color="MudBlazor.Color.Primary"
+                   Variant="Variant.Outlined"
+                   Disabled="!HasCreatePermission"
+                   OnClick="OpenCreateModalAsync">
+            @L["NewRole"]
+        </MudButton>
+    </ToolBarContent>
+    <Columns>
+        <MudBlazor.Column T="IdentityRoleDto"
+                          Field="@nameof(IdentityRoleDto.Id)"
+                          Hideable="false"
+                          Title="@L["Actions"]">
+            <CellTemplate>
+                @if (HasUpdatePermission)
+                {
+                    <MudIconButton Icon="fas fa-edit" 
+                                   OnClick="@(async (_) => { await OpenEditModalAsync(context.Item); })"
+                                   Size="MudBlazor.Size.Small" />
+                    <MudIconButton Icon="fas fa-user-lock" 
+                                   OnClick="@(async (_) => { await OpenPermissionsModalAsync(context.Item); })"
+                                   Size="MudBlazor.Size.Small" />
+                }
+                @if (HasDeletePermission)
+                {   
+                    <MudIconButton Icon="fas fa-trash" 
+                                   OnClick="@(async (_) => { await DeleteEntityAsync(context.Item);} )"
+                                   Size="MudBlazor.Size.Small" />
+                }
+            </CellTemplate>
+        </MudBlazor.Column>
+        <MudBlazor.Column T="IdentityRoleDto"
+                          Field="@nameof(IdentityRoleDto.Name)"
+                          Hideable="false"
+                          Title=@L["Name"] />
+        <MudBlazor.Column T="IdentityRoleDto"
+                          Field="@nameof(IdentityRoleDto.Name)"
+                          Title="">
+            <CellTemplate>
+                @if (context.Item.IsDefault)
+                {
+                    <MudChip Color="MudBlazor.Color.Success">
+                        @L["DisplayName:IsDefault"]
+                    </MudChip>
+                }
+                @if (context.Item.IsPublic)
+                {
+                    <MudChip Color="MudBlazor.Color.Info">
+                        @L["DisplayName:IsPublic"]
+                    </MudChip>
+                }
+            </CellTemplate>
+        </MudBlazor.Column>
+    </Columns>
+</MudDataGrid>
+
+@* ************************* CREATE MODAL ************************* *@
+@if (HasCreatePermission)
+{
+    <MudDialog @bind-IsVisible="_createDialogVisible"
+               Options="DialogOptions">
+        <TitleContent>
+            <MudText Typo="Typo.h6">@L["NewRole"]</MudText>
+        </TitleContent>
+        <DialogContent>
+            <MudForm Model="@NewEntity"
+                     @ref="_createForm">
+                <MudGrid>
+                    <MudItem xs="12">
+                        <MudTextField @bind-Value="@NewEntity.Name" 
+                                      Label=@L["Name"]
+                                      For=@(() => NewEntity.Name) />
+                    </MudItem>
+                    <MudItem xs="6">
+                        <MudCheckBox T="bool" @bind-Checked="@NewEntity.IsDefault">
+                            @L["DisplayName:IsDefault"]
+                        </MudCheckBox>
+                    </MudItem>
+                    <MudItem xs="6">
+                        <MudCheckBox T="bool" @bind-Checked="@NewEntity.IsPublic">
+                            @L["DisplayName:IsPublic"]
+                        </MudCheckBox>
+                    </MudItem>
+                </MudGrid>
+            </MudForm>
+        </DialogContent>
+        <DialogActions>
+            <MudButton Color="MudBlazor.Color.Secondary" 
+                       OnClick="CloseCreateModalAsync">
+                @L["Cancel"]
+            </MudButton>
+            <MudButton Variant="Variant.Filled" 
+                       Color="MudBlazor.Color.Primary" 
+                       OnClick="CreateEntityAsync">
+                @L["Save"]
+            </MudButton>
+        </DialogActions>
+    </MudDialog>
+}
+
+@* ************************* EDIT MODAL ************************* *@
+@if (HasUpdatePermission)
+{
+    <MudDialog @bind-IsVisible="_editDialogVisible"
+               Options="DialogOptions">
+        <TitleContent>
+            <MudText Typo="Typo.h6">@L["Edit"]</MudText>
+        </TitleContent>
+        <DialogContent>
+            <MudForm Model="@EditingEntity"
+                     @ref="_editForm">
+                <MudGrid>
+                    <MudItem xs="12">
+                        <MudTextField @bind-Value="@EditingEntity.Name" 
+                                      Label=@L["Name"]
+                                      For=@(() => EditingEntity.Name) />
+                    </MudItem>
+                    <MudItem xs="6">
+                        <MudCheckBox T="bool" @bind-Checked="@EditingEntity.IsDefault">
+                            @L["DisplayName:IsDefault"]
+                        </MudCheckBox>
+                    </MudItem>
+                    <MudItem xs="6">
+                        <MudCheckBox T="bool" @bind-Checked="@EditingEntity.IsPublic">
+                            @L["DisplayName:IsPublic"]
+                        </MudCheckBox>
+                    </MudItem>
+                </MudGrid>
+            </MudForm>
+        </DialogContent>
+        <DialogActions>
+            <MudButton Color="MudBlazor.Color.Secondary" 
+                       OnClick="CloseEditModalAsync">
+                @L["Cancel"]
+            </MudButton>
+            <MudButton Variant="Variant.Filled" 
+                       Color="MudBlazor.Color.Primary" 
+                       OnClick="UpdateEntityAsync">
+                @L["Save"]
+            </MudButton>
+        </DialogActions>
+    </MudDialog>
+}
+
+@if (HasManagePermissionsPermission)
+{
+    <MudPermissionManagementModal @ref="_permissionManagementModal"/>
+}

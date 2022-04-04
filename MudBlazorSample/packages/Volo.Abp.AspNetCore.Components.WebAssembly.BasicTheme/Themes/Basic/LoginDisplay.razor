@@ -1,0 +1,44 @@
+﻿@using Microsoft.Extensions.Localization
+@using Volo.Abp.Users
+@using Volo.Abp.MultiTenancy
+@using global::Localization.Resources.AbpUi
+@inherits AbpComponentBase
+@inject ICurrentUser CurrentUser
+@inject ICurrentTenant CurrentTenant
+@inject IJSRuntime JsRuntime
+@inject NavigationManager Navigation
+@inject IStringLocalizer<AbpUiResource> UiLocalizer
+
+<AuthorizeView>
+    <Authorized>
+        <MudMenu Color="MudBlazor.Color.Inherit" Direction="MudBlazor.Direction.Left" OffsetX="true" Dense="true">
+            <ActivatorContent>
+                <MudChip Color="MudBlazor.Color.Primary">
+                    @CurrentUser.Name
+                </MudChip>
+            </ActivatorContent>
+            <ChildContent>
+                @if (Menu is not null && Menu.Items.Any())
+                {
+                    @foreach (var menuItem in Menu.Items)
+                    {
+                        <MudListItem OnClick="@(async () => await NavigateToAsync(menuItem.Url, menuItem.Target))">
+                            @menuItem.DisplayName
+                        </MudListItem>
+                    }
+                    <MudDivider />
+                }
+                <MudListItem Icon="@Icons.Material.Outlined.Login" OnClick="BeginSignOut">
+                    @UiLocalizer["Logout"]
+                </MudListItem>
+            </ChildContent>
+        </MudMenu>
+    </Authorized>
+    <NotAuthorized>
+        <MudLink Color="MudBlazor.Color.Inherit" Href="authentication/login">
+            <MudChip Color="MudBlazor.Color.Primary">
+                @UiLocalizer["Login"]
+            </MudChip>
+        </MudLink>
+    </NotAuthorized>
+</AuthorizeView>

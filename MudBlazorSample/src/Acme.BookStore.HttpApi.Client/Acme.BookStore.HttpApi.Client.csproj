@@ -1,0 +1,28 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="..\..\common.props" />
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <RootNamespace>Acme.BookStore</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Acme.BookStore.Application.Contracts\Acme.BookStore.Application.Contracts.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Volo.Abp.Account.HttpApi.Client" Version="5.1.4" />
+    <PackageReference Include="Volo.Abp.Identity.HttpApi.Client" Version="5.1.4" />
+    <PackageReference Include="Volo.Abp.PermissionManagement.HttpApi.Client" Version="5.1.4" />
+    <PackageReference Include="Volo.Abp.TenantManagement.HttpApi.Client" Version="5.1.4" />
+    <PackageReference Include="Volo.Abp.FeatureManagement.HttpApi.Client" Version="5.1.4" />
+    <PackageReference Include="Volo.Abp.SettingManagement.HttpApi.Client" Version="5.1.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="**\*generate-proxy.json" />
+    <Content Remove="**\*generate-proxy.json" />
+  </ItemGroup>
+
+</Project>

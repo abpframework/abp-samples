@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk.Razor">
+
+    
+    
+
+    <PropertyGroup><LangVersion>latest</LangVersion>
+        <TargetFramework>net6.0</TargetFramework>
+        <PackageId>Volo.Abp.AspNetCore.Components.WebAssembly.BasicTheme</PackageId>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\Volo.Abp.AspNetCore.Components.Web.BasicTheme\Volo.Abp.AspNetCore.Components.Web.BasicTheme.csproj" />
+        <PackageReference Include="Volo.Abp.AspNetCore.Components.WebAssembly.Theming" Version="5.1.4" />
+        <PackageReference Include="Volo.Abp.Http.Client.IdentityModel.WebAssembly" Version="5.1.4" />
+    </ItemGroup>
+
+</Project>

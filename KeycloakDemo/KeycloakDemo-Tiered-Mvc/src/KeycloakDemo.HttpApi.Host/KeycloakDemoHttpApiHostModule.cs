@@ -197,6 +197,14 @@ public class KeycloakDemoHttpApiHostModule : AbpModule
             app.UseDeveloperExceptionPage();
         }
 
+        app.Use((httpContext, next) =>
+        {
+            Console.WriteLine("************TOKEN**************");
+            Console.WriteLine(httpContext.Request.Headers["Authorization"].ToString());
+            Console.WriteLine("************TOKEN-end**************");
+            return next();
+        });
+
         app.UseAbpRequestLocalization();
         app.UseCorrelationId();
         app.UseStaticFiles();

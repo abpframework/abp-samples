@@ -1,0 +1,57 @@
+﻿@using Volo.Abp.Localization
+@using System.Globalization
+@using System.Collections.Immutable
+@inject ILanguageProvider LanguageProvider
+@inject IJSRuntime JsRuntime
+
+@if (_otherLanguages is not null && _otherLanguages.Any())
+{
+    <MudMenu Color="MudBlazor.Color.Inherit" Direction="MudBlazor.Direction.Left" OffsetX="true" Dense="true">
+        <ActivatorContent>
+            <MudChip Color="MudBlazor.Color.Primary">
+                @_currentLanguage.DisplayName
+            </MudChip>
+        </ActivatorContent>
+        <ChildContent>
+            @foreach (var language in _otherLanguages)
+            {
+                <MudMenuItem OnClick="@(async () => await ChangeLanguageAsync(language))">
+                    @language.DisplayName
+                </MudMenuItem>
+            }
+        </ChildContent>
+    </MudMenu>
+}
+
+@code {
+    private IReadOnlyList<LanguageInfo> _otherLanguages;
+    private LanguageInfo _currentLanguage;
+
+    protected override async Task OnInitializedAsync()
+    {
+        var selectedLanguageName = await JsRuntime.InvokeAsync<string>(
+            "localStorage.getItem",
+            "Abp.SelectedLanguage");
+
+        _otherLanguages = await LanguageProvider.GetLanguagesAsync();
+
+        if (!_otherLanguages.Any()) return;
+
+        if (!selectedLanguageName.IsNullOrWhiteSpace())
+            _currentLanguage = _otherLanguages.FirstOrDefault(l => l.UiCultureName == selectedLanguageName);
+
+        _currentLanguage ??= _otherLanguages.FirstOrDefault(l => l.UiCultureName == CultureInfo.CurrentUICulture.Name);
+        _currentLanguage ??= _otherLanguages.FirstOrDefault();
+
+        _otherLanguages = _otherLanguages.Where(l => l != _currentLanguage).ToImmutableList();
+    }
+
+    private async Task ChangeLanguageAsync(LanguageInfo language)
+    {
+        await JsRuntime.InvokeVoidAsync(
+            "localStorage.setItem",
+            "Abp.SelectedLanguage", language.UiCultureName);
+
+        await JsRuntime.InvokeVoidAsync("location.reload");
+    }
+}

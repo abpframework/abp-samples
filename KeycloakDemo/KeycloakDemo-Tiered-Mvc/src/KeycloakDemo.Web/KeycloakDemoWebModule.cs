@@ -42,6 +42,11 @@ using Volo.Abp.UI.Navigation.Urls;
 using Volo.Abp.UI;
 using Volo.Abp.UI.Navigation;
 using Volo.Abp.VirtualFileSystem;
+using Volo.Abp.Users;
+using NUglify.Helpers;
+using KeycloakDemo.Oidc;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace KeycloakDemo.Web;
 
@@ -157,6 +162,22 @@ public class KeycloakDemoWebModule : AbpModule
                 options.Scope.Add("email");
                 options.Scope.Add("phone");
                 options.Scope.Add("roles");
+
+                options.Events.OnTicketReceived = async (context) =>
+                {
+                    var synchronizer = context.HttpContext.RequestServices.GetService<IUserSynchronizerAppService>();
+
+                    await synchronizer.SyncAsync(new SyncInputDto
+                    {
+                        Claims = context.Principal.Claims.Select(s => new ClaimDto
+                        {
+                            Type = s.Type,
+                            Value = s.Value
+                        }).ToList()
+                    });
+
+                    //return Task.CompletedTask;
+                };
             });
     }
 

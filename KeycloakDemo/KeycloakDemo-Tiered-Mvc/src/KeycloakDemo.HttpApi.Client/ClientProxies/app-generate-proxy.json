@@ -1,0 +1,71 @@
+{
+  "modules": {
+    "app": {
+      "rootPath": "app",
+      "remoteServiceName": "Default",
+      "controllers": {
+        "KeycloakDemo.Oidc.UserSynchronizerAppService": {
+          "controllerName": "UserSynchronizer",
+          "controllerGroupName": "UserSynchronizer",
+          "isRemoteService": false,
+          "apiVersion": null,
+          "type": "KeycloakDemo.Oidc.UserSynchronizerAppService",
+          "interfaces": [
+            {
+              "type": "Volo.Abp.Validation.IValidationEnabled"
+            },
+            {
+              "type": "Volo.Abp.Auditing.IAuditingEnabled"
+            },
+            {
+              "type": "Volo.Abp.GlobalFeatures.IGlobalFeatureCheckingEnabled"
+            },
+            {
+              "type": "KeycloakDemo.Oidc.IUserSynchronizerAppService"
+            }
+          ],
+          "actions": {
+            "SyncAsyncByInput": {
+              "uniqueName": "SyncAsyncByInput",
+              "name": "SyncAsync",
+              "httpMethod": "POST",
+              "url": "api/app/user-synchronizer/sync",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "input",
+                  "typeAsString": "KeycloakDemo.Oidc.SyncInputDto, KeycloakDemo.Application.Contracts",
+                  "type": "KeycloakDemo.Oidc.SyncInputDto",
+                  "typeSimple": "KeycloakDemo.Oidc.SyncInputDto",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "input",
+                  "name": "input",
+                  "jsonName": null,
+                  "type": "KeycloakDemo.Oidc.SyncInputDto",
+                  "typeSimple": "KeycloakDemo.Oidc.SyncInputDto",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "Body",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "System.Void",
+                "typeSimple": "System.Void"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "KeycloakDemo.Oidc.IUserSynchronizerAppService"
+            }
+          }
+        }
+      }
+    }
+  },
+  "types": {}
+}

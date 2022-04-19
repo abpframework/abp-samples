@@ -163,6 +163,18 @@ public class KeycloakDemoWebModule : AbpModule
                 options.Scope.Add("phone");
                 options.Scope.Add("roles");
 
+                options.Events.OnTokenValidated = async (context) =>
+                {
+                    // TODO: Consider sending raw token instead of claims.
+                    /*
+                     * Doing this, will provide a secure way to sync users.
+                     * Token can be validated in HttpApi.Host again then user can be created.
+                     */
+                    Console.WriteLine(context.SecurityToken.RawData);
+
+                    await Task.Yield();
+                };
+
                 options.Events.OnTicketReceived = async (context) =>
                 {
                     var synchronizer = context.HttpContext.RequestServices.GetService<IUserSynchronizerAppService>();

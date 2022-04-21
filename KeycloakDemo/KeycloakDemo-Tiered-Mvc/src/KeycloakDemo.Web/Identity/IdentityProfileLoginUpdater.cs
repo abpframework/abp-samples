@@ -28,7 +28,7 @@ internal class IdentityProfileLoginUpdater : ITransientDependency
     {
         using(var httpClient = _httpClientFactory.CreateClient("app"))
         {
-            var remoteServiceConfiguration = (await _remoteServiceConfigurationProvider.GetConfigurationOrDefaultAsync("app"));
+            var remoteServiceConfiguration = await _remoteServiceConfigurationProvider.GetConfigurationOrDefaultAsync("app");
 
             httpClient.BaseAddress = new Uri(remoteServiceConfiguration.BaseUrl);
             httpClient.DefaultRequestHeaders.Add("Authorization", "Bearer " + token.RawData);

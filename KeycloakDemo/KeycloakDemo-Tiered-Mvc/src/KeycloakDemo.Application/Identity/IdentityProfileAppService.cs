@@ -5,9 +5,11 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using Volo.Abp;
 using Volo.Abp.Identity;
+using Microsoft.AspNetCore.Authorization;
 
 namespace KeycloakDemo.Identity;
 
+[Authorize]
 public class IdentityProfileAppService : KeycloakDemoAppService, IIdentityProfileAppService
 {
     protected IdentityUserManager UserManager { get; }

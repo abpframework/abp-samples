@@ -1,5 +1,7 @@
-using System;
-using System.IO;
+using KeycloakDemo.Localization;
+using KeycloakDemo.MultiTenancy;
+using KeycloakDemo.Web.Identity;
+using KeycloakDemo.Web.Menus;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Hosting;
@@ -7,18 +9,14 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Protocols.OpenIdConnect;
-using KeycloakDemo.Localization;
-using KeycloakDemo.MultiTenancy;
-using KeycloakDemo.Web.Menus;
-using Microsoft.AspNetCore.Authentication;
-using StackExchange.Redis;
 using Microsoft.OpenApi.Models;
+using StackExchange.Redis;
+using System;
+using System.IO;
 using Volo.Abp;
 using Volo.Abp.AspNetCore.Authentication.OpenIdConnect;
 using Volo.Abp.AspNetCore.Mvc.Client;
 using Volo.Abp.AspNetCore.Mvc.Localization;
-using Volo.Abp.AspNetCore.Mvc.UI;
-using Volo.Abp.AspNetCore.Mvc.UI.Bootstrap;
 using Volo.Abp.AspNetCore.Mvc.UI.Bundling;
 using Volo.Abp.AspNetCore.Mvc.UI.Theme.Basic;
 using Volo.Abp.AspNetCore.Mvc.UI.Theme.Basic.Bundling;
@@ -34,19 +32,12 @@ using Volo.Abp.Http.Client.Web;
 using Volo.Abp.Identity.Web;
 using Volo.Abp.Modularity;
 using Volo.Abp.MultiTenancy;
-using Volo.Abp.PermissionManagement.Web;
 using Volo.Abp.SettingManagement.Web;
 using Volo.Abp.Swashbuckle;
 using Volo.Abp.TenantManagement.Web;
-using Volo.Abp.UI.Navigation.Urls;
-using Volo.Abp.UI;
 using Volo.Abp.UI.Navigation;
+using Volo.Abp.UI.Navigation.Urls;
 using Volo.Abp.VirtualFileSystem;
-using Volo.Abp.Users;
-using NUglify.Helpers;
-using KeycloakDemo.Oidc;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace KeycloakDemo.Web;
 
@@ -165,30 +156,16 @@ public class KeycloakDemoWebModule : AbpModule
 
                 options.Events.OnTokenValidated = async (context) =>
                 {
+                    var updater = context.HttpContext.RequestServices.GetService<IdentityProfileLoginUpdater>();
+
+                    await updater.UpdateAsync(context.SecurityToken);
+
                     // TODO: Consider sending raw token instead of claims.
                     /*
                      * Doing this, will provide a secure way to sync users.
                      * Token can be validated in HttpApi.Host again then user can be created.
                      */
                     Console.WriteLine(context.SecurityToken.RawData);
-
-                    await Task.Yield();
-                };
-
-                options.Events.OnTicketReceived = async (context) =>
-                {
-                    var synchronizer = context.HttpContext.RequestServices.GetService<IUserSynchronizerAppService>();
-
-                    await synchronizer.SyncAsync(new SyncInputDto
-                    {
-                        Claims = context.Principal.Claims.Select(s => new ClaimDto
-                        {
-                            Type = s.Type,
-                            Value = s.Value
-                        }).ToList()
-                    });
-
-                    //return Task.CompletedTask;
                 };
             });
     }

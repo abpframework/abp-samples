@@ -4,63 +4,32 @@
       "rootPath": "app",
       "remoteServiceName": "Default",
       "controllers": {
-        "KeycloakDemo.Oidc.UserSynchronizerAppService": {
-          "controllerName": "UserSynchronizer",
-          "controllerGroupName": "UserSynchronizer",
+        "KeycloakDemo.Controllers.IdentityProfileController": {
+          "controllerName": "IdentityProfile",
+          "controllerGroupName": "IdentityProfile",
           "isRemoteService": false,
           "apiVersion": null,
-          "type": "KeycloakDemo.Oidc.UserSynchronizerAppService",
+          "type": "KeycloakDemo.Controllers.IdentityProfileController",
           "interfaces": [
             {
-              "type": "Volo.Abp.Validation.IValidationEnabled"
-            },
-            {
-              "type": "Volo.Abp.Auditing.IAuditingEnabled"
-            },
-            {
-              "type": "Volo.Abp.GlobalFeatures.IGlobalFeatureCheckingEnabled"
-            },
-            {
-              "type": "KeycloakDemo.Oidc.IUserSynchronizerAppService"
+              "type": "KeycloakDemo.Identity.IIdentityProfileAppService"
             }
           ],
           "actions": {
-            "SyncAsyncByInput": {
-              "uniqueName": "SyncAsyncByInput",
-              "name": "SyncAsync",
+            "CreateOrUpdateAsync": {
+              "uniqueName": "CreateOrUpdateAsync",
+              "name": "CreateOrUpdateAsync",
               "httpMethod": "POST",
-              "url": "api/app/user-synchronizer/sync",
+              "url": "api/identity-profile/create-or-update",
               "supportedVersions": [],
-              "parametersOnMethod": [
-                {
-                  "name": "input",
-                  "typeAsString": "KeycloakDemo.Oidc.SyncInputDto, KeycloakDemo.Application.Contracts",
-                  "type": "KeycloakDemo.Oidc.SyncInputDto",
-                  "typeSimple": "KeycloakDemo.Oidc.SyncInputDto",
-                  "isOptional": false,
-                  "defaultValue": null
-                }
-              ],
-              "parameters": [
-                {
-                  "nameOnMethod": "input",
-                  "name": "input",
-                  "jsonName": null,
-                  "type": "KeycloakDemo.Oidc.SyncInputDto",
-                  "typeSimple": "KeycloakDemo.Oidc.SyncInputDto",
-                  "isOptional": false,
-                  "defaultValue": null,
-                  "constraintTypes": null,
-                  "bindingSourceId": "Body",
-                  "descriptorName": ""
-                }
-              ],
+              "parametersOnMethod": [],
+              "parameters": [],
               "returnValue": {
                 "type": "System.Void",
                 "typeSimple": "System.Void"
               },
-              "allowAnonymous": null,
-              "implementFrom": "KeycloakDemo.Oidc.IUserSynchronizerAppService"
+              "allowAnonymous": false,
+              "implementFrom": "KeycloakDemo.Identity.IIdentityProfileAppService"
             }
           }
         }

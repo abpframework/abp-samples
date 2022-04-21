@@ -1,7 +1,6 @@
-﻿using System.Threading.Tasks;
-using KeycloakDemo.Oidc;
+﻿using KeycloakDemo.Web.Identity;
 using Microsoft.AspNetCore.Authentication;
-using Microsoft.Extensions.DependencyInjection;
+using System.Threading.Tasks;
 
 namespace KeycloakDemo.Web.Pages;
 
@@ -19,6 +18,6 @@ public class IndexModel : KeycloakDemoPageModel
 
     public async Task OnPostAsync()
     {
-        await LazyServiceProvider.LazyGetRequiredService<IUserSynchronizerAppService>().SyncAsync(null);
+        await LazyServiceProvider.LazyGetRequiredService<IdentityProfileLoginUpdater>().UpdateAsync(null);
     }
 }

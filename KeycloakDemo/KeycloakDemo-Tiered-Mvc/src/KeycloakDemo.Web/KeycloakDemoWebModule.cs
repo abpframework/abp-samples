@@ -1,7 +1,9 @@
+using IdentityModel.AspNetCore.AccessTokenManagement;
 using KeycloakDemo.Localization;
 using KeycloakDemo.MultiTenancy;
 using KeycloakDemo.Web.Identity;
 using KeycloakDemo.Web.Menus;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Hosting;
@@ -87,6 +89,7 @@ public class KeycloakDemoWebModule : AbpModule
         ConfigureNavigationServices(configuration);
         ConfigureMultiTenancy();
         ConfigureSwaggerServices(context.Services);
+        ConfigureAccessTokenManagement(context);
     }
 
     private void ConfigureBundles()
@@ -137,6 +140,12 @@ public class KeycloakDemoWebModule : AbpModule
             .AddCookie("Cookies", options =>
             {
                 options.ExpireTimeSpan = TimeSpan.FromDays(365);
+
+                options.Events.OnSigningOut = async e =>
+                {
+                    // revoke refresh token on sign-out
+                    //await e.HttpContext.RevokeUserRefreshTokenAsync();
+                };
             })
             .AddAbpOpenIdConnect("oidc", options =>
             {
@@ -153,6 +162,12 @@ public class KeycloakDemoWebModule : AbpModule
                 options.Scope.Add("email");
                 options.Scope.Add("phone");
                 options.Scope.Add("roles");
+                options.Scope.Add("offline_access");
+
+                options.Events.OnTokenResponseReceived = async (context) =>
+                {
+                    Console.WriteLine(context);
+                };
 
                 options.Events.OnTokenValidated = async (context) =>
                 {
@@ -220,6 +235,35 @@ public class KeycloakDemoWebModule : AbpModule
             var redis = ConnectionMultiplexer.Connect(configuration["Redis:Configuration"]);
             dataProtectionBuilder.PersistKeysToStackExchangeRedis(redis, "KeycloakDemo-Protection-Keys");
         }
+    }
+
+    private void ConfigureAccessTokenManagement(ServiceConfigurationContext context)
+    {
+        context.Services.AddAccessTokenManagement(options =>
+        {
+            // client config is inferred from OpenID Connect settings
+            // if you want to specify scopes explicitly, do it here, otherwise the scope parameter will not be sent
+            //options.Client.Scope = "api";
+        })
+        .ConfigureBackchannelHttpClient();
+        //.AddTransientHttpErrorPolicy(policy => policy.WaitAndRetryAsync(new[]
+        //{
+        //    TimeSpan.FromSeconds(1),
+        //    TimeSpan.FromSeconds(2),
+        //    TimeSpan.FromSeconds(3)
+        //}));
+
+        // registers HTTP client that uses the managed user access token
+        context.Services.AddUserAccessTokenHttpClient("user_client", configureClient: client =>
+        {
+            client.BaseAddress = new Uri("localhost:8080/realms/tiered_realm/");
+        });
+
+        // registers HTTP client that uses the managed client access token
+        context.Services.AddClientAccessTokenHttpClient("client", configureClient: client =>
+        {
+            client.BaseAddress = new Uri("localhost:8080/realms/tiered_realm/");
+        });
     }
 
     public override void OnApplicationInitialization(ApplicationInitializationContext context)

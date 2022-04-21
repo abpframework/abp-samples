@@ -159,13 +159,6 @@ public class KeycloakDemoWebModule : AbpModule
                     var updater = context.HttpContext.RequestServices.GetService<IdentityProfileLoginUpdater>();
 
                     await updater.UpdateAsync(context.SecurityToken);
-
-                    // TODO: Consider sending raw token instead of claims.
-                    /*
-                     * Doing this, will provide a secure way to sync users.
-                     * Token can be validated in HttpApi.Host again then user can be created.
-                     */
-                    Console.WriteLine(context.SecurityToken.RawData);
                 };
             });
     }

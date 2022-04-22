@@ -24,6 +24,12 @@
         {
             <a abp-button="Primary" href="~/Account/Login" ><i class="fa fa-sign-in"></i> @L["Login"]</a>
         }
+        else
+        {
+            <form method="post">
+                <button type="submit">Sync me</button>
+            </form>
+        }
 
     </div>
     <div class="my-3 text-center">

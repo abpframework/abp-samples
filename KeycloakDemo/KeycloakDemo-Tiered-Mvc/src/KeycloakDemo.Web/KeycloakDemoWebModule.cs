@@ -1,5 +1,9 @@
-using System;
-using System.IO;
+using IdentityModel.AspNetCore.AccessTokenManagement;
+using KeycloakDemo.Localization;
+using KeycloakDemo.MultiTenancy;
+using KeycloakDemo.Web.Identity;
+using KeycloakDemo.Web.Menus;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Hosting;
@@ -7,18 +11,14 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Protocols.OpenIdConnect;
-using KeycloakDemo.Localization;
-using KeycloakDemo.MultiTenancy;
-using KeycloakDemo.Web.Menus;
-using Microsoft.AspNetCore.Authentication;
-using StackExchange.Redis;
 using Microsoft.OpenApi.Models;
+using StackExchange.Redis;
+using System;
+using System.IO;
 using Volo.Abp;
 using Volo.Abp.AspNetCore.Authentication.OpenIdConnect;
 using Volo.Abp.AspNetCore.Mvc.Client;
 using Volo.Abp.AspNetCore.Mvc.Localization;
-using Volo.Abp.AspNetCore.Mvc.UI;
-using Volo.Abp.AspNetCore.Mvc.UI.Bootstrap;
 using Volo.Abp.AspNetCore.Mvc.UI.Bundling;
 using Volo.Abp.AspNetCore.Mvc.UI.Theme.Basic;
 using Volo.Abp.AspNetCore.Mvc.UI.Theme.Basic.Bundling;
@@ -34,13 +34,11 @@ using Volo.Abp.Http.Client.Web;
 using Volo.Abp.Identity.Web;
 using Volo.Abp.Modularity;
 using Volo.Abp.MultiTenancy;
-using Volo.Abp.PermissionManagement.Web;
 using Volo.Abp.SettingManagement.Web;
 using Volo.Abp.Swashbuckle;
 using Volo.Abp.TenantManagement.Web;
-using Volo.Abp.UI.Navigation.Urls;
-using Volo.Abp.UI;
 using Volo.Abp.UI.Navigation;
+using Volo.Abp.UI.Navigation.Urls;
 using Volo.Abp.VirtualFileSystem;
 
 namespace KeycloakDemo.Web;
@@ -91,6 +89,7 @@ public class KeycloakDemoWebModule : AbpModule
         ConfigureNavigationServices(configuration);
         ConfigureMultiTenancy();
         ConfigureSwaggerServices(context.Services);
+        ConfigureAccessTokenManagement(context);
     }
 
     private void ConfigureBundles()
@@ -141,6 +140,12 @@ public class KeycloakDemoWebModule : AbpModule
             .AddCookie("Cookies", options =>
             {
                 options.ExpireTimeSpan = TimeSpan.FromDays(365);
+
+                options.Events.OnSigningOut = async e =>
+                {
+                    // revoke refresh token on sign-out
+                    //await e.HttpContext.RevokeUserRefreshTokenAsync();
+                };
             })
             .AddAbpOpenIdConnect("oidc", options =>
             {
@@ -157,6 +162,19 @@ public class KeycloakDemoWebModule : AbpModule
                 options.Scope.Add("email");
                 options.Scope.Add("phone");
                 options.Scope.Add("roles");
+                options.Scope.Add("offline_access");
+
+                options.Events.OnTokenResponseReceived = async (context) =>
+                {
+                    Console.WriteLine(context);
+                };
+
+                options.Events.OnTokenValidated = async (context) =>
+                {
+                    var updater = context.HttpContext.RequestServices.GetService<IdentityProfileLoginUpdater>();
+
+                    await updater.UpdateAsync(context.SecurityToken);
+                };
             });
     }
 
@@ -217,6 +235,35 @@ public class KeycloakDemoWebModule : AbpModule
             var redis = ConnectionMultiplexer.Connect(configuration["Redis:Configuration"]);
             dataProtectionBuilder.PersistKeysToStackExchangeRedis(redis, "KeycloakDemo-Protection-Keys");
         }
+    }
+
+    private void ConfigureAccessTokenManagement(ServiceConfigurationContext context)
+    {
+        context.Services.AddAccessTokenManagement(options =>
+        {
+            // client config is inferred from OpenID Connect settings
+            // if you want to specify scopes explicitly, do it here, otherwise the scope parameter will not be sent
+            //options.Client.Scope = "api";
+        })
+        .ConfigureBackchannelHttpClient();
+        //.AddTransientHttpErrorPolicy(policy => policy.WaitAndRetryAsync(new[]
+        //{
+        //    TimeSpan.FromSeconds(1),
+        //    TimeSpan.FromSeconds(2),
+        //    TimeSpan.FromSeconds(3)
+        //}));
+
+        // registers HTTP client that uses the managed user access token
+        context.Services.AddUserAccessTokenHttpClient("user_client", configureClient: client =>
+        {
+            client.BaseAddress = new Uri("localhost:8080/realms/tiered_realm/");
+        });
+
+        // registers HTTP client that uses the managed client access token
+        context.Services.AddClientAccessTokenHttpClient("client", configureClient: client =>
+        {
+            client.BaseAddress = new Uri("localhost:8080/realms/tiered_realm/");
+        });
     }
 
     public override void OnApplicationInitialization(ApplicationInitializationContext context)

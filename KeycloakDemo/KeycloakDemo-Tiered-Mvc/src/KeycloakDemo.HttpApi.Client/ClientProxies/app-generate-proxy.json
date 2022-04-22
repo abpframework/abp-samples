@@ -1,0 +1,40 @@
+{
+  "modules": {
+    "app": {
+      "rootPath": "app",
+      "remoteServiceName": "Default",
+      "controllers": {
+        "KeycloakDemo.Controllers.IdentityProfileController": {
+          "controllerName": "IdentityProfile",
+          "controllerGroupName": "IdentityProfile",
+          "isRemoteService": false,
+          "apiVersion": null,
+          "type": "KeycloakDemo.Controllers.IdentityProfileController",
+          "interfaces": [
+            {
+              "type": "KeycloakDemo.Identity.IIdentityProfileAppService"
+            }
+          ],
+          "actions": {
+            "CreateOrUpdateAsync": {
+              "uniqueName": "CreateOrUpdateAsync",
+              "name": "CreateOrUpdateAsync",
+              "httpMethod": "POST",
+              "url": "api/identity-profile/create-or-update",
+              "supportedVersions": [],
+              "parametersOnMethod": [],
+              "parameters": [],
+              "returnValue": {
+                "type": "System.Void",
+                "typeSimple": "System.Void"
+              },
+              "allowAnonymous": false,
+              "implementFrom": "KeycloakDemo.Identity.IIdentityProfileAppService"
+            }
+          }
+        }
+      }
+    }
+  },
+  "types": {}
+}

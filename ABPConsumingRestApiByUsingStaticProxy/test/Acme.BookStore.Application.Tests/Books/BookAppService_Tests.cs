@@ -1,4 +1,6 @@
-﻿using System.Threading.Tasks;
+﻿using Shouldly;
+using System.Threading.Tasks;
+using Volo.Abp.Application.Dtos;
 using Xunit;
 
 namespace Acme.BookStore.Books
@@ -15,10 +17,10 @@ namespace Acme.BookStore.Books
         [Fact]
         public async Task Should_Get_List_Of_Books()
         {
-            //Act
-            var result = await _bookAppService.GetListAsync();
+            var result = await _bookAppService.GetListAsync(new PagedAndSortedResultRequestDto());
 
-            Assert.Equal(3, result.Count);
+            result.TotalCount.ShouldBeGreaterThan(0);
+            result.Items.ShouldContain(b => b.Name == "Mother");
         }
     }
 }

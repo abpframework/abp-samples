@@ -31,8 +31,7 @@ public class BookStoreApplicationModule : AbpModule
             options.AddMaps<BookStoreApplicationModule>();
         });
 
-        // Prepare for static client proxy generation
-        context.Services.AddStaticHttpClientProxies(
+        context.Services.AddHttpClientProxies(
             typeof(BookStoreApplicationContractsModule).Assembly
         );
     }

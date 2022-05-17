@@ -1,24 +1,25 @@
-﻿using Acme.BookStore.Books;
-using System;
-using System.Linq;
+﻿using System;
 using System.Threading.Tasks;
-using Volo.Abp.Application.Dtos;
+using Volo.Abp.Account;
 using Volo.Abp.DependencyInjection;
 
 namespace Acme.BookStore.HttpApi.Client.ConsoleTestApp;
 
 public class ClientDemoService : ITransientDependency
 {
-    private readonly IBookAppService _bookAppService;
+    private readonly IProfileAppService _profileAppService;
 
-    public ClientDemoService(IBookAppService bookAppService )
+    public ClientDemoService(IProfileAppService profileAppService)
     {
-        _bookAppService = bookAppService;
+        _profileAppService = profileAppService;
     }
 
     public async Task RunAsync()
     {
-        var listOfBooks = await _bookAppService.GetListAsync(new PagedAndSortedResultRequestDto());
-        Console.WriteLine($"Books: {string.Join(", ", listOfBooks.Items.Select(p => p.Name).ToList())}");
+        var output = await _profileAppService.GetAsync();
+        Console.WriteLine($"UserName : {output.UserName}");
+        Console.WriteLine($"Email    : {output.Email}");
+        Console.WriteLine($"Name     : {output.Name}");
+        Console.WriteLine($"Surname  : {output.Surname}");
     }
 }

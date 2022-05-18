@@ -4,6 +4,7 @@ using KeycloakDemo.MultiTenancy;
 using KeycloakDemo.Web.Identity;
 using KeycloakDemo.Web.Menus;
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Hosting;
@@ -15,6 +16,8 @@ using Microsoft.OpenApi.Models;
 using StackExchange.Redis;
 using System;
 using System.IO;
+using System.IO.Pipelines;
+using System.Threading.Tasks;
 using Volo.Abp;
 using Volo.Abp.AspNetCore.Authentication.OpenIdConnect;
 using Volo.Abp.AspNetCore.Mvc.Client;
@@ -40,6 +43,7 @@ using Volo.Abp.TenantManagement.Web;
 using Volo.Abp.UI.Navigation;
 using Volo.Abp.UI.Navigation.Urls;
 using Volo.Abp.VirtualFileSystem;
+using static IdentityModel.OidcConstants;
 
 namespace KeycloakDemo.Web;
 
@@ -140,34 +144,64 @@ public class KeycloakDemoWebModule : AbpModule
             .AddCookie("Cookies", options =>
             {
                 options.ExpireTimeSpan = TimeSpan.FromDays(365);
+                options.SlidingExpiration = true;//TODO false
 
                 options.Events.OnSigningOut = async e =>
                 {
                     // revoke refresh token on sign-out
-                    //await e.HttpContext.RevokeUserRefreshTokenAsync();
+                    await e.HttpContext.RevokeUserRefreshTokenAsync();
                 };
+
+                options.Events = new CookieAuthenticationEvents()
+                {
+                    OnValidatePrincipal = context =>
+                    {
+                        if (context.Properties.Items.ContainsKey(".Token.expires_at"))
+                        {
+                            var expire = DateTime.Parse(context.Properties.Items[".Token.expires_at"]);
+                            if (expire < DateTime.Now) //TODO:change to check expires in next 5 mintues.
+                            {
+                                context.ShouldRenew = true;
+                                context.Properties.Items[".Token.expires_at"] = expire.AddMinutes(5).ToString();
+                                expire = expire.AddMinutes(5);
+                                //TODO generate a new token
+                                //context.Properties.Items["Token.access_token"] = newToken;
+                            }
+                        }
+                        return Task.CompletedTask;
+                    }
+                };
+
             })
             .AddAbpOpenIdConnect("oidc", options =>
             {
+                //options.SignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+
                 options.Authority = configuration["AuthServer:Authority"];
+                options.ClientId = configuration["AuthServer:ClientId"];
+                options.ClientSecret = configuration["AuthServer:ClientSecret"];
+
                 options.RequireHttpsMetadata = Convert.ToBoolean(configuration["AuthServer:RequireHttpsMetadata"]);
+
                 options.ResponseType = OpenIdConnectResponseType.Code;
 
-                options.ClientId = configuration["AuthServer:ClientId"];
 
-                options.SaveTokens = true;
-                options.GetClaimsFromUserInfoEndpoint = true;
-
+                //options.Scope.Clear();
                 options.Scope.Add("profile");
                 options.Scope.Add("email");
                 options.Scope.Add("phone");
                 options.Scope.Add("roles");
                 options.Scope.Add("offline_access");
 
+                options.GetClaimsFromUserInfoEndpoint = true;
+                options.SaveTokens = true;
+
                 options.Events.OnTokenResponseReceived = async (context) =>
                 {
                     Console.WriteLine(context);
+                    Console.WriteLine(context.TokenEndpointResponse.AccessToken);
                 };
+
 
                 options.Events.OnTokenValidated = async (context) =>
                 {

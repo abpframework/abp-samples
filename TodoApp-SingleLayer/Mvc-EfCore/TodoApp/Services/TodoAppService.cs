@@ -5,7 +5,7 @@ using Volo.Abp.Domain.Repositories;
 
 namespace TodoApp.Services;
 
-public class TodoAppService : ApplicationService, ITodoAppService
+public class TodoAppService : ApplicationService
 {
     private readonly IRepository<TodoItem, Guid> _todoItemRepository;
     

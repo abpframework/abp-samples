@@ -8,9 +8,9 @@ public class IndexModel : AbpPageModel
 {
     public List<TodoItemDto> TodoItems { get; set; }
 
-    private readonly ITodoAppService _todoAppService;
+    private readonly TodoAppService _todoAppService;
 
-    public IndexModel(ITodoAppService todoAppService)
+    public IndexModel(TodoAppService todoAppService)
     {
         _todoAppService = todoAppService;
     }

@@ -1,7 +1,6 @@
-﻿using System.Threading.Tasks;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System.Threading.Tasks;
 
 namespace Acme.BookStore.HttpApi.Client.ConsoleTestApp;
 

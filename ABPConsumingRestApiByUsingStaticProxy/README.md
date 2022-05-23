@@ -214,10 +214,19 @@ public class BookAppService : ApplicationService, IBookAppService
 If you now run the server, then run the console client application, you will see the following error on the console application:
 
 ```
-Authorization failed. These requirements were not met:
-PermissionRequirement: BookStore.Books
-AuthenticationScheme: Identity.Application was forbidden.
-Request finished HTTP/1.1 GET https://localhost:44397/api/app/book?SkipCount=0&MaxResultCount=10&api-version=1.0 - - - 403 0 - 156.9766ms
+Unhandled exception. Volo.Abp.Http.Client.AbpRemoteCallException: Forbidden
+   at Volo.Abp.Http.Client.ClientProxying.ClientProxyBase`1.ThrowExceptionForResponseAsync(HttpResponseMessage response)
+   at Volo.Abp.Http.Client.ClientProxying.ClientProxyBase`1.RequestAsync(ClientProxyRequestContext requestContext)
+   at Volo.Abp.Http.Client.ClientProxying.ClientProxyBase`1.RequestAsync[T](ClientProxyRequestContext requestContext)
+   at Volo.Abp.Http.Client.ClientProxying.ClientProxyBase`1.RequestAsync[T](String methodName, ClientProxyRequestTypeValue arguments)
+   at Acme.BookStore.Books.ClientProxies.BookClientProxy.GetListAsync(PagedAndSortedResultRequestDto input) in YourPath\ABPConsumingRestApiByUsingStaticProxy\src\Acme.BookStore.HttpApi.Client\ClientProxies\BookClientProxy.Generated.cs:line 20
+   at Acme.BookStore.HttpApi.Client.ConsoleTestApp.ClientDemoService.RunAsync() in YourPath\ABPConsumingRestApiByUsingStaticProxy\test\Acme.BookStore.HttpApi.Client.ConsoleTestApp\ClientDemoService.cs:line 21
+   at Acme.BookStore.HttpApi.Client.ConsoleTestApp.ConsoleTestAppHostedService.StartAsync(CancellationToken cancellationToken) in YourPath\ABPConsumingRestApiByUsingStaticProxy\test\Acme.BookStore.HttpApi.Client.ConsoleTestApp\ConsoleTestAppHostedService.cs:line 30
+   at Microsoft.Extensions.Hosting.Internal.Host.StartAsync(CancellationToken cancellationToken)
+   at Microsoft.Extensions.Hosting.HostingAbstractionsHostExtensions.RunAsync(IHost host, CancellationToken token)
+   at Microsoft.Extensions.Hosting.HostingAbstractionsHostExtensions.RunAsync(IHost host, CancellationToken token)
+   at Acme.BookStore.HttpApi.Client.ConsoleTestApp.Program.Main(String[] args) in YourPath\ABPConsumingRestApiByUsingStaticProxy\test\Acme.BookStore.HttpApi.Client.ConsoleTestApp\Program.cs:line 12
+   at Acme.BookStore.HttpApi.Client.ConsoleTestApp.Program.<Main>(String[] args)
 ```
 
 To fix the problem, we should grant permission for the admin user. We are granting permission to the admin user because the console application is configured to use Resource Owner Password Grant Flow. That means the client application is consuming services on behalf of the admin user. You can see the configuration in the `appsettings.json` file of the console application.

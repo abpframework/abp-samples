@@ -14,9 +14,9 @@ namespace Acme.BookStore.Books
         {
             var bookDtos = new List<BookDto>()
             {
-                new BookDto(){ Name = "Anna Karenina", AuthorName ="Tolstoy", Price = 50},
+                new BookDto(){ Name = "Hunger", AuthorName ="Knut Hamsun", Price = 50},
                 new BookDto(){ Name = "Crime and Punishment", AuthorName ="Dostoevsky", Price = 60},
-                new BookDto(){ Name = "Mother", AuthorName ="Gorki", Price = 70}
+                new BookDto(){ Name = "For Whom the Bell Tolls", AuthorName ="Ernest Hemingway", Price = 70}
             };
             return Task.FromResult(new PagedResultDto<BookDto>(
                bookDtos.Count,

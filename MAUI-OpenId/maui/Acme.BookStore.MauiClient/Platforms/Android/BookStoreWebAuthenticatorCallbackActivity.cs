@@ -8,7 +8,7 @@ namespace Acme.BookStore.MauiClient.Platforms.Android;
 [IntentFilter(new[] { Intent.ActionView },
     Categories = new[] { Intent.CategoryDefault, Intent.CategoryBrowsable },
     DataScheme = CALLBACK_SCHEME)]
-public class BookStoreWebAuthenticatorCallbackActivity : Microsoft.Maui.Essentials.WebAuthenticatorCallbackActivity
+public class BookStoreWebAuthenticatorCallbackActivity : WebAuthenticatorCallbackActivity
 {
     const string CALLBACK_SCHEME = "bookstore";
 }

@@ -1,6 +1,7 @@
 ﻿using IdentityModel.OidcClient.Browser;
 using System.Diagnostics;
 using Volo.Abp.DependencyInjection;
+using IBrowser = IdentityModel.OidcClient.Browser.IBrowser;
 
 namespace Acme.BookStore.MauiClient;
 

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using IdentityServer4.Models;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Volo.Abp.Authorization.Permissions;
@@ -14,6 +15,7 @@ using Volo.Abp.PermissionManagement;
 using Volo.Abp.TenantManagement;
 using Volo.Abp.Uow;
 using ApiResource = Volo.Abp.IdentityServer.ApiResources.ApiResource;
+using ApiScope = Volo.Abp.IdentityServer.ApiScopes.ApiScope;
 using Client = Volo.Abp.IdentityServer.Clients.Client;
 
 namespace AuthServer.Host
@@ -146,7 +148,7 @@ namespace AuthServer.Host
                 "console-client-demo",
                 new[] { "BloggingService", "IdentityService", "InternalGateway", "ProductService", "TenantManagementService" },
                 new[] { "client_credentials", "password" },
-                commonSecret,
+                commonSecret.Sha256(),
                 permissions: new[] { IdentityPermissions.Users.Default, TenantManagementPermissions.Tenants.Default, "ProductManagement.Product" }
             );
 
@@ -154,7 +156,7 @@ namespace AuthServer.Host
                 "backend-admin-app-client",
                 commonScopes.Union(new[] { "BackendAdminAppGateway", "IdentityService", "ProductService", "TenantManagementService" }),
                 new[] { "hybrid" },
-                commonSecret,
+                commonSecret.Sha256(),
                 permissions: new[] { IdentityPermissions.Users.Default, "ProductManagement.Product" },
                 redirectUri: "https://localhost:44354/signin-oidc",
                 postLogoutRedirectUri: "https://localhost:44354/signout-callback-oidc"
@@ -164,7 +166,7 @@ namespace AuthServer.Host
                 "public-website-client",
                 commonScopes.Union(new[] { "PublicWebSiteGateway", "BloggingService", "ProductService" }),
                 new[] { "hybrid" },
-                commonSecret,
+                commonSecret.Sha256(),
                 redirectUri: "https://localhost:44335/signin-oidc",
                 postLogoutRedirectUri: "https://localhost:44335/signout-callback-oidc"
             );
@@ -173,7 +175,7 @@ namespace AuthServer.Host
                 "blogging-service-client",
                 new[] { "InternalGateway", "IdentityService" },
                 new[] { "client_credentials" },
-                commonSecret,
+                commonSecret.Sha256(),
                 permissions: new[] { IdentityPermissions.UserLookup.Default }
             );
         }

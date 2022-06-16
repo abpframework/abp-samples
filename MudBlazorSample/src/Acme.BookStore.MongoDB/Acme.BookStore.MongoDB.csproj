@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <Import Project="..\..\common.props" />
 
@@ -9,14 +9,14 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Acme.BookStore.Domain\Acme.BookStore.Domain.csproj" />
-    <PackageReference Include="Volo.Abp.PermissionManagement.MongoDB" Version="5.1.4" />
-    <PackageReference Include="Volo.Abp.SettingManagement.MongoDB" Version="5.1.4" />
-    <PackageReference Include="Volo.Abp.Identity.MongoDB" Version="5.1.4" />
-    <PackageReference Include="Volo.Abp.IdentityServer.MongoDB" Version="5.1.4" />
-    <PackageReference Include="Volo.Abp.BackgroundJobs.MongoDB" Version="5.1.4" />
-    <PackageReference Include="Volo.Abp.AuditLogging.MongoDB" Version="5.1.4" />
-    <PackageReference Include="Volo.Abp.TenantManagement.MongoDB" Version="5.1.4" />
-    <PackageReference Include="Volo.Abp.FeatureManagement.MongoDB" Version="5.1.4" />
+    <PackageReference Include="Volo.Abp.PermissionManagement.MongoDB" Version="5.3.0" />
+    <PackageReference Include="Volo.Abp.SettingManagement.MongoDB" Version="5.3.0" />
+    <PackageReference Include="Volo.Abp.Identity.MongoDB" Version="5.3.0" />
+    <PackageReference Include="Volo.Abp.IdentityServer.MongoDB" Version="5.3.0" />
+    <PackageReference Include="Volo.Abp.BackgroundJobs.MongoDB" Version="5.3.0" />
+    <PackageReference Include="Volo.Abp.AuditLogging.MongoDB" Version="5.3.0" />
+    <PackageReference Include="Volo.Abp.TenantManagement.MongoDB" Version="5.3.0" />
+    <PackageReference Include="Volo.Abp.FeatureManagement.MongoDB" Version="5.3.0" />
   </ItemGroup>
 
 </Project>

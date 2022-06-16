@@ -27,7 +27,7 @@ namespace TodoApp
         {
             context.Services.PreConfigure<IMvcBuilder>(builder =>
             {
-                builder.PartManager.ApplicationParts.Add(new AssemblyPart(typeof(TodoAppWebModule).Assembly));
+                builder.PartManager.ApplicationParts.Add(new CompiledRazorAssemblyPart(typeof(TodoAppWebModule).Assembly));
             });
         }
 

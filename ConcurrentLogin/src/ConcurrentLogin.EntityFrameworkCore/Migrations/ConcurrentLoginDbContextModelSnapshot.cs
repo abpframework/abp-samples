@@ -19,7 +19,7 @@ namespace ConcurrentLogin.Migrations
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("_Abp_DatabaseProvider", EfCoreDatabaseProvider.SqlServer)
-                .HasAnnotation("ProductVersion", "6.0.0")
+                .HasAnnotation("ProductVersion", "6.0.5")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
@@ -620,7 +620,7 @@ namespace ConcurrentLogin.Migrations
                         .ValueGeneratedOnAdd()
                         .HasMaxLength(128)
                         .HasColumnType("nvarchar(128)")
-                        .HasDefaultValue("968598e88675403db9460b59465ff5e4");
+                        .HasDefaultValue("11220e28ce5848d587c10eda8ba4bda8");
 
                     b.Property<DateTime>("CreationTime")
                         .HasColumnType("datetime2")

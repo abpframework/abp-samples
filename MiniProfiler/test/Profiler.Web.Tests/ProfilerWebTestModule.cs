@@ -27,7 +27,7 @@ namespace Profiler
         {
             context.Services.PreConfigure<IMvcBuilder>(builder =>
             {
-                builder.PartManager.ApplicationParts.Add(new AssemblyPart(typeof(ProfilerWebModule).Assembly));
+                builder.PartManager.ApplicationParts.Add(new CompiledRazorAssemblyPart(typeof(ProfilerWebModule).Assembly));
             });
         }
 

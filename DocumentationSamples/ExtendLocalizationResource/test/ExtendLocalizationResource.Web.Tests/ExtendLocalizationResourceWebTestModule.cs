@@ -27,7 +27,7 @@ namespace ExtendLocalizationResource
         {
             context.Services.PreConfigure<IMvcBuilder>(builder =>
             {
-                builder.PartManager.ApplicationParts.Add(new AssemblyPart(typeof(ExtendLocalizationResourceWebModule).Assembly));
+                builder.PartManager.ApplicationParts.Add(new CompiledRazorAssemblyPart(typeof(ExtendLocalizationResourceWebModule).Assembly));
             });
         }
 

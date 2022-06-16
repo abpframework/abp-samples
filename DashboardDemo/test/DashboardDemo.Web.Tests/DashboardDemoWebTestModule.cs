@@ -29,7 +29,7 @@ namespace DashboardDemo
         {
             context.Services.PreConfigure<IMvcBuilder>(builder =>
             {
-                builder.PartManager.ApplicationParts.Add(new AssemblyPart(typeof(DashboardDemoWebModule).Assembly));
+                builder.PartManager.ApplicationParts.Add(new CompiledRazorAssemblyPart(typeof(DashboardDemoWebModule).Assembly));
             });
         }
 

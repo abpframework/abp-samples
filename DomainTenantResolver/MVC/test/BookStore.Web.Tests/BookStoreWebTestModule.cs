@@ -27,7 +27,7 @@ namespace BookStore
         {
             context.Services.PreConfigure<IMvcBuilder>(builder =>
             {
-                builder.PartManager.ApplicationParts.Add(new AssemblyPart(typeof(BookStoreWebModule).Assembly));
+                builder.PartManager.ApplicationParts.Add(new CompiledRazorAssemblyPart(typeof(BookStoreWebModule).Assembly));
             });
         }
 

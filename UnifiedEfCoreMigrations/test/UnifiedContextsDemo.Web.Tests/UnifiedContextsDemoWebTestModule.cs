@@ -27,7 +27,7 @@ namespace UnifiedContextsDemo
         {
             context.Services.PreConfigure<IMvcBuilder>(builder =>
             {
-                builder.PartManager.ApplicationParts.Add(new AssemblyPart(typeof(UnifiedContextsDemoWebModule).Assembly));
+                builder.PartManager.ApplicationParts.Add(new CompiledRazorAssemblyPart(typeof(UnifiedContextsDemoWebModule).Assembly));
             });
         }
 

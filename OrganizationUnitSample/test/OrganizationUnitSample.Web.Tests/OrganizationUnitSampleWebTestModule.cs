@@ -30,7 +30,7 @@ namespace OrganizationUnitSample
         {
             context.Services.PreConfigure<IMvcBuilder>(builder =>
             {
-                builder.PartManager.ApplicationParts.Add(new AssemblyPart(typeof(OrganizationUnitSampleWebModule).Assembly));
+                builder.PartManager.ApplicationParts.Add(new CompiledRazorAssemblyPart(typeof(OrganizationUnitSampleWebModule).Assembly));
             });
         }
 

@@ -27,7 +27,7 @@ namespace SignInWithoutSpecifyingTenant
         {
             context.Services.PreConfigure<IMvcBuilder>(builder =>
             {
-                builder.PartManager.ApplicationParts.Add(new AssemblyPart(typeof(SignInWithoutSpecifyingTenantWebModule).Assembly));
+                builder.PartManager.ApplicationParts.Add(new CompiledRazorAssemblyPart(typeof(SignInWithoutSpecifyingTenantWebModule).Assembly));
             });
         }
 

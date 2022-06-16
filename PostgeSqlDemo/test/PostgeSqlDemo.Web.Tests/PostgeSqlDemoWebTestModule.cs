@@ -30,7 +30,7 @@ namespace PostgeSqlDemo
         {
             context.Services.PreConfigure<IMvcBuilder>(builder =>
             {
-                builder.PartManager.ApplicationParts.Add(new AssemblyPart(typeof(PostgeSqlDemoWebModule).Assembly));
+                builder.PartManager.ApplicationParts.Add(new CompiledRazorAssemblyPart(typeof(PostgeSqlDemoWebModule).Assembly));
             });
         }
 

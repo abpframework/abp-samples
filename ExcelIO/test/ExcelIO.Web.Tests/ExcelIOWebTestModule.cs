@@ -27,7 +27,7 @@ namespace ExcelIO
         {
             context.Services.PreConfigure<IMvcBuilder>(builder =>
             {
-                builder.PartManager.ApplicationParts.Add(new AssemblyPart(typeof(ExcelIOWebModule).Assembly));
+                builder.PartManager.ApplicationParts.Add(new CompiledRazorAssemblyPart(typeof(ExcelIOWebModule).Assembly));
             });
         }
 

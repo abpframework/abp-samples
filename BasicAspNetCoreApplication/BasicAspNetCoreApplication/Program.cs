@@ -4,12 +4,10 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Host.UseAutofac();
 
-builder.Services.ReplaceConfiguration(builder.Configuration);
-
-builder.Services.AddApplication<AppModule>();
+await builder.AddApplicationAsync<AppModule>();
 
 var app = builder.Build();
 
-app.InitializeApplication();
+await app.InitializeApplicationAsync();
 
-app.Run();
+await app.RunAsync();

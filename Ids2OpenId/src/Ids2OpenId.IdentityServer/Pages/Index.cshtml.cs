@@ -1,24 +1,36 @@
-using Volo.Abp.AspNetCore.Mvc.UI.RazorPages;
-using IdentityServer4.Stores;
-using Volo.Abp.IdentityServer.Clients;
-using System.Threading.Tasks;
 using System.Collections.Generic;
+using System.Globalization;
+using System.Threading;
+using System.Threading.Tasks;
+using Volo.Abp.AspNetCore.Mvc.UI.RazorPages;
+using Volo.Abp.Localization;
+using Volo.Abp.OpenIddict.Applications;
 
 namespace Ids2OpenId.Pages;
 
 public class IndexModel : AbpPageModel
 {
-    public List<Client> Clients { get; protected set; }
-    
-    protected IClientRepository ClientRepository { get; }
-    
-    public IndexModel(IClientRepository clientRepository)
+    public List<OpenIddictApplication> Applications { get; protected set; }
+
+    public IReadOnlyList<LanguageInfo> Languages { get; protected set; }
+
+    public string CurrentLanguage { get; protected set; }
+
+    protected IOpenIddictApplicationRepository OpenIdApplicationRepository { get; }
+
+    protected ILanguageProvider LanguageProvider { get; }
+
+    public IndexModel(IOpenIddictApplicationRepository openIdApplicationmRepository, ILanguageProvider languageProvider)
     {
-        this.ClientRepository = clientRepository;
+        OpenIdApplicationRepository = openIdApplicationmRepository;
+        LanguageProvider = languageProvider;
     }
 
     public async Task OnGetAsync()
     {
-        Clients = await ClientRepository.GetListAsync(includeDetails: true);
+        Applications = await OpenIdApplicationRepository.GetListAsync();
+
+        Languages = await LanguageProvider.GetLanguagesAsync();
+        CurrentLanguage = CultureInfo.CurrentCulture.DisplayName;
     }
 }

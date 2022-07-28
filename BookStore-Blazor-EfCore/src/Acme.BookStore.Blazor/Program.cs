@@ -9,14 +9,14 @@ namespace Acme.BookStore.Blazor
         {
             var builder = WebAssemblyHostBuilder.CreateDefault(args);
 
-            var application = builder.AddApplication<BookStoreBlazorModule>(options =>
+            var application = await builder.AddApplicationAsync<BookStoreBlazorModule>(options =>
             {
                 options.UseAutofac();
             });
 
             var host = builder.Build();
 
-            await application.InitializeAsync(host.Services);
+            await application.InitializeApplicationAsync(host.Services);
 
             await host.RunAsync();
         }

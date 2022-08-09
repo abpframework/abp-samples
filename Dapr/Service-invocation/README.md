@@ -2,7 +2,7 @@
 ## Start Http Api
 
 ```cs
-dapr run --app-id defaultservice --app-port 7086 --dapr-http-port 3500 --app-ssl  dotnet run --project DaprHttpApi\DaprHttpApi.csproj 
+dapr run --app-id defaultservice --app-port 7086 --dapr-http-port 3500 --app-ssl dotnet run --project DaprHttpApi\DaprHttpApi.csproj 
 ```
 
 ## Start client app

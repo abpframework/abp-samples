@@ -19,16 +19,12 @@ public class DaprClientModule : AbpModule
 {
     public const string RemoteServiceName = "Default";
     
-    public override void PreConfigureServices(ServiceConfigurationContext context)
+    public override void ConfigureServices(ServiceConfigurationContext context)
     {
-        PreConfigure<AbpDaprOptions>(options =>
+        Configure<AbpDaprOptions>(options =>
         {
             options.HttpEndpoint = "http://localhost:3500";
         });
-    }
-
-    public override void ConfigureServices(ServiceConfigurationContext context)
-    {
         context.Services.AddHttpClientProxies(typeof(SharedModule).Assembly, RemoteServiceName);
     }
 }

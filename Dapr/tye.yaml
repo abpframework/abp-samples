@@ -1,4 +1,3 @@
-# This tye doesn't work properly now.
 name: pub-sub-application
 extensions:
 - name: dapr

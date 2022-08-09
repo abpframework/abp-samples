@@ -1,0 +1,11 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net6.0</TargetFramework>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\..\..\abp\framework\src\Volo.Abp.EventBus.Abstractions\Volo.Abp.EventBus.Abstractions.csproj" />
+    </ItemGroup>
+
+</Project>

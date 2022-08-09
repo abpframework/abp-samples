@@ -1,0 +1,24 @@
+# This tye doesn't work properly now.
+name: pub-sub-application
+extensions:
+- name: dapr
+  components-path: "./dapr/components/"
+  services:
+    dapr-subscribe:
+      http-port: 7002
+      grpc-port: 7003
+    dapr-publisher:
+      http-port: 8002
+      grpc-port: 8003
+      enabled: true
+
+services:
+- name: dapr-subscribe
+  project: DaprSubscribe\DaprSubscribe.csproj
+- name: dapr-publisher
+  project: DaprPublisher\DaprPublisher.csproj
+- name: redis
+  image: redis
+  bindings:
+    - port: 6973
+      containerPort: 6379

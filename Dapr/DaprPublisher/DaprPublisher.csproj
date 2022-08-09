@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <OutputType>Exe</OutputType>
+        <TargetFramework>net6.0</TargetFramework>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\..\..\abp\framework\src\Volo.Abp.Autofac\Volo.Abp.Autofac.csproj" />
+        <ProjectReference Include="..\..\..\abp\framework\src\Volo.Abp.EventBus.Dapr\Volo.Abp.EventBus.Dapr.csproj" />
+        <PackageReference Include="Microsoft.Extensions.Hosting" Version="6.0.1" />
+        <PackageReference Include="Dapr.Client" Version="1.8.0" />
+        <ProjectReference Include="..\Shared\Shared.csproj" />
+    </ItemGroup>
+
+</Project>

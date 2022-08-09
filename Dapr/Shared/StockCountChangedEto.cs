@@ -10,3 +10,15 @@ public class StockCountChangedEto
 
     public DateTime ChangedDate { get; set; }
 }
+
+public class CustomPubSubModel
+{
+    public CustomPubSubDataModel Data { get; set; }
+}
+
+public class CustomPubSubDataModel
+{
+    public int Id { get; set; }
+
+    public string Name { get; set; }
+}

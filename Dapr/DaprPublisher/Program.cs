@@ -50,11 +50,13 @@ public class HostedService : IHostedService
 {
     private readonly IAbpApplicationWithExternalServiceProvider _abpApplication;
     private readonly IDistributedEventBus _eventBus;
+    private readonly AbpDaprClientFactory _daprClientFactory;
 
-    public HostedService(IAbpApplicationWithExternalServiceProvider abpApplication, IDistributedEventBus eventBus)
+    public HostedService(IAbpApplicationWithExternalServiceProvider abpApplication, IDistributedEventBus eventBus, AbpDaprClientFactory daprClientFactory)
     {
         _abpApplication = abpApplication;
         _eventBus = eventBus;
+        _daprClientFactory = daprClientFactory;
     }
 
     public async Task StartAsync(CancellationToken cancellationToken)
@@ -72,6 +74,13 @@ public class HostedService : IHostedService
 
             await Task.Delay(500, cancellationToken);
         }
+
+        await (await _daprClientFactory.CreateAsync()).PublishEventAsync("test-pubsub", "test-topic", new CustomPubSubDataModel
+        {
+            Id = 123,
+            Name = "321"
+        }, cancellationToken);
+
         Console.WriteLine("Event publishing complete!");
     }
 

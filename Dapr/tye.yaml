@@ -15,6 +15,8 @@ extensions:
 services:
 - name: dapr-subscribe
   project: DaprSubscribe\DaprSubscribe.csproj
+  bindings:
+  - port: 7001
 - name: dapr-publisher
   project: DaprPublisher\DaprPublisher.csproj
 - name: redis

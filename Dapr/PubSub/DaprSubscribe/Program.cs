@@ -19,7 +19,7 @@ var app = builder.Build();
 await app.InitializeApplicationAsync();
 await app.RunAsync();
 
-[DependsOn(typeof(AbpAutofacModule), typeof(AbpAspNetCoreMvcModule), typeof(AbpAspNetCoreDaprModule))]
+[DependsOn(typeof(AbpAutofacModule), typeof(AbpAspNetCoreDaprEventBusModule))]
 public class AppModule : AbpModule
 {
     public override void ConfigureServices(ServiceConfigurationContext context)
@@ -38,7 +38,7 @@ public class AppModule : AbpModule
             options.PubSubName = "test-pubsub";
         });
 
-        Configure<AbpAspNetCoreDaprOptions>(options =>
+        Configure<AbpAspNetCoreDaprEventBusOptions>(options =>
         {
             options.Contributors.Add(new CustomDaprPubSubProviderContributor());
         });

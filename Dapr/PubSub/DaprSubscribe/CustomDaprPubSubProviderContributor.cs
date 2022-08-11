@@ -8,11 +8,11 @@ using Volo.Abp.AspNetCore.Mvc;
 
 namespace DaprSubscribe;
 
-public class CustomDaprPubSubProviderContributor : IAbpDaprPubSubProviderContributor
+public class CustomDaprPubSubProviderContributor : IAbpAspNetCoreDaprPubSubProviderContributor
 {
-    public Task ContributeAsync(AbpDaprPubSubProviderContributorContext context)
+    public Task ContributeAsync(AbpAspNetCoreDaprPubSubProviderContributorContext context)
     {
-        context.Subscriptions.Add(new DaprSubscriptionDefinition()
+        context.Subscriptions.Add(new AbpAspNetCoreDaprSubscriptionDefinition()
         {
             PubSubName = "test-pubsub",
             Topic = "test-topic",

@@ -5,7 +5,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\..\..\abp\framework\src\Volo.Abp.EventBus.Abstractions\Volo.Abp.EventBus.Abstractions.csproj" />
+        <ProjectReference Include="..\..\..\..\abp\framework\src\Volo.Abp.EventBus.Abstractions\Volo.Abp.EventBus.Abstractions.csproj" />
     </ItemGroup>
 
 </Project>

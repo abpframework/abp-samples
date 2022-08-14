@@ -105,6 +105,16 @@ namespace Acme.BookStore.EntityFrameworkCore
 
                 b.HasIndex(x => x.Name);
             });
+            
+            builder.Entity<BookTranslation>(b =>
+            {
+                b.ToTable(BookStoreConsts.DbTablePrefix + "BookTranslations",
+                    BookStoreConsts.DbSchema);
+
+                b.ConfigureByConvention();
+
+                b.HasKey(x => new {x.BookId, x.Language});
+            });
         }
     }
 }

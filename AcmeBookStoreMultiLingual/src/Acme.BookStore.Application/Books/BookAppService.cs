@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Acme.BookStore.Authors;
 using Acme.BookStore.Permissions;
 using Microsoft.AspNetCore.Authorization;
+using Volo.Abp;
 using Volo.Abp.Application.Dtos;
 using Volo.Abp.Application.Services;
 using Volo.Abp.Domain.Entities;
@@ -41,13 +42,13 @@ namespace Acme.BookStore.Books
         public override async Task<BookDto> GetAsync(Guid id)
         {
             //Get the IQueryable<Book> from the repository
-            var queryable = await Repository.GetQueryableAsync();
+            var queryable = await Repository.WithDetailsAsync(); // this line changed
 
             //Prepare a query to join books and authors
             var query = from book in queryable
                 join author in await _authorRepository.GetQueryableAsync() on book.AuthorId equals author.Id
                 where book.Id == id
-                select new { book, author };
+                select new {book, author};
 
             //Execute the query and get the book with author
             var queryResult = await AsyncExecuter.FirstOrDefaultAsync(query);
@@ -64,7 +65,7 @@ namespace Acme.BookStore.Books
         public override async Task<PagedResultDto<BookDto>> GetListAsync(PagedAndSortedResultRequestDto input)
         {
             //Get the IQueryable<Book> from the repository
-            var queryable = await Repository.GetQueryableAsync();
+            var queryable = await Repository.WithDetailsAsync(); // this line changed
 
             //Prepare a query to join books and authors
             var query = from book in queryable
@@ -105,7 +106,28 @@ namespace Acme.BookStore.Books
                 ObjectMapper.Map<List<Author>, List<AuthorLookupDto>>(authors)
             );
         }
-        
+
+        public async Task AddTranslationsAsync(Guid id, AddBookTranslationDto input)
+        {
+            var queryable = await Repository.WithDetailsAsync();
+
+            var book = await AsyncExecuter.FirstOrDefaultAsync(queryable, x => x.Id == id);
+
+            if (book.Translations.Any(x => x.Language == input.Language))
+            {
+                throw new UserFriendlyException($"Translation already available for {input.Language}");
+            }
+
+            book.Translations.Add(new BookTranslation
+            {
+                BookId = book.Id,
+                Name = input.Name,
+                Language = input.Language
+            });
+
+            await Repository.UpdateAsync(book);
+        }
+
         private static string NormalizeSorting(string sorting)
         {
             if (sorting.IsNullOrEmpty())

@@ -13,5 +13,7 @@ namespace Acme.BookStore.Books
             CreateUpdateBookDto> //Used to create/update a book
     {
         Task<ListResultDto<AuthorLookupDto>> GetAuthorLookupAsync();
+        
+        Task AddTranslationsAsync(Guid id, AddBookTranslationDto input); // added this line
     }
 }

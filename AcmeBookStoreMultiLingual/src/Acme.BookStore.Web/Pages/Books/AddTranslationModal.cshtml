@@ -1,0 +1,22 @@
+@page
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@using Volo.Abp.AspNetCore.Mvc.UI.Bootstrap.TagHelpers.Modal
+@model Acme.BookStore.Web.Pages.Books.AddTranslationModal
+
+@{
+    Layout = null;
+}
+
+<form asp-page="/Books/AddTranslationModal">
+    <abp-modal>
+        <abp-modal-header>Translations</abp-modal-header>
+        <abp-modal-body>
+            <abp-input asp-for="Id"></abp-input>
+            <abp-select asp-for="@Model.TranslationViewModel.Language" asp-items="Model.Languages" class="form-select">
+                <option selected value="">Pick a language</option>
+            </abp-select>
+            <abp-input asp-for="TranslationViewModel.Name"></abp-input>
+        </abp-modal-body>
+        <abp-modal-footer buttons="@(AbpModalButtons.Cancel | AbpModalButtons.Save)"></abp-modal-footer>
+    </abp-modal>
+</form>

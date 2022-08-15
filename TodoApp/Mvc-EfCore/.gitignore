@@ -258,3 +258,6 @@ src/TodoApp.IdentityServer/Logs/*
 src/TodoApp.HttpApi.Host/Logs/*
 src/TodoApp.HttpApi.HostWithIds/Logs/*
 src/TodoApp.DbMigrator/Logs/*
+
+# Use abp install-libs to restore.
+**/wwwroot/libs/*

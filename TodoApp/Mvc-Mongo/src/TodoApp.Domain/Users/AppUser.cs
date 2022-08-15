@@ -29,6 +29,7 @@ namespace TodoApp.Users
         public virtual string Name { get; private set; }
 
         public virtual string Surname { get; private set; }
+        public bool IsActive { get; }
 
         public virtual string Email { get; private set; }
 

@@ -258,3 +258,6 @@ src/Acme.BookStore.AngularMaterial.IdentityServer/Logs/*
 src/Acme.BookStore.AngularMaterial.HttpApi.Host/Logs/*
 src/Acme.BookStore.AngularMaterial.HttpApi.Host/Logs/*
 src/Acme.BookStore.AngularMaterial.DbMigrator/Logs/*
+
+# Use abp install-libs to restore.
+**/wwwroot/libs/*

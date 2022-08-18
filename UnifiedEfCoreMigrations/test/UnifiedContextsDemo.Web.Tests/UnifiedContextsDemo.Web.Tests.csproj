@@ -18,7 +18,7 @@
     <PackageReference Include="HtmlAgilityPack" Version="1.11.32" />
     <ProjectReference Include="..\UnifiedContextsDemo.Application.Tests\UnifiedContextsDemo.Application.Tests.csproj" />
     <ProjectReference Include="..\..\src\UnifiedContextsDemo.Web\UnifiedContextsDemo.Web.csproj" />
-    <PackageReference Include="Volo.Abp.AspNetCore.TestBase" Version="5.3.0" />
+    <PackageReference Include="Volo.Abp.AspNetCore.TestBase" Version="6.0.0-rc.2" />
   </ItemGroup>
 
   <ItemGroup>

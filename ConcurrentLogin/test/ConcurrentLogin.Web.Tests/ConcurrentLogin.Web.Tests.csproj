@@ -17,7 +17,7 @@
     <PackageReference Include="HtmlAgilityPack" Version="1.11.36" />
     <ProjectReference Include="..\ConcurrentLogin.Application.Tests\ConcurrentLogin.Application.Tests.csproj" />
     <ProjectReference Include="..\..\src\ConcurrentLogin.Web\ConcurrentLogin.Web.csproj" />
-    <PackageReference Include="Volo.Abp.AspNetCore.TestBase" Version="5.3.0" />
+    <PackageReference Include="Volo.Abp.AspNetCore.TestBase" Version="6.0.0-rc.2" />
   </ItemGroup>
 
   <ItemGroup>

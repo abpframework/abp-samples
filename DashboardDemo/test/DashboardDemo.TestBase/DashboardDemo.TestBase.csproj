@@ -21,9 +21,9 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Volo.Abp.TestBase" Version="5.3.0" />
-    <PackageReference Include="Volo.Abp.Autofac" Version="5.3.0" />
-    <PackageReference Include="Volo.Abp.Authorization" Version="5.3.0" />
+    <PackageReference Include="Volo.Abp.TestBase" Version="6.0.0-rc.2" />
+    <PackageReference Include="Volo.Abp.Autofac" Version="6.0.0-rc.2" />
+    <PackageReference Include="Volo.Abp.Authorization" Version="6.0.0-rc.2" />
   </ItemGroup>
 
 </Project>

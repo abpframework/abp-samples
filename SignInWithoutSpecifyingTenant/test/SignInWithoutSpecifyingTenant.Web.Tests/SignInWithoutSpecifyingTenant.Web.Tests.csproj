@@ -18,7 +18,7 @@
     <PackageReference Include="HtmlAgilityPack" Version="1.11.26" />
     <ProjectReference Include="..\SignInWithoutSpecifyingTenant.Application.Tests\SignInWithoutSpecifyingTenant.Application.Tests.csproj" />
     <ProjectReference Include="..\..\src\SignInWithoutSpecifyingTenant.Web\SignInWithoutSpecifyingTenant.Web.csproj" />
-    <PackageReference Include="Volo.Abp.AspNetCore.TestBase" Version="5.3.0" />
+    <PackageReference Include="Volo.Abp.AspNetCore.TestBase" Version="6.0.0-rc.2" />
   </ItemGroup>
 
   <ItemGroup>

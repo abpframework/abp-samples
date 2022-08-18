@@ -12,10 +12,10 @@
   },
   "private": true,
   "dependencies": {
-    "@abp/ng.identity": "~5.3.0",
-    "@abp/ng.setting-management": "~5.3.0",
-    "@abp/ng.tenant-management": "~5.3.0",
-    "@abp/ng.theme.basic": "~5.3.0",
+    "@abp/ng.identity": "^6.0.0-rc.2",
+    "@abp/ng.setting-management": "^6.0.0-rc.2",
+    "@abp/ng.tenant-management": "^6.0.0-rc.2",
+    "@abp/ng.theme.basic": "^6.0.0-rc.2",
     "@angular/animations": "~11.0.3",
     "@angular/common": "~11.0.3",
     "@angular/compiler": "~11.0.3",
@@ -31,7 +31,7 @@
     "zone.js": "~0.10.2"
   },
   "devDependencies": {
-    "@abp/ng.schematics": "~5.3.0",
+    "@abp/ng.schematics": "^6.0.0-rc.2",
     "@angular-devkit/build-angular": "~0.1100.3",
     "@angular/cli": "~11.0.3",
     "@angular/compiler-cli": "~11.0.3",

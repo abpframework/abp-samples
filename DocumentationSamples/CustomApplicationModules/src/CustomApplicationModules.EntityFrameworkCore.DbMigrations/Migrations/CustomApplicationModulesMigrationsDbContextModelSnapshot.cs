@@ -769,7 +769,8 @@ namespace CustomApplicationModules.Migrations
                         .HasColumnName("ExtraProperties");
 
                     b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
+                        .HasColumnType("bit")
+                        .HasColumnName("IsActive");
 
                     b.Property<bool>("IsDeleted")
                         .ValueGeneratedOnAdd()

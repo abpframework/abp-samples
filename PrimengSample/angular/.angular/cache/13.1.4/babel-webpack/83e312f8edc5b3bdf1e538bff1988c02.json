@@ -1,0 +1,1 @@
+{"ast":null,"code":"export default function getWindow(node) {\n  if (node == null) {\n    return window;\n  }\n\n  if (node.toString() !== '[object Window]') {\n    var ownerDocument = node.ownerDocument;\n    return ownerDocument ? ownerDocument.defaultView || window : window;\n  }\n\n  return node;\n}","map":null,"metadata":{},"sourceType":"module"}

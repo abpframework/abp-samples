@@ -711,7 +711,8 @@ namespace PostgeSqlDemo.Migrations
                         .HasColumnName("ExtraProperties");
 
                     b.Property<bool>("IsActive")
-                        .HasColumnType("boolean");
+                        .HasColumnType("boolean")
+                        .HasColumnName("IsActive");
 
                     b.Property<bool>("IsDeleted")
                         .ValueGeneratedOnAdd()

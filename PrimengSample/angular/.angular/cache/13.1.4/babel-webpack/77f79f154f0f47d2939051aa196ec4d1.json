@@ -1,0 +1,1 @@
+{"ast":null,"code":"export default function rectToClientRect(rect) {\n  return Object.assign({}, rect, {\n    left: rect.x,\n    top: rect.y,\n    right: rect.x + rect.width,\n    bottom: rect.y + rect.height\n  });\n}","map":null,"metadata":{},"sourceType":"module"}

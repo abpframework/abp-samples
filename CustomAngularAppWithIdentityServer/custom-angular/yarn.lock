@@ -2,22 +2,22 @@
 # yarn lockfile v1
 
 
-"@abp/ng.core@~5.3.0":
-  version "5.3.0"
-  resolved "https://registry.yarnpkg.com/@abp/ng.core/-/ng.core-5.3.0.tgz#ea31063ddd97610cbf0bd473e01411620634340f"
-  integrity sha512-LQyLzw0F4vcb32pmDbvKuNnw8yk3MklToyHeCuDjSfiNOwOQoCPr/QDOk5bHCaWalho/uwFd+s3Cb+M31Ggn6g==
+"@abp/ng.core@^6.0.0-rc.2":
+  version "6.0.0-rc.2"
+  resolved "https://registry.yarnpkg.com/@abp/ng.core/-/ng.core-6.0.0-rc.2.tgz#dde525584b350dd359b02bd5ba46db93d5e2a895"
+  integrity sha512-VMJjabJBC5NxI2/8zu0KE0j1rF71cvZewbpUqcSqifSU1z+KsIiajBB4sa38nCYLvm1fN6r6560ih9s9eIvP4w==
   dependencies:
-    "@abp/utils" "~5.3.0"
+    "@abp/utils" "~6.0.0-rc.2"
     angular-oauth2-oidc "^13.0.1"
     just-clone "^3.2.1"
     just-compare "^1.4.0"
     ts-toolbelt "6.15.4"
     tslib "^2.0.0"
 
-"@abp/ng.schematics@~5.3.0":
-  version "5.3.0"
-  resolved "https://registry.yarnpkg.com/@abp/ng.schematics/-/ng.schematics-5.3.0.tgz#4d366326cad6772c3ae5c9389464e85ade977075"
-  integrity sha512-jfqKnM3C3jM0pDdMiI8ZDBr89ZpDYQ3MYrPSgP8XZuJJ5rZKLYCzDgaYO9JG0KvkApkJWcysJ5QFPLgaCddkOQ==
+"@abp/ng.schematics@^6.0.0-rc.2":
+  version "6.0.0-rc.2"
+  resolved "https://registry.yarnpkg.com/@abp/ng.schematics/-/ng.schematics-6.0.0-rc.2.tgz#3e8ab897237745ec3d396332dec058f304b2d68c"
+  integrity sha512-nQrwypEybP066WksGCFlnd0tRbDHEL5WADHwquDiBOSTqLZFWvHUnzP7rzmJ0B99msxRaZ9euOXyo3gl/f350w==
   dependencies:
     "@angular-devkit/core" "~11.0.2"
     "@angular-devkit/schematics" "~11.0.2"
@@ -26,10 +26,10 @@
     should-quote "^1.0.0"
     typescript "~3.9.2"
 
-"@abp/utils@~5.3.0":
-  version "5.3.0"
-  resolved "https://registry.yarnpkg.com/@abp/utils/-/utils-5.3.0.tgz#e93739074a3cd445a5a221209506b7e663050ca0"
-  integrity sha512-Nm+h+3PL10+rBFSh8UUuenmGM+OBlEoNQeGzHRmhOc6hJ3oqCogPzY+zkq0e4pksrwhjxAu/cgCEGLAoEXXycw==
+"@abp/utils@~6.0.0-rc.2":
+  version "6.0.0-rc.2"
+  resolved "https://registry.yarnpkg.com/@abp/utils/-/utils-6.0.0-rc.2.tgz#f93d7bcccc35335df5c14be10dc23bd7472868c8"
+  integrity sha512-6YdeptFQR1vZzLVKVjHmGQ+R+pK0iBiZdL7A3GkaC+ad5b+adybf8MJPyrbob96xV77/CEuXFUG88URed1B5Fw==
   dependencies:
     just-compare "^1.3.0"
 

@@ -17,13 +17,13 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Volo.Abp.Autofac.WebAssembly" Version="5.3.0" />
-    <PackageReference Include="Volo.Abp.AspNetCore.Components.WebAssembly.BasicTheme" Version="5.3.0" />
+    <PackageReference Include="Volo.Abp.Autofac.WebAssembly" Version="6.0.0-rc.2" />
+    <PackageReference Include="Volo.Abp.AspNetCore.Components.WebAssembly.BasicTheme" Version="6.0.0-rc.2" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Volo.Abp.Identity.Blazor" Version="5.3.0" />
-    <PackageReference Include="Volo.Abp.TenantManagement.Blazor" Version="5.3.0" />
+    <PackageReference Include="Volo.Abp.Identity.Blazor" Version="6.0.0-rc.2" />
+    <PackageReference Include="Volo.Abp.TenantManagement.Blazor" Version="6.0.0-rc.2" />
   </ItemGroup>
 
   <ItemGroup>

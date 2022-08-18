@@ -13,11 +13,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Volo.Abp.Identity.Application" Version="5.3.0" />
-    <PackageReference Include="Volo.Abp.PermissionManagement.Application" Version="5.3.0" />
-    <PackageReference Include="Volo.Abp.TenantManagement.Application" Version="5.3.0" />
-    <PackageReference Include="Volo.Abp.FeatureManagement.Application" Version="5.3.0" />
-    <PackageReference Include="Volo.Abp.Account.Application" Version="5.3.0" />
+    <PackageReference Include="Volo.Abp.Identity.Application" Version="6.0.0-rc.2" />
+    <PackageReference Include="Volo.Abp.PermissionManagement.Application" Version="6.0.0-rc.2" />
+    <PackageReference Include="Volo.Abp.TenantManagement.Application" Version="6.0.0-rc.2" />
+    <PackageReference Include="Volo.Abp.FeatureManagement.Application" Version="6.0.0-rc.2" />
+    <PackageReference Include="Volo.Abp.Account.Application" Version="6.0.0-rc.2" />
   </ItemGroup>
 
 </Project>

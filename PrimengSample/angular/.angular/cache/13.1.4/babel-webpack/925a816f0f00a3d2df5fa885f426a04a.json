@@ -1,0 +1,1 @@
+{"ast":null,"code":"import { max as mathMax, min as mathMin } from \"./math.js\";\nexport function within(min, value, max) {\n  return mathMax(min, mathMin(value, max));\n}\nexport function withinMaxClamp(min, value, max) {\n  var v = within(min, value, max);\n  return v > max ? max : v;\n}","map":null,"metadata":{},"sourceType":"module"}

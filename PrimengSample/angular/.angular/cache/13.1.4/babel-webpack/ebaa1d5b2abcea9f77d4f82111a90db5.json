@@ -1,0 +1,1 @@
+{"ast":null,"code":"export default function getFreshSideObject() {\n  return {\n    top: 0,\n    right: 0,\n    bottom: 0,\n    left: 0\n  };\n}","map":null,"metadata":{},"sourceType":"module"}

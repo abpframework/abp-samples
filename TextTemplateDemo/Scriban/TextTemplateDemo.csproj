@@ -15,9 +15,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Volo.Abp.Autofac" Version="5.3.0" />
-    <PackageReference Include="Volo.Abp.TextTemplating.Scriban" Version="5.3.0" />
-    <PackageReference Include="Volo.Abp.Localization" Version="5.3.0" />
+    <PackageReference Include="Volo.Abp.Autofac" Version="6.0.0-rc.2" />
+    <PackageReference Include="Volo.Abp.TextTemplating.Scriban" Version="6.0.0-rc.2" />
+    <PackageReference Include="Volo.Abp.Localization" Version="6.0.0-rc.2" />
   </ItemGroup>
 
 </Project>

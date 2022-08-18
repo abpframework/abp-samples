@@ -620,7 +620,7 @@ namespace ConcurrentLogin.Migrations
                         .ValueGeneratedOnAdd()
                         .HasMaxLength(128)
                         .HasColumnType("nvarchar(128)")
-                        .HasDefaultValue("11220e28ce5848d587c10eda8ba4bda8");
+                        .HasDefaultValue("2b44a023b55a451b8bb7d926e8258282");
 
                     b.Property<DateTime>("CreationTime")
                         .HasColumnType("datetime2")
@@ -655,7 +655,8 @@ namespace ConcurrentLogin.Migrations
                         .HasColumnName("ExtraProperties");
 
                     b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
+                        .HasColumnType("bit")
+                        .HasColumnName("IsActive");
 
                     b.Property<bool>("IsDeleted")
                         .ValueGeneratedOnAdd()

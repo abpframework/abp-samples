@@ -1,0 +1,1 @@
+{"ast":null,"code":"import { auto } from \"../enums.js\";\nexport default function getBasePlacement(placement) {\n  return placement.split('-')[0];\n}","map":null,"metadata":{},"sourceType":"module"}

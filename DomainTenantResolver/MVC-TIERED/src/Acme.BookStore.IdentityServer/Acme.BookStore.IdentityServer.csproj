@@ -39,12 +39,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Volo.Abp.Autofac" Version="5.3.0" />
-    <PackageReference Include="Volo.Abp.Caching.StackExchangeRedis" Version="5.3.0" />
-    <PackageReference Include="Volo.Abp.AspNetCore.Mvc.UI.Theme.Basic" Version="5.3.0" />
-    <PackageReference Include="Volo.Abp.AspNetCore.Serilog" Version="5.3.0" />
-    <PackageReference Include="Volo.Abp.Account.Web.IdentityServer" Version="5.3.0" />
-    <PackageReference Include="Volo.Abp.Account.Application" Version="5.3.0" />
+    <PackageReference Include="Volo.Abp.Autofac" Version="6.0.0-rc.2" />
+    <PackageReference Include="Volo.Abp.Caching.StackExchangeRedis" Version="6.0.0-rc.2" />
+    <PackageReference Include="Volo.Abp.AspNetCore.Mvc.UI.Theme.Basic" Version="6.0.0-rc.2" />
+    <PackageReference Include="Volo.Abp.AspNetCore.Serilog" Version="6.0.0-rc.2" />
+    <PackageReference Include="Volo.Abp.Account.Web.IdentityServer" Version="6.0.0-rc.2" />
+    <PackageReference Include="Volo.Abp.Account.Application" Version="6.0.0-rc.2" />
     <ProjectReference Include="..\Acme.BookStore.EntityFrameworkCore.DbMigrations\Acme.BookStore.EntityFrameworkCore.DbMigrations.csproj" />
   </ItemGroup>
 

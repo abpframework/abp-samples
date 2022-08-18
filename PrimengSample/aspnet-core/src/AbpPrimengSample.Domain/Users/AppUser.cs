@@ -12,6 +12,7 @@ namespace AbpPrimengSample.Users
      * - You can query users from database with this entity.
      * - You can update values of your custom properties.
      */
+    
     public class AppUser : FullAuditedAggregateRoot<Guid>, IUser
     {
         #region Base properties
@@ -29,6 +30,7 @@ namespace AbpPrimengSample.Users
         public virtual string Name { get; private set; }
 
         public virtual string Surname { get; private set; }
+        public bool IsActive { get; private set; }
 
         public virtual string Email { get; private set; }
 

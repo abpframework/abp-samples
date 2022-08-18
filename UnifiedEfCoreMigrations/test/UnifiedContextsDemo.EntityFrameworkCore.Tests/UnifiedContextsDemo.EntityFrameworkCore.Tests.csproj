@@ -10,7 +10,7 @@
   <ItemGroup>
     <ProjectReference Include="..\UnifiedContextsDemo.TestBase\UnifiedContextsDemo.TestBase.csproj" />
     <ProjectReference Include="..\..\src\UnifiedContextsDemo.EntityFrameworkCore\UnifiedContextsDemo.EntityFrameworkCore.csproj" />
-    <PackageReference Include="Volo.Abp.EntityFrameworkCore.Sqlite" Version="5.3.0" />
+    <PackageReference Include="Volo.Abp.EntityFrameworkCore.Sqlite" Version="6.0.0-rc.2" />
   </ItemGroup>
 
   <ItemGroup>

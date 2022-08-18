@@ -1,0 +1,1 @@
+{"ast":null,"code":"export default function format(str) {\n  for (var _len = arguments.length, args = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {\n    args[_key - 1] = arguments[_key];\n  }\n\n  return [].concat(args).reduce(function (p, c) {\n    return p.replace(/%s/, c);\n  }, str);\n}","map":null,"metadata":{},"sourceType":"module"}

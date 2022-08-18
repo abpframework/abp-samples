@@ -1,0 +1,1 @@
+{"ast":null,"code":"export var max = Math.max;\nexport var min = Math.min;\nexport var round = Math.round;","map":null,"metadata":{},"sourceType":"module"}

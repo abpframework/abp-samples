@@ -1,0 +1,1 @@
+{"ast":null,"code":"import getNodeName from \"./getNodeName.js\";\nexport default function isTableElement(element) {\n  return ['table', 'td', 'th'].indexOf(getNodeName(element)) >= 0;\n}","map":null,"metadata":{},"sourceType":"module"}

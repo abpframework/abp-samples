@@ -10,7 +10,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\src\MatBlazorSample.EntityFrameworkCore.DbMigrations\MatBlazorSample.EntityFrameworkCore.DbMigrations.csproj" />
     <ProjectReference Include="..\MatBlazorSample.TestBase\MatBlazorSample.TestBase.csproj" />
-    <PackageReference Include="Volo.Abp.EntityFrameworkCore.Sqlite" Version="5.3.0" />
+    <PackageReference Include="Volo.Abp.EntityFrameworkCore.Sqlite" Version="6.0.0-rc.2" />
   </ItemGroup>
 
   <ItemGroup>

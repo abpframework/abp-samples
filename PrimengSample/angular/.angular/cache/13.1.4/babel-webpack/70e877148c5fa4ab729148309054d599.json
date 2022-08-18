@@ -1,0 +1,1 @@
+{"ast":null,"code":"import getWindow from \"./getWindow.js\";\nexport default function getWindowScroll(node) {\n  var win = getWindow(node);\n  var scrollLeft = win.pageXOffset;\n  var scrollTop = win.pageYOffset;\n  return {\n    scrollLeft: scrollLeft,\n    scrollTop: scrollTop\n  };\n}","map":null,"metadata":{},"sourceType":"module"}

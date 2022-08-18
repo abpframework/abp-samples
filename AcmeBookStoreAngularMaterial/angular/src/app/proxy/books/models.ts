@@ -13,7 +13,7 @@ export interface AuthorWithDetailsDto extends AuthorDto {
 export interface BookDto extends AuditedEntityDto<string> {
   name?: string;
   type: BookType;
-  publishDate?: string;
+  publishDate?: Date;
   price: number;
   authorId?: string;
   authorName?: string;

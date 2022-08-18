@@ -43,11 +43,15 @@ export class BookComponent implements OnInit {
     const dialogRef = this.dialog.open(BookDialogComponent);
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
+        this.setPublishDate(result);
         this.bookService.create(result).subscribe(() => {
           this.list.get();
         });
       }
     });
+  }
+  setPublishDate(book: any){
+    book.publishDate = book.publishDate ? new Date(book.publishDate) : null;
   }
 
   editBook(id: any) {
@@ -57,6 +61,7 @@ export class BookComponent implements OnInit {
       });
       dialogRef.afterClosed().subscribe(result => {
         if (result) {
+          this.setPublishDate(result);
           this.bookService.update(id, result).subscribe(() => {
             this.list.get();
           });

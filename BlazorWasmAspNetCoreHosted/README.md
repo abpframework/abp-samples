@@ -90,7 +90,7 @@ Microsoft provides a template named Blazor WebAssembly Asp.NET Core Hosted. This
             }
         }
     }
-```
+    ```
 
 - Run `BookStore.DbMigrator` once.
 

@@ -19,7 +19,7 @@ Microsoft provides a template named Blazor WebAssembly Asp.NET Core Hosted. This
     ```
 
 - Add Blazor framework files middleware into **OnApplicationInitializaiton** method in `BookStoreHttpApiHostModule.cs` file.
-    ```cs
+    ```csharp
     public override void OnApplicationInitialization(ApplicationInitializationContext context)
     {
         // ...
@@ -34,7 +34,7 @@ Microsoft provides a template named Blazor WebAssembly Asp.NET Core Hosted. This
 
 - Add a mapping for fallback to index.html file at the end of the **OnApplicationInitializaiton** method in `BookStoreHttpApiHostModule.cs` file.
 
-    ```cs
+    ```csharp
     if (app is WebApplication webApp)
     {
         webApp.MapFallbackToFile("index.html");

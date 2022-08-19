@@ -218,7 +218,8 @@ public class BookStoreHttpApiHostModule : AbpModule
         }
 
         app.UseCorrelationId();
-        
+
+        app.UseBlazorFrameworkFiles();
         app.UseStaticFiles();
         app.UseRouting();
         app.UseCors();
@@ -246,5 +247,10 @@ public class BookStoreHttpApiHostModule : AbpModule
         app.UseAuditing();
         app.UseAbpSerilogEnrichers();
         app.UseConfiguredEndpoints();
+
+        if (app is WebApplication webApp)
+        {
+            webApp.MapFallbackToFile("index.html");
+        }
     }
 }

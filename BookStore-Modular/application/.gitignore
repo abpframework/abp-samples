@@ -257,3 +257,6 @@ src/Acme.BookStore.Web.Host/Logs/*
 src/Acme.BookStore.IdentityServer/Logs/*
 src/Acme.BookStore.HttpApi.Host/Logs/*
 src/Acme.BookStore.HttpApi.HostWithIds/Logs/*
+
+# Use abp install-libs to restore.
+**/wwwroot/libs/*

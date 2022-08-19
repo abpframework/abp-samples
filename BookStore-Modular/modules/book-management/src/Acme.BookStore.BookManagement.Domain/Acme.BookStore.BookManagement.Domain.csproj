@@ -12,7 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Volo.Abp.Ddd.Domain" Version="5.3.0" />
+    <PackageReference Include="Volo.Abp.Ddd.Domain" Version="6.0.0-rc.2" />
   </ItemGroup>
 
 </Project>

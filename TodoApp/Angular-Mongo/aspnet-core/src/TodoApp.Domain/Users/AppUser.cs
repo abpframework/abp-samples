@@ -38,6 +38,8 @@ namespace TodoApp.Users
 
         public virtual bool PhoneNumberConfirmed { get; private set; }
 
+        public bool IsActive { get; private set; }
+
         #endregion
 
         /* Add your own properties here. Example:

@@ -260,3 +260,6 @@ src/TodoApp.HttpApi.HostWithIds/Logs/*
 src/TodoApp.DbMigrator/Logs/*
 src/TodoApp.Blazor.Server/Logs/*
 src/TodoApp.Blazor.Server.Tiered/Logs/*
+
+# Use abp install-libs to restore.
+**/wwwroot/libs/*

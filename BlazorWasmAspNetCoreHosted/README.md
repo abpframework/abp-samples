@@ -1,6 +1,6 @@
 # Blazor WebAssembly Asp.NET Core Hosted
 
-Microsoft provides a template named Blazor WebAssembly Asp.NET Core Hosted. This template is a Blazor WebAssembly application that hosts a Blazor WebAssembly application. Basically, `HttpApi.Host` and `Blazor` applications are hosted together. In this case, only one application will be deployed and blazor application will be served by the HttpApi.Host.
+Microsoft provides a template named Blazor WebAssembly Asp.NET Core Hosted. This template is an Asp.NET Core Razor Pages application that hosts a Blazor WebAssembly application. Basically, `HttpApi.Host` and `Blazor` applications are hosted together. In this case, only one application will be deployed and blazor application will be served by the HttpApi.Host.
 
 ## Instructions
 

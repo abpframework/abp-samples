@@ -7,7 +7,7 @@ Microsoft provides a template named Blazor WebAssembly Asp.NET Core Hosted. This
 - Create a new ABP Application with Blazor UI
 
     ```bash
-    abp new BookStore -u blazor -t app -v 6.0.0-rc.2
+    abp new BookStore -u blazor -t app -v 6.0.0-rc.2 --no-random-port
     ```
 
 - Add Blazor project reference and `Microsoft.AspNetCore.Components.WebAssembly.Server` package reference to the HttpApi.Host project.
@@ -40,3 +40,64 @@ Microsoft provides a template named Blazor WebAssembly Asp.NET Core Hosted. This
         webApp.MapFallbackToFile("index.html");
     }
     ```
+
+- Configure your blazor SelfUrl as HttpApi.Host URL in `BookStore.Blazor/wwwroot/appsettings.json`
+
+    ```json
+    {
+        "App": {
+            "SelfUrl": "https://localhost:44305"
+        },
+        "AuthServer": {
+            "Authority": "https://localhost:44305",
+            "ClientId": "BookStore_Blazor",
+            "ResponseType": "code"
+        },
+        "RemoteServices": {
+            "Default": {
+            "BaseUrl": "https://localhost:44305"
+            }
+        },
+        "AbpCli": {
+            "Bundle": {
+            "Mode": "BundleAndMinify", /* Options: None, Bundle, BundleAndMinify */
+            "Name": "global",
+            "Parameters": {
+
+                }
+            }
+        }
+    }
+    ```	
+
+- Configure DbMigrator too. Navigate to `BookStore.DbMigrator/appsettings.json` and change Blazor URL to HttpApi.Host URL.
+
+    ```json
+    {
+        "ConnectionStrings": {
+            "Default": "XXX"
+        },
+        "OpenIddict": {
+            "Applications": {
+            "BookStore_Blazor": {
+                "ClientId": "BookStore_Blazor",
+                "RootUrl": "https://localhost:44305"
+            },
+            "BookStore_Swagger": {
+                "ClientId": "BookStore_Swagger",
+                "RootUrl": "https://localhost:44305"
+            }
+            }
+        }
+    }
+```
+
+- Run `BookStore.DbMigrator` once.
+
+- Remove **HomeController.cs** from HttpApi.Host project to prevent `/swagger` redirection.
+
+- Run only `BookStore.HttpApi.Host` project and see the result.
+
+    ![blazor-aspnetcore-hosted-demo](blazor-aspnetcore-hosted-demo.gif)
+
+    As you can see, URL is `localhost:44305` for blazor application and login razor page. MVC application and Blazor WebAssembly works together. As you can see swagger UI is available at `localhost:44305/swagger` too.

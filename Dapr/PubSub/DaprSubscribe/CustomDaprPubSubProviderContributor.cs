@@ -2,17 +2,17 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Shared;
-using Volo.Abp.AspNetCore.Dapr;
-using Volo.Abp.AspNetCore.Dapr.Models;
 using Volo.Abp.AspNetCore.Mvc;
+using Volo.Abp.AspNetCore.Mvc.Dapr.EventBus;
+using Volo.Abp.AspNetCore.Mvc.Dapr.EventBus.Models;
 
 namespace DaprSubscribe;
 
-public class CustomDaprPubSubProviderContributor : IAbpAspNetCoreDaprPubSubProviderContributor
+public class CustomDaprPubSubProviderContributor : IAbpAspNetCoreMvcDaprPubSubProviderContributor
 {
-    public Task ContributeAsync(AbpAspNetCoreDaprPubSubProviderContributorContext context)
+    public Task ContributeAsync(AbpAspNetCoreMvcDaprPubSubProviderContributorContext context)
     {
-        context.Subscriptions.Add(new AbpAspNetCoreDaprSubscriptionDefinition()
+        context.Subscriptions.Add(new AbpAspNetCoreMvcDaprSubscriptionDefinition()
         {
             PubSubName = "test-pubsub",
             Topic = "test-topic",

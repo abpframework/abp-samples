@@ -3,8 +3,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Volo.Abp;
-using Volo.Abp.AspNetCore.Dapr;
-using Volo.Abp.AspNetCore.Mvc;
+using Volo.Abp.AspNetCore.Mvc.Dapr.EventBus;
 using Volo.Abp.Autofac;
 using Volo.Abp.Dapr;
 using Volo.Abp.EventBus.Dapr;
@@ -19,7 +18,7 @@ var app = builder.Build();
 await app.InitializeApplicationAsync();
 await app.RunAsync();
 
-[DependsOn(typeof(AbpAutofacModule), typeof(AbpAspNetCoreDaprEventBusModule))]
+[DependsOn(typeof(AbpAutofacModule), typeof(AbpAspNetCoreMvcDaprEventBusModule))]
 public class AppModule : AbpModule
 {
     public override void ConfigureServices(ServiceConfigurationContext context)
@@ -38,7 +37,7 @@ public class AppModule : AbpModule
             options.PubSubName = "test-pubsub";
         });
 
-        Configure<AbpAspNetCoreDaprEventBusOptions>(options =>
+        Configure<AbpAspNetCoreMvcDaprEventBusOptions>(options =>
         {
             options.Contributors.Add(new CustomDaprPubSubProviderContributor());
         });

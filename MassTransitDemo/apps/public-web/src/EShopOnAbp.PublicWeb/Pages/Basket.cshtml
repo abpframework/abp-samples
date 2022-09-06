@@ -1,0 +1,17 @@
+﻿@page
+@using EShopOnAbp.Localization
+@using EShopOnAbp.PublicWeb.Components.Basket
+@using Microsoft.Extensions.Localization
+@model EShopOnAbp.PublicWeb.Pages.BasketModel
+
+@section scripts {
+    <abp-script src="/client-proxies/basket-proxy.js"/>
+}
+
+@inject IStringLocalizer<EShopOnAbpResource> L
+
+<div class="row">
+    <div id="BasketArea" class="pt-5">
+        @await Component.InvokeAsync(typeof(BasketWidgetViewComponent))
+    </div>
+</div>

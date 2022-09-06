@@ -1,0 +1,43 @@
+config:
+  selfUrl: # https://eshop-st-identity
+  corsOrigins: # https://eshop-st-gateway-web,https://eshop-st-gateway-public-web,https://eshop-st-gateway-internal
+  connectionStrings:
+    identityService: #
+    administrationService: #
+  authServer:
+    authority: http://eshop-st-authserver
+    requireHttpsMetadata: "false"
+    swaggerClientId: WebGateway_Swagger
+    swaggerClientSecret: "1q2w3e*"
+  dotnetEnv: Staging
+  redisHost: eshop-st-redis
+  rabbitmqHost: eshop-st-rabbitmq
+  elasticsearchHost: eshop-st-elasticsearch
+  stringEncryptionDefaultPassPhrase: gsKnGZ041HLL4IM8
+
+# Seeded clients 
+identityServerClients:
+  webRootUrl: #  
+  publicWebRootUrl: #
+  webGatewayRootUrl: #
+  publicWebGatewayRootUrl: #
+  accountServiceRootUrl: #  
+  identityServiceRootUrl: #
+  administrationServiceRootUrl: #
+  basketServiceRootUrl: #
+  catalogServiceRootUrl: #
+  orderingServiceRootUrl: #
+  paymentServiceRootUrl: #
+  
+
+ingress:
+  host: eshop-st-identity
+  tlsSecret: eshop-wildcard-tls
+
+image:
+  repository: eshoponabp/service-identity
+  tag: latest
+  pullPolicy: IfNotPresent
+
+env: {}
+    

@@ -1,0 +1,33 @@
+.img-size {
+    width: 80%;
+}
+
+.order-item {
+    width: -webkit-fill-available;
+    background-color: #fff;
+    border: 1px solid #eee;
+    border-radius: 3px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, .05);
+    transition: all .2s;
+    cursor: default;
+}
+
+.order-item:hover {
+    box-shadow: 0 0 20px rgba(0, 0, 0, .1);
+}
+
+.o-header {
+    text-transform: uppercase;
+    font-weight: 500;    
+}
+
+.o-description {
+    font-weight: 500;
+    font-size: larger;
+}
+.o-order-no{
+    font-size:larger;
+}
+.order-title{
+    font-size: x-large;
+}

@@ -1,0 +1,69 @@
+﻿@using EShopOnAbp.Localization
+@using Microsoft.AspNetCore.Mvc.Localization
+@using Microsoft.Extensions.Options
+@using Volo.Abp.Http.Client
+@inject IHtmlLocalizer<EShopOnAbpResource> L
+@model EShopOnAbp.BasketService.Services.BasketDto
+@inject IOptions<AbpRemoteServiceOptions> options
+
+<div id="shopping-cart" class="nav-link">
+
+	@if (Model == null)
+	{
+		<span class="cart-error" style="vertical-align: -webkit-baseline-middle;color: white">@L["Toolbar:BasketNotLoaded"] </span>
+	}
+	else
+	{
+		<div class="dropdown">
+			<a class="btn nav-link dropdown-toggle" id="shopping-cart-link" style="padding:0px" role="button" href="~/Basket">
+				<span abp-badge="Info" data-cart-count>@Model.Items.Count</span> @L["Toolbar:Cart"]
+			</a>
+
+			<div class="dropdown-menu dropdown-menu-end border-0 shadow-sm cart-preview" aria-labelledby="shopping-cart-link">
+
+				@if (!Model.Items.Any())
+				{
+					<div class="p-3 text-center">
+						<h3>
+							<i class="fas fa-shopping-cart"></i>
+						</h3>
+						<div>
+							<span>
+								@L["Toolbar:CartEmpty"]
+							</span>
+						</div>
+					</div>
+				}
+				else
+				{
+					foreach (var item in Model.Items)
+					{
+						string imageName = item.ImageName.IsNullOrEmpty() ? $"{options.Value.RemoteServices.Default.BaseUrl}product-images/noimage.jpg" : $"{options.Value.RemoteServices.Default.BaseUrl}product-images/{item.ImageName}";
+						var price = item.TotalPrice.ToString("0.00");
+						<div class="dropdown-item">
+
+							<abp-row>
+								<abp-column size="_3">
+									<img class="basket-item-preview-image m-1 my-2" src="@imageName" />
+								</abp-column>
+								<abp-column size="_9">
+									<p class="mt-2 mb-0"><strong>@item.ProductName</strong></p>
+									<p>$@item.TotalPrice</p>
+								</abp-column>
+							</abp-row>
+						</div>
+					}
+
+					<div>
+						<div class="d-grid gap-2 m-2">
+							<a href="~/Basket" class="btn btn-outline-warning text-center">
+								@L["Toolbar:Cart"]
+							</a>
+						</div>
+					</div>
+				}
+
+			</div>
+		</div>
+	}
+</div>

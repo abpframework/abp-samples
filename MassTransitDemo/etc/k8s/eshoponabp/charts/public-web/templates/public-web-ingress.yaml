@@ -1,0 +1,41 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{ .Release.Name }}-{{ .Chart.Name }}-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/proxy-buffer-size: 32k
+    nginx.ingress.kubernetes.io/proxy-buffers-number: "8"
+    cert-manager.io/cluster-issuer: letsencrypt
+{{- if eq .Release.Name "eshop-az" }}
+    nginx.ingress.kubernetes.io/from-to-www-redirect: "true"
+{{- end }}
+spec:
+  ingressClassName: nginx
+  tls:
+  - hosts:
+      - {{ .Values.ingress.host }}
+{{- if eq .Release.Name "eshop-az" }}
+      - {{ print "www." .Values.ingress.host  }}
+{{- end }}
+{{- if eq .Release.Name "eshop-az" }}
+    secretName: {{ .Release.Name }}-{{ .Chart.Name }}-tls
+{{- else }}
+    secretName: {{ .Values.ingress.tlsSecret }}
+{{- end }}
+  rules:
+{{- if eq .Release.Name "eshop-az" }}
+  - host: "{{ print "www." .Values.ingress.host}}"
+{{- else }}
+  - host: "{{ .Values.ingress.host }}"
+{{- end }}
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: {{ .Release.Name }}-{{ .Chart.Name }}
+            port:
+              number: 80

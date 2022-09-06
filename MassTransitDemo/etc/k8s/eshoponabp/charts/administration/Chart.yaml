@@ -1,0 +1,6 @@
+apiVersion: v2
+name: administration
+appVersion: "1.0"
+description: eShopOnAbp Administration Microservice
+version: 1.0.0
+type: application

@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net6.0</TargetFramework>
+        <RootNamespace>EShopOnAbp.IdentityService</RootNamespace>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\EShopOnAbp.IdentityService.Domain.Shared\EShopOnAbp.IdentityService.Domain.Shared.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Volo.Abp.Identity.Domain" Version="5.1.2" />
+        <PackageReference Include="Volo.Abp.IdentityServer.Domain" Version="5.1.2" />
+    </ItemGroup>
+
+</Project>

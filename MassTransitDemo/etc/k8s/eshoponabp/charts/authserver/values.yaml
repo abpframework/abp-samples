@@ -1,0 +1,28 @@
+config:
+  selfUrl: # https://eshop-st-authserver
+  corsOrigins: # https://eshop-st-identity,https://eshop-st-administration
+  allowedRedirectUrls: https://eshop-st-web
+  connectionStrings:
+    administrationService: #
+    identityService: #
+  authServer:
+    authority: http://eshop-st-authserver
+    requireHttpsMetadata: "false"
+    swaggerClientId: WebGateway_Swagger
+    swaggerClientSecret: "1q2w3e*"  
+  dotnetEnv: # 
+  redisHost: #
+  rabbitmqHost: #
+  elasticsearchHost: #
+  stringEncryptionDefaultPassPhrase: gsKnGZ041HLL4IM8
+
+ingress:
+  host: eshop-st-authserver
+  tlsSecret: eshop-wildcard-tls
+
+image:
+  repository: eshoponabp/app-authserver
+  tag: latest
+  pullPolicy: IfNotPresent
+
+env: {}

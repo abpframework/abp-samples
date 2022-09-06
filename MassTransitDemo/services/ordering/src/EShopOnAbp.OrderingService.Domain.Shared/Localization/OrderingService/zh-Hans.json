@@ -1,0 +1,20 @@
+{
+  "culture": "zh-Hans",
+  "texts": {
+    "MyAccount": "我的账户",
+    "SamplePageMessage": "OrderingService模块的示例页面",
+    "Ordering:00001": "订单状态的可能值：{0}",
+    "Ordering:00011": "支付类型的可能值：{0}",
+    "Ordering:00002": "无效的单位数量",
+    "Ordering:00003": "无效的折扣",
+    "Ordering:00004": "订单项的总额低于申请的折扣",
+    "Ordering:01001": "无法找到 id 为 {0} 的订单！",
+    "Permission:Orders": "命令",
+    "Permission:OrderingService": "订购服务",
+    "Menu:Orders": "命令",
+    "Menu:OrderManagement": "订单管理",
+    "Permission:Orders.SetAsCancelled": "设置为取消",
+    "Permission:Orders.SetAsShipped": "设置为发货",
+    "Permission:Dashboard": "仪表板"
+  }
+}

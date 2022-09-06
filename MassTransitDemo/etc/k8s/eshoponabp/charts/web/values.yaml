@@ -1,0 +1,18 @@
+config:
+  selfUrl: https://admin.eshoponabp.com
+  gatewayUrl: https://www.gateway.eshoponabp.com/
+  authServer:
+    authority: https://auth.eshoponabp.com
+    requireHttpsMetadata: "false"
+    responseType: "code"
+ingress:
+  host: eshop-st-web
+  tlsSecret: eshop-wildcard-tls
+
+image:
+  repository: eshoponabp/app-web
+  tag: latest
+  pullPolicy: IfNotPresent
+
+# Extra environment variables or configurations
+env: {}

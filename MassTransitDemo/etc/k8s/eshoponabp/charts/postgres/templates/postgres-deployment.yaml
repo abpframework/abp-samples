@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: {{ .Release.Name }}-{{ .Chart.Name }}
+spec:
+  serviceName: {{ .Release.Name }}-{{ .Chart.Name }}
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ .Release.Name }}-{{ .Chart.Name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Release.Name }}-{{ .Chart.Name }}
+    spec:
+      containers:
+        - image: "postgres:14.1"
+          name: {{ .Release.Name }}-{{ .Chart.Name }}
+{{- if eq .Release.Name "eshop-az" }}
+          volumeMounts:
+          - mountPath: "/var/opt/postgres"
+            name: {{ .Release.Name }}-{{ .Chart.Name }}-database-volume
+            subPath: postgres-data
+{{- end }}
+          ports:
+            - name: postgres
+              containerPort: 5432
+          env:
+          - name: POSTGRES_PASSWORD
+            value: "myPassw0rd"
+{{- if eq .Release.Name "eshop-az" }}
+  volumeClaimTemplates:
+  - metadata:
+      name: {{ .Release.Name }}-{{ .Chart.Name }}-database-volume
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      storageClassName: "managed-premium-retain"
+      resources:
+        requests:
+          storage: 32Gi
+{{- end }}

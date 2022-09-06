@@ -1,0 +1,118 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Release.Name }}-{{ .Chart.Name }}-configmap
+data:
+  yarp.json: |-
+    {
+    "ReverseProxy": {
+      "Routes": {
+        "Account Service": {
+          "ClusterId": "account-cluster",
+          "Match": {
+            "Path": "/api/account/{**everything}"
+          }
+        },
+        "Identity Service": {
+          "ClusterId": "identity-cluster",
+          "Match": {
+            "Path": "/api/identity/{**everything}"
+          }
+        },
+        "Administration Service": {
+          "ClusterId": "administration-cluster",
+          "Match": {
+            "Path": "/api/abp/{**everything}"
+          }
+        },
+        "feature-management-route": {
+          "ClusterId": "feature-management-cluster",
+          "Match": {
+            "Path": "/api/feature-management/{**everything}"
+          }
+        },
+        "permission-management-route": {
+          "ClusterId": "permission-management-cluster",
+          "Match": {
+            "Path": "/api/permission-management/{**everything}"
+          }
+        },
+        "setting-management-route": {
+          "ClusterId": "setting-management-cluster",
+          "Match": {
+            "Path": "/api/setting-management/{**everything}"
+          }
+        },
+        "Catalog Service": {
+          "ClusterId": "catalogCluster",
+          "Match": {
+            "Path": "/api/catalog/{**everything}"
+          }
+        },
+        "Ordering Service": {
+          "ClusterId": "orderingCluster",
+          "Match": {
+            "Path": "/api/ordering/{**everything}"
+          }
+        }
+      },
+      "Clusters": {
+        "account-cluster": {
+          "Destinations": {
+            "destination1": {
+              "Address": "{{ .Values.reRoutes.accountService.url }}"
+            }
+          }
+        },
+        "identity-cluster": {
+          "Destinations": {
+            "destination1": {
+              "Address": "{{ .Values.reRoutes.identityService.url }}"
+            }
+          }
+        },
+        "administration-cluster": {
+          "Destinations": {
+            "destination1": {
+              "Address": "{{ .Values.reRoutes.administrationService.url }}"
+            }
+          }
+        },
+        "feature-management-cluster": {
+          "Destinations": {
+            "destination1": {
+              "Address": "{{ .Values.reRoutes.administrationService.url }}"
+            }
+          }
+        },
+        "permission-management-cluster": {
+          "Destinations": {
+            "destination1": {
+              "Address": "{{ .Values.reRoutes.administrationService.url }}"
+            }
+          }
+        },
+        "setting-management-cluster": {
+          "Destinations": {
+            "destination1": {
+              "Address": "{{ .Values.reRoutes.administrationService.url }}"
+            }
+          }
+        },
+        "catalogCluster": {
+          "Destinations": {
+            "destination1": {
+              "Address": "{{ .Values.reRoutes.catalogService.url }}"
+            }
+          }
+        },
+        "orderingCluster": {
+          "Destinations": {
+            "destination1": {
+              "Address": "{{ .Values.reRoutes.orderingService.url }}"
+            }
+          }
+        }
+      }
+    }
+    }

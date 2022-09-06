@@ -1,0 +1,106 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Release.Name }}-{{ .Chart.Name }}-configmap
+data:
+  yarp.json: |-
+    {
+    "ReverseProxy": {
+      "Routes": {
+        "Account Service": {
+          "ClusterId": "account-cluster",
+          "Match": {
+            "Path": "/api/account/{**everything}"
+          }
+        },
+        "Administration Service": {
+          "ClusterId": "administration-cluster",
+          "Match": {
+            "Path": "/api/abp/{**everything}"
+          }
+        },
+        "Catalog Service": {
+          "ClusterId": "catalog-cluster",
+          "Match": {
+            "Path": "/api/catalog/{**everything}"
+          }
+        },      
+        "Basket Service": {
+          "ClusterId": "basket-cluster",
+          "Match": {
+            "Path": "/api/basket/{**everything}"
+          }
+        },
+        "Ordering Service": {
+          "ClusterId": "ordering-cluster",
+          "Match": {
+            "Path": "/api/ordering/{**everything}"
+          }
+        },
+        "Payment Service": {
+          "ClusterId": "payment-cluster",
+          "Match": {
+            "Path": "/api/payment/{**everything}"
+          }
+        },
+        "product-picture-route": {
+          "ClusterId": "product-picture-cluster",
+          "Match": {
+            "Path": "/product-images/{**everything}",
+            "Methods" : [ "GET" ]
+          }
+        }
+      },
+      "Clusters": {
+        "account-cluster": {
+          "Destinations": {
+            "destination1": {
+              "Address": "{{ .Values.reRoutes.accountService.url }}"
+            }
+          }
+        },
+        "administration-cluster": {
+          "Destinations": {
+            "destination1": {
+              "Address": "{{ .Values.reRoutes.administrationService.url }}"
+            }
+          }
+        },
+        "catalog-cluster": {
+          "Destinations": {
+            "destination1": {
+              "Address": "{{ .Values.reRoutes.catalogService.url }}"
+            }
+          }
+        },
+        "product-picture-cluster": {
+          "Destinations": {
+            "destination1": {
+              "Address": "{{ .Values.reRoutes.catalogService.url }}"
+            }
+          }
+        },
+        "basket-cluster": {
+          "Destinations": {
+            "destination1": {
+              "Address": "{{ .Values.reRoutes.basketService.url }}"
+            }
+          }
+        },
+        "ordering-cluster": {
+          "Destinations": {
+            "destination1": {
+              "Address": "{{ .Values.reRoutes.orderingService.url }}"
+            }
+          }
+        },
+        "payment-cluster": {
+          "Destinations": {
+            "destination1": {
+              "Address": "{{ .Values.reRoutes.paymentService.url }}"
+            }
+          }
+        }
+      }
+    }
+    }

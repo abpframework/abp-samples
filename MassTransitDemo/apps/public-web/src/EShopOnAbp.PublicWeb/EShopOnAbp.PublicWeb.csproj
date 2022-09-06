@@ -1,0 +1,59 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+    <PropertyGroup>
+        <TargetFramework>net6.0</TargetFramework>
+    </PropertyGroup>
+    
+    <ItemGroup>
+        <PackageReference Include="Microsoft.AspNetCore.DataProtection.StackExchangeRedis" Version="6.0.1" />
+        <PackageReference Include="Microsoft.Extensions.Http.Polly" Version="6.0.7" />
+        <PackageReference Include="Volo.Abp.AutoMapper" Version="5.1.2" />
+        <PackageReference Include="Yarp.ReverseProxy" Version="1.0.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Volo.Abp.Caching.StackExchangeRedis" Version="5.1.2" />
+        <PackageReference Include="Volo.Abp.EventBus.RabbitMQ" Version="5.1.2" />
+        <PackageReference Include="Volo.Abp.Http.Client.IdentityModel.Web" Version="5.1.2" />
+        <PackageReference Include="Volo.Abp.AspNetCore.Authentication.OpenIdConnect" Version="5.1.2" />
+        <PackageReference Include="Volo.Abp.AspNetCore.Mvc.Client" Version="5.1.2" />
+        <PackageReference Include="Volo.Abp.AspNetCore.Mvc.UI.Theme.Basic" Version="5.1.2" />
+        <PackageReference Include="Volo.Abp.Account.HttpApi.Client" Version="5.1.2" />
+        <PackageReference Include="Volo.Abp.AspNetCore.SignalR" Version="5.1.2" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\..\..\..\shared\EShopOnAbp.Shared.Hosting.AspNetCore\EShopOnAbp.Shared.Hosting.AspNetCore.csproj" />
+        <ProjectReference Include="..\..\..\..\shared\EShopOnAbp.Shared.Localization\EShopOnAbp.Shared.Localization.csproj" />
+        <ProjectReference Include="..\..\..\..\services\catalog\src\EShopOnAbp.CatalogService.HttpApi.Client\EShopOnAbp.CatalogService.HttpApi.Client.csproj" />
+        <ProjectReference Include="..\..\..\..\services\basket\src\EShopOnAbp.BasketService.Contracts\EShopOnAbp.BasketService.Contracts.csproj" />
+        <ProjectReference Include="..\..\..\..\services\payment\src\EShopOnAbp.PaymentService.HttpApi.Client\EShopOnAbp.PaymentService.HttpApi.Client.csproj" />
+        <ProjectReference Include="..\..\..\..\services\ordering\src\EShopOnAbp.OrderingService.HttpApi.Client\EShopOnAbp.OrderingService.HttpApi.Client.csproj" />
+    </ItemGroup>
+    
+    <ItemGroup>
+        <Content Include="Pages\**\*.js">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+        <Content Include="Pages\**\*.css">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+    </ItemGroup>
+
+    <ItemGroup>
+        <EmbeddedResource Include="**\*generate-proxy.json" />
+        <Content Remove="**\*generate-proxy.json" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <Compile Remove="Logs\**" />
+        <Content Remove="Logs\**" />
+        <EmbeddedResource Remove="Logs\**" />
+        <None Remove="Logs\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <_ContentIncludedByDefault Remove="ClientProxies\app-generate-proxy.json" />
+    </ItemGroup>
+
+</Project>

@@ -1,0 +1,28 @@
+config:
+  selfUrl: # https://eshop-st-payment
+  corsOrigins: # https://eshop-st-gateway-web,https://eshop-st-gateway-public-web
+  connectionStrings:
+    paymentService: #
+    administrationService: #
+  authServer:
+    authority: http://eshop-st-authserver
+    requireHttpsMetadata: "false"
+    swaggerClientId: WebGateway_Swagger
+    swaggerClientSecret: "1q2w3e*"
+  dotnetEnv: Staging
+  redisHost: eshop-st-redis
+  rabbitmqHost: eshop-st-rabbitmq
+  elasticsearchHost: eshop-st-elasticsearch
+  stringEncryptionDefaultPassPhrase: gsKnGZ041HLL4IM8
+
+ingress:
+  host: eshop-st-payment
+  tlsSecret: eshop-wildcard-tls
+
+image:
+  repository: eshoponabp/service-payment
+  tag: latest
+  pullPolicy: IfNotPresent
+
+env: {}
+    

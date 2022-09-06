@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net6.0</TargetFramework>
+        <GenerateEmbeddedFilesManifest>true</GenerateEmbeddedFilesManifest>
+        <RootNamespace>EShopOnAbp</RootNamespace>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Microsoft.Extensions.FileProviders.Embedded" Version="6.0.1" />
+        <PackageReference Include="Volo.Abp.Validation" Version="5.1.2" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <EmbeddedResource Include="Localization\EShopOnAbp\*.json" />
+        <Content Remove="Localization\EShopOnAbp\*.json" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Localization" />
+    </ItemGroup>
+
+</Project>

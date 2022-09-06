@@ -1,0 +1,47 @@
+﻿@page
+@using EShopOnAbp.Localization
+@using Microsoft.Extensions.Localization
+@using EShopOnAbp.PublicWeb.Components.UserOrders
+@model EShopOnAbp.PublicWeb.Pages.MyOrdersModel
+
+@inject IStringLocalizer<EShopOnAbpResource> L
+
+@section scripts {
+    <abp-script src="/client-proxies/basket-proxy.js"/>
+    <abp-script src="/client-proxies/ordering-proxy.js"/>
+    <abp-script src="/Pages/myOrders.js"/>
+}
+
+@section styles{
+    <abp-style src="/Pages/myOrders.css"/>
+}
+
+@{
+    string lastYearString = $"y{DateTime.Today.Year - 1}";
+    int lastYearCounter = 2;
+    var selectList = new List<SelectListItem>
+    {
+        new(L["MyOrders:Last30Days"], "last30", selected: true),
+        new(L["MyOrders:LastMonth"], "m1"),
+        new(L["MyOrders:Last3Months"], "m3"),
+        new(L["MyOrders:LastYear"], lastYearString)
+    };
+    for (int i = 0; i < lastYearCounter; i++)
+    {
+        selectList.Add(
+            new((DateTime.Today.Year - 2 - i).ToString(), $"y{DateTime.Today.Year - 2 - i}")
+            );
+    }
+}
+
+<div class="mt-5 col">
+    <abp-row>
+        <abp-column offset="_9" size="_3">
+            <abp-select suppress-label="true" asp-for="OrderFilter" asp-items="selectList"></abp-select>
+        </abp-column>
+    </abp-row>
+</div>
+
+<div id="UserOrdersArea" class="pt-5">
+    @await Component.InvokeAsync(typeof(UserOrderWidgetViewComponent), new {Filter = Model.OrderFilter})
+</div>

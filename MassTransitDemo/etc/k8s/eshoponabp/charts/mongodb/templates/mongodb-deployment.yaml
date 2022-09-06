@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: {{ .Release.Name }}-{{ .Chart.Name }}
+spec:
+  serviceName: {{ .Release.Name }}-{{ .Chart.Name }}
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ .Release.Name }}-{{ .Chart.Name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Release.Name }}-{{ .Chart.Name }}
+    spec:
+      containers:
+        - image: "mongo:4.2"
+          name: {{ .Release.Name }}-{{ .Chart.Name }}
+{{- if eq .Release.Name "eshop-az" }}
+          volumeMounts:
+          - mountPath: "/data/db"
+            name: {{ .Release.Name }}-{{ .Chart.Name }}-database-volume
+            subPath: mongodb-data
+{{- end }}
+          ports:
+            - name: mongo
+              containerPort: 27017
+{{- if eq .Release.Name "eshop-az" }}
+  volumeClaimTemplates:
+  - metadata:
+      name: {{ .Release.Name }}-{{ .Chart.Name }}-database-volume
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      storageClassName: "managed-premium-retain"
+      resources:
+        requests:
+          storage: 32Gi
+{{- end }}

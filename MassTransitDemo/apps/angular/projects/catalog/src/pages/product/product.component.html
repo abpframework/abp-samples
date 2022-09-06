@@ -1,0 +1,167 @@
+<div class="card">
+  <div class="card-header">
+    <div class="row">
+      <div class="col col-md-6">
+        <h5 class="card-title">{{ 'CatalogService::Products' | abpLocalization }}</h5>
+      </div>
+      <div class="text-right col col-md-6">
+        <button class="btn btn-primary" (click)="onCreate()" *abpPermission="permissions.create">
+          {{ 'CatalogService::NewProduct' | abpLocalization }}
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="card-body">
+    <ngx-datatable [rows]="items" [count]="count" [list]="list" default>
+      <ngx-datatable-column
+        [name]="'AbpUi::Actions' | abpLocalization"
+        [sortable]="false"
+        *abpPermission="permissions.update + ' || ' + permissions.delete"
+      >
+        <ng-template let-row="row" ngx-datatable-cell-template>
+          <div ngbDropdown container="body" class="d-inline-block">
+            <button
+              class="btn btn-primary btn-sm dropdown-toggle"
+              data-toggle="dropdown"
+              aria-haspopup="true"
+              ngbDropdownToggle
+            >
+              <i class="mr-1 fa fa-cog"></i>{{ 'AbpUi::Actions' | abpLocalization }}
+            </button>
+            <div ngbDropdownMenu>
+              <button
+                class="dropdown-item"
+                (click)="onEdit(row)"
+                *abpPermission="permissions.update"
+              >
+                {{ 'AbpUi::Edit' | abpLocalization }}
+              </button>
+              <button
+                class="dropdown-item"
+                (click)="onDelete(row)"
+                *abpPermission="permissions.delete"
+              >
+                {{ 'AbpUi::Delete' | abpLocalization }}
+              </button>
+            </div>
+          </div>
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column
+        [name]="'CatalogService::DisplayName:Code' | abpLocalization"
+        prop="code"
+      ></ngx-datatable-column>
+      <ngx-datatable-column
+        [name]="'CatalogService::DisplayName:Name' | abpLocalization"
+        prop="name"
+      ></ngx-datatable-column>
+      <ngx-datatable-column
+        [name]="'CatalogService::DisplayName:ImageName' | abpLocalization"
+        prop="imageName"
+      ></ngx-datatable-column>
+      <ngx-datatable-column
+        [name]="'CatalogService::DisplayName:Price' | abpLocalization"
+        prop="price"
+      ></ngx-datatable-column>
+      <ngx-datatable-column
+        [name]="'CatalogService::DisplayName:StockCount' | abpLocalization"
+        prop="stockCount"
+      ></ngx-datatable-column>
+    </ngx-datatable>
+  </div>
+</div>
+
+<abp-modal [(visible)]="isModalVisible" [busy]="modalBusy">
+  <ng-template #abpHeader>
+    <h3>
+      {{ (selected?.id ? 'AbpUi::Edit' : 'CatalogService::NewProduct') | abpLocalization }}
+    </h3>
+  </ng-template>
+
+  <ng-template #abpBody>
+    <ng-template #loaderRef
+      ><div class="text-center"><i class="fa fa-pulse fa-spinner"></i></div
+    ></ng-template>
+
+    <form *ngIf="form; else loaderRef" [formGroup]="form" (ngSubmit)="save()">
+      <div class="mb-3">
+        <label class="form-label" for="code">
+          {{ 'CatalogService::DisplayName:Code' | abpLocalization }} *
+        </label>
+        <input
+          type="text"
+          class="form-control"
+          id="code"
+          formControlName="code"
+          [readonly]="selected?.id"
+          [placeholder]="'CatalogService::DisplayName:Code' | abpLocalization"
+        />
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label" for="name">
+          {{ 'CatalogService::DisplayName:Name' | abpLocalization }} *
+        </label>
+        <input
+          type="text"
+          class="form-control"
+          id="name"
+          formControlName="name"
+          [placeholder]="'CatalogService::DisplayName:Name' | abpLocalization"
+        />
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label" for="imageName">
+          {{ 'CatalogService::DisplayName:ImageName' | abpLocalization }} *
+        </label>
+        <input
+          type="text"
+          class="form-control"
+          id="imageName"
+          formControlName="imageName"
+          [placeholder]="'CatalogService::DisplayName:ImageName' | abpLocalization"
+        />
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label" for="price">
+          {{ 'CatalogService::DisplayName:Price' | abpLocalization }} *
+        </label>
+        <input
+          type="number"
+          class="form-control"
+          id="price"
+          formControlName="price"
+          [placeholder]="'CatalogService::DisplayName:Price' | abpLocalization"
+        />
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label" for="stockCount">
+          {{ 'CatalogService::DisplayName:StockCount' | abpLocalization }} *
+        </label>
+        <input
+          type="number"
+          class="form-control"
+          id="stockCount"
+          formControlName="stockCount"
+          [placeholder]="'CatalogService::DisplayName:StockCount' | abpLocalization"
+        />
+      </div>
+    </form>
+
+    <ng-template #loaderRef
+      ><div class="text-center"><i class="fa fa-pulse fa-spinner"></i></div
+    ></ng-template>
+  </ng-template>
+
+  <ng-template #abpFooter>
+    <button type="button" class="btn btn-secondary" abpClose>
+      {{ 'AbpUi::Cancel' | abpLocalization }}
+    </button>
+    <abp-button iconClass="fa fa-check" [disabled]="form?.invalid" (click)="save()">{{
+      'AbpUi::Save' | abpLocalization
+    }}</abp-button>
+  </ng-template>
+</abp-modal>

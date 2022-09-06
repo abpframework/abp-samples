@@ -1,0 +1,6 @@
+apiVersion: v2
+name: authserver
+appVersion: "1.0"
+description: eShopOnAbp AuthServer Application
+version: 1.0.0
+type: application

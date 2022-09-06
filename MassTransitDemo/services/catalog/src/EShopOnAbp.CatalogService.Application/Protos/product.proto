@@ -1,0 +1,22 @@
+﻿syntax = "proto3";
+
+option csharp_namespace = "EShopOnAbp.CatalogService.Grpc";
+
+package CatalogApi;
+
+service ProductPublic {
+	rpc GetById(ProductRequest) returns (ProductResponse);
+}
+
+message ProductRequest {
+	string id = 1;
+}
+
+message ProductResponse {
+	string id = 1;
+	string code = 2;
+	string name = 3;
+	string imageName = 4;
+	float price = 5;
+	int32 stockCount = 6;
+}

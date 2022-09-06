@@ -1,0 +1,31 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Release.Name }}-{{ .Chart.Name }}-configmap
+data:
+  dynamic-env.json: |-
+    {
+        "production": "true",
+        "application": {
+            "baseUrl": "{{ .Values.config.selfUrl }}",
+            "name": "EShopOnAbp",
+            "logoUrl": ""
+        },
+        "oAuthConfig": {
+            "issuer": "{{ .Values.config.authServer.authority }}",
+            "redirectUri": "{{ .Values.config.selfUrl }}",
+            "requireHttps": {{ .Values.config.authServer.requireHttpsMetadata }},
+            "clientId": "Web",
+            "responseType": "code",
+            "responseType": "{{ .Values.config.authServer.responseType }}",
+            "scope": "offline_access openid profile email phone AccountService IdentityService AdministrationService CatalogService OrderingService",
+            "strictDiscoveryDocumentValidation": {{ .Values.config.authServer.strictDiscoveryDocumentValidation }},
+            "skipIssuerCheck": {{ .Values.config.authServer.skipIssuerCheck }}
+        },
+        "apis": {
+            "default": {
+                "url": "{{ .Values.config.gatewayUrl }}",
+                "rootNamespace": "EShopOnAbp"
+            }
+        }
+    }

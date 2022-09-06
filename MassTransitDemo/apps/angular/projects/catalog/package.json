@@ -1,0 +1,14 @@
+{
+  "name": "@eshoponabp/catalog",
+  "version": "0.0.1",
+  "peerDependencies": {
+    "@angular/common": "^12.2.0",
+    "@angular/core": "^12.2.0",
+    "@abp/ng.theme.shared": "~5.0.0-rc.2",
+    "@abp/ng.core": "~5.0.0-rc.2",
+    "@ngx-validate/core": "~0.1.1"
+  },
+  "dependencies": {
+    "tslib": "^2.3.0"
+  }
+}

@@ -1,0 +1,1 @@
+helm upgrade --install eshop-st eshoponabp --namespace eshop --create-namespace

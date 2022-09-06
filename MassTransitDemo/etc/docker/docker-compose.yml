@@ -1,0 +1,343 @@
+version: '3.7'
+
+services:
+  lb:
+    image: nginx:1.21
+    container_name: load-balancer-container
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - ./nginx/certs/eshop-st-web+10.pem:/etc/nginx/certs/app-cert.pem:ro
+      - ./nginx/certs/eshop-st-web+10-key.pem:/etc/nginx/certs/app-cert-key.pem:ro
+      - ./nginx/conf.d:/etc/nginx/conf.d:ro
+    depends_on:
+      - eshop-st-administration
+      - eshop-st-authserver
+      - eshop-st-identity
+      - eshop-st-basket
+      - eshop-st-catalog
+      - eshop-st-ordering
+      - eshop-st-payment
+      - eshop-st-web
+      - eshop-st-public-web
+      - eshop-st-gateway-web-public
+      - eshop-st-gateway-web
+    restart: on-failure
+    networks:
+      - eshoponabp-network
+
+  eshop-st-administration:
+    image: eshoponabp/service-administration:latest
+    container_name: administration-service-container
+    build:
+      context: ../../
+      dockerfile: services/administration/src/EShopOnAbp.AdministrationService.HttpApi.Host/Dockerfile
+    environment:
+      # - ASPNETCORE_ENVIRONMENT=Docker
+      - ASPNETCORE_URLS=http://+:80
+      - App__SelfUrl=https://eshop-st-administration
+      - App__CorsOrigins=https://gateway-web,gateway-web-public
+      - RemoteServices__AbpIdentity__BaseUrl=eshop-st-identity
+      - RemoteServices__AbpIdentity__UseCurrentAccessToken=false
+      - ConnectionStrings__AdministrationService=User ID=postgres;Password=myPassw0rd;Host=postgres-db;Port=5432;Database=EShopOnAbp_Administration;Pooling=false;
+      - AuthServer__Authority=http://eshop-st-authserver
+      - AuthServer__RequireHttpsMetadata=false
+      - IdentityClients__Default__Authority=http://eshop-st-identity
+      - Redis__Configuration=redis
+      - RabbitMQ__Connections__Default__HostName=rabbitmq
+    depends_on:
+      redis:
+        condition: service_healthy
+      postgres-db:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
+    restart: on-failure
+    networks: 
+      - eshoponabp-network
+  eshop-st-identity:
+    image: eshoponabp/service-identity:latest
+    container_name: identity-service-container
+    build:
+      context: ../../
+      dockerfile: services/identity/src/EShopOnAbp.IdentityService.HttpApi.Host/Dockerfile
+    environment:
+      # - ASPNETCORE_ENVIRONMENT=Docker
+      - ASPNETCORE_URLS=http://+:80
+      - App__SelfUrl=https://eshop-st-identity
+      - App__CorsOrigins=https://gateway-web,gateway-web-public
+      - AuthServer__Authority=http://eshop-st-authserver
+      - AuthServer__RequireHttpsMetadata=false
+      - ConnectionStrings__IdentityService=User ID=postgres;Password=myPassw0rd;Host=postgres-db;Port=5432;Database=EShopOnAbp_Identity;Pooling=false;
+      - ConnectionStrings__AdministrationService=User ID=postgres;Password=myPassw0rd;Host=postgres-db;Port=5432;Database=EShopOnAbp_Administration;Pooling=false;
+      - Redis__Configuration=redis
+      - RabbitMQ__Connections__Default__HostName=rabbitmq
+      - IdentityServerClients__Web__RootUrl=https://eshop-st-web
+      - IdentityServerClients__PublicWeb__RootUrl=https://eshop-st-public-web
+      - IdentityServerClients__WebGateway__RootUrl=https://eshop-st-gateway-web
+      - IdentityServerClients__PublicWebGateway__RootUrl=https://eshop-st-gateway-web-public
+      - IdentityServerClients__IdentityService__RootUrl=https://eshop-st-identity
+      - IdentityServerClients__AdministrationService__RootUrl=https://eshop-st-administration
+      - IdentityServerClients__AccountService__RootUrl=https://eshop-st-authserver
+      - IdentityServerClients__CatalogService__RootUrl=https://eshop-st-catalog
+      - IdentityServerClients__BasketService__RootUrl=https://eshop-st-basket     
+      - IdentityServerClients__OrderingService__RootUrl=https://eshop-st-ordering
+      - IdentityServerClients__PaymentService__RootUrl=https://eshop-st-payment
+    depends_on:
+      redis:
+        condition: service_healthy
+      postgres-db:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
+    restart: on-failure
+    networks: 
+      - eshoponabp-network
+  eshop-st-catalog:
+    image: eshoponabp/service-catalog:latest
+    container_name: catalog-service-container
+    build:
+      context: ../../
+      dockerfile: services/catalog/src/EShopOnAbp.CatalogService.HttpApi.Host/Dockerfile
+    environment:
+      # - ASPNETCORE_ENVIRONMENT=Docker
+      - ASPNETCORE_URLS=http://+:80;http://+:81;
+      - App__SelfUrl=https://eshop-st-catalog
+      - App__CorsOrigins=https://eshop-st-gateway-web,https://eshop-st-gateway-web-public,https://eshop-st-public-web,https://eshop-st-web
+      - AuthServer__Authority=http://eshop-st-authserver
+      - AuthServer__RequireHttpsMetadata=false
+      - Kestrel__EndPoints__Http__Url=http://docker.host.internal:80
+      - Kestrel__EndPoints__gRPC__Url=http://docker.host.internal:81
+      - Kestrel__EndPoints__gRPC__Protocols=Http2
+      - ConnectionStrings__CatalogService=mongodb://mongodb/EShopOnAbp_Catalog
+      - ConnectionStrings__AdministrationService=User ID=postgres;Password=myPassw0rd;Host=postgres-db;Port=5432;Database=EShopOnAbp_Administration;Pooling=false;
+      - Redis__Configuration=redis
+      - RabbitMQ__Connections__Default__HostName=rabbitmq
+    depends_on:
+      redis:
+        condition: service_healthy
+      mongodb:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
+    restart: on-failure  
+    networks: 
+      - eshoponabp-network
+  eshop-st-basket:
+    image: eshoponabp/service-basket:latest
+    container_name: basket-service-container
+    build:
+      context: ../../
+      dockerfile: services/basket/src/EShopOnAbp.BasketService.HttpApi.Host/Dockerfile
+    environment:
+      # - ASPNETCORE_ENVIRONMENT=Docker
+      - ASPNETCORE_URLS=http://+:80
+      - App__SelfUrl=https://eshop-st-basket
+      - App__CorsOrigins=https://eshop-st-gateway-web,https://eshop-st-gateway-web-public,https://eshop-st-public-web
+      - RemoteServices__Catalog__BaseUrl=http://eshop-st-catalog:80
+      - RemoteServices__Catalog__GrpcUrl=http://eshop-st-catalog:81
+      - ConnectionStrings__AdministrationService=User ID=postgres;Password=myPassw0rd;Host=postgres-db;Port=5432;Database=EShopOnAbp_Administration;Pooling=false;
+      - AuthServer__Authority=http://eshop-st-authserver
+      - AuthServer__RequireHttpsMetadata=false
+      - Redis__Configuration=redis
+      - RabbitMQ__Connections__Default__HostName=rabbitmq    
+    depends_on:
+      redis:
+        condition: service_healthy
+      mongodb:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
+    restart: on-failure  
+    networks: 
+      - eshoponabp-network
+  eshop-st-ordering:
+    image: eshoponabp/service-ordering:latest
+    container_name: ordering-service-container
+    build:
+      context: ../../
+      dockerfile: services/ordering/src/EShopOnAbp.OrderingService.HttpApi.Host/Dockerfile
+    environment:
+      # - ASPNETCORE_ENVIRONMENT=Docker
+      - ASPNETCORE_URLS=http://+:80;
+      - App__SelfUrl=https://eshop-st-ordering
+      - App__CorsOrigins=https://eshop-st-gateway-web,https://eshop-st-gateway-web-public,https://eshop-st-web
+      - ConnectionStrings__OrderingService=User ID=postgres;Password=myPassw0rd;Host=postgres-db;Port=5432;Database=EShopOnAbp_Ordering;Pooling=false;
+      - ConnectionStrings__AdministrationService=User ID=postgres;Password=myPassw0rd;Host=postgres-db;Port=5432;Database=EShopOnAbp_Administration;Pooling=false;
+      - AuthServer__Authority=http://eshop-st-authserver
+      - AuthServer__RequireHttpsMetadata=false
+      - Redis__Configuration=redis
+      - RabbitMQ__Connections__Default__HostName=rabbitmq
+    depends_on:
+      redis:
+        condition: service_healthy
+      postgres-db:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
+    restart: on-failure  
+    networks: 
+      - eshoponabp-network
+    # volumes:
+    #   - ./certs:/root/certificate
+  eshop-st-payment:
+    image: eshoponabp/service-payment:latest
+    container_name: payment-service-container
+    build:
+      context: ../../
+      dockerfile: services/payment/src/EShopOnAbp.PaymentService.HttpApi.Host/Dockerfile
+    environment:
+      # - ASPNETCORE_ENVIRONMENT=Docker
+      - ASPNETCORE_URLS=http://+:80;
+      - App__SelfUrl=https://eshop-st-payment
+      - App__CorsOrigins=https://eshop-st-gateway-web,https://eshop-st-gateway-web-public      
+      - ConnectionStrings__PaymentService=User ID=postgres;Password=myPassw0rd;Host=postgres-db;Port=5432;Database=EShopOnAbp_Payment;Pooling=false;
+      - ConnectionStrings__AdministrationService=User ID=postgres;Password=myPassw0rd;Host=postgres-db;Port=5432;Database=EShopOnAbp_Administration;Pooling=false;
+      - AuthServer__Authority=http://eshop-st-authserver
+      - AuthServer__RequireHttpsMetadata=false
+      - Redis__Configuration=redis
+      - RabbitMQ__Connections__Default__HostName=rabbitmq
+      - Payment__PayPal__ClientId=PAYPAL_CLIENT_ID
+      - Payment__PayPal__Secret=PAYPAL_SECRET
+      - Payment__PayPal__Environment=Sandbox
+    depends_on:
+      redis:
+        condition: service_healthy
+      postgres-db:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
+    restart: on-failure  
+    networks: 
+      - eshoponabp-network
+  eshop-st-authserver:
+    image: eshoponabp/app-authserver:latest
+    container_name: app-authserver-container
+    build:
+      context: ../../
+      dockerfile: apps/auth-server/src/EShopOnAbp.AuthServer/Dockerfile
+    environment:
+      # - ASPNETCORE_ENVIRONMENT=Docker
+      - ASPNETCORE_URLS=http://+:80;
+      - App__SelfUrl=https://eshop-st-authserver
+      - App__CorsOrigins=https://eshop-st-web,https://eshop-st-public-web,https://eshop-st-identity,http://eshop-st-administration,https://eshop-st-administration,https://eshop-st-catalog,https://eshop-st-basket,https://eshop-st-ordering,https://eshop-st-payment
+      - App__RedirectAllowedUrls=http://eshop-st-web
+      - AuthServer__Authority=http://eshop-st-authserver
+      - AuthServer__RequireHttpsMetadata=false
+      - ConnectionStrings__IdentityService=User ID=postgres;Password=myPassw0rd;Host=postgres-db;Port=5432;Database=EShopOnAbp_Identity;Pooling=false;
+      - ConnectionStrings__AdministrationService=User ID=postgres;Password=myPassw0rd;Host=postgres-db;Port=5432;Database=EShopOnAbp_Administration;Pooling=false;   
+      - Redis__Configuration=redis
+      - RabbitMQ__Connections__Default__HostName=rabbitmq
+    depends_on:
+      redis:
+        condition: service_healthy
+      postgres-db:
+        condition: service_healthy  
+      rabbitmq:
+        condition: service_healthy
+    restart: on-failure  
+    networks: 
+      - eshoponabp-network
+  eshop-st-web:
+    image: eshoponabp/app-web:latest
+    container_name: app-web-container
+    build:
+      context: ../../
+      dockerfile: apps/angular/Dockerfile
+    volumes:
+      - ./nginx/dynamic-env.json:/usr/share/nginx/html/dynamic-env.json
+    depends_on:
+      redis:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
+    restart: on-failure
+    networks: 
+      - eshoponabp-network
+  eshop-st-public-web:
+    image: eshoponabp/app-publicweb:latest
+    container_name: app-publicweb-container
+    build:
+      context: ../../
+      dockerfile: apps/public-web/src/EShopOnAbp.PublicWeb/Dockerfile
+    environment:
+      # - ASPNETCORE_ENVIRONMENT=Docker
+      - ASPNETCORE_URLS=http://+:80;
+      - App__SelfUrl=https://eshop-st-public-web
+      - AuthServer__Authority=http://eshop-st-authserver
+      - AuthServer__RequireHttpsMetadata=false
+      - RemoteServices__Default__BaseUrl=http://eshop-st-gateway-web-public/                
+      - Redis__Configuration=redis
+      - RabbitMQ__Connections__Default__HostName=rabbitmq
+      - ReverseProxy__Clusters__cluster1__Destinations__destination1__Address=http://eshop-st-gateway-web-public
+    depends_on:
+      redis:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
+    restart: on-failure  
+    networks: 
+      - eshoponabp-network
+  eshop-st-gateway-web:
+    image: eshoponabp/gateway-web:latest
+    container_name: gateway-web-container
+    build:
+      context: ../../
+      dockerfile: gateways/web/src/EShopOnAbp.WebGateway/Dockerfile
+    environment:
+      #- ASPNETCORE_ENVIRONMENT=Docker # Yarp can't resolve dns, needs to be overridden
+      - ASPNETCORE_URLS=http://+:80;
+      - App__SelfUrl=https://eshop-st-gateway-web
+      - App__CorsOrigins=https://eshop-st-web
+      - AuthServer__Authority=http://eshop-st-authserver
+      - AuthServer__RequireHttpsMetadata=false
+      - Redis__Configuration=redis
+      - ReverseProxy__Clusters__accountCluster__Destinations__destination1__Address=http://eshop-st-authserver
+      - ReverseProxy__Clusters__identityCluster__Destinations__destination1__Address=http://eshop-st-identity
+      - ReverseProxy__Clusters__administrationCluster__Destinations__destination1__Address=http://eshop-st-administration
+      - ReverseProxy__Clusters__catalogCluster__Destinations__destination1__Address=http://eshop-st-catalog
+      - ReverseProxy__Clusters__orderingCluster__Destinations__destination1__Address=http://eshop-st-ordering
+      - ReverseProxy__Clusters__feature-management-cluster__Destinations__destination1__Address=http://eshop-st-administration
+      - ReverseProxy__Clusters__permission-management-cluster__Destinations__destination1__Address=http://eshop-st-administration
+      - ReverseProxy__Clusters__setting-management-cluster__Destinations__destination1__Address=http://eshop-st-administration
+    depends_on:
+      redis:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
+    restart: on-failure  
+    networks: 
+      - eshoponabp-network
+  eshop-st-gateway-web-public:
+    image: eshoponabp/gateway-web-public:latest
+    container_name: gateway-web-public-container
+    build:
+      context: ../../
+      dockerfile: gateways/web-public/src/EShopOnAbp.WebPublicGateway/Dockerfile
+    environment:
+      # - ASPNETCORE_ENVIRONMENT=Docker # Yarp can't resolve dns, needs to be overridden
+      - ASPNETCORE_URLS=http://+:80;
+      - App__SelfUrl=https://eshop-st-gateway-web-public
+      - AuthServer__Authority=http://eshop-st-authserver
+      - AuthServer__RequireHttpsMetadata=false
+      - Redis__Configuration=redis
+      - ReverseProxy__Clusters__accountCluster__Destinations__destination1__Address=http://eshop-st-authserver
+      - ReverseProxy__Clusters__administrationCluster__Destinations__destination1__Address=http://eshop-st-administration
+      - ReverseProxy__Clusters__catalogCluster__Destinations__destination1__Address=http://eshop-st-catalog
+      - ReverseProxy__Clusters__basketCluster__Destinations__destination1__Address=http://eshop-st-basket
+      - ReverseProxy__Clusters__orderingCluster__Destinations__destination1__Address=http://eshop-st-ordering
+      - ReverseProxy__Clusters__paymentCluster__Destinations__destination1__Address=http://eshop-st-payment
+      - ReverseProxy__Clusters__productPictureCluster__Destinations__destination1__Address=http://eshop-st-catalog
+    depends_on:
+      redis:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
+    restart: on-failure  
+    networks: 
+      - eshoponabp-network
+
+networks:
+  eshoponabp-network:
+    external: true

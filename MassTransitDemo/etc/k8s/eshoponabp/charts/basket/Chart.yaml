@@ -1,0 +1,6 @@
+apiVersion: v2
+name: basket
+appVersion: "1.0"
+description: eShopOnAbp Basket Microservice
+version: 1.0.0
+type: application

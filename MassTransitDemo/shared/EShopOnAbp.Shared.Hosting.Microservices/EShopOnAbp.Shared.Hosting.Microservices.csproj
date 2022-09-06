@@ -1,0 +1,31 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net6.0</TargetFramework>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\EShopOnAbp.Shared.Hosting.AspNetCore\EShopOnAbp.Shared.Hosting.AspNetCore.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Microsoft.AspNetCore.DataProtection.StackExchangeRedis" Version="6.0.1" />
+        <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.1" />
+        <PackageReference Include="Volo.Abp.MongoDB" Version="5.1.2" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Volo.Abp.AspNetCore.MultiTenancy" Version="5.1.2" />
+        <PackageReference Include="Volo.Abp.EventBus.RabbitMQ" Version="5.1.2" />
+        <PackageReference Include="Volo.Abp.BackgroundJobs.RabbitMQ" Version="5.1.2" />
+        <PackageReference Include="Volo.Abp.Caching.StackExchangeRedis" Version="5.1.2" />
+        <PackageReference Include="Volo.Abp.DistributedLocking" Version="5.1.2" />
+        <PackageReference Include="DistributedLock.Redis" Version="1.0.1" />
+        <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\..\services\administration\src\EShopOnAbp.AdministrationService.EntityFrameworkCore\EShopOnAbp.AdministrationService.EntityFrameworkCore.csproj" />        
+    </ItemGroup>
+
+</Project>

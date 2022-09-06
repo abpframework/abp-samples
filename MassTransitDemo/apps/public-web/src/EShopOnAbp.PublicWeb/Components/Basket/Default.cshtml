@@ -1,0 +1,88 @@
+@using EShopOnAbp.Localization
+@using EShopOnAbp.PublicWeb.Components.Purchase
+@using Microsoft.Extensions.Localization
+@using Microsoft.Extensions.Options
+@using Volo.Abp.Http.Client
+@model EShopOnAbp.BasketService.Services.BasketDto
+@inject IStringLocalizer<EShopOnAbpResource> L
+@inject IOptions<AbpRemoteServiceOptions> options
+
+<div>
+    @if (!Model.Items.Any())
+    {
+        <div class="basket-list">
+            <abp-row>
+                <abp-card>
+                    <abp-card-body>
+                        <h3 style="text-align: center">@L["EmptyBasket"]</h3>
+                        <br/>
+                        <div style="text-align: center">
+                            <span>
+                                @L["CheckOtherProducts"] <a href="/">@L["ContinueShopping"]</a>
+                            </span>
+                        </div>
+
+                    </abp-card-body>
+                </abp-card>
+            </abp-row>
+        </div>
+    }
+    else
+    {
+        <div class="row">
+            <div class="col-lg-9">
+                <div class="basket-list flex-container vertical">
+                    @foreach (var item in Model.Items)
+                    {
+                        string imageName = item.ImageName.IsNullOrEmpty() ? $"{options.Value.RemoteServices.Default.BaseUrl}product-images/noimage.jpg" : $"{options.Value.RemoteServices.Default.BaseUrl}product-images/{item.ImageName}";
+                        var price = item.TotalPrice.ToString("0.00");
+                        <div class="card basket-list-item" data-product-id="@item.ProductId">
+                            <div class="card-body">
+                                <div class="flex-container horizontal">
+                                    <div class="image-container flex-item">
+                                        <img class="basket-item-image" src="@imageName"/>
+                                    </div>
+                                    <div class="flex-item">
+                                        <div class="flex-container vertical description-container">
+                                            <div class="flex-item description-header">
+                                                <span>@item.ProductName</span>
+                                            </div>
+                                            <div class="flex-item description-price">
+                                                <span>$@price</span>
+                                            </div>
+                                            <div class="flex-item description-cargo">
+                                                <span>
+                                                    <i class="fa fa-truck"></i> @L["FreeCargo"]
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="remove-container hide flex-item">
+                                        <i class="fa fa-trash basket-item-remove" title="@L["RemoveFromBasket"]"></i>
+                                    </div>
+                                    <div class="actions-container flex-item">
+                                        <a href="" class="basket-item-increase">
+                                            <i class="fa fa-plus-circle"></i>
+                                        </a>
+                                        <span class="basket-item-count">@item.Count</span>
+                                        <a href="" class="basket-item-decrease">
+                                            @{
+                                                string removeIcon = item.Count <= 1 ? "fa-trash" : "fa-minus-circle";
+                                            }
+                                            <i class="fa @removeIcon"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <hr/>
+                    }
+                </div>
+            </div>
+            <div class="col-lg-3 sticky">
+                @await Component.InvokeAsync(typeof(PurchaseWidgetViewComponent),
+                    new {Basket = Model, ButtonDescription = "CompletePurchase"})
+            </div>
+        </div>
+    }
+</div>

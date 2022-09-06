@@ -1,0 +1,6 @@
+apiVersion: v2
+name: redis
+appVersion: "1.0"
+description: Runs Redis instance
+version: 1.0.0
+type: application

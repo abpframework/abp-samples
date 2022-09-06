@@ -1,0 +1,370 @@
+# auth-server sub-chart override
+authserver:
+  config:
+    selfUrl: https://auth.eshoponabp.com   
+    corsOrigins: https://gateway.eshoponabp.com,https://gateway-public.eshoponabp.com,https://identity.eshoponabp.com,https://administration.eshoponabp.com,https://basket.eshoponabp.com,https://catalog.eshoponabp.com,https://order.eshoponabp.com,https://payment.eshoponabp.com,https://admin.eshoponabp.com,https://www.eshoponabp.com
+    allowedRedirectUrls: https://admin.eshoponabp.com
+    authServer:
+      authority: https://auth.eshoponabp.com
+      requireHttpsMetadata: "false"
+    connectionStrings:
+      administrationService: "Host=eshop-az-postgresdb;Port=5432;Database=EShopOnAbp_Administration;User ID=postgres;password=myPassw0rd;Pooling=false"
+      identityService: "Host=eshop-az-postgresdb;Port=5432;Database=EShopOnAbp_Identity;User ID=postgres;password=myPassw0rd;Pooling=false"
+    dotnetEnv: Production
+    redisHost: eshop-az-redis
+    rabbitmqHost: eshop-az-rabbitmq
+    elasticsearchHost: eshop-az-elasticsearch
+  ingress:
+    host: auth.eshoponabp.com
+    tlsSecret: eshop-wildcard-tls
+  image:
+    repository: "volocr.azurecr.io/eshoponabp/app-authserver"
+    tag: 1.0.5
+
+# web sub-chart override
+web:
+  config:
+    selfUrl: https://admin.eshoponabp.com
+    gatewayUrl: https://gateway.eshoponabp.com
+    authServer:
+      authority: https://auth.eshoponabp.com
+      requireHttpsMetadata: false
+      responseType: "code"
+      strictDiscoveryDocumentValidation: false
+      skipIssuerCheck: true
+  ingress:
+    host: admin.eshoponabp.com
+  image:
+    repository: "volocr.azurecr.io/eshoponabp/app-web"
+    tag: 1.0.5
+
+# public-web sub-chart override
+public-web:
+  config:
+    selfUrl: https://www.eshoponabp.com
+    gatewayUrl: https://gateway-public.eshoponabp.com/
+    authServer:
+      authority: https://auth.eshoponabp.com
+      requireHttpsMetadata: "false"
+      isOnProd: "true"
+      metaAddress: http://eshop-az-authserver
+    dotnetEnv: Production
+    redisHost: eshop-az-redis
+    rabbitmqHost: eshop-az-rabbitmq
+    elasticsearchHost: eshop-az-elasticsearch
+    
+  ingress:
+    host: eshoponabp.com
+  image:
+    repository: "volocr.azurecr.io/eshoponabp/app-publicweb"
+    tag: 1.0.6
+
+# identity-service sub-chart override
+identity:
+  config:
+    selfUrl: https://identity.eshoponabp.com
+    corsOrigins: https://gateway.eshoponabp.com,https://gateway-public.eshoponabp.com
+    connectionStrings:
+      identityService: "Host=eshop-az-postgresdb;Port=5432;Database=EShopOnAbp_Identity;User ID=postgres;password=myPassw0rd;Pooling=false"
+      administrationService: "Host=eshop-az-postgresdb;Port=5432;Database=EShopOnAbp_Administration;User ID=postgres;password=myPassw0rd;Pooling=false"
+    authServer:
+      authority: http://eshop-az-authserver
+      requireHttpsMetadata: "false"
+      swaggerClientId: WebGateway_Swagger
+      swaggerClientSecret: "1q2w3e*"
+    dotnetEnv: Production
+    redisHost: eshop-az-redis
+    rabbitmqHost: eshop-az-rabbitmq
+    elasticsearchHost: eshop-az-elasticsearch    
+  identityServerClients: # Seeded Clients
+    webRootUrl: https://admin.eshoponabp.com/  
+    publicWebRootUrl: https://www.eshoponabp.com/
+    webGatewayRootUrl: https://gateway.eshoponabp.com/
+    publicWebGatewayRootUrl: https://gateway-public.eshoponabp.com/
+    identityServiceRootUrl: https://identity.eshoponabp.com/
+    administrationServiceRootUrl: https://administration.eshoponabp.com/
+    accountServiceRootUrl: https://auth.eshoponabp.com
+    basketServiceRootUrl: https://basket.eshoponabp.com/
+    catalogServiceRootUrl: https://catalog.eshoponabp.com
+    orderingServiceRootUrl: https://order.eshoponabp.com
+    paymentServiceRootUrl: https://payment.eshoponabp.com
+  ingress:
+    host: identity.eshoponabp.com
+  image:
+    repository: "volocr.azurecr.io/eshoponabp/service-identity"
+    tag: 1.0.5
+
+# administration sub-chart override
+administration:
+  config:
+    selfUrl: https://administration.eshoponabp.com
+    corsOrigins: https://gateway.eshoponabp.com,https://gateway-public.eshoponabp.com,https://eshop-az-gateway-internal
+    connectionStrings:
+      administrationService: "Host=eshop-az-postgresdb;Port=5432;Database=EShopOnAbp_Administration;User ID=postgres;password=myPassw0rd;Pooling=false"
+    authServer:
+      authority: http://eshop-az-authserver
+      requireHttpsMetadata: "false"      
+      swaggerClientId: WebGateway_Swagger
+      swaggerClientSecret: "1q2w3e*"
+    remoteServices:
+      abpIdentityBaseUrl: https://identity.eshoponabp.com
+      useCurrentToken: "false"  
+    dotnetEnv: Production
+    redisHost: eshop-az-redis
+    rabbitmqHost: eshop-az-rabbitmq
+    elasticsearchHost: eshop-az-elasticsearch
+  synchedCommunication: # Used for server-to-server (client-credentials) communication with identityService for user permissions
+    authority: https://auth.eshoponabp.com 
+  ingress:
+    host: administration.eshoponabp.com
+  image:
+    repository: "volocr.azurecr.io/eshoponabp/service-administration"
+    tag: 1.0.5
+
+# gateway-web sub-chart override
+gateway-web:
+  config:
+    selfUrl: https://gateway.eshoponabp.com
+    corsOrigins: https://admin.eshoponabp.com
+    globalConfigurationBaseUrl: http://eshop-az-gateway-public
+    authServer:
+      authority: http://eshop-az-authserver
+      requireHttpsMetadata: "false"
+      swaggerClientId: WebGateway_Swagger
+      swaggerClientSecret: "1q2w3e*"
+    dotnetEnv: Production
+    redisHost: eshop-az-redis
+    rabbitmqHost: eshop-az-rabbitmq
+    elasticsearchHost: eshop-az-elasticsearch
+  ingress:
+    host: gateway.eshoponabp.com
+  image:
+    repository: "volocr.azurecr.io/eshoponabp/gateway-web"
+    tag: 1.0.5
+  reRoutes:
+    accountService:
+      url: http://eshop-az-authserver
+    identityService:
+      url: http://eshop-az-identity
+    administrationService:
+      url: http://eshop-az-administration
+    catalogService:
+      url: http://eshop-az-catalog
+    orderingService:
+      url: http://eshop-az-ordering
+
+# gateway-web-public sub-chart override
+gateway-web-public:
+  config:
+    selfUrl: https://gateway-public.eshoponabp.com
+    authServer:
+      authority: http://eshop-az-authserver
+      requireHttpsMetadata: "false"
+      swaggerClientId: WebGateway_Swagger
+      swaggerClientSecret: "1q2w3e*"
+    dotnetEnv: Production
+    redisHost: eshop-az-redis
+    rabbitmqHost: eshop-az-rabbitmq
+    elasticsearchHost: eshop-az-elasticsearch
+  ingress:
+    host: gateway-public.eshoponabp.com
+  image:
+    repository: "volocr.azurecr.io/eshoponabp/gateway-web-public"
+    tag: 1.0.5
+  reRoutes:
+    accountService:
+      url: http://eshop-az-authserver
+    identityService:
+      url: http://eshop-az-identity
+    administrationService:
+      url: http://eshop-az-administration
+    catalogService:
+      url: http://eshop-az-catalog
+    basketService:
+      url: http://eshop-az-basket
+    orderingService:
+      url: http://eshop-az-ordering
+    paymentService:
+      url: http://eshop-az-payment  
+
+# basket-service sub-chart override
+basket:
+  config:
+    selfUrl: https://basket.eshoponabp.com
+    corsOrigins: https://gateway.eshoponabp.com,https://gateway-public.eshoponabp.com,https://www.eshoponabp.com
+    connectionStrings:
+      administrationService: "Host=eshop-az-postgresdb;Port=5432;Database=EShopOnAbp_Administration;User ID=postgres;password=myPassw0rd;Pooling=false"
+    authServer:
+      authority: http://eshop-az-authserver
+      requireHttpsMetadata: "false"
+      swaggerClientId: WebGateway_Swagger
+      swaggerClientSecret: "1q2w3e*"
+    dotnetEnv: Production
+    redisHost: eshop-az-redis
+    rabbitmqHost: eshop-az-rabbitmq
+    elasticsearchHost: eshop-az-elasticsearch
+    remoteServices:
+      catalogBaseUrl: http://eshop-az-catalog:80
+      catalogGrpcUrl: http://eshop-az-catalog:81
+  ingress:
+    host: basket.eshoponabp.com
+  image:
+    repository: "volocr.azurecr.io/eshoponabp/service-basket"
+    tag: 1.0.5
+
+# catalog-service sub-chart override
+catalog:
+  config:
+    selfUrl: https://catalog.eshoponabp.com
+    corsOrigins: https://gateway.eshoponabp.com,https://gateway-public.eshoponabp.com,https://www.eshoponabp.com,https://admin.eshoponabp.com
+    connectionStrings:
+      catalogService: "mongodb://eshop-az-mongodb/EShopOnAbp_Catalog"
+      administrationService: "Host=eshop-az-postgresdb;Port=5432;Database=EShopOnAbp_Administration;User ID=postgres;password=myPassw0rd;Pooling=false"
+    authServer:
+      authority: http://eshop-az-authserver
+      requireHttpsMetadata: "false"
+      swaggerClientId: WebGateway_Swagger
+      swaggerClientSecret: "1q2w3e*"
+    dotnetEnv: Production
+    redisHost: eshop-az-redis
+    rabbitmqHost: eshop-az-rabbitmq
+    elasticsearchHost: eshop-az-elasticsearch
+    kestrel:
+      httpUrl: http://eshop-az-catalog:80
+      httpProtocols: Http1AndHttp2
+      grpcUrl: http://eshop-az-catalog:81
+      grpcProtocols: Http2
+  ingress:
+    host: catalog.eshoponabp.com
+  image:
+    repository: "volocr.azurecr.io/eshoponabp/service-catalog"
+    tag: 1.0.5
+
+# ordering-service sub-chart override
+ordering:
+  config:
+    selfUrl: https://order.eshoponabp.com
+    corsOrigins: https://gateway.eshoponabp.com,https://gateway-public.eshoponabp.com
+    connectionStrings:
+      orderingService: "Host=eshop-az-postgresdb;Port=5432;Database=EShopOnAbp_Ordering;User ID=postgres;password=myPassw0rd;Pooling=false"
+      administrationService: "Host=eshop-az-postgresdb;Port=5432;Database=EShopOnAbp_Administration;User ID=postgres;password=myPassw0rd;Pooling=false"
+    authServer:
+      authority: http://eshop-az-authserver
+      requireHttpsMetadata: "false"
+      swaggerClientId: WebGateway_Swagger
+      swaggerClientSecret: "1q2w3e*"
+    dotnetEnv: Production
+    redisHost: eshop-az-redis
+    rabbitmqHost: eshop-az-rabbitmq
+    elasticsearchHost: eshop-az-elasticsearch
+  ingress:
+    host: order.eshoponabp.com
+  image:
+    repository: "volocr.azurecr.io/eshoponabp/service-ordering"
+    tag: 1.0.5
+
+# payment-service sub-chart override
+payment:
+  config:
+    selfUrl: https://payment.eshoponabp.com
+    corsOrigins: https://gateway.eshoponabp.com,https://gateway-public.eshoponabp.com
+    connectionStrings:
+      paymentService: "Host=eshop-az-postgresdb;Port=5432;Database=EShopOnAbp_Payment;User ID=postgres;password=myPassw0rd;Pooling=false"
+      administrationService: "Host=eshop-az-postgresdb;Port=5432;Database=EShopOnAbp_Administration;User ID=postgres;password=myPassw0rd;Pooling=false"
+    authServer:
+      authority: http://eshop-az-authserver
+      requireHttpsMetadata: "false"
+      swaggerClientId: WebGateway_Swagger
+      swaggerClientSecret: "1q2w3e*"
+    dotnetEnv: Production
+    redisHost: eshop-az-redis
+    rabbitmqHost: eshop-az-rabbitmq
+    elasticsearchHost: eshop-az-elasticsearch
+  ingress:
+    host: payment.eshoponabp.com
+  image:
+    repository: "volocr.azurecr.io/eshoponabp/service-payment"
+    tag: 1.0.5
+
+# Default values for eshoponabp.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+replicaCount: 1
+
+image:
+  repository: nginx
+  pullPolicy: IfNotPresent
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: ""
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
+serviceAccount:
+  # Specifies whether a service account should be created
+  create: true
+  # Annotations to add to the service account
+  annotations: {}
+  # The name of the service account to use.
+  # If not set and create is true, a name is generated using the fullname template
+  name: ""
+
+podAnnotations: {}
+
+podSecurityContext: {}
+  # fsGroup: 2000
+
+securityContext: {}
+  # capabilities:
+  #   drop:
+  #   - ALL
+  # readOnlyRootFilesystem: true
+  # runAsNonRoot: true
+  # runAsUser: 1000
+
+service:
+  type: ClusterIP
+  port: 80
+
+ingress:
+  enabled: false
+  className: ""
+  annotations: {}
+    # kubernetes.io/ingress.class: nginx
+    # kubernetes.io/tls-acme: "true"
+  hosts:
+    - host: chart-example.local
+      paths:
+        - path: /
+          pathType: ImplementationSpecific
+  tls: []
+  #  - secretName: chart-example-tls
+  #    hosts:
+  #      - chart-example.local
+
+resources: {}
+  # We usually recommend not to specify default resources and to leave this as a conscious
+  # choice for the user. This also increases chances charts run on environments with little
+  # resources, such as Minikube. If you do want to specify resources, uncomment the following
+  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+  # limits:
+  #   cpu: 100m
+  #   memory: 128Mi
+  # requests:
+  #   cpu: 100m
+  #   memory: 128Mi
+
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 100
+  targetCPUUtilizationPercentage: 80
+  # targetMemoryUtilizationPercentage: 80
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}

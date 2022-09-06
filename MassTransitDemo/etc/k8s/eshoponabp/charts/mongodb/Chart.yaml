@@ -1,0 +1,6 @@
+apiVersion: v2
+name: mongodb
+appVersion: "1.0"
+description: Runs Mongo DB Instance
+version: 1.0.0
+type: application

@@ -1,0 +1,15 @@
+{
+  "culture": "zh-Hans",
+  "texts": {
+    "Menu:Home": "首页",
+    "Login": "登录",
+    "YourBasket": "你的购物车",
+    "Total": "总数",
+    "OurProducts": "我们的产品",
+    "CatalogServiceNotAvailable": "当前分类服务不可用！请稍候再试……",
+    "StockCount": "库存数量",
+    "RemoveFromBasket": "从购物车中移除",
+    "CompletePurchase": "购买完成",
+    "CompleteOrder": "订单完成"
+  }
+}

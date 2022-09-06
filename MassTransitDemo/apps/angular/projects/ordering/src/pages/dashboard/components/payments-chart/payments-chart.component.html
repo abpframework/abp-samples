@@ -1,0 +1,19 @@
+
+<div class="card">
+  <div class="card-header">
+    <div class="row">
+      <div class="col col-md-12">
+        <h5 class="card-title">{{ 'OrderingService::Dashboard:PaymentChartTitle' | abpLocalization }}</h5>
+      </div>
+    </div>
+  </div>
+  <div class="card-body" >
+    <abp-chart
+      type="doughnut"
+      [data]="chartData"
+      [options]="options"
+      [responsive]="true"
+    ></abp-chart>
+  </div>
+</div>
+

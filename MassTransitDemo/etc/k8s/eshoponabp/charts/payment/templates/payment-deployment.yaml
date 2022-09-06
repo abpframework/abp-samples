@@ -1,0 +1,53 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-{{ .Chart.Name }}
+spec:
+  selector:
+    matchLabels:
+      app: {{ .Release.Name }}-{{ .Chart.Name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Release.Name }}-{{ .Chart.Name }}
+    spec:
+      containers:
+      - image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
+        imagePullPolicy: {{ .Values.image.pullPolicy }}
+        name: {{ .Release.Name }}-{{ .Chart.Name }}
+        ports:
+        - name: http
+          containerPort: 80
+        - name: https
+          containerPort: 443
+        env:
+        - name: App__SelfUrl
+          value: "{{ .Values.config.selfUrl }}"
+        - name: App__CorsOrigins
+          value: "{{ .Values.config.corsOrigins }}"
+        - name: "ConnectionStrings__PaymentService"
+          value: {{ .Values.config.connectionStrings.paymentService }}  
+        - name: "ConnectionStrings__AdministrationService"
+          value: {{ .Values.config.connectionStrings.administrationService }}
+        - name: "DOTNET_ENVIRONMENT"
+          value: "{{ .Values.config.dotnetEnv }}"
+        - name: "Redis__Configuration"
+          value: "{{ .Values.config.redisHost }}"
+        - name: "RabbitMQ__Connections__Default__HostName"
+          value: "{{ .Values.config.rabbitmqHost }}"
+        - name: "ElasticSearch__Url"
+          value: "{{ .Values.config.elasticsearchHost }}"   
+        - name: "AuthServer__Authority"
+          value: "{{ .Values.config.authServer.authority }}"
+        - name: "AuthServer__RequireHttpsMetadata"
+          value: "{{ .Values.config.authServer.requireHttpsMetadata }}"
+        - name: "AuthServer__SwaggerClientId"
+          value: "{{ .Values.config.authServer.swaggerClientId }}"
+        - name: "AuthServer__SwaggerClientSecret"
+          value: "{{ .Values.config.authServer.swaggerClientSecret }}"
+        - name: "StringEncryption__DefaultPassPhrase"
+          value: "{{ .Values.config.stringEncryptionDefaultPassPhrase }}"
+          {{- if .Values.env }}
+{{ toYaml .Values.env | indent 8 }}
+          {{- end }}
+

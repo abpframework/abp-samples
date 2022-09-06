@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    name: {{ .Release.Name }}-{{ .Chart.Name }}
+  name: {{ .Release.Name }}-{{ .Chart.Name }}
+spec:
+  ports:
+    - name: "http"
+      port: 80
+      targetPort: http
+      protocol: TCP
+    - name: grpc
+      targetPort: grpc
+      protocol: TCP
+      port: {{ .Values.config.grpcPort }}
+  selector:
+    app: {{ .Release.Name }}-{{ .Chart.Name }}

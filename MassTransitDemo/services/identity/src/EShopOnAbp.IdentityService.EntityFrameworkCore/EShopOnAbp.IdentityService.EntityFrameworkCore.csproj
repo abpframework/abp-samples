@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net6.0</TargetFramework>
+        <RootNamespace>EShopOnAbp.IdentityService</RootNamespace>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.0">
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\EShopOnAbp.IdentityService.Domain\EShopOnAbp.IdentityService.Domain.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Volo.Abp.EntityFrameworkCore.PostgreSql" Version="5.1.2" />
+        <PackageReference Include="Volo.Abp.Identity.EntityFrameworkCore" Version="5.1.2" />
+        <PackageReference Include="Volo.Abp.IdentityServer.EntityFrameworkCore" Version="5.1.2" />
+    </ItemGroup>
+
+</Project>

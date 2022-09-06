@@ -1,0 +1,35 @@
+config:
+  selfUrl: # https://eshop-st-gateway-web
+  corsOrigins: # localhost:4200
+  globalConfigurationBaseUrl: # http://eshop-st-gateway-web
+  authServer:
+    authority: http://eshop-st-authserver
+    requireHttpsMetadata: "false"
+    swaggerClientId: WebGateway_Swagger
+    swaggerClientSecret: "1q2w3e*"
+  dotnetEnv: # 
+  redisHost: #
+  rabbitmqHost: #
+  elasticsearchHost: #
+  stringEncryptionDefaultPassPhrase: gsKnGZ041HLL4IM8
+reRoutes:
+  accountService:
+    url: http://eshop-st-authserver
+  identityService:
+    url: http://eshop-st-identity
+  administrationService:
+    url: http://eshop-st-administration
+  catalogService:
+    url: http://eshop-st-catalog
+  orderingService:
+    url: http://eshop-st-order
+ingress:
+  host: # eshop-st-gateway-web
+  tlsSecret: eshop-wildcard-tls
+
+image:
+  repository: eshoponabp/gateway-web
+  tag: latest
+  pullPolicy: IfNotPresent
+
+env: {}

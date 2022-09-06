@@ -1,0 +1,66 @@
+﻿@page "{orderNo:int}"
+@using System.Globalization
+@using EShopOnAbp.Localization
+@using EShopOnAbp.PublicWeb.PaymentMethods
+@using Microsoft.Extensions.Localization
+@using Microsoft.Extensions.Options
+@model EShopOnAbp.PublicWeb.Pages.OrderReceivedModel
+@inject IStringLocalizer<EShopOnAbpResource> L
+@inject IOptions<PaymentMethodUiOptions> PaymentMethodUiOptions
+@{
+    decimal orderTotal = Model.ReceivedOrder.Items.Sum(q => q.UnitPrice * q.Units);
+    string orderTotalString = orderTotal.ToString("C", new CultureInfo("en-US")); // We work with USD any ways
+    string orderNoString = Model.ReceivedOrder.OrderNo.ToString("N0", new NumberFormatInfo() {NumberGroupSeparator = " "});
+}
+
+@section styles{
+    <abp-style src="/Pages/orderReceived.css"/>
+}
+
+@{
+    var paymentIcon = PaymentMethodUiOptions.Value.Icons.GetValueOrDefault(Model.ReceivedOrder.PaymentMethod, PaymentMethodUiOptions.Value.DefaultIcon);
+}
+<abp-row class="justify-content-center p-5">
+    <abp-card class="col-lg-10 col-md-10 col-sm-12 shadow">
+        <abp-card-body>
+            <abp-row class="p-5">
+                <abp-column size="_1">
+                    <i class="fa fa-3x fa-check-circle" style="color: greenyellow"></i>
+                </abp-column>
+                <abp-column>
+                    <div>
+                        <h4>@L["OrderReceived:AcceptedOrder"]</h4>
+                        <p>
+                            @L["OrderReceived:MailSentTo"] <strong>@Model.ReceivedOrder.Buyer.Email</strong> @L["OrderReceived:MailSentToEnd"] <a href="/MyOrders">@L["OrderReceived:LinkToMyOrders"]</a>
+                        </p>
+                    </div>
+                </abp-column>
+
+            </abp-row>
+            <abp-row>
+                <abp-column>
+                    <div class="ro-title">@L["OrderReceived:OrderNo"]</div>
+                    <div class="ro-body ro-ono">
+                        @orderNoString
+                    </div>
+                </abp-column>
+                <abp-column>
+                    <div class="ro-title">@L["OrderReceived:DeliveryAddress"]</div>
+                    <div class="ro-body ro-large">
+                        @Model.ReceivedOrder.Address.Description
+                    </div>
+                    <div>@Model.ReceivedOrder.Address.Street - @Model.ReceivedOrder.Address.ZipCode</div>
+                    <div>@Model.ReceivedOrder.Address.City / @Model.ReceivedOrder.Address.Country</div>
+                </abp-column>
+                <abp-column>
+                    <div class="ro-title">@L["OrderReceived:PaidTotal"]</div>
+                    <div class="ro-body ro-large">@orderTotalString</div>
+                    <div class="pt-2">
+                        <i class="fa fa-5x @paymentIcon" style="color:indigo"></i>
+                    </div>
+                </abp-column>
+            </abp-row>
+            <abp-row class="p-5"></abp-row>
+        </abp-card-body>
+    </abp-card>
+</abp-row>

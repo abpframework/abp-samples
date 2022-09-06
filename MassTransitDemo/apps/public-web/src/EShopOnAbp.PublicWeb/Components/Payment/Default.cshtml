@@ -1,0 +1,58 @@
+@using EShopOnAbp.Localization
+@using EShopOnAbp.PublicWeb.Components.Purchase
+@using Microsoft.Extensions.Localization
+@model EShopOnAbp.PublicWeb.Components.Payment.PaymentViewModel
+
+@inject IStringLocalizer<EShopOnAbpResource> L
+
+<div class="row">
+	<div class="col-lg-9">
+		<div class="address-list p-5">
+			<h5 class="mb-5">@L["Payment:SelectAddress"]</h5>
+			<abp-row>
+				@foreach (var address in Model.Address)
+				{
+					string isSelectedAddressClass = address.IsDefault ? "is-selected" : string.Empty;
+					<abp-column size="_3">
+						<div class="card selectable @isSelectedAddressClass" data-address-id="@address.Id">
+							<div class="card-header">
+								<h4>@address.Type</h4>
+							</div>
+							<div class="card-body">
+								<p class="card-text">@address.ToString()</p>
+							</div>
+							<div class="card-footer">@address.Type</div>
+						</div>
+					</abp-column>
+				}
+			</abp-row>
+		</div>
+
+		<div class="payment-list p-5">
+			<h5 class="mb-5">@L["Payment:SelectPaymentMethod"]</h5>
+			<abp-row>
+				@foreach (var paymentMethod in Model.PaymentMethods)
+				{
+					string isSelectedClass = paymentMethod.IsDefault ? "is-selected" : "";
+					<abp-column size="_2">
+						<abp-card class="selectable @isSelectedClass" data-payment-method="@paymentMethod.Name">
+							<abp-card-body>
+								<p class="card-title payment-method-header" style="text-align: center">
+									@L["Payment:PaymentMethod." + paymentMethod.Name]
+								</p>
+								<p class="card-text payment-method-icon">
+									<i class="fa fa-5x @paymentMethod.IconCss"></i>
+								</p>
+							</abp-card-body>
+						</abp-card>
+					</abp-column>
+				}
+			</abp-row>
+
+		</div>
+	</div>
+	<div class="col-lg-3">
+		@await Component.InvokeAsync(typeof(PurchaseWidgetViewComponent),
+		new {Basket = Model.Basket, ButtonDescription = "CompleteOrder"})
+	</div>
+</div>

@@ -1,0 +1,33 @@
+.card {
+    /* Add shadows to create the "card" effect */
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    transition: 0.3s;
+}
+
+/* On mouse-over, add a deeper shadow */
+.card:hover {
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+    cursor: default;
+}
+
+/* Add some padding inside the card container */
+.card-body {
+    padding: 2px 16px;
+}
+
+.payment-method-icon {
+    opacity:0.8;
+}
+
+.selectable {
+    cursor: pointer !important;
+}
+
+.is-selected {
+    border: solid #bfbfe3;
+    color: #6c84fa;
+}
+
+.payment-method-header {
+    font-weight: 500;
+}

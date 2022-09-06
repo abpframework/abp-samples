@@ -1,0 +1,6 @@
+apiVersion: v2
+name: gateway-web-public
+appVersion: "1.0"
+description: eShopOnAbp Web Public Gateway Application
+version: 1.0.0
+type: application

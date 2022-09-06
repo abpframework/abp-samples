@@ -1,0 +1,19 @@
+.ro-title {
+    text-transform: uppercase;
+    font-weight: 500;
+    color: crimson;
+    padding-bottom: .5em;
+}
+
+.ro-body {
+    font-weight: bold;
+}
+
+.ro-ono {
+    font-size: x-large;
+}
+
+.ro-large {
+    font-size: larger;
+    padding-bottom: .5rem;
+}

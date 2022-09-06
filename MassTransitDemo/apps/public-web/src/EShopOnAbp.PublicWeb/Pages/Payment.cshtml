@@ -1,0 +1,17 @@
+﻿@page
+@using EShopOnAbp.Localization
+@using EShopOnAbp.PublicWeb.Components.Payment
+@using Microsoft.Extensions.Localization
+@model EShopOnAbp.PublicWeb.Pages.PaymentModel
+
+@inject IStringLocalizer<EShopOnAbpResource> L
+
+@section scripts {
+    <abp-script src="/Pages/payment.js"/>
+}
+
+<div class="row">
+    <div id="PaymentArea" class="pt-5">
+        @await Component.InvokeAsync(typeof(PaymentWidgetViewComponent))
+    </div>
+</div>

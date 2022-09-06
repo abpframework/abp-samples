@@ -1,0 +1,87 @@
+<div class="card">
+  <div class="card-header">
+    <div class="row">
+      <div class="col col-md-6">
+        <h5 class="card-title">{{ 'AbpOrdering::Orders' | abpLocalization }}</h5>
+      </div>
+    </div>
+  </div>
+  <div class="card-body">
+    <ngx-datatable [rows]="items" [count]="count" [list]="list" default>
+      <!-- TODO: localize column headers -->
+      <ngx-datatable-column name="" [sortable]="false" prop="id">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+          <div ngbDropdown container="body" class="d-inline-block">
+            <button
+              class="btn btn-primary btn-sm dropdown-toggle"
+              data-toggle="dropdown"
+              aria-haspopup="true"
+              ngbDropdownToggle
+            >
+              <i class="mr-1 fa fa-cog"></i>{{ 'AbpUi::Actions' | abpLocalization }}
+            </button>
+            <div ngbDropdownMenu>
+              <button
+                class="dropdown-item"
+                (click)="openModal(row)"
+                *abpPermission="permissions.detail"
+              >
+                {{ 'AbpUi::Detail' | abpLocalization }}
+              </button>
+              <button
+                class="dropdown-item"
+                (click)="setAsShipped(row)"
+                *abpPermission="permissions.setAsShipped"
+              >
+                {{ 'OrderingService::Permission:Orders.SetAsShipped' | abpLocalization }}
+              </button>
+              <!-- Todo: Add permissions -->
+              <button
+                class="dropdown-item"
+                *abpPermission="permissions.setAsCancelled"
+                (click)="setAsCancelled(row)"
+              >
+                {{ 'OrderingService::Permission:Orders.SetAsCancelled' | abpLocalization }}
+              </button>
+            </div>
+          </div>
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column
+        [name]="'OrderingService::DisplayName:OrderNo' | abpLocalization"
+        prop="orderNo"
+      ></ngx-datatable-column>
+      <ngx-datatable-column
+        [name]="'OrderingService::DisplayName:OrderDate' | abpLocalization"
+        prop="orderDate"
+      >
+        <ng-template let-value="value" ngx-datatable-cell-template>
+          <span>{{ value | date }}</span>
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column
+        [name]="'OrderingService::DisplayName:OrderTotal' | abpLocalization"
+        prop="orderTotal"
+      >
+        <ng-template let-value="value" ngx-datatable-cell-template>
+          <span>{{ value | currency }}</span>
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column
+        [name]="'OrderingService::DisplayName:OrderStatus' | abpLocalization"
+        prop="orderStatus"
+      >
+        <ng-template let-value="value" ngx-datatable-cell-template>
+          {{ 'OrderingService::Enum:OrderStatus:' + value | abpLocalization }}
+        </ng-template>
+      </ngx-datatable-column>
+    </ngx-datatable>
+  </div>
+</div>
+
+<app-order-detail
+  [visible]="isModalVisible"
+  (visibleChange)="closeModal($event)"
+  [order]="selectedOrder"
+>
+</app-order-detail>

@@ -1,0 +1,6 @@
+apiVersion: v2
+name: postgresdb
+appVersion: "1.0"
+description: Runs Postgres DB Instance
+version: 1.0.0
+type: application

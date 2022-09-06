@@ -1,0 +1,92 @@
+@using System.Globalization
+@using EShopOnAbp.Localization
+@using Microsoft.Extensions.Localization
+@using Microsoft.Extensions.Options
+@using Volo.Abp.Http.Client
+@model EShopOnAbp.PublicWeb.Components.UserOrders.UserOrderWidgetViewComponent.UserOrderViewModel
+@inject IStringLocalizer<EShopOnAbpResource> L
+@inject IOptions<AbpRemoteServiceOptions> options
+
+@if (Model.ServiceError)
+{
+    <div>SERVICE ERROR</div>
+}
+
+<abp-row class="m-2 p-2" style="text-align: center">
+    <span class="order-title">@L["UserOrders:TotalOrderCount"] <strong>@Model.UserOrders.Count</strong></span>
+</abp-row>
+
+@foreach (var order in Model.UserOrders)
+{
+    var orderTotalString = order.Items.Sum(q => q.UnitPrice * q.Units).ToString("C", new CultureInfo("en-US"));
+    string addressString = $"{order.Address.Street} {order.Address.ZipCode} \n {order.Address.City}/{order.Address.Country}";
+    <div class="card">
+        <div class="card-header">
+            <div class="row">
+                <div class="col">
+                    <div class="o-header">@L["UserOrders:OrderDate"]</div>
+                    <div class="o-description">@order.OrderDate.ToString("dd MMMM yyyy")</div>
+                </div>
+                <div class="col">
+                    <div class="o-header">@L["Purchase:OrderTotal"]</div>
+                    <div class="o-description">@orderTotalString</div>
+                </div>
+                <div class="col">
+                    <div class="o-header">@L["OrderReceived:DeliveryAddress"]</div>
+                    <div>
+                        <abp-button abp-tooltip-bottom="@addressString">@order.Address.Description</abp-button>
+                    </div>
+                </div>
+                <div class="col">
+                    <div>
+                        <span class="o-header">@L["OrderReceived:OrderNo"]</span> <span class="o-order-no">@order.OrderNo.ToString("N0", new NumberFormatInfo() {NumberGroupSeparator = " "})</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            @foreach (var item in order.Items)
+            {
+                <abp-card class="order-item m-3">
+                    <abp-card-body>
+                        <div class="row m-3">
+                            <h3>@order.OrderStatus</h3>
+                        </div>
+                        <abp-row>
+                            <abp-column size="_2">
+                                <a href="/products/@item.ProductId.ToString()">
+                                    @{
+                                        string imageUrl = $"{options.Value.RemoteServices.Default.BaseUrl}product-images/{item.PictureUrl}";
+                                        <img class="img-size" src="@imageUrl" />
+                                    }
+                                </a>
+                            </abp-column>
+                            <abp-column size-lg="_4" size-md="_4" size-sm="_4">
+                                <a href="/products/@item.ProductId.ToString()">
+                                    <div><strong>@item.ProductName</strong></div>
+                                    <div>@L["UserOrders:ProductReturnDate"] @order.OrderDate.AddMonths(1).ToString("dd MMMM yyyy")</div>
+                                </a>
+                                <div class="mt-3">
+                                    <abp-button icon="fas fa-cart-plus" class="btn btn-warning buy-again" text="@L["UserOrders:BuyAgain"]" data-product-id="@item.ProductId"></abp-button>
+                                </div>
+                            </abp-column>
+                            <abp-column offset="_3" size="_2">
+                                <abp-row class="pb-3">
+                                    <abp-button class="btn btn-light shadow" disabled="true" abp-tooltip-right="Not available yet">
+                                        @L["UserOrders:ReturnProducts"]
+                                    </abp-button>
+                                </abp-row>
+                                <abp-row>
+                                    <abp-button class="btn btn-light shadow" disabled="true" abp-tooltip-right="Not available yet">
+                                        @L["UserOrders:AddReview"]
+                                    </abp-button>
+                                </abp-row>
+                            </abp-column>
+                        </abp-row>
+                    </abp-card-body>
+                </abp-card>
+            }
+        </div>
+    </div>
+    <hr />
+}

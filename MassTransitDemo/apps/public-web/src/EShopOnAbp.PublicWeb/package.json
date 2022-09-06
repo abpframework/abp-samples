@@ -1,0 +1,9 @@
+{
+  "version": "0.1.0",
+  "name": "EShopOnAbpPublicWeb",
+  "private": true,
+  "dependencies": {
+    "@abp/aspnetcore.mvc.ui.theme.basic": "~5.1.2",
+    "@abp/signalr": "~5.1.2"
+  }
+}

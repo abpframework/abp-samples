@@ -1,0 +1,36 @@
+config:
+  selfUrl: # https://eshop-st-administration
+  corsOrigins: # https://eshop-st-gateway-web,https://eshop-st-gateway-public-web
+  connectionStrings:
+    administrationService: #
+  authServer:
+    authority: http://eshop-st-authserver
+    requireHttpsMetadata: "false"
+    swaggerClientId: WebGateway_Swagger
+    swaggerClientSecret: "1q2w3e*"
+  remoteServices:
+    abpIdentityBaseUrl: #
+    useCurrentToken: "false"
+  dotnetEnv: Staging
+  redisHost: eshop-st-redis
+  rabbitmqHost: eshop-st-rabbitmq
+  elasticsearchHost: #
+  stringEncryptionDefaultPassPhrase: gsKnGZ041HLL4IM8
+
+synchedCommunication:
+  grantType: # "client_credentials"
+  clientId: # 
+  clientSecret: #
+  authority: # "https://eshop-st-authserver"
+  scope: # "IdentityService"
+
+ingress:
+  host: eshop-st-administration
+  tlsSecret: eshop-wildcard-tls
+
+image:
+  repository: eshoponabp/service-administration
+  tag: latest
+  pullPolicy: IfNotPresent
+
+env: {}

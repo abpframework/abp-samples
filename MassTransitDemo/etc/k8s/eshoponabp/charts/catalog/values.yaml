@@ -1,0 +1,36 @@
+config:
+  selfUrl: # https://eshop-st-catalog
+  corsOrigins: # https://eshop-st-gateway-web,https://eshop-st-gateway-public-web,https://eshop-st-public,https://eshop-st-web
+  connectionStrings:
+    catalogService: #
+    administrationService: #
+  authServer:
+    authority: http://eshop-st-authserver
+    requireHttpsMetadata: "false"
+    swaggerClientId: WebGateway_Swagger
+    swaggerClientSecret: "1q2w3e*"
+  dotnetEnv: Staging
+  redisHost: eshop-st-redis
+  rabbitmqHost: eshop-st-rabbitmq
+  elasticsearchHost: eshop-st-elasticsearch
+  stringEncryptionDefaultPassPhrase: gsKnGZ041HLL4IM8
+  grpcPort: 81
+  kestrel:
+    httpUrl: http://eshop-st-catalog:80
+    httpProtocols: Http1AndHttp2
+    grpcUrl: http://eshop-st-catalog:81
+    grpcProtocols: Http2
+
+ingress:
+  host: eshop-st-catalog
+  tlsSecret: eshop-wildcard-tls
+
+image:
+  repository: eshoponabp/service-catalog
+  tag: latest
+  pullPolicy: IfNotPresent
+
+env: {
+  # ASPNETCORE_URLS=http://+:80;http://+:81
+}
+    

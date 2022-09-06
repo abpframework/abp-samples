@@ -1,0 +1,6 @@
+apiVersion: v2
+name: payment
+appVersion: "1.0"
+description: eShopOnAbp Payment Microservice
+version: 1.0.0
+type: application

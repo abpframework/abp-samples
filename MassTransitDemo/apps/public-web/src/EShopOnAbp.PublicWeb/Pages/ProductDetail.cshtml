@@ -1,0 +1,55 @@
+﻿@page "/products/{id:guid}"
+@using EShopOnAbp.Localization
+@using Microsoft.Extensions.Localization
+@using System.Globalization
+@using Microsoft.Extensions.Options
+@using Volo.Abp.Http.Client
+@model EShopOnAbp.PublicWeb.Pages.ProductDetailModel
+@inject IStringLocalizer<EShopOnAbpResource> L
+@inject IOptions<AbpRemoteServiceOptions> options
+
+@section styles{
+    <abp-style src="/Pages/index.css" />
+}
+
+@section scripts {
+    <abp-script src="/client-proxies/basket-proxy.js" />
+    <abp-script src="/Pages/index.js" />
+}
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-lg-6 col-md-6 col-sm-6 ">
+            <div class="product-list">
+                @{
+                    var product = Model.Product;
+                    var productPrice = product.Price.ToString("C", new CultureInfo("en-US"));
+                    string productImage = !product.ImageName.IsNullOrEmpty() ? $"{options.Value.RemoteServices.Default.BaseUrl}product-images/{product.ImageName}" : $"{options.Value.RemoteServices.Default.BaseUrl}product-images/@product.ImageName";
+                    string buyText = L["Index:AddToBasket"];
+                    <div class="product-list-item" data-product-id="@product.Id.ToString()" style="cursor:auto">
+                        <div class="col">
+                            <div class="product-info-box">
+                                <h6>@product.Name</h6>
+                                <em class="d-block text-muted">@product.Code - @L["StockCount"]: @product.StockCount</em>
+                            </div>
+                        </div>
+                        <img src="@productImage" />
+                        <div class="row mt-5 ">
+                            @if (product.StockCount > 0)
+                            {
+                                <abp-button class="add-basket-button" button-type="Warning" text="@buyText" data-product-id="@product.Id.ToString()"></abp-button>
+                            }
+                            else
+                            {
+                                <abp-button disabled="true" class="add-basket-button" button-type="Warning" text="@L["Index:OutOfStock"]" />
+                            }
+                            <div class="info-section col" style="text-align: center">
+                                <span class="product-price">@productPrice</span>
+                            </div>
+                        </div>
+                    </div>
+                 }
+            </div>
+        </div>
+    </div>
+</div>

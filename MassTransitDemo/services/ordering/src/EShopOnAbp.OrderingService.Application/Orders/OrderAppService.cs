@@ -15,8 +15,7 @@ using Volo.Abp.Users;
 
 namespace EShopOnAbp.OrderingService.Orders;
 
-//[Authorize(OrderingServicePermissions.Orders.Default)]
-[AllowAnonymous]
+[Authorize(OrderingServicePermissions.Orders.Default)]
 public class OrderAppService : ApplicationService, IOrderAppService
 {
     private readonly OrderManager _orderManager;

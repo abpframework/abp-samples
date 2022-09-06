@@ -45,6 +45,7 @@ public class OrderingServiceHttpApiHostModule : AbpModule
 
 To complete this configuration you need to install the related packages on NuGet or via the below code
 > Install-Package MassTransit
+
 > Install-Package MassTransit.RabbitMQ
 
 Let's do its implemantation on `OrderManager` under `EShopOnAbp.OrderingService.Domain`
@@ -136,6 +137,7 @@ public class OrderCancelledConsumer : IConsumer<OrderCancelledEto>
 
 To complete this configuration you need to install the related packages on NuGet or via the below code
 > Install-Package MassTransit
+
 > Install-Package MassTransit.RabbitMQ
 
 

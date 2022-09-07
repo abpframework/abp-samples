@@ -12,7 +12,7 @@ As you know, `RabbitMQ` is one of the most popular open-source message brokers w
 
 MassTransit also supports exceptions, retries, sagas, scheduling and more features. We're planning to write some new articles about them.
 
-In this article, we will show you how to use `MassTransit` in eShopOnAbp project instead of `Volo.Abp.EventBus.Distributed`. 
+In this article, we will show you how to use `MassTransit` in [eShopOnAbp](https://github.com/abpframework/eShopOnAbp) project instead of `Volo.Abp.EventBus.Distributed`. 
 
 In eShopOnAbp, once the order service cancels the order, it publishes an event. The configured services can consumer it. In this case, the just payment service will do that. Already the system works properly, but we will make changes without touching businesses and use MassTransit abilities.
 
@@ -44,9 +44,9 @@ public class OrderingServiceHttpApiHostModule : AbpModule
 ```
 
 To complete this configuration you need to install the related packages on NuGet or via the below code
-> Install-Package MassTransit
+> Install-Package MassTransit -Version 8.0.6
 
-> Install-Package MassTransit.RabbitMQ
+> Install-Package MassTransit.RabbitMQ -Version 8.0.6
 
 Let's do its implemantation on `OrderManager` under `EShopOnAbp.OrderingService.Domain`
 As we mentioned above, already the system works properly hence firstly we will remove/comment on the old publishing code and write the new codes.
@@ -136,9 +136,9 @@ public class OrderCancelledConsumer : IConsumer<OrderCancelledEto>
 ```
 
 To complete this configuration you need to install the related packages on NuGet or via the below code
-> Install-Package MassTransit
+> Install-Package MassTransit -Version 8.0.6
 
-> Install-Package MassTransit.RabbitMQ
+> Install-Package MassTransit.RabbitMQ -Version 8.0.6
 
 
 In this article, we showed how to publish and consume the events with eShopOnAbp project by using MassTransit. For more detail, you can visit its [own official website](https://masstransit-project.com/getting-started/).

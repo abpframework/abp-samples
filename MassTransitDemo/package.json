@@ -1,5 +1,0 @@
-{
-  "dependencies": {
-    "@ngxs/store": "^3.7.3"
-  }
-}

@@ -1,6 +1,0 @@
-apiVersion: v2
-name: identity
-appVersion: "1.0"
-description: eShopOnAbp Identity Microservice
-version: 1.0.0
-type: application

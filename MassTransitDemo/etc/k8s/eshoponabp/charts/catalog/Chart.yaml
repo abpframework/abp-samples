@@ -1,6 +1,0 @@
-apiVersion: v2
-name: catalog
-appVersion: "1.0"
-description: eShopOnAbp Catalog Microservice
-version: 1.0.0
-type: application

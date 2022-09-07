@@ -1,6 +1,0 @@
-apiVersion: v2
-name: public-web
-appVersion: "1.0"
-description: eShopOnAbp Public Web Application
-version: 1.0.0
-type: application

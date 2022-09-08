@@ -35,17 +35,12 @@ public class OrderingServiceHttpApiHostModule : AbpModule
                     h.Password("pwd");
                 });
             }));
-
-            x.AddRequestClient<OrderCancelledEto>();
-            //OrderCancelledEto is already defined under the `EShopOnAbp.OrderingService.Domain.Shared` 
         });
     }
 }
 ```
 
 To complete this configuration you need to install the related packages on NuGet or via the below code
-> Install-Package MassTransit -Version 8.0.6
-
 > Install-Package MassTransit.RabbitMQ -Version 8.0.6
 
 Let's do its implemantation on `OrderManager` under `EShopOnAbp.OrderingService.Domain`
@@ -111,6 +106,10 @@ public class PaymentServiceHttpApiHostModule : AbpModule
                     h.Username("username");
                     h.Password("pwd");
                 });
+                cfg.ReceiveEndpoint("order-service", ep =>
+                {
+                    ep.ConfigureConsumer<OrderCancelledConsumer>(provider);
+                });
             }));
         });
     }
@@ -136,8 +135,6 @@ public class OrderCancelledConsumer : IConsumer<OrderCancelledEto>
 ```
 
 To complete this configuration you need to install the related packages on NuGet or via the below code
-> Install-Package MassTransit -Version 8.0.6
-
 > Install-Package MassTransit.RabbitMQ -Version 8.0.6
 
 

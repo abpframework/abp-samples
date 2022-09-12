@@ -8,17 +8,17 @@
 - gRPC
 - ActiveMQ
 
-As you know, `RabbitMQ` is one of the most popular open-source message brokers which is used by many developers. So we will continue via that. Also, you can implement the others easily as well.
+As you know, `RabbitMQ` is one of the most popular open-source message brokers which is used by many developers. So we will continue with it. Also, you can implement the others easily as well.
 
 MassTransit also supports exceptions, retries, sagas, scheduling and more features. We're planning to write some new articles about them.
 
-In this article, we will show you how to use `MassTransit` in [eShopOnAbp](https://github.com/abpframework/eShopOnAbp) project instead of `Volo.Abp.EventBus.Distributed`. 
+In this article, we will show you how to use `MassTransit` in the [eShopOnAbp](https://github.com/abpframework/eShopOnAbp) project instead of `Volo.Abp.EventBus.Distributed`. 
 
-In eShopOnAbp, once the order service cancels the order, it publishes an event. The configured services can consumer it. In this case, the just payment service will do that. Already the system works properly, but we will make changes without touching businesses and use MassTransit abilities.
+In eShopOnAbp, once the order service cancels the order, it publishes an event. The configured services can consume it. In this case, the just payment service will do that. The system already works properly, but we will make changes without touching the business logic code and use MassTransit abilities.
 
-Firstly, let's focus on the publishing event side (order service) and then will focus on the consumer side (payment service).
+Firstly, let's focus on the publishing event side (order service) and then we will focus on the consumer side (payment service).
 
-Lets do its configuration in `OrderingServiceHttpApiHostModule` under the `EShopOnAbp.OrderingService.HttpApi.Host`
+Let's do its configuration in `OrderingServiceHttpApiHostModule` under the `EShopOnAbp.OrderingService.HttpApi.Host`
 ```csharp
 public class OrderingServiceHttpApiHostModule : AbpModule
 {
@@ -44,7 +44,7 @@ To complete this configuration you need to install the related packages on NuGet
 > Install-Package MassTransit.RabbitMQ -Version 8.0.6
 
 Let's do its implemantation on `OrderManager` under `EShopOnAbp.OrderingService.Domain`
-As we mentioned above, already the system works properly hence firstly we will remove/comment on the old publishing code and write the new codes.
+As we mentioned above, the system already works properly so firstly we will remove/comment on the old published code and write the new codes.
 
 ```csharp
 public class OrderManager : DomainService
@@ -86,9 +86,9 @@ public class OrderManager : DomainService
     }
 ```
 
-Note: You can define your model `OrderCancelledEto` as a class, interface or record but MassTransit recommends [record](https://docs.microsoft.com/en-US/dotnet/csharp/whats-new/csharp-9#record-types) as best practice.
+Note: You can define your model `OrderCancelledEto` as a class, interface or record but MassTransit recommends [record](https://docs.microsoft.com/en-US/dotnet/csharp/whats-new/csharp-9#record-types) as the best practice.
 
-We're ready to focus on the consumer side (payment service). Firstly lets should with configuration in `PaymentServiceHttpApiHostModule` under the `EShopOnAbp.PaymentService.HttpApi.Host`
+We're ready to focus on the consumer side (payment service). Firstly let's implement the configuration in `PaymentServiceHttpApiHostModule` under the `EShopOnAbp.PaymentService.HttpApi.Host`
 
 ```csharp
 public class PaymentServiceHttpApiHostModule : AbpModule
@@ -138,6 +138,6 @@ To complete this configuration you need to install the related packages on NuGet
 > Install-Package MassTransit.RabbitMQ -Version 8.0.6
 
 
-In this article, we showed how to publish and consume the events with eShopOnAbp project by using MassTransit. For more detail, you can visit its [own official website](https://masstransit-project.com/getting-started/).
+In this article, we demonstrated how to publish and consume the events with the eShopOnAbp project by using MassTransit. For more detail, you can visit its [own official website](https://masstransit-project.com/getting-started/).
 
 Regards.

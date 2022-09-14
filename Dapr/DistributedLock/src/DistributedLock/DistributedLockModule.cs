@@ -15,7 +15,6 @@ public class DistributedLockModule : AbpModule
     {
         Configure<AbpDaprOptions>(options =>
         {
-            options.AppId = "dapr-distributedlock";
             options.GrpcEndpoint = "http://localhost:7003";
             options.HttpEndpoint = "http://localhost:7001";
         });

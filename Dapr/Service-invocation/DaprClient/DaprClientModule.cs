@@ -1,8 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Shared;
 using Volo.Abp.Autofac;
-using Volo.Abp.Dapr;
-using Volo.Abp.Http.Client.ClientProxying;
 using Volo.Abp.Http.Client.Dapr;
 using Volo.Abp.Modularity;
 using Volo.Abp.Validation;
@@ -21,10 +19,6 @@ public class DaprClientModule : AbpModule
     
     public override void ConfigureServices(ServiceConfigurationContext context)
     {
-        Configure<AbpDaprOptions>(options =>
-        {
-            options.HttpEndpoint = "http://localhost:3500";
-        });
         context.Services.AddHttpClientProxies(typeof(SharedModule).Assembly, RemoteServiceName);
     }
 }

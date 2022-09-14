@@ -23,4 +23,11 @@ public class HelloWorldController : AbpControllerBase, IHelloWorldAppService
     {
         return await _helloWorldAppService.SayHelloAsync();
     }
+    
+    [HttpGet]
+    [Route("json-result")]
+    public async Task<SayHelloResult> SayHello2Async()
+    {
+        return await _helloWorldAppService.SayHello2Async();
+    }
 }

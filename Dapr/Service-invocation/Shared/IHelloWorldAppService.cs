@@ -5,4 +5,6 @@ namespace Shared;
 public interface IHelloWorldAppService : IApplicationService
 {
     Task<string> SayHelloAsync();
+    
+    Task<SayHelloResult> SayHello2Async();
 }

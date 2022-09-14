@@ -9,4 +9,12 @@ public class HelloWorldAppService : ApplicationService ,  IHelloWorldAppService
     {
         return Task.FromResult("Hello world");
     }
+
+    public async Task<SayHelloResult> SayHello2Async()
+    {
+        return new SayHelloResult
+        {
+            Result = "Hello world 2"
+        };
+    }
 }

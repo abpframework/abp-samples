@@ -14,6 +14,7 @@ using Volo.Abp.AspNetCore.Mvc.UI.Theme.LeptonXLite;
 using Volo.Abp.AspNetCore.Mvc.UI.Theme.LeptonXLite.Bundling;
 using Microsoft.OpenApi.Models;
 using OpenIddict.Validation.AspNetCore;
+using ProductManagement.Products;
 using ProtoBuf.Grpc.Server;
 using Volo.Abp;
 using Volo.Abp.Account;
@@ -247,6 +248,9 @@ public class ProductManagementHttpApiHostModule : AbpModule
 
         app.UseAuditing();
         app.UseAbpSerilogEnrichers();
-        app.UseConfiguredEndpoints();
+        app.UseConfiguredEndpoints(endpoints =>
+        {
+            endpoints.MapGrpcService<IProductAppService>();
+        });
     }
 }

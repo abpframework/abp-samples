@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Volo.Abp.DependencyInjection;
 
-namespace ProductManagement;
+namespace ProductManagement.Products;
 
-public class MyProductService : IMyProductService, ITransientDependency
+public class ProductAppService : ProductManagementAppService, IProductAppService
 {
     public async Task<List<ProductDto>> GetListAsync()
     {

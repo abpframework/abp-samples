@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Grpc.Net.Client;
+using ProductManagement.Products;
 using ProtoBuf.Grpc.Client;
 using Volo.Abp.Account;
 using Volo.Abp.DependencyInjection;
@@ -24,15 +25,19 @@ public class ClientDemoService : ITransientDependency
         Console.WriteLine($"Name     : {output.Name}");
         Console.WriteLine($"Surname  : {output.Surname}");
         
-        GrpcClientFactory.AllowUnencryptedHttp2 = true;
-        using (var channel = GrpcChannel.ForAddress("http://localhost:10042"))
+        await RunGrpcDemoAsync();
+    }
+
+    private static async Task RunGrpcDemoAsync()
+    {
+        using (var channel = GrpcChannel.ForAddress("https://localhost:10042"))
         {
-            var calculator = channel.CreateGrpcService<IMyProductService>();
-            var result = await calculator.GetListAsync();
-            
-            foreach (var dto in result)
+            var productAppService = channel.CreateGrpcService<IProductAppService>();
+            var productDtos = await productAppService.GetListAsync();
+
+            foreach (var productDto in productDtos)
             {
-                Console.WriteLine($"[Product] Id = {dto.Id}, Name = {dto.Name}");
+                Console.WriteLine($"[Product] Id = {productDto.Id}, Name = {productDto.Name}");
             }
         }
     }

@@ -1,4 +1,6 @@
 ﻿using Localization.Resources.AbpUi;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Routing;
 using ProductManagement.Localization;
 using Volo.Abp.Account;
 using Volo.Abp.FeatureManagement;
@@ -25,6 +27,14 @@ public class ProductManagementHttpApiModule : AbpModule
     public override void ConfigureServices(ServiceConfigurationContext context)
     {
         ConfigureLocalization();
+        
+        Configure<AbpEndpointRouterOptions>(options =>
+        {
+            options.EndpointConfigureActions.Add(builderContext =>
+            {
+                builderContext.Endpoints.MapGrpcService<MyProductService>();
+            });
+        });
     }
 
     private void ConfigureLocalization()

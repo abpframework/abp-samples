@@ -5,7 +5,7 @@ using Volo.Abp.Application.Services;
 
 namespace ProductManagement.Products;
 
-[ServiceContract(Name = "ProductManagement.ProductAppService")]
+[ServiceContract]
 public interface IProductAppService : IApplicationService
 {
     Task<List<ProductDto>> GetListAsync();

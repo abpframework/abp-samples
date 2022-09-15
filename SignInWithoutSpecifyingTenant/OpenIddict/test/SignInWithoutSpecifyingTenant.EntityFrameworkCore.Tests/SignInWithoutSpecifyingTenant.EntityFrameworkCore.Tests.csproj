@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="..\..\common.props" />
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <RootNamespace>SignInWithoutSpecifyingTenant</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\SignInWithoutSpecifyingTenant.EntityFrameworkCore\SignInWithoutSpecifyingTenant.EntityFrameworkCore.csproj" />
+    <ProjectReference Include="..\SignInWithoutSpecifyingTenant.TestBase\SignInWithoutSpecifyingTenant.TestBase.csproj" />
+    <PackageReference Include="Volo.Abp.EntityFrameworkCore.Sqlite" Version="6.0.0-rc.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.2.0" />
+  </ItemGroup>
+
+</Project>

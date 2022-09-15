@@ -75,7 +75,7 @@ public class HostedService : IHostedService
             await Task.Delay(500, cancellationToken);
         }
 
-        await (await _daprClientFactory.CreateAsync()).PublishEventAsync("test-pubsub", "test-topic", new CustomPubSubDataModel
+        await _daprClientFactory.Create().PublishEventAsync("test-pubsub", "test-topic", new CustomPubSubDataModel
         {
             Id = 123,
             Name = "321"

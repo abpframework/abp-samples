@@ -10,6 +10,9 @@
   <ItemGroup>
     <PackageReference Include="Blazorise.Bootstrap5" Version="1.0.4" />
     <PackageReference Include="Blazorise.Icons.FontAwesome" Version="1.0.4" />
+    <PackageReference Include="Grpc.Net.Client" Version="2.49.0-pre1" />
+    <PackageReference Include="Grpc.Net.Client.Web" Version="2.49.0-pre1" />
+    <PackageReference Include="protobuf-net.Grpc" Version="1.0.177" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="6.0.5" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="6.0.5" />
   </ItemGroup>

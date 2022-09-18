@@ -196,6 +196,7 @@ public class ProductManagementHttpApiHostModule : AbpModule
                             .ToArray()
                     )
                     .WithAbpExposedHeaders()
+                    .WithExposedHeaders("Grpc-Status", "Grpc-Message", "Grpc-Encoding", "Grpc-Accept-Encoding")
                     .SetIsOriginAllowedToAllowWildcardSubdomains()
                     .AllowAnyHeader()
                     .AllowAnyMethod()
@@ -248,9 +249,10 @@ public class ProductManagementHttpApiHostModule : AbpModule
 
         app.UseAuditing();
         app.UseAbpSerilogEnrichers();
+        app.UseGrpcWeb(new GrpcWebOptions { DefaultEnabled = true });
         app.UseConfiguredEndpoints(endpoints =>
         {
-            endpoints.MapGrpcService<IProductAppService>();
+            endpoints.MapGrpcService<IProductAppService>().RequireCors("__DefaultCorsPolicy");
         });
     }
 }

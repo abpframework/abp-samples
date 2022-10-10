@@ -1,0 +1,12 @@
+﻿{
+  "profiles": {
+    "Acme.BookStore.HttpApi.Host": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "applicationUrl": "https://api.getabp.net:44302",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    }
+  }
+}

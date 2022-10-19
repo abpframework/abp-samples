@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/dotnet/core/sdk:7.0-buster AS build
+FROM mcr.microsoft.com/dotnet/core/sdk:7.0 AS build
 #RUN apk add --no-cache bash
 ENV PATH $PATH:/root/.dotnet/tools
 RUN dotnet tool install -g dotnet-ef

@@ -14,3 +14,12 @@ public class StockHandler : IDistributedEventHandler<StockCountChangedEto>, ITra
         return Task.CompletedTask;
     }
 }
+
+public class PriceHandler : IDistributedEventHandler<PriceChangedEto>, ITransientDependency
+{
+    public Task HandleEventAsync(PriceChangedEto eventData)
+    {
+        Console.WriteLine($"Product: {eventData.Price}. Date: {eventData.ChangedDate}");
+        return Task.CompletedTask;
+    }
+}

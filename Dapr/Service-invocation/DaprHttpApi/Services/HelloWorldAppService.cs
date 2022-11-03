@@ -1,4 +1,5 @@
-﻿using Shared;
+﻿using System.Threading.Tasks;
+using Shared;
 using Volo.Abp.Application.Services;
 
 namespace DaprHttpApi.Services;

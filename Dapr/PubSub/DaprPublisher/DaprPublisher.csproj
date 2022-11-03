@@ -2,14 +2,13 @@
 
     <PropertyGroup>
         <OutputType>Exe</OutputType>
-        <TargetFramework>net6.0</TargetFramework>
+        <TargetFramework>net7.0</TargetFramework>
     </PropertyGroup>
 
     <ItemGroup>
         <ProjectReference Include="..\..\..\..\abp\framework\src\Volo.Abp.Autofac\Volo.Abp.Autofac.csproj" />
         <ProjectReference Include="..\..\..\..\abp\framework\src\Volo.Abp.EventBus.Dapr\Volo.Abp.EventBus.Dapr.csproj" />
-        <PackageReference Include="Microsoft.Extensions.Hosting" Version="6.0.1" />
-        <PackageReference Include="Dapr.Client" Version="1.8.0" />
+        <PackageReference Include="Microsoft.Extensions.Hosting" Version="7.0.0-rc.2.22472.3" />
         <ProjectReference Include="..\Shared\Shared.csproj" />
     </ItemGroup>
 

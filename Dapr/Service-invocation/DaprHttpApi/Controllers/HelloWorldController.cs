@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
 using Shared;
 using Volo.Abp;
 using Volo.Abp.AspNetCore.Mvc;
@@ -12,7 +13,7 @@ namespace DaprHttpApi.Controllers;
 public class HelloWorldController : AbpControllerBase, IHelloWorldAppService
 {
     private readonly IHelloWorldAppService _helloWorldAppService;
-    
+
     public HelloWorldController(IHelloWorldAppService helloWorldAppService)
     {
         _helloWorldAppService = helloWorldAppService;
@@ -23,7 +24,7 @@ public class HelloWorldController : AbpControllerBase, IHelloWorldAppService
     {
         return await _helloWorldAppService.SayHelloAsync();
     }
-    
+
     [HttpGet]
     [Route("json-result")]
     public async Task<SayHelloResult> SayHello2Async()

@@ -1,4 +1,3 @@
-using DaprSubscribe;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -35,11 +34,6 @@ public class AppModule : AbpModule
         Configure<AbpDaprEventBusOptions>(options =>
         {
             options.PubSubName = "test-pubsub";
-        });
-
-        Configure<AbpAspNetCoreMvcDaprEventBusOptions>(options =>
-        {
-            options.Contributors.Add(new CustomDaprPubSubProviderContributor());
         });
     }
 

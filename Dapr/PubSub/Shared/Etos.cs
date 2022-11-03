@@ -11,9 +11,12 @@ public class StockCountChangedEto
     public DateTime ChangedDate { get; set; }
 }
 
-public class CustomPubSubModel
+[EventName("PriceChanged")]
+public class PriceChangedEto
 {
-    public CustomPubSubDataModel Data { get; set; }
+    public string Price { get; set; }
+
+    public DateTime ChangedDate { get; set; }
 }
 
 public class CustomPubSubDataModel

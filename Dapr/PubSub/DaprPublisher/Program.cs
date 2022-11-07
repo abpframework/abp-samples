@@ -75,19 +75,19 @@ public class HostedService : IHostedService
             await Task.Delay(500, cancellationToken);
         }
 
-        await (await _daprClientFactory.CreateAsync()).PublishEventAsync("test-pubsub", "StockCountChanged", new StockCountChangedEto
+        await _daprClientFactory.Create().PublishEventAsync("test-pubsub", "StockCountChanged", new StockCountChangedEto
         {
             Product = "Product from Dapr client",
             ChangedDate = DateTime.Now
         }, cancellationToken);
 
-        await (await _daprClientFactory.CreateAsync()).PublishEventAsync("test-pubsub", "PriceChanged", new PriceChangedEto
+        await _daprClientFactory.Create().PublishEventAsync("test-pubsub", "PriceChanged", new PriceChangedEto
         {
             Price = "Price from Dapr client",
             ChangedDate = DateTime.Now
         }, cancellationToken);
 
-        await (await _daprClientFactory.CreateAsync()).PublishEventAsync("test-pubsub", "test-topic", new CustomPubSubDataModel
+        await _daprClientFactory.Create().PublishEventAsync("test-pubsub", "test-topic", new CustomPubSubDataModel
         {
             Id = 123,
             Name = "321"

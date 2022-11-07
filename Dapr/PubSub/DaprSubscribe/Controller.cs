@@ -14,13 +14,13 @@ public class OverrideEventBusController : AbpController
 {
     [HttpPost("/price-changed")]
     [Topic("test-pubsub", "PriceChanged")]
-    public async Task<IActionResult> PriceChangeAsync([FromBody]AbpDaprSubscriptionRequest<PriceChangedEto> model)
+    public Task<IActionResult> PriceChangeAsync([FromBody]AbpDaprSubscriptionRequest<PriceChangedEto> model)
     {
-        await HttpContext.ValidateDaprAppApiTokenAsync();
+        HttpContext.ValidateDaprAppApiToken();
 
         Console.WriteLine($"OverrideEventBusController Received message: {model.Data.Price} {model.Data.ChangedDate}");
 
-        return Ok();
+        return Task.FromResult<IActionResult>(Ok());
     }
 }
 
@@ -28,12 +28,12 @@ public class CustomPubSubController : AbpController
 {
     [Topic("test-pubsub", "test-topic")]
     [HttpPost("/test-route")]
-    public async Task<IActionResult> TestRouteAsync([FromBody] AbpDaprSubscriptionRequest<CustomPubSubDataModel> model)
+    public Task<IActionResult> TestRouteAsync([FromBody] AbpDaprSubscriptionRequest<CustomPubSubDataModel> model)
     {
-        await HttpContext.ValidateDaprAppApiTokenAsync();
+        HttpContext.ValidateDaprAppApiToken();
 
         Console.WriteLine($"Received message: {model.Data.Id} {model.Data.Name}");
 
-        return Ok();
+        return Task.FromResult<IActionResult>(Ok());
     }
 }

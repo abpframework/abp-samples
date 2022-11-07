@@ -52,6 +52,7 @@ public class AppModule : AbpModule
         app.UseSwagger();
         app.UseSwaggerUI();
         app.UseRouting();
+        app.UseCloudEvents();
         app.UseConfiguredEndpoints();
     }
 }

@@ -1,0 +1,18 @@
+name: distributedlock-application
+extensions:
+- name: dapr
+  components-path: "./dapr/components/"
+  services:
+    dapr-distributedlock:
+      http-port: 7001
+      grpc-port: 7003
+      enabled: true
+
+services:
+- name: dapr-distributedlock
+  project: DistributedLock.csproj
+- name: redis
+  image: redis
+  bindings:
+    - port: 6973
+      containerPort: 6379

@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DaprHttpApi", "DaprHttpApi\DaprHttpApi.csproj", "{F075B5DF-5497-4A64-8259-8CBA73974046}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DaprClient", "DaprClient\DaprClient.csproj", "{ED3683C7-8334-409A-BEB4-BE6E5C837BAC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared", "Shared\Shared.csproj", "{CE17BCB2-82E1-430F-9AB8-ACBE3AF7FFDE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F075B5DF-5497-4A64-8259-8CBA73974046}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F075B5DF-5497-4A64-8259-8CBA73974046}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F075B5DF-5497-4A64-8259-8CBA73974046}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F075B5DF-5497-4A64-8259-8CBA73974046}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ED3683C7-8334-409A-BEB4-BE6E5C837BAC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ED3683C7-8334-409A-BEB4-BE6E5C837BAC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ED3683C7-8334-409A-BEB4-BE6E5C837BAC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ED3683C7-8334-409A-BEB4-BE6E5C837BAC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CE17BCB2-82E1-430F-9AB8-ACBE3AF7FFDE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CE17BCB2-82E1-430F-9AB8-ACBE3AF7FFDE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CE17BCB2-82E1-430F-9AB8-ACBE3AF7FFDE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CE17BCB2-82E1-430F-9AB8-ACBE3AF7FFDE}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

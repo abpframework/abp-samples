@@ -5,7 +5,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\..\..\..\abp\framework\src\Volo.Abp.EventBus.Abstractions\Volo.Abp.EventBus.Abstractions.csproj" />
+        <PackageReference Include="Volo.Abp.EventBus.Abstractions" Version="7.0.0-rc.1" />
     </ItemGroup>
 
 </Project>

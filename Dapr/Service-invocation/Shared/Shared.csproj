@@ -5,7 +5,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\..\..\..\abp\framework\src\Volo.Abp.AspNetCore.Mvc\Volo.Abp.AspNetCore.Mvc.csproj" />
+        <PackageReference Include="Volo.Abp.AspNetCore.Mvc" Version="7.0.0-rc.1" />
     </ItemGroup>
 
 </Project>

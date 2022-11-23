@@ -78,6 +78,8 @@ public class OutputCachingMiddlewareWebModule : AbpModule
                 options.UseAspNetCore();
             });
         });
+
+        context.Services.AddOutputCache();
     }
 
     public override void ConfigureServices(ServiceConfigurationContext context)
@@ -211,5 +213,7 @@ public class OutputCachingMiddlewareWebModule : AbpModule
         app.UseAuditing();
         app.UseAbpSerilogEnrichers();
         app.UseConfiguredEndpoints();
+
+        app.UseOutputCache();
     }
 }

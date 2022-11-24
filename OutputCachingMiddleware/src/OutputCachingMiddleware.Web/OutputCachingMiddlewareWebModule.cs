@@ -198,6 +198,7 @@ public class OutputCachingMiddlewareWebModule : AbpModule
         app.UseAuthentication();
         app.UseAbpOpenIddictValidation();
 
+        app.UseOutputCache();
         if (MultiTenancyConsts.IsEnabled)
         {
             app.UseMultiTenancy();
@@ -214,6 +215,5 @@ public class OutputCachingMiddlewareWebModule : AbpModule
         app.UseAbpSerilogEnrichers();
         app.UseConfiguredEndpoints();
 
-        app.UseOutputCache();
     }
 }

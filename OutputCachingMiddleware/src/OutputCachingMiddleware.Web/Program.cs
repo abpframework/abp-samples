@@ -1,11 +1,11 @@
 ﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Serilog;
 using Serilog.Events;
-
 namespace OutputCachingMiddleware.Web;
 
 public class Program
@@ -29,11 +29,42 @@ public class Program
         {
             Log.Information("Starting web host.");
             var builder = WebApplication.CreateBuilder(args);
+            
+            builder.Services.AddOutputCache();
+            
             builder.Host.AddAppSettingsSecretsJson()
                 .UseAutofac()
                 .UseSerilog();
             await builder.AddApplicationAsync<OutputCachingMiddlewareWebModule>();
             var app = builder.Build();
+            
+
+            app.UseHttpsRedirection();
+            app.UseOutputCache();
+            
+
+            //TODO It's just for trying 
+            var summaries = new[]
+            {
+                "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
+            };
+            app.MapGet("/weatherforecast", async () =>
+            {
+                await Task.Delay(1000);
+                var forecast = Enumerable.Range(1, 5).Select(index =>
+                new WeatherForecast
+                    (
+                        DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
+                        Random.Shared.Next(-20, 55),
+                        summaries[Random.Shared.Next(summaries.Length)]
+                    ))
+                    .ToArray();
+                return forecast;
+            })
+            .CacheOutput();
+
+            //Once removing this line the cache works properly 
+            //My goal achieve it via ExamplaController or the correct place that you advice. Thanks
             await app.InitializeApplicationAsync();
             await app.RunAsync();
             return 0;
@@ -48,4 +79,12 @@ public class Program
             Log.CloseAndFlush();
         }
     }
+
+
+    internal record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
+    {
+        public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
+    }
+
+
 }

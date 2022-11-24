@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.OutputCaching;
-using System;
+using System.Threading.Tasks;
 
 namespace OutputCachingMiddleware.Controllers
 {
@@ -8,11 +8,12 @@ namespace OutputCachingMiddleware.Controllers
     public class ExampleContoller : OutputCachingMiddlewareController
     {
         //[OutputCache(PolicyName = "Expire30")]
-        [OutputCache(Duration = 10)]
+        [OutputCache]
         [HttpGet("example")]
-        public string Get()
+        public async Task<string> Get()
         {
-            return DateTime.Now.ToString();
+            await Task.Delay(1000);
+            return "Hello World";
         }
     }
 }

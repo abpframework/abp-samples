@@ -79,13 +79,14 @@ public class OutputCachingMiddlewareWebModule : AbpModule
             });
         });
 
-        context.Services.AddOutputCache();
     }
 
     public override void ConfigureServices(ServiceConfigurationContext context)
     {
         var hostingEnvironment = context.Services.GetHostingEnvironment();
         var configuration = context.Services.GetConfiguration();
+        
+        context.Services.AddOutputCache();
 
         ConfigureAuthentication(context);
         ConfigureUrls(configuration);

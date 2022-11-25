@@ -1,5 +1,5 @@
 # Output Caching Middleware 
-Output caching is a new middleware component included with.net 7. Instead of calling each request, it saves `HTTP` responses. In this post, we will show its capabilities, how to use it with an ABP-based solution, and compare it to its alternatives.
+Output caching is a new middleware component included with .NET 7. Instead of calling each request, it saves `HTTP` responses. In this post, we will show its capabilities, how to use it with an ABP-based solution, and compare it to its alternatives.
 
 Let`s create an ABP app(default) solution template and show its implementation
 > abp new OutputCachingMiddleware -t app
@@ -26,7 +26,7 @@ public class OutputCachingMiddlewareWebModule : AbpModule
 }
 ```
 
-> Note Please keep in mind that `UseOutputCache` must be called after `UseCors` and `UseRouting` but before `UseEndpoints`.
+> Note: Please keep in mind that `UseOutputCache` must be called after `UseCors` and `UseRouting` but before `UseEndpoints`.
 
 Now, we can create a controller under the `OutputCachingMiddleware.HttpApi` named `OutputCachingContoller`
 ```csharp
@@ -45,7 +45,7 @@ public class OutputCachingContoller : OutputCachingMiddlewareController
 
 ![default ](./images/default.gif)
 
->Note: After .net6, you can see the above code in minimal API but it`s used as the above for apps with controllers.
+>Note: After .NET 6, you can see the above code in minimal API but it`s used as the above for apps with controllers.
 
 ## Specify the cache key
 You can store by default as described above, but you can also store based on sending parameters. This feature is available as an attribute with `VaryByQueryKeys.` There are also `VaryByHeaderNames` and `VaryByRouteValueNames` for various purposes.
@@ -63,14 +63,14 @@ public async Task<string> ChangeColon(string letter)
 ![var by query keys](./images/change%20colon.gif)
 
 ## Disable cache
-To disable changing, you can remove the attribute on the action, however, if you use `[OutputCache]` for the whole controller that`s why you must use the below way. 
+To disable caching, you can remove the attribute on the action, however, if you use `[OutputCache]` for the whole controller, you must use the way below. 
 
 Let`s see the code
 ```csharp
 [OutputCache] //enables the whole controller
 public class OutputCachingContoller : OutputCachingMiddlewareController
 {
-    [OutputCache(NoStore = true)]//disable just this action
+    [OutputCache(NoStore = true)]//only disable this action
     [HttpGet("nostore")]
     public async Task<string> NoStore()
     {
@@ -83,7 +83,7 @@ public class OutputCachingContoller : OutputCachingMiddlewareController
 
 ## Some default policies
 * HTTP 200 responses (the successful responses) are cached and the others aren`t.
-* HTTP GET or HEAD requests are cached the other HTTP methods aren`t.
+* HTTP GET or HEAD requests are cached and the other HTTP methods aren`t.
 * Responses that set cookies aren`t cached.
 * Responses to authenticated requests aren`t cached.
 
@@ -101,10 +101,10 @@ public override void ConfigureServices(ServiceConfigurationContext context)
 }
 ```
 
-## The Differences between response caching
+## The Differences with response caching
 It differs from [response caching](https://learn.microsoft.com/en-us/aspnet/core/performance/caching/overview?view=aspnetcore-7.0#response-caching) with the following features
 
-* The output cache behaviour is configurable on the server, the response cache uses the browsers` cache.
+* The output cache behaviour is configurable on the server, the response cache uses the browser's cache.
 * The output cache entries can be programmatically invalidated, the response cache doesn`t support that.
 * The output cache gets just the successful responses but the response cache stores even if the response is bad.
 * The output cache storage medium is extensible.

@@ -56,7 +56,8 @@ else
         "../ExcelIO",
         "../EmailSendDemo",
         "../IdentityServerReferenceToken/aspnet-core",
-        "../SignInWithoutSpecifyingTenant",
+        "../SignInWithoutSpecifyingTenant/IdentityServer",
+        "../SignInWithoutSpecifyingTenant/OpenIddict",
         "../UnifiedEfCoreMigrations"
     )
 }

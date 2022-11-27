@@ -67,7 +67,17 @@
                     title: l('Type'),
                     data: "type",
                     render: function (data) {
-                        return l('Enum:BookType:' + data);
+                        return l([
+                            "Enum:BookType.Undefined",
+                            "Enum:BookType.Adventure",
+                            "Enum:BookType.Biography",
+                            "Enum:BookType.Dystopia",
+                            "Enum:BookType.Fantastic",
+                            "Enum:BookType.Horror",
+                            "Enum:BookType.Science",
+                            "Enum:BookType.ScienceFiction",
+                            "Enum:BookType.Poetry"
+                        ][data]);
                     }
                 },
                 {

@@ -1,0 +1,17 @@
+name: service-invocation-application
+extensions:
+- name: dapr
+  services:
+    dapr-httpapi:
+      http-port: 3500
+    dapr-client:
+      http-port: 3600
+      enabled: true
+
+services:
+- name: dapr-httpapi
+  project: DaprHttpApi\DaprHttpApi.csproj
+  bindings:
+  - port: 7086
+- name: dapr-client
+  project: DaprClient\DaprClient.csproj

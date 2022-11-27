@@ -4,6 +4,7 @@ using EfCoreDiDemo.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Volo.Abp.EntityFrameworkCore;
 
@@ -12,9 +13,11 @@ using Volo.Abp.EntityFrameworkCore;
 namespace EfCoreDiDemo.Migrations
 {
     [DbContext(typeof(EfCoreDiDemoDbContext))]
-    partial class EfCoreDiDemoDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221127162537_Added_Product")]
+    partial class AddedProduct
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

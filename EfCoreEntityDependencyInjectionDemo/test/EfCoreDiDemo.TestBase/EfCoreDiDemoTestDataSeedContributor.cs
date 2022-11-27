@@ -1,15 +1,24 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using Volo.Abp.Data;
 using Volo.Abp.DependencyInjection;
+using Volo.Abp.Domain.Repositories;
 
 namespace EfCoreDiDemo;
 
 public class EfCoreDiDemoTestDataSeedContributor : IDataSeedContributor, ITransientDependency
 {
-    public Task SeedAsync(DataSeedContext context)
-    {
-        /* Seed additional test data... */
+    private readonly IRepository<Product, Guid> _productRepository;
 
-        return Task.CompletedTask;
+    public EfCoreDiDemoTestDataSeedContributor(
+        IRepository<Product, Guid> productRepository)
+    {
+        _productRepository = productRepository;
+    }
+
+    public async Task SeedAsync(DataSeedContext context)
+    {
+        await _productRepository.InsertAsync(new Product("P01", "Product One"));
+        await _productRepository.InsertAsync(new Product("P02", "Product Two"));
     }
 }

@@ -27,6 +27,8 @@ public class Product : AuditedAggregateRoot<Guid>, IInjectServiceProvider
     {
         ProductCode = Check.NotNullOrWhiteSpace(productCode, nameof(productCode));
         Name = Check.NotNullOrWhiteSpace(name, nameof(name));
+        
+        /* Can not check here if the given product code is already used by another product! */
     }
     
     public async Task ChangeCodeAsync(string newProductCode)

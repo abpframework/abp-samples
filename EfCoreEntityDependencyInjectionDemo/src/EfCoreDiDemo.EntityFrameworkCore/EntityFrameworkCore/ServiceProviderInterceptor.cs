@@ -10,9 +10,9 @@ public class ServiceProviderInterceptor : IMaterializationInterceptor
         MaterializationInterceptionData materializationData, 
         object instance)
     {
-        if (instance is IInjectServiceProvider entityWithServiceProvider)
+        if (instance is IInjectServiceProvider entity)
         {
-            entityWithServiceProvider.ServiceProvider = materializationData
+            entity.ServiceProvider = materializationData
                 .Context
                 .GetService<ICachedServiceProvider>();
         }

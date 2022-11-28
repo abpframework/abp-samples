@@ -4,6 +4,7 @@ using Volo.Abp.BackgroundJobs.EntityFrameworkCore;
 using Volo.Abp.Data;
 using Volo.Abp.DependencyInjection;
 using Volo.Abp.EntityFrameworkCore;
+using Volo.Abp.EntityFrameworkCore.Modeling;
 using Volo.Abp.FeatureManagement.EntityFrameworkCore;
 using Volo.Abp.Identity;
 using Volo.Abp.Identity.EntityFrameworkCore;
@@ -24,6 +25,8 @@ public class EfCoreDiDemoDbContext :
     ITenantManagementDbContext
 {
     /* Add DbSet properties for your Aggregate Roots / Entities here. */
+
+    public DbSet<Product> Products { get; set; }
 
     #region Entities from the modules
 
@@ -58,6 +61,12 @@ public class EfCoreDiDemoDbContext :
 
     }
 
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    {
+        base.OnConfiguring(optionsBuilder);
+        optionsBuilder.AddInterceptors(new ServiceProviderInterceptor());
+    }
+
     protected override void OnModelCreating(ModelBuilder builder)
     {
         base.OnModelCreating(builder);
@@ -75,11 +84,17 @@ public class EfCoreDiDemoDbContext :
 
         /* Configure your own tables/entities inside here */
 
-        //builder.Entity<YourEntity>(b =>
-        //{
-        //    b.ToTable(EfCoreDiDemoConsts.DbTablePrefix + "YourEntities", EfCoreDiDemoConsts.DbSchema);
-        //    b.ConfigureByConvention(); //auto configure for the base class props
-        //    //...
-        //});
+        builder.Entity<Product>(b =>
+        {
+            b.ToTable(EfCoreDiDemoConsts.DbTablePrefix + "Products", EfCoreDiDemoConsts.DbSchema);
+
+            b.Property(x => x.Name).IsRequired().HasMaxLength(256);
+            b.Property(x => x.ProductCode).IsRequired().HasMaxLength(32);
+
+            /* We should ignore the ServiceProvider on mapping! */
+            b.Ignore(x => x.ServiceProvider);
+
+            b.HasIndex(x => x.ProductCode);
+        });
     }
 }

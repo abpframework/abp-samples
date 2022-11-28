@@ -108,3 +108,12 @@ It differs from [response caching](https://learn.microsoft.com/en-us/aspnet/core
 * The output cache entries can be programmatically invalidated, the response cache doesn`t support that.
 * The output cache gets just the successful responses but the response cache stores even if the response is bad.
 * The output cache storage medium is extensible.
+
+## Source Code
+
+- You can find the full source code of the example application [here](https://github.com/abpframework/abp-samples/tree/master/OutputCachingMiddleware).
+
+## See Also
+
+- [What's new in ASP.NET Core 7.0](https://learn.microsoft.com/en-us/aspnet/core/release-notes/aspnetcore-7.0?view=aspnetcore-7.0#output-caching-middleware)
+- [Output caching middleware in ASP.NET Core](https://learn.microsoft.com/en-us/aspnet/core/performance/caching/output?view=aspnetcore-7.0)

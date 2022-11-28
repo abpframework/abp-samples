@@ -1,7 +1,4 @@
-﻿using Microsoft.Data.Sqlite;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Storage;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Volo.Abp;
 using Volo.Abp.EntityFrameworkCore;
@@ -17,45 +14,47 @@ namespace EfCoreJSONColumnDemo.EntityFrameworkCore;
     )]
 public class EfCoreJSONColumnDemoEntityFrameworkCoreTestModule : AbpModule
 {
-    private SqliteConnection _sqliteConnection;
-
+    private const string ConnectionString =
+        "Server=(LocalDb)\\MSSQLLocalDB;Database=EfCoreJSONColumnDemoTest;Trusted_Connection=True;TrustServerCertificate=True";
     public override void ConfigureServices(ServiceConfigurationContext context)
     {
-        ConfigureInMemorySqlite(context.Services);
+        ConfigureSqlServer(context.Services);
     }
 
-    private void ConfigureInMemorySqlite(IServiceCollection services)
+    private void ConfigureSqlServer(IServiceCollection services)
     {
-        _sqliteConnection = CreateDatabaseAndGetConnection();
+        CreateDatabase();
 
         services.Configure<AbpDbContextOptions>(options =>
         {
             options.Configure(context =>
             {
-                context.DbContextOptions.UseSqlite(_sqliteConnection);
+                context.DbContextOptions.UseSqlServer(ConnectionString);
             });
         });
     }
 
     public override void OnApplicationShutdown(ApplicationShutdownContext context)
     {
-        _sqliteConnection.Dispose();
+        var options = new DbContextOptionsBuilder<EfCoreJSONColumnDemoDbContext>()
+            .UseSqlServer(ConnectionString)
+            .Options;
+        using (var db = new EfCoreJSONColumnDemoDbContext(options))
+        {
+            db.Database.EnsureDeleted();
+        }
     }
 
-    private static SqliteConnection CreateDatabaseAndGetConnection()
+    private static void CreateDatabase()
     {
-        var connection = new SqliteConnection("Data Source=:memory:");
-        connection.Open();
 
         var options = new DbContextOptionsBuilder<EfCoreJSONColumnDemoDbContext>()
-            .UseSqlite(connection)
+            .UseSqlServer(ConnectionString)
             .Options;
 
         using (var context = new EfCoreJSONColumnDemoDbContext(options))
         {
-            context.GetService<IRelationalDatabaseCreator>().CreateTables();
+            context.Database.EnsureCreated();
         }
-
-        return connection;
     }
 }

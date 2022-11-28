@@ -1,9 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using EfCoreJSONColumnDemo.Persons;
+using Microsoft.EntityFrameworkCore;
 using Volo.Abp.AuditLogging.EntityFrameworkCore;
 using Volo.Abp.BackgroundJobs.EntityFrameworkCore;
 using Volo.Abp.Data;
 using Volo.Abp.DependencyInjection;
 using Volo.Abp.EntityFrameworkCore;
+using Volo.Abp.EntityFrameworkCore.Modeling;
 using Volo.Abp.FeatureManagement.EntityFrameworkCore;
 using Volo.Abp.Identity;
 using Volo.Abp.Identity.EntityFrameworkCore;
@@ -25,6 +27,7 @@ public class EfCoreJSONColumnDemoDbContext :
 {
     /* Add DbSet properties for your Aggregate Roots / Entities here. */
 
+    public DbSet<Person> Persons { get; set; }
     #region Entities from the modules
 
     /* Notice: We only implemented IIdentityDbContext and ITenantManagementDbContext
@@ -75,11 +78,15 @@ public class EfCoreJSONColumnDemoDbContext :
 
         /* Configure your own tables/entities inside here */
 
-        //builder.Entity<YourEntity>(b =>
-        //{
-        //    b.ToTable(EfCoreJSONColumnDemoConsts.DbTablePrefix + "YourEntities", EfCoreJSONColumnDemoConsts.DbSchema);
-        //    b.ConfigureByConvention(); //auto configure for the base class props
-        //    //...
-        //});
+        builder.Entity<Person>(b =>
+        {
+            b.ToTable(EfCoreJSONColumnDemoConsts.DbTablePrefix + "Persons", EfCoreJSONColumnDemoConsts.DbSchema);
+            b.ConfigureByConvention();
+            b.OwnsOne(x => x.ContactDetails, c =>
+            {
+                c.ToJson(); //mark as JSON Column
+                c.OwnsOne(cd => cd.Address);
+            });
+        });
     }
 }

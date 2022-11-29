@@ -1,9 +1,14 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System;
+using EfCoreGuardedTypeDemo.Categories;
+using EfCoreGuardedTypeDemo.Products;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Volo.Abp.AuditLogging.EntityFrameworkCore;
 using Volo.Abp.BackgroundJobs.EntityFrameworkCore;
 using Volo.Abp.Data;
 using Volo.Abp.DependencyInjection;
 using Volo.Abp.EntityFrameworkCore;
+using Volo.Abp.EntityFrameworkCore.Modeling;
 using Volo.Abp.FeatureManagement.EntityFrameworkCore;
 using Volo.Abp.Identity;
 using Volo.Abp.Identity.EntityFrameworkCore;
@@ -51,6 +56,9 @@ public class EfCoreGuardedTypeDemoDbContext :
     public DbSet<TenantConnectionString> TenantConnectionStrings { get; set; }
 
     #endregion
+    
+    public DbSet<Product> Products { get; set; }
+    public DbSet<Category> Categories { get; set; }
 
     public EfCoreGuardedTypeDemoDbContext(DbContextOptions<EfCoreGuardedTypeDemoDbContext> options)
         : base(options)
@@ -75,11 +83,43 @@ public class EfCoreGuardedTypeDemoDbContext :
 
         /* Configure your own tables/entities inside here */
 
-        //builder.Entity<YourEntity>(b =>
-        //{
-        //    b.ToTable(EfCoreGuardedTypeDemoConsts.DbTablePrefix + "YourEntities", EfCoreGuardedTypeDemoConsts.DbSchema);
-        //    b.ConfigureByConvention(); //auto configure for the base class props
-        //    //...
-        //});
+        builder.Entity<Product>(b =>
+        {
+            b.ToTable(EfCoreGuardedTypeDemoConsts.DbTablePrefix + "Products", EfCoreGuardedTypeDemoConsts.DbSchema);
+            b.ConfigureByConvention(); //auto configure for the base class props
+            
+            b.Property(x => x.Name).IsRequired().HasMaxLength(256);
+            b.HasOne<Category>().WithMany(q => q.Products).HasForeignKey(q => q.CategoryId);
+        });
+        
+        builder.Entity<Category>(b =>
+        {
+            b.ToTable(EfCoreGuardedTypeDemoConsts.DbTablePrefix + "Categories", EfCoreGuardedTypeDemoConsts.DbSchema);
+            b.ConfigureByConvention(); //auto configure for the base class props
+            
+            b.Property(x => x.Name).IsRequired().HasMaxLength(128);
+        });
+    }
+
+    protected override void ConfigureConventions(ModelConfigurationBuilder configurationBuilder)
+    {
+        configurationBuilder.Properties<ProductId>().HaveConversion<ProductIdConverter>();
+        configurationBuilder.Properties<CategoryId>().HaveConversion<CategoryIdConverter>();
+    }
+    
+    private class ProductIdConverter : ValueConverter<ProductId, Guid>
+    {
+        public ProductIdConverter()
+            : base(v => v.Value, v => new(v))
+        {
+        }
+    }
+
+    private class CategoryIdConverter : ValueConverter<CategoryId, Guid>
+    {
+        public CategoryIdConverter()
+            : base(v => v.Value, v => new(v))
+        {
+        }
     }
 }

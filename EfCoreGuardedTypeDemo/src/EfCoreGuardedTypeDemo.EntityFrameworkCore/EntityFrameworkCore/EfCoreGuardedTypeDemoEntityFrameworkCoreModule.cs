@@ -1,9 +1,12 @@
 ﻿using System;
+using EfCoreGuardedTypeDemo.Categories;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Volo.Abp.Uow;
 using Volo.Abp.AuditLogging.EntityFrameworkCore;
 using Volo.Abp.BackgroundJobs.EntityFrameworkCore;
 using Volo.Abp.EntityFrameworkCore;
+using Volo.Abp.EntityFrameworkCore.DependencyInjection;
 using Volo.Abp.EntityFrameworkCore.SqlServer;
 using Volo.Abp.FeatureManagement.EntityFrameworkCore;
 using Volo.Abp.Identity.EntityFrameworkCore;
@@ -26,7 +29,7 @@ namespace EfCoreGuardedTypeDemo.EntityFrameworkCore;
     typeof(AbpAuditLoggingEntityFrameworkCoreModule),
     typeof(AbpTenantManagementEntityFrameworkCoreModule),
     typeof(AbpFeatureManagementEntityFrameworkCoreModule)
-    )]
+)]
 public class EfCoreGuardedTypeDemoEntityFrameworkCoreModule : AbpModule
 {
     public override void PreConfigureServices(ServiceConfigurationContext context)
@@ -38,17 +41,24 @@ public class EfCoreGuardedTypeDemoEntityFrameworkCoreModule : AbpModule
     {
         context.Services.AddAbpDbContext<EfCoreGuardedTypeDemoDbContext>(options =>
         {
-                /* Remove "includeAllEntities: true" to create
-                 * default repositories only for aggregate roots */
+            /* Remove "includeAllEntities: true" to create
+             * default repositories only for aggregate roots */
             options.AddDefaultRepositories(includeAllEntities: true);
         });
 
         Configure<AbpDbContextOptions>(options =>
         {
-                /* The main point to change your DBMS.
-                 * See also EfCoreGuardedTypeDemoMigrationsDbContextFactory for EF Core tooling. */
+            /* The main point to change your DBMS.
+             * See also EfCoreGuardedTypeDemoMigrationsDbContextFactory for EF Core tooling. */
             options.UseSqlServer();
         });
 
+        Configure<AbpEntityOptions>(options =>
+        {
+            options.Entity<Category>(orderOptions =>
+            {
+                orderOptions.DefaultWithDetailsFunc = query => query.Include(o => o.Products);
+            });
+        });
     }
 }

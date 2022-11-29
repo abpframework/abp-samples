@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="..\..\common.props" />
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <RootNamespace>EfCoreGuardedTypeDemo</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\EfCoreGuardedTypeDemo.Application.Contracts\EfCoreGuardedTypeDemo.Application.Contracts.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Volo.Abp.Account.HttpApi" Version="6.0.1" />
+    <PackageReference Include="Volo.Abp.Identity.HttpApi" Version="6.0.1" />
+    <PackageReference Include="Volo.Abp.PermissionManagement.HttpApi" Version="6.0.1" />
+    <PackageReference Include="Volo.Abp.TenantManagement.HttpApi" Version="6.0.1" />
+    <PackageReference Include="Volo.Abp.FeatureManagement.HttpApi" Version="6.0.1" />
+    <PackageReference Include="Volo.Abp.SettingManagement.HttpApi" Version="6.0.1" />
+  </ItemGroup>
+
+</Project>

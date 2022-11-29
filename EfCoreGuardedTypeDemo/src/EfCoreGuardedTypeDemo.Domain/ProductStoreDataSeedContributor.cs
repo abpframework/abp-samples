@@ -27,7 +27,7 @@ public class ProductStoreDataSeedContributor : IDataSeedContributor, ITransientD
 
     public async Task SeedAsync(DataSeedContext context)
     {
-        if (await _categoryRepository.AnyAsync())
+        if (!await _categoryRepository.AnyAsync())
         {
             await SeedSampleDataAsync();
         }

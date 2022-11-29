@@ -18,14 +18,14 @@ namespace EfCoreGuardedTypeDemo;
     typeof(AbpTenantManagementApplicationModule),
     typeof(AbpFeatureManagementApplicationModule),
     typeof(AbpSettingManagementApplicationModule)
-    )]
+)]
 public class EfCoreGuardedTypeDemoApplicationModule : AbpModule
 {
     public override void ConfigureServices(ServiceConfigurationContext context)
     {
         Configure<AbpAutoMapperOptions>(options =>
         {
-            options.AddMaps<EfCoreGuardedTypeDemoApplicationModule>();
+            options.AddMaps<EfCoreGuardedTypeDemoApplicationModule>(validate: true);
         });
     }
 }

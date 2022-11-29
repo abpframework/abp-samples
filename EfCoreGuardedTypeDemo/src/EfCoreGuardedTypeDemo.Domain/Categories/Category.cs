@@ -15,9 +15,8 @@ public class Category : AggregateRoot<CategoryId>
     {
     }
 
-    public Category(CategoryId id, string name)
+    public Category(CategoryId id, string name) : base(id)
     {
-        Id = id;
         Name = Check.NotNullOrEmpty(name, nameof(name));
     }
 }

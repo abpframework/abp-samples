@@ -14,9 +14,8 @@ public class Product : AggregateRoot<ProductId>
     {
     }
 
-    public Product(ProductId id, string name)
+    public Product(ProductId id, string name) : base(id)
     {
-        Id = id;
         Name = Check.NotNullOrEmpty(name, nameof(name));
     }
 }

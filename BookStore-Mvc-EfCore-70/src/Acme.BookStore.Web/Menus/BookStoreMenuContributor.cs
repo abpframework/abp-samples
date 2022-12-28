@@ -59,6 +59,12 @@ public class BookStoreMenuContributor : IMenuContributor
                     l["Menu:Books"],
                     url: "/Books"
                 ).RequirePermissions(BookStorePermissions.Books.Default)
+            ).AddItem(
+                new ApplicationMenuItem(
+                    "BooksStore.Authors",
+                    l["Menu:Authors"],
+                    url: "/Authors"
+                ).RequirePermissions(BookStorePermissions.Books.Default)
             )
         );
     }

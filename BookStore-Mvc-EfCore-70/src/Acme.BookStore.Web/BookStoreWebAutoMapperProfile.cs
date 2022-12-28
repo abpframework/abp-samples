@@ -1,11 +1,13 @@
-﻿using AutoMapper;
+﻿using Acme.BookStore.Books;
+using AutoMapper;
 
-namespace Acme.BookStore.Web;
-
-public class BookStoreWebAutoMapperProfile : Profile
+namespace Acme.BookStore.Web
 {
-    public BookStoreWebAutoMapperProfile()
+    public class BookStoreWebAutoMapperProfile : Profile
     {
-        //Define your AutoMapper configuration here for the Web project.
+        public BookStoreWebAutoMapperProfile()
+        {
+            CreateMap<BookDto, CreateUpdateBookDto>();
+        }
     }
 }

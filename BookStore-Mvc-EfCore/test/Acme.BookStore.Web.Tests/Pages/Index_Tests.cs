@@ -2,15 +2,14 @@
 using Shouldly;
 using Xunit;
 
-namespace Acme.BookStore.Pages
+namespace Acme.BookStore.Pages;
+
+public class Index_Tests : BookStoreWebTestBase
 {
-    public class Index_Tests : BookStoreWebTestBase
+    [Fact]
+    public async Task Welcome_Page()
     {
-        [Fact]
-        public async Task Welcome_Page()
-        {
-            var response = await GetResponseAsStringAsync("/");
-            response.ShouldNotBeNull();
-        }
+        var response = await GetResponseAsStringAsync("/");
+        response.ShouldNotBeNull();
     }
 }

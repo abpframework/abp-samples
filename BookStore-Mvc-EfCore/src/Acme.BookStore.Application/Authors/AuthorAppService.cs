@@ -45,7 +45,8 @@ namespace Acme.BookStore.Authors
 
             var totalCount = input.Filter == null
                 ? await _authorRepository.CountAsync()
-                : await _authorRepository.CountAsync(author => author.Name.Contains(input.Filter));
+                : await _authorRepository.CountAsync(
+                    author => author.Name.Contains(input.Filter));
 
             return new PagedResultDto<AuthorDto>(
                 totalCount,

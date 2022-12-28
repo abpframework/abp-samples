@@ -28,18 +28,13 @@
                                     text: l('Delete'),
                                     visible: abp.auth.isGranted('BookStore.Books.Delete'),
                                     confirmMessage: function (data) {
-                                        return l(
-                                            'BookDeletionConfirmationMessage',
-                                            data.record.name
-                                        );
+                                        return l('BookDeletionConfirmationMessage', data.record.name);
                                     },
                                     action: function (data) {
                                         acme.bookStore.books.book
                                             .delete(data.record.id)
-                                            .then(function() {
-                                                abp.notify.info(
-                                                    l('SuccessfullyDeleted')
-                                                );
+                                            .then(function () {
+                                                abp.notify.info(l('SuccessfullyDeleted'));
                                                 dataTable.ajax.reload();
                                             });
                                     }
@@ -59,44 +54,21 @@
                     title: l('Type'),
                     data: "type",
                     render: function (data) {
-                        return l([
-                            "Enum:BookType.Undefined",
-                            "Enum:BookType.Adventure",
-                            "Enum:BookType.Biography",
-                            "Enum:BookType.Dystopia",
-                            "Enum:BookType.Fantastic",
-                            "Enum:BookType.Horror",
-                            "Enum:BookType.Science",
-                            "Enum:BookType.ScienceFiction",
-                            "Enum:BookType.Poetry"
-                        ][data]);
+                        return l('Enum:BookType:' + data);
                     }
                 },
                 {
                     title: l('PublishDate'),
                     data: "publishDate",
-                    render: function (data) {
-                        return luxon
-                            .DateTime
-                            .fromISO(data, {
-                                locale: abp.localization.currentCulture.name
-                            }).toLocaleString();
-                    }
+                    dataFormat: "datetime"
                 },
                 {
                     title: l('Price'),
                     data: "price"
                 },
                 {
-                    title: l('CreationTime'),
-                    data: "creationTime",
-                    render: function (data) {
-                        return luxon
-                            .DateTime
-                            .fromISO(data, {
-                                locale: abp.localization.currentCulture.name
-                            }).toLocaleString(luxon.DateTime.DATETIME_SHORT);
-                    }
+                    title: l('CreationTime'), data: "creationTime",
+                    dataFormat: "datetime"
                 }
             ]
         })

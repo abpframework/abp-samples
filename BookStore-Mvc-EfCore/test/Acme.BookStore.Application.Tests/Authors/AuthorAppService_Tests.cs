@@ -27,7 +27,8 @@ namespace Acme.BookStore.Authors
         [Fact]
         public async Task Should_Get_Filtered_Authors()
         {
-            var result = await _authorAppService.GetListAsync(new GetAuthorListDto {Filter = "George"});
+            var result = await _authorAppService.GetListAsync(
+                new GetAuthorListDto { Filter = "George" });
 
             result.TotalCount.ShouldBeGreaterThanOrEqualTo(1);
             result.Items.ShouldContain(author => author.Name == "George Orwell");
@@ -42,7 +43,7 @@ namespace Acme.BookStore.Authors
                 {
                     Name = "Edward Bellamy",
                     BirthDate = new DateTime(1850, 05, 22),
-                    ShortBio = "Edward Bellamy was an American author, journalist, and political activist most famous for his utopian novel, Looking Backward..."
+                    ShortBio = "Edward Bellamy was an American author..."
                 }
             );
 
@@ -65,7 +66,5 @@ namespace Acme.BookStore.Authors
                 );
             });
         }
-
-        //TODO: Test other methods...
     }
 }

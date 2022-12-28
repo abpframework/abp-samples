@@ -45,9 +45,9 @@ namespace Acme.BookStore.Books
 
             //Prepare a query to join books and authors
             var query = from book in queryable
-                join author in await _authorRepository.GetQueryableAsync() on book.AuthorId equals author.Id
-                where book.Id == id
-                select new { book, author };
+                        join author in await _authorRepository.GetQueryableAsync() on book.AuthorId equals author.Id
+                        where book.Id == id
+                        select new { book, author };
 
             //Execute the query and get the book with author
             var queryResult = await AsyncExecuter.FirstOrDefaultAsync(query);
@@ -68,8 +68,8 @@ namespace Acme.BookStore.Books
 
             //Prepare a query to join books and authors
             var query = from book in queryable
-                join author in await _authorRepository.GetQueryableAsync() on book.AuthorId equals author.Id
-                select new {book, author};
+                        join author in await _authorRepository.GetQueryableAsync() on book.AuthorId equals author.Id
+                        select new { book, author };
 
             //Paging
             query = query
@@ -105,7 +105,7 @@ namespace Acme.BookStore.Books
                 ObjectMapper.Map<List<Author>, List<AuthorLookupDto>>(authors)
             );
         }
-        
+
         private static string NormalizeSorting(string sorting)
         {
             if (sorting.IsNullOrEmpty())

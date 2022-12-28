@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace Acme.BookStore.Web.Pages.Books
 {
@@ -6,7 +6,7 @@ namespace Acme.BookStore.Web.Pages.Books
     {
         public void OnGet()
         {
-            
+
         }
     }
 }

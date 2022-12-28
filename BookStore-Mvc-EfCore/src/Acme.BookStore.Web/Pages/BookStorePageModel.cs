@@ -1,15 +1,14 @@
 ﻿using Acme.BookStore.Localization;
 using Volo.Abp.AspNetCore.Mvc.UI.RazorPages;
 
-namespace Acme.BookStore.Web.Pages
+namespace Acme.BookStore.Web.Pages;
+
+/* Inherit your PageModel classes from this class.
+ */
+public abstract class BookStorePageModel : AbpPageModel
 {
-    /* Inherit your PageModel classes from this class.
-     */
-    public abstract class BookStorePageModel : AbpPageModel
+    protected BookStorePageModel()
     {
-        protected BookStorePageModel()
-        {
-            LocalizationResourceType = typeof(BookStoreResource);
-        }
+        LocalizationResourceType = typeof(BookStoreResource);
     }
 }

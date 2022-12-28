@@ -19,14 +19,16 @@
                             [
                                 {
                                     text: l('Edit'),
-                                    visible: abp.auth.isGranted('BookStore.Authors.Edit'),
+                                    visible:
+                                        abp.auth.isGranted('BookStore.Authors.Edit'),
                                     action: function (data) {
                                         editModal.open({ id: data.record.id });
                                     }
                                 },
                                 {
                                     text: l('Delete'),
-                                    visible: abp.auth.isGranted('BookStore.Authors.Delete'),
+                                    visible:
+                                        abp.auth.isGranted('BookStore.Authors.Delete'),
                                     confirmMessage: function (data) {
                                         return l(
                                             'AuthorDeletionConfirmationMessage',
@@ -36,7 +38,7 @@
                                     action: function (data) {
                                         acme.bookStore.authors.author
                                             .delete(data.record.id)
-                                            .then(function() {
+                                            .then(function () {
                                                 abp.notify.info(
                                                     l('SuccessfullyDeleted')
                                                 );

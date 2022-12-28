@@ -30,9 +30,10 @@ namespace Acme.BookStore.Books
 
             //Assert
             result.TotalCount.ShouldBeGreaterThan(0);
-            result.Items.ShouldContain(b => b.Name == "1984" && b.AuthorName == "George Orwell");
+            result.Items.ShouldContain(b => b.Name == "1984" &&
+                                       b.AuthorName == "George Orwell");
         }
-        
+
         [Fact]
         public async Task Should_Create_A_Valid_Book()
         {
@@ -55,7 +56,7 @@ namespace Acme.BookStore.Books
             result.Id.ShouldNotBe(Guid.Empty);
             result.Name.ShouldBe("New test book 42");
         }
-        
+
         [Fact]
         public async Task Should_Not_Create_A_Book_Without_Name()
         {

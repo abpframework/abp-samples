@@ -254,7 +254,12 @@ paket-files/
 # BookStore
 src/Acme.BookStore.Web/Logs/*
 src/Acme.BookStore.Web.Host/Logs/*
-src/Acme.BookStore.IdentityServer/Logs/*
+src/Acme.BookStore.AuthServer/Logs/*
 src/Acme.BookStore.HttpApi.Host/Logs/*
 src/Acme.BookStore.HttpApi.HostWithIds/Logs/*
 src/Acme.BookStore.DbMigrator/Logs/*
+src/Acme.BookStore.Blazor.Server/Logs/*
+src/Acme.BookStore.Blazor.Server.Tiered/Logs/*
+
+# Use abp install-libs to restore.
+**/wwwroot/libs/*

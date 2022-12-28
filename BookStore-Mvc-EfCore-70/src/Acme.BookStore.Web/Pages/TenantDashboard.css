@@ -1,0 +1,11 @@
+#MyDashboardFilterForm button[type=Submit] {
+    margin-top: 25px;
+}
+
+.input-group-prepend {
+    border: 1px solid #d6d6d6;
+}
+
+.input-group-text {
+    border-right: 1px solid #d6d6d6;
+}

@@ -1,0 +1,11 @@
+/* Your Global Styles */
+
+:root .lpx-theme-dim, :root .lpx-theme-dark {
+    --lpx-logo: url('/images/logo/leptonx/logo-light.png');
+    --lpx-logo-icon: url('/images/logo/leptonx/logo-light-thumbnail.png');
+}
+
+:root .lpx-theme-light {
+    --lpx-logo: url('/images/logo/leptonx/logo-dark.png');
+    --lpx-logo-icon: url('/images/logo/leptonx/logo-dark-thumbnail.png');
+}

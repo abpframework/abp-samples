@@ -37,6 +37,9 @@ using Volo.Abp.UI.Navigation.Urls;
 using Volo.Abp.UI;
 using Volo.Abp.UI.Navigation;
 using Volo.Abp.VirtualFileSystem;
+using System;
+using Acme.BookStore.Permissions;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace Acme.BookStore.Web;
 
@@ -93,6 +96,7 @@ public class BookStoreWebModule : AbpModule
         ConfigureNavigationServices();
         ConfigureAutoApiControllers();
         ConfigureSwaggerServices(context.Services);
+        ConfigureAuthorization();
     }
 
     private void ConfigureAuthentication(ServiceConfigurationContext context)
@@ -171,6 +175,16 @@ public class BookStoreWebModule : AbpModule
                 options.CustomSchemaIds(type => type.FullName);
             }
         );
+    }
+
+    private void ConfigureAuthorization()
+    {
+        Configure<RazorPagesOptions>(options =>
+        {
+            options.Conventions.AuthorizePage("/Books/Index", BookStorePermissions.Books.Default);
+            options.Conventions.AuthorizePage("/Books/CreateModal", BookStorePermissions.Books.Create);
+            options.Conventions.AuthorizePage("/Books/EditModal", BookStorePermissions.Books.Edit);
+        });
     }
 
     public override void OnApplicationInitialization(ApplicationInitializationContext context)

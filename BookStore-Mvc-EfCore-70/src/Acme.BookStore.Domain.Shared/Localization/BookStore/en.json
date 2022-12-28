@@ -28,6 +28,11 @@
     "Enum:BookType:7": "Science fiction",
     "Enum:BookType:8": "Poetry",
     "BookDeletionConfirmationMessage": "Are you sure to delete the book '{0}'?",
-    "SuccessfullyDeleted": "Successfully deleted!"
+    "SuccessfullyDeleted": "Successfully deleted!",
+    "Permission:BookStore": "Book Store",
+    "Permission:Books": "Book Management",
+    "Permission:Books.Create": "Creating new books",
+    "Permission:Books.Edit": "Editing the books",
+    "Permission:Books.Delete": "Deleting the books"
   }
 }

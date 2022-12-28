@@ -1,12 +1,15 @@
 ﻿@page
 @using Acme.BookStore.Localization
+@using Acme.BookStore.Permissions
 @using Acme.BookStore.Web.Pages.Books
+@using Microsoft.AspNetCore.Authorization
 @using Microsoft.Extensions.Localization
 @model IndexModel
 @inject IStringLocalizer<BookStoreResource> L
+@inject IAuthorizationService AuthorizationService
 @section scripts
-{
-    <abp-script src="/Pages/Books/Index.js"/>
+    {
+    <abp-script src="/Pages/Books/Index.js" />
 }
 
 <abp-card>
@@ -16,10 +19,13 @@
                 <abp-card-title>@L["Books"]</abp-card-title>
             </abp-column>
             <abp-column size-md="_6" class="text-end">
-                <abp-button id="NewBookButton"
+                @if (await AuthorizationService.IsGrantedAsync(BookStorePermissions.Books.Create))
+                {
+                    <abp-button id="NewBookButton"
                             text="@L["NewBook"].Value"
                             icon="plus"
-                            button-type="Primary"/>
+                            button-type="Primary" />
+                }
             </abp-column>
         </abp-row>
     </abp-card-header>

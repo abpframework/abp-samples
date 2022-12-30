@@ -62,7 +62,7 @@
                                 Field="@nameof(BookDto.Type)"
                                 Caption="@L["Type"]">
                     <DisplayTemplate>
-                        @L[$"Enum:BookType.{Enum.GetName(context.Type)}"]
+                        @L[$"Enum:BookType.{context.Type}"]
                     </DisplayTemplate>
                 </DataGridColumn>
                 <DataGridColumn TItem="BookDto"
@@ -126,7 +126,7 @@
                             @foreach (int bookTypeValue in Enum.GetValues(typeof(BookType)))
                             {
                                 <SelectItem TValue="BookType" Value="@((BookType) bookTypeValue)">
-                                    @L[$"Enum:BookType.{Enum.GetName((BookType)bookTypeValue)}"]
+                                    @L[$"Enum:BookType.{bookTypeValue}"]
                                 </SelectItem>
                             }
                         </Select>
@@ -194,7 +194,7 @@
                             @foreach (int bookTypeValue in Enum.GetValues(typeof(BookType)))
                             {
                                 <SelectItem TValue="BookType" Value="@((BookType) bookTypeValue)">
-                                    @L[$"Enum:BookType.{Enum.GetName((BookType)bookTypeValue)}"]
+                                    @L[$"Enum:BookType.{bookTypeValue}"]
                                 </SelectItem>
                             }
                         </Select>

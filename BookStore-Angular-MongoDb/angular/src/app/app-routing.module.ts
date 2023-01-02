@@ -17,13 +17,15 @@ const routes: Routes = [
   },
   {
     path: 'tenant-management',
-    loadChildren: () =>
-      import('@abp/ng.tenant-management').then(m => m.TenantManagementModule.forLazy()),
+    loadChildren: () => import('@abp/ng.tenant-management').then(m => m.TenantManagementModule.forLazy()),
   },
   {
     path: 'setting-management',
-    loadChildren: () =>
-      import('@abp/ng.setting-management').then(m => m.SettingManagementModule.forLazy()),
+    loadChildren: () => import('@abp/ng.setting-management').then(m => m.SettingManagementModule.forLazy()),
+  },
+  {
+     path: 'books',
+     loadChildren: () => import('./book/book.module').then(m => m.BookModule) 
   },
 ];
 

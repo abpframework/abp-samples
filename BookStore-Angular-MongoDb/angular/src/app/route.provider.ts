@@ -23,11 +23,12 @@ function configureRoutes(routes: RoutesService) {
           layout: eLayoutType.application,
         },
         {
-          path: '/books',
-          name: '::Menu:Books',
-          parentName: '::Menu:BookStore',
-          layout: eLayoutType.application,
-        },
+            path: '/books',
+            name: '::Menu:Books',
+            parentName: '::Menu:BookStore',
+            layout: eLayoutType.application,
+            requiredPolicy: 'BookStore.Books',
+          }
       ]);
     };
   }

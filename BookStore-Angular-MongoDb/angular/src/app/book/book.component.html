@@ -8,9 +8,10 @@
             </div>
             <div class="text-end col col-md-6">
                 <div class="text-lg-end pt-2">
-                    <button id="create" class="btn btn-primary" type="button" (click)="createBook()">
+                    <button *abpPermission="'BookStore.Books.Create'" id="create" class="btn btn-primary" type="button"
+                        (click)="createBook()">
                         <i class="fa fa-plus mr-1"></i>
-                        <span>{{ "::NewBook" | abpLocalization }}</span>
+                        <span>{{ '::NewBook' | abpLocalization }}</span>
                     </button>
                 </div>
             </div>
@@ -26,10 +27,10 @@
                             <i class="fa fa-cog mr-1"></i>{{ '::Actions' | abpLocalization }}
                         </button>
                         <div ngbDropdownMenu>
-                            <button ngbDropdownItem (click)="editBook(row.id)">
+                            <button *abpPermission="'BookStore.Books.Edit'" ngbDropdownItem (click)="editBook(row.id)">
                                 {{ '::Edit' | abpLocalization }}
                             </button>
-                            <button ngbDropdownItem (click)="delete(row.id)">
+                            <button *abpPermission="'BookStore.Books.Delete'" ngbDropdownItem (click)="delete(row.id)">
                                 {{ '::Delete' | abpLocalization }}
                             </button>
                         </div>
@@ -60,7 +61,7 @@
 <abp-modal [(visible)]="isModalOpen">
     <ng-template #abpHeader>
         <h3>{{ (selectedBook.id ? '::Edit' : '::NewBook' ) | abpLocalization }}</h3>
-    </ng-template>    
+    </ng-template>
 
     <ng-template #abpBody>
         <form [formGroup]="form" (ngSubmit)="save()">

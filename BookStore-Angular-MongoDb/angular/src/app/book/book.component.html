@@ -44,7 +44,7 @@
 
             <ngx-datatable-column [name]="'::Type' | abpLocalization" prop="type">
                 <ng-template let-row="row" ngx-datatable-cell-template>
-                    {{ '::Enum:BookType.' + row.type | abpLocalization }}
+                    {{ '::Enum:BookType.' + row.type | abpLocalization }}1
                 </ng-template>
             </ngx-datatable-column>
             <ngx-datatable-column [name]="'::PublishDate' | abpLocalization" prop="publishDate">
@@ -77,6 +77,7 @@
                     </option>
                 </select>
             </div>
+
             <div class="form-group">
                 <label for="book-name">Name</label><span> * </span>
                 <input type="text" id="book-name" class="form-control" formControlName="name" autofocus />
@@ -91,7 +92,9 @@
                 <label for="book-type">Type</label><span> * </span>
                 <select class="form-control" id="book-type" formControlName="type">
                     <option [ngValue]="null">Select a book type</option>
-                    <option [ngValue]="type.value" *ngFor="let type of bookTypes"> {{ type.key }}</option>
+                    <option [ngValue]="type.value" *ngFor="let type of bookTypes"> 
+                        {{ '::Enum:BookType.' + type.value | abpLocalization }}
+                    </option>
                 </select>
             </div>
 

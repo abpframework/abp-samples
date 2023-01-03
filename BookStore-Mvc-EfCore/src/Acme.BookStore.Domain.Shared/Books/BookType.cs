@@ -1,15 +1,14 @@
-﻿namespace Acme.BookStore.Books
+﻿namespace Acme.BookStore.Books;
+
+public enum BookType
 {
-    public enum BookType
-    {
-        Undefined,
-        Adventure,
-        Biography,
-        Dystopia,
-        Fantastic,
-        Horror,
-        Science,
-        ScienceFiction,
-        Poetry
-    }
+    Undefined,
+    Adventure,
+    Biography,
+    Dystopia,
+    Fantastic,
+    Horror,
+    Science,
+    ScienceFiction,
+    Poetry
 }

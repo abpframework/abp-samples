@@ -40,6 +40,8 @@ using Volo.Abp.VirtualFileSystem;
 using System;
 using Acme.BookStore.Permissions;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Volo.Abp.AspNetCore.MultiTenancy;
+using Volo.Abp.MultiTenancy;
 
 namespace Acme.BookStore.Web;
 
@@ -97,6 +99,11 @@ public class BookStoreWebModule : AbpModule
         ConfigureAutoApiControllers();
         ConfigureSwaggerServices(context.Services);
         ConfigureAuthorization();
+        
+        Configure<AbpTenantResolveOptions>(options =>
+        {
+            options.AddDomainTenantResolver("{0}.localtest.me");
+        });
     }
 
     private void ConfigureAuthentication(ServiceConfigurationContext context)

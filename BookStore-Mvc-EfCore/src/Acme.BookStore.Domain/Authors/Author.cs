@@ -2,11 +2,14 @@
 using JetBrains.Annotations;
 using Volo.Abp;
 using Volo.Abp.Domain.Entities.Auditing;
+using Volo.Abp.MultiTenancy;
 
 namespace Acme.BookStore.Authors
 {
-    public class Author : FullAuditedAggregateRoot<Guid>
+    public class Author : FullAuditedAggregateRoot<Guid>, IMultiTenant
     {
+        public Guid? TenantId { get; private set; }
+
         public string Name { get; private set; }
         public DateTime BirthDate { get; set; }
         public string ShortBio { get; set; }

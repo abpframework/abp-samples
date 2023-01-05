@@ -12,11 +12,11 @@
   <ItemGroup>
     <PackageReference Include="Serilog.AspNetCore" Version="5.0.0" />
     <PackageReference Include="Serilog.Sinks.Async" Version="1.5.0" />
-    <PackageReference Include="Volo.Abp.AspNetCore.MultiTenancy" Version="7.0.0-rc.6" />
-    <PackageReference Include="Volo.Abp.Autofac" Version="7.0.0-rc.6" />
-    <PackageReference Include="Volo.Abp.AspNetCore.Serilog" Version="7.0.0-rc.6" />
-    <PackageReference Include="Volo.Abp.Swashbuckle" Version="7.0.0-rc.6" />
-    <PackageReference Include="Volo.Abp.Account.Web.OpenIddict" Version="7.0.0-rc.6" />
+    <PackageReference Include="Volo.Abp.AspNetCore.MultiTenancy" Version="7.0.0" />
+    <PackageReference Include="Volo.Abp.Autofac" Version="7.0.0" />
+    <PackageReference Include="Volo.Abp.AspNetCore.Serilog" Version="7.0.0" />
+    <PackageReference Include="Volo.Abp.Swashbuckle" Version="7.0.0" />
+    <PackageReference Include="Volo.Abp.Account.Web.OpenIddict" Version="7.0.0" />
   </ItemGroup>
 
   <ItemGroup>

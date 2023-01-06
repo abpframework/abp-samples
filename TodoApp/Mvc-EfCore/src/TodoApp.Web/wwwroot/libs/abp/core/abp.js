@@ -81,7 +81,7 @@ var abp = abp || {};
         if (resource) {
             return resource;
         }
-
+        
         var legacySource = abp.localization.values[resourceName];
         if (legacySource) {
             return {
@@ -89,11 +89,11 @@ var abp = abp || {};
                 baseResources: []
             };
         }
-
-        abp.log.warn('Could not find localization source: ' + resourceName);
+        
+        abp.log.warn('Could not find localization source: ' + resourceName);        
         return null;
     };
-
+    
     abp.localization.internal.localize = function (key, sourceName) {
         var resource = abp.localization.internal.getResource(sourceName);
         if (!resource){
@@ -104,7 +104,7 @@ var abp = abp || {};
         }
 
         var value = resource.texts[key];
-        if (value === undefined) {
+        if (value === undefined) {            
             for (var i = 0; i < resource.baseResources.length; i++){
                 var basedArguments = Array.prototype.slice.call(arguments, 0);
                 basedArguments[1] = resource.baseResources[i];
@@ -114,7 +114,7 @@ var abp = abp || {};
                     return result;
                 }
             }
-
+            
             return {
                 value: key,
                 found: false
@@ -135,7 +135,7 @@ var abp = abp || {};
         if (sourceName === '_') { //A convention to suppress the localization
             return key;
         }
-
+        
         if (sourceName) {
             return abp.localization.internal.localize.apply(this, arguments).value;
         }

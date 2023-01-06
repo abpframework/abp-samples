@@ -5,6 +5,7 @@ using Microsoft.Extensions.Hosting;
 using TodoApp.Data;
 using Serilog;
 using Volo.Abp;
+using Volo.Abp.Data;
 
 namespace TodoApp.DbMigrator
 {
@@ -23,6 +24,7 @@ namespace TodoApp.DbMigrator
             {
                 options.UseAutofac();
                 options.Services.AddLogging(c => c.AddSerilog());
+                options.AddDataMigrationEnvironment();
             }))
             {
                 application.Initialize();

@@ -10,7 +10,6 @@
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <GenerateBindingRedirectsOutputType>true</GenerateBindingRedirectsOutputType>
     <GenerateRuntimeConfigurationFiles>true</GenerateRuntimeConfigurationFiles>
-    <PreserveCompilationContext>true</PreserveCompilationContext>
   </PropertyGroup>
 
   <ItemGroup>
@@ -18,7 +17,7 @@
     <PackageReference Include="HtmlAgilityPack" Version="1.11.42" />
     <ProjectReference Include="..\TodoApp.Application.Tests\TodoApp.Application.Tests.csproj" />
     <ProjectReference Include="..\..\src\TodoApp.Web\TodoApp.Web.csproj" />
-    <PackageReference Include="Volo.Abp.AspNetCore.TestBase" Version="7.0.0-rc.6" />
+    <PackageReference Include="Volo.Abp.AspNetCore.TestBase" Version="7.0.0" />
   </ItemGroup>
 
   <ItemGroup>

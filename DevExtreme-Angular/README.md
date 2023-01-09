@@ -1,0 +1,5 @@
+# Using DevExtreme Angular Components With the ABP Framework
+
+This is an example project that demonstrates using DevExpress Angular Components With the ABP Framework. See the article that explain this project:
+
+**https://community.abp.io/posts/using-devextreme-angular-components-with-the-abp-framework-x5nyvj3i**

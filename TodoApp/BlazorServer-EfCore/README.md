@@ -2,4 +2,4 @@
 
 This is an example project for the quick start tutorial documentation. See the documentation:
 
-**https://docs.abp.io/en/abp/latest/Tutorials/Todo/Single-Layer/Index?UI=MVC&DB=EF**
+**https://docs.abp.io/en/abp/latest/Tutorials/Todo/Index?UI=BlazorServer&DB=EF**

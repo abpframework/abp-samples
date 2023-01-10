@@ -3,6 +3,15 @@
   "texts": {
     "Menu:Home": "Ana sayfa",
     "Welcome": "Hoşgeldiniz",
-    "LongWelcomeMessage": "Uygulamaya hoşgeldiniz. Bu, ABP framework'ü üzerine bina edilmiş bir başlangıç projesidir. Daha fazla bilgi için abp.io adresini ziyaret edebilirsiniz."
+    "LongWelcomeMessage": "Uygulamaya hoşgeldiniz. Bu, ABP framework'ü üzerine bina edilmiş bir başlangıç projesidir. Daha fazla bilgi için abp.io adresini ziyaret edebilirsiniz.",
+    "Enum:BookType.0": "Belirsiz",
+    "Enum:BookType.1": "Macera",
+    "Enum:BookType.2": "Biografi",
+    "Enum:BookType.3": "Distopya",
+    "Enum:BookType.4": "Fantastik",
+    "Enum:BookType.5": "Korku",
+    "Enum:BookType.6": "Bilim",
+    "Enum:BookType.7": "Bilim Kurgu",
+    "Enum:BookType.8": "Masal"
   }
 }

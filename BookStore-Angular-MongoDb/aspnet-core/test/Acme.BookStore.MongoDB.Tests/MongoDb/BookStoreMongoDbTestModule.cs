@@ -1,31 +1,25 @@
 ﻿using System;
 using Volo.Abp.Data;
-using Volo.Abp.Uow;
 using Volo.Abp.Modularity;
 
-namespace Acme.BookStore.MongoDB
+namespace Acme.BookStore.MongoDB;
+
+[DependsOn(
+    typeof(BookStoreTestBaseModule),
+    typeof(BookStoreMongoDbModule)
+    )]
+public class BookStoreMongoDbTestModule : AbpModule
 {
-    [DependsOn(
-        typeof(BookStoreTestBaseModule),
-        typeof(BookStoreMongoDbModule)
-        )]
-    public class BookStoreMongoDbTestModule : AbpModule
+    public override void ConfigureServices(ServiceConfigurationContext context)
     {
-        public override void ConfigureServices(ServiceConfigurationContext context)
-        {
-            var connectionString = BookStoreMongoDbFixture.ConnectionString.EnsureEndsWith('/') +
+        var stringArray = BookStoreMongoDbFixture.ConnectionString.Split('?');
+        var connectionString = stringArray[0].EnsureEndsWith('/') +
                                    "Db_" +
-                                   Guid.NewGuid().ToString("N");
+                               Guid.NewGuid().ToString("N") + "/?" + stringArray[1];
 
-            Configure<AbpDbConnectionOptions>(options =>
-            {
-                options.ConnectionStrings.Default = connectionString;
-            });
-
-            Configure<AbpUnitOfWorkDefaultOptions>(options =>
-            {
-                options.TransactionBehavior = UnitOfWorkTransactionBehavior.Disabled;
-            });
-        }
+        Configure<AbpDbConnectionOptions>(options =>
+        {
+            options.ConnectionStrings.Default = connectionString;
+        });
     }
 }

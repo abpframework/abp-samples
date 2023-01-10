@@ -1,7 +1,6 @@
-﻿namespace Acme.BookStore.Blazor.Pages
-{
-    public partial class Index
-    {
+﻿namespace Acme.BookStore.Blazor.Pages;
 
-    }
+public partial class Index
+{
+
 }

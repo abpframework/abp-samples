@@ -3,19 +3,19 @@ using Volo.Abp.Identity;
 using Volo.Abp.ObjectExtending;
 using Volo.Abp.Threading;
 
-namespace Acme.BookStore.EntityFrameworkCore
+namespace Acme.BookStore.EntityFrameworkCore;
+
+public static class BookStoreEfCoreEntityExtensionMappings
 {
-    public static class BookStoreEfCoreEntityExtensionMappings
+    private static readonly OneTimeRunner OneTimeRunner = new OneTimeRunner();
+
+    public static void Configure()
     {
-        private static readonly OneTimeRunner OneTimeRunner = new OneTimeRunner();
+        BookStoreGlobalFeatureConfigurator.Configure();
+        BookStoreModuleExtensionConfigurator.Configure();
 
-        public static void Configure()
+        OneTimeRunner.Run(() =>
         {
-            BookStoreGlobalFeatureConfigurator.Configure();
-            BookStoreModuleExtensionConfigurator.Configure();
-
-            OneTimeRunner.Run(() =>
-            {
                 /* You can configure extra properties for the
                  * entities defined in the modules used by your application.
                  *
@@ -39,7 +39,6 @@ namespace Acme.BookStore.EntityFrameworkCore
                  * See the documentation for more:
                  * https://docs.abp.io/en/abp/latest/Customizing-Application-Modules-Extending-Entities
                  */
-            });
-        }
+        });
     }
 }

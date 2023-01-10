@@ -10,15 +10,16 @@ export const environment = {
     logoUrl: '',
   },
   oAuthConfig: {
-    issuer: 'https://localhost:44308',
+    issuer: 'https://localhost:44367/',
     redirectUri: baseUrl,
     clientId: 'BookStore_App',
     responseType: 'code',
     scope: 'offline_access BookStore',
+    requireHttps: true
   },
   apis: {
     default: {
-      url: 'https://localhost:44308',
+      url: 'https://localhost:44367',
       rootNamespace: 'Acme.BookStore',
     },
   },

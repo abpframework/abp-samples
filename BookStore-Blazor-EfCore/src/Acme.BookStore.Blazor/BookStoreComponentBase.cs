@@ -1,13 +1,12 @@
 ﻿using Acme.BookStore.Localization;
 using Volo.Abp.AspNetCore.Components;
 
-namespace Acme.BookStore.Blazor
+namespace Acme.BookStore.Blazor;
+
+public abstract class BookStoreComponentBase : AbpComponentBase
 {
-    public class BookStoreComponentBase : AbpComponentBase
+    protected BookStoreComponentBase()
     {
-        public BookStoreComponentBase()
-        {
-            LocalizationResource = typeof(BookStoreResource);
-        }
+        LocalizationResource = typeof(BookStoreResource);
     }
 }

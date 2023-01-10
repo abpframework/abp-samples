@@ -8,14 +8,16 @@ import { Injectable } from '@angular/core';
 })
 export class BookService {
   apiName = 'Default';
+  
 
   create = (input: CreateUpdateBookDto) =>
     this.restService.request<any, BookDto>({
       method: 'POST',
-      url: `/api/app/book`,
+      url: '/api/app/book',
       body: input,
     },
     { apiName: this.apiName });
+  
 
   delete = (id: string) =>
     this.restService.request<any, void>({
@@ -23,6 +25,7 @@ export class BookService {
       url: `/api/app/book/${id}`,
     },
     { apiName: this.apiName });
+  
 
   get = (id: string) =>
     this.restService.request<any, BookDto>({
@@ -30,21 +33,24 @@ export class BookService {
       url: `/api/app/book/${id}`,
     },
     { apiName: this.apiName });
+  
 
   getAuthorLookup = () =>
     this.restService.request<any, ListResultDto<AuthorLookupDto>>({
       method: 'GET',
-      url: `/api/app/book/author-lookup`,
+      url: '/api/app/book/author-lookup',
     },
     { apiName: this.apiName });
+  
 
   getList = (input: PagedAndSortedResultRequestDto) =>
     this.restService.request<any, PagedResultDto<BookDto>>({
       method: 'GET',
-      url: `/api/app/book`,
-      params: { skipCount: input.skipCount, maxResultCount: input.maxResultCount, sorting: input.sorting },
+      url: '/api/app/book',
+      params: { sorting: input.sorting, skipCount: input.skipCount, maxResultCount: input.maxResultCount },
     },
     { apiName: this.apiName });
+  
 
   update = (id: string, input: CreateUpdateBookDto) =>
     this.restService.request<any, BookDto>({

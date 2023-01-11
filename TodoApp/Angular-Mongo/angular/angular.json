@@ -178,7 +178,6 @@
       }
     }
   },
-  "defaultProject": "TodoApp",
   "cli": {
     "analytics": false
   }

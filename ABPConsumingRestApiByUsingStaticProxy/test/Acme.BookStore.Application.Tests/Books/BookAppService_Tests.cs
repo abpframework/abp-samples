@@ -20,7 +20,7 @@ namespace Acme.BookStore.Books
             var result = await _bookAppService.GetListAsync(new PagedAndSortedResultRequestDto());
 
             result.TotalCount.ShouldBeGreaterThan(0);
-            result.Items.ShouldContain(b => b.Name == "Mother");
+            result.Items.ShouldContain(b => b.Name == "Hunger");
         }
     }
 }

@@ -1,7 +1,6 @@
-﻿namespace Acme.BookStore.Authors
+﻿namespace Acme.BookStore.Authors;
+
+public static class AuthorConsts
 {
-    public static class AuthorConsts
-    {
-        public const int MaxNameLength = 64;
-    }
+    public const int MaxNameLength = 64;
 }

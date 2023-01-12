@@ -2,15 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { ListService, PagedResultDto } from '@abp/ng.core';
 import { AuthorService, AuthorDto } from '@proxy/authors';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { NgbDateAdapter } from '@ng-bootstrap/ng-bootstrap';
-import { DateAdapter } from '@abp/ng.theme.shared/extensions';
+import { NgbDateNativeAdapter, NgbDateAdapter } from '@ng-bootstrap/ng-bootstrap';
 import { ConfirmationService, Confirmation } from '@abp/ng.theme.shared';
 
 @Component({
   selector: 'app-author',
   templateUrl: './author.component.html',
   styleUrls: ['./author.component.scss'],
-  providers: [ListService, { provide: NgbDateAdapter, useClass: DateAdapter }],
+  providers: [ListService, { provide: NgbDateAdapter, useClass: NgbDateNativeAdapter }],
 })
 export class AuthorComponent implements OnInit {
   author = { items: [], totalCount: 0 } as PagedResultDto<AuthorDto>;
@@ -66,11 +65,13 @@ export class AuthorComponent implements OnInit {
     }
 
     if (this.selectedAuthor.id) {
-      this.authorService.update(this.selectedAuthor.id, this.form.value).subscribe(() => {
-        this.isModalOpen = false;
-        this.form.reset();
-        this.list.get();
-      });
+      this.authorService
+        .update(this.selectedAuthor.id, this.form.value)
+        .subscribe(() => {
+          this.isModalOpen = false;
+          this.form.reset();
+          this.list.get();
+        });
     } else {
       this.authorService.create(this.form.value).subscribe(() => {
         this.isModalOpen = false;
@@ -81,10 +82,11 @@ export class AuthorComponent implements OnInit {
   }
 
   delete(id: string) {
-    this.confirmation.warn('::AreYouSureToDelete', '::AreYouSure').subscribe((status) => {
-      if (status === Confirmation.Status.confirm) {
-        this.authorService.delete(id).subscribe(() => this.list.get());
-      }
-    });
+    this.confirmation.warn('::AreYouSureToDelete', '::AreYouSure')
+        .subscribe((status) => {
+          if (status === Confirmation.Status.confirm) {
+            this.authorService.delete(id).subscribe(() => this.list.get());
+          }
+	    });
   }
 }

@@ -7,12 +7,11 @@
 @inject AbpBlazorMessageLocalizerHelper<BookStoreResource> LH
 <Card>
     <CardHeader>
-        <Row>
-            <Column ColumnSize="ColumnSize.Is6">
+        <Row Class="justify-content-between">
+            <Column ColumnSize="ColumnSize.IsAuto">
                 <h2>@L["Authors"]</h2>
             </Column>
-            <Column ColumnSize="ColumnSize.Is6">
-                <Paragraph Alignment="TextAlignment.Right">
+            <Column ColumnSize="ColumnSize.IsAuto">
                     @if (CanCreateAuthor)
                     {
                         <Button Color="Color.Primary"
@@ -20,7 +19,6 @@
                             @L["NewAuthor"]
                         </Button>
                     }
-                </Paragraph>
             </Column>
         </Row>
     </CardHeader>

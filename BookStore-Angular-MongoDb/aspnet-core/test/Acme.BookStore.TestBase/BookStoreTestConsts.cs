@@ -1,7 +1,6 @@
-﻿namespace Acme.BookStore
+﻿namespace Acme.BookStore;
+
+public static class BookStoreTestConsts
 {
-    public static class BookStoreTestConsts
-    {
-        public const string CollectionDefinitionName = "BookStore collection";
-    }
+    public const string CollectionDefinitionName = "BookStore collection";
 }

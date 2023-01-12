@@ -1,13 +1,14 @@
-﻿using Volo.Abp;
+﻿using System;
+using Volo.Abp;
 
-namespace Acme.BookStore.Authors
+namespace Acme.BookStore.Authors;
+
+[Serializable]
+public class AuthorAlreadyExistsException : BusinessException
 {
-    public class AuthorAlreadyExistsException : BusinessException
+    public AuthorAlreadyExistsException(string name)
+        : base(BookStoreDomainErrorCodes.AuthorAlreadyExists)
     {
-        public AuthorAlreadyExistsException(string name)
-            : base(BookStoreDomainErrorCodes.AuthorAlreadyExists)
-        {
-            WithData("name", name);
-        }
+        WithData("name", name);
     }
 }

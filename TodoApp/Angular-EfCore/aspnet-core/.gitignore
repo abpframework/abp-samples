@@ -254,7 +254,7 @@ paket-files/
 # TodoApp
 src/TodoApp.Web/Logs/*
 src/TodoApp.Web.Host/Logs/*
-src/TodoApp.IdentityServer/Logs/*
+src/TodoApp.AuthServer/Logs/*
 src/TodoApp.HttpApi.Host/Logs/*
 src/TodoApp.HttpApi.Host/Logs/*
 src/TodoApp.DbMigrator/Logs/*

@@ -1,7 +1,6 @@
-﻿namespace TodoApp
-{
-    public abstract class TodoAppDomainTestBase : TodoAppTestBase<TodoAppDomainTestModule> 
-    {
+﻿namespace TodoApp;
 
-    }
+public abstract class TodoAppDomainTestBase : TodoAppTestBase<TodoAppDomainTestModule>
+{
+
 }

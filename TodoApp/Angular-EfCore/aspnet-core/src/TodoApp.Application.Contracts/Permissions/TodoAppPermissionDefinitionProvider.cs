@@ -2,21 +2,19 @@
 using Volo.Abp.Authorization.Permissions;
 using Volo.Abp.Localization;
 
-namespace TodoApp.Permissions
+namespace TodoApp.Permissions;
+
+public class TodoAppPermissionDefinitionProvider : PermissionDefinitionProvider
 {
-    public class TodoAppPermissionDefinitionProvider : PermissionDefinitionProvider
+    public override void Define(IPermissionDefinitionContext context)
     {
-        public override void Define(IPermissionDefinitionContext context)
-        {
-            var myGroup = context.AddGroup(TodoAppPermissions.GroupName);
+        var myGroup = context.AddGroup(TodoAppPermissions.GroupName);
+        //Define your own permissions here. Example:
+        //myGroup.AddPermission(TodoAppPermissions.MyPermission1, L("Permission:MyPermission1"));
+    }
 
-            //Define your own permissions here. Example:
-            //myGroup.AddPermission(TodoAppPermissions.MyPermission1, L("Permission:MyPermission1"));
-        }
-
-        private static LocalizableString L(string name)
-        {
-            return LocalizableString.Create<TodoAppResource>(name);
-        }
+    private static LocalizableString L(string name)
+    {
+        return LocalizableString.Create<TodoAppResource>(name);
     }
 }

@@ -1,9 +1,8 @@
 ﻿using System.Threading.Tasks;
 
-namespace TodoApp.Data
+namespace TodoApp.Data;
+
+public interface ITodoAppDbSchemaMigrator
 {
-    public interface ITodoAppDbSchemaMigrator
-    {
-        Task MigrateAsync();
-    }
+    Task MigrateAsync();
 }

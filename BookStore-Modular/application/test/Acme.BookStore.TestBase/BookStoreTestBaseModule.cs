@@ -7,6 +7,7 @@ using Volo.Abp.Data;
 using Volo.Abp.IdentityServer;
 using Volo.Abp.Modularity;
 using Volo.Abp.Threading;
+using Volo.Abp.Uow;
 
 namespace Acme.BookStore
 {
@@ -39,6 +40,17 @@ namespace Acme.BookStore
             });
 
             context.Services.AddAlwaysAllowAuthorization();
+
+            Configure<AbpUnitOfWorkDefaultOptions>(options =>
+            {
+                options.TransactionBehavior = UnitOfWorkTransactionBehavior.Disabled;
+            });
+
+            
+            Configure<AbpUnitOfWorkDefaultOptions>(options =>
+            {
+                options.TransactionBehavior = UnitOfWorkTransactionBehavior.Disabled;
+            });
         }
 
         public override void OnApplicationInitialization(ApplicationInitializationContext context)

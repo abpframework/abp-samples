@@ -5,6 +5,7 @@ using Microsoft.Extensions.Hosting;
 using OrganizationUnitSample.Data;
 using Serilog;
 using Volo.Abp;
+using Volo.Abp.Data;
 
 namespace OrganizationUnitSample.DbMigrator
 {
@@ -23,6 +24,7 @@ namespace OrganizationUnitSample.DbMigrator
             {
                 options.UseAutofac();
                 options.Services.AddLogging(c => c.AddSerilog());
+                options.Services.AddDataMigrationEnvironment();
             }))
             {
                 application.Initialize();

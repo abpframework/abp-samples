@@ -3,7 +3,7 @@
   <Import Project="..\..\common.props" />
 
   <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
+    <TargetFramework>net7.0</TargetFramework>
     <OutputType>Exe</OutputType>
     <AssetTargetFallback>$(AssetTargetFallback);portable-net45+win8+wp8+wpa81;</AssetTargetFallback>
     <RootNamespace>ConcurrentLogin</RootNamespace>
@@ -17,7 +17,7 @@
     <PackageReference Include="HtmlAgilityPack" Version="1.11.36" />
     <ProjectReference Include="..\ConcurrentLogin.Application.Tests\ConcurrentLogin.Application.Tests.csproj" />
     <ProjectReference Include="..\..\src\ConcurrentLogin.Web\ConcurrentLogin.Web.csproj" />
-    <PackageReference Include="Volo.Abp.AspNetCore.TestBase" Version="6.0.0-rc.2" />
+    <PackageReference Include="Volo.Abp.AspNetCore.TestBase" Version="7.0.0" />
   </ItemGroup>
 
   <ItemGroup>

@@ -42,6 +42,7 @@ using Volo.Abp.Swashbuckle;
 using Volo.Abp.TenantManagement.Web;
 using Volo.Abp.UI.Navigation.Urls;
 using Volo.Abp.UI;
+using Volo.Abp.Ui.LayoutHooks;
 using Volo.Abp.UI.Navigation;
 using Volo.Abp.VirtualFileSystem;
 
@@ -102,7 +103,7 @@ namespace ProfilerTiered.Web
                 //More options see https://miniprofiler.com/dotnet/AspDotNetCore
                 options.Storage = new RedisStorage(configuration["Redis:Configuration"]);
             });
-            
+
             context.Services.Configure<AbpLayoutHookOptions>(options =>
             {
                 options.Add(LayoutHooks.Body.Last, typeof(MiniProfilerViewComponent));
@@ -253,7 +254,7 @@ namespace ProfilerTiered.Web
             {
                 app.UseErrorPage();
             }
-            
+
             app.UseMiniProfiler();
             app.UseCorrelationId();
             app.UseStaticFiles();

@@ -74,11 +74,6 @@ namespace ElsaDemo.Web
     {
         public override void PreConfigureServices(ServiceConfigurationContext context)
         {
-            PreConfigure<AbpJsonOptions>(options =>
-            {
-                options.UseHybridSerializer = false;
-            });
-
             PreConfigure<IMvcBuilder>(mvcBuilder =>
             {
                 //https://github.com/abpframework/abp/pull/9299

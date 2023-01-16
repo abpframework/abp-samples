@@ -41,6 +41,7 @@ namespace Acme.BookStore
 
             context.Services.AddAlwaysAllowAuthorization();
 
+
             Configure<AbpUnitOfWorkDefaultOptions>(options =>
             {
                 options.TransactionBehavior = UnitOfWorkTransactionBehavior.Disabled;

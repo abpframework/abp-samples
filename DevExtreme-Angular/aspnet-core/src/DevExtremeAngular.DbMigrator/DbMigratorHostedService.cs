@@ -5,6 +5,7 @@ using Microsoft.Extensions.Hosting;
 using DevExtremeAngular.Data;
 using Serilog;
 using Volo.Abp;
+using Volo.Abp.Data;
 
 namespace DevExtremeAngular.DbMigrator
 {
@@ -23,6 +24,7 @@ namespace DevExtremeAngular.DbMigrator
             {
                 options.UseAutofac();
                 options.Services.AddLogging(c => c.AddSerilog());
+                options.Services.AddDataMigrationEnvironment();
             }))
             {
                 application.Initialize();

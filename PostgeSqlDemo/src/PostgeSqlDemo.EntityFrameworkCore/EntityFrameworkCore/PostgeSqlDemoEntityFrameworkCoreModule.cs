@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Volo.Abp.AuditLogging.EntityFrameworkCore;
 using Volo.Abp.BackgroundJobs.EntityFrameworkCore;
@@ -30,6 +31,7 @@ namespace PostgeSqlDemo.EntityFrameworkCore
     {
         public override void PreConfigureServices(ServiceConfigurationContext context)
         {
+            AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
             PostgeSqlDemoEfCoreEntityExtensionMappings.Configure();
         }
 
@@ -46,7 +48,10 @@ namespace PostgeSqlDemo.EntityFrameworkCore
             {
                 /* The main point to change your DBMS.
                  * See also PostgeSqlDemoMigrationsDbContextFactory for EF Core tooling. */
-                options.UsePostgreSql(builder => builder.UseNetTopologySuite());
+                options.UseNpgsql(opt=>
+                {
+                    opt.UseNetTopologySuite();
+                });
             });
         }
     }

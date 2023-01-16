@@ -5,6 +5,7 @@ using Microsoft.Extensions.Hosting;
 using PasswordlessAuthentication.Data;
 using Serilog;
 using Volo.Abp;
+using Volo.Abp.Data;
 
 namespace PasswordlessAuthentication.DbMigrator
 {
@@ -23,6 +24,7 @@ namespace PasswordlessAuthentication.DbMigrator
             {
                 options.UseAutofac();
                 options.Services.AddLogging(c => c.AddSerilog());
+                options.Services.AddDataMigrationEnvironment();
             }))
             {
                 application.Initialize();

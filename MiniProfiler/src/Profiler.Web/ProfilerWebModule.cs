@@ -38,6 +38,7 @@ using Volo.Abp.Swashbuckle;
 using Volo.Abp.TenantManagement.Web;
 using Volo.Abp.UI.Navigation.Urls;
 using Volo.Abp.UI;
+using Volo.Abp.Ui.LayoutHooks;
 using Volo.Abp.UI.Navigation;
 using Volo.Abp.VirtualFileSystem;
 
@@ -97,7 +98,7 @@ namespace Profiler.Web
             {
                 options.Add(LayoutHooks.Body.Last, typeof(MiniProfilerViewComponent));
             });
-            
+
             context.Services.AddMiniProfiler(options =>
             {
                 //https://miniprofiler.com/dotnet/AspDotNetCore

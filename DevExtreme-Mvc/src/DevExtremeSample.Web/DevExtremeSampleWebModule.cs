@@ -42,6 +42,7 @@ using Volo.Abp.UI.Navigation.Urls;
 using Volo.Abp.UI;
 using Volo.Abp.UI.Navigation;
 using Volo.Abp.VirtualFileSystem;
+using Volo.Abp.Ui.LayoutHooks;
 
 namespace DevExtremeSample.Web
 {

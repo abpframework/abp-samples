@@ -1,9 +1,9 @@
 /*!
 * DevExtreme (dx.messages.de.js)
-* Version: 21.2.3
-* Build date: Thu Oct 28 2021
+* Version: 22.2.3
+* Build date: Mon Dec 05 2022
 *
-* Copyright (c) 2012 - 2021 Developer Express Inc. ALL RIGHTS RESERVED
+* Copyright (c) 2012 - 2022 Developer Express Inc. ALL RIGHTS RESERVED
 * Read about DevExtreme licensing here: https://js.devexpress.com/Licensing/
 */
 "use strict";
@@ -24,6 +24,7 @@
             Yes: "Ja",
             No: "Nein",
             Cancel: "Abbrechen",
+            Close: "Schlie\xdfen",
             Clear: "L\xf6schen",
             Done: "Fertig",
             Loading: "Laden...",
@@ -150,8 +151,10 @@
             "dxDataGrid-exporting": "Exportieren ...",
             "dxDataGrid-excelFormat": "Excel-Datei",
             "dxDataGrid-selectedRows": "Ausgew\xe4hlte Zeilen",
-            "dxDataGrid-exportAll": "Alle Daten exportieren",
-            "dxDataGrid-exportSelectedRows": "Ausgew\xe4hlte Zeilen exportieren",
+            "dxDataGrid-exportSelectedRows": "Ausgew\xe4hlte Zeilen exportieren nach {0}",
+            "dxDataGrid-exportAll": "Alle Daten exportieren nach {0}",
+            "dxDataGrid-headerFilterLabel": "Filteroptionen",
+            "dxDataGrid-headerFilterIndicatorLabel": "Filteroptionen f\xfcr Spalte '{0}' anzeigen",
             "dxDataGrid-headerFilterEmptyValue": "(Leerwerte)",
             "dxDataGrid-headerFilterOK": "OK",
             "dxDataGrid-headerFilterCancel": "Abbrechen",
@@ -177,7 +180,12 @@
             "dxTreeList-editingAddRowToNode": "Hinzuf\xfcgen",
             "dxPager-infoText": "Seite {0} von {1} ({2} Elemente)",
             "dxPager-pagesCountText": "von",
+            "dxPager-pageSize": "Elemente pro Seite: {0}",
             "dxPager-pageSizesAllText": "Alle",
+            "dxPager-page": "Seite {0}",
+            "dxPager-prevPage": "Vorherige Seite",
+            "dxPager-nextPage": "N\xe4chste Seite",
+            "dxPager-ariaLabel": "Seitennavigation",
             "dxPivotGrid-grandTotal": "Gesamt",
             "dxPivotGrid-total": "{0} Gesamt",
             "dxPivotGrid-fieldChooserTitle": "Feldauswahl",
@@ -225,11 +233,11 @@
             "dxScheduler-switcherWeek": "Woche",
             "dxScheduler-switcherWorkWeek": "Arbeitswoche",
             "dxScheduler-switcherMonth": "Monat",
+            "dxScheduler-switcherAgenda": "Agenda",
             "dxScheduler-switcherTimelineDay": "Zeitstrahl Tag",
             "dxScheduler-switcherTimelineWeek": "Zeitstrahl Woche",
             "dxScheduler-switcherTimelineWorkWeek": "Zeitstrahl Arbeitswoche",
             "dxScheduler-switcherTimelineMonth": "Zeitstrahl Monat",
-            "dxScheduler-switcherAgenda": "Agenda",
             "dxScheduler-recurrenceRepeatOnDate": "am Datum",
             "dxScheduler-recurrenceRepeatCount": "Ereignisse",
             "dxScheduler-allDay": "Ganzt\xe4gig",
@@ -290,6 +298,13 @@
             "dxHtmlEditor-dialogInsertTableRowsField": "Zeilen",
             "dxHtmlEditor-dialogInsertTableColumnsField": "Spalten",
             "dxHtmlEditor-dialogInsertTableCaption": "Tabelle einf\xfcgen",
+            "dxHtmlEditor-dialogUpdateImageCaption": "Bild Aktualisieren",
+            "dxHtmlEditor-dialogImageUpdateButton": "Aktualisieren",
+            "dxHtmlEditor-dialogImageAddButton": "Hinzuf\xfcgen",
+            "dxHtmlEditor-dialogImageSpecifyUrl": "Aus dem Web",
+            "dxHtmlEditor-dialogImageSelectFile": "Von diesem Ger\xe4t",
+            "dxHtmlEditor-dialogImageKeepAspectRatio": "Seitenverh\xe4ltnis beibehalten",
+            "dxHtmlEditor-dialogImageEncodeToBase64": "Als Base64 kodieren",
             "dxHtmlEditor-heading": "\xdcberschrift",
             "dxHtmlEditor-normalText": "Normaler Text",
             "dxHtmlEditor-background": "Hintergrundfarbe",
@@ -427,6 +442,8 @@
             "dxFileManager-editingUploadSingleItemErrorMessage": "Element wurde nicht hochgeladen",
             "dxFileManager-editingUploadMultipleItemsErrorMessage": "{0} Elemente wurden nicht hochgeladen",
             "dxFileManager-editingUploadCanceledMessage": "Abgebrochen",
+            "dxFileManager-editingDownloadSingleItemErrorMessage": "Datei wurde nicht heruntergeladen",
+            "dxFileManager-editingDownloadMultipleItemsErrorMessage": "{0} Dateien wurden nicht heruntergeladen",
             "dxFileManager-listDetailsColumnCaptionName": "Name",
             "dxFileManager-listDetailsColumnCaptionDateModified": "Zuletzt ge\xe4ndert am",
             "dxFileManager-listDetailsColumnCaptionFileSize": "Dateigr\xf6\xdfe",
@@ -591,6 +608,10 @@
             "dxGantt-dialogCancelOperationMessage": "Vorgang abbrechen",
             "dxGantt-dialogDeleteDependencyMessage": "Abh\xe4ngigkeit l\xf6schen",
             "dxGantt-dialogMoveTaskAndKeepDependencyMessage": "Aufgabe verschieben und Abh\xe4ngigkeit beibehalten",
+            "dxGantt-dialogConstraintCriticalViolationSeveralTasksMessage": "Die Aufgabe, die Sie zu verschieben versuchen, ist mit anderen Aufgaben durch Abh\xe4ngigkeitsbeziehungen verbunden. Die \xc4nderung verst\xf6\xdft daher gegen Abh\xe4ngigkeitsregeln. Wie m\xf6chten Sie fortfahren?",
+            "dxGantt-dialogConstraintViolationSeveralTasksMessage": "Die Aufgabe, die Sie zu verschieben versuchen, ist mit anderen Aufgaben durch Abh\xe4ngigkeitsbeziehungen verbunden. Wie m\xf6chten Sie fortfahren?",
+            "dxGantt-dialogDeleteDependenciesMessage": "Abh\xe4ngigkeitsbeziehungen entfernen",
+            "dxGantt-dialogMoveTaskAndKeepDependenciesMessage": "Die Aufgabe verschieben und die Abh\xe4ngigkeitsbeziehungen beibehalten.",
             "dxGantt-undo": "R\xfcckg\xe4ngig",
             "dxGantt-redo": "Wiederherstellen",
             "dxGantt-expandAll": "Alle erweitern",

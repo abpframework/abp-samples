@@ -205,39 +205,37 @@
   dependencies:
     regenerator-runtime "^0.13.4"
 
-"@devexpress/analytics-core@^21.2.3":
-  version "21.2.3"
-  resolved "https://registry.npmjs.org/@devexpress/analytics-core/-/analytics-core-21.2.3.tgz"
-  integrity sha512-eBIzanCmJ/TTbDt4qMMu4dYj9GWrzHRmWn8Hd5kOq0Z5WsxHarJeBFvWzaJjBk0oVqZV1lg8qh9mW0etu5yscw==
+"@devexpress/analytics-core@^22.2.3":
+  version "22.2.3"
+  resolved "https://registry.yarnpkg.com/@devexpress/analytics-core/-/analytics-core-22.2.3.tgz#3fb830727d74a247af4884435e2048a82a6aa994"
+  integrity sha512-FZYMY3lSk8aOYYySEbSjV7r9gdptEZh4Fqg62a+k8n3xyyWCGsurOhwhwqCpIf2syabkQWFRSKPtq8UXQ0hFfQ==
   dependencies:
     "@types/jquery" "^3.1.1"
     "@types/jqueryui" "^1.12.1"
     ace-builds "^1.3.0"
     jquery "^3.1.1"
-    jquery-ui "^1.12.1"
     knockout "~3.5.0"
 
-"@devexpress/utils@1.3.10":
-  version "1.3.10"
-  resolved "https://registry.npmjs.org/@devexpress/utils/-/utils-1.3.10.tgz"
-  integrity sha512-cq1bxLqbvhfoXDjLBZQAG7RBdxiVKhTxZnmY7hT4ZNPBMV7xESO0Q5xHH8rHaiPdXAxLJKciOtibaC7DxO86wA==
+"@devexpress/utils@1.3.16":
+  version "1.3.16"
+  resolved "https://registry.yarnpkg.com/@devexpress/utils/-/utils-1.3.16.tgz#e7b6e18380b7fa9cec57aa9c80621bf3da1e93dc"
+  integrity sha512-4Az8FUtvesew89j6N7zmDGfZQyHicvSwVoPZMmxRPvz2u4UiLpI/LDD0zuzLYWsLa8pr+SsJ3JRIKmhlcDAsgA==
   dependencies:
     tslib "2.0.1"
 
-"@devexpress/utils@1.3.2":
-  version "1.3.2"
-  resolved "https://registry.npmjs.org/@devexpress/utils/-/utils-1.3.2.tgz"
-  integrity sha512-Ii7hpz6ItNMLKz23qQOlHom/k0e1TSnIQKCwZlKuYBwpIEBX5I/PQxvAwbdBnu5EZZSkdjnhzxl6luhl/k4LdA==
+"@devexpress/utils@1.4.1":
+  version "1.4.1"
+  resolved "https://registry.yarnpkg.com/@devexpress/utils/-/utils-1.4.1.tgz#71ad847ae3b95f57276e7fe6d879bde84dc7de66"
+  integrity sha512-wXixOorFlYsUiLOjAxb9UnTtvMXxYdsEmApKrbDmRk9M76V8evOQR2ChUzNtfPloy7fZecL8UWq/sF+3ZCPzQQ==
   dependencies:
-    tslib "2.0.1"
+    tslib "2.3.1"
 
-"@devextreme/runtime@2.3.8":
-  version "2.3.8"
-  resolved "https://registry.npmjs.org/@devextreme/runtime/-/runtime-2.3.8.tgz"
-  integrity sha512-UfUkDV4tVMaGFpOUlrRXyvAzLKjLHYmHpSzAmI5DTQglL+jPtncx+mXyNEo2ZSPZtJgvyiBNHmg2w+jnmIFGkQ==
+"@devextreme/runtime@3.0.11":
+  version "3.0.11"
+  resolved "https://registry.yarnpkg.com/@devextreme/runtime/-/runtime-3.0.11.tgz#fc5829851b4b454ef5d770147d52d3a8a787deb7"
+  integrity sha512-j17t+7Uv2iji9YKSzoArw8TyYCjRBWKFRjUyQrog77Z9CVUsQnv2kI7MVNHKjmQgD/aTnHvb57dYq9UL6HesLw==
   dependencies:
     inferno "^7.4.6"
-    inferno-compat "^7.4.6"
     inferno-create-element "^7.4.6"
     inferno-hydrate "^7.4.6"
 
@@ -777,36 +775,35 @@ detect-file@^1.0.0:
   version "1.0.0"
   resolved "https://registry.npmjs.org/detect-file/-/detect-file-1.0.0.tgz"
 
-devexpress-diagram@2.1.37:
-  version "2.1.37"
-  resolved "https://registry.npmjs.org/devexpress-diagram/-/devexpress-diagram-2.1.37.tgz"
-  integrity sha512-2b6oY8l8/wwC3nrLS7Yd6ScL5NNKWE2IJxafFEqmCldt+VLZH7ZB8PwOcQ6nuOhS2/KzlUYKGbu3xyw733UYWg==
+devexpress-diagram@2.1.65:
+  version "2.1.65"
+  resolved "https://registry.yarnpkg.com/devexpress-diagram/-/devexpress-diagram-2.1.65.tgz#b558aec087f114af0fa4b14f2d659ea7755a1734"
+  integrity sha512-Xdq0EQTtYZQJwWWW+xBpjVeAJYK2kCugsGXRR4IRlp4hcCJ80dKAW19SQOZ3n5pIAbs3Oz4e1xZQhKZ7OyQXEw==
   dependencies:
-    "@devexpress/utils" "1.3.10"
+    "@devexpress/utils" "1.3.16"
     es6-object-assign "^1.1.0"
 
-devexpress-gantt@3.1.24:
-  version "3.1.24"
-  resolved "https://registry.npmjs.org/devexpress-gantt/-/devexpress-gantt-3.1.24.tgz"
-  integrity sha512-iCpdpBkmqVco5y/kTIOrE+zcpEEQasRqtPlXzktn14DFLLyI7pnsYdeheLIqliulMOqXTmjGBRsmF4b2Qy5tDA==
+devexpress-gantt@4.1.37:
+  version "4.1.37"
+  resolved "https://registry.yarnpkg.com/devexpress-gantt/-/devexpress-gantt-4.1.37.tgz#1b305f3dbf154e41b86db3ef4699ae8ce2c08e0a"
+  integrity sha512-DFzTTMQwZMotfqp+ULhQ0A6lKdkNvx0L00jNB7VZFwi4SUj7INNahp4+S6Z1LgqI+mvvnQvxKtW2X/y0EsyAgA==
   dependencies:
-    "@devexpress/utils" "1.3.2"
+    "@devexpress/utils" "1.4.1"
     tslib "2.3.1"
 
-devexpress-reporting@^21.2.3:
-  version "21.2.3"
-  resolved "https://registry.npmjs.org/devexpress-reporting/-/devexpress-reporting-21.2.3.tgz"
-  integrity sha512-lFP+6t79tboZa/IVqoDSULTFZVJTN42CcZv4eRIiqdeXHzGz8P5ZqR67WCQlgDBBu28CaPCnIJby8oCcZJwSXg==
+devexpress-reporting@^22.2.3:
+  version "22.2.3"
+  resolved "https://registry.yarnpkg.com/devexpress-reporting/-/devexpress-reporting-22.2.3.tgz#ece195e5874c0cd90204f5d3ae6316c3996405b6"
+  integrity sha512-otGEvN7I/7A09IN/NGWJOVrHFxgyDZX1IQ2u22RUdqc/q7pLMrvRwXsH1We911k/VOgGxRNjYd1N/2kHviQW4Q==
   dependencies:
     ace-builds "^1.3.0"
     jquery "^3.1.1"
-    jquery-ui "^1.12.1"
     knockout "~3.5.0"
 
-devextreme-quill@~1.5.5:
-  version "1.5.7"
-  resolved "https://registry.npmjs.org/devextreme-quill/-/devextreme-quill-1.5.7.tgz"
-  integrity sha512-QY1sERl1avqqS3pjH4GRMevrL7LMDZiV6+rv7wXU+9n0f1ZqN/LUXME3r9rRxB4osUTDjVeh9GPodiAIEgmA/g==
+devextreme-quill@~1.5.18:
+  version "1.5.20"
+  resolved "https://registry.yarnpkg.com/devextreme-quill/-/devextreme-quill-1.5.20.tgz#6537b7be621fe7222e051fff79c9197a0f3f97a9"
+  integrity sha512-1za3UXfXV5diQjVyOwJQv1rGI05ZItZKsg0L45os8FU4/QW8QDr7NArQbzkGSbvAcea/frMEbH4X/VRzAvyagw==
   dependencies:
     core-js "^3.19.1"
     eventemitter3 "^4.0.0"
@@ -816,31 +813,31 @@ devextreme-quill@~1.5.5:
     parchment "2.0.0-dev.2"
     quill-delta "4.2.2"
 
-devextreme-showdown@^1.0.0:
+devextreme-showdown@^1.0.1:
   version "1.0.1"
-  resolved "https://registry.npmjs.org/devextreme-showdown/-/devextreme-showdown-1.0.1.tgz"
+  resolved "https://registry.yarnpkg.com/devextreme-showdown/-/devextreme-showdown-1.0.1.tgz#210485fc37334bcef5da7fb665513fc6de599dbe"
   integrity sha512-63zsdU3iGDp0E9TibxGwZPlS+l07/VvD/mlgZY30fEqz6J2kCsYCqyNKbhlgIvuz+yMtWcUXVYVOMpA2YBTgEg==
   dependencies:
     yargs "^17.2.1"
 
-devextreme@^21.2.3:
-  version "21.2.3"
-  resolved "https://registry.npmjs.org/devextreme/-/devextreme-21.2.3.tgz"
-  integrity sha512-d4187XOQjzKWhekjBzvvIvw9UG91jCrAFWuvjJaJSwHpTGh+DPNTk8ozMIv85IwGSnCiT8NzQLc04Bkp7EY94A==
+devextreme@^22.2.3:
+  version "22.2.3"
+  resolved "https://registry.yarnpkg.com/devextreme/-/devextreme-22.2.3.tgz#5ec48215f51c9ea42156b1f247bd30ea2ab87036"
+  integrity sha512-+WChZfaQbX3Wpo10EzBr+KNS3nPJ5rEai4YZq4c0tLpyyLS1tPK0qVknBt4AqOn8vMetGM2yZ0ueMY9Ok9VU0w==
   dependencies:
     "@babel/runtime" "^7.12.1"
-    "@devextreme/runtime" "2.3.8"
-    devexpress-diagram "2.1.37"
-    devexpress-gantt "3.1.24"
-    devextreme-quill "~1.5.5"
-    devextreme-showdown "^1.0.0"
+    "@devextreme/runtime" "3.0.11"
+    devexpress-diagram "2.1.65"
+    devexpress-gantt "4.1.37"
+    devextreme-quill "~1.5.18"
+    devextreme-showdown "^1.0.1"
     inferno "^7.4.9"
     inferno-compat "^7.4.9"
     inferno-create-element "^7.4.9"
     inferno-hydrate "^7.4.9"
     jszip "^3.7.1"
     rrule "2.6.6"
-    turndown "~7.0.0"
+    turndown "~7.1.0"
 
 domino@^2.1.6:
   version "2.1.6"
@@ -1318,7 +1315,7 @@ inferno-clone-vnode@7.4.11:
   dependencies:
     inferno "7.4.11"
 
-inferno-compat@^7.4.6, inferno-compat@^7.4.9:
+inferno-compat@^7.4.9:
   version "7.4.11"
   resolved "https://registry.npmjs.org/inferno-compat/-/inferno-compat-7.4.11.tgz"
   integrity sha512-gaF5yL6CpN1DckVzMN/eiPZqlkWIMjWtr6BCBJbpUF+hXE5bJ60xNrtTFNsu2ChbYtO96UPqUNfC2VBRMz+k9Q==
@@ -1595,13 +1592,6 @@ jquery-ui-dist@^1.12.1:
   resolved "https://registry.npmjs.org/jquery-ui-dist/-/jquery-ui-dist-1.12.1.tgz"
   integrity sha1-XAgV08xvkP9fqvWyaKbiO0ypBPo=
 
-jquery-ui@^1.12.1:
-  version "1.13.0"
-  resolved "https://registry.npmjs.org/jquery-ui/-/jquery-ui-1.13.0.tgz"
-  integrity sha512-Osf7ECXNTYHtKBkn9xzbIf9kifNrBhfywFEKxOeB/OVctVmLlouV9mfc2qXCp6uyO4Pn72PXKOnj09qXetopCw==
-  dependencies:
-    jquery ">=1.8.0 <4.0.0"
-
 jquery-validation-unobtrusive@^3.2.12:
   version "3.2.12"
   resolved "https://registry.yarnpkg.com/jquery-validation-unobtrusive/-/jquery-validation-unobtrusive-3.2.12.tgz#1d52841f653e516525c251e494b042e664dad8af"
@@ -1626,7 +1616,7 @@ jquery@>=1.10:
   resolved "https://registry.yarnpkg.com/jquery/-/jquery-3.6.3.tgz#23ed2ffed8a19e048814f13391a19afcdba160e6"
   integrity sha512-bZ5Sy3YzKo9Fyc8wH2iIQK4JImJ6R0GWI9kL1/k7Z91ZBNgkRXE6U0JfHIizZbort8ZunhSI3jw9I6253ahKfg==
 
-jquery@>=1.12.0, jquery@>=1.7, jquery@>=1.7.2, "jquery@>=1.8.0 <4.0.0", "jquery@^1.7 || ^2.0 || ^3.1", jquery@^3.1.1:
+jquery@>=1.12.0, jquery@>=1.7, jquery@>=1.7.2, "jquery@^1.7 || ^2.0 || ^3.1", jquery@^3.1.1:
   version "3.3.1"
   resolved "https://registry.npmjs.org/jquery/-/jquery-3.3.1.tgz"
 
@@ -2632,10 +2622,10 @@ tslib@^1.10.0:
   resolved "https://registry.npmjs.org/tslib/-/tslib-1.14.1.tgz"
   integrity sha512-Xni35NKzjgMrwevysHTCArtLDpPvye8zV/0E4EyYn43P7/7qvQwPh9BGkHewbMulVntbigmcT7rdX3BNo9wRJg==
 
-turndown@~7.0.0:
-  version "7.0.0"
-  resolved "https://registry.npmjs.org/turndown/-/turndown-7.0.0.tgz"
-  integrity sha512-G1FfxfR0mUNMeGjszLYl3kxtopC4O9DRRiMlMDDVHvU1jaBkGFg4qxIyjIk2aiKLHyDyZvZyu4qBO2guuYBy3Q==
+turndown@~7.1.0:
+  version "7.1.1"
+  resolved "https://registry.yarnpkg.com/turndown/-/turndown-7.1.1.tgz#96992f2d9b40a1a03d3ea61ad31b5a5c751ef77f"
+  integrity sha512-BEkXaWH7Wh7e9bd2QumhfAXk5g34+6QUmmWx+0q6ThaVOLuLUqsnkq35HQ5SBHSaxjSfSM7US5o4lhJNH7B9MA==
   dependencies:
     domino "^2.1.6"
 

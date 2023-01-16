@@ -4,7 +4,7 @@
   "private": true,
   "dependencies": {
     "@abp/aspnetcore.mvc.ui.theme.basic": "~7.0.0",
-    "devextreme": "^20.1.5",
-    "devextreme-aspnet-data": "^2.6.2"
+    "devextreme": "^22.2.3",
+    "devextreme-aspnet-data": "^2.9.0"
   }
 }

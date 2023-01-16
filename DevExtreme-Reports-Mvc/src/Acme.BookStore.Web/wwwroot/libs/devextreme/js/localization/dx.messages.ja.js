@@ -1,9 +1,9 @@
 /*!
 * DevExtreme (dx.messages.ja.js)
-* Version: 21.2.3
-* Build date: Thu Oct 28 2021
+* Version: 22.2.3
+* Build date: Mon Dec 05 2022
 *
-* Copyright (c) 2012 - 2021 Developer Express Inc. ALL RIGHTS RESERVED
+* Copyright (c) 2012 - 2022 Developer Express Inc. ALL RIGHTS RESERVED
 * Read about DevExtreme licensing here: https://js.devexpress.com/Licensing/
 */
 "use strict";
@@ -24,6 +24,7 @@
             Yes: "\u306f\u3044",
             No: "\u3044\u3044\u3048",
             Cancel: "\u30ad\u30e3\u30f3\u30bb\u30eb",
+            Close: "\u9589\u3058\u308b",
             Clear: "\u30af\u30ea\u30a2",
             Done: "\u5b8c\u4e86",
             Loading: "\u8aad\u307f\u8fbc\u307f\u4e2d\u2026",
@@ -150,8 +151,10 @@
             "dxDataGrid-exporting": "\u30a8\u30af\u30b9\u30dd\u30fc\u30c8...",
             "dxDataGrid-excelFormat": "Excel \u30d5\u30a1\u30a4\u30eb",
             "dxDataGrid-selectedRows": "\u9078\u629e\u3055\u308c\u305f\u884c",
-            "dxDataGrid-exportAll": "\u3059\u3079\u3066\u306e\u30c7\u30fc\u30bf\u3092\u30a8\u30af\u30b9\u30dd\u30fc\u30c8",
-            "dxDataGrid-exportSelectedRows": "\u9078\u629e\u3055\u308c\u305f\u884c\u3092\u30a8\u30af\u30b9\u30dd\u30fc\u30c8",
+            "dxDataGrid-exportSelectedRows": "\u884c\u306e\u30a8\u30af\u30b9\u30dd\u30fc\u30c8\u5148\uff1a{0}",
+            "dxDataGrid-exportAll": "\u3059\u3079\u3066\u306e\u30c7\u30fc\u30bf\u306e\u30a8\u30af\u30b9\u30dd\u30fc\u30c8\u5148\uff1a{0}",
+            "dxDataGrid-headerFilterLabel": "\u30d5\u30a3\u30eb\u30bf\u30aa\u30d7\u30b7\u30e7\u30f3",
+            "dxDataGrid-headerFilterIndicatorLabel": "\u5217'{0}'\u306e\u30d5\u30a3\u30eb\u30bf\u30fc\u30aa\u30d7\u30b7\u30e7\u30f3\u3092\u8868\u793a\u3059\u308b",
             "dxDataGrid-headerFilterEmptyValue": "(\u7a7a\u767d)",
             "dxDataGrid-headerFilterOK": "OK",
             "dxDataGrid-headerFilterCancel": "\u30ad\u30e3\u30f3\u30bb\u30eb",
@@ -177,7 +180,12 @@
             "dxTreeList-editingAddRowToNode": "\u8ffd\u52a0",
             "dxPager-infoText": "\u30da\u30fc\u30b8 {0} / {1} ({2} \u30a2\u30a4\u30c6\u30e0)",
             "dxPager-pagesCountText": "/",
+            "dxPager-pageSize": "\u30da\u30fc\u30b8\u3042\u305f\u308a\u306e\u30a2\u30a4\u30c6\u30e0\u6570: {0}",
             "dxPager-pageSizesAllText": "\u3059\u3079\u3066",
+            "dxPager-page": "\u30da\u30fc\u30b8 {0}",
+            "dxPager-prevPage": "\u524d\u306e\u30da\u30fc\u30b8",
+            "dxPager-nextPage": "\u6b21\u306e\u30da\u30fc\u30b8",
+            "dxPager-ariaLabel": "\u30da\u30fc\u30b8 \u30ca\u30d3\u30b2\u30fc\u30b7\u30e7\u30f3",
             "dxPivotGrid-grandTotal": "\u7dcf\u8a08",
             "dxPivotGrid-total": "{0} \u5408\u8a08",
             "dxPivotGrid-fieldChooserTitle": "\u30d5\u30a3\u30fc\u30eb\u30c9\u306e\u9078\u629e",
@@ -225,11 +233,11 @@
             "dxScheduler-switcherWeek": "\u9031\u30d3\u30e5\u30fc",
             "dxScheduler-switcherWorkWeek": "\u7a3c\u50cd\u9031\u30d3\u30e5\u30fc",
             "dxScheduler-switcherMonth": "\u6708\u30d3\u30e5\u30fc",
+            "dxScheduler-switcherAgenda": "\u4e88\u5b9a\u4e00\u89a7",
             "dxScheduler-switcherTimelineDay": "\u30bf\u30a4\u30e0\u30e9\u30a4\u30f3 \u65e5\u30d3\u30e5\u30fc",
             "dxScheduler-switcherTimelineWeek": "\u30bf\u30a4\u30e0\u30e9\u30a4\u30f3 \u9031\u30d3\u30e5\u30fc",
             "dxScheduler-switcherTimelineWorkWeek": "\u30bf\u30a4\u30e0\u30e9\u30a4\u30f3 \u7a3c\u50cd\u9031\u30d3\u30e5\u30fc",
             "dxScheduler-switcherTimelineMonth": "\u30bf\u30a4\u30e0\u30e9\u30a4\u30f3 \u6708\u30d3\u30e5\u30fc",
-            "dxScheduler-switcherAgenda": "\u4e88\u5b9a\u4e00\u89a7",
             "dxScheduler-recurrenceRepeatOnDate": "\u6b21\u306e\u65e5\u4ed8\u306b\u7d42\u4e86",
             "dxScheduler-recurrenceRepeatCount": "\u51fa\u73fe",
             "dxScheduler-allDay": "\u7d42\u65e5\u30a4\u30d9\u30f3\u30c8",
@@ -290,6 +298,13 @@
             "dxHtmlEditor-dialogInsertTableRowsField": "\u884c",
             "dxHtmlEditor-dialogInsertTableColumnsField": "\u5217",
             "dxHtmlEditor-dialogInsertTableCaption": "\u30c6\u30fc\u30d6\u30eb\u306e\u633f\u5165",
+            "dxHtmlEditor-dialogUpdateImageCaption": "\u30a4\u30e1\u30fc\u30b8\u306e\u66f4\u65b0",
+            "dxHtmlEditor-dialogImageUpdateButton": "\u66f4\u65b0",
+            "dxHtmlEditor-dialogImageAddButton": "\u8ffd\u52a0",
+            "dxHtmlEditor-dialogImageSpecifyUrl": "Web \u304b\u3089\u8ffd\u52a0",
+            "dxHtmlEditor-dialogImageSelectFile": "\u3053\u306e\u30c7\u30d0\u30a4\u30b9\u304b\u3089\u8ffd\u52a0",
+            "dxHtmlEditor-dialogImageKeepAspectRatio": "\u7e26\u6a2a\u6bd4\u3092\u7dad\u6301\u3059\u308b",
+            "dxHtmlEditor-dialogImageEncodeToBase64": "Base64 \u306b\u30a8\u30f3\u30b3\u30fc\u30c9\u3059\u308b",
             "dxHtmlEditor-heading": "\u898b\u51fa\u3057",
             "dxHtmlEditor-normalText": "\u6a19\u6e96\u30c6\u30ad\u30b9\u30c8",
             "dxHtmlEditor-background": "\u80cc\u666f\u8272",
@@ -427,6 +442,8 @@
             "dxFileManager-editingUploadSingleItemErrorMessage": "\u9805\u76ee\u304c\u30a2\u30c3\u30d7\u30ed\u30fc\u30c9\u3055\u308c\u307e\u305b\u3093\u3067\u3057\u305f",
             "dxFileManager-editingUploadMultipleItemsErrorMessage": "{0} \u9805\u76ee\u304c\u30a2\u30c3\u30d7\u30ed\u30fc\u30c9\u3055\u308c\u307e\u305b\u3093\u3067\u3057\u305f",
             "dxFileManager-editingUploadCanceledMessage": "\u30ad\u30e3\u30f3\u30bb\u30eb\u3057\u307e\u3057\u305f",
+            "dxFileManager-editingDownloadSingleItemErrorMessage": "\u30a2\u30a4\u30c6\u30e0\u306f\u30c0\u30a6\u30f3\u30ed\u30fc\u30c9\u3055\u308c\u307e\u305b\u3093\u3067\u3057\u305f",
+            "dxFileManager-editingDownloadMultipleItemsErrorMessage": "{0} \u500b\u306e\u30a2\u30a4\u30c6\u30e0\u306f\u30c0\u30a6\u30f3\u30ed\u30fc\u30c9\u3055\u308c\u307e\u305b\u3093\u3067\u3057\u305f",
             "dxFileManager-listDetailsColumnCaptionName": "\u30d5\u30a1\u30a4\u30eb\u540d",
             "dxFileManager-listDetailsColumnCaptionDateModified": "\u66f4\u65b0\u65e5",
             "dxFileManager-listDetailsColumnCaptionFileSize": "\u30d5\u30a1\u30a4\u30eb \u30b5\u30a4\u30ba",
@@ -591,6 +608,10 @@
             "dxGantt-dialogCancelOperationMessage": "\u64cd\u4f5c\u3092\u30ad\u30e3\u30f3\u30bb\u30eb\u3059\u308b",
             "dxGantt-dialogDeleteDependencyMessage": "\u4f9d\u5b58\u95a2\u4fc2\u3092\u524a\u9664\u3059\u308b",
             "dxGantt-dialogMoveTaskAndKeepDependencyMessage": "\u30bf\u30b9\u30af\u3092\u79fb\u52d5\u3057\u3066\u3001\u4f9d\u5b58\u95a2\u4fc2\u3092\u4fdd\u6301\u3059\u308b",
+            "dxGantt-dialogConstraintCriticalViolationSeveralTasksMessage": "\u79fb\u52d5\u3057\u3088\u3046\u3068\u3057\u3066\u3044\u308b\u30bf\u30b9\u30af\u306f\u3001\u4f9d\u5b58\u95a2\u4fc2\u306b\u3088\u308a\u4ed6\u306e\u30bf\u30b9\u30af\u306b\u30ea\u30f3\u30af\u3055\u308c\u3066\u3044\u307e\u3059\u3002\u3053\u306e\u5909\u66f4\u306f\u4f9d\u5b58\u95a2\u4fc2\u30eb\u30fc\u30eb\u3068\u7af6\u5408\u3057\u307e\u3059\u3002\u3069\u306e\u3088\u3046\u306b\u7d9a\u884c\u3057\u307e\u3059\u304b?",
+            "dxGantt-dialogConstraintViolationSeveralTasksMessage": "\u79fb\u52d5\u3057\u3088\u3046\u3068\u3057\u3066\u3044\u308b\u30bf\u30b9\u30af\u306f\u3001\u4f9d\u5b58\u95a2\u4fc2\u306b\u3088\u308a\u4ed6\u306e\u30bf\u30b9\u30af\u306b\u30ea\u30f3\u30af\u3055\u308c\u3066\u3044\u307e\u3059\u3002\u3069\u306e\u3088\u3046\u306b\u7d9a\u884c\u3057\u307e\u3059\u304b?",
+            "dxGantt-dialogDeleteDependenciesMessage": "\u4f9d\u5b58\u95a2\u4fc2\u3092\u524a\u9664\u3059\u308b",
+            "dxGantt-dialogMoveTaskAndKeepDependenciesMessage": "\u30bf\u30b9\u30af\u3092\u79fb\u52d5\u3057\u3066\u3001\u4f9d\u5b58\u95a2\u4fc2\u3092\u7dad\u6301\u3059\u308b",
             "dxGantt-undo": "\u5143\u306b\u623b\u3059",
             "dxGantt-redo": "\u3084\u308a\u76f4\u3057",
             "dxGantt-expandAll": "\u3059\u3079\u3066\u5c55\u958b",

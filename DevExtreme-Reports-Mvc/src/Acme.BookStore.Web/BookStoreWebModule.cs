@@ -12,12 +12,17 @@ using Acme.BookStore.Web.Bundling.Common;
 using Acme.BookStore.Web.Controllers;
 using Acme.BookStore.Web.Menus;
 using DevExpress.AspNetCore;
+using DevExpress.AspNetCore.Reporting.QueryBuilder;
+using DevExpress.AspNetCore.Reporting.ReportDesigner;
+using DevExpress.AspNetCore.Reporting.WebDocumentViewer;
 using DevExpress.XtraReports.Web.Extensions;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.OpenApi.Models;
 using Volo.Abp;
 using Volo.Abp.Account.Web;
 using Volo.Abp.AspNetCore.Authentication.JwtBearer;
 using Volo.Abp.AspNetCore.Mvc;
+using Volo.Abp.AspNetCore.Mvc.Conventions;
 using Volo.Abp.AspNetCore.Mvc.Localization;
 using Volo.Abp.AspNetCore.Mvc.UI;
 using Volo.Abp.AspNetCore.Mvc.UI.Bootstrap;
@@ -58,7 +63,7 @@ namespace Acme.BookStore.Web
         typeof(AbpTenantManagementWebModule),
         typeof(AbpAspNetCoreSerilogModule),
         typeof(AbpSwashbuckleModule)
-        )]
+    )]
     public class BookStoreWebModule : AbpModule
     {
         public override void PreConfigureServices(ServiceConfigurationContext context)
@@ -96,6 +101,7 @@ namespace Acme.BookStore.Web
         private void ConfigureDevExpress(ServiceConfigurationContext context)
         {
             context.Services.AddDevExpressControls();
+            //context.Services.Replace(ServiceDescriptor.Transient<IAbpServiceConvention, DevExpressAbpServiceConvention>());
             context.Services.AddTransient<CustomReportDesignerController>();
             context.Services.AddTransient<CustomQueryBuilderController>();
             context.Services.AddTransient<CustomWebDocumentViewerController>();
@@ -117,10 +123,7 @@ namespace Acme.BookStore.Web
             {
                 options.StyleBundles.Configure(
                     BasicThemeBundles.Styles.Global,
-                    bundle =>
-                    {
-                        bundle.AddFiles("/global-styles.css");
-                    }
+                    bundle => { bundle.AddFiles("/global-styles.css"); }
                 );
                 options
                     .StyleBundles
@@ -142,10 +145,7 @@ namespace Acme.BookStore.Web
 
         private void ConfigureAutoMapper()
         {
-            Configure<AbpAutoMapperOptions>(options =>
-            {
-                options.AddMaps<BookStoreWebModule>();
-            });
+            Configure<AbpAutoMapperOptions>(options => { options.AddMaps<BookStoreWebModule>(); });
         }
 
         private void ConfigureVirtualFileSystem(IWebHostEnvironment hostingEnvironment)
@@ -154,10 +154,18 @@ namespace Acme.BookStore.Web
             {
                 Configure<AbpVirtualFileSystemOptions>(options =>
                 {
-                    options.FileSets.ReplaceEmbeddedByPhysical<BookStoreDomainSharedModule>(Path.Combine(hostingEnvironment.ContentRootPath, $"..{Path.DirectorySeparatorChar}Acme.BookStore.Domain.Shared"));
-                    options.FileSets.ReplaceEmbeddedByPhysical<BookStoreDomainModule>(Path.Combine(hostingEnvironment.ContentRootPath, $"..{Path.DirectorySeparatorChar}Acme.BookStore.Domain"));
-                    options.FileSets.ReplaceEmbeddedByPhysical<BookStoreApplicationContractsModule>(Path.Combine(hostingEnvironment.ContentRootPath, $"..{Path.DirectorySeparatorChar}Acme.BookStore.Application.Contracts"));
-                    options.FileSets.ReplaceEmbeddedByPhysical<BookStoreApplicationModule>(Path.Combine(hostingEnvironment.ContentRootPath, $"..{Path.DirectorySeparatorChar}Acme.BookStore.Application"));
+                    options.FileSets.ReplaceEmbeddedByPhysical<BookStoreDomainSharedModule>(
+                        Path.Combine(hostingEnvironment.ContentRootPath,
+                            $"..{Path.DirectorySeparatorChar}Acme.BookStore.Domain.Shared"));
+                    options.FileSets.ReplaceEmbeddedByPhysical<BookStoreDomainModule>(
+                        Path.Combine(hostingEnvironment.ContentRootPath,
+                            $"..{Path.DirectorySeparatorChar}Acme.BookStore.Domain"));
+                    options.FileSets.ReplaceEmbeddedByPhysical<BookStoreApplicationContractsModule>(
+                        Path.Combine(hostingEnvironment.ContentRootPath,
+                            $"..{Path.DirectorySeparatorChar}Acme.BookStore.Application.Contracts"));
+                    options.FileSets.ReplaceEmbeddedByPhysical<BookStoreApplicationModule>(
+                        Path.Combine(hostingEnvironment.ContentRootPath,
+                            $"..{Path.DirectorySeparatorChar}Acme.BookStore.Application"));
                     options.FileSets.ReplaceEmbeddedByPhysical<BookStoreWebModule>(hostingEnvironment.ContentRootPath);
                 });
             }
@@ -233,7 +241,7 @@ namespace Acme.BookStore.Web
             {
                 app.UseErrorPage();
             }
-            
+
             app.UseDevExpressControls();
 
             app.UseCorrelationId();
@@ -251,10 +259,7 @@ namespace Acme.BookStore.Web
             app.UseIdentityServer();
             app.UseAuthorization();
             app.UseSwagger();
-            app.UseAbpSwaggerUI(options =>
-            {
-                options.SwaggerEndpoint("/swagger/v1/swagger.json", "BookStore API");
-            });
+            app.UseAbpSwaggerUI(options => { options.SwaggerEndpoint("/swagger/v1/swagger.json", "BookStore API"); });
             app.UseAuditing();
             app.UseAbpSerilogEnrichers();
             app.UseConfiguredEndpoints();

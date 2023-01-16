@@ -1,9 +1,9 @@
 /*!
 * DevExtreme (dx.messages.en.js)
-* Version: 21.2.3
-* Build date: Thu Oct 28 2021
+* Version: 22.2.3
+* Build date: Mon Dec 05 2022
 *
-* Copyright (c) 2012 - 2021 Developer Express Inc. ALL RIGHTS RESERVED
+* Copyright (c) 2012 - 2022 Developer Express Inc. ALL RIGHTS RESERVED
 * Read about DevExtreme licensing here: https://js.devexpress.com/Licensing/
 */
 "use strict";
@@ -24,6 +24,7 @@
             Yes: "Yes",
             No: "No",
             Cancel: "Cancel",
+            Close: "Close",
             Clear: "Clear",
             Done: "Done",
             Loading: "Loading...",
@@ -69,8 +70,8 @@
             "dxDateBox-simulatedDataPickerTitleDate": "Select date",
             "dxDateBox-simulatedDataPickerTitleDateTime": "Select date and time",
             "dxDateBox-validation-datetime": "Value must be a date or time",
-            "dxFileUploader-selectFile": "Select file",
-            "dxFileUploader-dropFile": "or Drop file here",
+            "dxFileUploader-selectFile": "Select a file",
+            "dxFileUploader-dropFile": "or Drop a file here",
             "dxFileUploader-bytes": "bytes",
             "dxFileUploader-kb": "kb",
             "dxFileUploader-Mb": "Mb",
@@ -150,8 +151,10 @@
             "dxDataGrid-exporting": "Exporting...",
             "dxDataGrid-excelFormat": "Excel file",
             "dxDataGrid-selectedRows": "Selected rows",
-            "dxDataGrid-exportSelectedRows": "Export selected rows",
-            "dxDataGrid-exportAll": "Export all data",
+            "dxDataGrid-exportSelectedRows": "Export selected rows to {0}",
+            "dxDataGrid-exportAll": "Export all data to {0}",
+            "dxDataGrid-headerFilterLabel": "Filter options",
+            "dxDataGrid-headerFilterIndicatorLabel": "Show filter options for column '{0}'",
             "dxDataGrid-headerFilterEmptyValue": "(Blanks)",
             "dxDataGrid-headerFilterOK": "OK",
             "dxDataGrid-headerFilterCancel": "Cancel",
@@ -177,7 +180,12 @@
             "dxTreeList-editingAddRowToNode": "Add",
             "dxPager-infoText": "Page {0} of {1} ({2} items)",
             "dxPager-pagesCountText": "of",
+            "dxPager-pageSize": "Items per page: {0}",
             "dxPager-pageSizesAllText": "All",
+            "dxPager-page": "Page {0}",
+            "dxPager-prevPage": "Previous Page",
+            "dxPager-nextPage": "Next Page",
+            "dxPager-ariaLabel": "Page Navigation",
             "dxPivotGrid-grandTotal": "Grand Total",
             "dxPivotGrid-total": "{0} Total",
             "dxPivotGrid-fieldChooserTitle": "Field Chooser",
@@ -290,6 +298,13 @@
             "dxHtmlEditor-dialogInsertTableRowsField": "Rows",
             "dxHtmlEditor-dialogInsertTableColumnsField": "Columns",
             "dxHtmlEditor-dialogInsertTableCaption": "Insert Table",
+            "dxHtmlEditor-dialogUpdateImageCaption": "Update Image",
+            "dxHtmlEditor-dialogImageUpdateButton": "Update",
+            "dxHtmlEditor-dialogImageAddButton": "Add",
+            "dxHtmlEditor-dialogImageSpecifyUrl": "From the Web",
+            "dxHtmlEditor-dialogImageSelectFile": "From This Device",
+            "dxHtmlEditor-dialogImageKeepAspectRatio": "Keep Aspect Ratio",
+            "dxHtmlEditor-dialogImageEncodeToBase64": "Encode to Base64",
             "dxHtmlEditor-heading": "Heading",
             "dxHtmlEditor-normalText": "Normal text",
             "dxHtmlEditor-background": "Background Color",
@@ -427,6 +442,8 @@
             "dxFileManager-editingUploadSingleItemErrorMessage": "Item was not uploaded",
             "dxFileManager-editingUploadMultipleItemsErrorMessage": "{0} items were not uploaded",
             "dxFileManager-editingUploadCanceledMessage": "Canceled",
+            "dxFileManager-editingDownloadSingleItemErrorMessage": "Item was not downloaded",
+            "dxFileManager-editingDownloadMultipleItemsErrorMessage": "{0} items were not downloaded",
             "dxFileManager-listDetailsColumnCaptionName": "Name",
             "dxFileManager-listDetailsColumnCaptionDateModified": "Date Modified",
             "dxFileManager-listDetailsColumnCaptionFileSize": "File Size",
@@ -509,7 +526,7 @@
             "dxDiagram-dialogInsertShapeImageTitle": "Insert Image",
             "dxDiagram-dialogEditShapeImageTitle": "Change Image",
             "dxDiagram-dialogEditShapeImageSelectButton": "Select image",
-            "dxDiagram-dialogEditShapeImageLabelText": "or drop file here",
+            "dxDiagram-dialogEditShapeImageLabelText": "or drop a file here",
             "dxDiagram-uiExport": "Export",
             "dxDiagram-uiProperties": "Properties",
             "dxDiagram-uiSettings": "Settings",
@@ -591,6 +608,10 @@
             "dxGantt-dialogCancelOperationMessage": "Cancel the operation",
             "dxGantt-dialogDeleteDependencyMessage": "Delete the dependency",
             "dxGantt-dialogMoveTaskAndKeepDependencyMessage": "Move the task and keep the dependency",
+            "dxGantt-dialogConstraintCriticalViolationSeveralTasksMessage": "The task you are attempting to move is linked to another tasks by dependency relations. This change would conflict with dependency rules. How would you like to proceed?",
+            "dxGantt-dialogConstraintViolationSeveralTasksMessage": "The task you are attempting to move is linked to another tasks by dependency relations. How would you like to proceed?",
+            "dxGantt-dialogDeleteDependenciesMessage": "Delete the dependency relations",
+            "dxGantt-dialogMoveTaskAndKeepDependenciesMessage": "Move the task and keep the dependencies",
             "dxGantt-undo": "Undo",
             "dxGantt-redo": "Redo",
             "dxGantt-expandAll": "Expand All",

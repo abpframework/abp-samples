@@ -1,8 +1,7 @@
-using System;
-using TodoApp;
 using TodoApp.Data;
 using Serilog;
 using Serilog.Events;
+using Volo.Abp.Data;
 
 namespace TodoApp;
 
@@ -19,17 +18,13 @@ public class Program
             .MinimumLevel.Override("Microsoft", LogEventLevel.Information)
             .MinimumLevel.Override("Microsoft.EntityFrameworkCore", LogEventLevel.Warning)
             .Enrich.FromLogContext()
-#if DEBUG
             .WriteTo.Async(c => c.File("Logs/logs.txt"))
             .WriteTo.Async(c => c.Console());
-#else
-            .WriteTo.Async(c => c.File("Logs/logs.txt"));
-#endif
+
         if (IsMigrateDatabase(args))
         {
             loggerConfiguration.MinimumLevel.Override("Volo.Abp", LogEventLevel.Warning);
             loggerConfiguration.MinimumLevel.Override("Microsoft", LogEventLevel.Warning);
-            loggerConfiguration.MinimumLevel.Override("IdentityServer4.Startup", LogEventLevel.Warning);
         }
 
         Log.Logger = loggerConfiguration.CreateLogger();
@@ -40,6 +35,10 @@ public class Program
             builder.Host.AddAppSettingsSecretsJson()
                 .UseAutofac()
                 .UseSerilog();
+            if (IsMigrateDatabase(args))
+            {
+                builder.Services.AddDataMigrationEnvironment();
+            }
             await builder.AddApplicationAsync<TodoAppModule>();
             var app = builder.Build();
             await app.InitializeApplicationAsync();
@@ -56,7 +55,7 @@ public class Program
         }
         catch (Exception ex)
         {
-            if (ex.GetType().Name.Equals("StopTheHostException", StringComparison.Ordinal))
+            if (ex is HostAbortedException)
             {
                 throw;
             }

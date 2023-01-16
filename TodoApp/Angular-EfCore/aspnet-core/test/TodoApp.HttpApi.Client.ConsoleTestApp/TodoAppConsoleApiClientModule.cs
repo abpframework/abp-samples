@@ -1,31 +1,30 @@
 ﻿using System;
 using Microsoft.Extensions.DependencyInjection;
 using Polly;
+using Volo.Abp.Autofac;
 using Volo.Abp.Http.Client;
 using Volo.Abp.Http.Client.IdentityModel;
 using Volo.Abp.Modularity;
-using Volo.Abp.Autofac;
 
-namespace TodoApp.HttpApi.Client.ConsoleTestApp
+namespace TodoApp.HttpApi.Client.ConsoleTestApp;
+
+[DependsOn(
+    typeof(AbpAutofacModule),
+    typeof(TodoAppHttpApiClientModule),
+    typeof(AbpHttpClientIdentityModelModule)
+    )]
+public class TodoAppConsoleApiClientModule : AbpModule
 {
-    [DependsOn(
-        typeof(AbpAutofacModule),
-        typeof(TodoAppHttpApiClientModule),
-        typeof(AbpHttpClientIdentityModelModule)
-        )]
-    public class TodoAppConsoleApiClientModule : AbpModule
+    public override void PreConfigureServices(ServiceConfigurationContext context)
     {
-        public override void PreConfigureServices(ServiceConfigurationContext context)
+        PreConfigure<AbpHttpClientBuilderOptions>(options =>
         {
-            PreConfigure<AbpHttpClientBuilderOptions>(options =>
+            options.ProxyClientBuildActions.Add((remoteServiceName, clientBuilder) =>
             {
-                options.ProxyClientBuildActions.Add((remoteServiceName, clientBuilder) =>
-                {
-                    clientBuilder.AddTransientHttpErrorPolicy(
-                        policyBuilder => policyBuilder.WaitAndRetryAsync(3, i => TimeSpan.FromSeconds(Math.Pow(2, i)))
-                    );
-                });
+                clientBuilder.AddTransientHttpErrorPolicy(
+                    policyBuilder => policyBuilder.WaitAndRetryAsync(3, i => TimeSpan.FromSeconds(Math.Pow(2, i)))
+                );
             });
-        }
+        });
     }
 }

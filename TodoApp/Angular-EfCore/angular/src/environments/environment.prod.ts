@@ -10,11 +10,12 @@ export const environment = {
     logoUrl: '',
   },
   oAuthConfig: {
-    issuer: 'https://localhost:44319',
+    issuer: 'https://localhost:44319/',
     redirectUri: baseUrl,
     clientId: 'TodoApp_App',
     responseType: 'code',
     scope: 'offline_access TodoApp',
+    requireHttps: true
   },
   apis: {
     default: {

@@ -4,29 +4,26 @@ using System.Net.Http;
 using Blazorise.Bootstrap5;
 using Blazorise.Icons.FontAwesome;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using OpenIddict.Validation.AspNetCore;
 using TodoApp.Blazor.Menus;
 using TodoApp.Localization;
 using TodoApp.MongoDB;
 using TodoApp.MultiTenancy;
 using Volo.Abp;
 using Volo.Abp.Account.Web;
-using Volo.Abp.AspNetCore.Authentication.JwtBearer;
-using Volo.Abp.AspNetCore.Components.Server.BasicTheme;
-using Volo.Abp.AspNetCore.Components.Server.BasicTheme.Bundling;
+using Volo.Abp.AspNetCore.Components.Server.LeptonXLiteTheme;
+using Volo.Abp.AspNetCore.Components.Server.LeptonXLiteTheme.Bundling;
 using Volo.Abp.AspNetCore.Components.Web.Theming.Routing;
 using Volo.Abp.AspNetCore.Mvc;
 using Volo.Abp.AspNetCore.Mvc.Localization;
-using Volo.Abp.AspNetCore.Mvc.UI;
-using Volo.Abp.AspNetCore.Mvc.UI.Bootstrap;
 using Volo.Abp.AspNetCore.Mvc.UI.Bundling;
-using Volo.Abp.AspNetCore.Mvc.UI.MultiTenancy;
-using Volo.Abp.AspNetCore.Mvc.UI.Theme.Basic;
-using Volo.Abp.AspNetCore.Mvc.UI.Theme.Basic.Bundling;
-using Volo.Abp.AspNetCore.Mvc.UI.Theme.Shared;
+using Volo.Abp.AspNetCore.Mvc.UI.Theme.LeptonXLite;
+using Volo.Abp.AspNetCore.Mvc.UI.Theme.LeptonXLite.Bundling;
 using Volo.Abp.AspNetCore.Serilog;
 using Volo.Abp.Autofac;
 using Volo.Abp.AutoMapper;
@@ -36,7 +33,6 @@ using Volo.Abp.Modularity;
 using Volo.Abp.SettingManagement.Blazor.Server;
 using Volo.Abp.Swashbuckle;
 using Volo.Abp.TenantManagement.Blazor.Server;
-using Volo.Abp.UI;
 using Volo.Abp.UI.Navigation;
 using Volo.Abp.UI.Navigation.Urls;
 using Volo.Abp.VirtualFileSystem;
@@ -46,13 +42,12 @@ namespace TodoApp.Blazor
     [DependsOn(
         typeof(TodoAppApplicationModule),
         typeof(TodoAppHttpApiModule),
-        typeof(AbpAspNetCoreMvcUiBasicThemeModule),
+        typeof(AbpAspNetCoreComponentsServerLeptonXLiteThemeModule),
+        typeof(AbpAspNetCoreMvcUiLeptonXLiteThemeModule),
         typeof(AbpAutofacModule),
         typeof(AbpSwashbuckleModule),
-        typeof(AbpAspNetCoreAuthenticationJwtBearerModule),
         typeof(AbpAspNetCoreSerilogModule),
-        typeof(AbpAccountWebIdentityServerModule),
-        typeof(AbpAspNetCoreComponentsServerBasicThemeModule),
+        typeof(AbpAccountWebOpenIddictModule),
         typeof(AbpIdentityBlazorServerModule),
         typeof(AbpTenantManagementBlazorServerModule),
         typeof(AbpSettingManagementBlazorServerModule),
@@ -73,6 +68,17 @@ namespace TodoApp.Blazor
                     typeof(TodoAppBlazorModule).Assembly
                 );
             });
+            
+            PreConfigure<OpenIddictBuilder>(builder =>
+            {
+                builder.AddValidation(options =>
+                {
+                    options.AddAudiences("TodoAppServerMongo");
+                    options.UseLocalServer();
+                    options.UseAspNetCore();
+                });
+            });
+            
         }
 
         public override void ConfigureServices(ServiceConfigurationContext context)
@@ -107,7 +113,7 @@ namespace TodoApp.Blazor
             {
                 // MVC UI
                 options.StyleBundles.Configure(
-                    BasicThemeBundles.Styles.Global,
+                    LeptonXLiteThemeBundles.Styles.Global,
                     bundle =>
                     {
                         bundle.AddFiles("/global-styles.css");
@@ -116,7 +122,7 @@ namespace TodoApp.Blazor
 
                 //BLAZOR UI
                 options.StyleBundles.Configure(
-                    BlazorBasicThemeBundles.Styles.Global,
+                    BlazorLeptonXLiteThemeBundles.Styles.Global,
                     bundle =>
                     {
                         bundle.AddFiles("/blazor-global-styles.css");
@@ -129,13 +135,7 @@ namespace TodoApp.Blazor
 
         private void ConfigureAuthentication(ServiceConfigurationContext context, IConfiguration configuration)
         {
-            context.Services.AddAuthentication()
-                .AddJwtBearer(options =>
-                {
-                    options.Authority = configuration["AuthServer:Authority"];
-                    options.RequireHttpsMetadata = Convert.ToBoolean(configuration["AuthServer:RequireHttpsMetadata"]);
-                    options.Audience = "TodoApp";
-                });
+            context.Services.ForwardIdentityAuthenticationForBearer(OpenIddictValidationAspNetCoreDefaults.AuthenticationScheme);
         }
 
         private void ConfigureVirtualFileSystem(IWebHostEnvironment hostingEnvironment)
@@ -242,7 +242,7 @@ namespace TodoApp.Blazor
             app.UseStaticFiles();
             app.UseRouting();
             app.UseAuthentication();
-            app.UseJwtTokenMiddleware();
+            app.UseAbpOpenIddictValidation();
 
             if (MultiTenancyConsts.IsEnabled)
             {
@@ -250,7 +250,6 @@ namespace TodoApp.Blazor
             }
 
             app.UseUnitOfWork();
-            app.UseIdentityServer();
             app.UseAuthorization();
             app.UseConfiguredEndpoints();
         }

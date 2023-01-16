@@ -4,15 +4,14 @@ using System.Text;
 using TodoApp.Localization;
 using Volo.Abp.Application.Services;
 
-namespace TodoApp
+namespace TodoApp;
+
+/* Inherit your application services from this class.
+ */
+public abstract class TodoAppAppService : ApplicationService
 {
-    /* Inherit your application services from this class.
-     */
-    public abstract class TodoAppAppService : ApplicationService
+    protected TodoAppAppService()
     {
-        protected TodoAppAppService()
-        {
-            LocalizationResource = typeof(TodoAppResource);
-        }
+        LocalizationResource = typeof(TodoAppResource);
     }
 }

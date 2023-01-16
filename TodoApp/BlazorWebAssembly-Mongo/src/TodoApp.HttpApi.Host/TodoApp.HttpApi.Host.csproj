@@ -3,7 +3,7 @@
   <Import Project="..\..\common.props" />
 
   <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
+    <TargetFramework>net7.0</TargetFramework>
     <RootNamespace>TodoApp</RootNamespace>
     <PreserveCompilationReferences>true</PreserveCompilationReferences>
     <UserSecretsId>TodoApp-4681b4fd-151f-4221-84a4-929d86723e4c</UserSecretsId>
@@ -12,13 +12,15 @@
   <ItemGroup>
     <PackageReference Include="Serilog.AspNetCore" Version="5.0.0" />
     <PackageReference Include="Serilog.Sinks.Async" Version="1.5.0" />
-    <PackageReference Include="Volo.Abp.AspNetCore.MultiTenancy" Version="6.0.0-rc.2" />
-    <PackageReference Include="Volo.Abp.Autofac" Version="6.0.0-rc.2" />
-    <PackageReference Include="Volo.Abp.AspNetCore.Mvc.UI.Theme.Basic" Version="6.0.0-rc.2" />
-    <PackageReference Include="Volo.Abp.AspNetCore.Authentication.JwtBearer" Version="6.0.0-rc.2" />
-    <PackageReference Include="Volo.Abp.AspNetCore.Serilog" Version="6.0.0-rc.2" />
-    <PackageReference Include="Volo.Abp.Swashbuckle" Version="6.0.0-rc.2" />
-    <PackageReference Include="Volo.Abp.Account.Web.IdentityServer" Version="6.0.0-rc.2" />
+    <PackageReference Include="Volo.Abp.AspNetCore.MultiTenancy" Version="7.0.0" />
+    <PackageReference Include="Volo.Abp.Autofac" Version="7.0.0" />
+    <PackageReference Include="Volo.Abp.AspNetCore.Serilog" Version="7.0.0" />
+    <PackageReference Include="Volo.Abp.Swashbuckle" Version="7.0.0" />
+    <PackageReference Include="Volo.Abp.Account.Web.OpenIddict" Version="7.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Volo.Abp.AspNetCore.Mvc.UI.Theme.LeptonXLite" Version="2.0.0-*" />
   </ItemGroup>
 
   <ItemGroup>

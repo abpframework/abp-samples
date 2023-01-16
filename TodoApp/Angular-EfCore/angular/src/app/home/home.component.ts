@@ -12,7 +12,10 @@ export class HomeComponent implements OnInit {
   todoItems: TodoItemDto[];
   newTodoText: string;
 
-  constructor(private todoService: TodoService, private toasterService: ToasterService) {}
+  constructor(
+      private todoService: TodoService,
+      private toasterService: ToasterService)
+  { }
 
   ngOnInit(): void {
     this.todoService.getList().subscribe(response => {
@@ -34,3 +37,4 @@ export class HomeComponent implements OnInit {
     });
   }  
 }
+

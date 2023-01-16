@@ -2,24 +2,24 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Net.Http;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Cors;
+using Microsoft.AspNetCore.Extensions.DependencyInjection;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using TodoApp.EntityFrameworkCore;
 using TodoApp.MultiTenancy;
-using Volo.Abp.AspNetCore.Mvc.UI.Theme.Basic;
 using Microsoft.OpenApi.Models;
+using OpenIddict.Validation.AspNetCore;
+using TodoApp.EntityFrameworkCore;
 using Volo.Abp;
 using Volo.Abp.Account;
 using Volo.Abp.Account.Web;
-using Volo.Abp.AspNetCore.Authentication.JwtBearer;
 using Volo.Abp.AspNetCore.MultiTenancy;
 using Volo.Abp.AspNetCore.Mvc;
 using Volo.Abp.AspNetCore.Mvc.UI.Bundling;
-using Volo.Abp.AspNetCore.Mvc.UI.Theme.Basic.Bundling;
+using Volo.Abp.AspNetCore.Mvc.UI.Theme.LeptonXLite;
+using Volo.Abp.AspNetCore.Mvc.UI.Theme.LeptonXLite.Bundling;
 using Volo.Abp.AspNetCore.Mvc.UI.Theme.Shared;
 using Volo.Abp.AspNetCore.Serilog;
 using Volo.Abp.Autofac;
@@ -37,15 +37,26 @@ namespace TodoApp
         typeof(AbpAspNetCoreMultiTenancyModule),
         typeof(TodoAppApplicationModule),
         typeof(TodoAppEntityFrameworkCoreModule),
-        typeof(AbpAspNetCoreMvcUiBasicThemeModule),
-        typeof(AbpAspNetCoreAuthenticationJwtBearerModule),
-        typeof(AbpAccountWebIdentityServerModule),
+        typeof(AbpAspNetCoreMvcUiLeptonXLiteThemeModule),
+        typeof(AbpAccountWebOpenIddictModule),
         typeof(AbpAspNetCoreSerilogModule),
         typeof(AbpSwashbuckleModule)
     )]
     public class TodoAppHttpApiHostModule : AbpModule
     {
-        private const string DefaultCorsPolicyName = "Default";
+
+        public override void PreConfigureServices(ServiceConfigurationContext context)
+        {
+            PreConfigure<OpenIddictBuilder>(builder =>
+            {
+                builder.AddValidation(options =>
+                {
+                    options.AddAudiences("TodoApp");
+                    options.UseLocalServer();
+                    options.UseAspNetCore();
+                });
+            });
+        }
 
         public override void ConfigureServices(ServiceConfigurationContext context)
         {
@@ -67,7 +78,7 @@ namespace TodoApp
             Configure<AbpBundlingOptions>(options =>
             {
                 options.StyleBundles.Configure(
-                    BasicThemeBundles.Styles.Global,
+                    LeptonXLiteThemeBundles.Styles.Global,
                     bundle => { bundle.AddFiles("/global-styles.css"); }
                 );
             });
@@ -119,18 +130,7 @@ namespace TodoApp
 
         private void ConfigureAuthentication(ServiceConfigurationContext context, IConfiguration configuration)
         {
-            context.Services.AddAuthentication()
-                .AddJwtBearer(options =>
-                {
-                    options.Authority = configuration["AuthServer:Authority"];
-                    options.RequireHttpsMetadata = Convert.ToBoolean(configuration["AuthServer:RequireHttpsMetadata"]);
-                    options.Audience = "TodoApp";
-                    options.BackchannelHttpHandler = new HttpClientHandler
-                    {
-                        ServerCertificateCustomValidationCallback =
-                            HttpClientHandler.DangerousAcceptAnyServerCertificateValidator
-                    };
-                });
+            context.Services.ForwardIdentityAuthenticationForBearer(OpenIddictValidationAspNetCoreDefaults.AuthenticationScheme);
         }
 
         private static void ConfigureSwaggerServices(ServiceConfigurationContext context, IConfiguration configuration)
@@ -173,7 +173,7 @@ namespace TodoApp
         {
             context.Services.AddCors(options =>
             {
-                options.AddPolicy(DefaultCorsPolicyName, builder =>
+                options.AddDefaultPolicy( builder =>
                 {
                     builder
                         .WithOrigins(
@@ -211,9 +211,9 @@ namespace TodoApp
             app.UseCorrelationId();
             app.UseStaticFiles();
             app.UseRouting();
-            app.UseCors(DefaultCorsPolicyName);
+            app.UseCors();
             app.UseAuthentication();
-            app.UseJwtTokenMiddleware();
+            app.UseAbpOpenIddictValidation();
 
             if (MultiTenancyConsts.IsEnabled)
             {
@@ -221,7 +221,6 @@ namespace TodoApp
             }
 
             app.UseUnitOfWork();
-            app.UseIdentityServer();
             app.UseAuthorization();
 
             app.UseSwagger();

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -15,7 +15,7 @@ namespace TodoApp
         {
             _todoItemRepository = todoItemRepository;
         }
-
+        // TODO: Implement the methods here...
         public async Task<List<TodoItemDto>> GetListAsync()
         {
             var items = await _todoItemRepository.GetListAsync();
@@ -26,11 +26,10 @@ namespace TodoApp
                     Text = item.Text
                 }).ToList();
         }
-
         public async Task<TodoItemDto> CreateAsync(string text)
         {
             var todoItem = await _todoItemRepository.InsertAsync(
-                new TodoItem { Text = text }
+                new TodoItem {Text = text}
             );
 
             return new TodoItemDto
@@ -39,10 +38,10 @@ namespace TodoApp
                 Text = todoItem.Text
             };
         }
-
         public async Task DeleteAsync(Guid id)
         {
             await _todoItemRepository.DeleteAsync(id);
         }
+        
     }
 }

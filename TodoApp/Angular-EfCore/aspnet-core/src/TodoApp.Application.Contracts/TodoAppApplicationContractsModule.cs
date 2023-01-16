@@ -7,23 +7,22 @@ using Volo.Abp.PermissionManagement;
 using Volo.Abp.SettingManagement;
 using Volo.Abp.TenantManagement;
 
-namespace TodoApp
+namespace TodoApp;
+
+[DependsOn(
+    typeof(TodoAppDomainSharedModule),
+    typeof(AbpAccountApplicationContractsModule),
+    typeof(AbpFeatureManagementApplicationContractsModule),
+    typeof(AbpIdentityApplicationContractsModule),
+    typeof(AbpPermissionManagementApplicationContractsModule),
+    typeof(AbpSettingManagementApplicationContractsModule),
+    typeof(AbpTenantManagementApplicationContractsModule),
+    typeof(AbpObjectExtendingModule)
+)]
+public class TodoAppApplicationContractsModule : AbpModule
 {
-    [DependsOn(
-        typeof(TodoAppDomainSharedModule),
-        typeof(AbpAccountApplicationContractsModule),
-        typeof(AbpFeatureManagementApplicationContractsModule),
-        typeof(AbpIdentityApplicationContractsModule),
-        typeof(AbpPermissionManagementApplicationContractsModule),
-        typeof(AbpSettingManagementApplicationContractsModule),
-        typeof(AbpTenantManagementApplicationContractsModule),
-        typeof(AbpObjectExtendingModule)
-    )]
-    public class TodoAppApplicationContractsModule : AbpModule
+    public override void PreConfigureServices(ServiceConfigurationContext context)
     {
-        public override void PreConfigureServices(ServiceConfigurationContext context)
-        {
-            TodoAppDtoExtensions.Configure();
-        }
+        TodoAppDtoExtensions.Configure();
     }
 }

@@ -31,6 +31,11 @@ public class BookStoreTestBaseModule : AbpModule
         });
 
         context.Services.AddAlwaysAllowAuthorization();
+
+        Configure<AbpUnitOfWorkDefaultOptions>(options =>
+        {
+            options.TransactionBehavior = UnitOfWorkTransactionBehavior.Disabled;
+        });
     }
 
     public override void OnApplicationInitialization(ApplicationInitializationContext context)

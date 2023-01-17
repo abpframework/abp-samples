@@ -3,7 +3,7 @@
   <Import Project="..\..\common.props" />
 
   <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
+    <TargetFramework>net7.0</TargetFramework>
     <RootNamespace>Acme.BookStore.Web</RootNamespace>
     <AssetTargetFallback>$(AssetTargetFallback);portable-net45+win8+wp8+wpa81;</AssetTargetFallback>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -37,27 +37,27 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.Identity.Web" Version="1.10.0" />
-    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.5" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="7.0.0" />
     <PackageReference Include="Serilog.AspNetCore" Version="5.0.0" />
     <PackageReference Include="Serilog.Sinks.File" Version="5.0.0" />
     <PackageReference Include="Serilog.Sinks.Async" Version="1.5.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.3.1" />
     <PackageReference Include="IdentityServer4.AccessTokenValidation" Version="3.0.1" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.5" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="7.0.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Acme.BookStore.Application\Acme.BookStore.Application.csproj" />
     <ProjectReference Include="..\Acme.BookStore.HttpApi\Acme.BookStore.HttpApi.csproj" />
     <ProjectReference Include="..\Acme.BookStore.EntityFrameworkCore.DbMigrations\Acme.BookStore.EntityFrameworkCore.DbMigrations.csproj" />
-    <PackageReference Include="Volo.Abp.AspNetCore.Mvc.UI.Theme.Basic" Version="6.0.0-rc.2" />
-    <PackageReference Include="Volo.Abp.Autofac" Version="6.0.0-rc.2" />
-    <PackageReference Include="Volo.Abp.AspNetCore.Authentication.JwtBearer" Version="6.0.0-rc.2" />
-    <PackageReference Include="Volo.Abp.AspNetCore.Serilog" Version="6.0.0-rc.2" />
-    <PackageReference Include="Volo.Abp.Identity.Web" Version="6.0.0-rc.2" />
-    <PackageReference Include="Volo.Abp.Account.Web.IdentityServer" Version="6.0.0-rc.2" />
-    <PackageReference Include="Volo.Abp.TenantManagement.Web" Version="6.0.0-rc.2" />
-    <PackageReference Include="Volo.Abp.FeatureManagement.Web" Version="6.0.0-rc.2" />
+    <PackageReference Include="Volo.Abp.AspNetCore.Mvc.UI.Theme.Basic" Version="7.0.0" />
+    <PackageReference Include="Volo.Abp.Autofac" Version="7.0.0" />
+    <PackageReference Include="Volo.Abp.AspNetCore.Authentication.JwtBearer" Version="7.0.0" />
+    <PackageReference Include="Volo.Abp.AspNetCore.Serilog" Version="7.0.0" />
+    <PackageReference Include="Volo.Abp.Identity.Web" Version="7.0.0" />
+    <PackageReference Include="Volo.Abp.Account.Web.IdentityServer" Version="7.0.0" />
+    <PackageReference Include="Volo.Abp.TenantManagement.Web" Version="7.0.0" />
+    <PackageReference Include="Volo.Abp.FeatureManagement.Web" Version="7.0.0" />
   </ItemGroup>
 
   <ItemGroup>

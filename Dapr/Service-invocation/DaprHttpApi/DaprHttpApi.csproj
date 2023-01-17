@@ -1,12 +1,12 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
     <PropertyGroup>
         <TargetFramework>net7.0</TargetFramework>
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Volo.Abp.Autofac" Version="7.0.0-rc.1" />
-        <PackageReference Include="Volo.Abp.AspNetCore.Mvc" Version="7.0.0-rc.1" />
+        <PackageReference Include="Volo.Abp.Autofac" Version="7.0.0" />
+        <PackageReference Include="Volo.Abp.AspNetCore.Mvc" Version="7.0.0" />
         <ProjectReference Include="..\Shared\Shared.csproj" />
     </ItemGroup>
 

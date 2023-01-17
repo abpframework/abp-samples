@@ -5,6 +5,7 @@ using Microsoft.Extensions.Hosting;
 using SignalRDemo.Data;
 using Serilog;
 using Volo.Abp;
+using Volo.Abp.Data;
 
 namespace SignalRDemo.DbMigrator
 {
@@ -23,6 +24,7 @@ namespace SignalRDemo.DbMigrator
             {
                 options.UseAutofac();
                 options.Services.AddLogging(c => c.AddSerilog());
+                options.Services.AddDataMigrationEnvironment();
             }))
             {
                 application.Initialize();

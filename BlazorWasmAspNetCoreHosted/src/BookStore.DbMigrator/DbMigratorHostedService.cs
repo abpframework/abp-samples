@@ -6,6 +6,7 @@ using Microsoft.Extensions.Hosting;
 using BookStore.Data;
 using Serilog;
 using Volo.Abp;
+using Volo.Abp.Data;
 
 namespace BookStore.DbMigrator;
 
@@ -27,6 +28,7 @@ public class DbMigratorHostedService : IHostedService
            options.Services.ReplaceConfiguration(_configuration);
            options.UseAutofac();
            options.Services.AddLogging(c => c.AddSerilog());
+           options.Services.AddDataMigrationEnvironment();
         }))
         {
             await application.InitializeAsync();

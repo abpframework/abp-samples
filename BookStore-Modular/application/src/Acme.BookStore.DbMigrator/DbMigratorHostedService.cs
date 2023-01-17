@@ -5,6 +5,7 @@ using Microsoft.Extensions.Hosting;
 using Acme.BookStore.Data;
 using Serilog;
 using Volo.Abp;
+using Volo.Abp.Data;
 
 namespace Acme.BookStore.DbMigrator
 {
@@ -16,6 +17,7 @@ namespace Acme.BookStore.DbMigrator
             {
                 options.UseAutofac();
                 options.Services.AddLogging(c => c.AddSerilog());
+                options.Services.AddDataMigrationEnvironment();
             }))
             {
                 application.Initialize();

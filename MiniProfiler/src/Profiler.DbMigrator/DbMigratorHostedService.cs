@@ -6,6 +6,7 @@ using Microsoft.Extensions.Hosting;
 using Profiler.Data;
 using Serilog;
 using Volo.Abp;
+using Volo.Abp.Data;
 
 namespace Profiler.DbMigrator
 {
@@ -27,6 +28,7 @@ namespace Profiler.DbMigrator
                 options.Services.ReplaceConfiguration(_configuration);
                 options.UseAutofac();
                 options.Services.AddLogging(c => c.AddSerilog());
+                options.Services.AddDataMigrationEnvironment();
             }))
             {
                 application.Initialize();

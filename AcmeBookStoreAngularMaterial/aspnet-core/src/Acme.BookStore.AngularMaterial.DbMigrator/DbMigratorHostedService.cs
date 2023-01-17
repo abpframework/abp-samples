@@ -5,6 +5,7 @@ using Microsoft.Extensions.Hosting;
 using Acme.BookStore.AngularMaterial.Data;
 using Serilog;
 using Volo.Abp;
+using Volo.Abp.Data;
 
 namespace Acme.BookStore.AngularMaterial.DbMigrator
 {
@@ -23,6 +24,7 @@ namespace Acme.BookStore.AngularMaterial.DbMigrator
             {
                 options.UseAutofac();
                 options.Services.AddLogging(c => c.AddSerilog());
+                options.Services.AddDataMigrationEnvironment();
             }))
             {
                 application.Initialize();

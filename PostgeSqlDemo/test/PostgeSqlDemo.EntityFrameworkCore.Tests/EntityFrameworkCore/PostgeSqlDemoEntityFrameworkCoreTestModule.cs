@@ -12,7 +12,7 @@ namespace PostgeSqlDemo.EntityFrameworkCore
     [DependsOn(
         typeof(PostgeSqlDemoEntityFrameworkCoreDbMigrationsModule),
         typeof(PostgeSqlDemoTestBaseModule)
-        )]
+    )]
     public class PostgeSqlDemoEntityFrameworkCoreTestModule : AbpModule
     {
         private SqliteConnection _sqliteConnection;
@@ -30,7 +30,7 @@ namespace PostgeSqlDemo.EntityFrameworkCore
             {
                 options.Configure(context =>
                 {
-                    context.DbContextOptions.UseSqlite(_sqliteConnection, sqliteOptions => sqliteOptions.UseNetTopologySuite());
+                    context.DbContextOptions.UseSqlite(_sqliteConnection, opt => opt.UseNetTopologySuite());
                 });
             });
         }
@@ -46,10 +46,7 @@ namespace PostgeSqlDemo.EntityFrameworkCore
             connection.Open();
 
             var options = new DbContextOptionsBuilder<PostgeSqlDemoMigrationsDbContext>()
-                .UseSqlite(connection, sqliteOptions =>
-                {
-                    sqliteOptions.UseNetTopologySuite();
-                })
+                .UseSqlite(connection, opt => opt.UseNetTopologySuite())
                 .Options;
 
             using (var context = new PostgeSqlDemoMigrationsDbContext(options))

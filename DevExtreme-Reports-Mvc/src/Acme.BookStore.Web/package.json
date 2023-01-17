@@ -3,11 +3,11 @@
   "name": "my-app",
   "private": true,
   "dependencies": {
-    "@abp/aspnetcore.mvc.ui.theme.basic": "^6.0.0-rc.2",
-    "@devexpress/analytics-core": "^21.2.3",
+    "@abp/aspnetcore.mvc.ui.theme.basic": "~7.0.0",
+    "@devexpress/analytics-core": "^22.2.3",
     "cldrjs": "^0.5.5",
-    "devexpress-reporting": "^21.2.3",
-    "devextreme": "^21.2.3",
+    "devexpress-reporting": "^22.2.3",
+    "devextreme": "^22.2.3",
     "globalize": "^1.7.0",
     "jquery-ui-dist": "^1.12.1"
   }

@@ -7,6 +7,7 @@ using EfCoreJSONColumnDemo.Data;
 using Serilog;
 using Volo.Abp;
 using Volo.Abp.Data;
+using Volo.Abp.Data;
 
 namespace EfCoreJSONColumnDemo.DbMigrator;
 
@@ -28,6 +29,7 @@ public class DbMigratorHostedService : IHostedService
            options.Services.ReplaceConfiguration(_configuration);
            options.UseAutofac();
            options.Services.AddLogging(c => c.AddSerilog());
+           options.Services.AddDataMigrationEnvironment();
            options.AddDataMigrationEnvironment();
         }))
         {

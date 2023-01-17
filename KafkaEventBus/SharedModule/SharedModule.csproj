@@ -5,7 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Volo.Abp.EventBus" Version="6.0.0-rc.2" />
+    <PackageReference Include="Volo.Abp.EventBus" Version="7.0.0" />
   </ItemGroup>
 
 </Project>

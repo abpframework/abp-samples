@@ -1,8 +1,8 @@
 ﻿/**
 * DevExpress Analytics (dist\css\dx-analytics.darkmoon.compact.css)
-* Version:  21.2.3
-* Build date: Oct 28, 2021
-* Copyright (c) 2012 - 2021 Developer Express Inc. ALL RIGHTS RESERVED
+* Version:  22.2.3
+* Build date: Dec 6, 2022
+* Copyright (c) 2012 - 2022 Developer Express Inc. ALL RIGHTS RESERVED
 * License: https://www.devexpress.com/Support/EULAs/universal.xml
 */
 .dx-designer-viewport {
@@ -107,6 +107,9 @@
 }
 .dx-designer-viewport .dxd-back-contrast .dxd-back-highlighted:hover {
   background-color: #3DEBD3;
+}
+.dx-designer-viewport .dxd-back-primary .dxd-back-highlighted:hover:not(.dxd-state-no-hover) {
+  background-color: #4E607F;
 }
 .dx-designer-viewport .dxd-back-contrast .dxd-state-active .dxd-back-highlighted:hover {
   background-color: #FFFFFF;

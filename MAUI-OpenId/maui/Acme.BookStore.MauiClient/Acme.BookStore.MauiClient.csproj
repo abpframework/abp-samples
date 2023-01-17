@@ -1,8 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFrameworks>net6.0-android;net6.0-ios;net6.0-maccatalyst</TargetFrameworks>
-		<TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows')) and '$(MSBuildRuntimeType)' == 'Full'">$(TargetFrameworks);net6.0-windows10.0.19041</TargetFrameworks>
+		<TargetFrameworks>net7.0-android;net7.0-ios;net7.0-maccatalyst</TargetFrameworks>
+		<TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows')) and '$(MSBuildRuntimeType)' == 'Full'">$(TargetFrameworks);net7.0-windows10.0.19041</TargetFrameworks>
 		<OutputType>Exe</OutputType>
 		<RootNamespace>Acme.BookStore.MauiClient</RootNamespace>
 		<UseMaui>true</UseMaui>
@@ -59,8 +59,8 @@
   <ItemGroup>
     <PackageReference Include="IdentityModel.OidcClient" Version="5.0.0" />
     <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.16.0" />
-	  <PackageReference Include="Volo.Abp.Http.Client.IdentityModel" Version="6.0.0-rc.2" />
-	  <PackageReference Include="Volo.Abp.Autofac" Version="6.0.0-rc.2" />
+	  <PackageReference Include="Volo.Abp.Http.Client.IdentityModel" Version="7.0.0" />
+	  <PackageReference Include="Volo.Abp.Autofac" Version="7.0.0" />
   </ItemGroup>
 
   <ItemGroup>

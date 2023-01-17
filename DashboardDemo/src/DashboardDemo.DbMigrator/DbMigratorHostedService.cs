@@ -5,6 +5,7 @@ using Microsoft.Extensions.Hosting;
 using DashboardDemo.Data;
 using Serilog;
 using Volo.Abp;
+using Volo.Abp.Data;
 
 namespace DashboardDemo.DbMigrator
 {
@@ -16,6 +17,7 @@ namespace DashboardDemo.DbMigrator
             {
                 options.UseAutofac();
                 options.Services.AddLogging(c => c.AddSerilog());
+                options.Services.AddDataMigrationEnvironment();
             }))
             {
                 application.Initialize();

@@ -10,7 +10,7 @@
                 <div class="text-lg-end pt-2">
                     <button *abpPermission="'BookStore.Books.Create'" id="create" class="btn btn-primary" type="button"
                         (click)="createBook()">
-                        <i class="fa fa-plus mr-1"></i>
+                        <i class="fa fa-plus me-1"></i>
                         <span>{{ '::NewBook' | abpLocalization }}</span>
                     </button>
                 </div>
@@ -24,7 +24,7 @@
                     <div ngbDropdown container="body" class="d-inline-block">
                         <button class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown"
                             aria-haspopup="true" ngbDropdownToggle>
-                            <i class="fa fa-cog mr-1"></i>{{ '::Actions' | abpLocalization }}
+                            <i class="fa fa-cog me-1"></i>{{ '::Actions' | abpLocalization }}
                         </button>
                         <div ngbDropdownMenu>
                             <button *abpPermission="'BookStore.Books.Edit'" ngbDropdownItem (click)="editBook(row.id)">
@@ -78,17 +78,17 @@
                 </select>
             </div>
 
-            <div class="form-group">
+            <div class="mt-2">
                 <label for="book-name">Name</label><span> * </span>
                 <input type="text" id="book-name" class="form-control" formControlName="name" autofocus />
             </div>
 
-            <div class="form-group">
+            <div class="mt-2">
                 <label for="book-price">Price</label><span> * </span>
                 <input type="number" id="book-price" class="form-control" formControlName="price" />
             </div>
 
-            <div class="form-group">
+            <div class="mt-2">
                 <label for="book-type">Type</label><span> * </span>
                 <select class="form-control" id="book-type" formControlName="type">
                     <option [ngValue]="null">Select a book type</option>
@@ -98,7 +98,7 @@
                 </select>
             </div>
 
-            <div class="form-group">
+            <div class="mt-2">
                 <label>Publish date</label><span> * </span>
                 <input #datepicker="ngbDatepicker" class="form-control" name="datepicker" formControlName="publishDate"
                     ngbDatepicker (click)="datepicker.toggle()" />

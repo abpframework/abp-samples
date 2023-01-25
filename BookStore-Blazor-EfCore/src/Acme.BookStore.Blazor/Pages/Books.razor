@@ -6,6 +6,7 @@
 @using Acme.BookStore.Books
 @using Acme.BookStore.Localization
 @using Microsoft.Extensions.Localization
+@using Volo.Abp
 @using Volo.Abp.AspNetCore.Components.Web
 @inject IStringLocalizer<BookStoreResource> L
 @inject AbpBlazorMessageLocalizerHelper<BookStoreResource> LH
@@ -102,7 +103,6 @@
                         <Field>
                             <FieldLabel>@L["Author"]</FieldLabel>
                             <Select TValue="Guid" @bind-SelectedValue="@NewEntity.AuthorId">
-                                <SelectItem TValue="Guid" Value="Guid.Empty">@L["PickAnAuthor"]</SelectItem>
                                 @foreach (var author in authorList)
                                 {
                                     <SelectItem TValue="Guid" Value="@author.Id">
@@ -242,5 +242,16 @@
     {
         await base.OnInitializedAsync();
         authorList = (await AppService.GetAuthorLookupAsync()).Items;
+    }
+    
+    protected override async Task OpenCreateModalAsync()
+    {
+        if (!authorList.Any())
+        {
+            throw new UserFriendlyException(message: L["AnAuthorIsRequiredForCreatingBook"]);
+        }
+
+        await base.OpenCreateModalAsync();
+        NewEntity.AuthorId = authorList.First().Id;
     }
 }

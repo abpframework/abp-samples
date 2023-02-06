@@ -5,15 +5,38 @@
 @using Volo.Abp.AspNetCore.Mvc.UI.Bootstrap.TagHelpers.Modal
 @model EditModalModel
 @inject IStringLocalizer<BookStoreResource> L
-@{
-    Layout = null;
+@section styles {
+    <style>
+        .abp-view-modal .modal {
+                position: static;
+                display: block;
+                opacity: inherit !important;
+        }
+        .abp-view-modal .modal.fade .modal-dialog {
+            transition: inherit !important;
+            transform: inherit !important;;
+        }
+        .abp-view-modal .modal-header .btn-close {
+            display: none;
+        }
+    </style>
 }
-<abp-dynamic-form abp-model="Book" asp-page="/Books/EditModal">
-    <abp-modal>
-        <abp-modal-header title="@L["Update"].Value"></abp-modal-header>
-        <abp-modal-body>
-            <abp-form-content />
-        </abp-modal-body>
-        <abp-modal-footer buttons="@(AbpModalButtons.Cancel|AbpModalButtons.Save)"></abp-modal-footer>
-    </abp-modal>
-</abp-dynamic-form>
+
+@section scripts {
+    <script>
+        $(".abp-view-modal form").abpAjaxForm().on('abp-ajax-success', function () {
+            location.href = "/Books";
+        });
+    </script>
+}
+<div class="abp-view-modal">
+    <abp-dynamic-form abp-model="Book" asp-page="/Books/EditModal">
+        <abp-modal size="ExtraLarge">
+            <abp-modal-header title="@L["Update"].Value"></abp-modal-header>
+            <abp-modal-body>
+                <abp-form-content />
+            </abp-modal-body>
+            <abp-modal-footer buttons="@(AbpModalButtons.Save)"></abp-modal-footer>
+        </abp-modal>
+    </abp-dynamic-form>
+</div>

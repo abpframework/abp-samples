@@ -8,7 +8,7 @@
 @inject IStringLocalizer<BookStoreResource> L
 @inject IAuthorizationService AuthorizationService
 @section scripts
-    {
+{
     <abp-script src="/Pages/Books/Index.js" />
 }
 
@@ -21,10 +21,7 @@
             <abp-column size-md="_6" class="text-end">
                 @if (await AuthorizationService.IsGrantedAsync(BookStorePermissions.Books.Create))
                 {
-                    <abp-button id="NewBookButton"
-                            text="@L["NewBook"].Value"
-                            icon="plus"
-                            button-type="Primary" />
+                    <a class="btn btn-primary" href="/Books/CreateModal"><i class="fa fa-plus"></i> @L["NewBook"].Value</a>
                 }
             </abp-column>
         </abp-row>

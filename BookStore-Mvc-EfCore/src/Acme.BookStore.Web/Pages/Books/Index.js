@@ -1,7 +1,5 @@
 ﻿$(function () {
     var l = abp.localization.getResource('BookStore');
-    var createModal = new abp.ModalManager(abp.appPath + 'Books/CreateModal');
-    var editModal = new abp.ModalManager(abp.appPath + 'Books/EditModal');
 
     var dataTable = $('#BooksTable').DataTable(
         abp.libs.datatables.normalizeConfiguration({
@@ -21,7 +19,7 @@
                                     text: l('Edit'),
                                     visible: abp.auth.isGranted('BookStore.Books.Edit'),
                                     action: function (data) {
-                                        editModal.open({ id: data.record.id });
+                                    location.href = "/Books/EditModal?id=" + data.record.id;
                                     }
                                 },
                                 {
@@ -73,17 +71,4 @@
             ]
         })
     );
-
-    createModal.onResult(function () {
-        dataTable.ajax.reload();
-    });
-
-    editModal.onResult(function () {
-        dataTable.ajax.reload();
-    });
-
-    $('#NewBookButton').click(function (e) {
-        e.preventDefault();
-        createModal.open();
-    });
 });

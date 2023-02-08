@@ -1,18 +1,5 @@
-## About this solution
+# Quick Start Tutorial
 
-This is a minimalist, non-layered startup solution with the ABP Framework. All the fundamental ABP modules are already installed.
+This is an example project for the quick start tutorial documentation. See the documentation:
 
-## How to run
-
-The application needs to a database. Run the following command in the `TodoApp` directory:
-
-````bash
-dotnet run --migrate-database
-````
-
-This will create and seed the initial database. Then you can run the application with any IDE that supports .NET.
-
-Happy coding..!
-
-
-
+**https://docs.abp.io/en/abp/latest/Tutorials/Todo/Single-Layer/Index?UI=BlazorServer&DB=EF**

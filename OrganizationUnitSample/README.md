@@ -2,7 +2,7 @@
 
 This is the sample project for Organization Unit Management to demonstrate common use cases. 
 
-Also see [Organization Unit Management docs](https://github.com/abpframework/abp/blob/dev/docs/en/Modules/Organization-Units.md).
+Also see [Organization Unit Management docs](https://github.com/abpframework/abp/blob/rel-3.3/docs/en/Modules/Organization-Units.md).
 
 
 

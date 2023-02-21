@@ -1,1 +1,0 @@
-{"ast":null,"code":"var hash = {\n  left: 'right',\n  right: 'left',\n  bottom: 'top',\n  top: 'bottom'\n};\nexport default function getOppositePlacement(placement) {\n  return placement.replace(/left|right|bottom|top/g, function (matched) {\n    return hash[matched];\n  });\n}","map":null,"metadata":{},"sourceType":"module"}

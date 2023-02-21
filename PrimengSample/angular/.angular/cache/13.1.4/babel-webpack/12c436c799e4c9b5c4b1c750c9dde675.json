@@ -1,1 +1,0 @@
-{"ast":null,"code":"export default function getAltAxis(axis) {\n  return axis === 'x' ? 'y' : 'x';\n}","map":null,"metadata":{},"sourceType":"module"}

@@ -1,1 +1,0 @@
-{"ast":null,"code":"import getFreshSideObject from \"./getFreshSideObject.js\";\nexport default function mergePaddingObject(paddingObject) {\n  return Object.assign({}, getFreshSideObject(), paddingObject);\n}","map":null,"metadata":{},"sourceType":"module"}

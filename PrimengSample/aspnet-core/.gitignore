@@ -258,3 +258,5 @@ src/AbpPrimengSample.IdentityServer/Logs/*
 src/AbpPrimengSample.HttpApi.Host/Logs/*
 src/AbpPrimengSample.HttpApi.Host/Logs/*
 src/AbpPrimengSample.DbMigrator/Logs/*
+
+src/AbpPrimengSample.HttpApi.Host/wwwroot/libs/*

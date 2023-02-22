@@ -21,6 +21,7 @@
     "@abp/ng.tenant-management": "~7.1.0-rc.1",
     "@abp/ng.theme.lepton-x": "^2.1.0-rc.1",
     "@abp/ng.theme.shared": "~7.1.0-rc.1",
+    "@angular-builders/custom-webpack": "^15.0.0",
     "@angular/animations": "~15.0.1",
     "@angular/common": "~15.0.1",
     "@angular/compiler": "~15.0.1",

@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
+import { AbpOAuthModule } from '@abp/ng.oauth';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { environment } from '../environments/environment';
@@ -18,6 +18,7 @@ import { NgxsModule } from '@ngxs/store';
       registerLocaleFn: registerLocale(),
     }),
     NgxsModule.forRoot([]),
+    AbpOAuthModule.forRoot(),
   ],
   providers: [],
   bootstrap: [AppComponent],

@@ -12,6 +12,7 @@
   "private": true,
   "dependencies": {
     "@abp/ng.core": "~7.1.0-rc.1",
+    "@abp/ng.oauth": "^7.1.0-rc.1",
     "@angular/animations": "~15.0.1",
     "@angular/common": "~15.0.1",
     "@angular/compiler": "~15.0.1",
@@ -21,8 +22,8 @@
     "@angular/platform-browser-dynamic": "~15.0.1",
     "@angular/router": "~15.0.1",
     "@ngxs/store": "~3.7.1",
-    "rxjs": "~6.6.0",
-    "tslib": "^2.0.0",
+    "rxjs": "~7.5.6",
+    "tslib": "^2.1.0",
     "zone.js": "~0.11.4"
   },
   "devDependencies": {
@@ -32,6 +33,9 @@
     "@angular/compiler-cli": "~15.0.1",
     "@types/jasmine": "~3.6.0",
     "@types/node": "^12.11.1",
+    "@typescript-eslint/eslint-plugin": "^5.53.0",
+    "@typescript-eslint/parser": "^5.53.0",
+    "eslint": "^8.34.0",
     "jasmine-core": "~3.8.0",
     "jasmine-spec-reporter": "~5.0.0",
     "karma": "~6.3.0",
@@ -40,7 +44,6 @@
     "karma-jasmine": "~4.0.0",
     "karma-jasmine-html-reporter": "^1.5.0",
     "ts-node": "~8.3.0",
-    "tslint": "~6.1.0",
     "typescript": "~4.8.2"
   }
 }

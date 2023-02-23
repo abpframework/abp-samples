@@ -33,6 +33,7 @@ using Volo.Abp.MultiTenancy;
 using Volo.Abp.UI.Navigation.Urls;
 using Volo.Abp.UI;
 using Volo.Abp.VirtualFileSystem;
+using Microsoft.IdentityModel.Logging;
 
 namespace BookStore;
 
@@ -52,7 +53,7 @@ public class BookStoreIdentityServerModule : AbpModule
     {
         var hostingEnvironment = context.Services.GetHostingEnvironment();
         var configuration = context.Services.GetConfiguration();
-
+        IdentityModelEventSource.ShowPII = true;
         context.Services.AddAbpStrictRedirectUriValidator();
         context.Services.AddAbpClientConfigurationValidator();
         context.Services.AddAbpWildcardSubdomainCorsPolicyService();

@@ -17,7 +17,9 @@
         "build": {
           "builder": "@angular-builders/custom-webpack:browser",
           "options": {
-            
+            "customWebpackConfig": {
+              "path": "./custom-webpack.config.js"
+            },
             "outputPath": "dist/BookStore",
             "index": "src/index.html",
             "main": "src/main.ts",

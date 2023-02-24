@@ -65,7 +65,7 @@ namespace DevExtremeAngular.IdentityServer
 
         private async Task CreateApiScopesAsync()
         {
-            await CreateApiScopeAsync("MyProjectName");
+            await CreateApiScopeAsync("DevExtremeAngular");
         }
 
         private async Task CreateApiResourcesAsync()
@@ -80,7 +80,7 @@ namespace DevExtremeAngular.IdentityServer
                 "role"
             };
 
-            await CreateApiResourceAsync("MyProjectName", commonApiUserClaims);
+            await CreateApiResourceAsync("DevExtremeAngular", commonApiUserClaims);
         }
 
         private async Task<ApiResource> CreateApiResourceAsync(string name, IEnumerable<string> claims)
@@ -137,25 +137,25 @@ namespace DevExtremeAngular.IdentityServer
                 "role",
                 "phone",
                 "address",
-                "MyProjectName"
+                "DevExtremeAngular"
             };
 
             var configurationSection = _configuration.GetSection("IdentityServer:Clients");
 
             //Web Client
-            var webClientId = configurationSection["MyProjectName_Web:ClientId"];
+            var webClientId = configurationSection["DevExtremeAngular_Web:ClientId"];
             if (!webClientId.IsNullOrWhiteSpace())
             {
-                var webClientRootUrl = configurationSection["MyProjectName_Web:RootUrl"].EnsureEndsWith('/');
+                var webClientRootUrl = configurationSection["DevExtremeAngular_Web:RootUrl"].EnsureEndsWith('/');
 
-                /* MyProjectName_Web client is only needed if you created a tiered
+                /* DevExtremeAngular_Web client is only needed if you created a tiered
                  * solution. Otherwise, you can delete this client. */
 
                 await CreateClientAsync(
                     name: webClientId,
                     scopes: commonScopes,
                     grantTypes: new[] { "hybrid" },
-                    secret: (configurationSection["MyProjectName_Web:ClientSecret"] ?? "1q2w3e*").Sha256(),
+                    secret: (configurationSection["DevExtremeAngular_Web:ClientSecret"] ?? "1q2w3e*").Sha256(),
                     redirectUri: $"{webClientRootUrl}signin-oidc",
                     postLogoutRedirectUri: $"{webClientRootUrl}signout-callback-oidc",
                     frontChannelLogoutUri: $"{webClientRootUrl}Account/FrontChannelLogout",
@@ -164,16 +164,16 @@ namespace DevExtremeAngular.IdentityServer
             }
 
             //Console Test / Angular Client
-            var consoleAndAngularClientId = configurationSection["MyProjectName_App:ClientId"];
+            var consoleAndAngularClientId = configurationSection["DevExtremeAngular_App:ClientId"];
             if (!consoleAndAngularClientId.IsNullOrWhiteSpace())
             {
-                var webClientRootUrl = configurationSection["MyProjectName_App:RootUrl"]?.TrimEnd('/');
+                var webClientRootUrl = configurationSection["DevExtremeAngular_App:RootUrl"]?.TrimEnd('/');
 
                 await CreateClientAsync(
                     name: consoleAndAngularClientId,
                     scopes: commonScopes,
                     grantTypes: new[] { "password", "client_credentials", "authorization_code" },
-                    secret: (configurationSection["MyProjectName_App:ClientSecret"] ?? "1q2w3e*").Sha256(),
+                    secret: (configurationSection["DevExtremeAngular_App:ClientSecret"] ?? "1q2w3e*").Sha256(),
                     requireClientSecret: false,
                     redirectUri: webClientRootUrl,
                     postLogoutRedirectUri: webClientRootUrl,
@@ -182,16 +182,16 @@ namespace DevExtremeAngular.IdentityServer
             }
 
             // Blazor Client
-            var blazorClientId = configurationSection["MyProjectName_Blazor:ClientId"];
+            var blazorClientId = configurationSection["DevExtremeAngular_Blazor:ClientId"];
             if (!blazorClientId.IsNullOrWhiteSpace())
             {
-                var blazorRootUrl = configurationSection["MyProjectName_Blazor:RootUrl"].TrimEnd('/');
+                var blazorRootUrl = configurationSection["DevExtremeAngular_Blazor:RootUrl"].TrimEnd('/');
 
                 await CreateClientAsync(
                     name: blazorClientId,
                     scopes: commonScopes,
                     grantTypes: new[] { "authorization_code" },
-                    secret: configurationSection["MyProjectName_Blazor:ClientSecret"]?.Sha256(),
+                    secret: configurationSection["DevExtremeAngular_Blazor:ClientSecret"]?.Sha256(),
                     requireClientSecret: false,
                     redirectUri: $"{blazorRootUrl}/authentication/login-callback",
                     postLogoutRedirectUri: $"{blazorRootUrl}/authentication/logout-callback",
@@ -200,16 +200,16 @@ namespace DevExtremeAngular.IdentityServer
             }
 
             // Swagger Client
-            var swaggerClientId = configurationSection["MyProjectName_Swagger:ClientId"];
+            var swaggerClientId = configurationSection["DevExtremeAngular_Swagger:ClientId"];
             if (!swaggerClientId.IsNullOrWhiteSpace())
             {
-                var swaggerRootUrl = configurationSection["MyProjectName_Swagger:RootUrl"].TrimEnd('/');
+                var swaggerRootUrl = configurationSection["DevExtremeAngular_Swagger:RootUrl"].TrimEnd('/');
 
                 await CreateClientAsync(
                     name: swaggerClientId,
                     scopes: commonScopes,
                     grantTypes: new[] { "authorization_code" },
-                    secret: configurationSection["MyProjectName_Swagger:ClientSecret"]?.Sha256(),
+                    secret: configurationSection["DevExtremeAngular_Swagger:ClientSecret"]?.Sha256(),
                     requireClientSecret: false,
                     redirectUri: $"{swaggerRootUrl}/swagger/oauth2-redirect.html",
                     corsOrigins: new[] { swaggerRootUrl.RemovePostFix("/") }

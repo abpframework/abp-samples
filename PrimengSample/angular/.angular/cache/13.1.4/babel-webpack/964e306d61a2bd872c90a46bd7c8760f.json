@@ -1,1 +1,0 @@
-{"ast":null,"code":"export default function getVariation(placement) {\n  return placement.split('-')[1];\n}","map":null,"metadata":{},"sourceType":"module"}

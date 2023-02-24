@@ -1,1 +1,0 @@
-{"ast":null,"code":"export default function uniqueBy(arr, fn) {\n  var identifiers = new Set();\n  return arr.filter(function (item) {\n    var identifier = fn(item);\n\n    if (!identifiers.has(identifier)) {\n      identifiers.add(identifier);\n      return true;\n    }\n  });\n}","map":null,"metadata":{},"sourceType":"module"}

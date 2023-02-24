@@ -1,1 +1,0 @@
-{"ast":null,"code":"export default function expandToHashMap(value, keys) {\n  return keys.reduce(function (hashMap, key) {\n    hashMap[key] = value;\n    return hashMap;\n  }, {});\n}","map":null,"metadata":{},"sourceType":"module"}

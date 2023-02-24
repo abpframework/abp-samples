@@ -1,1 +1,0 @@
-{"ast":null,"code":"import getWindow from \"./getWindow.js\";\nexport default function getComputedStyle(element) {\n  return getWindow(element).getComputedStyle(element);\n}","map":null,"metadata":{},"sourceType":"module"}

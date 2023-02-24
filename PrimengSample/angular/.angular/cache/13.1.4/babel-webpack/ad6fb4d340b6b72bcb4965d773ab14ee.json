@@ -1,1 +1,0 @@
-{"ast":null,"code":"export default function getHTMLElementScroll(element) {\n  return {\n    scrollLeft: element.scrollLeft,\n    scrollTop: element.scrollTop\n  };\n}","map":null,"metadata":{},"sourceType":"module"}

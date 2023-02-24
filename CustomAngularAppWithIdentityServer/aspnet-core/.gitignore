@@ -258,3 +258,6 @@ src/CustomAngularAppWithIdentityServer.IdentityServer/Logs/*
 src/CustomAngularAppWithIdentityServer.HttpApi.Host/Logs/*
 src/CustomAngularAppWithIdentityServer.HttpApi.Host/Logs/*
 src/CustomAngularAppWithIdentityServer.DbMigrator/Logs/*
+
+# Use abp install-libs to restore.
+**/wwwroot/libs/*

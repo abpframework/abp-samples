@@ -24,7 +24,7 @@ export class AppComponent {
   ) {}
 
   initLogin() {
-    this.authService.initLogin();
+    this.authService.navigateToLogin();
   }
 
   retrieveUsers() {

@@ -1,1 +1,0 @@
-{"ast":null,"code":"export default function getMainAxisFromPlacement(placement) {\n  return ['top', 'bottom'].indexOf(placement) >= 0 ? 'x' : 'y';\n}","map":null,"metadata":{},"sourceType":"module"}

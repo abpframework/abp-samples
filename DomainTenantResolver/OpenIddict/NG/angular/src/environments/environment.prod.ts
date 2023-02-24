@@ -15,7 +15,7 @@ export const environment = {
     clientId: 'BookStore_App',
     skipIssuerCheck: true,
     responseType: 'code',
-    scope: 'offline_access openid profile role email phone BookStore',
+    scope: 'BookStore',
   },
   apis: {
     default: {

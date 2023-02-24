@@ -1,4 +1,4 @@
-<ng-container *ngIf="service.users$ | async as users">
+<ng-container *ngIf="users$ | async as users">
   <dx-data-grid [dataSource]="users">
     <dxi-column
       dataField="userName"

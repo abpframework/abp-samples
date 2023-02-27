@@ -1,35 +1,23 @@
 using System.Collections.Generic;
-using System.Globalization;
 using System.Threading.Tasks;
 using Volo.Abp.AspNetCore.Mvc.UI.RazorPages;
-using Volo.Abp.Localization;
-using Volo.Abp.OpenIddict.Applications;
+using Volo.Abp.IdentityServer.Clients;
 
 namespace OpenId2Ids.Pages;
 
 public class IndexModel : AbpPageModel
-{
-    public List<OpenIddictApplication> Applications { get; protected set; }
+{ 
+    public List<Client> Clients { get; protected set; }
 
-    public IReadOnlyList<LanguageInfo> Languages { get; protected set; }
+    protected IClientRepository ClientRepository { get; }
 
-    public string CurrentLanguage { get; protected set; }
-
-    protected IOpenIddictApplicationRepository OpenIdApplicationRepository { get; }
-
-    protected ILanguageProvider LanguageProvider { get; }
-
-    public IndexModel(IOpenIddictApplicationRepository openIdApplicationRepository, ILanguageProvider languageProvider)
+    public IndexModel(IClientRepository clientRepository)
     {
-        OpenIdApplicationRepository = openIdApplicationRepository;
-        LanguageProvider = languageProvider;
+        this.ClientRepository = clientRepository;
     }
 
     public async Task OnGetAsync()
     {
-        Applications = await OpenIdApplicationRepository.GetListAsync();
-
-        Languages = await LanguageProvider.GetLanguagesAsync();
-        CurrentLanguage = CultureInfo.CurrentCulture.DisplayName;
+        Clients = await ClientRepository.GetListAsync(includeDetails: true);
     }
 }

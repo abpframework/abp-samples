@@ -16,7 +16,7 @@
     <PackageReference Include="Volo.Abp.FeatureManagement.Domain.Shared" Version="7.0.0" />
     <PackageReference Include="Volo.Abp.PermissionManagement.Domain.Shared" Version="7.0.0" />
     <PackageReference Include="Volo.Abp.SettingManagement.Domain.Shared" Version="7.0.0" />
-    <PackageReference Include="Volo.Abp.OpenIddict.Domain.Shared" Version="7.0.0" />
+    <PackageReference Include="Volo.Abp.IdentityServer.Domain.Shared" Version="7.0.0" />
   </ItemGroup>
 
   <ItemGroup>

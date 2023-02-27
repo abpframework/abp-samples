@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="..\..\common.props" />
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <RootNamespace>OpenId2Ids</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\OpenId2Ids.Application.Contracts\OpenId2Ids.Application.Contracts.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Volo.Abp.Account.HttpApi" Version="7.0.0" />
+    <PackageReference Include="Volo.Abp.Identity.HttpApi" Version="7.0.0" />
+    <PackageReference Include="Volo.Abp.PermissionManagement.HttpApi" Version="7.0.0" />
+    <PackageReference Include="Volo.Abp.TenantManagement.HttpApi" Version="7.0.0" />
+    <PackageReference Include="Volo.Abp.FeatureManagement.HttpApi" Version="7.0.0" />
+    <PackageReference Include="Volo.Abp.SettingManagement.HttpApi" Version="7.0.0" />
+  </ItemGroup>
+
+</Project>

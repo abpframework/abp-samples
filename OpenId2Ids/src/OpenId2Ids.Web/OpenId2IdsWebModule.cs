@@ -159,7 +159,7 @@ public class OpenId2IdsWebModule : AbpModule
                 options.SaveTokens = true;
                 options.GetClaimsFromUserInfoEndpoint = true;
 
-                options.Scope.Add("roles");
+                options.Scope.Add("role");
                 options.Scope.Add("email");
                 options.Scope.Add("phone");
                 options.Scope.Add("OpenId2Ids");

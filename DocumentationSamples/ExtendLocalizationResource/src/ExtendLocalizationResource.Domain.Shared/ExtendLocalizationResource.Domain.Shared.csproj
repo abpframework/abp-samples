@@ -23,6 +23,7 @@
   <ItemGroup>
     <EmbeddedResource Include="Localization\ExtendLocalizationResource\*.json" />
     <Content Remove="Localization\ExtendLocalizationResource\*.json" />
+    <EmbeddedResource Include="Localization\Identity\en.json" />
   </ItemGroup>
 
   <ItemGroup>

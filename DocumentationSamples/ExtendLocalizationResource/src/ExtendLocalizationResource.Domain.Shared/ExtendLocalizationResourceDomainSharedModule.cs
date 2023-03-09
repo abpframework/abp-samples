@@ -3,6 +3,7 @@ using Volo.Abp.AuditLogging;
 using Volo.Abp.BackgroundJobs;
 using Volo.Abp.FeatureManagement;
 using Volo.Abp.Identity;
+using Volo.Abp.Identity.Localization;
 using Volo.Abp.IdentityServer;
 using Volo.Abp.Localization;
 using Volo.Abp.Localization.ExceptionHandling;
@@ -53,6 +54,10 @@ namespace ExtendLocalizationResource
                 options.Resources
                     .Get<AbpTimingResource>()
                     .AddVirtualJson("/Localization/AbpTiming");
+                
+                options.Resources
+                    .Get<IdentityResource>()
+                    .AddVirtualJson("/Localization/Identity");
 
                 options.DefaultResourceType = typeof(ExtendLocalizationResourceResource);
             });

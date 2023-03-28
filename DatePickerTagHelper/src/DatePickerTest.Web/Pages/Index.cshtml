@@ -1,0 +1,52 @@
+﻿@page
+@using Microsoft.AspNetCore.Mvc.Localization
+@using DatePickerTest.Localization
+@using Volo.Abp.Users
+@model DatePickerTest.Web.Pages.IndexModel
+@inject IHtmlLocalizer<DatePickerTestResource> L
+@inject ICurrentUser CurrentUser
+
+@section styles {
+    <abp-style src="/Pages/Index.css"/>
+}
+
+@section scripts {
+    <abp-script src="/Pages/Index.js"/>
+    <script>
+        var newPicker = abp.libs.bootstrapDateRangePicker.createDateRangePicker(
+            {
+                label: "New JavaScript Picker",
+                startDate: "2020-01-01",
+                endDate: "2020-01-02",
+                singleOpenAndClearButton: false,
+                placeholder: "New Picker",
+            });
+        newPicker.insertAfter($('#testPicker').parent());
+    </script>
+}
+
+<div class="container">
+    <form method="post">
+        <abp-date-picker placeholder="New" single-open-and-clear-button="false" week-numbers="Iso" time-picker="true" required info="Test"  today-button-classes="btn primary" picker-id="testPicker" asp-for="DateTime"></abp-date-picker>
+        <abp-date-range-picker time-picker="true" asp-for-end="EndDate" asp-for-start="StartDate"></abp-date-range-picker>
+
+        <abp-date-picker auto-update-input="true" today-button-classes="btn primary" asp-for="NullableDateTime"></abp-date-picker>
+        <abp-date-range-picker clear-button="false" asp-for-end="NullableEndDate" asp-for-start="NullableStartDate"></abp-date-range-picker>
+
+        <abp-date-picker auto-update-input="true" today-button-classes="btn primary" asp-for="DateTimeDateTimeOffset"></abp-date-picker>
+        <abp-date-range-picker clear-button="false" asp-for-end="EndDateTimeOffset" asp-for-start="StartDateTimeOffset"></abp-date-range-picker>
+
+        <abp-date-picker auto-update-input="true" today-button-classes="btn primary" asp-for="NullableDateTimeDateTimeOffset"></abp-date-picker>
+        <abp-date-range-picker clear-button="false" asp-for-end="NullableEndDateTimeOffset" asp-for-start="NullableStartDateTimeOffset"></abp-date-range-picker>
+
+        <abp-date-picker auto-update-input="true" today-button-classes="btn primary" asp-for="StringDate"></abp-date-picker>
+        <abp-date-range-picker clear-button="false" asp-for-end="StringEndDate" asp-for-start="StringStartDate"></abp-date-range-picker>
+
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+
+    <h1>Dynamic Form</h1>
+    <abp-dynamic-form abp-model="DynamicFormExample">
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </abp-dynamic-form>
+</div>

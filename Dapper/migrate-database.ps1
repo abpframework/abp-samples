@@ -1,0 +1,1 @@
+dotnet run --project DapperDemo --migrate-database

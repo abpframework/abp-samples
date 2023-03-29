@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Extensions.DependencyInjection;
+using Microsoft.AspNetCore.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.OpenApi.Models;
 using DapperDemo.Data;
@@ -48,6 +48,7 @@ using Volo.Abp.UI.Navigation;
 using Volo.Abp.UI.Navigation.Urls;
 using Volo.Abp.Validation.Localization;
 using Volo.Abp.VirtualFileSystem;
+using Volo.Abp.Dapper;
 
 namespace DapperDemo;
 
@@ -99,7 +100,9 @@ namespace DapperDemo;
     typeof(AbpSettingManagementApplicationModule),
     typeof(AbpSettingManagementEntityFrameworkCoreModule),
     typeof(AbpSettingManagementHttpApiModule),
-    typeof(AbpSettingManagementWebModule)
+    typeof(AbpSettingManagementWebModule),
+    
+    typeof(AbpDapperModule)
 )]
 public class DapperDemoModule : AbpModule
 {

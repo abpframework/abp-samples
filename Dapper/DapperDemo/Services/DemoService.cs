@@ -9,6 +9,8 @@ using Volo.Abp.Uow;
 
 namespace DapperDemo.Services;
 
+/* This service is not used. It is for just demonstrate how
+   to work with Dapper out of the repository */
 public class DemoService : ITransientDependency
 {
     private readonly IRepository<Book, Guid> _bookRepository;

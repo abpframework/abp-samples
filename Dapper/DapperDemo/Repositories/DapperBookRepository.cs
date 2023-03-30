@@ -16,11 +16,13 @@ public class BookRepository :
     {
     }
     
-    public async Task<List<BookDataView>> GetListAsync()
+    public virtual async Task<List<BookDataView>> GetListAsync()
     {
         var connection = await GetDbConnectionAsync();
-        var sqlQuery = "SELECT Id, Name, Price FROM Books";
-        var queryResult = await connection.QueryAsync<BookDataView>(sqlQuery, transaction: await GetDbTransactionAsync());
+        var queryResult = await connection.QueryAsync<BookDataView>(
+            "SELECT Id, Name, Price FROM Books",
+            transaction: await GetDbTransactionAsync()
+        );
         return queryResult.ToList();
     }
 }

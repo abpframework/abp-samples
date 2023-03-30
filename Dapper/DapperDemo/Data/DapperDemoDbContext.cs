@@ -1,6 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using DapperDemo.Entities;
+using Microsoft.EntityFrameworkCore;
 using Volo.Abp.AuditLogging.EntityFrameworkCore;
 using Volo.Abp.EntityFrameworkCore;
+using Volo.Abp.EntityFrameworkCore.Modeling;
 using Volo.Abp.FeatureManagement.EntityFrameworkCore;
 using Volo.Abp.Identity.EntityFrameworkCore;
 using Volo.Abp.OpenIddict.EntityFrameworkCore;
@@ -12,6 +14,8 @@ namespace DapperDemo.Data;
 
 public class DapperDemoDbContext : AbpDbContext<DapperDemoDbContext>
 {
+    public DbSet<Book> Books { get; set; }
+
     public DapperDemoDbContext(DbContextOptions<DapperDemoDbContext> options)
         : base(options)
     {
@@ -32,5 +36,11 @@ public class DapperDemoDbContext : AbpDbContext<DapperDemoDbContext>
         builder.ConfigureTenantManagement();
 
         /* Configure your own entities here */
+        
+        builder.Entity<Book>(b =>
+        {
+            b.ToTable("Books");
+            b.Property(x => x.Name).IsRequired().HasMaxLength(128);
+        });
     }
 }

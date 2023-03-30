@@ -7,12 +7,11 @@ using Volo.Abp.EntityFrameworkCore;
 
 namespace DapperDemo.Repositories;
 
-public class DapperBookRepository :
+public class BookRepository :
     DapperRepository<DapperDemoDbContext>,
-    IBookRepository,
     ITransientDependency
 {
-    public DapperBookRepository(IDbContextProvider<DapperDemoDbContext> dbContextProvider) 
+    public BookRepository(IDbContextProvider<DapperDemoDbContext> dbContextProvider) 
         : base(dbContextProvider)
     {
     }
@@ -21,7 +20,7 @@ public class DapperBookRepository :
     {
         var connection = await GetDbConnectionAsync();
         var sqlQuery = "SELECT Id, Name, Price FROM Books";
-        var queryResult = await connection.QueryAsync<BookDataView>(sqlQuery);
+        var queryResult = await connection.QueryAsync<BookDataView>(sqlQuery, transaction: await GetDbTransactionAsync());
         return queryResult.ToList();
     }
 }

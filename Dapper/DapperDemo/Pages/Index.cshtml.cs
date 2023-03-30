@@ -8,9 +8,9 @@ public class IndexModel : AbpPageModel
 {
     public List<BookDataView> Books { get; private set; }
 
-    private readonly IBookRepository _bookRepository;
+    private readonly BookRepository _bookRepository;
 
-    public IndexModel(IBookRepository bookRepository)
+    public IndexModel(BookRepository bookRepository)
     {
         _bookRepository = bookRepository;
     }

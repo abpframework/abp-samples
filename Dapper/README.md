@@ -1,18 +1,5 @@
-## About this solution
+## ABP Dapper Demo
 
-This is a minimalist, non-layered startup solution with the ABP Framework. All the fundamental ABP modules are already installed.
+A simple application that uses the [Dapper](https://github.com/DapperLib/Dapper) library with the ABP Framework.
 
-## How to run
-
-The application needs to connect to a database. Run the following command in the `DapperDemo` directory:
-
-````bash
-dotnet run --migrate-database
-````
-
-This will create and seed the initial database. Then you can run the application with any IDE that supports .NET.
-
-Happy coding..!
-
-
-
+**You can find the article that explains this application in the [ABP Community Website](https://community.abp.io/).**

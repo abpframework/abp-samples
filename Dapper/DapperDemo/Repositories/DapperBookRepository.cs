@@ -7,9 +7,7 @@ using Volo.Abp.EntityFrameworkCore;
 
 namespace DapperDemo.Repositories;
 
-public class BookRepository :
-    DapperRepository<DapperDemoDbContext>,
-    ITransientDependency
+public class BookRepository : DapperRepository<DapperDemoDbContext>, ITransientDependency
 {
     public BookRepository(IDbContextProvider<DapperDemoDbContext> dbContextProvider) 
         : base(dbContextProvider)

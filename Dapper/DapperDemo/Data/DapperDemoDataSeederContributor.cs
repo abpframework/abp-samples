@@ -27,8 +27,7 @@ public class DapperDemoDataSeederContributor : IDataSeedContributor, ITransientD
                 Name = "1984",
                 PublishDate = new DateTime(1949, 6, 8),
                 Price = 19.84f
-            },
-            autoSave: true
+            }
         );
 
         await _bookRepository.InsertAsync(
@@ -37,8 +36,7 @@ public class DapperDemoDataSeederContributor : IDataSeedContributor, ITransientD
                 Name = "The Hitchhiker's Guide to the Galaxy",
                 PublishDate = new DateTime(1995, 9, 27),
                 Price = 42.0f
-            },
-            autoSave: true
+            }
         );
     }
 }

@@ -65,6 +65,7 @@ namespace BookStore
                 options.EnableWildcardDomainSupport = true;
                 options.WildcardDomainsFormat.Add("https://{0}.web.getabp.net:44303/signin-oidc");
                 options.WildcardDomainsFormat.Add("https://{0}.web.getabp.net:44303/signout-callback-oidc");
+                options.WildcardDomainsFormat.Add("https://{0}.ng.getabp.net:4200/");
             });
         }
 

@@ -1,0 +1,58 @@
+<div class="card">
+  <div class="card-body">
+    <form *ngIf="form" [formGroup]="form" (ngSubmit)="save()">
+      <div class="form-group">
+        <label for="author-id">Author</label><span> * </span>
+        <select class="form-control" id="author-id" formControlName="authorId">
+          <option [ngValue]="null">Select author</option>
+          <option [ngValue]="author.id" *ngFor="let author of authors$ | async">
+            {{ author.name }}
+          </option>
+        </select>
+      </div>
+
+      <div class="mt-2">
+        <label for="book-name">Name</label><span> * </span>
+        <input type="text" id="book-name" class="form-control" formControlName="name" autofocus />
+      </div>
+
+      <div class="mt-2">
+        <label for="book-price">Price</label><span> * </span>
+        <input type="number" id="book-price" class="form-control" formControlName="price" />
+      </div>
+
+      <div class="mt-2">
+        <label for="book-type">Type</label><span> * </span>
+        <select class="form-control" id="book-type" formControlName="type">
+          <option [ngValue]="null">Select a book type</option>
+          <option [ngValue]="type.value" *ngFor="let type of bookTypes">
+            {{ '::Enum:BookType.' + type.value | abpLocalization }}
+          </option>
+        </select>
+      </div>
+
+      <div class="mt-2">
+        <label>Publish date</label><span> * </span>
+        <input
+          #datepicker="ngbDatepicker"
+          class="form-control"
+          name="datepicker"
+          formControlName="publishDate"
+          ngbDatepicker
+          (click)="datepicker.toggle()"
+        />
+      </div>
+
+      <div class="pt-2">
+        <button type="button" class="btn btn-secondary m-1" [routerLink]="['/books']">
+          {{ '::Cancel' | abpLocalization }}
+        </button>
+
+        <button class="btn btn-primary">
+          <i class="fa fa-check mr-1"></i>
+          {{ '::Save' | abpLocalization }}
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

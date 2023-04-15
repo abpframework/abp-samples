@@ -8,8 +8,13 @@
             </div>
             <div class="text-end col col-md-6">
                 <div class="text-lg-end pt-2">
-                    <button *abpPermission="'BookStore.Books.Create'" id="create" class="btn btn-primary" type="button"
-                        (click)="createBook()">
+                    <button 
+                      *abpPermission="'BookStore.Books.Create'" 
+                      id="create" 
+                      class="btn btn-primary" 
+                      type="button" 
+                      [routerLink]="['create']"
+                      >
                         <i class="fa fa-plus me-1"></i>
                         <span>{{ '::NewBook' | abpLocalization }}</span>
                     </button>
@@ -27,7 +32,11 @@
                             <i class="fa fa-cog me-1"></i>{{ '::Actions' | abpLocalization }}
                         </button>
                         <div ngbDropdownMenu>
-                            <button *abpPermission="'BookStore.Books.Edit'" ngbDropdownItem (click)="editBook(row.id)">
+                            <button 
+                              *abpPermission="'BookStore.Books.Edit'" 
+                              ngbDropdownItem 
+                              [routerLink]="['edit', row.id]"
+                              >
                                 {{ '::Edit' | abpLocalization }}
                             </button>
                             <button *abpPermission="'BookStore.Books.Delete'" ngbDropdownItem (click)="delete(row.id)">
@@ -60,62 +69,3 @@
         </ngx-datatable>
     </div>
 </div>
-
-<abp-modal [(visible)]="isModalOpen">
-    <ng-template #abpHeader>
-        <h3>{{ (selectedBook.id ? '::Edit' : '::NewBook' ) | abpLocalization }}</h3>
-    </ng-template>
-
-    <ng-template #abpBody>
-        <form [formGroup]="form" (ngSubmit)="save()">
-            <div class="form-group">
-                <label for="author-id">Author</label><span> * </span>
-                <select class="form-control" id="author-id" formControlName="authorId">
-                    <option [ngValue]="null">Select author</option>
-                    <option [ngValue]="author.id" *ngFor="let author of authors$ | async">
-                        {{ author.name }}
-                    </option>
-                </select>
-            </div>
-
-            <div class="mt-2">
-                <label for="book-name">Name</label><span> * </span>
-                <input type="text" id="book-name" class="form-control" formControlName="name" autofocus />
-            </div>
-
-            <div class="mt-2">
-                <label for="book-price">Price</label><span> * </span>
-                <input type="number" id="book-price" class="form-control" formControlName="price" />
-            </div>
-
-            <div class="mt-2">
-                <label for="book-type">Type</label><span> * </span>
-                <select class="form-control" id="book-type" formControlName="type">
-                    <option [ngValue]="null">Select a book type</option>
-                    <option [ngValue]="type.value" *ngFor="let type of bookTypes"> 
-                        {{ '::Enum:BookType.' + type.value | abpLocalization }}
-                    </option>
-                </select>
-            </div>
-
-            <div class="mt-2">
-                <label>Publish date</label><span> * </span>
-                <input #datepicker="ngbDatepicker" class="form-control" name="datepicker" formControlName="publishDate"
-                    ngbDatepicker (click)="datepicker.toggle()" />
-            </div>
-        </form>
-    </ng-template>
-
-    <ng-template #abpFooter>
-        <button type="button" class="btn btn-secondary" abpClose>
-            {{ '::Close' | abpLocalization }}
-        </button>
-
-        <!--added save button-->
-        <button class="btn btn-primary" (click)="save()" [disabled]="form.invalid">
-            <i class="fa fa-check mr-1"></i>
-            {{ '::Save' | abpLocalization }}
-        </button>
-    </ng-template>
-
-</abp-modal>

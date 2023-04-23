@@ -1,11 +1,10 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Dapr;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using Shared;
 using Volo.Abp.AspNetCore.Mvc;
 using Volo.Abp.AspNetCore.Mvc.Dapr;
-
 
 namespace DaprSubscribe;
 
@@ -17,7 +16,7 @@ public class OverrideEventBusController : AbpController
     {
         HttpContext.ValidateDaprAppApiToken();
 
-        Console.WriteLine($"OverrideEventBusController Received message: {model.Price} {model.ChangedDate}");
+        Logger.LogInformation($"OverrideEventBusController Received message: {model.Price} {model.ChangedDate}");
 
         return Task.FromResult<IActionResult>(Ok());
     }
@@ -31,7 +30,7 @@ public class CustomPubSubController : AbpController
     {
         HttpContext.ValidateDaprAppApiToken();
 
-        Console.WriteLine($"Received message: {model.Id} {model.Name}");
+        Logger.LogInformation($"Received message: {model.Id} {model.Name}");
 
         return Task.FromResult<IActionResult>(Ok());
     }

@@ -6,8 +6,8 @@
 
     <ItemGroup>
         <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
-        <PackageReference Include="Volo.Abp.Autofac" Version="7.0.0" />
-        <PackageReference Include="Volo.Abp.AspNetCore.Mvc.Dapr.EventBus" Version="7.0.0" />
+        <ProjectReference Include="/Users/maliming/Github/abp/framework/src/Volo.Abp.Autofac/Volo.Abp.Autofac.csproj" />
+        <ProjectReference Include="/Users/maliming/Github/abp/framework/src/Volo.Abp.AspNetCore.Mvc.Dapr.EventBus/Volo.Abp.AspNetCore.Mvc.Dapr.EventBus.csproj" />
         <ProjectReference Include="..\Shared\Shared.csproj" />
     </ItemGroup>
 

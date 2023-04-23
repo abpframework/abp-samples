@@ -6,10 +6,24 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Volo.Abp.Autofac" Version="7.0.0" />
-        <PackageReference Include="Volo.Abp.EventBus.Dapr" Version="7.0.0" />
+        <ProjectReference Include="/Users/maliming/Github/abp/framework/src/Volo.Abp.Autofac/Volo.Abp.Autofac.csproj" />
+        <ProjectReference Include="/Users/maliming/Github/abp/framework/src/Volo.Abp.EventBus.Dapr/Volo.Abp.EventBus.Dapr.csproj" />
         <PackageReference Include="Microsoft.Extensions.Hosting" Version="7.0.0" />
         <ProjectReference Include="..\Shared\Shared.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Content Update="appsettings.json">
+        <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        <CopyToPublishDirectory>Always</CopyToPublishDirectory>
+      </Content>
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Update="appsettings.json">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
     </ItemGroup>
 
 </Project>

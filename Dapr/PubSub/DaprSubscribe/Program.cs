@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Shared;
 using Volo.Abp;
 using Volo.Abp.AspNetCore.Mvc.Dapr.EventBus;
 using Volo.Abp.Autofac;
@@ -15,9 +16,10 @@ await builder.AddApplicationAsync<AppModule>();
 var app = builder.Build();
 
 await app.InitializeApplicationAsync();
+
 await app.RunAsync();
 
-[DependsOn(typeof(AbpAutofacModule), typeof(AbpAspNetCoreMvcDaprEventBusModule))]
+[DependsOn(typeof(AbpAutofacModule), typeof(AbpAspNetCoreMvcDaprEventBusModule), typeof(SharedModule))]
 public class AppModule : AbpModule
 {
     public override void ConfigureServices(ServiceConfigurationContext context)

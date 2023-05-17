@@ -2,34 +2,34 @@
 # yarn lockfile v1
 
 
-"@abp/ng.core@~7.1.0-rc.1":
-  version "7.1.0-rc.1"
-  resolved "https://registry.npmjs.org/@abp/ng.core/-/ng.core-7.1.0-rc.1.tgz"
-  integrity sha512-B4hXyfHxTLtNt33wwQSnv+PRmKSBfPD2L8eapFipCq6qEzBCrNl+bClJOQhEc10g3HqPeLmORg9+s2XGmhrTJw==
+"@abp/ng.core@~7.2.2":
+  version "7.2.2"
+  resolved "https://registry.yarnpkg.com/@abp/ng.core/-/ng.core-7.2.2.tgz#40cefb08223b5cb59f78580586dd4f4b66eafe0c"
+  integrity sha512-Nz4K3E8h4jRngH3YsidOG7VHOLUebGyjQ9ACuVH2wntpYvHNOAQ5Z+/PyF7GJmdOBUXsMpq6eXpobDijpxpkuw==
   dependencies:
-    "@abp/utils" "~7.1.0-rc.1"
+    "@abp/utils" "~7.2.2"
     angular-oauth2-oidc "^15.0.1"
     just-clone "^6.1.1"
-    just-compare "^1.4.0"
+    just-compare "^2.3.0"
     ts-toolbelt "6.15.4"
     tslib "^2.0.0"
 
-"@abp/ng.oauth@^7.1.0-rc.1":
-  version "7.1.0-rc.1"
-  resolved "https://registry.yarnpkg.com/@abp/ng.oauth/-/ng.oauth-7.1.0-rc.1.tgz#7dc071c3a15f7bc274183dce375a573389dc72e9"
-  integrity sha512-6y2TiWvWfq5XkmwAKyC3dz5xbp5+fOJ5yNXPn98vqp+rpX36l++5wcJZMlAMCMLYa04Eb09TupV1h7X7CdvOKQ==
+"@abp/ng.oauth@~7.2.2":
+  version "7.2.2"
+  resolved "https://registry.yarnpkg.com/@abp/ng.oauth/-/ng.oauth-7.2.2.tgz#bdf64d94dd58d2c9fdea1983d8e89a3ac3df6696"
+  integrity sha512-xJ2yPdQ9A31fZiE88WPi8VTxMNMUJpia5AbCWgUetVVgdL1LUJTkh7S6F84VfAQXXYDEJF4kEQsr05WDRX3eQg==
   dependencies:
-    "@abp/ng.core" "~7.1.0-rc.1"
-    "@abp/utils" "~7.1.0-rc.1"
+    "@abp/ng.core" "~7.2.2"
+    "@abp/utils" "~7.2.2"
     angular-oauth2-oidc "^15.0.1"
     just-clone "^6.1.1"
     just-compare "^1.4.0"
     tslib "^2.0.0"
 
-"@abp/ng.schematics@~7.1.0-rc.1":
-  version "7.1.0-rc.1"
-  resolved "https://registry.npmjs.org/@abp/ng.schematics/-/ng.schematics-7.1.0-rc.1.tgz"
-  integrity sha512-X3cpDHAKKD8g2RETQ6xYD2Z0p3HQglxk/chgfoiG/LeBMymmxKHZ5qOEwJ1tmlnuz/KFF0I3ZtdUiyLYmjyqRQ==
+"@abp/ng.schematics@~7.2.2":
+  version "7.2.2"
+  resolved "https://registry.yarnpkg.com/@abp/ng.schematics/-/ng.schematics-7.2.2.tgz#683b719c375bf132ee4df19288dc426292eb0bf5"
+  integrity sha512-S3aHPLxmJcDANbBktPAHheGs0hTRwMcBz2co5o7LrDGB6VFG+6dBCh4Oud5QObl612tdJ3qDpy1lvbkDF0sBsw==
   dependencies:
     "@angular-devkit/core" "~15.0.1"
     "@angular-devkit/schematics" "~15.0.1"
@@ -37,12 +37,12 @@
     got "^11.5.2"
     jsonc-parser "^2.3.0"
     should-quote "^1.0.0"
-    typescript "4.8.4"
+    typescript "~4.8.4"
 
-"@abp/utils@~7.1.0-rc.1":
-  version "7.1.0-rc.1"
-  resolved "https://registry.npmjs.org/@abp/utils/-/utils-7.1.0-rc.1.tgz"
-  integrity sha512-IhPNxCPTHcL/ol6MTytNJDy7WkWwo61F7qoZqxzfjf7Jt5tDMy6ilBw4wyrFoGiBbXvr5z98hKm0NIBtWFxxYg==
+"@abp/utils@~7.2.2":
+  version "7.2.2"
+  resolved "https://registry.yarnpkg.com/@abp/utils/-/utils-7.2.2.tgz#6054baa822d52f08452e8405c7a391aaedee7de0"
+  integrity sha512-VB9ijoPvB2tHInc1XrcvTvEzYANh+V1BliyScNTG9tr09q2pvn5jHp8Jixtu7GewCy8dh7cyueqhbnuozxedjg==
   dependencies:
     just-compare "^1.3.0"
 
@@ -4351,6 +4351,11 @@ just-compare@^1.3.0, just-compare@^1.4.0:
   resolved "https://registry.npmjs.org/just-compare/-/just-compare-1.5.1.tgz"
   integrity sha512-xDEEFHNIyJNmN4uo/2RVeUcay9THtN/5ka/iw98Y/gsa8w9KXZQuyaf5eFUY6VlntA2+G+bdPmdhqqTs7T+BRw==
 
+just-compare@^2.3.0:
+  version "2.3.0"
+  resolved "https://registry.yarnpkg.com/just-compare/-/just-compare-2.3.0.tgz#a2adcc1d1940536263275f5a1ef1298bcacfeda7"
+  integrity sha512-6shoR7HDT+fzfL3gBahx1jZG3hWLrhPAf+l7nCwahDdT9XDtosB9kIF0ZrzUp5QY8dJWfQVr5rnsPqsbvflDzg==
+
 karma-chrome-launcher@~3.1.0:
   version "3.1.1"
   resolved "https://registry.npmjs.org/karma-chrome-launcher/-/karma-chrome-launcher-3.1.1.tgz"
@@ -6412,9 +6417,9 @@ typed-assert@^1.0.8:
   resolved "https://registry.npmjs.org/typed-assert/-/typed-assert-1.0.9.tgz"
   integrity sha512-KNNZtayBCtmnNmbo5mG47p1XsCyrx6iVqomjcZnec/1Y5GGARaxPs6r49RnSPeUP3YjNYiU9sQHAtY4BBvnZwg==
 
-typescript@4.8.4, typescript@~4.8.2:
+typescript@~4.8.2, typescript@~4.8.4:
   version "4.8.4"
-  resolved "https://registry.npmjs.org/typescript/-/typescript-4.8.4.tgz"
+  resolved "https://registry.yarnpkg.com/typescript/-/typescript-4.8.4.tgz#c464abca159669597be5f96b8943500b238e60e6"
   integrity sha512-QCh+85mCy+h0IGff8r5XWzOVSbBO+KfeYrMQh7NJ58QujwcE22u+NUSmUxqF+un70P9GXKxa2HCNiTTMJknyjQ==
 
 ua-parser-js@^0.7.30:

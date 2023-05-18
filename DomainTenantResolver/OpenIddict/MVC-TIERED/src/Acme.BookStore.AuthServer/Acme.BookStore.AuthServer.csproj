@@ -39,13 +39,13 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Volo.Abp.Autofac" Version="7.0.0" />
-    <PackageReference Include="Volo.Abp.Caching.StackExchangeRedis" Version="7.0.0" />
-    <PackageReference Include="Volo.Abp.AspNetCore.Mvc.UI.Theme.Basic" Version="7.0.0" />
-    <PackageReference Include="Volo.Abp.AspNetCore.Serilog" Version="7.0.0" />
-    <PackageReference Include="Volo.Abp.Account.Web.OpenIddict" Version="7.0.0" />
+    <PackageReference Include="Volo.Abp.Autofac" Version="7.2.2" />
+    <PackageReference Include="Volo.Abp.Caching.StackExchangeRedis" Version="7.2.2" />
+    <PackageReference Include="Volo.Abp.AspNetCore.Mvc.UI.Theme.Basic" Version="7.2.2" />
+    <PackageReference Include="Volo.Abp.AspNetCore.Serilog" Version="7.2.2" />
+    <PackageReference Include="Volo.Abp.Account.Web.OpenIddict" Version="7.2.2" />
     <PackageReference Include="Owl.TokenWildcardIssuerValidator" Version="1.0.0" />
-    <PackageReference Include="Volo.Abp.Account.Application" Version="7.0.0" />
+    <PackageReference Include="Volo.Abp.Account.Application" Version="7.2.2" />
     <ProjectReference Include="..\Acme.BookStore.EntityFrameworkCore.DbMigrations\Acme.BookStore.EntityFrameworkCore.DbMigrations.csproj" />
   </ItemGroup>
 

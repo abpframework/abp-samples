@@ -17,7 +17,7 @@
     <PackageReference Include="HtmlAgilityPack" Version="1.11.42" />
     <ProjectReference Include="..\EfCoreGuardedTypeDemo.Application.Tests\EfCoreGuardedTypeDemo.Application.Tests.csproj" />
     <ProjectReference Include="..\..\src\EfCoreGuardedTypeDemo.Web\EfCoreGuardedTypeDemo.Web.csproj" />
-    <PackageReference Include="Volo.Abp.AspNetCore.TestBase" Version="7.0.0" />
+    <PackageReference Include="Volo.Abp.AspNetCore.TestBase" Version="7.2.2" />
   </ItemGroup>
 
   <ItemGroup>

@@ -19,13 +19,13 @@ namespace ImageManipulationDemo.Controllers
 
         [HttpPost("upload")]
         [CompressImage]
-        [ResizeImage(width: 100, height: 100)]
+        [ResizeImage(width: 200, height: 200)]
         public async Task<IActionResult> UploadAsync(IFormFile file)
         {
             var fileBytes = await file.GetAllBytesAsync();
             var blobName = file.FileName;
 
-            await _blobContainer.SaveAsync(blobName, fileBytes);
+            await _blobContainer.SaveAsync(blobName, fileBytes, overrideExisting: true);
 
             return Ok();
         }

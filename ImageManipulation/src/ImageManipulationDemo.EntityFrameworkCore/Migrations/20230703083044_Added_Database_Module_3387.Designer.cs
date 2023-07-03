@@ -4,6 +4,7 @@ using ImageManipulationDemo.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Volo.Abp.EntityFrameworkCore;
 
@@ -12,9 +13,11 @@ using Volo.Abp.EntityFrameworkCore;
 namespace ImageManipulationDemo.Migrations
 {
     [DbContext(typeof(ImageManipulationDemoDbContext))]
-    partial class ImageManipulationDemoDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230703083044_Added_Database_Module_3387")]
+    partial class AddedDatabaseModule3387
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

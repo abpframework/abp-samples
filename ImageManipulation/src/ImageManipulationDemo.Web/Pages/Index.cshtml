@@ -1,0 +1,54 @@
+﻿@page
+@using Microsoft.AspNetCore.Mvc.Localization
+@using ImageManipulationDemo.Localization
+@using Volo.Abp.Users
+@model ImageManipulationDemo.Web.Pages.IndexModel
+@inject IHtmlLocalizer<ImageManipulationDemoResource> L
+@inject ICurrentUser CurrentUser
+@section styles {
+    <abp-style src="/Pages/Index.css" />
+}
+@section scripts {
+    <abp-script src="/Pages/Index.js" />
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <div class="card">
+                <div class="card-body">
+                    <form method="post" id="upload-image" enctype="multipart/form-data">
+                        <div class="mb-3">
+                            <label for="formFile" class="form-label">Upload an image</label>
+                            <input class="form-control" type="file" id="formFile" required/>
+                        </div>
+
+                        <div class="mb-3">
+                            <button type="submit" class="btn btn-primary d-block w-100">Submit</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="col">
+            <div class="card">
+                <div class="card-title">
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title my-2">Search & Display Images</h5>
+
+                    <form method="get" id="search-image">
+                        <div class="input-group mb-3">
+                            <input id="img-search-input" type="text" class="form-control" placeholder="Search with image name... E.g. image.png" aria-label="Search with image name" aria-describedby="button-search" required>
+                            <button class="btn btn-outline-secondary" type="submit" id="button-search">Search</button>
+                        </div>
+                    </form>
+
+                    <div class="d-none" id="image-result">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

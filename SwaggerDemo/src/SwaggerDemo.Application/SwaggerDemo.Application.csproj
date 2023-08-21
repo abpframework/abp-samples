@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="..\..\common.props" />
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <RootNamespace>SwaggerDemo</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SwaggerDemo.Domain\SwaggerDemo.Domain.csproj" />
+    <ProjectReference Include="..\SwaggerDemo.Application.Contracts\SwaggerDemo.Application.Contracts.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Volo.Abp.Account.Application" Version="7.4.0-rc.1" />
+    <PackageReference Include="Volo.Abp.Identity.Application" Version="7.4.0-rc.1" />
+    <PackageReference Include="Volo.Abp.PermissionManagement.Application" Version="7.4.0-rc.1" />
+    <PackageReference Include="Volo.Abp.TenantManagement.Application" Version="7.4.0-rc.1" />
+    <PackageReference Include="Volo.Abp.FeatureManagement.Application" Version="7.4.0-rc.1" />
+    <PackageReference Include="Volo.Abp.SettingManagement.Application" Version="7.4.0-rc.1" />
+  </ItemGroup>
+
+</Project>

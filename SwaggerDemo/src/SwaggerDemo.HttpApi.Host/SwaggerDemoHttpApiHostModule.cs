@@ -109,12 +109,30 @@ public class SwaggerDemoHttpApiHostModule : AbpModule
 
     private static void ConfigureSwaggerServices(ServiceConfigurationContext context, IConfiguration configuration)
     {
+        // Using Swagger with OAUTH
+        /*
         context.Services.AddAbpSwaggerGenWithOAuth(
             configuration["AuthServer:Authority"],
             new Dictionary<string, string>
             {
-                    {"SwaggerDemo", "SwaggerDemo API"}
+                { "SwaggerDemo", "SwaggerDemo API" }
             },
+            options =>
+            {
+                options.SwaggerDoc("v1", new OpenApiInfo { Title = "SwaggerDemo API", Version = "v1" });
+                options.DocInclusionPredicate((docName, description) => true);
+                options.CustomSchemaIds(type => type.FullName);
+            });
+        */
+        // Using Swagger with OIDC
+        context.Services.AddAbpSwaggerGenWithOidc(
+            configuration["AuthServer:Authority"],
+            scopes: new[] { "SwaggerDemo" },
+            // "authorization_code"
+            flows: new[] { AbpSwaggerOidcFlows.AuthorizationCode, AbpSwaggerOidcFlows.Password },
+            // Should be the discovery endpoint of the reachable DNS of the AuthServer over the internet like https://myauthserver.company.com/.well-known/openid-configuration
+            // Default null value is the "configuration["AuthServer:Authority"]+.well-known/openid-configuration
+            discoveryEndpoint: null,
             options =>
             {
                 options.SwaggerDoc("v1", new OpenApiInfo { Title = "SwaggerDemo API", Version = "v1" });

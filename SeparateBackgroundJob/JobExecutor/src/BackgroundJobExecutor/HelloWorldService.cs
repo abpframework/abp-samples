@@ -16,7 +16,7 @@ public class HelloWorldService : ITransientDependency
 
     public Task SayHelloAsync()
     {
-        Logger.LogInformation("Hello World!");
+        Logger.LogInformation("Starting JobExecutor...");
         return Task.CompletedTask;
     }
 }

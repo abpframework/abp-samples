@@ -1,4 +1,4 @@
-namespace SeparateBackgroundJob;
+namespace SeparateBackgroundJob.Common.Shared;
 
 public class MyReportJobArgs
 {

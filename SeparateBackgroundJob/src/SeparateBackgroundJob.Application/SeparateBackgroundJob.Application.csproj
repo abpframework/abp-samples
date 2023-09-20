@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="..\..\common.props" />
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <RootNamespace>SeparateBackgroundJob</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SeparateBackgroundJob.Domain\SeparateBackgroundJob.Domain.csproj" />
+    <ProjectReference Include="..\SeparateBackgroundJob.Application.Contracts\SeparateBackgroundJob.Application.Contracts.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Volo.Abp.Account.Application" Version="7.4.0-rc.3" />
+    <PackageReference Include="Volo.Abp.Identity.Application" Version="7.4.0-rc.3" />
+    <PackageReference Include="Volo.Abp.PermissionManagement.Application" Version="7.4.0-rc.3" />
+    <PackageReference Include="Volo.Abp.TenantManagement.Application" Version="7.4.0-rc.3" />
+    <PackageReference Include="Volo.Abp.FeatureManagement.Application" Version="7.4.0-rc.3" />
+    <PackageReference Include="Volo.Abp.SettingManagement.Application" Version="7.4.0-rc.3" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,37 @@
+﻿@page
+@using Microsoft.AspNetCore.Mvc.Localization
+@using SeparateBackgroundJob.Localization
+@using Volo.Abp.Users
+@model SeparateBackgroundJob.Web.Pages.IndexModel
+@inject IHtmlLocalizer<SeparateBackgroundJobResource> L
+@inject ICurrentUser CurrentUser
+
+@section styles {
+    <abp-style src="/Pages/Index.css"/>
+}
+
+@section scripts {
+    <abp-script src="/Pages/Index.js"/>
+}
+
+<div class="container">
+    <abp-card>
+        <abp-card-header>
+            <abp-card-title>
+                Add NEW BACKGROUND JOB
+            </abp-card-title>
+        </abp-card-header>
+        <abp-card-body>
+            <form id="NewItemForm" method="post" class="row row-cols-lg-auto g-3 align-items-center">
+                <div class="col-12">
+                    <div class="input-group">
+                        <input id="ReportContent" required name="ReportContent" type="text" class="form-control" placeholder="enter text...">
+                    </div>
+                </div>
+                <div class="col-12">
+                    <button type="submit" class="btn btn-primary">Add</button>
+                </div>
+            </form>
+        </abp-card-body>
+    </abp-card>
+</div>

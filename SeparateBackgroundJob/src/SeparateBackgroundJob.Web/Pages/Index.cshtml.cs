@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using SeparateBackgroundJob.Common.Shared;
 using Volo.Abp.BackgroundJobs;
 
 namespace SeparateBackgroundJob.Web.Pages;

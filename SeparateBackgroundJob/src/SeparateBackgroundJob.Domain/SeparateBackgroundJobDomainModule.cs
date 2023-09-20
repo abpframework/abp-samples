@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
+using SeparateBackgroundJob.Common.Shared;
 using SeparateBackgroundJob.MultiTenancy;
 using Volo.Abp.AuditLogging;
 using Volo.Abp.BackgroundJobs;
@@ -28,7 +29,8 @@ namespace SeparateBackgroundJob;
     typeof(AbpPermissionManagementDomainIdentityModule),
     typeof(AbpSettingManagementDomainModule),
     typeof(AbpTenantManagementDomainModule),
-    typeof(AbpEmailingModule)
+    typeof(AbpEmailingModule),
+    typeof(SeparateBackgroundJobCommonSharedModule)
 )]
 public class SeparateBackgroundJobDomainModule : AbpModule
 {

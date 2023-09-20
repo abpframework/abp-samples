@@ -1,9 +1,8 @@
-using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
 using Volo.Abp.BackgroundJobs;
 using Volo.Abp.DependencyInjection;
 
-namespace SeparateBackgroundJob;
+namespace SeparateBackgroundJob.Common.Shared;
 
 public class MyReportJob : AsyncBackgroundJob<MyReportJobArgs>, ITransientDependency
 {

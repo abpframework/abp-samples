@@ -26,7 +26,9 @@ public class IndexModel : SeparateBackgroundJobPageModel
     {
         await _backgroundJobManager.EnqueueAsync(new MyReportJobArgs
         {
-            Content = ReportContent
+            Content = ReportContent,
+            UserId = CurrentUser.Id,
+            TenantId = CurrentTenant.Id
         });
         
         Alerts.Success("Job is queued!");

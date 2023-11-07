@@ -10,6 +10,7 @@ using Volo.Abp.BackgroundJobs;
 using Volo.Abp.BackgroundJobs.EntityFrameworkCore;
 using Volo.Abp.EntityFrameworkCore;
 using Volo.Abp.EntityFrameworkCore.SqlServer;
+using Volo.Abp.Identity.EntityFrameworkCore;
 using Volo.Abp.Modularity;
 
 namespace BackgroundJobExecutor;
@@ -18,6 +19,7 @@ namespace BackgroundJobExecutor;
     typeof(AbpAutofacModule),
     typeof(AbpBackgroundJobsDomainModule),
     typeof(AbpBackgroundJobsEntityFrameworkCoreModule),
+    typeof(AbpIdentityEntityFrameworkCoreModule),
     typeof(AbpEntityFrameworkCoreSqlServerModule),
     typeof(SeparateBackgroundJobCommonSharedModule)
 )]

@@ -1,0 +1,10 @@
+using InterceptionSampleMongoApp.MongoDB;
+using Xunit;
+
+namespace InterceptionSampleMongoApp;
+
+[CollectionDefinition(InterceptionSampleMongoAppTestConsts.CollectionDefinitionName)]
+public class InterceptionSampleMongoAppApplicationCollection : InterceptionSampleMongoAppMongoDbCollectionFixtureBase
+{
+
+}

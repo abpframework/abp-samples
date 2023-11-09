@@ -19,13 +19,13 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Volo.Abp.Autofac.WebAssembly" Version="7.4.0" />
+    <PackageReference Include="Volo.Abp.Autofac.WebAssembly" Version="7.4.1" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Volo.Abp.Identity.Blazor.WebAssembly" Version="7.4.0" />
-    <PackageReference Include="Volo.Abp.TenantManagement.Blazor.WebAssembly" Version="7.4.0" />
-    <PackageReference Include="Volo.Abp.SettingManagement.Blazor.WebAssembly" Version="7.4.0" />
+    <PackageReference Include="Volo.Abp.Identity.Blazor.WebAssembly" Version="7.4.1" />
+    <PackageReference Include="Volo.Abp.TenantManagement.Blazor.WebAssembly" Version="7.4.1" />
+    <PackageReference Include="Volo.Abp.SettingManagement.Blazor.WebAssembly" Version="7.4.1" />
   </ItemGroup>
 
   <ItemGroup>

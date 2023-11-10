@@ -1,4 +1,6 @@
-﻿using Volo.Abp.Account;
+﻿using InterceptionSampleMongoApp.Interception;
+using Microsoft.Extensions.DependencyInjection;
+using Volo.Abp.Account;
 using Volo.Abp.AutoMapper;
 using Volo.Abp.FeatureManagement;
 using Volo.Abp.Identity;
@@ -21,6 +23,11 @@ namespace InterceptionSampleMongoApp;
     )]
 public class InterceptionSampleMongoAppApplicationModule : AbpModule
 {
+    public override void PreConfigureServices(ServiceConfigurationContext context)
+    {
+        context.Services.OnRegistered(WatcherInterceptorRegistrar.RegisterIfNeeded);
+    }
+    
     public override void ConfigureServices(ServiceConfigurationContext context)
     {
         Configure<AbpAutoMapperOptions>(options =>

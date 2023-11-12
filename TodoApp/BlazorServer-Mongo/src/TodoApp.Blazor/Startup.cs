@@ -14,6 +14,7 @@ namespace TodoApp.Blazor
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             app.InitializeApplication();
+
         }
     }
 }

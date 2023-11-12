@@ -41,6 +41,7 @@
     <PackageReference Include="Volo.Abp.TenantManagement.HttpApi" Version="7.4.1" />
     <ProjectReference Include="..\..\src\Acme.BookStore.BookManagement.Application.Contracts\Acme.BookStore.BookManagement.Application.Contracts.csproj" />
     <ProjectReference Include="..\Acme.BookStore.BookManagement.Host.Shared\Acme.BookStore.BookManagement.Host.Shared.csproj" />
+    <ProjectReference Include="..\Acme.BookStore.BookManagement.HttpApi.Host\Acme.BookStore.BookManagement.HttpApi.Host.csproj" />
   </ItemGroup>
 
   <ItemGroup>

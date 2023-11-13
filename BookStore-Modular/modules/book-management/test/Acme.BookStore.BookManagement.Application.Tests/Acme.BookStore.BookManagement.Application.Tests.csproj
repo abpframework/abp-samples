@@ -10,7 +10,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\src\Acme.BookStore.BookManagement.Application\Acme.BookStore.BookManagement.Application.csproj" />
     <ProjectReference Include="..\Acme.BookStore.BookManagement.Domain.Tests\Acme.BookStore.BookManagement.Domain.Tests.csproj" />
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.8.3" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.8.0" />
   </ItemGroup>
 
 </Project>

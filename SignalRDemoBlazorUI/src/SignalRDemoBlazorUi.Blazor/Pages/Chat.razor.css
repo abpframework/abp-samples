@@ -1,0 +1,16 @@
+#MessageList {
+    border: 1px solid gray;
+    height: 400px;
+    overflow: auto;
+    list-style: none;
+    padding-left: 0;
+    padding: 10px;
+}
+
+#TargetUser {
+    width: 100%;
+}
+
+#Message {
+    width: 100%;
+}

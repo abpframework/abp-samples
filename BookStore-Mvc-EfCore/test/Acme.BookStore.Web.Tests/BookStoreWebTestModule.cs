@@ -5,12 +5,14 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc.ApplicationParts;
 using Microsoft.Extensions.DependencyInjection;
+using Acme.BookStore.EntityFrameworkCore;
 using Acme.BookStore.Localization;
 using Acme.BookStore.Web;
 using Acme.BookStore.Web.Menus;
 using Volo.Abp.AspNetCore.TestBase;
 using Volo.Abp.Localization;
 using Volo.Abp.Modularity;
+using Volo.Abp.OpenIddict;
 using Volo.Abp.UI.Navigation;
 using Volo.Abp.Validation.Localization;
 
@@ -19,7 +21,8 @@ namespace Acme.BookStore;
 [DependsOn(
     typeof(AbpAspNetCoreTestBaseModule),
     typeof(BookStoreWebModule),
-    typeof(BookStoreApplicationTestModule)
+    typeof(BookStoreApplicationTestModule),
+    typeof(BookStoreEntityFrameworkCoreTestModule)
 )]
 public class BookStoreWebTestModule : AbpModule
 {
@@ -28,6 +31,12 @@ public class BookStoreWebTestModule : AbpModule
         context.Services.PreConfigure<IMvcBuilder>(builder =>
         {
             builder.PartManager.ApplicationParts.Add(new CompiledRazorAssemblyPart(typeof(BookStoreWebModule).Assembly));
+        });
+
+        context.Services.GetPreConfigureActions<OpenIddictServerBuilder>().Clear();
+        PreConfigure<AbpOpenIddictAspNetCoreOptions>(options =>
+        {
+            options.AddDevelopmentEncryptionAndSigningCertificate = true;
         });
     }
 

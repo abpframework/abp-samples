@@ -1,4 +1,4 @@
-﻿$(function () {
+$(function () {
     var l = abp.localization.getResource('BookStore');
     var createModal = new abp.ModalManager(abp.appPath + 'Authors/CreateModal');
     var editModal = new abp.ModalManager(abp.appPath + 'Authors/EditModal');
@@ -38,7 +38,7 @@
                                     action: function (data) {
                                         acme.bookStore.authors.author
                                             .delete(data.record.id)
-                                            .then(function () {
+                                            .then(function() {
                                                 abp.notify.info(
                                                     l('SuccessfullyDeleted')
                                                 );

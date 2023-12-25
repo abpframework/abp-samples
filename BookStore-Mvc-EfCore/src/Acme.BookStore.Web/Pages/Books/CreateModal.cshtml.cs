@@ -1,12 +1,12 @@
-using Acme.BookStore.Books;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
+using Acme.BookStore.Books;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Volo.Abp.AspNetCore.Mvc.UI.Bootstrap.TagHelpers.Form;
 
 namespace Acme.BookStore.Web.Pages.Books;
@@ -40,7 +40,7 @@ public class CreateModalModel : BookStorePageModel
     {
         await _bookAppService.CreateAsync(
             ObjectMapper.Map<CreateBookViewModel, CreateUpdateBookDto>(Book)
-            );
+        );
         return NoContent();
     }
 

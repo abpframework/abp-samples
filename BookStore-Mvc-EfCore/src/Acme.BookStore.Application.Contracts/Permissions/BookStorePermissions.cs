@@ -12,6 +12,7 @@ public static class BookStorePermissions
         public const string Delete = Default + ".Delete";
     }
 
+    // *** ADDED a NEW NESTED CLASS ***
     public static class Authors
     {
         public const string Default = GroupName + ".Authors";

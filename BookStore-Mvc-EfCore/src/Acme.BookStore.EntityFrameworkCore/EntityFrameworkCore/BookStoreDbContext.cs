@@ -28,10 +28,6 @@ public class BookStoreDbContext :
 {
     /* Add DbSet properties for your Aggregate Roots / Entities here. */
 
-    public DbSet<Book> Books { get; set; }
-
-    public DbSet<Author> Authors { get; set; }
-
     #region Entities from the modules
 
     /* Notice: We only implemented IIdentityDbContext and ITenantManagementDbContext
@@ -60,6 +56,10 @@ public class BookStoreDbContext :
 
     #endregion
 
+    public DbSet<Book> Books { get; set; }
+
+    public DbSet<Author> Authors { get; set; }
+
     public BookStoreDbContext(DbContextOptions<BookStoreDbContext> options)
         : base(options)
     {
@@ -81,14 +81,13 @@ public class BookStoreDbContext :
         builder.ConfigureFeatureManagement();
         builder.ConfigureTenantManagement();
 
-        /* Configure your own tables/entities inside here */
-
         builder.Entity<Book>(b =>
         {
             b.ToTable(BookStoreConsts.DbTablePrefix + "Books", BookStoreConsts.DbSchema);
             b.ConfigureByConvention(); //auto configure for the base class props
             b.Property(x => x.Name).IsRequired().HasMaxLength(128);
 
+            // ADD THE MAPPING FOR THE RELATION
             b.HasOne<Author>().WithMany().HasForeignKey(x => x.AuthorId).IsRequired();
         });
 
@@ -105,5 +104,15 @@ public class BookStoreDbContext :
 
             b.HasIndex(x => x.Name);
         });
+
+
+        /* Configure your own tables/entities inside here */
+
+        //builder.Entity<YourEntity>(b =>
+        //{
+        //    b.ToTable(BookStoreConsts.DbTablePrefix + "YourEntities", BookStoreConsts.DbSchema);
+        //    b.ConfigureByConvention(); //auto configure for the base class props
+        //    //...
+        //});
     }
 }

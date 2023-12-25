@@ -1,15 +1,17 @@
-﻿using Shouldly;
 using System;
 using System.Threading.Tasks;
+using Shouldly;
+using Volo.Abp.Modularity;
 using Xunit;
 
 namespace Acme.BookStore.Authors;
 
-public class AuthorAppService_Tests : BookStoreApplicationTestBase
+public abstract class AuthorAppService_Tests<TStartupModule> : BookStoreApplicationTestBase<TStartupModule>
+    where TStartupModule : IAbpModule
 {
     private readonly IAuthorAppService _authorAppService;
 
-    public AuthorAppService_Tests()
+    protected AuthorAppService_Tests()
     {
         _authorAppService = GetRequiredService<IAuthorAppService>();
     }
@@ -28,7 +30,7 @@ public class AuthorAppService_Tests : BookStoreApplicationTestBase
     public async Task Should_Get_Filtered_Authors()
     {
         var result = await _authorAppService.GetListAsync(
-            new GetAuthorListDto { Filter = "George" });
+            new GetAuthorListDto {Filter = "George"});
 
         result.TotalCount.ShouldBeGreaterThanOrEqualTo(1);
         result.Items.ShouldContain(author => author.Name == "George Orwell");
@@ -66,4 +68,6 @@ public class AuthorAppService_Tests : BookStoreApplicationTestBase
             );
         });
     }
+
+    //TODO: Test other methods...
 }

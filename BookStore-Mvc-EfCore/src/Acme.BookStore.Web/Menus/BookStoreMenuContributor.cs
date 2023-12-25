@@ -20,7 +20,7 @@ public class BookStoreMenuContributor : IMenuContributor
         }
     }
 
-    private async Task ConfigureMainMenuAsync(MenuConfigurationContext context)
+    private Task ConfigureMainMenuAsync(MenuConfigurationContext context)
     {
         var administration = context.Menu.GetAdministration();
         var l = context.GetLocalizer<BookStoreResource>();
@@ -59,7 +59,7 @@ public class BookStoreMenuContributor : IMenuContributor
                     l["Menu:Books"],
                     url: "/Books"
                 ).RequirePermissions(BookStorePermissions.Books.Default)
-            ).AddItem(
+            ).AddItem( // ADDED THE NEW "AUTHORS" MENU ITEM UNDER THE "BOOK STORE" MENU
                 new ApplicationMenuItem(
                     "BooksStore.Authors",
                     l["Menu:Authors"],
@@ -67,5 +67,7 @@ public class BookStoreMenuContributor : IMenuContributor
                 ).RequirePermissions(BookStorePermissions.Authors.Default)
             )
         );
+
+        return Task.CompletedTask;
     }
 }

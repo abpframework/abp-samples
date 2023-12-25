@@ -14,6 +14,7 @@ namespace Acme.BookStore.EntityFrameworkCore.Samples;
  * (like default AppUser repository IRepository<AppUser, Guid> here).
  * Only test your custom repository methods.
  */
+[Collection(BookStoreTestConsts.CollectionDefinitionName)]
 public class SampleRepositoryTests : BookStoreEntityFrameworkCoreTestBase
 {
     private readonly IRepository<IdentityUser, Guid> _appUserRepository;

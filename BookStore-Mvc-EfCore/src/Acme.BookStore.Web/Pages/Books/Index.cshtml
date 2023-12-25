@@ -1,4 +1,4 @@
-﻿@page
+@page
 @using Acme.BookStore.Localization
 @using Acme.BookStore.Permissions
 @using Acme.BookStore.Web.Pages.Books
@@ -8,8 +8,8 @@
 @inject IStringLocalizer<BookStoreResource> L
 @inject IAuthorizationService AuthorizationService
 @section scripts
-    {
-    <abp-script src="/Pages/Books/Index.js" />
+{
+    <abp-script src="/Pages/Books/Index.js"/>
 }
 
 <abp-card>
@@ -22,9 +22,9 @@
                 @if (await AuthorizationService.IsGrantedAsync(BookStorePermissions.Books.Create))
                 {
                     <abp-button id="NewBookButton"
-                            text="@L["NewBook"].Value"
-                            icon="plus"
-                            button-type="Primary" />
+                                text="@L["NewBook"].Value"
+                                icon="plus"
+                                button-type="Primary"/>
                 }
             </abp-column>
         </abp-row>

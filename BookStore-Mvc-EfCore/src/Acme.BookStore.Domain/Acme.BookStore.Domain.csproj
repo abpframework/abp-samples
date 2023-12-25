@@ -1,9 +1,10 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <Import Project="..\..\common.props" />
 
   <PropertyGroup>
-    <TargetFramework>net7.0</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
     <RootNamespace>Acme.BookStore</RootNamespace>
   </PropertyGroup>
 
@@ -12,16 +13,16 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Volo.Abp.Emailing" Version="7.4.1" />
-    <PackageReference Include="Volo.Abp.Identity.Domain" Version="7.4.1" />
-    <PackageReference Include="Volo.Abp.PermissionManagement.Domain.Identity" Version="7.4.1" />
-    <PackageReference Include="Volo.Abp.BackgroundJobs.Domain" Version="7.4.1" />
-    <PackageReference Include="Volo.Abp.AuditLogging.Domain" Version="7.4.1" />
-    <PackageReference Include="Volo.Abp.TenantManagement.Domain" Version="7.4.1" />
-    <PackageReference Include="Volo.Abp.FeatureManagement.Domain" Version="7.4.1" />
-    <PackageReference Include="Volo.Abp.SettingManagement.Domain" Version="7.4.1" />
-    <PackageReference Include="Volo.Abp.OpenIddict.Domain" Version="7.4.1" />
-    <PackageReference Include="Volo.Abp.PermissionManagement.Domain.OpenIddict" Version="7.4.1" />
+    <PackageReference Include="Volo.Abp.Emailing" Version="8.0.0" />
+    <PackageReference Include="Volo.Abp.Identity.Domain" Version="8.0.0" />
+    <PackageReference Include="Volo.Abp.PermissionManagement.Domain.Identity" Version="8.0.0" />
+    <PackageReference Include="Volo.Abp.BackgroundJobs.Domain" Version="8.0.0" />
+    <PackageReference Include="Volo.Abp.AuditLogging.Domain" Version="8.0.0" />
+    <PackageReference Include="Volo.Abp.TenantManagement.Domain" Version="8.0.0" />
+    <PackageReference Include="Volo.Abp.FeatureManagement.Domain" Version="8.0.0" />
+    <PackageReference Include="Volo.Abp.SettingManagement.Domain" Version="8.0.0" />
+    <PackageReference Include="Volo.Abp.OpenIddict.Domain" Version="8.0.0" />
+    <PackageReference Include="Volo.Abp.PermissionManagement.Domain.OpenIddict" Version="8.0.0" />
   </ItemGroup>
 
 </Project>

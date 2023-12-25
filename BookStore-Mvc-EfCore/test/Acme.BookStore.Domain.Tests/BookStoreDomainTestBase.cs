@@ -1,6 +1,10 @@
-﻿namespace Acme.BookStore;
+﻿using Volo.Abp.Modularity;
 
-public abstract class BookStoreDomainTestBase : BookStoreTestBase<BookStoreDomainTestModule>
+namespace Acme.BookStore;
+
+/* Inherit from this class for your domain layer tests. */
+public abstract class BookStoreDomainTestBase<TStartupModule> : BookStoreTestBase<TStartupModule>
+    where TStartupModule : IAbpModule
 {
 
 }

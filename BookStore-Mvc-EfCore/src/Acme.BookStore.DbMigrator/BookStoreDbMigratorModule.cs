@@ -11,5 +11,4 @@ namespace Acme.BookStore.DbMigrator;
     )]
 public class BookStoreDbMigratorModule : AbpModule
 {
-
 }

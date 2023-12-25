@@ -1,4 +1,4 @@
-﻿namespace Acme.BookStore.Authors;
+namespace Acme.BookStore.Authors;
 
 public static class AuthorConsts
 {

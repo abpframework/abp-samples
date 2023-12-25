@@ -20,7 +20,7 @@ public class EntityFrameworkCoreBookStoreDbSchemaMigrator
 
     public async Task MigrateAsync()
     {
-        /* We intentionally resolving the BookStoreDbContext
+        /* We intentionally resolve the BookStoreDbContext
          * from IServiceProvider (instead of directly injecting it)
          * to properly get the connection string of the current tenant in the
          * current scope.

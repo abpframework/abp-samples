@@ -14,6 +14,7 @@ using Volo.Abp.AspNetCore.Mvc.UI.Theme.LeptonXLite;
 using Volo.Abp.AspNetCore.Mvc.UI.Theme.LeptonXLite.Bundling;
 using Microsoft.OpenApi.Models;
 using OpenIddict.Validation.AspNetCore;
+using ProductManagement.Catalogs;
 using ProductManagement.Products;
 using ProtoBuf.Grpc.Server;
 using Volo.Abp;
@@ -253,6 +254,7 @@ public class ProductManagementHttpApiHostModule : AbpModule
         app.UseConfiguredEndpoints(endpoints =>
         {
             endpoints.MapGrpcService<IProductAppService>().RequireCors("__DefaultCorsPolicy");
+            endpoints.MapGrpcService<ICatalogAppService>().RequireCors("__DefaultCorsPolicy");
         });
     }
 }

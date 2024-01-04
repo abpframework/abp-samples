@@ -21,6 +21,20 @@
                 </li>
             }
         </ul>
+        
+        <h2>A list of catalogs:</h2>
+                
+        <ul class="list-group">
+            @foreach(var catalog in Catalogs)
+            {
+                <li class="list-group-item">
+                    @catalog.Name <br/>
+                    <small>@catalog.Id.ToString()</small>
+                </li>
+            }
+        </ul>
+        
+        <h2>Current Tenant Name: @CurrentTenant.Name</h2>
 
         @if ( !CurrentUser.IsAuthenticated )
         {

@@ -57,6 +57,13 @@ public class ProductManagementHttpApiHostModule : AbpModule
                 options.AddAudiences("ProductManagement");
                 options.UseLocalServer();
                 options.UseAspNetCore();
+                options.Configure(validationOptions => validationOptions.TokenValidationParameters.ValidIssuers = new[]
+                {
+                    "https://localhost:44388",
+                    "https://localhost:44388/",
+                    "https://localhost:10042",
+                    "https://localhost:10042/"
+                });
             });
         });
     }
@@ -255,7 +262,7 @@ public class ProductManagementHttpApiHostModule : AbpModule
         app.UseConfiguredEndpoints(endpoints =>
         {
             endpoints.MapGrpcService<IProductAppService>().RequireCors("__DefaultCorsPolicy");
-            endpoints.MapGrpcService<ICatalogAppService>().RequireCors("__DefaultCorsPolicy").WithMetadata(new AuthorizeAttribute());
+            endpoints.MapGrpcService<ICatalogAppService>().RequireCors("__DefaultCorsPolicy");
         });
     }
 }

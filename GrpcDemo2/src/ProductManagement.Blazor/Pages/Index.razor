@@ -25,9 +25,6 @@
         {
             var name = CurrentTenant.IsAvailable ? CurrentTenant.Name : "Host";
             
-            <br/>
-            <h3>@AccessToken</h3>
-
             <h2> Catalog list of @name:</h2>
             <ul class="list-group">
                 @foreach (var catalog in Catalogs)

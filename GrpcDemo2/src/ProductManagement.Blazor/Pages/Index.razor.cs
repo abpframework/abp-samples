@@ -18,7 +18,6 @@ public partial class Index
     private List<ProductDto> Products { get; set; } = new();
     private List<CatalogDto> Catalogs { get; set; } = new();
     [Inject] IAccessTokenProvider TokenProvider { get; set; }
-    private string AccessToken { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
@@ -29,8 +28,6 @@ public partial class Index
         {
             accessToken = token.Value;
         }
-
-        AccessToken = accessToken;
         
         var credentials = CallCredentials.FromInterceptor(async (context, metadata) =>
         {

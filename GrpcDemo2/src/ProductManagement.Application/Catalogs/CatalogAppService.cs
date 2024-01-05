@@ -7,8 +7,7 @@ using Volo.Abp.Domain.Repositories;
 
 namespace ProductManagement.Catalogs;
 
-// [Authorize(ProductManagementPermissions.CatalogList)]
-[Authorize]
+[Authorize(ProductManagementPermissions.CatalogList)]
 public class CatalogAppService : ProductManagementAppService, ICatalogAppService
 {
     private readonly IRepository<Catalog, Guid> _catalogRepository;

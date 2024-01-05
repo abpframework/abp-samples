@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Microsoft.Extensions.Logging;
 using Volo.Abp.Domain.Repositories;
 
 namespace ProductManagement.Catalogs;
@@ -17,7 +16,6 @@ public class CatalogAppService : ProductManagementAppService, ICatalogAppService
 
     public async Task<List<CatalogDto>> GetListAsync()
     {
-        Logger.LogInformation($"==================== Current Tenant Name: {CurrentTenant.Name} ==================== ");
         return ObjectMapper.Map<List<Catalog>, List<CatalogDto>>(await _catalogRepository.GetListAsync());
     }
 }

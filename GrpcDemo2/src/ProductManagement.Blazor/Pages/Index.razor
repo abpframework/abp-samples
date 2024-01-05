@@ -11,9 +11,9 @@
         <h1>Welcome to the Application</h1>
 
         <h2>A list of products:</h2>
-        
+
         <ul class="list-group">
-            @foreach(var product in Products)
+            @foreach (var product in Products)
             {
                 <li class="list-group-item">
                     @product.Name <br/>
@@ -21,11 +21,14 @@
                 </li>
             }
         </ul>
-        
-        <h2>A list of catalogs:</h2>
-                
+        <br/>
+        @{
+            var name = CurrentTenant.IsAvailable ? CurrentTenant.Name : "Host";
+        }
+        <h2>Catalog list of @name:</h2>
+
         <ul class="list-group">
-            @foreach(var catalog in Catalogs)
+            @foreach (var catalog in Catalogs)
             {
                 <li class="list-group-item">
                     @catalog.Name <br/>
@@ -33,10 +36,8 @@
                 </li>
             }
         </ul>
-        
-        <h2>Current Tenant Name: @CurrentTenant.Name</h2>
 
-        @if ( !CurrentUser.IsAuthenticated )
+        @if (!CurrentUser.IsAuthenticated)
         {
             <a class="btn btn-primary" href="/authentication/login">
                 <i class="fa fa-sign-in-alt"></i> @L["Login"]

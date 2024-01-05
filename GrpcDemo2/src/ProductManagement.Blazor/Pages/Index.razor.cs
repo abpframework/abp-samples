@@ -3,7 +3,6 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using Grpc.Core;
 using Grpc.Net.Client;
-using Grpc.Net.Client.Configuration;
 using Grpc.Net.Client.Web;
 using ProductManagement.Catalogs;
 using ProductManagement.Products;
@@ -18,19 +17,22 @@ public partial class Index
 
     protected override async Task OnInitializedAsync()
     {
-        var credentials = CallCredentials.FromInterceptor(async (context, metadata) =>
+        var grpcChannelOptions = new GrpcChannelOptions
         {
-            // var token = "get access token from somewhere
-            // metadata.Add("Authorization", $"Bearer {token}");
-
-            metadata.Add("__tenant", ProductManagementConstants.AcmeTenant);
-        });
-
-        var channel = GrpcChannel.ForAddress("https://localhost:10042", new GrpcChannelOptions
+            HttpHandler = new GrpcWebHandler(new HttpClientHandler())
+        };
+        
+        if (CurrentTenant.IsAvailable)
         {
-            HttpHandler = new GrpcWebHandler(new HttpClientHandler()),
-            Credentials = ChannelCredentials.Create(new SslCredentials(), credentials)
-        });
+            var credentials = CallCredentials.FromInterceptor(async (context, metadata) =>
+            {
+                metadata.Add("__tenant", CurrentTenant.Name);
+            });
+            grpcChannelOptions.Credentials = ChannelCredentials.Create(new SslCredentials(), credentials);
+        }
+
+
+        var channel = GrpcChannel.ForAddress("https://localhost:10042", grpcChannelOptions);
 
         var productAppService = channel.CreateGrpcService<IProductAppService>();
         Products = await productAppService.GetListAsync();

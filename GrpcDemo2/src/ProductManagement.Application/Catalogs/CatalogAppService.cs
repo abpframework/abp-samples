@@ -1,10 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
+using ProductManagement.Permissions;
 using Volo.Abp.Domain.Repositories;
 
 namespace ProductManagement.Catalogs;
 
+// [Authorize(ProductManagementPermissions.CatalogList)]
+[Authorize]
 public class CatalogAppService : ProductManagementAppService, ICatalogAppService
 {
     private readonly IRepository<Catalog, Guid> _catalogRepository;

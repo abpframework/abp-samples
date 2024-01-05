@@ -1,9 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Grpc.Core;
 using Grpc.Net.Client;
 using Grpc.Net.Client.Web;
+using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
 using ProductManagement.Catalogs;
 using ProductManagement.Products;
 using ProtoBuf.Grpc.Client;
@@ -14,30 +17,52 @@ public partial class Index
 {
     private List<ProductDto> Products { get; set; } = new();
     private List<CatalogDto> Catalogs { get; set; } = new();
+    [Inject] IAccessTokenProvider TokenProvider { get; set; }
+    private string AccessToken { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
-        var grpcChannelOptions = new GrpcChannelOptions
+        var accessTokenResult = await TokenProvider.RequestAccessToken();
+        var accessToken = string.Empty;
+
+        if (accessTokenResult.TryGetToken(out var token))
         {
-            HttpHandler = new GrpcWebHandler(new HttpClientHandler())
-        };
-        
-        if (CurrentTenant.IsAvailable)
-        {
-            var credentials = CallCredentials.FromInterceptor(async (context, metadata) =>
-            {
-                metadata.Add("__tenant", CurrentTenant.Name);
-            });
-            grpcChannelOptions.Credentials = ChannelCredentials.Create(new SslCredentials(), credentials);
+            accessToken = token.Value;
         }
 
+        AccessToken = accessToken;
+        
+        var credentials = CallCredentials.FromInterceptor(async (context, metadata) =>
+        {
+            metadata.Add("Authorization", $"Bearer {accessToken}");
+        });
 
-        var channel = GrpcChannel.ForAddress("https://localhost:10042", grpcChannelOptions);
+        if (CurrentTenant.IsAvailable)
+        {
+            credentials = CallCredentials.FromInterceptor(async (context, metadata) =>
+            {
+                metadata.Add("__tenant", CurrentTenant.Name);
+                metadata.Add("Authorization", $"Bearer {accessToken}");
+            });
+        }
+
+        var channel = GrpcChannel.ForAddress("https://localhost:10042", new GrpcChannelOptions
+        {
+            HttpHandler = new GrpcWebHandler(new HttpClientHandler()),
+            Credentials = ChannelCredentials.Create(new SslCredentials(), credentials)
+        });
 
         var productAppService = channel.CreateGrpcService<IProductAppService>();
         Products = await productAppService.GetListAsync();
 
         var catalogAppService = channel.CreateGrpcService<ICatalogAppService>();
-        Catalogs = await catalogAppService.GetListAsync();
+        try
+        {
+            Catalogs = await catalogAppService.GetListAsync();
+        }
+        catch (Exception e)
+        {
+            //Omit
+        }
     }
 }

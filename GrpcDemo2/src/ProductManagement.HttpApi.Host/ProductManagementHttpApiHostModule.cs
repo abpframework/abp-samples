@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Extensions.DependencyInjection;
@@ -254,7 +255,7 @@ public class ProductManagementHttpApiHostModule : AbpModule
         app.UseConfiguredEndpoints(endpoints =>
         {
             endpoints.MapGrpcService<IProductAppService>().RequireCors("__DefaultCorsPolicy");
-            endpoints.MapGrpcService<ICatalogAppService>().RequireCors("__DefaultCorsPolicy");
+            endpoints.MapGrpcService<ICatalogAppService>().RequireCors("__DefaultCorsPolicy").WithMetadata(new AuthorizeAttribute());
         });
     }
 }

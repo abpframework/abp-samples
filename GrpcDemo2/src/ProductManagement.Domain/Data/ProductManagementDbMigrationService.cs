@@ -23,17 +23,20 @@ public class ProductManagementDbMigrationService : ITransientDependency
     private readonly IEnumerable<IProductManagementDbSchemaMigrator> _dbSchemaMigrators;
     private readonly ITenantRepository _tenantRepository;
     private readonly ICurrentTenant _currentTenant;
+    private readonly TenantManager _tenantManager;
 
     public ProductManagementDbMigrationService(
         IDataSeeder dataSeeder,
         IEnumerable<IProductManagementDbSchemaMigrator> dbSchemaMigrators,
         ITenantRepository tenantRepository,
-        ICurrentTenant currentTenant)
+        ICurrentTenant currentTenant,
+        TenantManager tenantManager)
     {
         _dataSeeder = dataSeeder;
         _dbSchemaMigrators = dbSchemaMigrators;
         _tenantRepository = tenantRepository;
         _currentTenant = currentTenant;
+        _tenantManager = tenantManager;
 
         Logger = NullLogger<ProductManagementDbMigrationService>.Instance;
     }
@@ -53,6 +56,8 @@ public class ProductManagementDbMigrationService : ITransientDependency
         await SeedDataAsync();
 
         Logger.LogInformation($"Successfully completed host database migrations.");
+
+        await SeedAcmeTenantAsync();
 
         var tenants = await _tenantRepository.GetListAsync(includeDetails: true);
 
@@ -85,6 +90,15 @@ public class ProductManagementDbMigrationService : ITransientDependency
         Logger.LogInformation("You can safely end this process...");
     }
 
+    protected virtual async Task SeedAcmeTenantAsync()
+    {
+        if (await _tenantRepository.FindByNameAsync(ProductManagementConstants.AcmeTenant) == null)
+        {
+            var tenant = await _tenantManager.CreateAsync(ProductManagementConstants.AcmeTenant);
+            await _tenantRepository.InsertAsync(tenant);
+        }
+    }
+
     private async Task MigrateDatabaseSchemaAsync(Tenant tenant = null)
     {
         Logger.LogInformation(
@@ -101,8 +115,10 @@ public class ProductManagementDbMigrationService : ITransientDependency
         Logger.LogInformation($"Executing {(tenant == null ? "host" : tenant.Name + " tenant")} database seed...");
 
         await _dataSeeder.SeedAsync(new DataSeedContext(tenant?.Id)
-            .WithProperty(IdentityDataSeedContributor.AdminEmailPropertyName, IdentityDataSeedContributor.AdminEmailDefaultValue)
-            .WithProperty(IdentityDataSeedContributor.AdminPasswordPropertyName, IdentityDataSeedContributor.AdminPasswordDefaultValue)
+            .WithProperty(IdentityDataSeedContributor.AdminEmailPropertyName,
+                IdentityDataSeedContributor.AdminEmailDefaultValue)
+            .WithProperty(IdentityDataSeedContributor.AdminPasswordPropertyName,
+                IdentityDataSeedContributor.AdminPasswordDefaultValue)
         );
     }
 

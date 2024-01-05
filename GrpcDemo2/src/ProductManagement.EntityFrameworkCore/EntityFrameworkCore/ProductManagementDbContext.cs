@@ -1,9 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using ProductManagement.Catalogs;
 using Volo.Abp.AuditLogging.EntityFrameworkCore;
 using Volo.Abp.BackgroundJobs.EntityFrameworkCore;
 using Volo.Abp.Data;
 using Volo.Abp.DependencyInjection;
 using Volo.Abp.EntityFrameworkCore;
+using Volo.Abp.EntityFrameworkCore.Modeling;
 using Volo.Abp.FeatureManagement.EntityFrameworkCore;
 using Volo.Abp.Identity;
 using Volo.Abp.Identity.EntityFrameworkCore;
@@ -53,10 +55,11 @@ public class ProductManagementDbContext :
 
     #endregion
 
+    public DbSet<Catalog> Catalogs { get; set; }
+
     public ProductManagementDbContext(DbContextOptions<ProductManagementDbContext> options)
         : base(options)
     {
-
     }
 
     protected override void OnModelCreating(ModelBuilder builder)
@@ -76,11 +79,11 @@ public class ProductManagementDbContext :
 
         /* Configure your own tables/entities inside here */
 
-        //builder.Entity<YourEntity>(b =>
-        //{
-        //    b.ToTable(ProductManagementConsts.DbTablePrefix + "YourEntities", ProductManagementConsts.DbSchema);
-        //    b.ConfigureByConvention(); //auto configure for the base class props
-        //    //...
-        //});
+        builder.Entity<Catalog>(b =>
+        {
+            b.ToTable(ProductManagementConsts.DbTablePrefix + "Catalogs", ProductManagementConsts.DbSchema);
+            b.ConfigureByConvention(); //auto configure for the base class props
+            b.Property(q => q.Name).HasMaxLength(ProductManagementConstants.Catalogs.NameMaxLength);
+        });
     }
 }

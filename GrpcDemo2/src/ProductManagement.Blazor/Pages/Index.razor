@@ -1,7 +1,5 @@
 ﻿@page "/"
-@using Volo.Abp.MultiTenancy
 @inherits ProductManagementComponentBase
-@inject AuthenticationStateProvider AuthenticationStateProvider
 <div class="container">
     <div class="p-5 text-center">
         <Badge Color="Color.Success" class="mb-4">
@@ -11,9 +9,9 @@
         <h1>Welcome to the Application</h1>
 
         <h2>A list of products:</h2>
-        
+
         <ul class="list-group">
-            @foreach(var product in Products)
+            @foreach (var product in Products)
             {
                 <li class="list-group-item">
                     @product.Name <br/>
@@ -21,8 +19,26 @@
                 </li>
             }
         </ul>
+        <br/>
 
-        @if ( !CurrentUser.IsAuthenticated )
+        @if (CurrentUser.IsAuthenticated)
+        {
+            var name = CurrentTenant.IsAvailable ? CurrentTenant.Name : "Host";
+            
+            <h2> Catalog list of @name:</h2>
+            <ul class="list-group">
+                @foreach (var catalog in Catalogs)
+                {
+                    <li class="list-group-item">
+                        @catalog.Name <br/>
+                        <small>@catalog.Id.ToString()</small>
+                    </li>
+                }
+            </ul>
+        }
+
+
+        @if (!CurrentUser.IsAuthenticated)
         {
             <a class="btn btn-primary" href="/authentication/login">
                 <i class="fa fa-sign-in-alt"></i> @L["Login"]

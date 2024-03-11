@@ -12,55 +12,55 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Volo.Abp.AspNetCore.Mvc" Version="7.4.1" />
-    <PackageReference Include="Volo.Abp.Autofac" Version="7.4.1" />
-    <PackageReference Include="Volo.Abp.AutoMapper" Version="7.4.1" />
-    <PackageReference Include="Volo.Abp.Swashbuckle" Version="7.4.1" />
-    <PackageReference Include="Volo.Abp.AspNetCore.Authentication.JwtBearer" Version="7.4.1" />
-    <PackageReference Include="Volo.Abp.AspNetCore.Serilog" Version="7.4.1" />
+    <PackageReference Include="Volo.Abp.AspNetCore.Mvc" Version="8.0.0" />
+    <PackageReference Include="Volo.Abp.Autofac" Version="8.0.0" />
+    <PackageReference Include="Volo.Abp.AutoMapper" Version="8.0.0" />
+    <PackageReference Include="Volo.Abp.Swashbuckle" Version="8.0.0" />
+    <PackageReference Include="Volo.Abp.AspNetCore.Authentication.JwtBearer" Version="8.0.0" />
+    <PackageReference Include="Volo.Abp.AspNetCore.Serilog" Version="8.0.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Volo.Abp.Account.Application" Version="7.4.1" />
-    <PackageReference Include="Volo.Abp.Account.HttpApi" Version="7.4.1" />
-    <PackageReference Include="Volo.Abp.Account.Web.OpenIddict" Version="7.4.1" />
+    <PackageReference Include="Volo.Abp.Account.Application" Version="8.0.0" />
+    <PackageReference Include="Volo.Abp.Account.HttpApi" Version="8.0.0" />
+    <PackageReference Include="Volo.Abp.Account.Web.OpenIddict" Version="8.0.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Volo.Abp.PermissionManagement.Domain.Identity" Version="7.4.1" />
-    <PackageReference Include="Volo.Abp.Identity.Application" Version="7.4.1" />
-    <PackageReference Include="Volo.Abp.Identity.HttpApi" Version="7.4.1" />
-    <PackageReference Include="Volo.Abp.Identity.MongoDB" Version="7.4.1" />
-    <PackageReference Include="Volo.Abp.OpenIddict.MongoDB" Version="7.4.1" />
+    <PackageReference Include="Volo.Abp.PermissionManagement.Domain.Identity" Version="8.0.0" />
+    <PackageReference Include="Volo.Abp.Identity.Application" Version="8.0.0" />
+    <PackageReference Include="Volo.Abp.Identity.HttpApi" Version="8.0.0" />
+    <PackageReference Include="Volo.Abp.Identity.MongoDB" Version="8.0.0" />
+    <PackageReference Include="Volo.Abp.OpenIddict.MongoDB" Version="8.0.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Volo.Abp.PermissionManagement.Domain.OpenIddict" Version="7.4.1" />
-    <PackageReference Include="Volo.Abp.PermissionManagement.Application" Version="7.4.1" />
-    <PackageReference Include="Volo.Abp.PermissionManagement.MongoDB" Version="7.4.1" />
-    <PackageReference Include="Volo.Abp.PermissionManagement.HttpApi" Version="7.4.1" />
+    <PackageReference Include="Volo.Abp.PermissionManagement.Domain.OpenIddict" Version="8.0.0" />
+    <PackageReference Include="Volo.Abp.PermissionManagement.Application" Version="8.0.0" />
+    <PackageReference Include="Volo.Abp.PermissionManagement.MongoDB" Version="8.0.0" />
+    <PackageReference Include="Volo.Abp.PermissionManagement.HttpApi" Version="8.0.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Volo.Abp.TenantManagement.Application" Version="7.4.1" />
-    <PackageReference Include="Volo.Abp.TenantManagement.MongoDB" Version="7.4.1" />
-    <PackageReference Include="Volo.Abp.TenantManagement.HttpApi" Version="7.4.1" />
+    <PackageReference Include="Volo.Abp.TenantManagement.Application" Version="8.0.0" />
+    <PackageReference Include="Volo.Abp.TenantManagement.MongoDB" Version="8.0.0" />
+    <PackageReference Include="Volo.Abp.TenantManagement.HttpApi" Version="8.0.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Volo.Abp.FeatureManagement.Application" Version="7.4.1" />
-    <PackageReference Include="Volo.Abp.FeatureManagement.MongoDB" Version="7.4.1" />
-    <PackageReference Include="Volo.Abp.FeatureManagement.HttpApi" Version="7.4.1" />
+    <PackageReference Include="Volo.Abp.FeatureManagement.Application" Version="8.0.0" />
+    <PackageReference Include="Volo.Abp.FeatureManagement.MongoDB" Version="8.0.0" />
+    <PackageReference Include="Volo.Abp.FeatureManagement.HttpApi" Version="8.0.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Volo.Abp.SettingManagement.Application" Version="7.4.1" />
-    <PackageReference Include="Volo.Abp.SettingManagement.MongoDB" Version="7.4.1" />
-    <PackageReference Include="Volo.Abp.SettingManagement.HttpApi" Version="7.4.1" />
+    <PackageReference Include="Volo.Abp.SettingManagement.Application" Version="8.0.0" />
+    <PackageReference Include="Volo.Abp.SettingManagement.MongoDB" Version="8.0.0" />
+    <PackageReference Include="Volo.Abp.SettingManagement.HttpApi" Version="8.0.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Volo.Abp.AuditLogging.MongoDB" Version="7.4.1" />
+    <PackageReference Include="Volo.Abp.AuditLogging.MongoDB" Version="8.0.0" />
   </ItemGroup>
 
   <ItemGroup>

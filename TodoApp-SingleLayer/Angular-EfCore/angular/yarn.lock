@@ -107,13 +107,13 @@
     "@abp/ng.theme.shared" "~8.0.4"
     tslib "^2.0.0"
 
-"@abp/ng.theme.lepton-x@~2.4.2":
-  version "2.4.7"
-  resolved "https://registry.yarnpkg.com/@abp/ng.theme.lepton-x/-/ng.theme.lepton-x-2.4.7.tgz#84a31a29ef50e7f9d98216daac1f3124e835bc26"
-  integrity sha512-laFCbmlAVdjQ1yOeKFB+rf6YX2eKlFXKEaas4Wh1XDgmyJSNPoIR/KunJyU+xlHxQ+33FUoK3LrObDiukLdjJQ==
+"@abp/ng.theme.lepton-x@~3.0.0":
+  version "3.0.4"
+  resolved "https://registry.yarnpkg.com/@abp/ng.theme.lepton-x/-/ng.theme.lepton-x-3.0.4.tgz#e0134b1b307f52c7687a0da154aeb3937a7643b4"
+  integrity sha512-+Jsk57lHUjEHx1xoZJsXwk5wVCgyatQniF1+vNxDR4xXfYfa9g3o5QsEzW0cpNHxvp73yCBoWV8OijJhuwUDCA==
   dependencies:
-    "@volo/abp.ng.lepton-x.core" "2.4.7"
-    "@volo/ngx-lepton-x.lite" "2.4.7"
+    "@volo/abp.ng.lepton-x.core" "3.0.4"
+    "@volo/ngx-lepton-x.lite" "3.0.4"
     tslib "^2.3.0"
 
 "@abp/ng.theme.shared@^8.0.0", "@abp/ng.theme.shared@~8.0.4":
@@ -2018,13 +2018,6 @@
   resolved "https://registry.yarnpkg.com/@leichtgewicht/ip-codec/-/ip-codec-2.0.4.tgz#b2ac626d6cb9c8718ab459166d4bb405b8ffa78b"
   integrity sha512-Hcv+nVC0kZnQ3tD9GVu5xSMR4VVYOteQIr/hwFPVEvPdlXqgGEuRjiheChHgdM+JyqdgNcmzZOX/tnl0JOiI7A==
 
-"@ng-bootstrap/ng-bootstrap@^15.0.0":
-  version "15.1.2"
-  resolved "https://registry.yarnpkg.com/@ng-bootstrap/ng-bootstrap/-/ng-bootstrap-15.1.2.tgz#98467947efb856096115e413c331bdb7ba8809ec"
-  integrity sha512-mM2yiGnt9o7KZLIFp8K1vjfmVfu7HR3d8dhH5SszfArbgn9DvvQ4P5D5TDGygzyBSzeyZe18p7I8rX8vgA6DKw==
-  dependencies:
-    tslib "^2.3.0"
-
 "@ng-bootstrap/ng-bootstrap@~16.0.0":
   version "16.0.0"
   resolved "https://registry.yarnpkg.com/@ng-bootstrap/ng-bootstrap/-/ng-bootstrap-16.0.0.tgz#f2d3679bae59106efbab3469514143c7b7a70d44"
@@ -2607,30 +2600,30 @@
     "@typescript-eslint/types" "5.48.1"
     eslint-visitor-keys "^3.3.0"
 
-"@volo/abp.ng.lepton-x.core@2.4.7":
-  version "2.4.7"
-  resolved "https://registry.yarnpkg.com/@volo/abp.ng.lepton-x.core/-/abp.ng.lepton-x.core-2.4.7.tgz#350ebc378e8858dc42980a1af7075a69b2f8b669"
-  integrity sha512-Pyi/3Svlo6Wr8oJFL1SEnwIx/NP3PPq+Q19lKputbmB01rPm7P3LWrxS/Gj1MMJMVFeSr2oiS5TrsImK7C/UgQ==
+"@volo/abp.ng.lepton-x.core@3.0.4":
+  version "3.0.4"
+  resolved "https://registry.yarnpkg.com/@volo/abp.ng.lepton-x.core/-/abp.ng.lepton-x.core-3.0.4.tgz#3af6cb2f5954174c00f1d06c1015a9c5ea9109c4"
+  integrity sha512-EiHapEPBpWqN6kXPhFOdXGWr3dATd7p1fnCU0aMWvVYs48UF4u7fX04+WciZLtKP7dEIw0Bv9QbTqQ6UTzjyZA==
   dependencies:
-    "@volo/ngx-lepton-x.core" "2.4.7"
+    "@volo/ngx-lepton-x.core" "3.0.4"
     tslib "^2.3.0"
 
-"@volo/ngx-lepton-x.core@2.4.7":
-  version "2.4.7"
-  resolved "https://registry.yarnpkg.com/@volo/ngx-lepton-x.core/-/ngx-lepton-x.core-2.4.7.tgz#1df32c247beb64067351713dcdb3bcb8acb797e6"
-  integrity sha512-k9hdJi1u6WfmVsIBBIJLSUN35ZyweO4cRIYCkxnuhQYAJBkBeFSde/qhZukq9c7SpICF6CY8Y3SopRXRmxt50A==
+"@volo/ngx-lepton-x.core@3.0.4":
+  version "3.0.4"
+  resolved "https://registry.yarnpkg.com/@volo/ngx-lepton-x.core/-/ngx-lepton-x.core-3.0.4.tgz#d5ef19ee5467226402fc48dec77483ea211f67b9"
+  integrity sha512-Z2Ryy5/VfXnP1H4yocLbjFyfTnhJueLxuLO2aOvneAkJTEAwNL3++qaBN2eM8ZI2TbB9pPqs1BK2ALzU/mVQbg==
   dependencies:
     perfect-scrollbar "^1.5.5"
     ts-toolbelt "^6.15.4"
     tslib "^2.3.0"
 
-"@volo/ngx-lepton-x.lite@2.4.7":
-  version "2.4.7"
-  resolved "https://registry.yarnpkg.com/@volo/ngx-lepton-x.lite/-/ngx-lepton-x.lite-2.4.7.tgz#75cdb0525067cd1979adfb796b9c940aee7ca5c4"
-  integrity sha512-fQOY2mNFI6b1Hxuo1wAVaZJ1rZX9/k4evrhjbUQl8mPHqcW96kDEOo2KEsJxhbW9IJOgV0UWttxpoKjLkweXhQ==
+"@volo/ngx-lepton-x.lite@3.0.4":
+  version "3.0.4"
+  resolved "https://registry.yarnpkg.com/@volo/ngx-lepton-x.lite/-/ngx-lepton-x.lite-3.0.4.tgz#64248105886608bc25f9529b27fc8d84dba6cbab"
+  integrity sha512-PHbyJgewH2JG26fC4T0lFC4JMxn1/9+lbZ2jICkD/8DXjvbtDXHLA/Lvmri+AvcoYUK3+eAPBYpPnmM/3+rlig==
   dependencies:
-    "@ng-bootstrap/ng-bootstrap" "^15.0.0"
-    "@volo/ngx-lepton-x.core" "2.4.7"
+    "@ng-bootstrap/ng-bootstrap" "~16.0.0"
+    "@volo/ngx-lepton-x.core" "3.0.4"
     bootstrap-icons "~1.7.2"
     tslib "^2.3.0"
 

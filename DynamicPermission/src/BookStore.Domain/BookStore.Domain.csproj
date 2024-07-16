@@ -1,0 +1,28 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="..\..\common.props" />
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <RootNamespace>BookStore</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\BookStore.Domain.Shared\BookStore.Domain.Shared.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Volo.Abp.Emailing" Version="8.2.0" />
+    <PackageReference Include="Volo.Abp.Identity.Domain" Version="8.2.0" />
+    <PackageReference Include="Volo.Abp.PermissionManagement.Domain.Identity" Version="8.2.0" />
+    <PackageReference Include="Volo.Abp.BackgroundJobs.Domain" Version="8.2.0" />
+    <PackageReference Include="Volo.Abp.AuditLogging.Domain" Version="8.2.0" />
+    <PackageReference Include="Volo.Abp.TenantManagement.Domain" Version="8.2.0" />
+    <PackageReference Include="Volo.Abp.FeatureManagement.Domain" Version="8.2.0" />
+    <PackageReference Include="Volo.Abp.SettingManagement.Domain" Version="8.2.0" />
+    <PackageReference Include="Volo.Abp.OpenIddict.Domain" Version="8.2.0" />
+    <PackageReference Include="Volo.Abp.PermissionManagement.Domain.OpenIddict" Version="8.2.0" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,1 @@
+acme.sh --issue --dns dns_cf -d getabp.net -d '*.getabp.net'  -d '*.api.getabp.net'  -d '*.ids.getabp.net'  -d '*.ng.getabp.net'  -d '*.web.getabp.net'

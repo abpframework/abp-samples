@@ -1,0 +1,41 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <Import Project="..\..\common.props" />
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <AssetTargetFallback>$(AssetTargetFallback);portable-net45+win8+wp8+wpa81;</AssetTargetFallback>
+    <IsPackable>true</IsPackable>
+    <OutputType>Library</OutputType>
+    <RootNamespace>ModularCrm.Products.Web</RootNamespace>
+    <GenerateEmbeddedFilesManifest>true</GenerateEmbeddedFilesManifest>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Volo.Abp.AutoMapper" Version="8.2.2" />
+    <PackageReference Include="Volo.Abp.AspNetCore.Mvc.UI.Theme.Shared" Version="8.2.2"/>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ModularCrm.Products.Application.Contracts\ModularCrm.Products.Application.Contracts.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.FileProviders.Embedded" Version="8.0.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Pages\**\*.css" />
+    <EmbeddedResource Include="Pages\**\*.js" />
+    <EmbeddedResource Include="Components\**\*.js" />
+    <EmbeddedResource Include="Components\**\*.css" />
+    <EmbeddedResource Include="wwwroot\**\*.*" />
+    <Content Remove="Pages\**\*.css" />
+    <Content Remove="Pages\**\*.js" />
+    <Content Remove="Components\**\*.js" />
+    <Content Remove="Components\**\*.css" />
+    <Content Remove="wwwroot\**\*.*" />
+  </ItemGroup>
+
+</Project>

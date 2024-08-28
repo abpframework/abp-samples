@@ -9,6 +9,10 @@
     "ModularCrm": {
       "path": "ModularCrm.abpmdl",
       "folder": "main"
+    },
+    "ModularCrm.Products": {
+      "path": "modules/modularcrm.products/ModularCrm.Products.abpmdl",
+      "folder": "modules"
     }
   },
   "runProfiles": {

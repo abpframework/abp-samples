@@ -1,0 +1,21 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="..\..\common.props" />
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <RootNamespace>ModularCrm.Products</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.8.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\ModularCrm.Products.Domain\ModularCrm.Products.Domain.csproj" />
+    <ProjectReference Include="..\ModularCrm.Products.TestBase\ModularCrm.Products.TestBase.csproj" />
+  </ItemGroup>
+
+
+</Project>

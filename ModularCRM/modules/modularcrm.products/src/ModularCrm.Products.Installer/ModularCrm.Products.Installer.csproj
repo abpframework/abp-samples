@@ -1,0 +1,29 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="..\..\common.props"/>
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <GenerateEmbeddedFilesManifest>true</GenerateEmbeddedFilesManifest>
+    <RootNamespace>ModularCrm.Products</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Volo.Abp.VirtualFileSystem" Version="8.2.2"/>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="..\..\ModularCrm.Products.abpmdl"/>
+    <Content Include="..\..\ModularCrm.Products.abpmdl">
+      <Pack>true</Pack>
+      <PackagePath>content\</PackagePath>
+    </Content>
+    <None Remove="..\..\**\*.abppkg*" />
+    <Content Include="..\..\**\*.abppkg*">
+      <Pack>true</Pack>
+      <PackagePath>content\</PackagePath>
+    </Content>
+  </ItemGroup>
+
+</Project>

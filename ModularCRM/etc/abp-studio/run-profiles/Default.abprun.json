@@ -1,0 +1,10 @@
+﻿{
+  "applications": {
+    "ModularCrm.Web": {
+      "type": "dotnet-project",
+      "launchUrl": "https://localhost:44358",
+      "path": "../../../src/ModularCrm.Web/ModularCrm.Web.csproj",
+      "kubernetesService": ".*-web$"
+    }
+  }
+}

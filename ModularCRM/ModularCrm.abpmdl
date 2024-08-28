@@ -1,0 +1,89 @@
+{
+  "template": "app",
+  "imports": {
+    "Volo.Abp.Account": {
+      "version": "8.2.2",
+      "isInstalled": true
+    },
+    "Volo.Abp.OpenIddict": {
+      "version": "8.2.2",
+      "isInstalled": true
+    },
+    "Volo.Abp.Identity": {
+      "version": "8.2.2",
+      "isInstalled": true
+    },
+    "Volo.Abp.TenantManagement": {
+      "version": "8.2.2",
+      "isInstalled": true
+    }
+  },
+  "folders": {
+    "items": {
+      "src": {},
+      "test": {}
+    }
+  },
+  "packages": {
+    "ModularCrm.Application": {
+      "path": "src/ModularCrm.Application/ModularCrm.Application.abppkg",
+      "folder": "src"
+    },
+    "ModularCrm.Application.Tests": {
+      "path": "test/ModularCrm.Application.Tests/ModularCrm.Application.Tests.abppkg",
+      "folder": "test"
+    },
+    "ModularCrm.Domain.Shared": {
+      "path": "src/ModularCrm.Domain.Shared/ModularCrm.Domain.Shared.abppkg",
+      "folder": "src"
+    },
+    "ModularCrm.Application.Contracts": {
+      "path": "src/ModularCrm.Application.Contracts/ModularCrm.Application.Contracts.abppkg",
+      "folder": "src"
+    },
+    "ModularCrm.HttpApi": {
+      "path": "src/ModularCrm.HttpApi/ModularCrm.HttpApi.abppkg",
+      "folder": "src"
+    },
+    "ModularCrm.HttpApi.Client": {
+      "path": "src/ModularCrm.HttpApi.Client/ModularCrm.HttpApi.Client.abppkg",
+      "folder": "src"
+    },
+    "ModularCrm.Web": {
+      "path": "src/ModularCrm.Web/ModularCrm.Web.abppkg",
+      "folder": "src"
+    },
+    "ModularCrm.Web.Tests": {
+      "path": "test/ModularCrm.Web.Tests/ModularCrm.Web.Tests.abppkg",
+      "folder": "test"
+    },
+    "ModularCrm.EntityFrameworkCore.Tests": {
+      "path": "test/ModularCrm.EntityFrameworkCore.Tests/ModularCrm.EntityFrameworkCore.Tests.abppkg",
+      "folder": "test"
+    },
+    "ModularCrm.EntityFrameworkCore": {
+      "path": "src/ModularCrm.EntityFrameworkCore/ModularCrm.EntityFrameworkCore.abppkg",
+      "folder": "src"
+    },
+    "ModularCrm.TestBase": {
+      "path": "test/ModularCrm.TestBase/ModularCrm.TestBase.abppkg",
+      "folder": "test"
+    },
+    "ModularCrm.Domain.Tests": {
+      "path": "test/ModularCrm.Domain.Tests/ModularCrm.Domain.Tests.abppkg",
+      "folder": "test"
+    },
+    "ModularCrm.HttpApi.Client.ConsoleTestApp": {
+      "path": "test/ModularCrm.HttpApi.Client.ConsoleTestApp/ModularCrm.HttpApi.Client.ConsoleTestApp.abppkg",
+      "folder": "test"
+    },
+    "ModularCrm.DbMigrator": {
+      "path": "src/ModularCrm.DbMigrator/ModularCrm.DbMigrator.abppkg",
+      "folder": "src"
+    },
+    "ModularCrm.Domain": {
+      "path": "src/ModularCrm.Domain/ModularCrm.Domain.abppkg",
+      "folder": "src"
+    }
+  }
+}

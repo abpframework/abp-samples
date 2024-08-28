@@ -1,0 +1,29 @@
+{
+  "culture": "sl",
+  "texts": {
+    "Menu:Home": "Domov",
+    "Menu:ContactUs": "Kontaktiraj nas",
+    "Menu:ArticleSample": "Vzorec članka",
+    "Home": "Domov",
+    "Welcome": "Dobrodošli",
+    "LongWelcomeMessage": "Dobrodošli v aplikaciji. To je osnovni projekt, ki temelji na razvojnem okolju ABP. Za več informacij obiščite",
+    "Date": "datum",
+    "Permission:Dashboard": "Nadzorna plošča",
+    "Menu:Dashboard": "Nadzorna plošča",
+    "Menu:HomePage": "Domača stran",
+    "Dashboard": "Nadzorna plošča",
+    "ExternalProvider:Google": "Google",
+    "ExternalProvider:Google:ClientId": "ID stranke",
+    "ExternalProvider:Google:ClientSecret": "Skrivnost stranke",
+    "ExternalProvider:Microsoft": "Microsoft",
+    "ExternalProvider:Microsoft:ClientId": "ID stranke",
+    "ExternalProvider:Microsoft:ClientSecret": "Skrivnost stranke",
+    "ExternalProvider:Twitter": "Twitter",
+    "ExternalProvider:Twitter:ConsumerKey": "Potrošniški ključ",
+    "ExternalProvider:Twitter:ConsumerSecret": "Potrošnikova skrivnost",
+    "NewsletterHeader": "Naročite se na novice!",
+    "NewsletterInfo": "Pridobite informacije o najnovejših dogodkih.",
+    "NewsletterPreference_Default": "Privzeto glasilo",
+    "NewsletterPrivacyAcceptMessage": "Sprejemam <a href='/privacy-policy'>pravilnik o zasebnosti</a>."
+  }
+}

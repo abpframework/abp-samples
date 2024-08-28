@@ -1,0 +1,30 @@
+{
+  "culture": "zh-Hans",
+  "texts": {
+    "Menu:Home": "首页",
+    "Menu:ContactUs": "联系我们",
+    "Menu:ArticleSample": "文章示例",
+    "Home": "首页",
+    "Welcome": "欢迎",
+    "LongWelcomeMessage": "欢迎来到该应用程序. 这是一个基于ABP框架的启动项目. 有关更多信息, 请访问",
+    "Date": "日期",
+    "Permission:Dashboard": "仪表板",
+    "Menu:Dashboard": "仪表板",
+    "Menu:HomePage": "主页",
+    "Dashboard": "仪表板",
+    "ExternalProvider:Google": "谷歌",
+    "ExternalProvider:Google:ClientId": "客户端ID",
+    "ExternalProvider:Google:ClientSecret": "客户端机密",
+    "ExternalProvider:Microsoft": "微软",
+    "ExternalProvider:Microsoft:ClientId": "客户端ID",
+    "ExternalProvider:Microsoft:ClientSecret": "客户端机密",
+    "ExternalProvider:Twitter": "推特",
+    "ExternalProvider:Twitter:ConsumerKey": "API密钥",
+    "ExternalProvider:Twitter:ConsumerSecret": "API机密",
+    "NewsletterHeader": "订阅新闻简讯",
+    "NewsletterInfo": "获取最新的状态",
+    "NewsletterPreference_Default": "默认简讯",
+    "NewsletterPrivacyAcceptMessage": "我同意<a href='/privacy-policy'>隐私政策</a>.",
+    "ChangeLanguage": "更改语言"
+  }
+}

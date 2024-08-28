@@ -7,9 +7,10 @@
   },
   "modules": {
     "ModularCrm": {
-      "path": "ModularCrm.abpmdl"
+      "path": "ModularCrm.abpmdl",
+      "folder": "main"
     }
-  }, 
+  },
   "runProfiles": {
     "Default": {
       "path": "etc/abp-studio/run-profiles/Default.abprun.json"
@@ -17,8 +18,8 @@
   },
   "options": {
     "httpRequests": {
-        "ignoredUrls": [
-          "^/metrics$"
+      "ignoredUrls": [
+        "^/metrics$"
       ]
     }
   },
@@ -35,5 +36,11 @@
     "mobileFramework": "none",
     "publicWebsite": "false",
     "socialLogin": ""
+  },
+  "folders": {
+    "items": {
+      "modules": {},
+      "main": {}
+    }
   }
 }

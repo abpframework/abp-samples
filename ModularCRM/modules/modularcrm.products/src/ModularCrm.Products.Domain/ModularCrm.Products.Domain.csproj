@@ -11,7 +11,6 @@
   <ItemGroup>
     <PackageReference Include="Volo.Abp.Ddd.Domain" Version="8.2.2"/>
     <ProjectReference Include="..\ModularCrm.Products.Domain.Shared\ModularCrm.Products.Domain.Shared.csproj" />
-    <PackageReference Include="Volo.Abp.Commercial.SuiteTemplates" Version="8.2.2" />
   </ItemGroup>
 
 </Project>

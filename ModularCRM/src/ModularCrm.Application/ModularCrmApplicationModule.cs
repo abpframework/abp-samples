@@ -1,4 +1,5 @@
-﻿using Volo.Abp.PermissionManagement;
+using ModularCrm.Products;
+using Volo.Abp.PermissionManagement;
 using Volo.Abp.SettingManagement;
 using Volo.Abp.Account;
 using Volo.Abp.Identity;
@@ -10,6 +11,7 @@ using Volo.Abp.TenantManagement;
 namespace ModularCrm;
 
 [DependsOn(
+    typeof(ProductsApplicationModule),
     typeof(ModularCrmDomainModule),
     typeof(ModularCrmApplicationContractsModule),
     typeof(AbpPermissionManagementApplicationModule),

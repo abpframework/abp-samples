@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+using ModularCrm.Products;
+using Microsoft.Extensions.DependencyInjection;
 using Volo.Abp.Account;
 using Volo.Abp.Modularity;
 using Volo.Abp.PermissionManagement;
@@ -11,6 +12,7 @@ using Volo.Abp.TenantManagement;
 namespace ModularCrm;
 
 [DependsOn(
+    typeof(ProductsHttpApiClientModule),
     typeof(ModularCrmApplicationContractsModule),
     typeof(AbpPermissionManagementHttpApiClientModule),
     typeof(AbpFeatureManagementHttpApiClientModule),

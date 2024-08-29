@@ -16,6 +16,10 @@
     "Volo.Abp.TenantManagement": {
       "version": "8.2.2",
       "isInstalled": true
+    },
+    "ModularCrm.Products": {
+      "path": "modules/modularcrm.products/ModularCrm.Products.abpmdl",
+      "isInstalled": true
     }
   },
   "folders": {

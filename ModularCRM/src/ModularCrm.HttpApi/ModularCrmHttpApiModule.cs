@@ -1,4 +1,5 @@
-﻿using Localization.Resources.AbpUi;
+using ModularCrm.Products;
+using Localization.Resources.AbpUi;
 using ModularCrm.Localization;
 using Volo.Abp.Account;
 using Volo.Abp.SettingManagement;
@@ -12,6 +13,7 @@ using Volo.Abp.TenantManagement;
 namespace ModularCrm;
 
  [DependsOn(
+    typeof(ProductsHttpApiModule),
     typeof(ModularCrmApplicationContractsModule),
     typeof(AbpPermissionManagementHttpApiModule),
     typeof(AbpSettingManagementHttpApiModule),

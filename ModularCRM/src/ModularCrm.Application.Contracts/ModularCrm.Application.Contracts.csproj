@@ -1,17 +1,14 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
-
+<Project Sdk="Microsoft.NET.Sdk">
   <Import Project="..\..\common.props" />
-
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
     <Nullable>enable</Nullable>
     <RootNamespace>ModularCrm</RootNamespace>
   </PropertyGroup>
-
   <ItemGroup>
     <ProjectReference Include="..\ModularCrm.Domain.Shared\ModularCrm.Domain.Shared.csproj" />
+    <ProjectReference Include="../../modules/modularcrm.products/src/ModularCrm.Products.Application.Contracts/ModularCrm.Products.Application.Contracts.csproj" />
   </ItemGroup>
-  
   <ItemGroup>
     <PackageReference Include="Volo.Abp.PermissionManagement.Application.Contracts" Version="8.2.2" />
     <PackageReference Include="Volo.Abp.FeatureManagement.Application.Contracts" Version="8.2.2" />
@@ -20,5 +17,4 @@
     <PackageReference Include="Volo.Abp.Account.Application.Contracts" Version="8.2.2" />
     <PackageReference Include="Volo.Abp.TenantManagement.Application.Contracts" Version="8.2.2" />
   </ItemGroup>
-
 </Project>

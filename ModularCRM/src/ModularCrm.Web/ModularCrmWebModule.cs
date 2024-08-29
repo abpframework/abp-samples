@@ -1,3 +1,4 @@
+using ModularCrm.Products.Web;
 using System.IO;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -51,6 +52,7 @@ using Volo.Abp.Studio.Client.AspNetCore;
 namespace ModularCrm.Web;
 
 [DependsOn(
+    typeof(ProductsWebModule),
     typeof(ModularCrmHttpApiModule),
     typeof(ModularCrmApplicationModule),
     typeof(ModularCrmEntityFrameworkCoreModule),

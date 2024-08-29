@@ -1,3 +1,4 @@
+using ModularCrm.Products.EntityFrameworkCore;
 using System;
 using Microsoft.Extensions.DependencyInjection;
 using Volo.Abp.Uow;
@@ -17,6 +18,7 @@ using Volo.Abp.TenantManagement.EntityFrameworkCore;
 namespace ModularCrm.EntityFrameworkCore;
 
 [DependsOn(
+    typeof(ProductsEntityFrameworkCoreModule),
     typeof(ModularCrmDomainModule),
     typeof(AbpPermissionManagementEntityFrameworkCoreModule),
     typeof(AbpSettingManagementEntityFrameworkCoreModule),

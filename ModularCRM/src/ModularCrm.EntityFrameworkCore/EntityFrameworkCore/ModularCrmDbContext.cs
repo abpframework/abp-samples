@@ -14,19 +14,22 @@ using Volo.Abp.SettingManagement.EntityFrameworkCore;
 using Volo.Abp.OpenIddict.EntityFrameworkCore;
 using Volo.Abp.TenantManagement;
 using Volo.Abp.TenantManagement.EntityFrameworkCore;
+using ModularCrm.Products.EntityFrameworkCore;
+using ModularCrm.Products;
 
 namespace ModularCrm.EntityFrameworkCore;
 
 [ReplaceDbContext(typeof(IIdentityDbContext))]
 [ReplaceDbContext(typeof(ITenantManagementDbContext))]
+[ReplaceDbContext(typeof(IProductsDbContext))]
 [ConnectionStringName("Default")]
 public class ModularCrmDbContext :
     AbpDbContext<ModularCrmDbContext>,
     ITenantManagementDbContext,
-    IIdentityDbContext
+    IIdentityDbContext,
+    IProductsDbContext
 {
-    /* Add DbSet properties for your Aggregate Roots / Entities here. */
-
+    public DbSet<Product> Products { get; set; }
 
     #region Entities from the modules
 
@@ -78,6 +81,7 @@ public class ModularCrmDbContext :
         builder.ConfigureOpenIddict();
         builder.ConfigureTenantManagement();
         builder.ConfigureBlobStoring();
+        builder.ConfigureProducts();
         
         /* Configure your own tables/entities inside here */
 

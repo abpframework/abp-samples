@@ -7,9 +7,7 @@ namespace ModularCrm.Products.EntityFrameworkCore;
 [ConnectionStringName(ProductsDbProperties.ConnectionStringName)]
 public class ProductsDbContext : AbpDbContext<ProductsDbContext>, IProductsDbContext
 {
-    /* Add DbSet for each Aggregate Root here. Example:
-     * public DbSet<Question> Questions { get; set; }
-     */
+    public DbSet<Product> Products { get; set; }
 
     public ProductsDbContext(DbContextOptions<ProductsDbContext> options)
         : base(options)

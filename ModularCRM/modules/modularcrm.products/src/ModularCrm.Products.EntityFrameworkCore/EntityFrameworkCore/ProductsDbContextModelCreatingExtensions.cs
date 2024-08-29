@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Volo.Abp;
+using Volo.Abp.EntityFrameworkCore.Modeling;
 
 namespace ModularCrm.Products.EntityFrameworkCore;
 
@@ -10,24 +11,17 @@ public static class ProductsDbContextModelCreatingExtensions
     {
         Check.NotNull(builder, nameof(builder));
 
-        /* Configure all entities here. Example:
-
-        builder.Entity<Question>(b =>
+        builder.Entity<Product>(b =>
         {
             //Configure table & schema name
-            b.ToTable(ProductsDbProperties.DbTablePrefix + "Questions", ProductsDbProperties.DbSchema);
+            b.ToTable(ProductsDbProperties.DbTablePrefix + "Products",
+                      ProductsDbProperties.DbSchema);
 
+            //Always call this method to setup base entity properties
             b.ConfigureByConvention();
 
-            //Properties
-            b.Property(q => q.Title).IsRequired().HasMaxLength(QuestionConsts.MaxTitleLength);
-
-            //Relations
-            b.HasMany(question => question.Tags).WithOne().HasForeignKey(qt => qt.QuestionId);
-
-            //Indexes
-            b.HasIndex(q => q.CreationTime);
+            //Properties of the entity
+            b.Property(q => q.Name).IsRequired().HasMaxLength(100);
         });
-        */
     }
 }

@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="..\..\common.props" />
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <RootNamespace>AspirationalAbp</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\AspirationalAbp.Application.Contracts\AspirationalAbp.Application.Contracts.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Volo.Abp.Account.HttpApi" Version="8.2.2" />
+    <PackageReference Include="Volo.Abp.Identity.HttpApi" Version="8.2.2" />
+    <PackageReference Include="Volo.Abp.PermissionManagement.HttpApi" Version="8.2.2" />
+    <PackageReference Include="Volo.Abp.TenantManagement.HttpApi" Version="8.2.2" />
+    <PackageReference Include="Volo.Abp.FeatureManagement.HttpApi" Version="8.2.2" />
+    <PackageReference Include="Volo.Abp.SettingManagement.HttpApi" Version="8.2.2" />
+  </ItemGroup>
+
+</Project>

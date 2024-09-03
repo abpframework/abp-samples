@@ -1,0 +1,114 @@
+﻿@page
+@using Microsoft.AspNetCore.Http.Extensions
+@using Microsoft.AspNetCore.Mvc.Localization
+@using AspirationalAbp.Pages
+@using AspirationalAbp.Localization
+@using Volo.Abp.Users
+@using Volo.Abp.AspNetCore.Mvc.UI.Theming
+@using Volo.Abp.Ui.Branding
+@model IndexModel
+@inject IHtmlLocalizer<AspirationalAbpResource> L
+@inject ICurrentUser CurrentUser
+@inject IBrandingProvider BrandingProvider
+@inject ITheme Theme
+
+@{
+    Layout = Theme.GetEmptyLayout();
+}
+
+@section styles {
+    <style>
+        body {
+            background-color: white;
+        }
+    </style>
+}
+
+<div class="d-flex align-items-center" style="min-height: 100vh;">
+    <div class="container">
+        <abp-row>
+            <div class="col mx-auto account-column">
+                <div class="account-brand p-4 text-center mb-1">
+                    @if (!BrandingProvider.LogoUrl.IsNullOrEmpty())
+                    {
+                        <a class="navbar-brand" href="~/" alt="@BrandingProvider.AppName"></a>
+                    }
+                    else
+                    {
+                        <h1>@BrandingProvider.AppName</h1>
+                    }
+                </div>
+
+                <abp-card>
+                    <abp-card-body>
+                        <div class="container">
+                            <abp-row>
+                                <abp-column size="_6">
+                                    <div class="mr-auto p-2 float-start">
+                                            <div class="">
+                                                @if (CurrentUser.IsAuthenticated)
+                                                {
+                                                    <div class="">
+                                                        <a abp-button="Outline_Primary" asp-controller="Manage" asp-action="Index" asp-area="Account" class="me-2">@L["MyAccount"]</a>
+                                                        <a abp-button="Primary" asp-controller="Logout" asp-action="Index" asp-area="Account" asp-route-returnUrl="/" >@L["Logout"]</a>
+                                                    </div>
+                                                }
+                                                else
+                                                {
+                                                    <a abp-button="Primary" asp-controller="Login" asp-action="Index" asp-area="Account">@L["Login"]</a>
+                                                }
+                                            </div>
+                                    </div>
+                                </abp-column>
+
+                                <abp-column size="_6">
+                                    <div class="ml-auto p-2 float-end">
+                                        <abp-dropdown>
+                                            <abp-dropdown-button text="@Model.CurrentLanguage" />
+                                            @if (@Model.Languages != null)
+                                            {
+                                                <abp-dropdown-menu>
+                                                    @foreach (var language in Model.Languages)
+                                                    {
+                                                        var languageUrl = Url.Content($"~/Abp/Languages/Switch?culture={language.CultureName}&uiCulture={language.UiCultureName}&returnUrl={System.Net.WebUtility.UrlEncode(Request.GetEncodedPathAndQuery())}");
+                                                        <abp-dropdown-item href="@languageUrl">@language.DisplayName</abp-dropdown-item>
+                                                    }
+                                                </abp-dropdown-menu>
+                                            }
+                                        </abp-dropdown>
+                                    </div>
+                                </abp-column>
+                            </abp-row>
+
+                            @if (Model.Applications != null)
+                            {
+                                <hr class="m-2" />
+
+                                <abp-row class="mt-3">
+                                    @foreach (var application in Model.Applications)
+                                    {
+                                        <abp-column size-md="@Volo.Abp.AspNetCore.Mvc.UI.Bootstrap.TagHelpers.Grid.ColumnSize._4" class="mb-2">
+                                            <abp-card>
+                                                <abp-card-body>
+                                                    @if (!application.LogoUri.IsNullOrEmpty())
+                                                    {
+                                                        <div class="mx-auto">
+                                                            <img src="@application.LogoUri" style="height:64px" class="mb-3"/>
+                                                        </div>
+                                                    }
+
+                                                    <h4>@application.DisplayName</h4>
+                                                    <a href="@application.ClientUri" class="text-muted stretched-link">@application.ClientUri</a>
+                                                </abp-card-body>
+                                            </abp-card>
+                                        </abp-column>
+                                    }
+                                </abp-row>
+                            }
+                        </div>
+                    </abp-card-body>
+                </abp-card>
+            </div>
+        </abp-row>
+    </div>
+</div>

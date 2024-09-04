@@ -38,6 +38,7 @@ using System;
 using System.Security.Cryptography.X509Certificates;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Extensions.DependencyInjection;
+using ModularCrm.Products;
 using Volo.Abp.Account.Web;
 using Volo.Abp.AspNetCore.Mvc.UI.Bundling;
 using Volo.Abp.AspNetCore.Mvc.UI.Theme.Shared.Toolbars;
@@ -108,6 +109,11 @@ public class ModularCrmWebModule : AbpModule
                 builder.SetIssuer(new Uri(configuration["AuthServer:Authority"]));
             });
         }
+        
+        PreConfigure<IMvcBuilder>(mvcBuilder =>
+        {
+            mvcBuilder.AddApplicationPartIfNotExists(typeof(ProductsApplicationModule).Assembly);
+        });
     }
 
     public override void ConfigureServices(ServiceConfigurationContext context)
@@ -233,6 +239,7 @@ public class ModularCrmWebModule : AbpModule
         Configure<AbpAspNetCoreMvcOptions>(options =>
         {
             options.ConventionalControllers.Create(typeof(ModularCrmApplicationModule).Assembly);
+            options.ConventionalControllers.Create(typeof(ProductsApplicationModule).Assembly);
         });
     }
 

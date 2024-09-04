@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Volo.Abp.Domain.Repositories;
 
@@ -11,6 +12,12 @@ public class ProductAppService : ProductsAppService, IProductAppService
     public ProductAppService(IRepository<Product, Guid> productRepository)
     {
         _productRepository = productRepository;
+    }
+
+    public async Task<List<ProductDto>> GetListAsync()
+    {
+        var products = await _productRepository.GetListAsync();
+        return ObjectMapper.Map<List<Product>, List<ProductDto>>(products);
     }
 
     public async Task CreateAsync(ProductCreationDto input)

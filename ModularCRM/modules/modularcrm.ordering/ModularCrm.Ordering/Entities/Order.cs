@@ -1,6 +1,6 @@
-﻿using Acme.Ecommerce.OrderingService.Enums;
-using System;
+﻿using System;
 using Volo.Abp.Domain.Entities;
+using ModularCrm.Ordering.Contracts.Enums;
 
 namespace ModularCrm.Ordering.Entities
 {

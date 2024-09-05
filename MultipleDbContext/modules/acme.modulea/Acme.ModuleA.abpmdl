@@ -1,0 +1,54 @@
+{
+  "folders": {
+    "items": {
+      "src": {},
+      "test": {}
+    }
+  },
+  "packages": {
+    "Acme.ModuleA.Domain.Shared": {
+      "path": "src/Acme.ModuleA.Domain.Shared/Acme.ModuleA.Domain.Shared.abppkg",
+      "folder": "src"
+    },
+    "Acme.ModuleA.Domain": {
+      "path": "src/Acme.ModuleA.Domain/Acme.ModuleA.Domain.abppkg",
+      "folder": "src"
+    },
+    "Acme.ModuleA.Application.Contracts": {
+      "path": "src/Acme.ModuleA.Application.Contracts/Acme.ModuleA.Application.Contracts.abppkg",
+      "folder": "src"
+    },
+    "Acme.ModuleA.Application": {
+      "path": "src/Acme.ModuleA.Application/Acme.ModuleA.Application.abppkg",
+      "folder": "src"
+    },
+    "Acme.ModuleA.EntityFrameworkCore": {
+      "path": "src/Acme.ModuleA.EntityFrameworkCore/Acme.ModuleA.EntityFrameworkCore.abppkg",
+      "folder": "src"
+    },
+    "Acme.ModuleA.HttpApi": {
+      "path": "src/Acme.ModuleA.HttpApi/Acme.ModuleA.HttpApi.abppkg",
+      "folder": "src"
+    },
+    "Acme.ModuleA.HttpApi.Client": {
+      "path": "src/Acme.ModuleA.HttpApi.Client/Acme.ModuleA.HttpApi.Client.abppkg",
+      "folder": "src"
+    },
+    "Acme.ModuleA.TestBase": {
+      "path": "test/Acme.ModuleA.TestBase/Acme.ModuleA.TestBase.abppkg",
+      "folder": "test"
+    },
+    "Acme.ModuleA.EntityFrameworkCore.Tests": {
+      "path": "test/Acme.ModuleA.EntityFrameworkCore.Tests/Acme.ModuleA.EntityFrameworkCore.Tests.abppkg",
+      "folder": "test"
+    },
+    "Acme.ModuleA.Domain.Tests": {
+      "path": "test/Acme.ModuleA.Domain.Tests/Acme.ModuleA.Domain.Tests.abppkg",
+      "folder": "test"
+    },
+    "Acme.ModuleA.Application.Tests": {
+      "path": "test/Acme.ModuleA.Application.Tests/Acme.ModuleA.Application.Tests.abppkg",
+      "folder": "test"
+    }
+  }
+}

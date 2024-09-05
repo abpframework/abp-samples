@@ -1,1 +1,7 @@
-{}
+{
+  "packages": {
+    "ModularCrm.Ordering.Contracts": {
+      "path": "ModularCrm.Ordering.Contracts/ModularCrm.Ordering.Contracts.abppkg"
+    }
+  }
+}

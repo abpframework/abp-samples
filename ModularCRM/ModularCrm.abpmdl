@@ -20,6 +20,10 @@
     "ModularCrm.Products": {
       "path": "modules/modularcrm.products/ModularCrm.Products.abpmdl",
       "isInstalled": true
+    },
+    "ModularCrm.Ordering": {
+      "path": "modules/modularcrm.ordering/ModularCrm.Ordering.abpmdl",
+      "isInstalled": true
     }
   },
   "folders": {

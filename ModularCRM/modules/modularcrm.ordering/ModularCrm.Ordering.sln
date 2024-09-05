@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # 
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ModularCrm.Ordering.Contracts", "ModularCrm.Ordering.Contracts\ModularCrm.Ordering.Contracts.csproj", "{1BAC7BA9-CA00-483F-AC4B-171650DBA677}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ModularCrm.Ordering", "ModularCrm.Ordering\ModularCrm.Ordering.csproj", "{823675BD-DC5A-4864-8182-66CE0044C564}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -28,5 +30,17 @@ Global
 		{1BAC7BA9-CA00-483F-AC4B-171650DBA677}.Release|x64.Build.0 = Release|Any CPU
 		{1BAC7BA9-CA00-483F-AC4B-171650DBA677}.Release|x86.ActiveCfg = Release|Any CPU
 		{1BAC7BA9-CA00-483F-AC4B-171650DBA677}.Release|x86.Build.0 = Release|Any CPU
+		{823675BD-DC5A-4864-8182-66CE0044C564}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{823675BD-DC5A-4864-8182-66CE0044C564}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{823675BD-DC5A-4864-8182-66CE0044C564}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{823675BD-DC5A-4864-8182-66CE0044C564}.Debug|x64.Build.0 = Debug|Any CPU
+		{823675BD-DC5A-4864-8182-66CE0044C564}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{823675BD-DC5A-4864-8182-66CE0044C564}.Debug|x86.Build.0 = Debug|Any CPU
+		{823675BD-DC5A-4864-8182-66CE0044C564}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{823675BD-DC5A-4864-8182-66CE0044C564}.Release|Any CPU.Build.0 = Release|Any CPU
+		{823675BD-DC5A-4864-8182-66CE0044C564}.Release|x64.ActiveCfg = Release|Any CPU
+		{823675BD-DC5A-4864-8182-66CE0044C564}.Release|x64.Build.0 = Release|Any CPU
+		{823675BD-DC5A-4864-8182-66CE0044C564}.Release|x86.ActiveCfg = Release|Any CPU
+		{823675BD-DC5A-4864-8182-66CE0044C564}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

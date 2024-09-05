@@ -13,6 +13,10 @@
     "ModularCrm.Products": {
       "path": "modules/modularcrm.products/ModularCrm.Products.abpmdl",
       "folder": "modules"
+    },
+    "ModularCrm.Ordering": {
+      "path": "modules/modularcrm.ordering/ModularCrm.Ordering.abpmdl",
+      "folder": "modules"
     }
   },
   "runProfiles": {

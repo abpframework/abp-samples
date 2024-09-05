@@ -14,5 +14,6 @@
   <ItemGroup>
     <PackageReference Include="Volo.Abp.AspNetCore.Mvc.UI.Theme.Shared" Version="8.2.1" />
     <ProjectReference Include="../ModularCrm.Ordering.Contracts/ModularCrm.Ordering.Contracts.csproj" />
+    <PackageReference Include="Volo.Abp.Ddd.Domain" Version="8.2.1" />
   </ItemGroup>
 </Project>

@@ -16,20 +16,25 @@ using Volo.Abp.TenantManagement;
 using Volo.Abp.TenantManagement.EntityFrameworkCore;
 using ModularCrm.Products.EntityFrameworkCore;
 using ModularCrm.Products;
+using ModularCrm.Ordering.Data;
+using ModularCrm.Ordering.Entities;
 
 namespace ModularCrm.EntityFrameworkCore;
 
 [ReplaceDbContext(typeof(IIdentityDbContext))]
 [ReplaceDbContext(typeof(ITenantManagementDbContext))]
 [ReplaceDbContext(typeof(IProductsDbContext))]
+[ReplaceDbContext(typeof(IOrderingDbContext))]
 [ConnectionStringName("Default")]
 public class ModularCrmDbContext :
     AbpDbContext<ModularCrmDbContext>,
     ITenantManagementDbContext,
     IIdentityDbContext,
-    IProductsDbContext
+    IProductsDbContext,
+    IOrderingDbContext
 {
     public DbSet<Product> Products { get; set; }
+    public DbSet<Order> Orders { get; set; }
 
     #region Entities from the modules
 

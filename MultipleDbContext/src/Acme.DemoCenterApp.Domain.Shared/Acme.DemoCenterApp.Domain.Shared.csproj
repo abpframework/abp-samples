@@ -1,0 +1,31 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <Import Project="..\..\common.props" />
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <RootNamespace>Acme.DemoCenterApp</RootNamespace>
+    <GenerateEmbeddedFilesManifest>true</GenerateEmbeddedFilesManifest>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Volo.Abp.BackgroundJobs.Domain.Shared" Version="8.2.2" />
+    <PackageReference Include="Volo.Abp.AuditLogging.Domain.Shared" Version="8.2.2" />
+    <PackageReference Include="Volo.Abp.FeatureManagement.Domain.Shared" Version="8.2.2" />
+    <PackageReference Include="Volo.Abp.PermissionManagement.Domain.Shared" Version="8.2.2" />
+    <PackageReference Include="Volo.Abp.SettingManagement.Domain.Shared" Version="8.2.2" />
+    <PackageReference Include="Volo.Abp.BlobStoring.Database.Domain.Shared" Version="8.2.2" />
+    <PackageReference Include="Volo.Abp.GlobalFeatures" Version="8.2.2" />
+    <ProjectReference Include="../../modules/acme.modulea/src/Acme.ModuleA.Domain.Shared/Acme.ModuleA.Domain.Shared.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Volo.Abp.OpenIddict.Domain.Shared" Version="8.2.2" />
+    <PackageReference Include="Volo.Abp.Identity.Domain.Shared" Version="8.2.2" />
+    <PackageReference Include="Volo.Abp.TenantManagement.Domain.Shared" Version="8.2.2" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.FileProviders.Embedded" Version="8.0.4" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Localization\DemoCenterApp\*.json" />
+    <Content Remove="Localization\DemoCenterApp\*.json" />
+  </ItemGroup>
+</Project>

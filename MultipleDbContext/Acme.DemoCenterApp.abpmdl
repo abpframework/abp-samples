@@ -1,0 +1,89 @@
+{
+  "template": "app",
+  "imports": {
+    "Volo.Abp.Account": {
+      "version": "8.2.2",
+      "isInstalled": true
+    },
+    "Volo.Abp.OpenIddict": {
+      "version": "8.2.2",
+      "isInstalled": true
+    },
+    "Volo.Abp.Identity": {
+      "version": "8.2.2",
+      "isInstalled": true
+    },
+    "Volo.Abp.TenantManagement": {
+      "version": "8.2.2",
+      "isInstalled": true
+    },
+    "Acme.ModuleA": {
+      "path": "modules/acme.modulea/Acme.ModuleA.abpmdl",
+      "isInstalled": true
+    }
+  },
+  "folders": {
+    "items": {
+      "src": {},
+      "test": {}
+    }
+  },
+  "packages": {
+    "Acme.DemoCenterApp.Application": {
+      "path": "src/Acme.DemoCenterApp.Application/Acme.DemoCenterApp.Application.abppkg",
+      "folder": "src"
+    },
+    "Acme.DemoCenterApp.Application.Tests": {
+      "path": "test/Acme.DemoCenterApp.Application.Tests/Acme.DemoCenterApp.Application.Tests.abppkg",
+      "folder": "test"
+    },
+    "Acme.DemoCenterApp.Domain.Shared": {
+      "path": "src/Acme.DemoCenterApp.Domain.Shared/Acme.DemoCenterApp.Domain.Shared.abppkg",
+      "folder": "src"
+    },
+    "Acme.DemoCenterApp.Application.Contracts": {
+      "path": "src/Acme.DemoCenterApp.Application.Contracts/Acme.DemoCenterApp.Application.Contracts.abppkg",
+      "folder": "src"
+    },
+    "Acme.DemoCenterApp.HttpApi": {
+      "path": "src/Acme.DemoCenterApp.HttpApi/Acme.DemoCenterApp.HttpApi.abppkg",
+      "folder": "src"
+    },
+    "Acme.DemoCenterApp.HttpApi.Client": {
+      "path": "src/Acme.DemoCenterApp.HttpApi.Client/Acme.DemoCenterApp.HttpApi.Client.abppkg",
+      "folder": "src"
+    },
+    "Acme.DemoCenterApp.EntityFrameworkCore.Tests": {
+      "path": "test/Acme.DemoCenterApp.EntityFrameworkCore.Tests/Acme.DemoCenterApp.EntityFrameworkCore.Tests.abppkg",
+      "folder": "test"
+    },
+    "Acme.DemoCenterApp.EntityFrameworkCore": {
+      "path": "src/Acme.DemoCenterApp.EntityFrameworkCore/Acme.DemoCenterApp.EntityFrameworkCore.abppkg",
+      "folder": "src"
+    },
+    "Acme.DemoCenterApp.TestBase": {
+      "path": "test/Acme.DemoCenterApp.TestBase/Acme.DemoCenterApp.TestBase.abppkg",
+      "folder": "test"
+    },
+    "Acme.DemoCenterApp.Domain.Tests": {
+      "path": "test/Acme.DemoCenterApp.Domain.Tests/Acme.DemoCenterApp.Domain.Tests.abppkg",
+      "folder": "test"
+    },
+    "Acme.DemoCenterApp.HttpApi.Client.ConsoleTestApp": {
+      "path": "test/Acme.DemoCenterApp.HttpApi.Client.ConsoleTestApp/Acme.DemoCenterApp.HttpApi.Client.ConsoleTestApp.abppkg",
+      "folder": "test"
+    },
+    "Acme.DemoCenterApp.DbMigrator": {
+      "path": "src/Acme.DemoCenterApp.DbMigrator/Acme.DemoCenterApp.DbMigrator.abppkg",
+      "folder": "src"
+    },
+    "Acme.DemoCenterApp.HttpApi.Host": {
+      "path": "src/Acme.DemoCenterApp.HttpApi.Host/Acme.DemoCenterApp.HttpApi.Host.abppkg",
+      "folder": "src"
+    },
+    "Acme.DemoCenterApp.Domain": {
+      "path": "src/Acme.DemoCenterApp.Domain/Acme.DemoCenterApp.Domain.abppkg",
+      "folder": "src"
+    }
+  }
+}

@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <Import Project="..\..\common.props" />
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <RootNamespace>Acme.DemoCenterApp</RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Acme.DemoCenterApp.Domain\Acme.DemoCenterApp.Domain.csproj" />
+    <ProjectReference Include="..\Acme.DemoCenterApp.Application.Contracts\Acme.DemoCenterApp.Application.Contracts.csproj" />
+    <ProjectReference Include="../../modules/acme.modulea/src/Acme.ModuleA.Application/Acme.ModuleA.Application.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Volo.Abp.PermissionManagement.Application" Version="8.2.2" />
+    <PackageReference Include="Volo.Abp.FeatureManagement.Application" Version="8.2.2" />
+    <PackageReference Include="Volo.Abp.SettingManagement.Application" Version="8.2.2" />
+    <PackageReference Include="Volo.Abp.Account.Application" Version="8.2.2" />
+    <PackageReference Include="Volo.Abp.Identity.Application" Version="8.2.2" />
+    <PackageReference Include="Volo.Abp.TenantManagement.Application" Version="8.2.2" />
+  </ItemGroup>
+</Project>

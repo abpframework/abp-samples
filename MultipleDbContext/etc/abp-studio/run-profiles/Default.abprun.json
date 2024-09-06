@@ -1,0 +1,10 @@
+﻿{
+  "applications": {
+    "Acme.DemoCenterApp.HttpApi.Host": {
+      "type": "dotnet-project",
+      "launchUrl": "https://localhost:44392",
+      "path": "../../../src/Acme.DemoCenterApp.HttpApi.Host/Acme.DemoCenterApp.HttpApi.Host.csproj",
+      "kubernetesService": ".*-httpapihost$"  
+    }
+  }
+}

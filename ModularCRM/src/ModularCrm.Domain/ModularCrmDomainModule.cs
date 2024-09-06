@@ -1,3 +1,4 @@
+using ModularCrm.Ordering;
 using ModularCrm.Products;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
@@ -22,6 +23,7 @@ using Volo.Abp.TenantManagement;
 namespace ModularCrm;
 
 [DependsOn(
+    typeof(OrderingWebModule),
     typeof(ProductsDomainModule),
     typeof(ModularCrmDomainSharedModule),
     typeof(AbpAuditLoggingDomainModule),

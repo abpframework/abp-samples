@@ -45,7 +45,6 @@
     <ProjectReference Include="..\ModularCrm.HttpApi\ModularCrm.HttpApi.csproj" />
     <ProjectReference Include="..\ModularCrm.EntityFrameworkCore\ModularCrm.EntityFrameworkCore.csproj" />
     <ProjectReference Include="../../modules/modularcrm.products/src/ModularCrm.Products.Web/ModularCrm.Products.Web.csproj" />
-    <ProjectReference Include="../../modules/modularcrm.ordering/ModularCrm.Ordering/ModularCrm.Ordering.csproj" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Volo.Abp.Autofac" Version="8.2.2" />

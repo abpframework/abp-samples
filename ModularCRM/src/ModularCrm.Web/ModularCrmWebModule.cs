@@ -1,4 +1,3 @@
-using ModularCrm.Ordering;
 using ModularCrm.Products.Web;
 using System.IO;
 using Microsoft.AspNetCore.Builder;
@@ -54,7 +53,6 @@ using Volo.Abp.Studio.Client.AspNetCore;
 namespace ModularCrm.Web;
 
 [DependsOn(
-    typeof(OrderingWebModule),
     typeof(ProductsWebModule),
     typeof(ModularCrmHttpApiModule),
     typeof(ModularCrmApplicationModule),

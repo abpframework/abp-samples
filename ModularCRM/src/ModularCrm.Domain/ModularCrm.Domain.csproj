@@ -8,6 +8,7 @@
   <ItemGroup>
     <ProjectReference Include="..\ModularCrm.Domain.Shared\ModularCrm.Domain.Shared.csproj" />
     <ProjectReference Include="../../modules/modularcrm.products/src/ModularCrm.Products.Domain/ModularCrm.Products.Domain.csproj" />
+    <ProjectReference Include="../../modules/modularcrm.ordering/ModularCrm.Ordering/ModularCrm.Ordering.csproj" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Volo.Abp.Emailing" Version="8.2.2" />

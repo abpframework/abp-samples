@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# 
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ModularCrm.Ordering.Contracts", "ModularCrm.Ordering.Contracts\ModularCrm.Ordering.Contracts.csproj", "{1BAC7BA9-CA00-483F-AC4B-171650DBA677}"
+# Visual Studio Version 17
+VisualStudioVersion = 17.11.35208.52
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ModularCrm.Ordering.Contracts", "ModularCrm.Ordering.Contracts\ModularCrm.Ordering.Contracts.csproj", "{1BAC7BA9-CA00-483F-AC4B-171650DBA677}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ModularCrm.Ordering", "ModularCrm.Ordering\ModularCrm.Ordering.csproj", "{823675BD-DC5A-4864-8182-66CE0044C564}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ModularCrm.Ordering", "ModularCrm.Ordering\ModularCrm.Ordering.csproj", "{823675BD-DC5A-4864-8182-66CE0044C564}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -13,9 +15,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 		Release|x64 = Release|x64
 		Release|x86 = Release|x86
-	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{1BAC7BA9-CA00-483F-AC4B-171650DBA677}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -42,5 +41,11 @@ Global
 		{823675BD-DC5A-4864-8182-66CE0044C564}.Release|x64.Build.0 = Release|Any CPU
 		{823675BD-DC5A-4864-8182-66CE0044C564}.Release|x86.ActiveCfg = Release|Any CPU
 		{823675BD-DC5A-4864-8182-66CE0044C564}.Release|x86.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {7FE275E9-D48D-4563-9CAB-2A3A652AE17A}
 	EndGlobalSection
 EndGlobal

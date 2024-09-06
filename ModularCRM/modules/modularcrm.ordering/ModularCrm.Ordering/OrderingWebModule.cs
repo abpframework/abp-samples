@@ -1,3 +1,4 @@
+using Volo.Abp.EntityFrameworkCore;
 using Volo.Abp.Domain;
 using ModularCrm.Ordering.Contracts;
 using Volo.Abp.Modularity;
@@ -7,6 +8,7 @@ using Microsoft.Extensions.DependencyInjection;
 namespace ModularCrm.Ordering;
 
 [DependsOn(
+    typeof(AbpEntityFrameworkCoreModule),
     typeof(AbpDddDomainModule),
     typeof(ModularCrmOrderingContractsModule),
     typeof(AbpAspNetCoreMvcUiThemeSharedModule)

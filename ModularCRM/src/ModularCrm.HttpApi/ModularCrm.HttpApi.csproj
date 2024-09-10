@@ -10,13 +10,13 @@
     <ProjectReference Include="../../modules/modularcrm.products/src/ModularCrm.Products.HttpApi/ModularCrm.Products.HttpApi.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Volo.Abp.PermissionManagement.HttpApi" Version="8.2.2" />
-    <PackageReference Include="Volo.Abp.FeatureManagement.HttpApi" Version="8.2.2" />
-    <PackageReference Include="Volo.Abp.SettingManagement.HttpApi" Version="8.2.2" />
+    <PackageReference Include="Volo.Abp.PermissionManagement.HttpApi" Version="8.3.0" />
+    <PackageReference Include="Volo.Abp.FeatureManagement.HttpApi" Version="8.3.0" />
+    <PackageReference Include="Volo.Abp.SettingManagement.HttpApi" Version="8.3.0" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Volo.Abp.Identity.HttpApi" Version="8.2.2" />
-    <PackageReference Include="Volo.Abp.Account.HttpApi" Version="8.2.2" />
-    <PackageReference Include="Volo.Abp.TenantManagement.HttpApi" Version="8.2.2" />
+    <PackageReference Include="Volo.Abp.Identity.HttpApi" Version="8.3.0" />
+    <PackageReference Include="Volo.Abp.Account.HttpApi" Version="8.3.0" />
+    <PackageReference Include="Volo.Abp.TenantManagement.HttpApi" Version="8.3.0" />
   </ItemGroup>
 </Project>

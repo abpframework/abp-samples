@@ -29,7 +29,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Volo.Abp.Autofac" Version="8.2.2" />
+    <PackageReference Include="Volo.Abp.Autofac" Version="8.3.0" />
     <ProjectReference Include="..\OpenId2Ids.Application.Contracts\OpenId2Ids.Application.Contracts.csproj" />
     <ProjectReference Include="..\OpenId2Ids.EntityFrameworkCore\OpenId2Ids.EntityFrameworkCore.csproj" />
   </ItemGroup>

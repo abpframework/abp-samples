@@ -29,7 +29,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Volo.Abp.Autofac" Version="8.2.2" />
+    <PackageReference Include="Volo.Abp.Autofac" Version="8.3.0" />
     <ProjectReference Include="..\OrganizationUnitSample.Application.Contracts\OrganizationUnitSample.Application.Contracts.csproj" />
     <ProjectReference Include="..\OrganizationUnitSample.EntityFrameworkCore.DbMigrations\OrganizationUnitSample.EntityFrameworkCore.DbMigrations.csproj" />
   </ItemGroup>

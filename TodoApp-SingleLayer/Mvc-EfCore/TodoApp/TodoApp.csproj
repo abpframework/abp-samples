@@ -12,63 +12,63 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Volo.Abp.AspNetCore.Mvc.UI.Theme.LeptonXLite" Version="3.2.0" />
+    <PackageReference Include="Volo.Abp.AspNetCore.Mvc.UI.Theme.LeptonXLite" Version="3.3.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Volo.Abp.AspNetCore.Mvc" Version="8.2.2" />
-    <PackageReference Include="Volo.Abp.Autofac" Version="8.2.2" />
-    <PackageReference Include="Volo.Abp.AutoMapper" Version="8.2.2" />
-    <PackageReference Include="Volo.Abp.Swashbuckle" Version="8.2.2" />
-    <PackageReference Include="Volo.Abp.AspNetCore.Serilog" Version="8.2.2" />
-    <PackageReference Include="Volo.Abp.EntityFrameworkCore.SqlServer" Version="8.2.2" />
+    <PackageReference Include="Volo.Abp.AspNetCore.Mvc" Version="8.3.0" />
+    <PackageReference Include="Volo.Abp.Autofac" Version="8.3.0" />
+    <PackageReference Include="Volo.Abp.AutoMapper" Version="8.3.0" />
+    <PackageReference Include="Volo.Abp.Swashbuckle" Version="8.3.0" />
+    <PackageReference Include="Volo.Abp.AspNetCore.Serilog" Version="8.3.0" />
+    <PackageReference Include="Volo.Abp.EntityFrameworkCore.SqlServer" Version="8.3.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Volo.Abp.Account.Application" Version="8.2.2" />
-    <PackageReference Include="Volo.Abp.Account.HttpApi" Version="8.2.2" />
-    <PackageReference Include="Volo.Abp.Account.Web.OpenIddict" Version="8.2.2" />
+    <PackageReference Include="Volo.Abp.Account.Application" Version="8.3.0" />
+    <PackageReference Include="Volo.Abp.Account.HttpApi" Version="8.3.0" />
+    <PackageReference Include="Volo.Abp.Account.Web.OpenIddict" Version="8.3.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Volo.Abp.PermissionManagement.Domain.Identity" Version="8.2.2" />
-    <PackageReference Include="Volo.Abp.Identity.Application" Version="8.2.2" />
-    <PackageReference Include="Volo.Abp.Identity.HttpApi" Version="8.2.2" />
-    <PackageReference Include="Volo.Abp.Identity.EntityFrameworkCore" Version="8.2.2" />
-    <PackageReference Include="Volo.Abp.OpenIddict.EntityFrameworkCore" Version="8.2.2" />
-    <PackageReference Include="Volo.Abp.Identity.Web" Version="8.2.2" />
+    <PackageReference Include="Volo.Abp.PermissionManagement.Domain.Identity" Version="8.3.0" />
+    <PackageReference Include="Volo.Abp.Identity.Application" Version="8.3.0" />
+    <PackageReference Include="Volo.Abp.Identity.HttpApi" Version="8.3.0" />
+    <PackageReference Include="Volo.Abp.Identity.EntityFrameworkCore" Version="8.3.0" />
+    <PackageReference Include="Volo.Abp.OpenIddict.EntityFrameworkCore" Version="8.3.0" />
+    <PackageReference Include="Volo.Abp.Identity.Web" Version="8.3.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Volo.Abp.PermissionManagement.Domain.OpenIddict" Version="8.2.2" />
-    <PackageReference Include="Volo.Abp.PermissionManagement.Application" Version="8.2.2" />
-    <PackageReference Include="Volo.Abp.PermissionManagement.EntityFrameworkCore" Version="8.2.2" />
-    <PackageReference Include="Volo.Abp.PermissionManagement.HttpApi" Version="8.2.2" />
+    <PackageReference Include="Volo.Abp.PermissionManagement.Domain.OpenIddict" Version="8.3.0" />
+    <PackageReference Include="Volo.Abp.PermissionManagement.Application" Version="8.3.0" />
+    <PackageReference Include="Volo.Abp.PermissionManagement.EntityFrameworkCore" Version="8.3.0" />
+    <PackageReference Include="Volo.Abp.PermissionManagement.HttpApi" Version="8.3.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Volo.Abp.TenantManagement.Application" Version="8.2.2" />
-    <PackageReference Include="Volo.Abp.TenantManagement.EntityFrameworkCore" Version="8.2.2" />
-    <PackageReference Include="Volo.Abp.TenantManagement.HttpApi" Version="8.2.2" />
-    <PackageReference Include="Volo.Abp.TenantManagement.Web" Version="8.2.2" />
+    <PackageReference Include="Volo.Abp.TenantManagement.Application" Version="8.3.0" />
+    <PackageReference Include="Volo.Abp.TenantManagement.EntityFrameworkCore" Version="8.3.0" />
+    <PackageReference Include="Volo.Abp.TenantManagement.HttpApi" Version="8.3.0" />
+    <PackageReference Include="Volo.Abp.TenantManagement.Web" Version="8.3.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Volo.Abp.FeatureManagement.Application" Version="8.2.2" />
-    <PackageReference Include="Volo.Abp.FeatureManagement.EntityFrameworkCore" Version="8.2.2" />
-    <PackageReference Include="Volo.Abp.FeatureManagement.HttpApi" Version="8.2.2" />
-    <PackageReference Include="Volo.Abp.FeatureManagement.Web" Version="8.2.2" />
+    <PackageReference Include="Volo.Abp.FeatureManagement.Application" Version="8.3.0" />
+    <PackageReference Include="Volo.Abp.FeatureManagement.EntityFrameworkCore" Version="8.3.0" />
+    <PackageReference Include="Volo.Abp.FeatureManagement.HttpApi" Version="8.3.0" />
+    <PackageReference Include="Volo.Abp.FeatureManagement.Web" Version="8.3.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Volo.Abp.SettingManagement.Application" Version="8.2.2" />
-    <PackageReference Include="Volo.Abp.SettingManagement.EntityFrameworkCore" Version="8.2.2" />
-    <PackageReference Include="Volo.Abp.SettingManagement.HttpApi" Version="8.2.2" />
-    <PackageReference Include="Volo.Abp.SettingManagement.Web" Version="8.2.2" />
+    <PackageReference Include="Volo.Abp.SettingManagement.Application" Version="8.3.0" />
+    <PackageReference Include="Volo.Abp.SettingManagement.EntityFrameworkCore" Version="8.3.0" />
+    <PackageReference Include="Volo.Abp.SettingManagement.HttpApi" Version="8.3.0" />
+    <PackageReference Include="Volo.Abp.SettingManagement.Web" Version="8.3.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Volo.Abp.AuditLogging.EntityFrameworkCore" Version="8.2.2" />
+    <PackageReference Include="Volo.Abp.AuditLogging.EntityFrameworkCore" Version="8.3.0" />
   </ItemGroup>
 
   <ItemGroup>

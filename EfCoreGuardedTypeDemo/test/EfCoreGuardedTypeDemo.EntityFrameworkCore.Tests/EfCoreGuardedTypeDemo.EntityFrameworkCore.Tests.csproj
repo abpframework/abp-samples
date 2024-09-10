@@ -10,7 +10,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\src\EfCoreGuardedTypeDemo.EntityFrameworkCore\EfCoreGuardedTypeDemo.EntityFrameworkCore.csproj" />
     <ProjectReference Include="..\EfCoreGuardedTypeDemo.TestBase\EfCoreGuardedTypeDemo.TestBase.csproj" />
-    <PackageReference Include="Volo.Abp.EntityFrameworkCore.Sqlite" Version="8.2.2" />
+    <PackageReference Include="Volo.Abp.EntityFrameworkCore.Sqlite" Version="8.3.0" />
   </ItemGroup>
 
   <ItemGroup>

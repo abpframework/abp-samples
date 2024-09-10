@@ -9,19 +9,19 @@
 
   <ItemGroup>
     <ProjectReference Include="..\OpenId2Ids.Domain\OpenId2Ids.Domain.csproj" />
-    <PackageReference Include="Volo.Abp.EntityFrameworkCore.SqlServer" Version="8.2.2" />
-    <PackageReference Include="Volo.Abp.PermissionManagement.EntityFrameworkCore" Version="8.2.2" />
-    <PackageReference Include="Volo.Abp.SettingManagement.EntityFrameworkCore" Version="8.2.2" />
-    <PackageReference Include="Volo.Abp.Identity.EntityFrameworkCore" Version="8.2.2" />
-    <PackageReference Include="Volo.Abp.BackgroundJobs.EntityFrameworkCore" Version="8.2.2" />
-    <PackageReference Include="Volo.Abp.AuditLogging.EntityFrameworkCore" Version="8.2.2" />
-    <PackageReference Include="Volo.Abp.TenantManagement.EntityFrameworkCore" Version="8.2.2" />
-    <PackageReference Include="Volo.Abp.FeatureManagement.EntityFrameworkCore" Version="8.2.2" />
-    <PackageReference Include="Volo.Abp.IdentityServer.EntityFrameworkCore" Version="8.2.2" />
+    <PackageReference Include="Volo.Abp.EntityFrameworkCore.SqlServer" Version="8.3.0" />
+    <PackageReference Include="Volo.Abp.PermissionManagement.EntityFrameworkCore" Version="8.3.0" />
+    <PackageReference Include="Volo.Abp.SettingManagement.EntityFrameworkCore" Version="8.3.0" />
+    <PackageReference Include="Volo.Abp.Identity.EntityFrameworkCore" Version="8.3.0" />
+    <PackageReference Include="Volo.Abp.BackgroundJobs.EntityFrameworkCore" Version="8.3.0" />
+    <PackageReference Include="Volo.Abp.AuditLogging.EntityFrameworkCore" Version="8.3.0" />
+    <PackageReference Include="Volo.Abp.TenantManagement.EntityFrameworkCore" Version="8.3.0" />
+    <PackageReference Include="Volo.Abp.FeatureManagement.EntityFrameworkCore" Version="8.3.0" />
+    <PackageReference Include="Volo.Abp.IdentityServer.EntityFrameworkCore" Version="8.3.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="7.0.1">
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.4">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>

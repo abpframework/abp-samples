@@ -16,7 +16,7 @@ public partial class MudRoleManagement
 
     protected async Task<GridData<IdentityRoleDto>> LoadServerData(GridState<IdentityRoleDto> state)
     {
-        if (GetListInput is PagedAndSortedResultRequestDto pageResultRequest)
+        if (GetListInput is ExtensiblePagedAndSortedResultRequestDto pageResultRequest)
         {
             pageResultRequest.MaxResultCount = state.PageSize;
             pageResultRequest.SkipCount = state.Page * state.PageSize;

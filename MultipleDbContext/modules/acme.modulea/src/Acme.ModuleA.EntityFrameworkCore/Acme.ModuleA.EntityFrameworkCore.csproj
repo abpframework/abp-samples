@@ -9,7 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Volo.Abp.EntityFrameworkCore" Version="8.2.2" />
+    <PackageReference Include="Volo.Abp.EntityFrameworkCore" Version="8.3.0" />
     <ProjectReference Include="..\Acme.ModuleA.Domain\Acme.ModuleA.Domain.csproj" />
   </ItemGroup>
 

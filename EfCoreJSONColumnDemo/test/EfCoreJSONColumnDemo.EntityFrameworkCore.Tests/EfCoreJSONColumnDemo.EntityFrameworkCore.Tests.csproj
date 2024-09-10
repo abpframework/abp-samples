@@ -10,7 +10,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\src\EfCoreJSONColumnDemo.EntityFrameworkCore\EfCoreJSONColumnDemo.EntityFrameworkCore.csproj" />
     <ProjectReference Include="..\EfCoreJSONColumnDemo.TestBase\EfCoreJSONColumnDemo.TestBase.csproj" />
-    <PackageReference Include="Volo.Abp.EntityFrameworkCore.Sqlite" Version="8.2.2" />
+    <PackageReference Include="Volo.Abp.EntityFrameworkCore.Sqlite" Version="8.3.0" />
   </ItemGroup>
 
   <ItemGroup>

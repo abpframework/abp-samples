@@ -27,7 +27,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Volo.Abp.Autofac" Version="8.2.2" />
+    <PackageReference Include="Volo.Abp.Autofac" Version="8.3.0" />
     <ProjectReference Include="..\CustomAngularAppWithIdentityServer.Application.Contracts\CustomAngularAppWithIdentityServer.Application.Contracts.csproj" />
     <ProjectReference Include="..\CustomAngularAppWithIdentityServer.EntityFrameworkCore.DbMigrations\CustomAngularAppWithIdentityServer.EntityFrameworkCore.DbMigrations.csproj" />
   </ItemGroup>

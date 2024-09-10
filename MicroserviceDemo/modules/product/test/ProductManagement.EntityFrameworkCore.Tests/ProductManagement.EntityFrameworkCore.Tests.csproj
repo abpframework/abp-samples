@@ -8,7 +8,7 @@
     <ItemGroup>
         <ProjectReference Include="..\..\src\ProductManagement.EntityFrameworkCore\ProductManagement.EntityFrameworkCore.csproj" />
         <ProjectReference Include="..\ProductManagement.TestBase\ProductManagement.TestBase.csproj" />
-        <PackageReference Include="Volo.Abp.EntityFrameworkCore.Sqlite" Version="8.2.2" />
+        <PackageReference Include="Volo.Abp.EntityFrameworkCore.Sqlite" Version="8.3.0" />
         <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.2.0" />
         <PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="8.0.4" />
     </ItemGroup>

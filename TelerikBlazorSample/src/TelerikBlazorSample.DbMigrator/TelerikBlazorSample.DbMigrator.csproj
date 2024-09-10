@@ -28,7 +28,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Volo.Abp.Autofac" Version="8.2.2" />
+    <PackageReference Include="Volo.Abp.Autofac" Version="8.3.0" />
     <ProjectReference Include="..\TelerikBlazorSample.Application.Contracts\TelerikBlazorSample.Application.Contracts.csproj" />
     <ProjectReference Include="..\TelerikBlazorSample.EntityFrameworkCore\TelerikBlazorSample.EntityFrameworkCore.csproj" />
   </ItemGroup>

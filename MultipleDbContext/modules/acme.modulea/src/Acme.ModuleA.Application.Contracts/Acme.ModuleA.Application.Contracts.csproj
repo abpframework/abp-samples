@@ -9,8 +9,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Volo.Abp.Ddd.Application.Contracts" Version="8.2.2" />
-    <PackageReference Include="Volo.Abp.Authorization" Version="8.2.2" />
+    <PackageReference Include="Volo.Abp.Ddd.Application.Contracts" Version="8.3.0" />
+    <PackageReference Include="Volo.Abp.Authorization" Version="8.3.0" />
     <ProjectReference Include="..\Acme.ModuleA.Domain.Shared\Acme.ModuleA.Domain.Shared.csproj" />
   </ItemGroup>
 

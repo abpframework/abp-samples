@@ -15,17 +15,17 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Volo.Abp.AspNetCore.Components.WebAssembly.LeptonXLiteTheme" Version="3.2.0" />
+    <PackageReference Include="Volo.Abp.AspNetCore.Components.WebAssembly.LeptonXLiteTheme" Version="3.3.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Volo.Abp.Autofac.WebAssembly" Version="8.2.2" />
+    <PackageReference Include="Volo.Abp.Autofac.WebAssembly" Version="8.3.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Volo.Abp.Identity.Blazor.WebAssembly" Version="8.2.2" />
-    <PackageReference Include="Volo.Abp.TenantManagement.Blazor.WebAssembly" Version="8.2.2" />
-    <PackageReference Include="Volo.Abp.SettingManagement.Blazor.WebAssembly" Version="8.2.2" />
+    <PackageReference Include="Volo.Abp.Identity.Blazor.WebAssembly" Version="8.3.0" />
+    <PackageReference Include="Volo.Abp.TenantManagement.Blazor.WebAssembly" Version="8.3.0" />
+    <PackageReference Include="Volo.Abp.SettingManagement.Blazor.WebAssembly" Version="8.3.0" />
   </ItemGroup>
 
   <ItemGroup>

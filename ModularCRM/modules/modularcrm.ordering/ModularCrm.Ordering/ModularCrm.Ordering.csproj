@@ -12,9 +12,9 @@
     <CopyLocalLockFileAssemblies>True</CopyLocalLockFileAssemblies>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Volo.Abp.AspNetCore.Mvc.UI.Theme.Shared" Version="8.2.2" />
+    <PackageReference Include="Volo.Abp.AspNetCore.Mvc.UI.Theme.Shared" Version="8.3.0" />
     <ProjectReference Include="../ModularCrm.Ordering.Contracts/ModularCrm.Ordering.Contracts.csproj" />
-    <PackageReference Include="Volo.Abp.Ddd.Domain" Version="8.2.2" />
-    <PackageReference Include="Volo.Abp.EntityFrameworkCore" Version="8.2.2" />
+    <PackageReference Include="Volo.Abp.Ddd.Domain" Version="8.3.0" />
+    <PackageReference Include="Volo.Abp.EntityFrameworkCore" Version="8.3.0" />
   </ItemGroup>
 </Project>

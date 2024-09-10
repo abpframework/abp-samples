@@ -10,7 +10,7 @@
     <ItemGroup>
         <PackageReference Include="bunit" Version="1.28.9" />
         <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.9.0" />
-        <PackageReference Include="Volo.Abp.Authorization.Abstractions" Version="8.2.2" />
+        <PackageReference Include="Volo.Abp.Authorization.Abstractions" Version="8.3.0" />
         <PackageReference Include="xunit" Version="2.7.1" />
         <PackageReference Include="xunit.runner.visualstudio" Version="2.5.8">
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>

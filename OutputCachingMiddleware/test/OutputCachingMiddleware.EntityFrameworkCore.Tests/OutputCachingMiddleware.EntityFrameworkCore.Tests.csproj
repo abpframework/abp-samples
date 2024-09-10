@@ -10,7 +10,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\src\OutputCachingMiddleware.EntityFrameworkCore\OutputCachingMiddleware.EntityFrameworkCore.csproj" />
     <ProjectReference Include="..\OutputCachingMiddleware.TestBase\OutputCachingMiddleware.TestBase.csproj" />
-    <PackageReference Include="Volo.Abp.EntityFrameworkCore.Sqlite" Version="8.2.2" />
+    <PackageReference Include="Volo.Abp.EntityFrameworkCore.Sqlite" Version="8.3.0" />
   </ItemGroup>
 
   <ItemGroup>

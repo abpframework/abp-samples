@@ -10,7 +10,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Volo.Abp.VirtualFileSystem" Version="8.2.2" />
+    <PackageReference Include="Volo.Abp.VirtualFileSystem" Version="8.3.0" />
   </ItemGroup>
 
   <ItemGroup>

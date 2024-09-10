@@ -10,7 +10,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\src\KeycloakDemo.EntityFrameworkCore\KeycloakDemo.EntityFrameworkCore.csproj" />
     <ProjectReference Include="..\KeycloakDemo.TestBase\KeycloakDemo.TestBase.csproj" />
-    <PackageReference Include="Volo.Abp.EntityFrameworkCore.Sqlite" Version="8.2.2" />
+    <PackageReference Include="Volo.Abp.EntityFrameworkCore.Sqlite" Version="8.3.0" />
   </ItemGroup>
 
   <ItemGroup>

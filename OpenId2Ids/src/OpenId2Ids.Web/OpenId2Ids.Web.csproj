@@ -22,22 +22,22 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Volo.Abp.AspNetCore.Mvc.UI.Theme.LeptonXLite" Version="3.2.0" />
+    <PackageReference Include="Volo.Abp.AspNetCore.Mvc.UI.Theme.LeptonXLite" Version="3.3.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Volo.Abp.Autofac" Version="8.2.2" />
-    <PackageReference Include="Volo.Abp.Caching.StackExchangeRedis" Version="8.2.2" />
-    <PackageReference Include="Volo.Abp.DistributedLocking" Version="8.2.2" />
-    <PackageReference Include="Volo.Abp.AspNetCore.Mvc.Client" Version="8.2.2" />
-    <PackageReference Include="Volo.Abp.AspNetCore.Authentication.OpenIdConnect" Version="8.2.2" />
-    <PackageReference Include="Volo.Abp.Http.Client.Web" Version="8.2.2" />
-    <PackageReference Include="Volo.Abp.AspNetCore.Serilog" Version="8.2.2" />
-    <PackageReference Include="Volo.Abp.Http.Client.IdentityModel.Web" Version="8.2.2" />
-    <PackageReference Include="Volo.Abp.Swashbuckle" Version="8.2.2" />
-    <PackageReference Include="Volo.Abp.Identity.Web" Version="8.2.2" />
-    <PackageReference Include="Volo.Abp.TenantManagement.Web" Version="8.2.2" />
-    <PackageReference Include="Volo.Abp.SettingManagement.Web" Version="8.2.2" />
+    <PackageReference Include="Volo.Abp.Autofac" Version="8.3.0" />
+    <PackageReference Include="Volo.Abp.Caching.StackExchangeRedis" Version="8.3.0" />
+    <PackageReference Include="Volo.Abp.DistributedLocking" Version="8.3.0" />
+    <PackageReference Include="Volo.Abp.AspNetCore.Mvc.Client" Version="8.3.0" />
+    <PackageReference Include="Volo.Abp.AspNetCore.Authentication.OpenIdConnect" Version="8.3.0" />
+    <PackageReference Include="Volo.Abp.Http.Client.Web" Version="8.3.0" />
+    <PackageReference Include="Volo.Abp.AspNetCore.Serilog" Version="8.3.0" />
+    <PackageReference Include="Volo.Abp.Http.Client.IdentityModel.Web" Version="8.3.0" />
+    <PackageReference Include="Volo.Abp.Swashbuckle" Version="8.3.0" />
+    <PackageReference Include="Volo.Abp.Identity.Web" Version="8.3.0" />
+    <PackageReference Include="Volo.Abp.TenantManagement.Web" Version="8.3.0" />
+    <PackageReference Include="Volo.Abp.SettingManagement.Web" Version="8.3.0" />
     <ProjectReference Include="..\OpenId2Ids.HttpApi.Client\OpenId2Ids.HttpApi.Client.csproj" />
     <ProjectReference Include="..\OpenId2Ids.HttpApi\OpenId2Ids.HttpApi.csproj" />
   </ItemGroup>

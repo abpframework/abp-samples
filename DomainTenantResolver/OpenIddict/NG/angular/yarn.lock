@@ -33,7 +33,7 @@
   integrity sha512-Nz4K3E8h4jRngH3YsidOG7VHOLUebGyjQ9ACuVH2wntpYvHNOAQ5Z+/PyF7GJmdOBUXsMpq6eXpobDijpxpkuw==
   dependencies:
     "@abp/utils" "~7.2.2"
-    angular-oauth2-oidc "^15.0.1"
+    angular-oauth2-oidc "^18.1.0"
     just-clone "^6.1.1"
     just-compare "^2.3.0"
     ts-toolbelt "6.15.4"
@@ -64,7 +64,7 @@
   dependencies:
     "@abp/ng.core" "~7.2.2"
     "@abp/utils" "~7.2.2"
-    angular-oauth2-oidc "^15.0.1"
+    angular-oauth2-oidc "^18.1.0"
     just-clone "^6.1.1"
     just-compare "^1.4.0"
     tslib "^2.0.0"
@@ -2696,7 +2696,7 @@ ajv@^6.10.0, ajv@^6.12.4, ajv@^6.12.5:
     json-schema-traverse "^0.4.1"
     uri-js "^4.2.2"
 
-angular-oauth2-oidc@^15.0.1:
+angular-oauth2-oidc@^18.1.0:
   version "15.0.1"
   resolved "https://registry.yarnpkg.com/angular-oauth2-oidc/-/angular-oauth2-oidc-15.0.1.tgz#ba3bcb88e565be7ea4c635a48524963c677be2fe"
   integrity sha512-5gpqO9QL+qFqMItYFHe8F6H5nOIEaowcNUc9iTDs3P1bfVYnoKoVAaijob53PuPTF4YwzdfwKWZi4Mq6P7GENQ==

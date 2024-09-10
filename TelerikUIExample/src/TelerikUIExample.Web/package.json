@@ -8,11 +8,11 @@
     "webpack-cli": "^4.5.0"
   },
   "dependencies": {
-    "@volo/abp.aspnetcore.mvc.ui.theme.lepton": "~8.2.2",
-    "@volo/account": "~8.2.2",
-    "@volo/audit-logging": "~8.2.2",
-    "@volo/identity": "~8.2.2",
-    "@volo/saas": "~8.2.2",
+    "@volo/abp.aspnetcore.mvc.ui.theme.lepton": "~8.3.0",
+    "@volo/account": "~8.3.0",
+    "@volo/audit-logging": "~8.3.0",
+    "@volo/identity": "~8.3.0",
+    "@volo/saas": "~8.3.0",
     "@progress/kendo-theme-bootstrap": "^9.0.0",
     "@progress/kendo-ui": "2024.3.806",
     "css-loader": "^5.1.3",

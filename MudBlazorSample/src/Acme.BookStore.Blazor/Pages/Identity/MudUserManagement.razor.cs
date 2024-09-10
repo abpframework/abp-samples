@@ -18,7 +18,7 @@ public partial class MudUserManagement
 
     protected async Task<GridData<IdentityUserDto>> LoadServerData(GridState<IdentityUserDto> state)
     {
-        if (GetListInput is PagedAndSortedResultRequestDto pageResultRequest)
+        if (GetListInput is ExtensiblePagedAndSortedResultRequestDto pageResultRequest)
         {
             pageResultRequest.MaxResultCount = state.PageSize;
             pageResultRequest.SkipCount = state.Page * state.PageSize;

@@ -33,7 +33,7 @@
   integrity sha512-Nz4K3E8h4jRngH3YsidOG7VHOLUebGyjQ9ACuVH2wntpYvHNOAQ5Z+/PyF7GJmdOBUXsMpq6eXpobDijpxpkuw==
   dependencies:
     "@abp/utils" "~7.2.2"
-    angular-oauth2-oidc "^15.0.1"
+    angular-oauth2-oidc "^18.1.0"
     just-clone "^6.1.1"
     just-compare "^2.3.0"
     ts-toolbelt "6.15.4"
@@ -64,7 +64,7 @@
   dependencies:
     "@abp/ng.core" "~7.2.2"
     "@abp/utils" "~7.2.2"
-    angular-oauth2-oidc "^15.0.1"
+    angular-oauth2-oidc "^18.1.0"
     just-clone "^6.1.1"
     just-compare "^1.4.0"
     tslib "^2.0.0"
@@ -2442,7 +2442,7 @@ ajv@^8.0.0, ajv@^8.11.0, ajv@^8.8.0:
     require-from-string "^2.0.2"
     uri-js "^4.2.2"
 
-angular-oauth2-oidc@^15.0.1:
+angular-oauth2-oidc@^18.1.0:
   version "15.0.1"
   resolved "https://registry.yarnpkg.com/angular-oauth2-oidc/-/angular-oauth2-oidc-15.0.1.tgz#ba3bcb88e565be7ea4c635a48524963c677be2fe"
   integrity sha512-5gpqO9QL+qFqMItYFHe8F6H5nOIEaowcNUc9iTDs3P1bfVYnoKoVAaijob53PuPTF4YwzdfwKWZi4Mq6P7GENQ==
@@ -7281,7 +7281,7 @@ tree-kill@1.2.2:
   resolved "https://registry.yarnpkg.com/tree-kill/-/tree-kill-1.2.2.tgz#4ca09a9092c88b73a7cdc5e8a01b507b0790a0cc"
   integrity sha512-L0Orpi8qGpRG//Nd+H90vFB+3iHnue1zSSGmNOOCh1GLJ7rUKVwV2HvijphGQS2UmhUZewS9VgvxYIdgr+fG1A==
 
-ts-node@~8.2.2:
+ts-node@~8.3.0:
   version "8.3.0"
   resolved "https://registry.yarnpkg.com/ts-node/-/ts-node-8.3.0.tgz#e4059618411371924a1fb5f3b125915f324efb57"
   integrity sha512-dyNS/RqyVTDcmNM4NIBAeDMpsAdaQ+ojdf0GOLqE6nwJOgzEkdRNzJywhDfwnuvB10oa6NLVG1rUJQCpRN7qoQ==
@@ -7734,7 +7734,7 @@ yaml@^1.10.0:
   resolved "https://registry.yarnpkg.com/yaml/-/yaml-1.10.2.tgz#2301c5ffbf12b467de8da2333a459e29e7920e4b"
   integrity sha512-r3vXyErRCYJ7wg28yvBY5VSoAF8ZvlcW9/BwUzEtUsjvX/DKs24dIkuwjtuprwJJHsbyUbLApepYTR1BN4uHrg==
 
-yargs-parser@^15.0.1:
+yargs-parser@^18.1.0:
   version "15.0.3"
   resolved "https://registry.yarnpkg.com/yargs-parser/-/yargs-parser-15.0.3.tgz#316e263d5febe8b38eef61ac092b33dfcc9b1115"
   integrity sha512-/MVEVjTXy/cGAjdtQf8dW3V9b97bPN7rNn8ETj6BmAQL7ibC7O1Q9SPJbGjgh3SlwoBNXMzj/ZGIj8mBgl12YA==
@@ -7780,7 +7780,7 @@ yargs@^14.2:
     string-width "^3.0.0"
     which-module "^2.0.0"
     y18n "^4.0.0"
-    yargs-parser "^15.0.1"
+    yargs-parser "^18.1.0"
 
 yargs@^16.1.1:
   version "16.2.0"

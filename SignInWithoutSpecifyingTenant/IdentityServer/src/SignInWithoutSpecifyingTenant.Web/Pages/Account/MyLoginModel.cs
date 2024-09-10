@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Identity;
 using Volo.Abp.Account.Web;
 using Volo.Abp.Account.Web.Pages.Account;
 using Volo.Abp.DependencyInjection;
+using Volo.Abp.Identity;
 using Volo.Abp.TenantManagement;
 using IdentityUser = Volo.Abp.Identity.IdentityUser;
 
@@ -18,15 +19,16 @@ namespace SignInWithoutSpecifyingTenant.Web.Pages.Account
     {
         private readonly ITenantRepository _tenantRepository;
 
+
         public MyLoginModel(
             IAuthenticationSchemeProvider schemeProvider,
             IOptions<AbpAccountOptions> accountOptions,
+            IOptions<IdentityOptions> identityOptions,
+            IdentityDynamicClaimsPrincipalContributorCache identityDynamicClaimsPrincipalContributorCache,
             IIdentityServerInteractionService interaction,
             IClientStore clientStore,
             IEventService identityServerEvents,
-            IOptions<IdentityOptions> identityOptions,
-            ITenantRepository tenantRepository)
-            : base(schemeProvider, accountOptions, interaction, clientStore, identityServerEvents, identityOptions)
+            ITenantRepository tenantRepository) : base(schemeProvider, accountOptions, identityOptions, identityDynamicClaimsPrincipalContributorCache, interaction, clientStore, identityServerEvents)
         {
             _tenantRepository = tenantRepository;
         }

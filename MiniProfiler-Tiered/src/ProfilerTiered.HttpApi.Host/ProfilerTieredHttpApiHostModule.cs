@@ -141,8 +141,8 @@ namespace ProfilerTiered
                 options.Languages.Add(new LanguageInfo("en-GB", "en-GB", "English (UK)"));
                 options.Languages.Add(new LanguageInfo("fi", "fi", "Finnish"));
                 options.Languages.Add(new LanguageInfo("fr", "fr", "Français"));
-                options.Languages.Add(new LanguageInfo("hi", "hi", "Hindi", "in"));
-                options.Languages.Add(new LanguageInfo("it", "it", "Italian", "it"));
+                options.Languages.Add(new LanguageInfo("hi", "hi", "Hindi"));
+                options.Languages.Add(new LanguageInfo("it", "it", "Italian"));
                 options.Languages.Add(new LanguageInfo("hu", "hu", "Magyar"));
                 options.Languages.Add(new LanguageInfo("pt-BR", "pt-BR", "Português"));
                 options.Languages.Add(new LanguageInfo("ru", "ru", "Русский"));
@@ -150,8 +150,8 @@ namespace ProfilerTiered
                 options.Languages.Add(new LanguageInfo("tr", "tr", "Türkçe"));
                 options.Languages.Add(new LanguageInfo("zh-Hans", "zh-Hans", "简体中文"));
                 options.Languages.Add(new LanguageInfo("zh-Hant", "zh-Hant", "繁體中文"));
-                options.Languages.Add(new LanguageInfo("de-DE", "de-DE", "Deutsch", "de"));
-                options.Languages.Add(new LanguageInfo("es", "es", "Español", "es"));
+                options.Languages.Add(new LanguageInfo("de-DE", "de-DE", "Deutsch"));
+                options.Languages.Add(new LanguageInfo("es", "es", "Español"));
             });
         }
 

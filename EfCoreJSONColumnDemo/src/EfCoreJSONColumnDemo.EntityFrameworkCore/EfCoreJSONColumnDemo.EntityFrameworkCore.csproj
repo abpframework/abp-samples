@@ -3,25 +3,25 @@
   <Import Project="..\..\common.props" />
 
   <PropertyGroup>
-    <TargetFramework>net7.0</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
     <RootNamespace>EfCoreJSONColumnDemo</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\EfCoreJSONColumnDemo.Domain\EfCoreJSONColumnDemo.Domain.csproj" />
-    <PackageReference Include="Volo.Abp.EntityFrameworkCore.SqlServer" Version="7.2.2" />
-    <PackageReference Include="Volo.Abp.PermissionManagement.EntityFrameworkCore" Version="7.2.2" />
-    <PackageReference Include="Volo.Abp.SettingManagement.EntityFrameworkCore" Version="7.2.2" />
-    <PackageReference Include="Volo.Abp.Identity.EntityFrameworkCore" Version="7.2.2" />
-    <PackageReference Include="Volo.Abp.BackgroundJobs.EntityFrameworkCore" Version="7.2.2" />
-    <PackageReference Include="Volo.Abp.AuditLogging.EntityFrameworkCore" Version="7.2.2" />
-    <PackageReference Include="Volo.Abp.TenantManagement.EntityFrameworkCore" Version="7.2.2" />
-    <PackageReference Include="Volo.Abp.FeatureManagement.EntityFrameworkCore" Version="7.2.2" />
-    <PackageReference Include="Volo.Abp.OpenIddict.EntityFrameworkCore" Version="7.2.2" />
+    <PackageReference Include="Volo.Abp.EntityFrameworkCore.SqlServer" Version="8.2.2" />
+    <PackageReference Include="Volo.Abp.PermissionManagement.EntityFrameworkCore" Version="8.2.2" />
+    <PackageReference Include="Volo.Abp.SettingManagement.EntityFrameworkCore" Version="8.2.2" />
+    <PackageReference Include="Volo.Abp.Identity.EntityFrameworkCore" Version="8.2.2" />
+    <PackageReference Include="Volo.Abp.BackgroundJobs.EntityFrameworkCore" Version="8.2.2" />
+    <PackageReference Include="Volo.Abp.AuditLogging.EntityFrameworkCore" Version="8.2.2" />
+    <PackageReference Include="Volo.Abp.TenantManagement.EntityFrameworkCore" Version="8.2.2" />
+    <PackageReference Include="Volo.Abp.FeatureManagement.EntityFrameworkCore" Version="8.2.2" />
+    <PackageReference Include="Volo.Abp.OpenIddict.EntityFrameworkCore" Version="8.2.2" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="7.0.0">
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.4">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>

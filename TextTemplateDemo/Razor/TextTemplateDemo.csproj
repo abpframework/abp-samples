@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>net7.0</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
@@ -11,9 +11,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Volo.Abp.Autofac" Version="7.2.2" />
-    <PackageReference Include="Volo.Abp.TextTemplating.Razor" Version="7.2.2" />
-    <PackageReference Include="Volo.Abp.Localization" Version="7.2.2" />
+    <PackageReference Include="Volo.Abp.Autofac" Version="8.2.2" />
+    <PackageReference Include="Volo.Abp.TextTemplating.Razor" Version="8.2.2" />
+    <PackageReference Include="Volo.Abp.Localization" Version="8.2.2" />
   </ItemGroup>
 
 </Project>

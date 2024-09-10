@@ -1,9 +1,9 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <Import Project="..\..\common.props" />
 
   <PropertyGroup>
-    <TargetFramework>net7.0</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
     <Nullable>enable</Nullable>
     <OutputType>Exe</OutputType>
     <AssetTargetFallback>$(AssetTargetFallback);portable-net45+win8+wp8+wpa81;</AssetTargetFallback>
@@ -18,7 +18,7 @@
     <PackageReference Include="HtmlAgilityPack" Version="1.11.42" />
     <ProjectReference Include="..\ImageManipulationDemo.Application.Tests\ImageManipulationDemo.Application.Tests.csproj" />
     <ProjectReference Include="..\..\src\ImageManipulationDemo.Web\ImageManipulationDemo.Web.csproj" />
-    <PackageReference Include="Volo.Abp.AspNetCore.TestBase" Version="7.3.0-rc.2" />
+    <PackageReference Include="Volo.Abp.AspNetCore.TestBase" Version="8.3.0" />
   </ItemGroup>
 
   <ItemGroup>

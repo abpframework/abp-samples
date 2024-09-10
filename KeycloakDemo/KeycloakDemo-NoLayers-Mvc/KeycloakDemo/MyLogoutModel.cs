@@ -29,7 +29,7 @@ public class MyLogoutModel : LogoutModel
 
         if (ReturnUrl != null)
         {
-            return RedirectSafely(ReturnUrl, ReturnUrlHash);
+            return await RedirectSafelyAsync(ReturnUrl, ReturnUrlHash);
         }
 
         ReturnUrl = Configuration.GetValue<string>("App:SelfUrl") + ReturnUrl;

@@ -3,7 +3,7 @@
   <Import Project="..\..\common.props" />
 
   <PropertyGroup>
-    <TargetFramework>net7.0</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
     <OutputType>Exe</OutputType>
     <AssetTargetFallback>$(AssetTargetFallback);portable-net45+win8+wp8+wpa81;</AssetTargetFallback>
     <RootNamespace>EfCoreDiDemo</RootNamespace>
@@ -17,7 +17,7 @@
     <PackageReference Include="HtmlAgilityPack" Version="1.11.42" />
     <ProjectReference Include="..\EfCoreDiDemo.Application.Tests\EfCoreDiDemo.Application.Tests.csproj" />
     <ProjectReference Include="..\..\src\EfCoreDiDemo.Web\EfCoreDiDemo.Web.csproj" />
-    <PackageReference Include="Volo.Abp.AspNetCore.TestBase" Version="7.2.2" />
+    <PackageReference Include="Volo.Abp.AspNetCore.TestBase" Version="8.2.2" />
   </ItemGroup>
 
   <ItemGroup>

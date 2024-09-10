@@ -1,6 +1,6 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <Import Project="..\..\common.props"/>
+  <Import Project="..\..\common.props" />
 
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
@@ -10,11 +10,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Volo.Abp.VirtualFileSystem" Version="8.2.2"/>
+    <PackageReference Include="Volo.Abp.VirtualFileSystem" Version="8.2.2" />
   </ItemGroup>
 
   <ItemGroup>
-    <None Remove="..\..\ModularCrm.Products.abpmdl"/>
+    <None Remove="..\..\ModularCrm.Products.abpmdl" />
     <Content Include="..\..\ModularCrm.Products.abpmdl">
       <Pack>true</Pack>
       <PackagePath>content\</PackagePath>

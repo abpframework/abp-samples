@@ -1,3 +1,6 @@
+using Asp.Versioning;
+using Asp.Versioning.ApiExplorer;
+using Asp.Versioning.ApplicationModels;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -55,32 +58,32 @@ public class BookStoreWebAppModule : AbpModule
             preActions.Configure(options);
         });
 
+        // Show neutral/versionless APIs.
+        context.Services.AddTransient<IApiControllerFilter, NoControllerFilter>();
         context.Services.AddAbpApiVersioning(options =>
         {
-            // Show neutral/versionless APIs.
-            options.UseApiBehavior = false;
-
             options.ReportApiVersions = true;
             options.AssumeDefaultVersionWhenUnspecified = true;
 
+            //options.ApiVersionReader = new HeaderApiVersionReader("api-version"); //Supports header too
+            //options.ApiVersionReader = new MediaTypeApiVersionReader(); //Supports accept header too
+        }, options =>
+        {
             options.ConfigureAbp(preActions.Configure());
-        });
+        })
+        .AddApiExplorer(options => {
+              // add the versioned api explorer, which also adds IApiVersionDescriptionProvider service
+              // note: the specified format code will format the version as "'v'major[.minor][-status]"
+              options.GroupNameFormat = "'v'VVV";
 
-        context.Services.AddVersionedApiExplorer(
-            options =>
-            {
-                // add the versioned api explorer, which also adds IApiVersionDescriptionProvider service
-                // note: the specified format code will format the version as "'v'major[.minor][-status]"
-                options.GroupNameFormat = "'v'VVV";
-
-                // note: this option is only necessary when versioning by url segment. the SubstitutionFormat
-                // can also be used to control the format of the API version in route templates
-                options.SubstituteApiVersionInUrl = true;
-            });
+              // note: this option is only necessary when versioning by url segment. the SubstitutionFormat
+              // can also be used to control the format of the API version in route templates
+              options.SubstituteApiVersionInUrl = true;
+          });
 
         context.Services.AddTransient<IConfigureOptions<SwaggerGenOptions>, ConfigureSwaggerOptions>();
 
-        context.Services.AddAbpSwaggerGen(
+        context.Services.AddSwaggerGen(
             options =>
             {
                 // add a custom operation filter which sets default values

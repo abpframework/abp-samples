@@ -1,4 +1,5 @@
 ﻿@page "/Posts"
+@using Telerik.SvgIcons
 @using TelerikBlazorSample.Posts
 
 @inject IPostAppService PostAppService
@@ -25,16 +26,16 @@
             <GridColumn Field="@nameof(Post.Title)" />
             <GridColumn Field="@nameof(Post.Body)" />
             <GridCommandColumn Width="190px">
-                <GridCommandButton Command="Save" Icon="save" ShowInEdit="true">Update</GridCommandButton>
-                <GridCommandButton Command="Edit" Icon="edit">Edit</GridCommandButton>
-                <GridCommandButton Command="Delete" Icon="delete" Primary="true">Delete</GridCommandButton>
-                <GridCommandButton Icon="window" OnClick="(e) => PostDetailAsync(e)">Display Comment</GridCommandButton>
-                <GridCommandButton Command="Cancel" Icon="cancel" ShowInEdit="true">Cancel</GridCommandButton>
+                <GridCommandButton Command="Save" Icon="@SvgIcon.Save" ShowInEdit="true">Update</GridCommandButton>
+                <GridCommandButton Command="Edit" Icon="@SvgIcon.EditTools">Edit</GridCommandButton>
+                <GridCommandButton Command="Delete" Icon="@SvgIcon.TableColumnDelete" Primary="true">Delete</GridCommandButton>
+                <GridCommandButton Icon="@SvgIcon.Window" OnClick="(e) => PostDetailAsync(e)">Display Comment</GridCommandButton>
+                <GridCommandButton Command="Cancel" Icon="@SvgIcon.Cancel" ShowInEdit="true">Cancel</GridCommandButton>
             </GridCommandColumn>
         </GridColumns>
-        <GridToolBar>
-            <GridCommandButton Command="Add" Icon="add">Add Post</GridCommandButton>
-        </GridToolBar>
+        <GridToolBarTemplate>
+            <GridCommandButton Command="Add" Icon="@SvgIcon.FileAdd">Add Post</GridCommandButton>
+        </GridToolBarTemplate>
     </TelerikGrid>
 
     @* Modal *@

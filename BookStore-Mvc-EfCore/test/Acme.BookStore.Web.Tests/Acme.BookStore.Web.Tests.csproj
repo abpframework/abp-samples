@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <Import Project="..\..\common.props" />
 
@@ -18,7 +18,7 @@
     <PackageReference Include="HtmlAgilityPack" Version="1.11.54" />
     <ProjectReference Include="..\Acme.BookStore.Application.Tests\Acme.BookStore.Application.Tests.csproj" />
     <ProjectReference Include="..\..\src\Acme.BookStore.Web\Acme.BookStore.Web.csproj" />
-    <PackageReference Include="Volo.Abp.AspNetCore.TestBase" Version="8.0.0" />
+    <PackageReference Include="Volo.Abp.AspNetCore.TestBase" Version="8.2.2" />
     <ProjectReference Include="..\Acme.BookStore.EntityFrameworkCore.Tests\Acme.BookStore.EntityFrameworkCore.Tests.csproj" />
   </ItemGroup>
 

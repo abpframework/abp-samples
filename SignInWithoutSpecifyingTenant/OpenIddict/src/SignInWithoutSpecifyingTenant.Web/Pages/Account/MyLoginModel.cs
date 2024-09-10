@@ -6,6 +6,7 @@ using Microsoft.Extensions.Options;
 using Volo.Abp.Account.Web;
 using Volo.Abp.Account.Web.Pages.Account;
 using Volo.Abp.DependencyInjection;
+using Volo.Abp.Identity;
 using Volo.Abp.OpenIddict;
 using Volo.Abp.TenantManagement;
 using IdentityUser = Volo.Abp.Identity.IdentityUser;
@@ -17,13 +18,14 @@ public class MyLoginModel : OpenIddictSupportedLoginModel
 {
     private readonly ITenantRepository _tenantRepository;
 
+
     public MyLoginModel(
         IAuthenticationSchemeProvider schemeProvider,
         IOptions<AbpAccountOptions> accountOptions,
         IOptions<IdentityOptions> identityOptions,
+        IdentityDynamicClaimsPrincipalContributorCache identityDynamicClaimsPrincipalContributorCache,
         AbpOpenIddictRequestHelper openIddictRequestHelper,
-        ITenantRepository tenantRepository)
-        : base(schemeProvider, accountOptions, identityOptions, openIddictRequestHelper)
+        ITenantRepository tenantRepository) : base(schemeProvider, accountOptions, identityOptions, identityDynamicClaimsPrincipalContributorCache, openIddictRequestHelper)
     {
         _tenantRepository = tenantRepository;
     }

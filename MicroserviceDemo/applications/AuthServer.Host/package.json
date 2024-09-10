@@ -3,6 +3,6 @@
   "name": "msdemo-authserver-host",
   "private": true,
   "dependencies": {
-    "@abp/aspnetcore.mvc.ui.theme.basic": "~7.2.2"
+    "@abp/aspnetcore.mvc.ui.theme.basic": "~8.2.2"
   }
 }

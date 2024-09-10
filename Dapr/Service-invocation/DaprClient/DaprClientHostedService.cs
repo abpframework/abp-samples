@@ -38,12 +38,12 @@ public class DaprClientHostedService : IHostedService
         Logger.LogInformation("Service proxy result: " + await _helloWorldService.SayHelloAsync());
 
         // Using Dapr's HttpClient
-        var httpClient = _daprClientFactory.CreateHttpClient("dapr-httpapi");
+        var httpClient = await _daprClientFactory.CreateHttpClientAsync("dapr-httpapi");
         var result = await httpClient.GetStringAsync("api/helloworld", cancellationToken);
         Logger.LogInformation("HttpClient result: " + result);
 
         // Using Dapr's client
-        var daprClient = _daprClientFactory.Create();
+        var daprClient = await _daprClientFactory.CreateAsync();
         var result2 = await daprClient.InvokeMethodAsync<SayHelloResult>(HttpMethod.Get, "dapr-httpapi", "api/helloworld/json-result", cancellationToken);
         Logger.LogInformation("DaprClient result 2: " + result2.Result);
     }

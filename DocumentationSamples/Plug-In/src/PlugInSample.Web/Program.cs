@@ -49,9 +49,9 @@ public class Program
                     if (parentDirectory.Name == "src")
                     {
 #if DEBUG
-                        plugDllInPath = Path.Combine(parentDirectory.FullName, "MyPlugIn", "bin", "Debug", "net7.0");
+                        plugDllInPath = Path.Combine(parentDirectory.FullName, "MyPlugIn", "bin", "Debug", "net8.0");
 #else
-                        plugDllInPath = Path.Combine(parentDirectory.FullName, "MyPlugIn", "bin", "Release", "net7.0");
+                        plugDllInPath = Path.Combine(parentDirectory.FullName, "MyPlugIn", "bin", "Release", "net8.0");
 #endif
                         break;
                     }

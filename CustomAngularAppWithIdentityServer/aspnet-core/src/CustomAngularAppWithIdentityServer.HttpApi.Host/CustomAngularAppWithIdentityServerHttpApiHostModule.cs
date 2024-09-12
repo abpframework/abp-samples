@@ -121,6 +121,7 @@ namespace CustomAngularAppWithIdentityServer
                     options.Authority = configuration["AuthServer:Authority"];
                     options.RequireHttpsMetadata = Convert.ToBoolean(configuration["AuthServer:RequireHttpsMetadata"]);
                     options.Audience = "CustomAngularAppWithIdentityServer";
+                    options.MapInboundClaims = false;
                     options.BackchannelHttpHandler = new HttpClientHandler
                     {
                         ServerCertificateCustomValidationCallback =

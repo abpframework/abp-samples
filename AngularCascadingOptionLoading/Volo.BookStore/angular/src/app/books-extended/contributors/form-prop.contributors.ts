@@ -1,6 +1,6 @@
 import { Validators } from '@angular/forms';
 import { map } from 'rxjs';
-import { ePropType, FormProp, FormPropList } from '@abp/ng.theme.shared/extensions';
+import { ePropType, FormProp, FormPropList } from '@abp/ng.components/extensible';
 import {
   BookDto,
   BookStoreRentFormPropContributors,

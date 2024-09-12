@@ -62,9 +62,18 @@ public class ProductManagementBlazorModule : AbpModule
 
     private void ConfigureBlazorise(ServiceConfigurationContext context)
     {
-        context.Services
-            .AddBootstrap5Providers()
-            .AddFontAwesomeIcons();
+        try
+        {
+            context.Services
+                .AddBootstrap5Providers()
+                .AddFontAwesomeIcons();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            throw;
+        }
+
     }
 
     private static void ConfigureAuthentication(WebAssemblyHostBuilder builder)

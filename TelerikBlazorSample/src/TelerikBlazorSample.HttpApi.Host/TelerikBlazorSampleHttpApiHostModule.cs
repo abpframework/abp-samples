@@ -123,7 +123,8 @@ public class TelerikBlazorSampleHttpApiHostModule : AbpModule
                 options.Authority = configuration["AuthServer:Authority"];
                 options.RequireHttpsMetadata = Convert.ToBoolean(configuration["AuthServer:RequireHttpsMetadata"]);
                 options.Audience = "TelerikBlazorSample";
-                options.BackchannelHttpHandler = new HttpClientHandler
+                options.MapInboundClaims = false;
+                    options.BackchannelHttpHandler = new HttpClientHandler
                 {
                     ServerCertificateCustomValidationCallback =
                         HttpClientHandler.DangerousAcceptAnyServerCertificateValidator

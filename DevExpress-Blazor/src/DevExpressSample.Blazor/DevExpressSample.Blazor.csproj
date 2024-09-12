@@ -10,6 +10,7 @@
     <PackageReference Include="Blazorise.Bootstrap5" Version="1.5.2" />
     <PackageReference Include="Blazorise.Icons.FontAwesome" Version="1.5.2" />
     <PackageReference Include="DevExpress.Blazor" Version="20.1.3" />
+    <PackageReference Include="DevExpress.Blazor.Themes" Version="20.1.3" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="8.0.4" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="8.0.4" />
   </ItemGroup>

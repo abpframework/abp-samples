@@ -110,6 +110,7 @@ namespace Acme.BookStore
                     options.Authority = configuration["AuthServer:Authority"];
                     options.RequireHttpsMetadata = Convert.ToBoolean(configuration["AuthServer:RequireHttpsMetadata"]);
                     options.Audience = "BookStore";
+                    options.MapInboundClaims = false;
                 });
         }
 

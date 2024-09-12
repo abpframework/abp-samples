@@ -105,7 +105,7 @@ public class BookStoreHttpApiHostModule : AbpModule
                 options.Authority = configuration["AuthServer:Authority"];
                 options.RequireHttpsMetadata = Convert.ToBoolean(configuration["AuthServer:RequireHttpsMetadata"]);
                 options.Audience = "BookStore";
-
+                options.MapInboundClaims = false;
                 options.TokenValidationParameters.IssuerValidator = TokenWildcardIssuerValidator.IssuerValidator;
                 options.TokenValidationParameters.ValidIssuers = new[]
                 {

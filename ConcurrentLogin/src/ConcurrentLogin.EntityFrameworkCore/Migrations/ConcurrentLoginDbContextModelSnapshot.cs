@@ -773,7 +773,7 @@ namespace ConcurrentLogin.Migrations
                         .ValueGeneratedOnAdd()
                         .HasMaxLength(128)
                         .HasColumnType("nvarchar(128)")
-                        .HasDefaultValue("0fb98fdf48274ec9b4ce581e7a740799");
+                        .HasDefaultValue("8f17a6d0463341de9b2dd0cf20f1bcff");
 
                     b.Property<DateTime>("CreationTime")
                         .HasColumnType("datetime2")

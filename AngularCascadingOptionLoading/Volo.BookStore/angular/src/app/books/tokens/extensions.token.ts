@@ -1,4 +1,4 @@
-import { CreateFormPropContributorCallback } from '@abp/ng.theme.shared/extensions';
+import { CreateFormPropContributorCallback } from '@abp/ng.components/extensible';
 import { InjectionToken } from '@angular/core';
 import { BookDto } from '../proxy';
 import { eBooksComponents } from '../enums';

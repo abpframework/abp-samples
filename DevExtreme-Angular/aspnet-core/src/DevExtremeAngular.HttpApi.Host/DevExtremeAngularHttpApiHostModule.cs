@@ -95,6 +95,7 @@ namespace DevExtremeAngular
                     options.Authority = configuration["AuthServer:Authority"];
                     options.RequireHttpsMetadata = false;
                     options.Audience = "DevExtremeAngular";
+                    options.MapInboundClaims = false;
                     options.BackchannelHttpHandler = new HttpClientHandler()
                     {
                         ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator

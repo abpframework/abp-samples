@@ -112,6 +112,7 @@ public class AspirationalAbpHttpApiHostModule : AbpModule
                 options.Authority = configuration["AuthServer:Authority"];
                 options.RequireHttpsMetadata = configuration.GetValue<bool>("AuthServer:RequireHttpsMetadata");
                 options.Audience = "AspirationalAbp";
+                options.MapInboundClaims = false;
             });
 
         context.Services.Configure<AbpClaimsPrincipalFactoryOptions>(options =>

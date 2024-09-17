@@ -11,7 +11,7 @@ using Volo.Abp.EventBus.Distributed;
 
 namespace ModularCrm.Ordering.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/orders")]
     [ApiController]
     public class OrdersController : AbpControllerBase
     {
@@ -27,8 +27,9 @@ namespace ModularCrm.Ordering.Controllers
         }
 
         [HttpPost]
-        public async Task CreateAsync(OrderCreationModel input)
+        public async Task<IActionResult> CreateAsync(OrderCreationModel input)
         {
+            // Create a new Order entity
             var order = new Order
             {
                 CustomerName = input.CustomerName,
@@ -36,14 +37,18 @@ namespace ModularCrm.Ordering.Controllers
                 State = OrderState.Placed
             };
 
+            // Save it to the database
             await _orderRepository.InsertAsync(order);
 
+            // Publish an event, so other modules can be informed
             await _distributedEventBus.PublishAsync(
                 new OrderPlacedEto
                 {
                     ProductId = order.ProductId,
                     CustomerName = order.CustomerName
                 });
+
+            return Created();
         }
 
         public class OrderCreationModel

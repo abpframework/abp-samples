@@ -1,3 +1,4 @@
+using ModularCrm.Products;
 using Volo.Abp.EntityFrameworkCore;
 using Volo.Abp.Domain;
 using ModularCrm.Ordering.Contracts;
@@ -9,6 +10,7 @@ using Volo.Abp.UI.Navigation;
 namespace ModularCrm.Ordering;
 
 [DependsOn(
+    typeof(ProductsApplicationContractsModule),
     typeof(AbpEntityFrameworkCoreModule),
     typeof(AbpDddDomainModule),
     typeof(ModularCrmOrderingContractsModule),

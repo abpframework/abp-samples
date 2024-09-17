@@ -4,6 +4,7 @@ using ModularCrm.Ordering.Contracts;
 using Volo.Abp.Modularity;
 using Volo.Abp.AspNetCore.Mvc.UI.Theme.Shared;
 using Microsoft.Extensions.DependencyInjection;
+using Volo.Abp.UI.Navigation;
 
 namespace ModularCrm.Ordering;
 
@@ -20,6 +21,14 @@ public class OrderingWebModule : AbpModule
         PreConfigure<IMvcBuilder>(mvcBuilder =>
         {
             mvcBuilder.AddApplicationPartIfNotExists(typeof(OrderingWebModule).Assembly);
+        });
+    }
+
+    public override void ConfigureServices(ServiceConfigurationContext context)
+    {
+        Configure<AbpNavigationOptions>(options =>
+        {
+            options.MenuContributors.Add(new OrderingMenuContributor());
         });
     }
 }

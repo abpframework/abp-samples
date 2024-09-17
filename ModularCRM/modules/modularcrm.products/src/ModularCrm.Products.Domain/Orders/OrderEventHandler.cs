@@ -7,8 +7,9 @@ using Volo.Abp.EventBus.Distributed;
 
 namespace ModularCrm.Products.Orders
 {
-    public class OrderEventHandler 
-        : IDistributedEventHandler<OrderPlacedEto>, ITransientDependency
+    public class OrderEventHandler :
+        IDistributedEventHandler<OrderPlacedEto>, 
+        ITransientDependency
     {
         private readonly IRepository<Product, Guid> _productRepository;
 

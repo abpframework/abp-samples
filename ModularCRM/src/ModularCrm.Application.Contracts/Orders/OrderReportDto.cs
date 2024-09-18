@@ -12,6 +12,6 @@ namespace ModularCrm.Orders
 
         // Product data
         public Guid ProductId { get; set; }
-        public Guid ProductName { get; set; }
+        public string ProductName { get; set; }
     }
 }

@@ -1,10 +1,10 @@
 ﻿using System;
-using Volo.Abp.Domain.Entities;
 using ModularCrm.Ordering.Contracts.Enums;
+using Volo.Abp.Domain.Entities.Auditing;
 
 namespace ModularCrm.Ordering.Entities
 {
-    public class Order : AggregateRoot<Guid>
+    public class Order : CreationAuditedAggregateRoot<Guid>
     {
         public Guid ProductId { get; set; }
         public string CustomerName { get; set; }

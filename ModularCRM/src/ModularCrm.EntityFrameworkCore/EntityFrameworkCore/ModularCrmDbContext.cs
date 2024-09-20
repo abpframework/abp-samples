@@ -87,6 +87,7 @@ public class ModularCrmDbContext :
         builder.ConfigureTenantManagement();
         builder.ConfigureBlobStoring();
         builder.ConfigureProducts();
+        builder.ConfigureOrdering();
         
         /* Configure your own tables/entities inside here */
 

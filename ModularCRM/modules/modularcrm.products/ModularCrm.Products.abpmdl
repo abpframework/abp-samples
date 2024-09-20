@@ -54,5 +54,11 @@
       "path": "test/ModularCrm.Products.Application.Tests/ModularCrm.Products.Application.Tests.abppkg",
       "folder": "test"
     }
+  },
+  "imports": {
+    "ModularCrm.Ordering": {
+      "path": "../modularcrm.ordering/ModularCrm.Ordering.abpmdl",
+      "isInstalled": true
+    }
   }
 }

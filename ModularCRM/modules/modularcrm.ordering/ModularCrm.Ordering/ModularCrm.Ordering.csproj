@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+<Project Sdk="Microsoft.NET.Sdk.Web">
   <Import Project="..\..\..\common.props" />
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
@@ -13,8 +13,9 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Volo.Abp.AspNetCore.Mvc.UI.Theme.Shared" Version="8.3.0" />
-    <ProjectReference Include="../ModularCrm.Ordering.Contracts/ModularCrm.Ordering.Contracts.csproj" />
     <PackageReference Include="Volo.Abp.Ddd.Domain" Version="8.3.0" />
     <PackageReference Include="Volo.Abp.EntityFrameworkCore" Version="8.3.0" />
+    <ProjectReference Include="../ModularCrm.Ordering.Contracts/ModularCrm.Ordering.Contracts.csproj" />
+    <ProjectReference Include="../../modularcrm.products/src/ModularCrm.Products.Application.Contracts/ModularCrm.Products.Application.Contracts.csproj" />
   </ItemGroup>
 </Project>

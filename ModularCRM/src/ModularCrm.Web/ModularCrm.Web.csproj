@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
   <Import Project="..\..\common.props" />
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
@@ -33,10 +33,10 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="AspNetCore.HealthChecks.UI" Version="7.0.2" />
-    <PackageReference Include="AspNetCore.HealthChecks.UI.Client" Version="7.1.0" />
+    <PackageReference Include="AspNetCore.HealthChecks.UI" Version="8.0.0" />
+    <PackageReference Include="AspNetCore.HealthChecks.UI.Client" Version="8.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="8.0.4" />
-    <PackageReference Include="AspNetCore.HealthChecks.UI.InMemory.Storage" Version="7.0.0" />
+    <PackageReference Include="AspNetCore.HealthChecks.UI.InMemory.Storage" Version="8.0.0" />
     <PackageReference Include="Serilog.AspNetCore" Version="8.0.0" />
     <PackageReference Include="Serilog.Sinks.Async" Version="1.5.0" />
   </ItemGroup>
@@ -47,19 +47,19 @@
     <ProjectReference Include="../../modules/modularcrm.products/src/ModularCrm.Products.Web/ModularCrm.Products.Web.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Volo.Abp.Autofac" Version="8.2.2" />
-    <PackageReference Include="Volo.Abp.AspNetCore.Serilog" Version="8.2.2" />
-    <PackageReference Include="Volo.Abp.AspNetCore.Authentication.JwtBearer" Version="8.2.2" />
-    <PackageReference Include="Volo.Abp.Swashbuckle" Version="8.2.2" />
-    <PackageReference Include="Volo.Abp.FeatureManagement.Web" Version="8.2.2" />
+    <PackageReference Include="Volo.Abp.Autofac" Version="8.3.0" />
+    <PackageReference Include="Volo.Abp.AspNetCore.Serilog" Version="8.3.0" />
+    <PackageReference Include="Volo.Abp.AspNetCore.Authentication.JwtBearer" Version="8.3.0" />
+    <PackageReference Include="Volo.Abp.Swashbuckle" Version="8.3.0" />
+    <PackageReference Include="Volo.Abp.FeatureManagement.Web" Version="8.3.0" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Volo.Abp.AspNetCore.Mvc.UI.Theme.LeptonXLite" Version="3.2.2" />
+    <PackageReference Include="Volo.Abp.AspNetCore.Mvc.UI.Theme.LeptonXLite" Version="3.3.0" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Volo.Abp.Account.Web.OpenIddict" Version="8.2.2" />
-    <PackageReference Include="Volo.Abp.Identity.Web" Version="8.2.2" />
-    <PackageReference Include="Volo.Abp.TenantManagement.Web" Version="8.2.2" />
+    <PackageReference Include="Volo.Abp.Account.Web.OpenIddict" Version="8.3.0" />
+    <PackageReference Include="Volo.Abp.Identity.Web" Version="8.3.0" />
+    <PackageReference Include="Volo.Abp.TenantManagement.Web" Version="8.3.0" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Volo.Abp.Studio.Client.AspNetCore" Version="0.7.8" />

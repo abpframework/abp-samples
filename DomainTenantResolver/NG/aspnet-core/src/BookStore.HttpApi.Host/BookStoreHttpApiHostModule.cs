@@ -140,6 +140,7 @@ namespace BookStore
                     options.Authority = configuration["AuthServer:Authority"];
                     options.RequireHttpsMetadata = Convert.ToBoolean(configuration["AuthServer:RequireHttpsMetadata"]);
                     options.Audience = "BookStore";
+                    options.MapInboundClaims = false;
                     options.BackchannelHttpHandler = new HttpClientHandler
                     {
                         ServerCertificateCustomValidationCallback =
@@ -179,8 +180,8 @@ namespace BookStore
                 options.Languages.Add(new LanguageInfo("tr", "tr", "Türkçe"));
                 options.Languages.Add(new LanguageInfo("zh-Hans", "zh-Hans", "简体中文"));
                 options.Languages.Add(new LanguageInfo("zh-Hant", "zh-Hant", "繁體中文"));
-                options.Languages.Add(new LanguageInfo("de-DE", "de-DE", "Deutsch", "de"));
-                options.Languages.Add(new LanguageInfo("es", "es", "Español", "es"));
+                options.Languages.Add(new LanguageInfo("de-DE", "de-DE", "Deutsch"));
+                options.Languages.Add(new LanguageInfo("es", "es", "Español"));
             });
         }
 

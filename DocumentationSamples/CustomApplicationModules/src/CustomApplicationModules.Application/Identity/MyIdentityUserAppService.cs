@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Options;
+using Volo.Abp.Authorization.Permissions;
 using Volo.Abp.Data;
 using Volo.Abp.DependencyInjection;
 using Volo.Abp.Identity;
@@ -16,8 +17,9 @@ namespace CustomApplicationModules.Identity
             IdentityUserManager userManager,
             IIdentityUserRepository userRepository,
             IIdentityRoleRepository roleRepository,
-            IOptions<IdentityOptions> identityOptions) :
-            base(userManager, userRepository, roleRepository, identityOptions)
+            IOptions<IdentityOptions> identityOptions,
+            IPermissionChecker permissionChecker) : base(userManager,
+            userRepository, roleRepository, identityOptions, permissionChecker)
         {
         }
 
@@ -38,7 +40,5 @@ namespace CustomApplicationModules.Identity
 
             return await base.GetAsync(id);
         }
-
-
     }
 }

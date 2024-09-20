@@ -7,8 +7,7 @@ namespace TelerikComponents.Web.Bundling
     {
         public override void ConfigureBundle(BundleConfigurationContext context)
         {
-            context.Files.AddIfNotContains("/libs/kendo/css/web/kendo.common-bootstrap.min.css");
-            context.Files.AddIfNotContains("/libs/kendo/css/web/kendo.bootstrap-v4.min.css");
+            context.Files.AddIfNotContains("/libs/kendo/css/all.css");
         }
     }
 }

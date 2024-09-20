@@ -5,8 +5,11 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Volo.Abp.Caching;
 using Volo.Abp.DependencyInjection;
+using Volo.Abp.EventBus.Distributed;
 using Volo.Abp.Identity;
+using Volo.Abp.Security.Claims;
 using Volo.Abp.Settings;
 using Volo.Abp.Threading;
 using Volo.Abp.Validation;
@@ -32,21 +35,10 @@ namespace CustomApplicationModules.Identity
             ILogger<IdentityUserManager> logger,
             ICancellationTokenProvider cancellationTokenProvider,
             IOrganizationUnitRepository organizationUnitRepository,
-            ISettingProvider settingProvider) :
-            base(store,
-                roleRepository,
-                userRepository,
-                optionsAccessor,
-                passwordHasher,
-                userValidators,
-                passwordValidators,
-                keyNormalizer,
-                errors,
-                services,
-                logger,
-                cancellationTokenProvider,
-                organizationUnitRepository,
-                settingProvider)
+            ISettingProvider settingProvider,
+            IDistributedEventBus distributedEventBus,
+            IIdentityLinkUserRepository identityLinkUserRepository,
+            IDistributedCache<AbpDynamicClaimCacheItem> dynamicClaimCache) : base(store, roleRepository, userRepository, optionsAccessor, passwordHasher, userValidators, passwordValidators, keyNormalizer, errors, services, logger, cancellationTokenProvider, organizationUnitRepository, settingProvider, distributedEventBus, identityLinkUserRepository, dynamicClaimCache)
         {
         }
 
@@ -68,5 +60,7 @@ namespace CustomApplicationModules.Identity
 
             return await base.CreateAsync(user);
         }
+
+
     }
 }

@@ -2,7 +2,7 @@
   "id": "d8ae1ace-0a65-4d08-b53e-b8b70e1aafe1",
   "template": "app",
   "versions": {
-    "AbpFramework": "8.2.2",
+    "AbpFramework": "8.3.0",
     "AbpStudio": "0.7.9"
   },
   "modules": {

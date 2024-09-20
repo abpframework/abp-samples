@@ -1,3 +1,4 @@
+using System;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 
@@ -16,8 +17,16 @@ public class Program
 
         var host = builder.Build();
 
-        await application.InitializeApplicationAsync(host.Services);
+        try
+        {
+            await application.InitializeApplicationAsync(host.Services);
 
-        await host.RunAsync();
+            await host.RunAsync();
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+        }
+
     }
 }

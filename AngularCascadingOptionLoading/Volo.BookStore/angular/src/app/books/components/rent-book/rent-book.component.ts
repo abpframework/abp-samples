@@ -12,9 +12,9 @@ import { ThemeSharedModule } from '@abp/ng.theme.shared';
 import {
   EXTENSIONS_IDENTIFIER,
   FormPropData,
-  UiExtensionsModule,
+  ExtensibleModule,
   generateFormFromProps,
-} from '@abp/ng.theme.shared/extensions';
+} from '@abp/ng.components/extensible';
 import { AuthorService, BookDto, BooksService } from '../../proxy';
 import { eBooksComponents } from '../../enums';
 
@@ -22,7 +22,7 @@ import { eBooksComponents } from '../../enums';
   standalone: true,
   selector: 'app-rent-book',
   templateUrl: './rent-book.component.html',
-  imports: [CoreModule, UiExtensionsModule, ThemeSharedModule],
+  imports: [CoreModule, ExtensibleModule, ThemeSharedModule],
   providers: [
     {
       provide: EXTENSIONS_IDENTIFIER,

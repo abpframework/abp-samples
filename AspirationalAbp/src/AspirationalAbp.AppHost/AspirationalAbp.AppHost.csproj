@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
@@ -12,7 +12,7 @@
   <ItemGroup>
     <ProjectReference Include="..\AspirationalAbp.AuthServer\AspirationalAbp.AuthServer.csproj" />
     <ProjectReference Include="..\AspirationalAbp.HttpApi.Host\AspirationalAbp.HttpApi.Host.csproj" />
-    <ProjectReference Include="..\AspirationalAbp.Web\AspirationalAbp.Web.csproj"/>
+    <ProjectReference Include="..\AspirationalAbp.Web\AspirationalAbp.Web.csproj" />
     <ProjectReference Include="..\AspirationalAbp.DbMigrator\AspirationalAbp.DbMigrator.csproj" />
   </ItemGroup>
 

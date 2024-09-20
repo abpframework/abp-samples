@@ -1,13 +1,13 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
     <PropertyGroup>
-        <TargetFramework>net7.0</TargetFramework>
+        <TargetFramework>net8.0</TargetFramework>
         <OutputType>Library</OutputType>
         <IsPackable>true</IsPackable>
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Volo.Abp.AspNetCore.Mvc.UI.Theme.Shared" Version="7.2.2" />
+        <PackageReference Include="Volo.Abp.AspNetCore.Mvc.UI.Theme.Shared" Version="8.3.0" />
     </ItemGroup>
 
 </Project>

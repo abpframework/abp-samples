@@ -12,7 +12,8 @@ namespace TelerikComponents.Web.Bundling
     {
         public override void ConfigureBundle(BundleConfigurationContext context)
         {
-            context.Files.AddIfNotContains("/libs/kendo/dist/kendo-bundle.js"); // This is the output of our webpack step
+            context.Files.AddIfNotContains("/libs/kendo/js/kendo.all.min.js"); // This is the output of our webpack step
+            context.Files.AddIfNotContains("/libs/kendo/js/kendo.aspnetmvc.min.js");
         }
     }
 }

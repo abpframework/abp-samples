@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using Volo.Abp.Account.Web;
 using Volo.Abp.Account.Web.Pages.Account;
+using Volo.Abp.Identity;
 
 namespace CustomApplicationModules.Web.Pages.Account
 {
@@ -14,8 +15,8 @@ namespace CustomApplicationModules.Web.Pages.Account
         public MyLoginModel(
             IAuthenticationSchemeProvider schemeProvider,
             IOptions<AbpAccountOptions> accountOptions,
-            IOptions<IdentityOptions> identityOptions)
-            : base(schemeProvider, accountOptions, identityOptions)
+            IOptions<IdentityOptions> identityOptions,
+            IdentityDynamicClaimsPrincipalContributorCache identityDynamicClaimsPrincipalContributorCache) : base(schemeProvider, accountOptions, identityOptions, identityDynamicClaimsPrincipalContributorCache)
         {
         }
 
@@ -27,5 +28,7 @@ namespace CustomApplicationModules.Web.Pages.Account
 
             return result;
         }
+
+
     }
 }

@@ -6,7 +6,7 @@ import {
   getObjectExtensionEntitiesFromStore,
   mapEntitiesToContributors,
   mergeWithDefaultProps,
-} from '@abp/ng.theme.shared/extensions';
+} from '@abp/ng.components/extensible';
 import {
   BOOK_STORE_RENT_FORM_PROP_CONTRIBUTORS,
   DEFAULT_BOOK_STORE_CREATE_FORM_PROPS,

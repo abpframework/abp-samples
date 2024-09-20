@@ -3,7 +3,7 @@
   <Import Project="..\..\common.props" />
 
   <PropertyGroup>
-    <TargetFramework>net7.0</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
     <RootNamespace>Acme.BookStore.Web</RootNamespace>
     <AssetTargetFallback>$(AssetTargetFallback);portable-net45+win8+wp8+wpa81;</AssetTargetFallback>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -31,7 +31,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="DevExpress.AspNetCore.Reporting" Version="22.2.3" />
+    <PackageReference Include="DevExpress.AspNetCore.Reporting" Version="20.1.3" />
     <PackageReference Include="Serilog.AspNetCore" Version="5.0.0" />
     <PackageReference Include="Serilog.Sinks.Async" Version="1.5.0" />
   </ItemGroup>
@@ -40,15 +40,15 @@
     <ProjectReference Include="..\Acme.BookStore.Application\Acme.BookStore.Application.csproj" />
     <ProjectReference Include="..\Acme.BookStore.HttpApi\Acme.BookStore.HttpApi.csproj" />
     <ProjectReference Include="..\Acme.BookStore.EntityFrameworkCore\Acme.BookStore.EntityFrameworkCore.csproj" />
-    <PackageReference Include="Volo.Abp.AspNetCore.Mvc.UI.Theme.Basic" Version="7.2.2" />
-    <PackageReference Include="Volo.Abp.Autofac" Version="7.2.2" />
-    <PackageReference Include="Volo.Abp.Swashbuckle" Version="7.2.2" />
-    <PackageReference Include="Volo.Abp.AspNetCore.Authentication.JwtBearer" Version="7.2.2" />
-    <PackageReference Include="Volo.Abp.AspNetCore.Serilog" Version="7.2.2" />
-    <PackageReference Include="Volo.Abp.Identity.Web" Version="7.2.2" />
-    <PackageReference Include="Volo.Abp.Account.Web.IdentityServer" Version="7.2.2" />
-    <PackageReference Include="Volo.Abp.TenantManagement.Web" Version="7.2.2" />
-    <PackageReference Include="Volo.Abp.SettingManagement.Web" Version="7.2.2" />
+    <PackageReference Include="Volo.Abp.AspNetCore.Mvc.UI.Theme.Basic" Version="8.3.0" />
+    <PackageReference Include="Volo.Abp.Autofac" Version="8.3.0" />
+    <PackageReference Include="Volo.Abp.Swashbuckle" Version="8.3.0" />
+    <PackageReference Include="Volo.Abp.AspNetCore.Authentication.JwtBearer" Version="8.3.0" />
+    <PackageReference Include="Volo.Abp.AspNetCore.Serilog" Version="8.3.0" />
+    <PackageReference Include="Volo.Abp.Identity.Web" Version="8.3.0" />
+    <PackageReference Include="Volo.Abp.Account.Web.IdentityServer" Version="8.3.0" />
+    <PackageReference Include="Volo.Abp.TenantManagement.Web" Version="8.3.0" />
+    <PackageReference Include="Volo.Abp.SettingManagement.Web" Version="8.3.0" />
   </ItemGroup>
 
 </Project>

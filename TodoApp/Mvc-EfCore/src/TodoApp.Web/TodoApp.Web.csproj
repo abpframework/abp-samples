@@ -36,20 +36,20 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Volo.Abp.AspNetCore.Mvc.UI.Theme.LeptonXLite" Version="3.0.0" />
+    <PackageReference Include="Volo.Abp.AspNetCore.Mvc.UI.Theme.LeptonXLite" Version="3.3.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\TodoApp.Application\TodoApp.Application.csproj" />
     <ProjectReference Include="..\TodoApp.HttpApi\TodoApp.HttpApi.csproj" />
     <ProjectReference Include="..\TodoApp.EntityFrameworkCore\TodoApp.EntityFrameworkCore.csproj" />
-    <PackageReference Include="Volo.Abp.Autofac" Version="8.0.0" />
-    <PackageReference Include="Volo.Abp.Swashbuckle" Version="8.0.0" />
-    <PackageReference Include="Volo.Abp.AspNetCore.Serilog" Version="8.0.0" />
-    <PackageReference Include="Volo.Abp.Identity.Web" Version="8.0.0" />
-    <PackageReference Include="Volo.Abp.Account.Web.OpenIddict" Version="8.0.0" />
-    <PackageReference Include="Volo.Abp.TenantManagement.Web" Version="8.0.0" />
-    <PackageReference Include="Volo.Abp.SettingManagement.Web" Version="8.0.0" />
+    <PackageReference Include="Volo.Abp.Autofac" Version="8.3.0" />
+    <PackageReference Include="Volo.Abp.Swashbuckle" Version="8.3.0" />
+    <PackageReference Include="Volo.Abp.AspNetCore.Serilog" Version="8.3.0" />
+    <PackageReference Include="Volo.Abp.Identity.Web" Version="8.3.0" />
+    <PackageReference Include="Volo.Abp.Account.Web.OpenIddict" Version="8.3.0" />
+    <PackageReference Include="Volo.Abp.TenantManagement.Web" Version="8.3.0" />
+    <PackageReference Include="Volo.Abp.SettingManagement.Web" Version="8.3.0" />
   </ItemGroup>
 
 </Project>

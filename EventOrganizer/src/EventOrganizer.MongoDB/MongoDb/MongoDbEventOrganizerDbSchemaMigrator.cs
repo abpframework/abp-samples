@@ -18,7 +18,7 @@ namespace EventOrganizer.MongoDB
             _serviceProvider = serviceProvider;
         }
 
-        public Task MigrateAsync()
+        public async Task MigrateAsync()
         {
             var dbContexts = _serviceProvider.GetServices<IAbpMongoDbContext>();
             var connectionStringResolver = _serviceProvider.GetService<IConnectionStringResolver>();
@@ -26,7 +26,7 @@ namespace EventOrganizer.MongoDB
             foreach (var dbContext in dbContexts)
             {
                 var connectionString =
-                    connectionStringResolver.Resolve(
+                    await connectionStringResolver.ResolveAsync(
                         ConnectionStringNameAttribute.GetConnStringName(dbContext.GetType()));
                 var mongoUrl = new MongoUrl(connectionString);
                 var databaseName = mongoUrl.DatabaseName;
@@ -39,8 +39,6 @@ namespace EventOrganizer.MongoDB
 
                 (dbContext as AbpMongoDbContext)?.InitializeCollections(client.GetDatabase(databaseName));
             }
-
-            return Task.CompletedTask;
         }
     }
 }

@@ -30,7 +30,6 @@ public class DbMigratorHostedService : IHostedService
            options.UseAutofac();
            options.Services.AddLogging(c => c.AddSerilog());
            options.Services.AddDataMigrationEnvironment();
-           options.AddDataMigrationEnvironment();
         }))
         {
             await application.InitializeAsync();

@@ -47,7 +47,7 @@ namespace DevExpressSample.Blazor
             ConfigureMenu(context);
             ConfigureAutoMapper(context);
 
-            builder.Services.AddDevExpressBlazor();
+            builder.Services.AddDevExpressBlazor(configure => configure.BootstrapVersion = DevExpress.Blazor.BootstrapVersion.v5);
         }
 
         private void ConfigureRouter(ServiceConfigurationContext context)

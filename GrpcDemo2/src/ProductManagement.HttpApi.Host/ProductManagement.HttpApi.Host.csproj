@@ -14,15 +14,18 @@
     <PackageReference Include="protobuf-net.Grpc.AspNetCore" Version="1.0.177" />
     <PackageReference Include="Serilog.AspNetCore" Version="5.0.0" />
     <PackageReference Include="Serilog.Sinks.Async" Version="1.5.0" />
-    <PackageReference Include="Volo.Abp.AspNetCore.MultiTenancy" Version="8.0.0" />
-    <PackageReference Include="Volo.Abp.Autofac" Version="8.0.0" />
-    <PackageReference Include="Volo.Abp.AspNetCore.Serilog" Version="8.0.0" />
-    <PackageReference Include="Volo.Abp.Swashbuckle" Version="8.0.0" />
-    <PackageReference Include="Volo.Abp.Account.Web.OpenIddict" Version="8.0.0" />
+    <PackageReference Include="Volo.Abp.AspNetCore.MultiTenancy" Version="8.3.0" />
+    <PackageReference Include="Volo.Abp.Autofac" Version="8.3.0" />
+    <PackageReference Include="Volo.Abp.AspNetCore.Serilog" Version="8.3.0" />
+    <PackageReference Include="Volo.Abp.Swashbuckle" Version="8.3.0" />
+    <PackageReference Include="Microsoft.IdentityModel.Protocols.OpenIdConnect" Version="7.5.1" />
+    <PackageReference Include="Microsoft.IdentityModel.Tokens" Version="7.5.1" />
+    <PackageReference Include="Microsoft.IdentityModel.JsonWebTokens" Version="7.5.1" />
+    <PackageReference Include="Volo.Abp.Account.Web.OpenIddict" Version="8.3.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Volo.Abp.AspNetCore.Mvc.UI.Theme.LeptonXLite" Version="3.0.0" />
+    <PackageReference Include="Volo.Abp.AspNetCore.Mvc.UI.Theme.LeptonXLite" Version="3.3.0" />
   </ItemGroup>
 
   <ItemGroup>

@@ -104,6 +104,7 @@ public class SwaggerDemoHttpApiHostModule : AbpModule
                 options.Authority = configuration["AuthServer:Authority"];
                 options.RequireHttpsMetadata = Convert.ToBoolean(configuration["AuthServer:RequireHttpsMetadata"]);
                 options.Audience = "SwaggerDemo";
+                options.MapInboundClaims = false;
             });
     }
 

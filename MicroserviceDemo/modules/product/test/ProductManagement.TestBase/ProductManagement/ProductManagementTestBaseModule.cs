@@ -3,6 +3,7 @@ using Volo.Abp;
 using Volo.Abp.Authorization;
 using Volo.Abp.Autofac;
 using Volo.Abp.Modularity;
+using Volo.Abp.Uow;
 
 namespace ProductManagement
 {

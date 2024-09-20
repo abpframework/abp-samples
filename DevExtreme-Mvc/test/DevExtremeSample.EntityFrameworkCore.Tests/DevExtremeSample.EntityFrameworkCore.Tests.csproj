@@ -3,14 +3,14 @@
   <Import Project="..\..\common.props" />
 
   <PropertyGroup>
-    <TargetFramework>net7.0</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
     <RootNamespace>DevExtremeSample</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\src\DevExtremeSample.EntityFrameworkCore.DbMigrations\DevExtremeSample.EntityFrameworkCore.DbMigrations.csproj" />
     <ProjectReference Include="..\DevExtremeSample.TestBase\DevExtremeSample.TestBase.csproj" />
-    <PackageReference Include="Volo.Abp.EntityFrameworkCore.Sqlite" Version="7.2.2" />
+    <PackageReference Include="Volo.Abp.EntityFrameworkCore.Sqlite" Version="8.3.0" />
   </ItemGroup>
 
   <ItemGroup>

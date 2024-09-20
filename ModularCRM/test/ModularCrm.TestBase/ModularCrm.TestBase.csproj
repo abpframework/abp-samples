@@ -23,10 +23,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Volo.Abp.Autofac" Version="8.2.2" />
-    <PackageReference Include="Volo.Abp.TestBase" Version="8.2.2" />
-    <PackageReference Include="Volo.Abp.Authorization" Version="8.2.2" />
-    <PackageReference Include="Volo.Abp.BackgroundJobs.Abstractions" Version="8.2.2" />
+    <PackageReference Include="Volo.Abp.Autofac" Version="8.3.0" />
+    <PackageReference Include="Volo.Abp.TestBase" Version="8.3.0" />
+    <PackageReference Include="Volo.Abp.Authorization" Version="8.3.0" />
+    <PackageReference Include="Volo.Abp.BackgroundJobs.Abstractions" Version="8.3.0" />
   </ItemGroup>
 
   <ItemGroup>

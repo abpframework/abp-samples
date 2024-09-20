@@ -3,7 +3,7 @@
   <Import Project="..\..\common.props" />
 
   <PropertyGroup>
-    <TargetFramework>net7.0</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
     <RootNamespace>Acme.BookStore</RootNamespace>
     <PreserveCompilationReferences>true</PreserveCompilationReferences>
     <UserSecretsId>Acme.BookStore-4681b4fd-151f-4221-84a4-929d86723e4c</UserSecretsId>
@@ -12,14 +12,17 @@
   <ItemGroup>
     <PackageReference Include="Serilog.AspNetCore" Version="5.0.0" />
     <PackageReference Include="Serilog.Sinks.Async" Version="1.5.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="7.0.0" />
-    <PackageReference Include="Microsoft.AspNetCore.DataProtection.StackExchangeRedis" Version="7.0.0" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="7.0.0" />
-    <PackageReference Include="Volo.Abp.AspNetCore.Mvc.UI.MultiTenancy" Version="7.2.2" />
-    <PackageReference Include="Volo.Abp.Autofac" Version="7.2.2" />
-    <PackageReference Include="Volo.Abp.Caching.StackExchangeRedis" Version="7.2.2" />
-    <PackageReference Include="Volo.Abp.AspNetCore.Serilog" Version="7.2.2" />
-    <PackageReference Include="Volo.Abp.Swashbuckle" Version="7.2.2" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.4" />
+    <PackageReference Include="Microsoft.AspNetCore.DataProtection.StackExchangeRedis" Version="8.0.4" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.4" />
+    <PackageReference Include="Volo.Abp.AspNetCore.Mvc.UI.MultiTenancy" Version="8.3.0" />
+    <PackageReference Include="Volo.Abp.Autofac" Version="8.3.0" />
+    <PackageReference Include="Volo.Abp.Caching.StackExchangeRedis" Version="8.3.0" />
+    <PackageReference Include="Volo.Abp.AspNetCore.Serilog" Version="8.3.0" />
+    <PackageReference Include="Volo.Abp.Swashbuckle" Version="8.3.0" />
+    <PackageReference Include="Microsoft.IdentityModel.Protocols.OpenIdConnect" Version="7.5.1" />
+    <PackageReference Include="Microsoft.IdentityModel.Tokens" Version="7.5.1" />
+    <PackageReference Include="Microsoft.IdentityModel.JsonWebTokens" Version="7.5.1" />
   </ItemGroup>
 
   <ItemGroup>

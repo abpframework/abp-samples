@@ -3,7 +3,7 @@
   "name": "my-app",
   "private": true,
   "dependencies": {
-    "@abp/aspnetcore.mvc.ui.theme.basic": "~7.2.2",
+    "@abp/aspnetcore.mvc.ui.theme.basic": "~8.3.0",
     "@devexpress/analytics-core": "^22.2.3",
     "cldrjs": "^0.5.5",
     "devexpress-reporting": "^22.2.3",

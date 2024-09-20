@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <Import Project="..\..\common.props" />
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
@@ -10,11 +10,11 @@
     <ProjectReference Include="../../modules/acme.modulea/src/Acme.ModuleA.Application.Contracts/Acme.ModuleA.Application.Contracts.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Volo.Abp.PermissionManagement.Application.Contracts" Version="8.2.2" />
-    <PackageReference Include="Volo.Abp.FeatureManagement.Application.Contracts" Version="8.2.2" />
-    <PackageReference Include="Volo.Abp.SettingManagement.Application.Contracts" Version="8.2.2" />
-    <PackageReference Include="Volo.Abp.Identity.Application.Contracts" Version="8.2.2" />
-    <PackageReference Include="Volo.Abp.Account.Application.Contracts" Version="8.2.2" />
-    <PackageReference Include="Volo.Abp.TenantManagement.Application.Contracts" Version="8.2.2" />
+    <PackageReference Include="Volo.Abp.PermissionManagement.Application.Contracts" Version="8.3.0" />
+    <PackageReference Include="Volo.Abp.FeatureManagement.Application.Contracts" Version="8.3.0" />
+    <PackageReference Include="Volo.Abp.SettingManagement.Application.Contracts" Version="8.3.0" />
+    <PackageReference Include="Volo.Abp.Identity.Application.Contracts" Version="8.3.0" />
+    <PackageReference Include="Volo.Abp.Account.Application.Contracts" Version="8.3.0" />
+    <PackageReference Include="Volo.Abp.TenantManagement.Application.Contracts" Version="8.3.0" />
   </ItemGroup>
 </Project>

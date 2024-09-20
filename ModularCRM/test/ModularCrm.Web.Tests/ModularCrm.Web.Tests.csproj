@@ -16,7 +16,7 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.8.0" />
     <PackageReference Include="HtmlAgilityPack" Version="1.11.54" />
-    <PackageReference Include="Volo.Abp.AspNetCore.TestBase" Version="8.2.2" />
+    <PackageReference Include="Volo.Abp.AspNetCore.TestBase" Version="8.3.0" />
     <ProjectReference Include="..\ModularCrm.Application.Tests\ModularCrm.Application.Tests.csproj" />
     <ProjectReference Include="..\..\src\ModularCrm.Web\ModularCrm.Web.csproj" />
     <ProjectReference Include="..\ModularCrm.EntityFrameworkCore.Tests\ModularCrm.EntityFrameworkCore.Tests.csproj" />

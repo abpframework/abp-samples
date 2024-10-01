@@ -11,6 +11,7 @@
 
     <ItemGroup>
         <PackageReference Include="Volo.Abp.Core" Version="8.3.0" />
+        <PackageReference Include="Volo.Abp.Ddd.Application.Contracts" Version="8.3.0" />
     </ItemGroup>
 
 </Project>

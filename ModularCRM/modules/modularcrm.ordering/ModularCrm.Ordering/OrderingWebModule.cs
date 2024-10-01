@@ -1,4 +1,6 @@
 using ModularCrm.Products;
+using Volo.Abp.AutoMapper;
+using Volo.Abp.Application;
 using Volo.Abp.EntityFrameworkCore;
 using Volo.Abp.Domain;
 using ModularCrm.Ordering.Contracts;
@@ -11,6 +13,8 @@ namespace ModularCrm.Ordering;
 
 [DependsOn(
     typeof(ProductsApplicationContractsModule),
+    typeof(AbpAutoMapperModule),
+    typeof(AbpDddApplicationModule),
     typeof(AbpEntityFrameworkCoreModule),
     typeof(AbpDddDomainModule),
     typeof(ModularCrmOrderingContractsModule),
@@ -28,6 +32,12 @@ public class OrderingWebModule : AbpModule
 
     public override void ConfigureServices(ServiceConfigurationContext context)
     {
+        context.Services.AddAutoMapperObjectMapper<OrderingWebModule>();
+        Configure<AbpAutoMapperOptions>(options =>
+        {
+            options.AddMaps<OrderingWebModule>(validate: true);
+        });
+
         Configure<AbpNavigationOptions>(options =>
         {
             options.MenuContributors.Add(new OrderingMenuContributor());

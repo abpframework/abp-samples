@@ -15,6 +15,8 @@
     <PackageReference Include="Volo.Abp.AspNetCore.Mvc.UI.Theme.Shared" Version="8.3.0" />
     <PackageReference Include="Volo.Abp.Ddd.Domain" Version="8.3.0" />
     <PackageReference Include="Volo.Abp.EntityFrameworkCore" Version="8.3.0" />
+    <PackageReference Include="Volo.Abp.Ddd.Application" Version="8.3.0" />
+    <PackageReference Include="Volo.Abp.AutoMapper" Version="8.3.0" />
     <ProjectReference Include="../ModularCrm.Ordering.Contracts/ModularCrm.Ordering.Contracts.csproj" />
     <ProjectReference Include="../../modularcrm.products/src/ModularCrm.Products.Application.Contracts/ModularCrm.Products.Application.Contracts.csproj" />
   </ItemGroup>

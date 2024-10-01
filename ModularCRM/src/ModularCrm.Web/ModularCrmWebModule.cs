@@ -38,6 +38,7 @@ using System;
 using System.Security.Cryptography.X509Certificates;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Extensions.DependencyInjection;
+using ModularCrm.Ordering;
 using ModularCrm.Products;
 using Volo.Abp.Account.Web;
 using Volo.Abp.AspNetCore.Mvc.UI.Bundling;
@@ -240,6 +241,7 @@ public class ModularCrmWebModule : AbpModule
         {
             options.ConventionalControllers.Create(typeof(ModularCrmApplicationModule).Assembly);
             options.ConventionalControllers.Create(typeof(ProductsApplicationModule).Assembly);
+            options.ConventionalControllers.Create(typeof(OrderingWebModule).Assembly);
         });
     }
 

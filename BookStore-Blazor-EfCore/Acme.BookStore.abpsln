@@ -1,0 +1,43 @@
+{
+  "id": "159a58ee-5103-46ab-af27-2a632d8cbbe8",
+  "template": "app",
+  "versions": {
+    "LeptonX": "3.3.0",
+    "AbpFramework": "8.3.0",
+    "AbpCommercial": "8.3.0",
+    "AbpStudio": "0.8.3"
+  },
+  "modules": {
+    "Acme.BookStore": {
+      "path": "Acme.BookStore.abpmdl"
+    }
+  },
+  "runProfiles": {
+    "Default": {
+      "path": "etc/abp-studio/run-profiles/Default.abprun.json"
+    }
+  },
+  "options": {
+    "httpRequests": {
+      "ignoredUrls": [
+        "^/metrics$"
+      ]
+    }
+  },
+  "creatingStudioConfiguration": {
+    "template": "app",
+    "createdAbpStudioVersion": "0.8.3",
+    "tiered": "false",
+    "uiFramework": "blazor",
+    "databaseProvider": "ef",
+    "databaseManagementSystem": "sqlserver",
+    "separateTenantSchema": "false",
+    "theme": "leptonx",
+    "themeStyle": "system",
+    "mobileFramework": "none",
+    "progressiveWebApp": "false",
+    "publicWebsite": "false",
+    "optionalModules": "GDPR TextTemplateManagement LanguageManagement AuditLogging SaaS OpenIddictAdmin",
+    "socialLogin": ""
+  }
+}

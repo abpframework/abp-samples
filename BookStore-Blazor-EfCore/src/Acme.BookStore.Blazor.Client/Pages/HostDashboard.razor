@@ -1,0 +1,59 @@
+﻿@page "/HostDashboard"
+@using Volo.Abp.AuditLogging.Blazor.Pages.Shared.ErrorRateWidget
+@using Volo.Abp.AuditLogging.Blazor.Pages.Shared.AverageExecutionDurationPerDayWidget
+@using Volo.Abp.AspNetCore.Components.Web.Theming.Layout
+@using Volo.Saas.Host.Blazor.Pages.Shared.Components.SaasLatestTenantsWidget
+@using Volo.Saas.Host.Blazor.Pages.Shared.Components.SaasEditionPercentageWidget
+@inherits BookStoreComponentBase
+
+@* ************************* PAGE HEADER ************************* *@
+<PageHeader Title="@L["Dashboard"]" BreadcrumbItems="@BreadcrumbItems">
+
+</PageHeader>
+
+@* ************************* CONTENT ************************* *@
+<Card>
+    <CardBody>
+        <Row Class="align-items-center justify-content-center">
+            <Column ColumnSize="ColumnSize.Is5.OnWidescreen.Is12.OnDesktop" class="mb-3 mb-lg-0">
+                <Addons>
+                    <Addon AddonType="AddonType.Start">
+                        <AddonLabel>@L["Date"]</AddonLabel>
+                    </Addon>
+                    <Addon AddonType="AddonType.Body">
+                        <DatePicker TValue="DateTime" 
+                            SelectionMode="DateInputSelectionMode.Range"
+                            DatesChanged="OnDatesChangedAsync"
+                            Placeholder="@string.Empty" />
+                    </Addon>
+                </Addons>
+            </Column>
+            <Column ColumnSize="ColumnSize.Is2.OnWidescreen.Is12.OnDesktop" class="d-grid gap-2">
+                <Button Color="Color.Primary" Clicked="@RefreshAsync">
+                    <Icon Name="@IconName.Redo"></Icon> @L["Refresh"]
+                </Button>
+            </Column>
+        </Row>
+    </CardBody>
+</Card>
+
+<Row>
+    @if (HasAuditLoggingPermission)
+    {
+        <Column ColumnSize="ColumnSize.Is12.OnDesktop.Is6.OnWidescreen">
+            <AuditLoggingErrorRateWidgetComponent @bind-StartDate="@StartDate" @bind-EndDate="@EndDate" @ref="ErrorRateWidgetComponent"/>
+        </Column>
+        <Column ColumnSize="ColumnSize.Is12.OnDesktop.Is6.OnWidescreen">
+            <AuditLoggingAverageExecutionDurationPerDayWidgetComponent @bind-StartDate="@StartDate" @bind-EndDate="@EndDate" @ref="AverageExecutionDurationPerDayWidgetComponent"/>
+        </Column>
+    }
+     @if (HasSaasPermission)
+     {
+         <Column ColumnSize="ColumnSize.Is12.OnDesktop.Is6.OnWidescreen">
+             <SaasEditionPercentageWidgetComponent @ref="SaasEditionPercentageWidgetComponent"/>
+         </Column>
+         <Column ColumnSize="ColumnSize.Is12.OnDesktop.Is6.OnWidescreen">
+             <SaasLatestTenantsWidgetComponent @ref="SaasLatestTenantsWidgetComponent"/>
+         </Column>
+     }
+</Row>

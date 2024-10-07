@@ -83,7 +83,6 @@ public class BookStoreMenuContributor : IMenuContributor
             icon: "fa fa-book"
         );
 
-        context.Menu.AddItem(bookStoreMenu);
 
         //CHECK the PERMISSION
         if (await context.IsGrantedAsync(BookStorePermissions.Books.Default))
@@ -94,6 +93,16 @@ public class BookStoreMenuContributor : IMenuContributor
                 url: "/books"
             ));
         }
+
+        if (await context.IsGrantedAsync(BookStorePermissions.Authors.Default))
+        {
+            bookStoreMenu.AddItem(new ApplicationMenuItem(
+                "BooksStore.Authors",
+                l["Menu:Authors"],
+                url: "/authors"
+            ));
+        }
+        context.Menu.AddItem(bookStoreMenu);
 
 
 
@@ -163,10 +172,10 @@ public class BookStoreMenuContributor : IMenuContributor
         );
 
         var bookStoreMenu = new ApplicationMenuItem(
-            "BooksStore",
-            l["Menu:BookStore"],
-            icon: "fa fa-book"
-        );
+           "BooksStore",
+           l["Menu:BookStore"],
+           icon: "fa fa-book"
+       );
 
         context.Menu.AddItem(bookStoreMenu);
 
@@ -180,14 +189,9 @@ public class BookStoreMenuContributor : IMenuContributor
             ));
         }
 
-        if (await context.IsGrantedAsync(BookStorePermissions.Authors.Default))
-        {
-            context.Menu.AddItem(new ApplicationMenuItem(
-                "BooksStore.Authors",
-                l["Menu:Authors"],
-                url: "/authors"
-            ));
-        }
+       
+       
+
 
         await Task.CompletedTask;
     }

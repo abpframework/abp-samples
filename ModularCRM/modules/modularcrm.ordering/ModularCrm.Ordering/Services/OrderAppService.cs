@@ -40,14 +40,15 @@ public class OrderAppService : ApplicationService, IOrderAppService
             .GetProductsByIdsAsync(productIds))
             .ToDictionary(p => p.Id, p => p.Name);
 
-        var orderDtos = ObjectMapper.Map<List<Order>, List<OrderDto>>(orders);
-
-        orderDtos.ForEach(orderDto =>
+        var result = ObjectMapper.Map<List<Order>, List<OrderDto>>(orders);
+        result = result.Select(a =>
         {
-            orderDto.ProductName = products[orderDto.ProductId];
-        });
+            a.ProductName = products[a.ProductId];
+            return a;
+        })
+        .ToList();
 
-        return orderDtos;
+        return result;
     }
 
     public async Task CreateAsync(OrderCreationDto input)

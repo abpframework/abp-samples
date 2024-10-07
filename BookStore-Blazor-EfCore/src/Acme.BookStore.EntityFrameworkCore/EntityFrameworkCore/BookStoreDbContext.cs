@@ -111,7 +111,7 @@ public class BookStoreDbContext :
             // ADD THE MAPPING FOR THE RELATION
             b.HasOne<Author>().WithMany().HasForeignKey(x => x.AuthorId).IsRequired();
         });
-
+    
 
         builder.Entity<Author>(b =>
         {

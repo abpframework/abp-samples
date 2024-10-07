@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Acme.BookStore.Permissions;
+using AutoMapper.Internal.Mappers;
 using Microsoft.AspNetCore.Authorization;
 using Volo.Abp.Application.Dtos;
 using Volo.Abp.Domain.Repositories;
-
+using Volo.Abp.ObjectMapping;
+using Acme.BookStore.Books;
 namespace Acme.BookStore.Authors;
 
 [Authorize(BookStorePermissions.Authors.Default)]
@@ -24,6 +26,7 @@ public class AuthorAppService : BookStoreAppService, IAuthorAppService
     }
 
     //...SERVICE METHODS WILL COME HERE...
+
     public async Task<AuthorDto> GetAsync(Guid id)
     {
         var author = await _authorRepository.GetAsync(id);
@@ -50,7 +53,7 @@ public class AuthorAppService : BookStoreAppService, IAuthorAppService
                 author => author.Name.Contains(input.Filter));
 
         return new PagedResultDto<AuthorDto>(
-            totalCount,
+        totalCount,
             ObjectMapper.Map<List<Author>, List<AuthorDto>>(authors)
         );
     }
@@ -68,6 +71,7 @@ public class AuthorAppService : BookStoreAppService, IAuthorAppService
 
         return ObjectMapper.Map<Author, AuthorDto>(author);
     }
+
 
     [Authorize(BookStorePermissions.Authors.Edit)]
     public async Task UpdateAsync(Guid id, UpdateAuthorDto input)
@@ -90,7 +94,5 @@ public class AuthorAppService : BookStoreAppService, IAuthorAppService
     {
         await _authorRepository.DeleteAsync(id);
     }
-
-
 
 }

@@ -77,19 +77,24 @@ public class BookStoreMenuContributor : IMenuContributor
             ).RequirePermissions(BookStorePermissions.Dashboard.Tenant)
         );
 
-        context.Menu.AddItem(
-            new ApplicationMenuItem(
-                "BooksStore",
-                l["Menu:BookStore"],
-                icon: "fa fa-book"
-            ).AddItem(
-                new ApplicationMenuItem(
-                    "BooksStore.Books",
-                    l["Menu:Books"],
-                    url: "/books"
-                )
-            )
+        var bookStoreMenu = new ApplicationMenuItem(
+            "BooksStore",
+            l["Menu:BookStore"],
+            icon: "fa fa-book"
         );
+
+        context.Menu.AddItem(bookStoreMenu);
+
+        //CHECK the PERMISSION
+        if (await context.IsGrantedAsync(BookStorePermissions.Books.Default))
+        {
+            bookStoreMenu.AddItem(new ApplicationMenuItem(
+                "BooksStore.Books",
+                l["Menu:Books"],
+                url: "/books"
+            ));
+        }
+
 
 
 
@@ -119,6 +124,8 @@ public class BookStoreMenuContributor : IMenuContributor
     {
         var accountStringLocalizer = context.GetLocalizer<AccountResource>();
         var authServerUrl = _configuration["AuthServer:Authority"] ?? "";
+        var l = context.GetLocalizer<BookStoreResource>();
+
 
         context.Menu.AddItem(new ApplicationMenuItem(
             "Account.Manage",
@@ -143,6 +150,38 @@ public class BookStoreMenuContributor : IMenuContributor
             icon: "fa fa-clock", 
             order: 1002,
             target: "_blank").RequireAuthenticated());
+
+
+        context.Menu.Items.Insert(
+            0,
+            new ApplicationMenuItem(
+                "BookStore.Home",
+                l["Menu:Home"],
+                "/",
+                icon: "fas fa-home"
+            )
+        );
+
+        var bookStoreMenu = new ApplicationMenuItem(
+            "BooksStore",
+            l["Menu:BookStore"],
+            icon: "fa fa-book"
+        );
+
+        context.Menu.AddItem(bookStoreMenu);
+
+        //CHECK the PERMISSION
+        if (await context.IsGrantedAsync(BookStorePermissions.Books.Default))
+        {
+            bookStoreMenu.AddItem(new ApplicationMenuItem(
+                "BooksStore.Books",
+                l["Menu:Books"],
+                url: "/books"
+            ));
+        }
+
+
+
 
         await Task.CompletedTask;
     }

@@ -55,42 +55,23 @@ public class BookStoreMenuContributor : IMenuContributor
             order: 1
         ));
 
-        //HostDashboard
-        context.Menu.AddItem(
-            new ApplicationMenuItem(
-                BookStoreMenus.HostDashboard,
-                l["Menu:Dashboard"],
-                "/HostDashboard",
-                icon: "fa fa-chart-line",
-                order: 2
-            ).RequirePermissions(BookStorePermissions.Dashboard.Host)
+        var bookStoreMenu = new ApplicationMenuItem(
+            "BooksStore",
+            l["Menu:BookStore"],
+            icon: "fa fa-book"
         );
 
-        //TenantDashboard
-        context.Menu.AddItem(
-            new ApplicationMenuItem(
-                BookStoreMenus.TenantDashboard,
-                l["Menu:Dashboard"],
-                "/Dashboard",
-                icon: "fa fa-chart-line",
-                order: 2
-            ).RequirePermissions(BookStorePermissions.Dashboard.Tenant)
-        );
+        context.Menu.AddItem(bookStoreMenu);
 
-        context.Menu.AddItem(
-            new ApplicationMenuItem(
-                "BooksStore",
-                l["Menu:BookStore"],
-                icon: "fa fa-book"
-            ).AddItem(
-                new ApplicationMenuItem(
-                    "BooksStore.Books",
-                    l["Menu:Books"],
-                    url: "/books"
-                )
-            )
-        );
-
+        //CHECK the PERMISSION
+        if (await context.IsGrantedAsync(BookStorePermissions.Books.Default))
+        {
+            bookStoreMenu.AddItem(new ApplicationMenuItem(
+                "BooksStore.Books",
+                l["Menu:Books"],
+                url: "/books"
+            ));
+        }
 
         //Saas
         administration.SetSubItemOrder(SaasHostMenus.GroupName, 1);

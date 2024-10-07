@@ -11,7 +11,7 @@ using Volo.Abp.Data;
 using Volo.Abp.DependencyInjection;
 using Volo.Abp.Identity;
 using Volo.Abp.MultiTenancy;
-using Volo.Abp.TenantManagement;
+using Volo.Saas.Tenants;
 
 namespace Acme.BookStore.Data;
 
@@ -26,14 +26,14 @@ public class BookStoreDbMigrationService : ITransientDependency
 
     public BookStoreDbMigrationService(
         IDataSeeder dataSeeder,
-        IEnumerable<IBookStoreDbSchemaMigrator> dbSchemaMigrators,
         ITenantRepository tenantRepository,
-        ICurrentTenant currentTenant)
+        ICurrentTenant currentTenant,
+        IEnumerable<IBookStoreDbSchemaMigrator> dbSchemaMigrators)
     {
         _dataSeeder = dataSeeder;
-        _dbSchemaMigrators = dbSchemaMigrators;
         _tenantRepository = tenantRepository;
         _currentTenant = currentTenant;
+        _dbSchemaMigrators = dbSchemaMigrators;
 
         Logger = NullLogger<BookStoreDbMigrationService>.Instance;
     }
@@ -85,24 +85,26 @@ public class BookStoreDbMigrationService : ITransientDependency
         Logger.LogInformation("You can safely end this process...");
     }
 
-    private async Task MigrateDatabaseSchemaAsync(Tenant tenant = null)
+    private async Task MigrateDatabaseSchemaAsync(Tenant? tenant = null)
     {
         Logger.LogInformation(
             $"Migrating schema for {(tenant == null ? "host" : tenant.Name + " tenant")} database...");
-
+        
         foreach (var migrator in _dbSchemaMigrators)
         {
             await migrator.MigrateAsync();
         }
     }
 
-    private async Task SeedDataAsync(Tenant tenant = null)
+    private async Task SeedDataAsync(Tenant? tenant = null)
     {
         Logger.LogInformation($"Executing {(tenant == null ? "host" : tenant.Name + " tenant")} database seed...");
-
+        
         await _dataSeeder.SeedAsync(new DataSeedContext(tenant?.Id)
-            .WithProperty(IdentityDataSeedContributor.AdminEmailPropertyName, IdentityDataSeedContributor.AdminEmailDefaultValue)
-            .WithProperty(IdentityDataSeedContributor.AdminPasswordPropertyName, IdentityDataSeedContributor.AdminPasswordDefaultValue)
+            .WithProperty(IdentityDataSeedContributor.AdminEmailPropertyName,
+                BookStoreConsts.AdminEmailDefaultValue)
+            .WithProperty(IdentityDataSeedContributor.AdminPasswordPropertyName,
+                BookStoreConsts.AdminPasswordDefaultValue)
         );
     }
 
@@ -150,7 +152,7 @@ public class BookStoreDbMigrationService : ITransientDependency
     {
         var dbMigrationsProjectFolder = GetEntityFrameworkCoreProjectFolderPath();
 
-        return Directory.Exists(Path.Combine(dbMigrationsProjectFolder, "Migrations"));
+        return dbMigrationsProjectFolder != null && Directory.Exists(Path.Combine(dbMigrationsProjectFolder, "Migrations"));
     }
 
     private void AddInitialMigration()
@@ -185,7 +187,7 @@ public class BookStoreDbMigrationService : ITransientDependency
         }
     }
 
-    private string GetEntityFrameworkCoreProjectFolderPath()
+    private string? GetEntityFrameworkCoreProjectFolderPath()
     {
         var slnDirectoryPath = GetSolutionDirectoryPath();
 
@@ -200,15 +202,15 @@ public class BookStoreDbMigrationService : ITransientDependency
             .FirstOrDefault(d => d.EndsWith(".EntityFrameworkCore"));
     }
 
-    private string GetSolutionDirectoryPath()
+    private string? GetSolutionDirectoryPath()
     {
         var currentDirectory = new DirectoryInfo(Directory.GetCurrentDirectory());
 
-        while (Directory.GetParent(currentDirectory.FullName) != null)
+        while (currentDirectory != null && Directory.GetParent(currentDirectory.FullName) != null)
         {
             currentDirectory = Directory.GetParent(currentDirectory.FullName);
 
-            if (Directory.GetFiles(currentDirectory.FullName).FirstOrDefault(f => f.EndsWith(".sln")) != null)
+            if (currentDirectory != null && Directory.GetFiles(currentDirectory.FullName).FirstOrDefault(f => f.EndsWith(".sln")) != null)
             {
                 return currentDirectory.FullName;
             }

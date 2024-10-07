@@ -8,8 +8,7 @@ namespace Acme.BookStore.DbMigrator;
     typeof(AbpAutofacModule),
     typeof(BookStoreEntityFrameworkCoreModule),
     typeof(BookStoreApplicationContractsModule)
-    )]
+)]
 public class BookStoreDbMigratorModule : AbpModule
 {
-
 }

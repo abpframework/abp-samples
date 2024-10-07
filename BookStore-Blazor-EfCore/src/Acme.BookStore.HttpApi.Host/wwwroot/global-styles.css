@@ -1,0 +1,18 @@
+/* Your Global Styles */
+:root .lpx-theme-dim,
+:root .lpx-theme-dark {
+  --lpx-logo: url('/images/logo/leptonx/icon.svg');
+  --lpx-logo-icon: url('/images/logo/leptonx/icon.svg');
+}
+
+:root .lpx-theme-light {
+  --lpx-logo: url('/images/logo/leptonx/icon.svg');
+  --lpx-logo-icon: url('/images/logo/leptonx/icon.svg');
+}
+
+:root {
+  --lpx-theme-light-bg: url('/LeptonX/images/login-pages/login-bg-img-light.svg');
+  --lpx-theme-dim-bg: url('/LeptonX/images/login-pages/login-bg-img-dim.svg');
+  --lpx-theme-dark-bg: url('/LeptonX/images/login-pages/login-bg-img-dark.svg');
+}
+

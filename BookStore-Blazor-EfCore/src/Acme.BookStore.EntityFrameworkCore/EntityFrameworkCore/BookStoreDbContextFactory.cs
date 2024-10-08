@@ -12,13 +12,13 @@ public class BookStoreDbContextFactory : IDesignTimeDbContextFactory<BookStoreDb
 {
     public BookStoreDbContext CreateDbContext(string[] args)
     {
-        BookStoreEfCoreEntityExtensionMappings.Configure();
-
         var configuration = BuildConfiguration();
+        
+        BookStoreEfCoreEntityExtensionMappings.Configure();
 
         var builder = new DbContextOptionsBuilder<BookStoreDbContext>()
             .UseSqlServer(configuration.GetConnectionString("Default"));
-
+        
         return new BookStoreDbContext(builder.Options);
     }
 

@@ -1,5 +1,5 @@
-﻿using JetBrains.Annotations;
-using System;
+﻿using System;
+using JetBrains.Annotations;
 using Volo.Abp;
 using Volo.Abp.Domain.Entities.Auditing;
 
@@ -18,9 +18,9 @@ public class Author : FullAuditedAggregateRoot<Guid>
 
     internal Author(
         Guid id,
-        [NotNull] string name,
+        string name,
         DateTime birthDate,
-        [CanBeNull] string shortBio = null)
+        string? shortBio = null)
         : base(id)
     {
         SetName(name);
@@ -28,13 +28,13 @@ public class Author : FullAuditedAggregateRoot<Guid>
         ShortBio = shortBio;
     }
 
-    internal Author ChangeName([NotNull] string name)
+    internal Author ChangeName(string name)
     {
         SetName(name);
         return this;
     }
 
-    private void SetName([NotNull] string name)
+    private void SetName(string name)
     {
         Name = Check.NotNullOrWhiteSpace(
             name,

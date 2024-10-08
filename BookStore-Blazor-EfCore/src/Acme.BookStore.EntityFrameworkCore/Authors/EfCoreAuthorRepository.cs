@@ -1,10 +1,10 @@
-﻿using Acme.BookStore.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Dynamic.Core;
 using System.Threading.Tasks;
+using Acme.BookStore.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using Volo.Abp.Domain.Repositories.EntityFrameworkCore;
 using Volo.Abp.EntityFrameworkCore;
 
@@ -37,10 +37,11 @@ public class EfCoreAuthorRepository
             .WhereIf(
                 !filter.IsNullOrWhiteSpace(),
                 author => author.Name.Contains(filter)
-             )
+                )
             .OrderBy(sorting)
             .Skip(skipCount)
             .Take(maxResultCount)
             .ToListAsync();
     }
 }
+    

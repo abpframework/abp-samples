@@ -1,4 +1,4 @@
-# Web Application Development Tutorial
+﻿# Web Application Development Tutorial
 
 This is an example project for the Web Application Development Tutorial documentation. See the documentation:
 

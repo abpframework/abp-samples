@@ -1,6 +1,9 @@
-﻿namespace Acme.BookStore;
+﻿using Volo.Abp.Modularity;
 
-public abstract class BookStoreApplicationTestBase : BookStoreTestBase<BookStoreApplicationTestModule>
+namespace Acme.BookStore;
+
+public abstract class BookStoreApplicationTestBase<TStartupModule> : BookStoreTestBase<TStartupModule>
+    where TStartupModule : IAbpModule
 {
 
 }

@@ -82,6 +82,16 @@ public class BookStoreMenuContributor : IMenuContributor
             ));
         }
 
+        if (await context.IsGrantedAsync(BookStorePermissions.Authors.Default))
+        {
+            context.Menu.AddItem(new ApplicationMenuItem(
+                "BooksStore.Authors",
+                l["Menu:Authors"],
+                url: "/authors"
+            ));
+        }
+
+
     }
 
     private async Task ConfigureUserMenuAsync(MenuConfigurationContext context)

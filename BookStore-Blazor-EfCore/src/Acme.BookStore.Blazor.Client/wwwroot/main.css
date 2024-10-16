@@ -1,0 +1,52 @@
+/* Global styles for the BookStore application */
+
+
+:root .lpx-brand-logo {
+    --lpx-logo: url('/images/logo/leptonx-lite/logo-light.png');
+    --lpx-logo-icon: url('/images/logo/leptonx-lite/logo-light-thumbnail.png');
+}
+
+/* 
+    loader
+*/
+.loader {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 999;
+    background-color: #f1f1f2;
+  }
+
+#ApplicationContainer > div:first-child:not(:only-child) {
+    display: none !important;
+}
+
+#blazor-error-ui {
+    background: lightyellow;
+    bottom: 0;
+    box-shadow: 0 -1px 2px rgba(0, 0, 0, 0.2);
+    display: none;
+    left: 0;
+    padding: 0.6rem 1.25rem 0.7rem 1.25rem;
+    position: fixed;
+    width: 100%;
+    z-index: 1000;
+}
+
+#blazor-error-ui .dismiss {
+    cursor: pointer;
+    position: absolute;
+    right: 0.75rem;
+    top: 0.5rem;
+}
+
+/* 
+    blazorise picker workaround for https://github.com/Megabit/Blazorise/issues/4917
+*/
+.flatpickr-calendar.static {
+    top: unset !important;
+}

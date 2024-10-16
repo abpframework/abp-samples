@@ -6,7 +6,6 @@ using Volo.Abp.BackgroundJobs;
 using Volo.Abp.Data;
 using Volo.Abp.Modularity;
 using Volo.Abp.Threading;
-using Volo.Abp.Uow;
 
 namespace Acme.BookStore;
 
@@ -14,15 +13,10 @@ namespace Acme.BookStore;
     typeof(AbpAutofacModule),
     typeof(AbpTestBaseModule),
     typeof(AbpAuthorizationModule),
-    typeof(BookStoreDomainModule)
-    )]
+    typeof(AbpBackgroundJobsAbstractionsModule)
+)]
 public class BookStoreTestBaseModule : AbpModule
 {
-    public override void PreConfigureServices(ServiceConfigurationContext context)
-    {
-
-    }
-
     public override void ConfigureServices(ServiceConfigurationContext context)
     {
         Configure<AbpBackgroundJobOptions>(options =>
@@ -31,11 +25,6 @@ public class BookStoreTestBaseModule : AbpModule
         });
 
         context.Services.AddAlwaysAllowAuthorization();
-
-        Configure<AbpUnitOfWorkDefaultOptions>(options =>
-        {
-            options.TransactionBehavior = UnitOfWorkTransactionBehavior.Disabled;
-        });
     }
 
     public override void OnApplicationInitialization(ApplicationInitializationContext context)

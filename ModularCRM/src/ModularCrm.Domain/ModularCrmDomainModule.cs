@@ -23,6 +23,7 @@ using Volo.Abp.TenantManagement;
 namespace ModularCrm;
 
 [DependsOn(
+    typeof(OrderingModule),
     typeof(OrderingWebModule),
     typeof(ProductsDomainModule),
     typeof(ModularCrmDomainSharedModule),

@@ -1,3 +1,4 @@
+using ModularCrm.Ordering.UI;
 using ModularCrm.Products.Web;
 using System.IO;
 using Microsoft.AspNetCore.Builder;

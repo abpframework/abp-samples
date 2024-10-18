@@ -1,10 +1,13 @@
-{
+﻿{
   "packages": {
-    "ModularCrm.Ordering.Contracts": {
-      "path": "ModularCrm.Ordering.Contracts/ModularCrm.Ordering.Contracts.abppkg"
-    },
     "ModularCrm.Ordering": {
       "path": "ModularCrm.Ordering/ModularCrm.Ordering.abppkg"
+    },
+    "ModularCrm.Ordering.UI": {
+      "path": "ModularCrm.Ordering.UI/ModularCrm.Ordering.UI.abppkg"
+    },
+    "ModularCrm.Ordering.Contracts": {
+      "path": "ModularCrm.Ordering.Contracts/ModularCrm.Ordering.Contracts.abppkg"
     }
   }
 }

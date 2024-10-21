@@ -15,8 +15,14 @@ public class OrderingMenuContributor : IMenuContributor
 
     private Task ConfigureMainMenuAsync(MenuConfigurationContext context)
     {
-        //Add main menu items.
-        context.Menu.AddItem(new ApplicationMenuItem(OrderingMenus.Prefix, displayName: "Ordering", "~/Ordering", icon: "fa fa-globe"));
+        context.Menu.AddItem(
+            new ApplicationMenuItem(
+                OrderingMenus.Prefix, // Unique menu id
+                "Orders", // Menu display text
+                "~/Ordering", // URL
+                "fa-solid fa-basket-shopping" // Icon CSS class
+            )
+        );
 
         return Task.CompletedTask;
     }

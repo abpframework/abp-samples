@@ -13,7 +13,7 @@ using Volo.Abp.EntityFrameworkCore;
 namespace ModularCrm.Migrations
 {
     [DbContext(typeof(ModularCrmDbContext))]
-    [Migration("20240912065237_Initial")]
+    [Migration("20241021115916_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -39,9 +39,18 @@ namespace ModularCrm.Migrations
                         .HasColumnType("nvarchar(40)")
                         .HasColumnName("ConcurrencyStamp");
 
+                    b.Property<DateTime>("CreationTime")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("CreationTime");
+
+                    b.Property<Guid?>("CreatorId")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("CreatorId");
+
                     b.Property<string>("CustomerName")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(120)
+                        .HasColumnType("nvarchar(120)");
 
                     b.Property<string>("ExtraProperties")
                         .IsRequired()
@@ -56,7 +65,7 @@ namespace ModularCrm.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Orders");
+                    b.ToTable("Orders", (string)null);
                 });
 
             modelBuilder.Entity("ModularCrm.Products.Product", b =>

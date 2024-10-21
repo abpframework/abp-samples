@@ -56,6 +56,7 @@ namespace ModularCrm.Web;
 
 [DependsOn(
     typeof(ProductsWebModule),
+    typeof(OrderingWebModule),
     typeof(ModularCrmHttpApiModule),
     typeof(ModularCrmApplicationModule),
     typeof(ModularCrmEntityFrameworkCoreModule),
@@ -242,7 +243,7 @@ public class ModularCrmWebModule : AbpModule
         {
             options.ConventionalControllers.Create(typeof(ModularCrmApplicationModule).Assembly);
             options.ConventionalControllers.Create(typeof(ProductsApplicationModule).Assembly);
-            options.ConventionalControllers.Create(typeof(OrderingWebModule).Assembly);
+            options.ConventionalControllers.Create(typeof(OrderingModule).Assembly);
         });
     }
 

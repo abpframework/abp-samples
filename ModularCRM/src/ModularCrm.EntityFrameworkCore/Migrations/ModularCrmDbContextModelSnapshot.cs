@@ -46,7 +46,8 @@ namespace ModularCrm.Migrations
 
                     b.Property<string>("CustomerName")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(120)
+                        .HasColumnType("nvarchar(120)");
 
                     b.Property<string>("ExtraProperties")
                         .IsRequired()
@@ -61,7 +62,7 @@ namespace ModularCrm.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Orders");
+                    b.ToTable("Orders", (string)null);
                 });
 
             modelBuilder.Entity("ModularCrm.Products.Product", b =>

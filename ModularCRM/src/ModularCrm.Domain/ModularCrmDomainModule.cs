@@ -24,7 +24,6 @@ namespace ModularCrm;
 
 [DependsOn(
     typeof(OrderingModule),
-    typeof(OrderingWebModule),
     typeof(ProductsDomainModule),
     typeof(ModularCrmDomainSharedModule),
     typeof(AbpAuditLoggingDomainModule),

@@ -1,4 +1,4 @@
-﻿using ModularCrm.Ordering.Contracts.Events;
+﻿using ModularCrm.Ordering.Events;
 using System;
 using System.Threading.Tasks;
 using Volo.Abp.DependencyInjection;

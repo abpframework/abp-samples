@@ -1,9 +1,9 @@
-using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using ModularCrm.Ordering.Contracts.Services;
+using Microsoft.AspNetCore.Mvc.RazorPages;
+using ModularCrm.Ordering.Services;
 
-namespace ModularCrm.Ordering.Pages.Orders
+namespace ModularCrm.Ordering.UI.Pages.Ordering
 {
     public class IndexModel : PageModel
     {

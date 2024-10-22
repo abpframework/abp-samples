@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ModularCrm.Ordering.Contracts.Events
+namespace ModularCrm.Ordering.Events
 {
     public class OrderPlacedEto
     {

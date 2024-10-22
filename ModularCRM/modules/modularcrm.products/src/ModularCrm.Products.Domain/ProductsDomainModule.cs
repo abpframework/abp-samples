@@ -1,11 +1,11 @@
-using ModularCrm.Ordering.Contracts;
+using ModularCrm.Ordering;
 using Volo.Abp.Domain;
 using Volo.Abp.Modularity;
 
 namespace ModularCrm.Products;
 
 [DependsOn(
-    typeof(ModularCrmOrderingContractsModule),
+    typeof(OrderingContractsModule),
     typeof(AbpDddDomainModule),
     typeof(ProductsDomainSharedModule)
 )]

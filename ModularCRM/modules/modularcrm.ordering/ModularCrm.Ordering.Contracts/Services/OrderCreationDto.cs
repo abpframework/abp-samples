@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace ModularCrm.Ordering.Contracts.Services;
+namespace ModularCrm.Ordering.Services;
 
 public class OrderCreationDto
 {

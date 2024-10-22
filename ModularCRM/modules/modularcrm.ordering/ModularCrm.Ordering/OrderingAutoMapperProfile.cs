@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using ModularCrm.Ordering.Contracts.Services;
+using ModularCrm.Ordering.Services;
 using ModularCrm.Ordering.Entities;
 using Volo.Abp.AutoMapper;
 

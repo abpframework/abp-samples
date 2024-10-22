@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using Volo.Abp.Application.Services;
 
-namespace ModularCrm.Ordering.Contracts.Services;
+namespace ModularCrm.Ordering.Services;
 
 public interface IOrderAppService : IApplicationService
 {

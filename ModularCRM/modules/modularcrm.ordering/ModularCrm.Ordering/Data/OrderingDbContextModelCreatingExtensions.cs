@@ -3,25 +3,25 @@ using ModularCrm.Ordering.Entities;
 using Volo.Abp;
 using Volo.Abp.EntityFrameworkCore.Modeling;
 
-namespace ModularCrm.Ordering.Data
+namespace ModularCrm.Ordering.Data;
+
+public static class OrderingDbContextModelCreatingExtensions
 {
-    public static class OrderingDbContextModelCreatingExtensions
+    public static void ConfigureOrdering(
+        this ModelBuilder builder)
     {
-        public static void ConfigureOrdering(this ModelBuilder builder)
+        Check.NotNull(builder, nameof(builder));
+
+        builder.Entity<Order>(b =>
         {
-            Check.NotNull(builder, nameof(builder));
+            //Configure table name
+            b.ToTable("Orders");
 
-            builder.Entity<Order>(b =>
-            {
-                //Configure table name
-                b.ToTable("Orders");
+            //Always call this method to set base entity properties
+            b.ConfigureByConvention();
 
-                //Always call this method to setup base entity properties
-                b.ConfigureByConvention();
-
-                //Properties of the entity
-                b.Property(q => q.CustomerName).IsRequired().HasMaxLength(120);
-            });
-        }
+            //Properties of the entity
+            b.Property(q => q.CustomerName).IsRequired().HasMaxLength(120);
+        });
     }
 }

@@ -1,4 +1,4 @@
-﻿namespace ModularCrm.Ordering.Contracts.Enums;
+﻿namespace ModularCrm.Ordering.Enums;
 
 public enum OrderState : byte
 {

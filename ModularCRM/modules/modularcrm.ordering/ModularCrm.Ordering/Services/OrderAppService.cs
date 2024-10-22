@@ -2,18 +2,16 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using ModularCrm.Ordering.Contracts.Enums;
-using ModularCrm.Ordering.Contracts.Events;
-using ModularCrm.Ordering.Contracts.Services;
+using ModularCrm.Ordering.Enums;
+using ModularCrm.Ordering.Events;
 using ModularCrm.Ordering.Entities;
 using ModularCrm.Products.Integration;
-using Volo.Abp.Application.Services;
 using Volo.Abp.Domain.Repositories;
 using Volo.Abp.EventBus.Distributed;
 
 namespace ModularCrm.Ordering.Services;
 
-public class OrderAppService : ApplicationService, IOrderAppService
+public class OrderAppService : OrderingAppService, IOrderAppService
 {
     private readonly IRepository<Order> _orderRepository;
     private readonly IProductIntegrationService _productIntegrationService;
@@ -27,7 +25,6 @@ public class OrderAppService : ApplicationService, IOrderAppService
         _orderRepository = orderRepository;
         _productIntegrationService = productIntegrationService;
         _distributedEventBus = distributedEventBus;
-        ObjectMapperContext = typeof(OrderingWebModule);
     }
 
     public async Task<List<OrderDto>> GetListAsync()

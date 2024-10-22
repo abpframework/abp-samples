@@ -1,7 +1,7 @@
 ﻿using System;
-using ModularCrm.Ordering.Contracts.Enums;
+using ModularCrm.Ordering.Enums;
 
-namespace ModularCrm.Ordering.Contracts.Services;
+namespace ModularCrm.Ordering.Services;
 
 public class OrderDto
 {

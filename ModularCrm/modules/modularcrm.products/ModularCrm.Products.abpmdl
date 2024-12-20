@@ -54,5 +54,11 @@
       "path": "src/ModularCrm.Products.Domain.Shared/ModularCrm.Products.Domain.Shared.abppkg",
       "folder": "src"
     }
+  },
+  "imports": {
+    "ModularCrm.Ordering": {
+      "path": "../modularcrm.ordering/ModularCrm.Ordering.abpmdl",
+      "isInstalled": true
+    }
   }
 }

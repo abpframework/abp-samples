@@ -122,6 +122,7 @@ namespace ModularCrm;
     typeof(AbpEntityFrameworkCoreSqlServerModule)
 )]
 [DependsOn(
+    typeof(OrderingContractsModule),
     typeof(OrderingWebModule),
     typeof(OrderingModule),
     typeof(ProductsDomainSharedModule),

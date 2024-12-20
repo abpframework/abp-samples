@@ -9,5 +9,10 @@
     "ModularCrm.Ordering.Contracts": {
       "path": "ModularCrm.Ordering.Contracts/ModularCrm.Ordering.Contracts.abppkg"
     }
+  },
+  "imports": {
+    "ModularCrm.Products": {
+      "path": "../modularcrm.products/ModularCrm.Products.abpmdl"
+    }
   }
 }

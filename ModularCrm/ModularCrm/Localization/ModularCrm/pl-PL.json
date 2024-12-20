@@ -1,0 +1,9 @@
+{
+  "culture": "pl-PL",
+  "texts": {
+    "AppName": "ModularCrm",
+    "Welcome_Title": "Witaj",
+    "Welcome_Text": "Jest to minimalistyczny, jednowarstwowy szablon uruchamiania aplikacji dla ABP Framework.",
+    "Menu:Home": "Home"
+  }
+}

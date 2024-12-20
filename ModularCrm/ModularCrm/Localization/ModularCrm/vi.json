@@ -1,0 +1,9 @@
+{
+  "culture": "vi",
+  "texts": {
+    "AppName": "ModularCrm",
+    "Welcome_Title": "Chào mừng bạn",
+    "Welcome_Text": "Đây là một mẫu khởi động ứng dụng lớp đơn, tối giản cho ABP Framework.",
+    "Menu:Home": "Trang chủ"
+  }
+}

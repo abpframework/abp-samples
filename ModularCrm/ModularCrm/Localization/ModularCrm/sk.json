@@ -1,0 +1,9 @@
+{
+  "culture": "sk",
+  "texts": {
+    "AppName": "ModularCrm",
+    "Welcome_Title": "Vitajte",
+    "Welcome_Text": "Toto je minimalistická šablóna na spustenie aplikácie s jednou vrstvou pre rámec ABP.",
+    "Menu:Home": "Domov"
+  }
+}

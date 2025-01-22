@@ -1,0 +1,73 @@
+version: '3.7'
+
+services:
+  modularcrm-web:
+    image: mycompanyname/modularcrm-web:latest
+    container_name: modularcrm-web
+    build:
+      context: ../../../
+      dockerfile: angular/Dockerfile.local      
+    ports:
+      - "4200:80"
+    depends_on:
+      - modularcrm-api
+    volumes:
+      - ./dynamic-env.json://usr/share/nginx/html/dynamic-env.json
+    networks:
+      - abp-network  
+
+  modularcrm-api:
+    image: mycompanyname/modularcrm-api:latest
+    container_name: modularcrm-api-container
+    build:
+      context: ../../
+      dockerfile: ModularCrm/Dockerfile.local
+    environment:
+      - ASPNETCORE_URLS=https://+:443;http://+:80;
+      - Kestrel__Certificates__Default__Path=/root/certificate/localhost.pfx
+      - Kestrel__Certificates__Default__Password=91f91912-5ab0-49df-8166-23377efaf3cc
+      - App__SelfUrl=https://localhost:44362
+      - AuthServer__Authority=http://modularcrm-api
+      - AuthServer__RequireHttpsMetadata=false
+      - AuthServer__SetSelfAsIssuer=true      
+      - Redis__Configuration=redis
+    ports:
+      - "44362:443"
+    depends_on:
+      redis:
+        condition: service_healthy  
+    restart: on-failure    
+    volumes:
+      - ./certs:/root/certificate
+    networks:
+      - abp-network  
+  
+  db-migrator:
+    image: mycompanyname/modularcrm-api:latest
+    container_name: db-migrator
+    build:
+      context: ../../
+      dockerfile: ModularCrm/Dockerfile.local
+    environment:
+    command:
+      - --migrate-database
+    depends_on:
+    networks:
+      - abp-network    
+
+  redis:
+    container_name: redis
+    image: redis:7.2.2-alpine
+    ports:
+      - "6379:6379"
+    networks:
+      - abp-network  
+    healthcheck:
+      test: ["CMD", "redis-cli","ping"]      
+
+volumes:
+
+networks:
+  abp-network:
+    name: modularcrm-network
+    driver: bridge

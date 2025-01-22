@@ -1,0 +1,42 @@
+{
+  "id": "f776feb9-7820-4086-8b4d-e33898adc3be",
+  "template": "app-nolayers",
+  "versions": {
+    "AbpFramework": "9.0.4",
+    "AbpStudio": "0.9.22",
+    "TargetDotnetFramework": "net9.0"
+  },
+  "modules": {
+    "ModularCrm": {
+      "path": "ModularCrm.abpmdl"
+    }
+  },
+  "runProfiles": {
+    "Default": {
+      "path": "etc/run-profiles/Default.abprun.json"
+    }
+  },
+  "options": {
+    "httpRequests": {
+      "ignoredUrls": [
+        "^/metrics$"
+      ]
+    }
+  },
+  "creatingStudioConfiguration": {
+    "template": "app-nolayers",
+    "createdAbpStudioVersion": "0.9.22",
+    "multiTenancy": "true",
+    "runInstallLibs": "true",
+    "useLocalReferences": "false",
+    "uiFramework": "angular",
+    "databaseProvider": "mongodb",
+    "runDbMigrator": "true",
+    "theme": "leptonx-lite",
+    "themeStyle": "",
+    "progressiveWebApp": "",
+    "runProgressiveWebAppSupport": "",
+    "publicWebsite": "",
+    "socialLogin": ""
+  }
+}

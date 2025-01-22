@@ -1,0 +1,21 @@
+{
+  "production": true,
+  "application": {
+    "baseUrl":"https://modularcrm-web",
+    "name": "ModularCrm",
+    "logoUrl": ""
+  },
+  "oAuthConfig": {
+    "issuer": "https://modularcrm-api/",
+    "redirectUri": "https://modularcrm",
+    "clientId": "ModularCrm_App",
+    "responseType": "code",
+    "scope": "offline_access openid profile email phone"
+  },
+  "apis": {
+    "default": {
+      "url": "https://modularcrm-api",
+      "rootNamespace": "ModularCrm"
+    }
+  }
+}

@@ -301,9 +301,15 @@ public class ModularCrmModule : AbpModule
         Configure<AbpAspNetCoreMvcOptions>(options =>
         {
             options.ConventionalControllers.Create(typeof(ModularCrmModule).Assembly);
-            options.ConventionalControllers.Create(typeof(ProductsApplicationModule).Assembly);
+            options.ConventionalControllers.Create(typeof(ProductsApplicationModule).Assembly, settings => 
+            {
+                settings.RootPath = "products";
+            });
 
-            options.ConventionalControllers.Create(typeof(OrderingModule).Assembly);
+            options.ConventionalControllers.Create(typeof(OrderingModule).Assembly, settings => 
+            {
+                settings.RootPath = "orders";
+            });
         });
     }
 

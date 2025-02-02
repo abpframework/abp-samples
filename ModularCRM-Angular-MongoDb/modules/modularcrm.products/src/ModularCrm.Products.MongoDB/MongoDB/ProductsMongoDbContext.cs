@@ -1,4 +1,5 @@
-﻿using Volo.Abp.Data;
+﻿using MongoDB.Driver;
+using Volo.Abp.Data;
 using Volo.Abp.MongoDB;
 
 namespace ModularCrm.Products.MongoDB;
@@ -6,9 +7,7 @@ namespace ModularCrm.Products.MongoDB;
 [ConnectionStringName(ProductsDbProperties.ConnectionStringName)]
 public class ProductsMongoDbContext : AbpMongoDbContext, IProductsMongoDbContext
 {
-    /* Add mongo collections here. Example:
-     * public IMongoCollection<Question> Questions => Collection<Question>();
-     */
+     public IMongoCollection<Product> Products => Collection<Product>();
 
     protected override void CreateModel(IMongoModelBuilder modelBuilder)
     {

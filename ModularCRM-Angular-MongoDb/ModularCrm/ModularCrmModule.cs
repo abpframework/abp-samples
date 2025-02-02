@@ -155,6 +155,11 @@ public class ModularCrmModule : AbpModule
             });
         }
 
+        PreConfigure<IMvcBuilder>(mvcBuilder =>
+        {
+            mvcBuilder.AddApplicationPartIfNotExists(typeof(ProductsApplicationModule).Assembly);
+        });
+
         ModularCrmGlobalFeatureConfigurator.Configure();
         ModularCrmModuleExtensionConfigurator.Configure();
         ModularCrmEfCoreEntityExtensionMappings.Configure();
@@ -278,6 +283,12 @@ public class ModularCrmModule : AbpModule
         Configure<AbpAspNetCoreMvcOptions>(options =>
         {
             options.ConventionalControllers.Create(typeof(ModularCrmModule).Assembly);
+
+            //ADD THE FOLLOWING LINE:
+            options.ConventionalControllers.Create(typeof(ProductsApplicationModule).Assembly, settings =>
+            {
+                settings.RootPath = "products";
+            });
         });
     }
 

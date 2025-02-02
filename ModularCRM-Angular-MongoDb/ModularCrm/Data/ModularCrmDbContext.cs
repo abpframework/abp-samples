@@ -1,24 +1,25 @@
-﻿using MongoDB.Driver;
+﻿using ModularCrm.Products;
+using ModularCrm.Products.MongoDB;
+using MongoDB.Driver;
 using Volo.Abp.Data;
+using Volo.Abp.DependencyInjection;
 using Volo.Abp.MongoDB;
 
 namespace ModularCrm.Data;
 
 [ConnectionStringName("Default")]
-public class ModularCrmDbContext : AbpMongoDbContext
+[ReplaceDbContext(typeof(IProductsMongoDbContext))]
+public class ModularCrmDbContext : 
+    AbpMongoDbContext,
+    IProductsMongoDbContext
 {
-    /* Add mongo collections here. Example:
-     * public IMongoCollection<Question> Questions => Collection<Question>();
-     */
+    public IMongoCollection<Product> Products => Collection<Product>();
 
     protected override void CreateModel(IMongoModelBuilder modelBuilder)
     {
         base.CreateModel(modelBuilder);
 
-        //builder.Entity<YourEntity>(b =>
-        //{
-        //    //...
-        //});
+        modelBuilder.ConfigureProducts();
     }
 }
 

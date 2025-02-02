@@ -22,7 +22,18 @@
       ],
       "@proxy/*": [
         "src/app/proxy/*"
-      ]
+      ],
+      "@angular/*": ["node_modules/@angular/*"],
+      "@abp/*":["node_modules/@abp/*"],
+      "@volo/*": ["node_modules/@volo/*"],
+      "@volosoft/*": ["node_modules/@volosoft/*"],
+
+      "@modularcrm/products": [
+        "../modules/modularcrm.products/angular/projects/products/src/public-api.ts"
+      ],
+      "@modularcrm/products/config": [
+        "../modules/modularcrm.products/angular/projects/products/config/src/public-api.ts"
+      ],
     },
     "useDefineForClassFields": false
   },

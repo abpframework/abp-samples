@@ -16,6 +16,7 @@ import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { APP_ROUTE_PROVIDER } from './route.provider';
+import { ProductsConfigModule } from '@modularcrm/products/config';
 
 @NgModule({
   declarations: [AppComponent],
@@ -27,6 +28,7 @@ import { APP_ROUTE_PROVIDER } from './route.provider';
     CoreModule,
     ThemeLeptonXModule.forRoot(),
     SideMenuLayoutModule.forRoot(),
+    ProductsConfigModule.forRoot()
   ],
   providers: [APP_ROUTE_PROVIDER,
     provideAbpCore(

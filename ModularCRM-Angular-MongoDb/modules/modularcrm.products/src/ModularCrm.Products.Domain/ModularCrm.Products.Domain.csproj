@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="..\..\common.props" />
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <RootNamespace>ModularCrm.Products</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Volo.Abp.Ddd.Domain" Version="9.0.4"/>
+    <ProjectReference Include="..\ModularCrm.Products.Domain.Shared\ModularCrm.Products.Domain.Shared.csproj" />
+    <PackageReference Include="Volo.Abp.Commercial.SuiteTemplates" Version="9.0.4" />
+  </ItemGroup>
+
+</Project>

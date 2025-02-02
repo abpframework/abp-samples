@@ -8,7 +8,12 @@
   },
   "modules": {
     "ModularCrm": {
-      "path": "ModularCrm.abpmdl"
+      "path": "ModularCrm.abpmdl",
+      "folder": "main"
+    },
+    "ModularCrm.Products": {
+      "path": "modules/modularcrm.products/ModularCrm.Products.abpmdl",
+      "folder": "modules"
     }
   },
   "runProfiles": {
@@ -38,5 +43,11 @@
     "runProgressiveWebAppSupport": "",
     "publicWebsite": "",
     "socialLogin": ""
+  },
+  "folders": {
+    "items": {
+      "main": {},
+      "modules": {}
+    }
   }
 }

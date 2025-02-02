@@ -1,0 +1,54 @@
+{
+  "folders": {
+    "items": {
+      "src": {},
+      "test": {}
+    }
+  },
+  "packages": {
+    "ModularCrm.Products.Domain": {
+      "path": "src/ModularCrm.Products.Domain/ModularCrm.Products.Domain.abppkg",
+      "folder": "src"
+    },
+    "ModularCrm.Products.Application.Contracts": {
+      "path": "src/ModularCrm.Products.Application.Contracts/ModularCrm.Products.Application.Contracts.abppkg",
+      "folder": "src"
+    },
+    "ModularCrm.Products.Application": {
+      "path": "src/ModularCrm.Products.Application/ModularCrm.Products.Application.abppkg",
+      "folder": "src"
+    },
+    "ModularCrm.Products.MongoDB": {
+      "path": "src/ModularCrm.Products.MongoDB/ModularCrm.Products.MongoDB.abppkg",
+      "folder": "src"
+    },
+    "ModularCrm.Products.HttpApi": {
+      "path": "src/ModularCrm.Products.HttpApi/ModularCrm.Products.HttpApi.abppkg",
+      "folder": "src"
+    },
+    "ModularCrm.Products.HttpApi.Client": {
+      "path": "src/ModularCrm.Products.HttpApi.Client/ModularCrm.Products.HttpApi.Client.abppkg",
+      "folder": "src"
+    },
+    "ModularCrm.Products.TestBase": {
+      "path": "test/ModularCrm.Products.TestBase/ModularCrm.Products.TestBase.abppkg",
+      "folder": "test"
+    },
+    "ModularCrm.Products.MongoDB.Tests": {
+      "path": "test/ModularCrm.Products.MongoDB.Tests/ModularCrm.Products.MongoDB.Tests.abppkg",
+      "folder": "test"
+    },
+    "ModularCrm.Products.Domain.Tests": {
+      "path": "test/ModularCrm.Products.Domain.Tests/ModularCrm.Products.Domain.Tests.abppkg",
+      "folder": "test"
+    },
+    "ModularCrm.Products.Application.Tests": {
+      "path": "test/ModularCrm.Products.Application.Tests/ModularCrm.Products.Application.Tests.abppkg",
+      "folder": "test"
+    },
+    "ModularCrm.Products.Domain.Shared": {
+      "path": "src/ModularCrm.Products.Domain.Shared/ModularCrm.Products.Domain.Shared.abppkg",
+      "folder": "src"
+    }
+  }
+}

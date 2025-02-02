@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Cors;
+using ModularCrm.Products.MongoDB;
+using ModularCrm.Products;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
@@ -104,6 +106,14 @@ namespace ModularCrm;
     typeof(AbpSettingManagementMongoDbModule),
     typeof(AbpBackgroundJobsMongoDbModule),
     typeof(BlobStoringDatabaseMongoDbModule)
+)]
+[DependsOn(
+    typeof(ProductsDomainSharedModule),
+    typeof(ProductsHttpApiModule),
+    typeof(ProductsMongoDbModule),
+    typeof(ProductsApplicationModule),
+    typeof(ProductsApplicationContractsModule),
+    typeof(ProductsDomainModule)
 )]
 public class ModularCrmModule : AbpModule
 {

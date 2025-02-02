@@ -1,0 +1,15 @@
+{
+  "extends": "./tsconfig.prod.json",
+  "compilerOptions": {
+    "paths": {
+      "@modular-crm/products": [
+        "projects/products/src/public-api.ts"
+      ],
+      "@modular-crm/products/config": [
+        "projects/products/config/src/public-api.ts"
+      ],
+      "@proxy": ["projects/products/src/lib/proxy/index.ts"],
+      "@proxy/*": ["projects/products/src/lib/proxy/*"]
+    }
+  }
+}

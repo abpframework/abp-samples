@@ -2,4 +2,4 @@
 
 This is an example project that demonstrates using MatBlazor UI components with the ABP Framework. See the article that explain this project:
 
-**https://community.abp.io/posts/using-matblazor-components-with-the-abp-framework-blazor-ui-xsvs7gq1**
+**https://abp.io/community/posts/using-matblazor-components-with-the-abp-framework-blazor-ui-xsvs7gq1**

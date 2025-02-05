@@ -65,5 +65,5 @@ The project created a dynamic API for the `AppUserAppService`, You can test thes
 
 Main implementation: [AppUserRepository](src/StoredProcedureDemo.EntityFrameworkCore/EntityFrameworkCore/Users/AppUserRepository.cs#L16)
 
-Related documents: [Add Custom Repositories in abp](https://docs.abp.io/en/abp/latest/Entity-Framework-Core#add-custom-repositories)
+Related documents: [Add Custom Repositories in abp](https://abp.io/docs/latest/Entity-Framework-Core#add-custom-repositories)
 

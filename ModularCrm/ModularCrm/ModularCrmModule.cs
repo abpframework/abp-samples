@@ -358,7 +358,7 @@ public class ModularCrmModule : AbpModule
         {
             /* You can remove "includeAllEntities: true" to create
              * default repositories only for aggregate roots
-             * Documentation: https://docs.abp.io/en/abp/latest/Entity-Framework-Core#add-default-repositories
+             * Documentation: https://abp.io/docs/latest/Entity-Framework-Core#add-default-repositories
              */
             options.AddDefaultRepositories(includeAllEntities: true);
         });

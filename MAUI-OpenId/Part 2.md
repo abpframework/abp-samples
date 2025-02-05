@@ -5,7 +5,7 @@ Before we start, I offer my special thanks to [@hikalkan](https://github.com/hik
 
 ## Getting Started
 
-In this article, we'll work on an application that was built on the previous article: [Integrating MAUI Client via Using OpenID Connect](https://community.abp.io/posts/integrating-maui-client-via-using-openid-connect-aqjjwsdf).
+In this article, we'll work on an application that was built on the previous article: [Integrating MAUI Client via Using OpenID Connect](https://abp.io/community/posts/integrating-maui-client-via-using-openid-connect-aqjjwsdf).
 
 
 ## Source Code

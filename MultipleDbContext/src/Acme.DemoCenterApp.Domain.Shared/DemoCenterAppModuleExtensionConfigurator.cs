@@ -65,7 +65,7 @@ public static class DemoCenterAppModuleExtensionConfigurator
               });
 
          * See the documentation for more:
-         * https://docs.abp.io/en/abp/latest/Module-Entity-Extensions
+         * https://abp.io/docs/latest/Module-Entity-Extensions
          */
     }
 }

@@ -24,7 +24,7 @@ namespace StoredProcedureDemo.ObjectExtending
                  *    .AddOrUpdateProperty<IdentityRole, string>("Title");
                  *
                  * See the documentation for more:
-                 * https://docs.abp.io/en/abp/latest/Object-Extensions
+                 * https://abp.io/docs/latest/Object-Extensions
                  */
             });
         }

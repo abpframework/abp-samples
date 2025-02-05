@@ -1,5 +1,9 @@
 # DomainTenantResolver
 
+This is an example project for the Domain Tenant Resolver documentation. See the documentation:    
+
+**https://abp.io/docs/latest/framework/architecture/multi-tenancy**
+
 ## MVC
 
 https://*.getabp.net/

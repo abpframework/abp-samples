@@ -2,7 +2,7 @@
 
 This sample solution demonstrates how to make some customizing the existing modules. See the related "Customizing the Application Modules" guides implemented with this solution:
 
-* [Customizing the Application Modules](https://docs.abp.io/en/abp/latest/Customizing-Application-Modules-Guide)
+* [Customizing the Application Modules](https://abp.io/docs/latest/Customizing-Application-Modules-Guide)
 
 In addition, the solution also contains some implementations not included in the document:
 

@@ -2,4 +2,4 @@
 
 This is an example project for the migration Identity Server to OpenIddict duide documentation. See the documentation:
 
-**https://docs.abp.io/en/abp/6.0/Migration-Guides/IdentityServer_To_OpenIddict**
+**https://abp.io/docs/6.0/Migration-Guides/IdentityServer_To_OpenIddict**

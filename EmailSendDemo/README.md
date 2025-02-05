@@ -1,4 +1,6 @@
-# About
+# Email Send Demo
+
+This is a demo project to test sending emails.
 
 * The `Password` of `Abp.Mailing.Smtp.Password` in `appsettings.json` file needs to encrypt!
 

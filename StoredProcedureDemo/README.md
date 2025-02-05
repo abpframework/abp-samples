@@ -1,5 +1,10 @@
 ### StoredProcedureDemo
 
+Related links:
+
+- **https://github.com/abpframework/abp-samples/pull/10**
+- **https://github.com/abpframework/abp/issues/4230**
+
 This project is just to demonstrate how to call stored procedures, views and functions, it is not developed in accordance with **best practices.**
 
 

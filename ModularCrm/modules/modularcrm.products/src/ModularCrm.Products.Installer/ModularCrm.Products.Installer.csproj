@@ -1,18 +1,14 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
   <Import Project="..\..\common.props" />
-
   <PropertyGroup>
     <TargetFramework>net9.0</TargetFramework>
     <Nullable>enable</Nullable>
     <GenerateEmbeddedFilesManifest>true</GenerateEmbeddedFilesManifest>
     <RootNamespace>ModularCrm.Products</RootNamespace>
   </PropertyGroup>
-
   <ItemGroup>
-    <PackageReference Include="Volo.Abp.VirtualFileSystem" Version="9.0.2" />
+    <PackageReference Include="Volo.Abp.VirtualFileSystem" Version="9.2.0-*" />
   </ItemGroup>
-
   <ItemGroup>
     <None Remove="..\..\ModularCrm.Products.abpmdl" />
     <Content Include="..\..\ModularCrm.Products.abpmdl">
@@ -25,5 +21,4 @@
       <PackagePath>content\</PackagePath>
     </Content>
   </ItemGroup>
-
 </Project>

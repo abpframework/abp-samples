@@ -1,7 +1,5 @@
 # ModularCrm
 
-## About this solution
-
 This is a minimalist, non-layered startup solution with the ABP Framework. All the fundamental ABP modules are already installed.
 
 ### Pre-requirements
@@ -39,6 +37,17 @@ abp install-libs
 
 > This command installs all NPM packages for MVC/Razor Pages and Blazor Server UIs and this command is already run by the ABP CLI, so most of the time you don't need to run this command manually.
 
+### Add EF Core Migrations
+
+If you changed the database schema, you need to add a new migration. Run the following command to add a new migration for the db context that you changed.
+
+> Initial just migration name, you can change it to any name you want.
+
+```bash
+dotnet ef migrations add Initial --context ModularCrmDbContext --output-dir Migrations/ModularCrm
+dotnet ef migrations add Initial --context ProductsDbContext --output-dir Migrations/Products
+```
+
 ## How to run
 
 The application needs a database. Run the following command in the `ModularCrm` directory to migrate the database and seed the initial data. This step is automatically done when you create a new solution, if you didn't especially disabled it.
@@ -74,3 +83,5 @@ Navigate to _etc/docker_ folder and run the `run-docker.ps1` script. The script 
 You can see the following resources to learn more about your solution and the ABP Framework:
 
 * [Application (Single Layer) Startup Template](https://abp.io/docs/latest/startup-templates/application-single-layer/index)
+=======
+**https://abp.io/docs/latest/tutorials/modular-crm/index**

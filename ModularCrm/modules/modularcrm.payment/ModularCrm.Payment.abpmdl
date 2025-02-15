@@ -1,0 +1,13 @@
+﻿{
+  "packages": {
+    "ModularCrm.Payment": {
+      "path": "ModularCrm.Payment/ModularCrm.Payment.abppkg"
+    },
+    "ModularCrm.Payment.UI": {
+      "path": "ModularCrm.Payment.UI/ModularCrm.Payment.UI.abppkg"
+    },
+    "ModularCrm.Payment.Contracts": {
+      "path": "ModularCrm.Payment.Contracts/ModularCrm.Payment.Contracts.abppkg"
+    }
+  }
+}

@@ -1,0 +1,20 @@
+﻿@page
+@using Microsoft.Extensions.Localization
+@using ModularCrm.Payment.Localization
+@model ModularCrm.Payment.UI.Pages.Payment.IndexModel
+@inject IStringLocalizer<PaymentResource> L
+
+<abp-card>
+    <abp-card-body>
+        <abp-list-group>
+            @foreach (var paymentRecord in Model.PaymentRecords)
+            {
+                <abp-list-group-item>
+                    <strong>OrderId:</strong> @paymentRecord.OrderId <br />
+                    <strong>Amount:</strong> @paymentRecord.Amount <br />
+                    <strong>Method:</strong> @paymentRecord.Method
+                </abp-list-group-item>
+            }
+        </abp-list-group>
+    </abp-card-body>
+</abp-card>

@@ -18,6 +18,7 @@
     "ModularCrm": {
       "commandName": "Project",
       "launchBrowser": true,
+//      "commandLineArgs": "--migrate-database",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },

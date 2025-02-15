@@ -37,7 +37,7 @@ namespace AbpPrimengSample.EntityFrameworkCore
                          );
 
                  * See the documentation for more:
-                 * https://docs.abp.io/en/abp/latest/Customizing-Application-Modules-Extending-Entities
+                 * https://abp.io/docs/latest/Customizing-Application-Modules-Extending-Entities
                  */
             });
         }

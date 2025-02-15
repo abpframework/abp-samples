@@ -2,5 +2,5 @@
 
 This is an example project that demonstrates how to inject service dependencies to your entities using Entity Framework Core 7.0. See the article that explain this project:
 
-**https://community.abp.io/posts/injecting-service-dependencies-to-entities-with-entity-framework-core-7.0-db6vdh4s**
+**https://abp.io/community/posts/injecting-service-dependencies-to-entities-with-entity-framework-core-7.0-db6vdh4s**
 

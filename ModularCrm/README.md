@@ -83,5 +83,3 @@ Navigate to _etc/docker_ folder and run the `run-docker.ps1` script. The script 
 You can see the following resources to learn more about your solution and the ABP Framework:
 
 * [Application (Single Layer) Startup Template](https://abp.io/docs/latest/startup-templates/application-single-layer/index)
-=======
-**https://abp.io/docs/latest/tutorials/modular-crm/index**

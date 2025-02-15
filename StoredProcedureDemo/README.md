@@ -1,5 +1,10 @@
 ### StoredProcedureDemo
 
+Related links:
+
+- **https://github.com/abpframework/abp-samples/pull/10**
+- **https://github.com/abpframework/abp/issues/4230**
+
 This project is just to demonstrate how to call stored procedures, views and functions, it is not developed in accordance with **best practices.**
 
 
@@ -60,5 +65,5 @@ The project created a dynamic API for the `AppUserAppService`, You can test thes
 
 Main implementation: [AppUserRepository](src/StoredProcedureDemo.EntityFrameworkCore/EntityFrameworkCore/Users/AppUserRepository.cs#L16)
 
-Related documents: [Add Custom Repositories in abp](https://docs.abp.io/en/abp/latest/Entity-Framework-Core#add-custom-repositories)
+Related documents: [Add Custom Repositories in abp](https://abp.io/docs/latest/Entity-Framework-Core#add-custom-repositories)
 

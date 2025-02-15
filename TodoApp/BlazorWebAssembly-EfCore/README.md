@@ -2,4 +2,4 @@
 
 This is an example project for the quick start tutorial documentation. See the documentation:
 
-**https://docs.abp.io/en/abp/latest/Tutorials/Todo/Index?UI=Blazor&DB=EF**
+**https://abp.io/docs/latest/Tutorials/Todo/Index?UI=Blazor&DB=EF**

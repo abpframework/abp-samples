@@ -2,7 +2,7 @@
   "template": "app-nolayers",
   "imports": {
     "Volo.Abp.LeptonXLiteTheme": {
-      "version": "4.2.0-preview20250214",
+      "version": "4.2.0",
       "isInstalled": true
     },
     "Volo.Abp.Account": {

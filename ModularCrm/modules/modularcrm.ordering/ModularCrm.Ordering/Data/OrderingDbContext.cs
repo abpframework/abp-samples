@@ -1,25 +1,25 @@
-﻿using ModularCrm.Ordering.Entities;
-using MongoDB.Driver;
+﻿using Microsoft.EntityFrameworkCore;
+using ModularCrm.Ordering.Entities;
 using Volo.Abp.Data;
-using Volo.Abp.MongoDB;
-using Volo.Abp.MongoDB.DistributedEvents;
+using Volo.Abp.EntityFrameworkCore;
 
 namespace ModularCrm.Ordering.Data;
 
 [ConnectionStringName(OrderingDbProperties.ConnectionStringName)]
-public class OrderingDbContext : AbpMongoDbContext, IOrderingDbContext
+public class OrderingDbContext : AbpDbContext<OrderingDbContext>, IOrderingDbContext
 {
-    public IMongoCollection<IncomingEventRecord> IncomingEvents => Collection<IncomingEventRecord>();
-    public IMongoCollection<OutgoingEventRecord> OutgoingEvents => Collection<OutgoingEventRecord>();
-    public IMongoCollection<Order> Orders => Collection<Order>();
+    public DbSet<Order> Orders { get; set; }
 
-    protected override void CreateModel(IMongoModelBuilder modelBuilder)
+    public OrderingDbContext(DbContextOptions<OrderingDbContext> options)
+        : base(options)
     {
-        base.CreateModel(modelBuilder);
 
-        modelBuilder.ConfigureEventInbox();
-        modelBuilder.ConfigureEventOutbox();
+    }
 
-        modelBuilder.ConfigureOrdering();
+    protected override void OnModelCreating(ModelBuilder builder)
+    {
+        base.OnModelCreating(builder);
+
+        builder.ConfigureOrdering();
     }
 }

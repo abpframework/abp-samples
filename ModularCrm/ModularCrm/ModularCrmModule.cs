@@ -3,15 +3,15 @@ using ModularCrm.Ordering;
 using ModularCrm.Products.Web;
 using ModularCrm.Products.EntityFrameworkCore;
 using ModularCrm.Products;
-using ModularCrm.Payment.UI;
-using ModularCrm.Payment;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.OpenApi.Models;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 using ModularCrm.Data;
 using ModularCrm.Localization;
 using ModularCrm.Menus;
-using ModularCrm.Ordering.Data;
+using ModularCrm.Permissions;
 using OpenIddict.Validation.AspNetCore;
 using Volo.Abp;
 using Volo.Abp.Account;
@@ -58,11 +58,9 @@ using Volo.Abp.SettingManagement.EntityFrameworkCore;
 using Volo.Abp.PermissionManagement.EntityFrameworkCore;
 using Volo.Abp.AuditLogging.EntityFrameworkCore;
 using Volo.Abp.BlobStoring.Database.EntityFrameworkCore;
-using Volo.Abp.EntityFrameworkCore.DistributedEvents;
 using Volo.Abp.Identity.EntityFrameworkCore;
 using Volo.Abp.FeatureManagement.EntityFrameworkCore;
 using Volo.Abp.EntityFrameworkCore.SqlServer;
-using Volo.Abp.EventBus.Distributed;
 using Volo.Abp.Studio.Client.AspNetCore;
 
 namespace ModularCrm;
@@ -84,7 +82,7 @@ namespace ModularCrm;
     typeof(AbpAccountWebOpenIddictModule),
     typeof(AbpAccountHttpApiModule),
     typeof(AbpAccountApplicationModule),
-
+        
     // Tenant Management module packages
     typeof(AbpTenantManagementWebModule),
     typeof(AbpTenantManagementHttpApiModule),
@@ -133,10 +131,7 @@ namespace ModularCrm;
     typeof(ProductsEntityFrameworkCoreModule),
     typeof(ProductsApplicationModule),
     typeof(ProductsApplicationContractsModule),
-    typeof(ProductsDomainModule),
-    typeof(PaymentContractsModule),
-    typeof(PaymentWebModule),
-    typeof(PaymentModule)
+    typeof(ProductsDomainModule)
 )]
 public class ModularCrmModule : AbpModule
 {
@@ -306,12 +301,12 @@ public class ModularCrmModule : AbpModule
         Configure<AbpAspNetCoreMvcOptions>(options =>
         {
             options.ConventionalControllers.Create(typeof(ModularCrmModule).Assembly);
-            options.ConventionalControllers.Create(typeof(ProductsApplicationModule).Assembly, settings =>
+            options.ConventionalControllers.Create(typeof(ProductsApplicationModule).Assembly, settings => 
             {
                 settings.RootPath = "products";
             });
 
-            options.ConventionalControllers.Create(typeof(OrderingModule).Assembly, settings =>
+            options.ConventionalControllers.Create(typeof(OrderingModule).Assembly, settings => 
             {
                 settings.RootPath = "orders";
             });
@@ -356,7 +351,7 @@ public class ModularCrmModule : AbpModule
             options.Contributors.Add(new ModularCrmToolbarContributor());
         });
     }
-
+    
     private void ConfigureEfCore(ServiceConfigurationContext context)
     {
         context.Services.AddAbpDbContext<ModularCrmDbContext>(options =>
@@ -374,34 +369,10 @@ public class ModularCrmModule : AbpModule
             {
                 configurationContext.UseSqlServer();
             });
-
-            options.Configure<ProductsDbContext>(configurationContext =>
-            {
-                configurationContext.UseSqlServer(c => c.MigrationsAssembly("ModularCrm"));
-            });
         });
-
-        // This selector will match all abp built-in modules and the current module.
-        Func<Type, bool> abpModuleSelector = type => type.Namespace != null &&
-                                                          (type.Namespace.StartsWith("Volo.") ||
-                                                           type.Assembly == typeof(ModularCrmModule).Assembly);
-
-        Configure<AbpDistributedEventBusOptions>(options =>
-        {
-            options.Inboxes.Configure("ModularCrm", config =>
-            {
-                config.UseDbContext<ModularCrmDbContext>();
-                config.EventSelector = abpModuleSelector;
-                config.HandlerSelector = abpModuleSelector;
-            });
-
-            options.Outboxes.Configure("ModularCrm", config =>
-            {
-                config.UseDbContext<ModularCrmDbContext>();
-                config.Selector = abpModuleSelector;
-            });
-        });
+        
     }
+
 
     public override void OnApplicationInitialization(ApplicationInitializationContext context)
     {

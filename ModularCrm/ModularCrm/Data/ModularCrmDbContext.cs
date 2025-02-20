@@ -1,9 +1,14 @@
+using ModularCrm.Products.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using ModularCrm.Ordering.Data;
+using ModularCrm.Ordering.Entities;
+using ModularCrm.Products;
 using Volo.Abp.EntityFrameworkCore;
+using Volo.Abp.EntityFrameworkCore.Modeling;
 using Volo.Abp.AuditLogging.EntityFrameworkCore;
 using Volo.Abp.BackgroundJobs.EntityFrameworkCore;
 using Volo.Abp.BlobStoring.Database.EntityFrameworkCore;
-using Volo.Abp.EntityFrameworkCore.DistributedEvents;
+using Volo.Abp.DependencyInjection;
 using Volo.Abp.FeatureManagement.EntityFrameworkCore;
 using Volo.Abp.Identity.EntityFrameworkCore;
 using Volo.Abp.OpenIddict.EntityFrameworkCore;
@@ -13,13 +18,18 @@ using Volo.Abp.TenantManagement.EntityFrameworkCore;
 
 namespace ModularCrm.Data;
 
-public class ModularCrmDbContext : AbpDbContext<ModularCrmDbContext>, IHasEventInbox, IHasEventOutbox
+[ReplaceDbContext(typeof(IProductsDbContext))]
+[ReplaceDbContext(typeof(IOrderingDbContext))]
+public class ModularCrmDbContext :
+    AbpDbContext<ModularCrmDbContext>,
+    IProductsDbContext,
+    IOrderingDbContext //NEW: IMPLEMENT THE INTERFACE
 {
     public const string DbTablePrefix = "App";
     public const string DbSchema = null;
 
-    public DbSet<IncomingEventRecord> IncomingEvents { get; set; }
-    public DbSet<OutgoingEventRecord> OutgoingEvents { get; set; }
+    public DbSet<Product> Products { get; set; }
+    public DbSet<Order> Orders { get; set; } //NEW: ADD DBSET PROPERTY
 
     public ModularCrmDbContext(DbContextOptions<ModularCrmDbContext> options)
         : base(options)
@@ -30,10 +40,9 @@ public class ModularCrmDbContext : AbpDbContext<ModularCrmDbContext>, IHasEventI
     {
         base.OnModelCreating(builder);
 
-        /* Include modules to your migration db context */
+        builder.ConfigureProducts();
 
-        builder.ConfigureEventInbox();
-        builder.ConfigureEventOutbox();
+        /* Include modules to your migration db context */
 
         builder.ConfigureSettingManagement();
         builder.ConfigureBackgroundJobs();
@@ -44,5 +53,9 @@ public class ModularCrmDbContext : AbpDbContext<ModularCrmDbContext>, IHasEventI
         builder.ConfigureIdentity();
         builder.ConfigureOpenIddict();
         builder.ConfigureTenantManagement();
+        
+        builder.ConfigureProducts();
+        builder.ConfigureOrdering();
     }
 }
+

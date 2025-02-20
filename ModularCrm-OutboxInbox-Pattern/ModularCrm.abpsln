@@ -1,0 +1,59 @@
+{
+  "id": "ce4ce837-6b3f-48e0-9195-a289f047c81e",
+  "template": "app-nolayers",
+  "versions": {
+    "AbpFramework": "9.2.0",
+    "AbpStudio": "0.9.17",
+    "TargetDotnetFramework": "net9.0",
+    "AbpCommercial": "9.2.0",
+    "LeptonX": "4.2.0"
+  },
+  "modules": {
+    "ModularCrm": {
+      "path": "ModularCrm.abpmdl",
+      "folder": "main"
+    },
+    "ModularCrm.Products": {
+      "path": "modules/modularcrm.products/ModularCrm.Products.abpmdl",
+      "folder": "modules"
+    },
+    "ModularCrm.Ordering": {
+      "path": "modules/modularcrm.ordering/ModularCrm.Ordering.abpmdl",
+      "folder": "modules"
+    },
+    "ModularCrm.Payment": {
+      "path": "modules/modularcrm.payment/ModularCrm.Payment.abpmdl",
+      "folder": "modules"
+    }
+  },
+  "runProfiles": {
+    "Default": {
+      "path": "etc/run-profiles/Default.abprun.json"
+    }
+  },
+  "options": {
+    "httpRequests": {
+      "ignoredUrls": [
+        "^/metrics$"
+      ]
+    }
+  },
+  "creatingStudioConfiguration": {
+    "template": "app-nolayers",
+    "createdAbpStudioVersion": "0.9.15",
+    "multiTenancy": "true",
+    "uiFramework": "mvc",
+    "databaseProvider": "ef",
+    "databaseManagementSystem": "sqlserver",
+    "theme": "leptonx-lite",
+    "themeStyle": "",
+    "publicWebsite": "",
+    "socialLogin": ""
+  },
+  "folders": {
+    "items": {
+      "main": {},
+      "modules": {}
+    }
+  }
+}

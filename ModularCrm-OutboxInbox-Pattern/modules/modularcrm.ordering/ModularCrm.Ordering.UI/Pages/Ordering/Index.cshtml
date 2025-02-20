@@ -1,0 +1,19 @@
+﻿@page
+@model ModularCrm.Ordering.UI.Pages.Ordering.IndexModel
+
+<h1>Orders</h1>
+
+<abp-card>
+    <abp-card-body>
+        <abp-list-group>
+            @foreach (var order in Model.Orders)
+            {
+                <abp-list-group-item>
+                    <strong>Customer:</strong> @order.CustomerName <br />
+                    <strong>Product:</strong> @order.ProductName <br />
+                    <strong>State:</strong> @order.State
+                </abp-list-group-item>
+            }
+        </abp-list-group>
+    </abp-card-body>
+</abp-card>

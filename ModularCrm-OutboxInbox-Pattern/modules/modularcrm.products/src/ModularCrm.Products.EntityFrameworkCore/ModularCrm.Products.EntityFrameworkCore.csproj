@@ -1,0 +1,12 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <Import Project="..\..\common.props" />
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <RootNamespace>ModularCrm.Products</RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ModularCrm.Products.Domain\ModularCrm.Products.Domain.csproj" />
+    <PackageReference Include="Volo.Abp.EntityFrameworkCore" Version="9.2.0-*" />
+  </ItemGroup>
+</Project>

@@ -1,0 +1,12 @@
+﻿{
+  "applications": {
+    "ModularCrm": {
+      "type": "dotnet-project",
+      "launchUrl": "https://localhost:44303",
+      "path": "../../ModularCrm/ModularCrm.csproj",
+      "execution": {
+        "order": 0
+      }
+    }
+  }
+}

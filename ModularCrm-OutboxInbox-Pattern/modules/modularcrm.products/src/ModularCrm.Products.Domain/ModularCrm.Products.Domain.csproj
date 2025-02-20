@@ -1,0 +1,14 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <Import Project="..\..\common.props" />
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <RootNamespace>ModularCrm.Products</RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ModularCrm.Products.Domain.Shared\ModularCrm.Products.Domain.Shared.csproj" />
+    <ProjectReference Include="../../../modularcrm.ordering/ModularCrm.Ordering.Contracts/ModularCrm.Ordering.Contracts.csproj" />
+    <PackageReference Include="Volo.Abp.Ddd.Domain" Version="9.2.0-*" />
+    <PackageReference Include="Volo.Abp.Users.Abstractions" Version="9.2.0-*" />
+  </ItemGroup>
+</Project>

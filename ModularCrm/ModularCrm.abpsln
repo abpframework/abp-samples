@@ -2,11 +2,11 @@
   "id": "ce4ce837-6b3f-48e0-9195-a289f047c81e",
   "template": "app-nolayers",
   "versions": {
-    "AbpFramework": "9.2.0",
+    "AbpFramework": "9.0.2",
     "AbpStudio": "0.9.17",
     "TargetDotnetFramework": "net9.0",
-    "AbpCommercial": "9.2.0",
-    "LeptonX": "4.2.0"
+    "AbpCommercial": "9.0.2",
+    "LeptonX": "4.0.3"
   },
   "modules": {
     "ModularCrm": {
@@ -19,10 +19,6 @@
     },
     "ModularCrm.Ordering": {
       "path": "modules/modularcrm.ordering/ModularCrm.Ordering.abpmdl",
-      "folder": "modules"
-    },
-    "ModularCrm.Payment": {
-      "path": "modules/modularcrm.payment/ModularCrm.Payment.abpmdl",
       "folder": "modules"
     }
   },

@@ -3,26 +3,19 @@ using Microsoft.Extensions.DependencyInjection;
 using Volo.Abp.AutoMapper;
 using Volo.Abp.Modularity;
 using Volo.Abp.Application;
+using Volo.Abp.EntityFrameworkCore;
 using ModularCrm.Ordering.Data;
-using ModularCrm.Ordering.Events;
-using ModularCrm.Ordering.Services;
-using ModularCrm.Payment;
-using ModularCrm.Payment.Payment;
 using Volo.Abp.AspNetCore.Mvc;
-using Volo.Abp.EventBus.Distributed;
-using Volo.Abp.MongoDB;
-using Volo.Abp.MongoDB.DistributedEvents;
 
 namespace ModularCrm.Ordering;
 
 [DependsOn(
     typeof(ProductsApplicationContractsModule),
     typeof(OrderingContractsModule),
-    typeof(PaymentContractsModule),
     typeof(AbpDddApplicationModule),
     typeof(AbpAutoMapperModule),
     typeof(AbpAspNetCoreMvcModule),
-    typeof(AbpMongoDbModule)
+    typeof(AbpEntityFrameworkCoreModule)
 )]
 public class OrderingModule : AbpModule
 {
@@ -33,26 +26,12 @@ public class OrderingModule : AbpModule
         {
             options.AddMaps<OrderingModule>(validate: true);
         });
-
-        context.Services.AddMongoDbContext<OrderingDbContext>(options =>
+        
+        context.Services.AddAbpDbContext<OrderingDbContext>(options =>
         {
-            options.AddDefaultRepositories(true);
-        });
-
-        Configure<AbpDistributedEventBusOptions>(options =>
-        {
-            options.Inboxes.Configure(OrderingDbProperties.ConnectionStringName, config =>
-            {
-                config.UseMongoDbContext<IOrderingDbContext>();
-                config.EventSelector = type => type == typeof(PaymentCompletedEto);
-                config.HandlerSelector = type => type == typeof(OrderPaymentCompletedEventHandler);
-            });
-
-            options.Outboxes.Configure(OrderingDbProperties.ConnectionStringName, config =>
-            {
-                config.UseMongoDbContext<IOrderingDbContext>();
-                config.Selector = type => type == typeof(OrderPlacedEto);
-            });
+            /* Add custom repositories here. Example:
+             * options.AddRepository<Question, EfCoreQuestionRepository>();
+             */
         });
     }
 }

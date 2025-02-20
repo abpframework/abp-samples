@@ -1,0 +1,80 @@
+﻿@page
+@using Microsoft.AspNetCore.Mvc.Localization
+@using ModularCrm.Localization
+@inject IHtmlLocalizer<ModularCrmResource> L
+@model ModularCrm.Pages.IndexModel
+
+@section styles {
+    <abp-style src="/Pages/Index.cshtml.css" />
+}
+@section scripts {
+    <abp-script src="/Pages/Index.cshtml.js" />
+}
+
+<div class="card">
+    <div class="card-body">
+        <form method="post">
+            <div class="mb-3">
+                <label for="CustomerName" class="form-label">Customer name</label>
+                <input type="text" class="form-control" name="CustomerName" id="CustomerName" >
+            </div>
+            <div class="mb-3">
+                <select class="form-select" name="ProductId">
+                    @foreach (var product in Model.Products)
+                    {
+                        <option value="@product.Id">@product.Name (stock: @product.StockCount)</option>
+                    }
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+            <div class="form-text mt-2"> We update the stock through distributed eventbus, please refresh the page later to check the latest stocks..</div>
+        </form>
+    </div>
+</div>
+
+<h1>Products</h1>
+<abp-card>
+    <abp-card-body>
+        <abp-list-group>
+            @foreach (var product in Model.Products)
+            {
+            <abp-list-group-item>
+                @product.Name <span class="text-muted">(stock: @product.StockCount)</span>
+            </abp-list-group-item>
+            }
+        </abp-list-group>
+    </abp-card-body>
+</abp-card>
+
+
+<h1>Orders</h1>
+<abp-card>
+    <abp-card-body>
+        <abp-list-group>
+            @foreach (var order in Model.Orders)
+            {
+                <abp-list-group-item>
+                    <strong>Customer:</strong> @order.CustomerName <br />
+                    <strong>Product:</strong> @order.ProductName <br />
+                    <strong>State:</strong> @order.State
+                </abp-list-group-item>
+            }
+        </abp-list-group>
+    </abp-card-body>
+</abp-card>
+
+<h1>Payment Records</h1>
+<abp-card>
+    <abp-card-body>
+        <abp-list-group>
+            @foreach (var paymentRecord in Model.PaymentRecords)
+            {
+                <abp-list-group-item>
+                    <strong>Method:</strong> @paymentRecord.Method <br />
+                    <strong>Amount:</strong> @paymentRecord.Amount <br />
+                    <strong>Product:</strong> @Model.Orders.FirstOrDefault(o => o.Id == paymentRecord.OrderId)?.ProductName
+                </abp-list-group-item>
+            }
+        </abp-list-group>
+    </abp-card-body>
+</abp-card>

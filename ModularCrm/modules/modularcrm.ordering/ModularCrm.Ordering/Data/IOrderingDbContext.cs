@@ -1,13 +1,12 @@
-﻿using ModularCrm.Ordering.Entities;
-using MongoDB.Driver;
+﻿using Microsoft.EntityFrameworkCore;
+using ModularCrm.Ordering.Entities;
 using Volo.Abp.Data;
-using Volo.Abp.MongoDB;
-using Volo.Abp.MongoDB.DistributedEvents;
+using Volo.Abp.EntityFrameworkCore;
 
 namespace ModularCrm.Ordering.Data;
 
 [ConnectionStringName(OrderingDbProperties.ConnectionStringName)]
-public interface IOrderingDbContext : IAbpMongoDbContext, IHasEventInbox, IHasEventOutbox
+public interface IOrderingDbContext : IEfCoreDbContext
 {
-    IMongoCollection<Order> Orders { get; }
+    DbSet<Order> Orders { get; set; }
 }

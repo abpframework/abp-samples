@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
 using ModularCrm.Ordering.Entities;
 using ModularCrm.Ordering.Enums;
 using ModularCrm.Ordering.Events;
@@ -13,15 +14,18 @@ namespace ModularCrm.Ordering.Services;
 
 public class OrderAppService : OrderingAppService, IOrderAppService
 {
+    private readonly ILogger<OrderAppService> _logger;
     private readonly IRepository<Order, Guid>  _orderRepository;
     private readonly IProductIntegrationService _productIntegrationService;
     private readonly IDistributedEventBus _distributedEventBus;
 
     public OrderAppService(
+        ILogger<OrderAppService> logger,
         IRepository<Order, Guid> orderRepository,
         IProductIntegrationService productIntegrationService,
         IDistributedEventBus distributedEventBus)
     {
+        _logger = logger;
         _orderRepository = orderRepository;
         _productIntegrationService = productIntegrationService;
         _distributedEventBus = distributedEventBus;
@@ -60,10 +64,13 @@ public class OrderAppService : OrderingAppService, IOrderAppService
         // Save it to the database
         await _orderRepository.InsertAsync(order);
 
+        _logger.LogInformation($"[Ordering Module] Order created:  OrderId: {order.Id}, ProductId: {order.ProductId}, CustomerName: {order.CustomerName}");
+
         // Publish an event so other modules can be informed
         await _distributedEventBus.PublishAsync(
             new OrderPlacedEto
             {
+                Id = order.Id,
                 ProductId = order.ProductId,
                 CustomerName = order.CustomerName
             });

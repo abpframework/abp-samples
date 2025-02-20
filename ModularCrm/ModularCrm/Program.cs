@@ -24,17 +24,15 @@ public class Program
                 {
                     if (IsMigrateDatabase(args))
                     {
-                        loggerConfiguration.MinimumLevel.Override("Volo.Abp", LogEventLevel.Warning);
-                        loggerConfiguration.MinimumLevel.Override("Microsoft", LogEventLevel.Warning);
+                        loggerConfiguration
+                            .MinimumLevel.Override("Volo.Abp", LogEventLevel.Warning)
+                            .MinimumLevel.Override("Microsoft", LogEventLevel.Warning)
+                            .WriteTo.Async(c => c.Console(standardErrorFromLevel: LogEventLevel.Error));
                     }
                     else
                     {
                         loggerConfiguration
-                        #if DEBUG
-                            .MinimumLevel.Debug()
-                        #else
                             .MinimumLevel.Information()
-                        #endif
                             .MinimumLevel.Override("Microsoft", LogEventLevel.Information)
                             .MinimumLevel.Override("Microsoft.EntityFrameworkCore", LogEventLevel.Warning)
                             .Enrich.FromLogContext()

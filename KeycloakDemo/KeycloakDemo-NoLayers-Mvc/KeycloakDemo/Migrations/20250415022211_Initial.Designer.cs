@@ -13,7 +13,7 @@ using Volo.Abp.EntityFrameworkCore;
 namespace KeycloakDemo.Migrations
 {
     [DbContext(typeof(KeycloakDemoDbContext))]
-    [Migration("20240912022415_Initial")]
+    [Migration("20250415022211_Initial")]
     partial class Initial
     {
         /// <inheritdoc />

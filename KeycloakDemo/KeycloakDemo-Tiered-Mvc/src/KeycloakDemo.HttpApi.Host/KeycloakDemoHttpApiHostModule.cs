@@ -27,6 +27,8 @@ using Volo.Abp.Modularity;
 using Volo.Abp.Swashbuckle;
 using Volo.Abp.VirtualFileSystem;
 using Microsoft.AspNetCore.Authentication;
+using Volo.Abp.AspNetCore.Security.Claims;
+using Volo.Abp.Security.Claims;
 
 namespace KeycloakDemo;
 
@@ -109,6 +111,13 @@ public class KeycloakDemoHttpApiHostModule : AbpModule
                         HttpClientHandler.DangerousAcceptAnyServerCertificateValidator
                 };
             });
+
+        context.Services.Configure<AbpClaimsMapOptions>(options =>
+        {
+            options.Maps.RemoveAll(x => x.Key == "name");
+            options.Maps.Add("preferred_username", () => AbpClaimTypes.UserName);
+        });
+        context.Services.TransformAbpClaims();
     }
 
     private static void ConfigureSwaggerServices(ServiceConfigurationContext context, IConfiguration configuration)

@@ -1,3 +1,4 @@
+using System.ClientModel;
 using Blazorise.Bootstrap5;
 using Blazorise.Icons.FontAwesome;
 using Microsoft.AspNetCore.Extensions.DependencyInjection;
@@ -9,6 +10,11 @@ using AbpAiChat.Data;
 using AbpAiChat.Localization;
 using AbpAiChat.Menus;
 using AbpAiChat.HealthChecks;
+using AbpAiChat.Services;
+using AbpAiChat.Services.Ingestion;
+using Microsoft.Extensions.AI;
+using Microsoft.Extensions.VectorData;
+using OpenAI;
 using OpenIddict.Validation.AspNetCore;
 using Volo.Abp;
 using Volo.Abp.Uow;
@@ -190,6 +196,8 @@ public class AbpAiChatModule : AbpModule
             context.Services.Replace(ServiceDescriptor.Singleton<IEmailSender, NullEmailSender>());
         }
 
+        ConfigureAi(context);
+
         ConfigureAuthentication(context);
         ConfigureBundles();
         ConfigureBlazorise(context);
@@ -204,6 +212,33 @@ public class AbpAiChatModule : AbpModule
         ConfigureLocalization();
         ConfigureVirtualFiles(hostingEnvironment);
         ConfigureEfCore(context);
+    }
+
+    private void ConfigureAi(ServiceConfigurationContext context)
+    {
+        var credential = new ApiKeyCredential(context.Services.GetConfiguration()["GitHubToken"] ??
+                                               throw new InvalidOperationException("Missing configuration: GitHubToken. See the README for details."));
+        var openAiOptions = new OpenAIClientOptions()
+        {
+            Endpoint = new Uri("https://models.inference.ai.azure.com")
+        };
+
+        var ghModelsClient = new OpenAIClient(credential, openAiOptions);
+        var chatClient = ghModelsClient.GetChatClient("gpt-4o-mini").AsIChatClient();
+        var embeddingGenerator = ghModelsClient.GetEmbeddingClient("text-embedding-3-small").AsIEmbeddingGenerator();
+
+        var vectorStore = new JsonVectorStore(Path.Combine(AppContext.BaseDirectory, "vector-store"));
+
+        context.Services.AddSingleton<IVectorStore>(vectorStore);
+        context.Services.AddScoped<DataIngestor>();
+        context.Services.AddSingleton<SemanticSearch>();
+        context.Services.AddChatClient(chatClient).UseFunctionInvocation().UseLogging();
+        context.Services.AddEmbeddingGenerator(embeddingGenerator);
+
+        context.Services.Configure<AbpAspNetCoreContentOptions>(options =>
+        {
+            options.ContentTypeMaps.Add(".mjs", "application/javascript");
+        });
     }
 
     private void ConfigureHealthChecks(ServiceConfigurationContext context)
@@ -398,7 +433,7 @@ public class AbpAiChatModule : AbpModule
     }
 
 
-    public override void OnApplicationInitialization(ApplicationInitializationContext context)
+    public override async Task OnApplicationInitializationAsync(ApplicationInitializationContext context)
     {
         var app = context.GetApplicationBuilder();
         var env = context.GetEnvironment();
@@ -407,6 +442,14 @@ public class AbpAiChatModule : AbpModule
         {
             app.UseDeveloperExceptionPage();
         }
+
+        // By default, we ingest PDF files from the /wwwroot/Data directory. You can ingest from
+        // other sources by implementing IIngestionSource.
+        // Important: ensure that any content you ingest is trusted, as it may be reflected back
+        // to users or could be a source of prompt injection risk.
+        await DataIngestor.IngestDataAsync(
+            app.ApplicationServices,
+            new PDFDirectorySource(Path.Combine(env.WebRootPath, "Data")));
 
         app.UseAbpRequestLocalization();
 

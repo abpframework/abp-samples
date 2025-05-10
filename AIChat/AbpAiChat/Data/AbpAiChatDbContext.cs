@@ -1,6 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using AbpAiChat.Entities;
+using Microsoft.EntityFrameworkCore;
 using Volo.Abp.EntityFrameworkCore;
-using Volo.Abp.EntityFrameworkCore.Modeling;
 using Volo.Abp.AuditLogging.EntityFrameworkCore;
 using Volo.Abp.BackgroundJobs.EntityFrameworkCore;
 using Volo.Abp.BlobStoring.Database.EntityFrameworkCore;
@@ -15,9 +15,13 @@ namespace AbpAiChat.Data;
 
 public class AbpAiChatDbContext : AbpDbContext<AbpAiChatDbContext>
 {
-    
+
     public const string DbTablePrefix = "App";
     public const string DbSchema = null;
+
+    public DbSet<IngestedDocument> Documents { get; set; } = default!;
+    public DbSet<IngestedRecord> Records { get; set; } = default!;
+
 
     public AbpAiChatDbContext(DbContextOptions<AbpAiChatDbContext> options)
         : base(options)
@@ -39,8 +43,13 @@ public class AbpAiChatDbContext : AbpDbContext<AbpAiChatDbContext>
         builder.ConfigureIdentity();
         builder.ConfigureOpenIddict();
         builder.ConfigureTenantManagement();
-        
+
         /* Configure your own entities here */
+
+        builder.Entity<IngestedDocument>()
+            .HasMany(d => d.Records)
+            .WithOne()
+            .HasForeignKey(r => r.DocumentId)
+            .OnDelete(DeleteBehavior.Cascade);
     }
 }
-

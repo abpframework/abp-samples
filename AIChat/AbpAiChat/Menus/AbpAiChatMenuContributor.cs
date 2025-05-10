@@ -34,6 +34,17 @@ public class AbpAiChatMenuContributor : IMenuContributor
             )
         );
 
+        context.Menu.Items.Insert(
+            0,
+            new ApplicationMenuItem(
+                AbpAiChatMenus.Home,
+                l["Menu:Chat"],
+                "/chat",
+                icon: "fas fa-comments",
+                order: 2
+            )
+        );
+
         //Administration
         var administration = context.Menu.GetAdministration();
         administration.Order = 4;

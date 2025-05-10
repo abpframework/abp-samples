@@ -1,0 +1,14 @@
+﻿{
+  "applications": {
+    "AbpAiChat": {
+      "type": "dotnet-project",
+      "launchUrl": "https://localhost:44313",
+      "healthCheckEndpoint": "/health-status",
+      "healthUiEndpoint": "/health-ui",
+      "path": "../../AbpAiChat/AbpAiChat.csproj",
+      "execution": {
+        "order": 0
+      }
+    }
+  }
+}

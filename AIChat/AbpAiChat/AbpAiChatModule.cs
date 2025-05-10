@@ -434,7 +434,7 @@ public class AbpAiChatModule : AbpModule
     }
 
 
-    public override async Task OnApplicationInitializationAsync(ApplicationInitializationContext context)
+    public override void OnApplicationInitialization(ApplicationInitializationContext context)
     {
         var app = context.GetApplicationBuilder();
         var env = context.GetEnvironment();
@@ -443,14 +443,6 @@ public class AbpAiChatModule : AbpModule
         {
             app.UseDeveloperExceptionPage();
         }
-
-        // By default, we ingest PDF files from the /wwwroot/Data directory. You can ingest from
-        // other sources by implementing IIngestionSource.
-        // Important: ensure that any content you ingest is trusted, as it may be reflected back
-        // to users or could be a source of prompt injection risk.
-        await DataIngestor.IngestDataAsync(
-            app.ApplicationServices,
-            new PDFDirectorySource(Path.Combine(env.WebRootPath, "Data")));
 
         app.UseAbpRequestLocalization();
 

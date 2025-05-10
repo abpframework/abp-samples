@@ -1,5 +1,6 @@
 using System;
 using AbpAiChat.Data;
+using AbpAiChat.Services.Ingestion;
 using Serilog;
 using Serilog.Events;
 using Volo.Abp.Data;
@@ -64,6 +65,15 @@ public class Program
             }
 
             Log.Information("Starting AbpAiChat.");
+
+            // By default, we ingest PDF files from the /wwwroot/Data directory. You can ingest from
+            // other sources by implementing IIngestionSource.
+            // Important: ensure that any content you ingest is trusted, as it may be reflected back
+            // to users or could be a source of prompt injection risk.
+            await DataIngestor.IngestDataAsync(
+                app.Services,
+                new PDFDirectorySource(Path.Combine(app.Environment.WebRootPath, "Data")));
+
             await app.RunAsync();
             return 0;
         }

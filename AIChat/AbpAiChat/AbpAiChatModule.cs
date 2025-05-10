@@ -55,6 +55,7 @@ using Volo.Abp.AspNetCore.Mvc.UI.Theme.LeptonXLite;
 using Volo.Abp.AspNetCore.Mvc.UI.Theme.LeptonXLite.Bundling;
 using Volo.Abp.AspNetCore.Components.Server.LeptonXLiteTheme;
 using Volo.Abp.AspNetCore.Components.Server.LeptonXLiteTheme.Bundling;
+using Volo.Abp.AspNetCore.VirtualFileSystem;
 using Volo.Abp.Swashbuckle;
 using Volo.Abp.UI.Navigation;
 using Volo.Abp.UI.Navigation.Urls;
@@ -96,7 +97,7 @@ namespace AbpAiChat;
     typeof(AbpIdentityBlazorServerModule),
     typeof(AbpIdentityHttpApiModule),
     typeof(AbpIdentityApplicationModule),
-        
+
     // Tenant Management module packages
     typeof(AbpTenantManagementBlazorServerModule),
     typeof(AbpTenantManagementHttpApiModule),
@@ -410,7 +411,7 @@ public class AbpAiChatModule : AbpModule
             }
         });
     }
-    
+
     private void ConfigureEfCore(ServiceConfigurationContext context)
     {
         context.Services.AddAbpDbContext<AbpAiChatDbContext>(options =>
@@ -429,7 +430,7 @@ public class AbpAiChatModule : AbpModule
                 configurationContext.UseSqlServer();
             });
         });
-        
+
     }
 
 

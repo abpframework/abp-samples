@@ -1,0 +1,9 @@
+{
+  "culture": "hu",
+  "texts": {
+    "Welcome_Title": "Üdvözöljük",
+    "Welcome_Text": "Ez egy minimalista, egyrétegű alkalmazásindítási sablon az ABP-keretrendszerhez.",
+    "Menu:Home": "Kezdőlap",
+    "Menu:Chat": "Chat"
+  }
+}

@@ -1,6 +1,7 @@
 ﻿@page "/chat"
 @using System.ComponentModel
 @using AbpAiChat.Services
+@using Volo.Abp.Users
 @inject IChatClient ChatClient
 @inject NavigationManager Nav
 @inject SemanticSearch Search
@@ -47,13 +48,17 @@
     private ChatInput? chatInput;
     private ChatSuggestions? chatSuggestions;
 
+    [Inject]
+    public ICurrentUser CurrentUser { get; set; }
+
     protected override void OnInitialized()
     {
         messages.Add(new(ChatRole.System, SystemPrompt));
         chatOptions.Tools =
         [
             AIFunctionFactory.Create(SearchAsync),
-            AIFunctionFactory.Create(GetWeather)
+            AIFunctionFactory.Create(GetWeather),
+            AIFunctionFactory.Create(GetCurrentUserInfo)
         ];
     }
 
@@ -119,6 +124,14 @@
     {
         string[] weatherValues = ["Sunny", "Cloudy", "Rainy", "Snowy", "Balmy", "Bracing"];
         return city == "London" ? "Drizzle" : weatherValues[Random.Shared.Next(weatherValues.Length)];
+    }
+
+    [Description("Get current user information")]
+    private Task<string> GetCurrentUserInfo()
+    {
+        return Task.FromResult(CurrentUser.IsAuthenticated ?
+            $"UserId: {CurrentUser.Id}, Name: {CurrentUser.UserName}, Email: {CurrentUser.Email}, Roles: {string.Join(", ", CurrentUser.Roles)}" :
+            "No user information available.");
     }
 
     public void Dispose()

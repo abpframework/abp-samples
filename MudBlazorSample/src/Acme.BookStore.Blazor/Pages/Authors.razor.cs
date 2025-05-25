@@ -85,14 +85,21 @@ namespace Acme.BookStore.Blazor.Pages
 
         private async Task DeleteAuthorAsync(AuthorDto author)
         {
-            var confirmMessage = L["AuthorDeletionConfirmationMessage", author.Name];
-            if (!await Message.Confirm(confirmMessage))
+            try
             {
-                return;
-            }
+                var confirmMessage = L["AuthorDeletionConfirmationMessage", author.Name];
+                if (!await Message.Confirm(confirmMessage))
+                {
+                    return;
+                }
 
-            await AuthorAppService.DeleteAsync(author.Id);
-            await _authorList.ReloadServerData();
+                await AuthorAppService.DeleteAsync(author.Id);
+                await _authorList.ReloadServerData();
+            }
+            catch (Exception ex)
+            {
+                await HandleErrorAsync(ex);
+            }
         }
 
         private void CloseEditAuthorModal()
@@ -102,21 +109,35 @@ namespace Acme.BookStore.Blazor.Pages
 
         private async Task CreateAuthorAsync()
         {
-            if (_createForm.IsValid)
+            try
             {
-                await AuthorAppService.CreateAsync(NewAuthor);
-                _createAuthorDialogVisible = false;
-                await _authorList.ReloadServerData();
+                if (_createForm.IsValid)
+                {
+                    await AuthorAppService.CreateAsync(NewAuthor);
+                    _createAuthorDialogVisible = false;
+                    await _authorList.ReloadServerData();
+                }
             }
+            catch (Exception ex)
+            {
+                await HandleErrorAsync(ex);
+            }   
         }
 
         private async Task UpdateAuthorAsync()
         {
-            if (_editForm.IsValid)
+            try
             {
-                await AuthorAppService.UpdateAsync(EditingAuthorId, EditingAuthor);
-                _editAuthorDialogVisible = false;
-                await _authorList.ReloadServerData();
+                if (_editForm.IsValid)
+                {
+                    await AuthorAppService.UpdateAsync(EditingAuthorId, EditingAuthor);
+                    _editAuthorDialogVisible = false;
+                    await _authorList.ReloadServerData();
+                }
+            }
+            catch (Exception ex)
+            {
+                await HandleErrorAsync(ex);
             }
         }
     }

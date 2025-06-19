@@ -1,4 +1,7 @@
-﻿using Microsoft.AspNetCore.Cors;
+using System.IO;
+using ModularCrm.Catalog.UI;
+using ModularCrm.Catalog;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.OpenApi.Models;
@@ -118,6 +121,10 @@ namespace ModularCrm;
     typeof(AbpBackgroundJobsEntityFrameworkCoreModule),
     typeof(BlobStoringDatabaseEntityFrameworkCoreModule),
     typeof(AbpEntityFrameworkCoreSqlServerModule)
+)]
+[DependsOn(
+    typeof(CatalogWebModule),
+    typeof(CatalogModule)
 )]
 public class ModularCrmModule : AbpModule
 {
@@ -288,6 +295,9 @@ public class ModularCrmModule : AbpModule
             if (hostingEnvironment.IsDevelopment())
             {
                 /* Using physical files in development, so we don't need to recompile on changes */
+                options.FileSets.ReplaceEmbeddedByPhysical<CatalogContractsModule>(Path.Combine(hostingEnvironment.ContentRootPath, string.Format("..{0}modules{0}modularcrm.catalog{0}ModularCrm.Catalog.Contracts", Path.DirectorySeparatorChar)));
+                options.FileSets.ReplaceEmbeddedByPhysical<CatalogWebModule>(Path.Combine(hostingEnvironment.ContentRootPath, string.Format("..{0}modules{0}modularcrm.catalog{0}ModularCrm.Catalog.UI", Path.DirectorySeparatorChar)));
+                options.FileSets.ReplaceEmbeddedByPhysical<CatalogModule>(Path.Combine(hostingEnvironment.ContentRootPath, string.Format("..{0}modules{0}modularcrm.catalog{0}ModularCrm.Catalog", Path.DirectorySeparatorChar)));
                 options.FileSets.ReplaceEmbeddedByPhysical<ModularCrmModule>(hostingEnvironment.ContentRootPath);
             }
         });

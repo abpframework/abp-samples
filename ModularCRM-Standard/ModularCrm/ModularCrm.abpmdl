@@ -32,6 +32,10 @@
     "Volo.Abp.FeatureManagement": {
       "version": "9.2.0",
       "isInstalled": true
+    },
+    "ModularCrm.Catalog": {
+      "path": "modules/modularcrm.catalog/ModularCrm.Catalog.abpmdl",
+      "isInstalled": true
     }
   },
   "packages": {

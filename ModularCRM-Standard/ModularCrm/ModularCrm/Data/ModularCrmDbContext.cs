@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+using ModularCrm.Catalog.Data;
+using Microsoft.EntityFrameworkCore;
 using Volo.Abp.EntityFrameworkCore;
 using Volo.Abp.EntityFrameworkCore.Modeling;
 using Volo.Abp.AuditLogging.EntityFrameworkCore;
@@ -27,6 +28,8 @@ public class ModularCrmDbContext : AbpDbContext<ModularCrmDbContext>
     protected override void OnModelCreating(ModelBuilder builder)
     {
         base.OnModelCreating(builder);
+
+        builder.ConfigureCatalog();
 
         /* Include modules to your migration db context */
 

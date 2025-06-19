@@ -1,0 +1,8 @@
+  FROM mcr.microsoft.com/dotnet/aspnet:9.0
+  USER $APP_UID
+  EXPOSE 8080
+  EXPOSE 8081
+
+  COPY bin/Release/net9.0/publish/ app/
+  WORKDIR /app
+  ENTRYPOINT ["dotnet", "ModularCrm.dll"]

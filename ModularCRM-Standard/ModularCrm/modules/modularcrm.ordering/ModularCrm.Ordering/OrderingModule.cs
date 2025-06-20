@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+using ModularCrm.Catalog;
+using Microsoft.Extensions.DependencyInjection;
 using Volo.Abp.AutoMapper;
 using Volo.Abp.Modularity;
 using Volo.Abp.Application;
@@ -9,6 +10,7 @@ using Volo.Abp.AspNetCore.Mvc;
 namespace ModularCrm.Ordering;
 
 [DependsOn(
+    typeof(CatalogContractsModule),
     typeof(OrderingContractsModule),
     typeof(AbpDddApplicationModule),
     typeof(AbpAutoMapperModule),

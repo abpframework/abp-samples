@@ -9,4 +9,5 @@ public class OrderDto
     public string CustomerName { get; set; } = null!;
     public Guid ProductId { get; set; }
     public OrderState State { get; set; }
+    public string ProductName { get; set; } = null!; //NEW PROPERTY
 }

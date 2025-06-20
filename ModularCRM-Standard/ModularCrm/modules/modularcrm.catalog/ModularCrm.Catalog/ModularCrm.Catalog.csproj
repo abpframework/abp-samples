@@ -16,5 +16,9 @@
     <ProjectReference Include="..\ModularCrm.Catalog.Contracts\ModularCrm.Catalog.Contracts.csproj" />
     <PackageReference Include="Volo.Abp.EntityFrameworkCore" Version="9.2.0" />
   </ItemGroup>
+    
+  <ItemGroup>
+    <Folder Include="Integration\" />
+  </ItemGroup>
 
 </Project>

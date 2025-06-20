@@ -14,15 +14,19 @@ using Volo.Abp.SettingManagement.EntityFrameworkCore;
 using Volo.Abp.TenantManagement.EntityFrameworkCore;
 using Volo.Abp.DependencyInjection;
 using ModularCrm.Catalog;
+using ModularCrm.Ordering.Entities;
 
 namespace ModularCrm.Data;
 
+[ReplaceDbContext(typeof(IOrderingDbContext))]
 [ReplaceDbContext(typeof(ICatalogDbContext))]
 public class ModularCrmDbContext : 
     AbpDbContext<ModularCrmDbContext>,
-    ICatalogDbContext //NEW: IMPLEMENT THE INTERFACE
+    ICatalogDbContext,
+    IOrderingDbContext //NEW: IMPLEMENT THE INTERFACE
 {
-    public DbSet<Product> Products { get; set; } //NEW: ADD DBSET PROPERTY
+    public DbSet<Product> Products { get; set; }
+    public DbSet<Order> Orders { get; set; } //NEW: ADD DBSET PROPERTY
 
     public const string DbTablePrefix = "App";
     public const string DbSchema = null;

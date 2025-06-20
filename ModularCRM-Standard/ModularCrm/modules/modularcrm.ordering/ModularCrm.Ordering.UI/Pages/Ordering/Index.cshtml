@@ -1,11 +1,19 @@
 ﻿@page
-@using Microsoft.Extensions.Localization
-@using ModularCrm.Ordering.Localization
-@using ModularCrm.Ordering.UI.Pages.Ordering
 @model ModularCrm.Ordering.UI.Pages.Ordering.IndexModel
-@inject IStringLocalizer<OrderingResource> L
 
-@{
-}
-<h1>Ordering</h1>
-<p>@L["SamplePageMessage"]</p>
+<h1>Orders</h1>
+
+<abp-card>
+    <abp-card-body>
+        <abp-list-group>
+            @foreach (var order in Model.Orders)
+            {
+                <abp-list-group-item>
+                    <strong>Customer:</strong> @order.CustomerName <br />
+                    <strong>Product:</strong> @order.ProductId <br />
+                    <strong>State:</strong> @order.State
+                </abp-list-group-item>
+            }
+        </abp-list-group>
+    </abp-card-body>
+</abp-card>

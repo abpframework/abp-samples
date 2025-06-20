@@ -1,8 +1,22 @@
-namespace ModularCrm.Ordering.UI.Pages.Ordering;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc.RazorPages;
+using ModularCrm.Ordering.Services;
 
-public class IndexModel : OrderingPageModel
+namespace ModularCrm.Ordering.UI.Pages.Ordering;
+public class IndexModel : PageModel
 {
-    public void OnGet()
+    public List<OrderDto> Orders { get; set; }
+
+    private readonly IOrderAppService _orderAppService;
+
+    public IndexModel(IOrderAppService orderAppService)
     {
+        _orderAppService = orderAppService;
+    }
+
+    public async Task OnGetAsync()
+    {
+        Orders = await _orderAppService.GetListAsync();
     }
 }

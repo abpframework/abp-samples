@@ -326,6 +326,12 @@ public class ModularCrmModule : AbpModule
             {
                 settings.RootPath = "catalog";
             });
+
+            //ADD THE FOLLOWING LINE:
+            options.ConventionalControllers.Create(typeof(OrderingModule).Assembly, settings => 
+            {
+                settings.RootPath = "orders";
+            });
         });
     }
 

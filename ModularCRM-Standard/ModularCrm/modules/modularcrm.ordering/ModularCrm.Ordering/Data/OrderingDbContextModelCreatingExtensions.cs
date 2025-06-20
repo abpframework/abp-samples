@@ -1,5 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using ModularCrm.Ordering.Entities;
 using Volo.Abp;
+using Volo.Abp.EntityFrameworkCore.Modeling;
 
 namespace ModularCrm.Ordering.Data;
 
@@ -10,24 +12,16 @@ public static class OrderingDbContextModelCreatingExtensions
     {
         Check.NotNull(builder, nameof(builder));
 
-        /* Configure all entities here. Example:
-
-        builder.Entity<Question>(b =>
+        builder.Entity<Order>(b =>
         {
-            //Configure table & schema name
-            b.ToTable(OrderingDbProperties.DbTablePrefix + "Questions", OrderingDbProperties.DbSchema);
+            //Configure table name
+            b.ToTable("Orders");
 
+            //Always call this method to set base entity properties
             b.ConfigureByConvention();
 
-            //Properties
-            b.Property(q => q.Title).IsRequired().HasMaxLength(QuestionConsts.MaxTitleLength);
-
-            //Relations
-            b.HasMany(question => question.Tags).WithOne().HasForeignKey(qt => qt.QuestionId);
-
-            //Indexes
-            b.HasIndex(q => q.CreationTime);
+            //Properties of the entity
+            b.Property(q => q.CustomerName).IsRequired().HasMaxLength(120);
         });
-        */
     }
 }

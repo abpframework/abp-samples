@@ -11,12 +11,18 @@ using Volo.Abp.OpenIddict.EntityFrameworkCore;
 using Volo.Abp.PermissionManagement.EntityFrameworkCore;
 using Volo.Abp.SettingManagement.EntityFrameworkCore;
 using Volo.Abp.TenantManagement.EntityFrameworkCore;
+using Volo.Abp.DependencyInjection;
+using ModularCrm.Catalog;
 
 namespace ModularCrm.Data;
 
-public class ModularCrmDbContext : AbpDbContext<ModularCrmDbContext>
+[ReplaceDbContext(typeof(ICatalogDbContext))]
+public class ModularCrmDbContext : 
+    AbpDbContext<ModularCrmDbContext>,
+    ICatalogDbContext //NEW: IMPLEMENT THE INTERFACE
 {
-    
+    public DbSet<Product> Products { get; set; } //NEW: ADD DBSET PROPERTY
+
     public const string DbTablePrefix = "App";
     public const string DbSchema = null;
 

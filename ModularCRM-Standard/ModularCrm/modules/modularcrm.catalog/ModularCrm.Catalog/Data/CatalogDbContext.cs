@@ -7,9 +7,7 @@ namespace ModularCrm.Catalog.Data;
 [ConnectionStringName(CatalogDbProperties.ConnectionStringName)]
 public class CatalogDbContext : AbpDbContext<CatalogDbContext>, ICatalogDbContext
 {
-    /* Add DbSet for each Aggregate Root here. Example:
-     * public DbSet<Question> Questions { get; set; }
-     */
+    public DbSet<Product> Products { get; set; } //NEW: DBSET FOR THE PRODUCT ENTITY
 
     public CatalogDbContext(DbContextOptions<CatalogDbContext> options)
         : base(options)

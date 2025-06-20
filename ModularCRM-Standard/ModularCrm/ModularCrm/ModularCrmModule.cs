@@ -82,7 +82,7 @@ namespace ModularCrm;
     typeof(AbpAccountWebOpenIddictModule),
     typeof(AbpAccountHttpApiModule),
     typeof(AbpAccountApplicationModule),
-        
+
     // Tenant Management module packages
     typeof(AbpTenantManagementWebModule),
     typeof(AbpTenantManagementHttpApiModule),
@@ -165,6 +165,11 @@ public class ModularCrmModule : AbpModule
                 serverBuilder.AddProductionEncryptionAndSigningCertificate("openiddict.pfx", configuration["AuthServer:CertificatePassPhrase"]!);
             });
         }
+
+        PreConfigure<IMvcBuilder>(mvcBuilder =>
+        {
+            mvcBuilder.AddApplicationPartIfNotExists(typeof(CatalogModule).Assembly);
+        });
 
         ModularCrmGlobalFeatureConfigurator.Configure();
         ModularCrmModuleExtensionConfigurator.Configure();
@@ -257,27 +262,27 @@ public class ModularCrmModule : AbpModule
                 .AddVirtualJson("/Localization/ModularCrm");
 
             options.DefaultResourceType = typeof(ModularCrmResource);
-            
-            options.Languages.Add(new LanguageInfo("en", "en", "English")); 
-            options.Languages.Add(new LanguageInfo("en-GB", "en-GB", "English (United Kingdom)")); 
-            options.Languages.Add(new LanguageInfo("zh-Hans", "zh-Hans", "简体中文")); 
-            options.Languages.Add(new LanguageInfo("es", "es", "Español")); 
-            options.Languages.Add(new LanguageInfo("ar", "ar", "العربية")); 
-            options.Languages.Add(new LanguageInfo("hi", "hi", "हिन्दी")); 
-            options.Languages.Add(new LanguageInfo("pt-BR", "pt-BR", "Português (Brasil)")); 
-            options.Languages.Add(new LanguageInfo("fr", "fr", "Français")); 
-            options.Languages.Add(new LanguageInfo("ru", "ru", "Русский")); 
-            options.Languages.Add(new LanguageInfo("de-DE", "de-DE", "Deutsch (Deuthschland)")); 
-            options.Languages.Add(new LanguageInfo("tr", "tr", "Türkçe")); 
-            options.Languages.Add(new LanguageInfo("it", "it", "Italiano")); 
-            options.Languages.Add(new LanguageInfo("cs", "cs", "Čeština")); 
-            options.Languages.Add(new LanguageInfo("hu", "hu", "Magyar")); 
-            options.Languages.Add(new LanguageInfo("ro-RO", "ro-RO", "Română (România)")); 
-            options.Languages.Add(new LanguageInfo("sv", "sv", "Svenska")); 
-            options.Languages.Add(new LanguageInfo("fi", "fi", "Suomi")); 
-            options.Languages.Add(new LanguageInfo("sk", "sk", "Slovenčina")); 
-            options.Languages.Add(new LanguageInfo("is", "is", "Íslenska")); 
-            options.Languages.Add(new LanguageInfo("zh-Hant", "zh-Hant", "繁體中文")); 
+
+            options.Languages.Add(new LanguageInfo("en", "en", "English"));
+            options.Languages.Add(new LanguageInfo("en-GB", "en-GB", "English (United Kingdom)"));
+            options.Languages.Add(new LanguageInfo("zh-Hans", "zh-Hans", "简体中文"));
+            options.Languages.Add(new LanguageInfo("es", "es", "Español"));
+            options.Languages.Add(new LanguageInfo("ar", "ar", "العربية"));
+            options.Languages.Add(new LanguageInfo("hi", "hi", "हिन्दी"));
+            options.Languages.Add(new LanguageInfo("pt-BR", "pt-BR", "Português (Brasil)"));
+            options.Languages.Add(new LanguageInfo("fr", "fr", "Français"));
+            options.Languages.Add(new LanguageInfo("ru", "ru", "Русский"));
+            options.Languages.Add(new LanguageInfo("de-DE", "de-DE", "Deutsch (Deuthschland)"));
+            options.Languages.Add(new LanguageInfo("tr", "tr", "Türkçe"));
+            options.Languages.Add(new LanguageInfo("it", "it", "Italiano"));
+            options.Languages.Add(new LanguageInfo("cs", "cs", "Čeština"));
+            options.Languages.Add(new LanguageInfo("hu", "hu", "Magyar"));
+            options.Languages.Add(new LanguageInfo("ro-RO", "ro-RO", "Română (România)"));
+            options.Languages.Add(new LanguageInfo("sv", "sv", "Svenska"));
+            options.Languages.Add(new LanguageInfo("fi", "fi", "Suomi"));
+            options.Languages.Add(new LanguageInfo("sk", "sk", "Slovenčina"));
+            options.Languages.Add(new LanguageInfo("is", "is", "Íslenska"));
+            options.Languages.Add(new LanguageInfo("zh-Hant", "zh-Hant", "繁體中文"));
 
         });
 
@@ -308,6 +313,12 @@ public class ModularCrmModule : AbpModule
         Configure<AbpAspNetCoreMvcOptions>(options =>
         {
             options.ConventionalControllers.Create(typeof(ModularCrmModule).Assembly);
+
+            //ADD THE FOLLOWING LINE:
+            options.ConventionalControllers.Create(typeof(CatalogModule).Assembly, settings =>
+            {
+                settings.RootPath = "catalog";
+            });
         });
     }
 
@@ -349,7 +360,7 @@ public class ModularCrmModule : AbpModule
             options.Contributors.Add(new ModularCrmToolbarContributor());
         });
     }
-    
+
     private void ConfigureEfCore(ServiceConfigurationContext context)
     {
         context.Services.AddAbpDbContext<ModularCrmDbContext>(options =>
@@ -368,7 +379,7 @@ public class ModularCrmModule : AbpModule
                 configurationContext.UseSqlServer();
             });
         });
-        
+
     }
 
 

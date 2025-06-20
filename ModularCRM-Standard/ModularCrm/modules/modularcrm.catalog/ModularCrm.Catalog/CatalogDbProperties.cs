@@ -2,7 +2,7 @@
 
 public static class CatalogDbProperties
 {
-    public static string DbTablePrefix { get; set; } = "Catalog";
+    public static string DbTablePrefix { get; set; } = "";
 
     public static string? DbSchema { get; set; } = null;
 

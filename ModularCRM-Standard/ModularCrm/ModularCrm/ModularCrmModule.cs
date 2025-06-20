@@ -1,3 +1,5 @@
+using ModularCrm.Ordering.UI;
+using ModularCrm.Ordering;
 using System.IO;
 using ModularCrm.Catalog.UI;
 using ModularCrm.Catalog;
@@ -123,6 +125,8 @@ namespace ModularCrm;
     typeof(AbpEntityFrameworkCoreSqlServerModule)
 )]
 [DependsOn(
+    typeof(OrderingWebModule),
+    typeof(OrderingModule),
     typeof(CatalogWebModule),
     typeof(CatalogModule)
 )]
@@ -300,6 +304,9 @@ public class ModularCrmModule : AbpModule
             if (hostingEnvironment.IsDevelopment())
             {
                 /* Using physical files in development, so we don't need to recompile on changes */
+                options.FileSets.ReplaceEmbeddedByPhysical<OrderingContractsModule>(Path.Combine(hostingEnvironment.ContentRootPath, string.Format("..{0}modules{0}modularcrm.ordering{0}ModularCrm.Ordering.Contracts", Path.DirectorySeparatorChar)));
+                options.FileSets.ReplaceEmbeddedByPhysical<OrderingWebModule>(Path.Combine(hostingEnvironment.ContentRootPath, string.Format("..{0}modules{0}modularcrm.ordering{0}ModularCrm.Ordering.UI", Path.DirectorySeparatorChar)));
+                options.FileSets.ReplaceEmbeddedByPhysical<OrderingModule>(Path.Combine(hostingEnvironment.ContentRootPath, string.Format("..{0}modules{0}modularcrm.ordering{0}ModularCrm.Ordering", Path.DirectorySeparatorChar)));
                 options.FileSets.ReplaceEmbeddedByPhysical<CatalogContractsModule>(Path.Combine(hostingEnvironment.ContentRootPath, string.Format("..{0}modules{0}modularcrm.catalog{0}ModularCrm.Catalog.Contracts", Path.DirectorySeparatorChar)));
                 options.FileSets.ReplaceEmbeddedByPhysical<CatalogWebModule>(Path.Combine(hostingEnvironment.ContentRootPath, string.Format("..{0}modules{0}modularcrm.catalog{0}ModularCrm.Catalog.UI", Path.DirectorySeparatorChar)));
                 options.FileSets.ReplaceEmbeddedByPhysical<CatalogModule>(Path.Combine(hostingEnvironment.ContentRootPath, string.Format("..{0}modules{0}modularcrm.catalog{0}ModularCrm.Catalog", Path.DirectorySeparatorChar)));

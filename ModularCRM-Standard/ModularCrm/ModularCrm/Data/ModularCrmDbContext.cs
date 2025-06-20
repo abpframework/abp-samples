@@ -1,3 +1,4 @@
+using ModularCrm.Ordering.Data;
 using ModularCrm.Catalog.Data;
 using Microsoft.EntityFrameworkCore;
 using Volo.Abp.EntityFrameworkCore;
@@ -34,6 +35,8 @@ public class ModularCrmDbContext :
     protected override void OnModelCreating(ModelBuilder builder)
     {
         base.OnModelCreating(builder);
+
+        builder.ConfigureOrdering();
 
         builder.ConfigureCatalog();
 

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc.RazorPages;
+using ModularCrm.Ordering.UI;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.DependencyInjection;
 using ModularCrm.Catalog.Localization;
 using ModularCrm.Catalog.UI.Menus;
@@ -13,6 +14,7 @@ using ModularCrm.Catalog.Permissions;
 namespace ModularCrm.Catalog.UI;
 
 [DependsOn(
+    typeof(OrderingWebModule),
     typeof(CatalogContractsModule),
     typeof(AbpAspNetCoreMvcUiThemeSharedModule),
     typeof(AbpAutoMapperModule)

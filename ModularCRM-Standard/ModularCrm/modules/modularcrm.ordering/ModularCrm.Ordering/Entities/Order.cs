@@ -1,5 +1,5 @@
 using System;
-using ModularCrm.Ordering.Enums;
+using ModularCrm.Ordering.Contracts.Enums;
 using Volo.Abp.Domain.Entities.Auditing;
 
 namespace ModularCrm.Ordering.Entities;

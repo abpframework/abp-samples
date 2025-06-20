@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using ModularCrm.Ordering.Enums;
+using ModularCrm.Ordering.Contracts.Enums;
 using ModularCrm.Ordering.Events;
 using ModularCrm.Ordering.Entities;
 using ModularCrm.Products.Integration;

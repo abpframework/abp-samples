@@ -1,5 +1,5 @@
 using System;
-using ModularCrm.Ordering.Enums;
+using ModularCrm.Ordering.Contracts.Enums;
 
 namespace ModularCrm.Ordering.Services;
 

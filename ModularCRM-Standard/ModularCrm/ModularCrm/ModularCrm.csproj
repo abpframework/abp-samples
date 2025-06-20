@@ -18,6 +18,7 @@
     <ProjectReference Include="../modules/modularcrm.catalog/ModularCrm.Catalog.UI/ModularCrm.Catalog.UI.csproj" />
     <ProjectReference Include="../modules/modularcrm.ordering/ModularCrm.Ordering/ModularCrm.Ordering.csproj" />
     <ProjectReference Include="../modules/modularcrm.ordering/ModularCrm.Ordering.UI/ModularCrm.Ordering.UI.csproj" />
+    <ProjectReference Include="../modules/modularcrm.ordering/ModularCrm.Ordering.Contracts/ModularCrm.Ordering.Contracts.csproj" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Volo.Abp.AspNetCore.Mvc" Version="9.2.0" />

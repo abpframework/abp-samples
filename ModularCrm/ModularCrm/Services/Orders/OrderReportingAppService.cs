@@ -1,11 +1,7 @@
-﻿
-using ModularCrm.Ordering.Entities;
-using ModularCrm.Products;
+﻿using ModularCrm.Catalog;
+using ModularCrm.Ordering;
 using ModularCrm.Services;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using ModularCrm.Services.Orders;
 using Volo.Abp.Domain.Repositories;
 
 namespace ModularCrm.Orders;

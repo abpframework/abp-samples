@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using ModularCrm.Ordering.Entities;
 using Volo.Abp;
 using Volo.Abp.EntityFrameworkCore.Modeling;
 
@@ -15,7 +14,8 @@ public static class OrderingDbContextModelCreatingExtensions
         builder.Entity<Order>(b =>
         {
             //Configure table name
-            b.ToTable("Orders");
+            b.ToTable(OrderingDbProperties.DbTablePrefix + "Orders", 
+                      OrderingDbProperties.DbSchema);
 
             //Always call this method to set base entity properties
             b.ConfigureByConvention();

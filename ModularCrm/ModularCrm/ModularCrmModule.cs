@@ -1,8 +1,8 @@
 using ModularCrm.Ordering.UI;
 using ModularCrm.Ordering;
-using ModularCrm.Products.Web;
-using ModularCrm.Products.EntityFrameworkCore;
-using ModularCrm.Products;
+using System.IO;
+using ModularCrm.Catalog.UI;
+using ModularCrm.Catalog;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
@@ -12,6 +12,7 @@ using ModularCrm.Data;
 using ModularCrm.Localization;
 using ModularCrm.Menus;
 using ModularCrm.Permissions;
+using ModularCrm.HealthChecks;
 using OpenIddict.Validation.AspNetCore;
 using Volo.Abp;
 using Volo.Abp.Account;
@@ -58,6 +59,7 @@ using Volo.Abp.SettingManagement.EntityFrameworkCore;
 using Volo.Abp.PermissionManagement.EntityFrameworkCore;
 using Volo.Abp.AuditLogging.EntityFrameworkCore;
 using Volo.Abp.BlobStoring.Database.EntityFrameworkCore;
+using Volo.Abp.BackgroundJobs.EntityFrameworkCore;
 using Volo.Abp.Identity.EntityFrameworkCore;
 using Volo.Abp.FeatureManagement.EntityFrameworkCore;
 using Volo.Abp.EntityFrameworkCore.SqlServer;
@@ -118,25 +120,20 @@ namespace ModularCrm;
     typeof(AbpTenantManagementEntityFrameworkCoreModule),
     typeof(AbpPermissionManagementEntityFrameworkCoreModule),
     typeof(AbpSettingManagementEntityFrameworkCoreModule),
+    typeof(AbpBackgroundJobsEntityFrameworkCoreModule),
     typeof(BlobStoringDatabaseEntityFrameworkCoreModule),
     typeof(AbpEntityFrameworkCoreSqlServerModule)
 )]
 [DependsOn(
-    typeof(OrderingContractsModule),
     typeof(OrderingWebModule),
     typeof(OrderingModule),
-    typeof(ProductsDomainSharedModule),
-    typeof(ProductsWebModule),
-    typeof(ProductsHttpApiModule),
-    typeof(ProductsEntityFrameworkCoreModule),
-    typeof(ProductsApplicationModule),
-    typeof(ProductsApplicationContractsModule),
-    typeof(ProductsDomainModule)
+    typeof(CatalogWebModule),
+    typeof(CatalogModule)
 )]
 public class ModularCrmModule : AbpModule
 {
     /* Single point to enable/disable multi-tenancy */
-    private const bool IsMultiTenant = true;
+    public const bool IsMultiTenant = true;
 
     public override void PreConfigureServices(ServiceConfigurationContext context)
     {
@@ -176,11 +173,6 @@ public class ModularCrmModule : AbpModule
         ModularCrmGlobalFeatureConfigurator.Configure();
         ModularCrmModuleExtensionConfigurator.Configure();
         ModularCrmEfCoreEntityExtensionMappings.Configure();
-
-        PreConfigure<IMvcBuilder>(mvcBuilder =>
-        {
-            mvcBuilder.AddApplicationPartIfNotExists(typeof(ProductsApplicationModule).Assembly);
-        });
     }
 
     public override void ConfigureServices(ServiceConfigurationContext context)
@@ -197,6 +189,7 @@ public class ModularCrmModule : AbpModule
         ConfigureMultiTenancy();
         ConfigureUrls(configuration);
         ConfigureBundles();
+        ConfigureHealthChecks(context);
         ConfigureAutoMapper(context);
         ConfigureSwagger(context.Services);
         ConfigureAutoApiControllers();
@@ -204,6 +197,11 @@ public class ModularCrmModule : AbpModule
         ConfigureLocalization();
         ConfigureNavigationServices();
         ConfigureEfCore(context);
+    }
+
+    private void ConfigureHealthChecks(ServiceConfigurationContext context)
+    {
+        context.Services.AddModularCrmHealthChecks();
     }
 
     private void ConfigureAuthentication(ServiceConfigurationContext context)
@@ -242,6 +240,14 @@ public class ModularCrmModule : AbpModule
                     bundle.AddFiles("/global-styles.css");
                 }
             );
+
+            options.ScriptBundles.Configure(
+                LeptonXLiteThemeBundles.Scripts.Global,
+                bundle =>
+                {
+                    bundle.AddFiles("/global-scripts.js");
+                }
+            );
         });
     }
 
@@ -255,26 +261,28 @@ public class ModularCrmModule : AbpModule
                 .AddVirtualJson("/Localization/ModularCrm");
 
             options.DefaultResourceType = typeof(ModularCrmResource);
+            
+            options.Languages.Add(new LanguageInfo("en", "en", "English")); 
+            options.Languages.Add(new LanguageInfo("en-GB", "en-GB", "English (United Kingdom)")); 
+            options.Languages.Add(new LanguageInfo("zh-Hans", "zh-Hans", "简体中文")); 
+            options.Languages.Add(new LanguageInfo("es", "es", "Español")); 
+            options.Languages.Add(new LanguageInfo("ar", "ar", "العربية")); 
+            options.Languages.Add(new LanguageInfo("hi", "hi", "हिन्दी")); 
+            options.Languages.Add(new LanguageInfo("pt-BR", "pt-BR", "Português (Brasil)")); 
+            options.Languages.Add(new LanguageInfo("fr", "fr", "Français")); 
+            options.Languages.Add(new LanguageInfo("ru", "ru", "Русский")); 
+            options.Languages.Add(new LanguageInfo("de-DE", "de-DE", "Deutsch (Deuthschland)")); 
+            options.Languages.Add(new LanguageInfo("tr", "tr", "Türkçe")); 
+            options.Languages.Add(new LanguageInfo("it", "it", "Italiano")); 
+            options.Languages.Add(new LanguageInfo("cs", "cs", "Čeština")); 
+            options.Languages.Add(new LanguageInfo("hu", "hu", "Magyar")); 
+            options.Languages.Add(new LanguageInfo("ro-RO", "ro-RO", "Română (România)")); 
+            options.Languages.Add(new LanguageInfo("sv", "sv", "Svenska")); 
+            options.Languages.Add(new LanguageInfo("fi", "fi", "Suomi")); 
+            options.Languages.Add(new LanguageInfo("sk", "sk", "Slovenčina")); 
+            options.Languages.Add(new LanguageInfo("is", "is", "Íslenska")); 
+            options.Languages.Add(new LanguageInfo("zh-Hant", "zh-Hant", "繁體中文")); 
 
-            options.Languages.Add(new LanguageInfo("en", "en", "English"));
-            options.Languages.Add(new LanguageInfo("tr", "tr", "Türkçe"));
-            options.Languages.Add(new LanguageInfo("ar", "ar", "العربية"));
-            options.Languages.Add(new LanguageInfo("cs", "cs", "Čeština"));
-            options.Languages.Add(new LanguageInfo("en-GB", "en-GB", "English (UK)"));
-            options.Languages.Add(new LanguageInfo("hu", "hu", "Magyar"));
-            options.Languages.Add(new LanguageInfo("fi", "fi", "Finnish"));
-            options.Languages.Add(new LanguageInfo("fr", "fr", "Français"));
-            options.Languages.Add(new LanguageInfo("hi", "hi", "Hindi"));
-            options.Languages.Add(new LanguageInfo("is", "is", "Icelandic"));
-            options.Languages.Add(new LanguageInfo("it", "it", "Italiano"));
-            options.Languages.Add(new LanguageInfo("pt-BR", "pt-BR", "Português"));
-            options.Languages.Add(new LanguageInfo("ro-RO", "ro-RO", "Română"));
-            options.Languages.Add(new LanguageInfo("ru", "ru", "Русский"));
-            options.Languages.Add(new LanguageInfo("sk", "sk", "Slovak"));
-            options.Languages.Add(new LanguageInfo("zh-Hans", "zh-Hans", "简体中文"));
-            options.Languages.Add(new LanguageInfo("zh-Hant", "zh-Hant", "繁體中文"));
-            options.Languages.Add(new LanguageInfo("de-DE", "de-DE", "Deutsch"));
-            options.Languages.Add(new LanguageInfo("es", "es", "Español"));
         });
 
         Configure<AbpExceptionLocalizationOptions>(options =>
@@ -291,6 +299,12 @@ public class ModularCrmModule : AbpModule
             if (hostingEnvironment.IsDevelopment())
             {
                 /* Using physical files in development, so we don't need to recompile on changes */
+                options.FileSets.ReplaceEmbeddedByPhysical<OrderingContractsModule>(Path.Combine(hostingEnvironment.ContentRootPath, string.Format("..{0}modules{0}modularcrm.ordering{0}ModularCrm.Ordering.Contracts", Path.DirectorySeparatorChar)));
+                options.FileSets.ReplaceEmbeddedByPhysical<OrderingWebModule>(Path.Combine(hostingEnvironment.ContentRootPath, string.Format("..{0}modules{0}modularcrm.ordering{0}ModularCrm.Ordering.UI", Path.DirectorySeparatorChar)));
+                options.FileSets.ReplaceEmbeddedByPhysical<OrderingModule>(Path.Combine(hostingEnvironment.ContentRootPath, string.Format("..{0}modules{0}modularcrm.ordering{0}ModularCrm.Ordering", Path.DirectorySeparatorChar)));
+                options.FileSets.ReplaceEmbeddedByPhysical<CatalogContractsModule>(Path.Combine(hostingEnvironment.ContentRootPath, string.Format("..{0}modules{0}modularcrm.catalog{0}ModularCrm.Catalog.Contracts", Path.DirectorySeparatorChar)));
+                options.FileSets.ReplaceEmbeddedByPhysical<CatalogWebModule>(Path.Combine(hostingEnvironment.ContentRootPath, string.Format("..{0}modules{0}modularcrm.catalog{0}ModularCrm.Catalog.UI", Path.DirectorySeparatorChar)));
+                options.FileSets.ReplaceEmbeddedByPhysical<CatalogModule>(Path.Combine(hostingEnvironment.ContentRootPath, string.Format("..{0}modules{0}modularcrm.catalog{0}ModularCrm.Catalog", Path.DirectorySeparatorChar)));
                 options.FileSets.ReplaceEmbeddedByPhysical<ModularCrmModule>(hostingEnvironment.ContentRootPath);
             }
         });
@@ -301,15 +315,6 @@ public class ModularCrmModule : AbpModule
         Configure<AbpAspNetCoreMvcOptions>(options =>
         {
             options.ConventionalControllers.Create(typeof(ModularCrmModule).Assembly);
-            options.ConventionalControllers.Create(typeof(ProductsApplicationModule).Assembly, settings => 
-            {
-                settings.RootPath = "products";
-            });
-
-            options.ConventionalControllers.Create(typeof(OrderingModule).Assembly, settings => 
-            {
-                settings.RootPath = "orders";
-            });
         });
     }
 
@@ -358,7 +363,7 @@ public class ModularCrmModule : AbpModule
         {
             /* You can remove "includeAllEntities: true" to create
              * default repositories only for aggregate roots
-             * Documentation: https://abp.io/docs/latest/Entity-Framework-Core#add-default-repositories
+             * Documentation: https://docs.abp.io/en/abp/latest/Entity-Framework-Core#add-default-repositories
              */
             options.AddDefaultRepositories(includeAllEntities: true);
         });
@@ -392,9 +397,9 @@ public class ModularCrmModule : AbpModule
         }
 
         app.UseCorrelationId();
+        app.UseRouting();
         app.MapAbpStaticAssets();
         app.UseAbpStudioLink();
-        app.UseRouting();
         app.UseAbpSecurityHeaders();
         app.UseAuthentication();
         app.UseAbpOpenIddictValidation();

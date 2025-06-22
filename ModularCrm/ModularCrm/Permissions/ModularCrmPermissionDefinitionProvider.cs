@@ -11,6 +11,7 @@ public class ModularCrmPermissionDefinitionProvider : PermissionDefinitionProvid
     {
         var myGroup = context.AddGroup(ModularCrmPermissions.GroupName);
 
+
         
         //Define your own permissions here. Example:
         //myGroup.AddPermission(ModularCrmPermissions.MyPermission1, L("Permission:MyPermission1"));

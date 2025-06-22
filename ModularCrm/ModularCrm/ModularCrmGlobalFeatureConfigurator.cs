@@ -13,7 +13,7 @@ public static class ModularCrmGlobalFeatureConfigurator
         {
            /* You can configure (enable/disable) global features of the used modules here.
             * Please refer to the documentation to learn more about the Global Features System:
-            * https://abp.io/docs/latest/Global-Features
+            * https://docs.abp.io/en/abp/latest/Global-Features
             */
         });
     }

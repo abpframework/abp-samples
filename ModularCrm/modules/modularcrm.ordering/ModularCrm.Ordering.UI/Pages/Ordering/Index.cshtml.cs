@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using ModularCrm.Ordering.Services;
 
 namespace ModularCrm.Ordering.UI.Pages.Ordering;
 

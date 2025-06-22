@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using ModularCrm.Ordering.Entities;
 using Volo.Abp.Data;
 using Volo.Abp.EntityFrameworkCore;
 

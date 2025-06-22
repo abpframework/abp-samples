@@ -1,17 +1,16 @@
 ﻿using System;
-using ModularCrm.Ordering.Enums;
+using ModularCrm.Ordering;
 
-namespace ModularCrm.Orders
+namespace ModularCrm.Orders;
+
+public class OrderReportDto
 {
-    public class OrderReportDto
-    {
-        // Order data
-        public Guid OrderId { get; set; }
-        public string CustomerName { get; set; }
-        public OrderState State { get; set; }
+    // Order data
+    public Guid OrderId { get; set; }
+    public string CustomerName { get; set; } = null!;
+    public OrderState State { get; set; }
 
-        // Product data
-        public Guid ProductId { get; set; }
-        public string ProductName { get; set; }
-    }
+    // Product data
+    public Guid ProductId { get; set; }
+    public string ProductName { get; set; } = null!;
 }

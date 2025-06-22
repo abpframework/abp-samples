@@ -1,4 +1,4 @@
-using ModularCrm.Products;
+using ModularCrm.Catalog;
 using Microsoft.Extensions.DependencyInjection;
 using Volo.Abp.AutoMapper;
 using Volo.Abp.Modularity;
@@ -10,7 +10,7 @@ using Volo.Abp.AspNetCore.Mvc;
 namespace ModularCrm.Ordering;
 
 [DependsOn(
-    typeof(ProductsApplicationContractsModule),
+    typeof(CatalogContractsModule),
     typeof(OrderingContractsModule),
     typeof(AbpDddApplicationModule),
     typeof(AbpAutoMapperModule),
@@ -29,9 +29,19 @@ public class OrderingModule : AbpModule
         
         context.Services.AddAbpDbContext<OrderingDbContext>(options =>
         {
+            options.AddDefaultRepositories<IOrderingDbContext>(includeAllEntities: true);
+            
             /* Add custom repositories here. Example:
              * options.AddRepository<Question, EfCoreQuestionRepository>();
              */
+        });
+
+        Configure<AbpAspNetCoreMvcOptions>(options =>
+        {
+            options.ConventionalControllers.Create(typeof(OrderingModule).Assembly, settings =>
+            {
+                settings.RootPath = "ordering";
+            });
         });
     }
 }

@@ -15,7 +15,6 @@ public class OrderingMenuContributor : IMenuContributor
 
     private Task ConfigureMainMenuAsync(MenuConfigurationContext context)
     {
-        //Add main menu items.
         context.Menu.AddItem(
             new ApplicationMenuItem(
                 OrderingMenus.Prefix, // Unique menu id

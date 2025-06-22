@@ -1,15 +1,13 @@
 ﻿using AutoMapper;
-using ModularCrm.Ordering.Entities;
-using ModularCrm.Ordering.Services;
 using Volo.Abp.AutoMapper;
 
 namespace ModularCrm.Ordering;
 
-public class OrderingAutoMapperProfile : Profile
+public class OrderingApplicationAutoMapperProfile : Profile
 {
-    public OrderingAutoMapperProfile()
+    public OrderingApplicationAutoMapperProfile()
     {
         CreateMap<Order, OrderDto>()
-            .Ignore(x => x.ProductName);
+            .Ignore(x => x.ProductName); // New line
     }
 }

@@ -1,46 +1,45 @@
-using ModularCrm.Products.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore;
 using ModularCrm.Ordering.Data;
-using ModularCrm.Ordering.Entities;
-using ModularCrm.Products;
+using ModularCrm.Catalog.Data;
+using Microsoft.EntityFrameworkCore;
 using Volo.Abp.EntityFrameworkCore;
 using Volo.Abp.EntityFrameworkCore.Modeling;
 using Volo.Abp.AuditLogging.EntityFrameworkCore;
 using Volo.Abp.BackgroundJobs.EntityFrameworkCore;
 using Volo.Abp.BlobStoring.Database.EntityFrameworkCore;
-using Volo.Abp.DependencyInjection;
 using Volo.Abp.FeatureManagement.EntityFrameworkCore;
 using Volo.Abp.Identity.EntityFrameworkCore;
 using Volo.Abp.OpenIddict.EntityFrameworkCore;
 using Volo.Abp.PermissionManagement.EntityFrameworkCore;
 using Volo.Abp.SettingManagement.EntityFrameworkCore;
 using Volo.Abp.TenantManagement.EntityFrameworkCore;
+using Volo.Abp.DependencyInjection;
+using ModularCrm.Catalog;
+using ModularCrm.Ordering;
 
 namespace ModularCrm.Data;
 
-[ReplaceDbContext(typeof(IProductsDbContext))]
+[ReplaceDbContext(typeof(ICatalogDbContext))]
 [ReplaceDbContext(typeof(IOrderingDbContext))]
-public class ModularCrmDbContext :
-    AbpDbContext<ModularCrmDbContext>,
-    IProductsDbContext,
-    IOrderingDbContext //NEW: IMPLEMENT THE INTERFACE
+public class ModularCrmDbContext : AbpDbContext<ModularCrmDbContext>, ICatalogDbContext, IOrderingDbContext
 {
     public const string DbTablePrefix = "App";
     public const string DbSchema = null;
 
     public DbSet<Product> Products { get; set; }
-    public DbSet<Order> Orders { get; set; } //NEW: ADD DBSET PROPERTY
+    public DbSet<Order> Orders { get; set; }
 
     public ModularCrmDbContext(DbContextOptions<ModularCrmDbContext> options)
         : base(options)
     {
-    }
+    }    
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
         base.OnModelCreating(builder);
 
-        builder.ConfigureProducts();
+        builder.ConfigureOrdering();
+
+        builder.ConfigureCatalog();
 
         /* Include modules to your migration db context */
 
@@ -54,8 +53,7 @@ public class ModularCrmDbContext :
         builder.ConfigureOpenIddict();
         builder.ConfigureTenantManagement();
         
-        builder.ConfigureProducts();
-        builder.ConfigureOrdering();
+        /* Configure your own entities here */
     }
 }
 

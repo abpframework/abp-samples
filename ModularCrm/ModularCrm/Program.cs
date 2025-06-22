@@ -24,8 +24,10 @@ public class Program
                 {
                     if (IsMigrateDatabase(args))
                     {
-                        loggerConfiguration.MinimumLevel.Override("Volo.Abp", LogEventLevel.Warning);
-                        loggerConfiguration.MinimumLevel.Override("Microsoft", LogEventLevel.Warning);
+                        loggerConfiguration
+                            .MinimumLevel.Override("Volo.Abp", LogEventLevel.Warning)
+                            .MinimumLevel.Override("Microsoft", LogEventLevel.Warning)
+                            .WriteTo.Async(c => c.Console(standardErrorFromLevel: LogEventLevel.Error));
                     }
                     else
                     {
@@ -54,6 +56,10 @@ public class Program
             if (IsMigrateDatabase(args))
             {
                 await app.Services.GetRequiredService<ModularCrmDbMigrationService>().MigrateAsync();
+                var previous = Console.ForegroundColor;
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine("Migration completed.");
+                Console.ForegroundColor = previous;
                 return 0;
             }
 

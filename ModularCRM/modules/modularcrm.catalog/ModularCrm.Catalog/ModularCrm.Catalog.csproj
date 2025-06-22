@@ -1,0 +1,16 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <Import Project="..\common.props" />
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <RootNamespace>ModularCrm.Catalog</RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Volo.Abp.AutoMapper" Version="9.2.0" />
+    <PackageReference Include="Volo.Abp.Ddd.Application" Version="9.2.0" />
+    <PackageReference Include="Volo.Abp.AspNetCore.Mvc" Version="9.2.0" />
+    <ProjectReference Include="..\ModularCrm.Catalog.Contracts\ModularCrm.Catalog.Contracts.csproj" />
+    <PackageReference Include="Volo.Abp.EntityFrameworkCore" Version="9.2.0" />
+    <ProjectReference Include="../../modularcrm.ordering/ModularCrm.Ordering.Contracts/ModularCrm.Ordering.Contracts.csproj" />
+  </ItemGroup>
+</Project>

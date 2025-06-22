@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using ModularCrm.Ordering.Entities;
 using Volo.Abp.Data;
 using Volo.Abp.EntityFrameworkCore;
 
@@ -10,8 +9,7 @@ public class OrderingDbContext : AbpDbContext<OrderingDbContext>, IOrderingDbCon
 {
     public DbSet<Order> Orders { get; set; }
 
-    public OrderingDbContext(DbContextOptions<OrderingDbContext> options)
-        : base(options)
+    public OrderingDbContext(DbContextOptions<OrderingDbContext> options) : base(options)
     {
 
     }

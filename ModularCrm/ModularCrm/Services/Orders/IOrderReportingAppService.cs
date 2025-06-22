@@ -1,8 +1,7 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
+﻿using ModularCrm.Orders;
 using Volo.Abp.Application.Services;
 
-namespace ModularCrm.Orders;
+namespace ModularCrm.Services.Orders;
 
 public interface IOrderReportingAppService : IApplicationService
 {

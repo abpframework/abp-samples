@@ -11,8 +11,8 @@
     }
   },
   "imports": {
-    "ModularCrm.Products": {
-      "path": "../modularcrm.products/ModularCrm.Products.abpmdl"
+    "ModularCrm.Catalog": {
+      "path": "../modularcrm.catalog/ModularCrm.Catalog.abpmdl"
     }
   }
 }

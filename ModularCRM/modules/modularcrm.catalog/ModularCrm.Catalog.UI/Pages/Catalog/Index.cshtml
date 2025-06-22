@@ -1,0 +1,21 @@
+﻿@page
+@using Microsoft.Extensions.Localization
+@using ModularCrm.Catalog.Localization
+@using ModularCrm.Catalog.UI.Pages.Catalog
+@model ModularCrm.Catalog.UI.Pages.Catalog.IndexModel
+@inject IStringLocalizer<CatalogResource> L
+
+<h1>Products</h1>
+
+<abp-card>
+    <abp-card-body>
+        <abp-list-group>
+            @foreach (var product in Model.Products)
+            {
+                <abp-list-group-item>
+                    @product.Name <span class="text-muted">(stock: @product.StockCount)</span>
+                </abp-list-group-item>
+            }
+        </abp-list-group>
+    </abp-card-body>
+</abp-card>

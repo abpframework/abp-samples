@@ -1,0 +1,80 @@
+{
+  "id": "d3472073-dbca-4c52-8576-40ae88e0bad8",
+  "template": "app-nolayers",
+  "versions": {
+    "AbpFramework": "9.2.0",
+    "AbpStudio": "1.0.1",
+    "TargetDotnetFramework": "net9.0"
+  },
+  "modules": {
+    "ModularCrm": {
+      "path": "ModularCrm.abpmdl",
+      "folder": "main"
+    },
+    "ModularCrm.Catalog": {
+      "path": "modules/modularcrm.catalog/ModularCrm.Catalog.abpmdl",
+      "folder": "modules"
+    },
+    "ModularCrm.Ordering": {
+      "path": "modules/modularcrm.ordering/ModularCrm.Ordering.abpmdl",
+      "folder": "modules"
+    }
+  },
+  "runProfiles": {
+    "Default": {
+      "path": "etc/run-profiles/Default.abprun.json"
+    }
+  },
+  "options": {
+    "httpRequests": {
+      "ignoredUrls": []
+    }
+  },
+  "creatingStudioConfiguration": {
+    "template": "app-nolayers",
+    "createdAbpStudioVersion": "1.0.1",
+    "multiTenancy": "true",
+    "runInstallLibs": "true",
+    "useLocalReferences": "false",
+    "uiFramework": "mvc",
+    "databaseProvider": "ef",
+    "runDbMigrator": "true",
+    "databaseManagementSystem": "sqlserver",
+    "createInitialMigration": "true",
+    "theme": "leptonx-lite",
+    "themeStyle": "",
+    "themeMenuPlacement": "",
+    "publicWebsite": "",
+    "socialLogin": "false",
+    "selectedLanguages": [
+      "English",
+      "English (United Kingdom)",
+      "简体中文",
+      "Español",
+      "العربية",
+      "हिन्दी",
+      "Português (Brasil)",
+      "Français",
+      "Русский",
+      "Deutsch (Deuthschland)",
+      "Türkçe",
+      "Italiano",
+      "Čeština",
+      "Magyar",
+      "Română (România)",
+      "Svenska",
+      "Suomi",
+      "Slovenčina",
+      "Íslenska",
+      "繁體中文"
+    ],
+    "defaultLanguage": "English",
+    "createCommand": "abp new ModularCrm -t app-nolayers --ui-framework mvc --mobile  --database-provider ef --database-management-system sqlserver --theme leptonx-lite --no-tests --without-cms-kit --dont-run-bundling --no-social-logins -no-gdpr -no-openiddict-admin-ui -no-audit-logging -no-file-management -no-language-management -no-text-template-management"
+  },
+  "folders": {
+    "items": {
+      "modules": {},
+      "main": {}
+    }
+  }
+}

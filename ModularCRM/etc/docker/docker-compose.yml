@@ -1,0 +1,64 @@
+services:
+  modularcrm-web:
+    image: modularcrm:latest
+    container_name: modularcrm
+    build:
+      context: ../../
+      dockerfile: ModularCrm/Dockerfile.local
+    environment:
+      - ASPNETCORE_URLS=https://+:8081;http://+:8080;
+      - Kestrel__Certificates__Default__Path=/app/certs/localhost.pfx
+      - Kestrel__Certificates__Default__Password=91f91912-5ab0-49df-8166-23377efaf3cc
+      - App__HealthCheckUrl=http://modularcrm:8080/health-status
+      - ConnectionStrings__Default=Data Source=sql-server;Initial Catalog=ModularCrm;User Id=sa;Password=myPassw0rd;MultipleActiveResultSets=true;TrustServerCertificate=True;
+    ports:
+      - "44366:8081"
+    depends_on:
+      sql-server:
+        condition: service_healthy
+    restart: on-failure  
+    volumes:
+      - ./certs:/app/certs
+    networks:
+      - abp-network  
+  
+  db-migrator:
+    image: modularcrm:latest
+    container_name: db-migrator
+    build:
+      context: ../../
+      dockerfile: ModularCrm/Dockerfile.local
+    environment:
+      - ConnectionStrings__Default=Data Source=sql-server;Initial Catalog=ModularCrm;User Id=sa;Password=myPassw0rd;MultipleActiveResultSets=true;TrustServerCertificate=True;
+    command:
+      - --migrate-database
+    depends_on:
+      sql-server:
+        condition: service_healthy
+    networks:
+      - abp-network
+  sql-server:
+    container_name: sql-server
+    image: mcr.microsoft.com/azure-sql-edge:1.0.7
+    ports:
+      - "1434:1433"
+    environment:
+      SA_PASSWORD: "myPassw0rd"
+      ACCEPT_EULA: "Y"
+    volumes:
+      - sqldata:/var/opt/mssql
+    networks:
+      - abp-network
+    healthcheck:
+      test: /opt/mssql-tools/bin/sqlcmd -S sql-server -U sa -P "myPassw0rd" -C -Q "SELECT 1" -b -o /dev/null
+      interval: 10s
+      timeout: 3s
+      retries: 10
+      start_period: 10s
+volumes:
+  sqldata:
+    name: modularcrm_sqldata
+networks:
+  abp-network:
+    name: modularcrm-network
+    driver: bridge

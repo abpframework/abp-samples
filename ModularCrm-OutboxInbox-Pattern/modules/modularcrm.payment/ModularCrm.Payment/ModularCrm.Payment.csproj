@@ -1,20 +1,16 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
-
+<Project Sdk="Microsoft.NET.Sdk">
   <Import Project="..\common.props" />
-
   <PropertyGroup>
     <TargetFramework>net9.0</TargetFramework>
     <Nullable>enable</Nullable>
     <RootNamespace>ModularCrm.Payment</RootNamespace>
   </PropertyGroup>
-
   <ItemGroup>
-    <PackageReference Include="Volo.Abp.AutoMapper" Version="9.2.0" />
-    <PackageReference Include="Volo.Abp.Ddd.Application" Version="9.2.0" />
-    <PackageReference Include="Volo.Abp.AspNetCore.Mvc" Version="9.2.0" />
     <ProjectReference Include="..\ModularCrm.Payment.Contracts\ModularCrm.Payment.Contracts.csproj" />
     <ProjectReference Include="../../modularcrm.ordering/ModularCrm.Ordering.Contracts/ModularCrm.Ordering.Contracts.csproj" />
-    <PackageReference Include="Volo.Abp.MongoDB" Version="9.2.0" />
+    <ProjectReference Include="../../../../../abp/framework/src/Volo.Abp.AutoMapper/Volo.Abp.AutoMapper.csproj" />
+    <ProjectReference Include="../../../../../abp/framework/src/Volo.Abp.Ddd.Application/Volo.Abp.Ddd.Application.csproj" />
+    <ProjectReference Include="../../../../../abp/framework/src/Volo.Abp.AspNetCore.Mvc/Volo.Abp.AspNetCore.Mvc.csproj" />
+    <ProjectReference Include="../../../../../abp/framework/src/Volo.Abp.MongoDB/Volo.Abp.MongoDB.csproj" />
   </ItemGroup>
-
 </Project>

@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
   <Import Project="..\..\common.props" />
   <PropertyGroup>
     <TargetFramework>net9.0</TargetFramework>
@@ -7,7 +7,7 @@
     <RootNamespace>ModularCrm.Products</RootNamespace>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Volo.Abp.VirtualFileSystem" Version="9.2.0" />
+    <ProjectReference Include="../../../../../../abp/framework/src/Volo.Abp.VirtualFileSystem/Volo.Abp.VirtualFileSystem.csproj" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="..\..\ModularCrm.Products.abpmdl" />

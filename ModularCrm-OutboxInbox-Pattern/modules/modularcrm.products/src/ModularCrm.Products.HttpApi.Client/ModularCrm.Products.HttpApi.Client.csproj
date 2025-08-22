@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
   <Import Project="..\..\common.props" />
   <PropertyGroup>
     <TargetFramework>net9.0</TargetFramework>
@@ -7,7 +7,7 @@
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\ModularCrm.Products.Application.Contracts\ModularCrm.Products.Application.Contracts.csproj" />
-    <PackageReference Include="Volo.Abp.Http.Client" Version="9.2.0" />
+    <ProjectReference Include="../../../../../../abp/framework/src/Volo.Abp.Http.Client/Volo.Abp.Http.Client.csproj" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="**\*generate-proxy.json" />

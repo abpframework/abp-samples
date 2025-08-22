@@ -9,9 +9,9 @@
     <ProjectReference Include="..\ModularCrm.Ordering.Contracts\ModularCrm.Ordering.Contracts.csproj" />
     <ProjectReference Include="../../modularcrm.products/src/ModularCrm.Products.Application.Contracts/ModularCrm.Products.Application.Contracts.csproj" />
     <ProjectReference Include="../../modularcrm.payment/ModularCrm.Payment.Contracts/ModularCrm.Payment.Contracts.csproj" />
-    <PackageReference Include="Volo.Abp.AutoMapper" Version="9.2.0-*" />
-    <PackageReference Include="Volo.Abp.Ddd.Application" Version="9.2.0-*" />
-    <PackageReference Include="Volo.Abp.AspNetCore.Mvc" Version="9.2.0-*" />
-    <PackageReference Include="Volo.Abp.MongoDB" Version="9.2.0-*" />
+    <PackageReference Include="Volo.Abp.AutoMapper" Version="9.2.0" />
+    <PackageReference Include="Volo.Abp.Ddd.Application" Version="9.2.0" />
+    <PackageReference Include="Volo.Abp.AspNetCore.Mvc" Version="9.2.0" />
+    <PackageReference Include="Volo.Abp.MongoDB" Version="9.2.0" />
   </ItemGroup>
 </Project>

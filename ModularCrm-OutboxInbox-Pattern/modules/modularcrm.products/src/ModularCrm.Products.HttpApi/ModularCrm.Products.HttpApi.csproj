@@ -7,6 +7,6 @@
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\ModularCrm.Products.Application.Contracts\ModularCrm.Products.Application.Contracts.csproj" />
-    <PackageReference Include="Volo.Abp.AspNetCore.Mvc" Version="9.2.0-*" />
+    <PackageReference Include="Volo.Abp.AspNetCore.Mvc" Version="9.2.0" />
   </ItemGroup>
 </Project>

@@ -7,7 +7,7 @@
     <RootNamespace>ModularCrm.Products</RootNamespace>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Volo.Abp.VirtualFileSystem" Version="9.2.0-*" />
+    <PackageReference Include="Volo.Abp.VirtualFileSystem" Version="9.2.0" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="..\..\ModularCrm.Products.abpmdl" />

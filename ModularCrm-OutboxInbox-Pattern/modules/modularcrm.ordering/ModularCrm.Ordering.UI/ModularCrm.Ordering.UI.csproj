@@ -10,8 +10,8 @@
     <GenerateEmbeddedFilesManifest>true</GenerateEmbeddedFilesManifest>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Volo.Abp.AutoMapper" Version="9.2.0-*" />
-    <PackageReference Include="Volo.Abp.AspNetCore.Mvc.UI.Theme.Shared" Version="9.2.0-*" />
+    <PackageReference Include="Volo.Abp.AutoMapper" Version="9.2.0" />
+    <PackageReference Include="Volo.Abp.AspNetCore.Mvc.UI.Theme.Shared" Version="9.2.0" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ModularCrm.Ordering.Contracts\ModularCrm.Ordering.Contracts.csproj" />

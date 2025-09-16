@@ -183,7 +183,6 @@ namespace Acme.BookStore.Web
             var app = context.GetApplicationBuilder();
             var env = context.GetEnvironment();
 
-            app.UseAbpStudioLink();
             app.UseCorrelationId();
 
             if (env.IsDevelopment())
@@ -208,6 +207,8 @@ namespace Acme.BookStore.Web
             app.UseIdentityServer();
             app.UseAuthorization();
             app.UseAbpRequestLocalization();
+            
+            app.UseAbpStudioLink();
 
             app.UseSwagger();
             app.UseSwaggerUI(options =>

@@ -3,20 +3,20 @@
   <Import Project="..\..\common.props" />
 
   <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
+    <TargetFramework>net9.0</TargetFramework>
     <RootNamespace>Acme.BookStore</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Acme.BookStore.Domain\Acme.BookStore.Domain.csproj" />
-    <PackageReference Include="Volo.Abp.PermissionManagement.MongoDB" Version="8.3.0" />
-    <PackageReference Include="Volo.Abp.SettingManagement.MongoDB" Version="8.3.0" />
-    <PackageReference Include="Volo.Abp.Identity.MongoDB" Version="8.3.0" />
-    <PackageReference Include="Volo.Abp.BackgroundJobs.MongoDB" Version="8.3.0" />
-    <PackageReference Include="Volo.Abp.AuditLogging.MongoDB" Version="8.3.0" />
-    <PackageReference Include="Volo.Abp.TenantManagement.MongoDB" Version="8.3.0" />
-    <PackageReference Include="Volo.Abp.FeatureManagement.MongoDB" Version="8.3.0" />
-    <PackageReference Include="Volo.Abp.OpenIddict.MongoDB" Version="8.3.0" />
+    <PackageReference Include="Volo.Abp.PermissionManagement.MongoDB" Version="9.3.3" />
+    <PackageReference Include="Volo.Abp.SettingManagement.MongoDB" Version="9.3.3" />
+    <PackageReference Include="Volo.Abp.Identity.MongoDB" Version="9.3.3" />
+    <PackageReference Include="Volo.Abp.BackgroundJobs.MongoDB" Version="9.3.3" />
+    <PackageReference Include="Volo.Abp.AuditLogging.MongoDB" Version="9.3.3" />
+    <PackageReference Include="Volo.Abp.TenantManagement.MongoDB" Version="9.3.3" />
+    <PackageReference Include="Volo.Abp.FeatureManagement.MongoDB" Version="9.3.3" />
+    <PackageReference Include="Volo.Abp.OpenIddict.MongoDB" Version="9.3.3" />
   </ItemGroup>
 
 </Project>

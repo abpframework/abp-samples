@@ -3,7 +3,7 @@
   <Import Project="..\..\common.props" />
 
   <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
+    <TargetFramework>net9.0</TargetFramework>
     <Nullable>enable</Nullable>
     <OutputType>Exe</OutputType>
     <AssetTargetFallback>$(AssetTargetFallback);portable-net45+win8+wp8+wpa81;</AssetTargetFallback>
@@ -18,7 +18,7 @@
     <PackageReference Include="HtmlAgilityPack" Version="1.11.54" />
     <ProjectReference Include="..\Acme.BookStore.Application.Tests\Acme.BookStore.Application.Tests.csproj" />
     <ProjectReference Include="..\..\src\Acme.BookStore.Web\Acme.BookStore.Web.csproj" />
-    <PackageReference Include="Volo.Abp.AspNetCore.TestBase" Version="8.3.0" />
+    <PackageReference Include="Volo.Abp.AspNetCore.TestBase" Version="9.3.3" />
     <ProjectReference Include="..\Acme.BookStore.EntityFrameworkCore.Tests\Acme.BookStore.EntityFrameworkCore.Tests.csproj" />
   </ItemGroup>
 

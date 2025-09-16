@@ -10,5 +10,10 @@
     "Default": {
       "path": "etc/abp-studio/run-profiles/Default.abprun.json"
     }
+  },
+  "versions": {
+    "AbpFramework": "9.3.3",
+    "AbpCommercial": "9.3.3",
+    "LeptonX": "4.3.3"
   }
 }

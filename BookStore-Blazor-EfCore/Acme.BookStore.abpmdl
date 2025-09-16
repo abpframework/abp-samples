@@ -1,4 +1,38 @@
 {
+  "imports": {
+    "Volo.Abp.LeptonXLiteTheme": {
+      "version": "4.3.3",
+      "isInstalled": true
+    },
+    "Volo.Abp.Account": {
+      "version": "9.3.3",
+      "isInstalled": true
+    },
+    "Volo.Abp.OpenIddict": {
+      "version": "9.3.3",
+      "isInstalled": true
+    },
+    "Volo.Abp.Identity": {
+      "version": "9.3.3",
+      "isInstalled": true
+    },
+    "Volo.Abp.TenantManagement": {
+      "version": "9.3.3",
+      "isInstalled": true
+    },
+    "Volo.Abp.SettingManagement": {
+      "version": "9.3.3",
+      "isInstalled": true
+    },
+    "Volo.Abp.PermissionManagement": {
+      "version": "9.3.3",
+      "isInstalled": true
+    },
+    "Volo.Abp.FeatureManagement": {
+      "version": "9.3.3",
+      "isInstalled": true
+    }
+  },
   "folders": {
     "items": {
       "src": {},

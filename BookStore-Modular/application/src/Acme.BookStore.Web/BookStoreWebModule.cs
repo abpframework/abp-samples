@@ -30,6 +30,7 @@ using Volo.Abp.Identity.Web;
 using Volo.Abp.Localization;
 using Volo.Abp.Modularity;
 using Volo.Abp.PermissionManagement.Web;
+using Volo.Abp.Studio.Client.AspNetCore;
 using Volo.Abp.TenantManagement.Web;
 using Volo.Abp.UI.Navigation.Urls;
 using Volo.Abp.UI;
@@ -48,6 +49,7 @@ namespace Acme.BookStore.Web
         typeof(AbpAspNetCoreMvcUiBasicThemeModule),
         typeof(AbpAspNetCoreAuthenticationJwtBearerModule),
         typeof(AbpTenantManagementWebModule),
+        typeof(AbpStudioClientAspNetCoreModule),
         typeof(BookManagementWebModule)
         )]
     public class BookStoreWebModule : AbpModule
@@ -181,6 +183,7 @@ namespace Acme.BookStore.Web
             var app = context.GetApplicationBuilder();
             var env = context.GetEnvironment();
 
+            app.UseAbpStudioLink();
             app.UseCorrelationId();
 
             if (env.IsDevelopment())

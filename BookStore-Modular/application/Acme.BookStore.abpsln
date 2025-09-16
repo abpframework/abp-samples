@@ -21,5 +21,9 @@
       "Modules": {},
       "Main": {}
     }
+  },
+  "versions": {
+    "AbpFramework": "9.3.3",
+    "AbpCommercial": "9.3.3"
   }
 }

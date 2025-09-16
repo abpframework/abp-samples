@@ -1,0 +1,15 @@
+{
+  "folders": {
+    "items": {
+      "Acme.BookStore": {}
+    }
+  },
+  "applications": {
+    "Acme.BookStore.Web": {
+      "type": "dotnet-project",
+      "path": "../../../src/Acme.BookStore.Web/Acme.BookStore.Web.csproj",
+      "launchUrl": "https://localhost:44339/",
+      "folder": "Acme.BookStore"
+    }
+  }
+}

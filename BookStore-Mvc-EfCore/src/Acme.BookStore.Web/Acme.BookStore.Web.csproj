@@ -51,6 +51,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Volo.Abp.Studio.Client.AspNetCore" Version="1.2.2" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Acme.BookStore.Application\Acme.BookStore.Application.csproj" />
     <ProjectReference Include="..\Acme.BookStore.HttpApi\Acme.BookStore.HttpApi.csproj" />
     <ProjectReference Include="..\Acme.BookStore.EntityFrameworkCore\Acme.BookStore.EntityFrameworkCore.csproj" />

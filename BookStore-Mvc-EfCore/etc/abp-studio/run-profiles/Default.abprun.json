@@ -3,7 +3,10 @@
     "Acme.BookStore.Web": {
       "type": "dotnet-project",
       "path": "../../../src/Acme.BookStore.Web/Acme.BookStore.Web.csproj",
-      "launchUrl": "https://localhost:44339/"
+      "launchUrl": "https://localhost:44339/",
+      "kubernetesService": null,
+      "healthCheckEndpoint": "/",
+      "healthUiEndpoint": ""
     }
   }
 }

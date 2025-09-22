@@ -258,3 +258,7 @@ src/EventOrganizer.IdentityServer/Logs/*
 src/EventOrganizer.HttpApi.Host/Logs/*
 src/EventOrganizer.HttpApi.Host/Logs/*
 src/EventOrganizer.DbMigrator/Logs/*
+
+
+# ABP Studio
+**/.abpstudio/

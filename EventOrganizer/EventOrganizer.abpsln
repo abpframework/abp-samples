@@ -1,0 +1,19 @@
+{
+  "id": "a161e0a2-4fe4-4cac-bee3-1bcc19e60fe2",
+  "template": "empty",
+  "modules": {
+    "EventOrganizer": {
+      "path": "EventOrganizer.abpmdl"
+    }
+  },
+  "runProfiles": {
+    "Default": {
+      "path": "etc/abp-studio/run-profiles/Default.abprun.json"
+    }
+  },
+  "versions": {
+    "AbpFramework": "9.3.3",
+    "AbpCommercial": "9.3.3",
+    "AbpStudio": "1.2.2"
+  }
+}

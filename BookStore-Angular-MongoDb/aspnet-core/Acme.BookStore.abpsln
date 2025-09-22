@@ -1,0 +1,14 @@
+{
+  "id": "b8de8587-4bb1-444b-8c20-bb6d2bf9475b",
+  "template": "empty",
+  "modules": {
+    "Acme.BookStore": {
+      "path": "Acme.BookStore.abpmdl"
+    }
+  },
+  "runProfiles": {
+    "Default": {
+      "path": "etc/abp-studio/run-profiles/Default.abprun.json"
+    }
+  }
+}

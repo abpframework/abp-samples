@@ -43,6 +43,7 @@
     "Authors": "Authors",
     "AuthorDeletionConfirmationMessage": "Are you sure to delete the author '{0}'?",
     "BirthDate": "Birth date",
+    "ShortBio": "Short bio",
     "NewAuthor": "New author"
   }
 }

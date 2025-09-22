@@ -263,3 +263,7 @@ src/Acme.BookStore.Blazor.Server.Tiered/Logs/*
 
 # Use abp install-libs to restore.
 **/wwwroot/libs/*
+
+
+# ABP Studio
+**/.abpstudio/

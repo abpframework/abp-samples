@@ -259,3 +259,6 @@ host/Acme.BookStore.BookManagement.Web.Unified/Logs/logs.txt
 
 # Use abp install-libs to restore.
 **/wwwroot/libs/*
+
+# ABP Studio
+**/.abpstudio/

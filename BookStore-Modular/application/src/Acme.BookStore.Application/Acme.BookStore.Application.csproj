@@ -3,7 +3,7 @@
   <Import Project="..\..\common.props" />
 
   <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
+    <TargetFramework>net9.0</TargetFramework>
     <RootNamespace>Acme.BookStore</RootNamespace>
   </PropertyGroup>
 
@@ -13,11 +13,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Volo.Abp.Account.Application" Version="8.3.0" />
-    <PackageReference Include="Volo.Abp.Identity.Application" Version="8.3.0" />
-    <PackageReference Include="Volo.Abp.PermissionManagement.Application" Version="8.3.0" />
-    <PackageReference Include="Volo.Abp.TenantManagement.Application" Version="8.3.0" />
-    <PackageReference Include="Volo.Abp.FeatureManagement.Application" Version="8.3.0" />
+    <PackageReference Include="Volo.Abp.Account.Application" Version="9.3.3" />
+    <PackageReference Include="Volo.Abp.Identity.Application" Version="9.3.3" />
+    <PackageReference Include="Volo.Abp.PermissionManagement.Application" Version="9.3.3" />
+    <PackageReference Include="Volo.Abp.TenantManagement.Application" Version="9.3.3" />
+    <PackageReference Include="Volo.Abp.FeatureManagement.Application" Version="9.3.3" />
   </ItemGroup>
 
 

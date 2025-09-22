@@ -27,6 +27,7 @@ using Volo.Abp.Modularity;
 using Volo.Abp.Swashbuckle;
 using Volo.Abp.UI.Navigation.Urls;
 using Volo.Abp.VirtualFileSystem;
+using Volo.Abp.Studio.Client.AspNetCore;
 
 namespace EventOrganizer
 {
@@ -40,6 +41,7 @@ namespace EventOrganizer
         typeof(AbpAspNetCoreAuthenticationJwtBearerModule),
         typeof(AbpAccountWebIdentityServerModule),
         typeof(AbpAspNetCoreSerilogModule),
+        typeof(AbpStudioClientAspNetCoreModule),
         typeof(AbpSwashbuckleModule)
     )]
     public class EventOrganizerHttpApiHostModule : AbpModule
@@ -196,6 +198,7 @@ namespace EventOrganizer
                 app.UseErrorPage();
             }
 
+            app.UseAbpStudioLink();
             app.UseCorrelationId();
             app.UseStaticFiles();
             app.UseRouting();

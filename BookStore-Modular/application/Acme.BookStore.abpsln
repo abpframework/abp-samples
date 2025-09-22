@@ -1,0 +1,29 @@
+{
+  "id": "20270d7a-f1ed-4185-a4d5-4228421bfb79",
+  "template": "empty",
+  "modules": {
+    "Acme.BookStore": {
+      "path": "Acme.BookStore.abpmdl",
+      "folder": "Main"
+    },
+    "Acme.BookStore.BookManagement": {
+      "path": "../modules/book-management/Acme.BookStore.BookManagement.abpmdl",
+      "folder": "Modules"
+    }
+  },
+  "runProfiles": {
+    "Default": {
+      "path": "etc/abp-studio/run-profiles/Default.abprun.json"
+    }
+  },
+  "folders": {
+    "items": {
+      "Modules": {},
+      "Main": {}
+    }
+  },
+  "versions": {
+    "AbpFramework": "9.3.3",
+    "AbpCommercial": "9.3.3"
+  }
+}

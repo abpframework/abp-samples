@@ -63,7 +63,7 @@
                                 Field="@nameof(BookDto.Type)"
                                 Caption="@L["Type"]">
                     <DisplayTemplate>
-                        @L[$"Enum:BookType.{context.Type}"]
+                        @L[$"Enum:BookType.{(int)context.Type}"]
                     </DisplayTemplate>
                 </DataGridColumn>
                 <DataGridColumn TItem="BookDto"

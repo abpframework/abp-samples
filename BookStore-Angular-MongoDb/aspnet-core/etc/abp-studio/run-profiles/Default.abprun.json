@@ -1,0 +1,20 @@
+{
+  "folders": {
+    "items": {
+      "Angular": {}
+    }
+  },
+  "applications": {
+    "Acme.BookStore.HttpApi.Host": {
+      "type": "dotnet-project",
+      "path": "../../../src/Acme.BookStore.HttpApi.Host/Acme.BookStore.HttpApi.Host.csproj",
+      "launchUrl": "https://localhost:44367"
+    },
+    "Angular": {
+      "type": "cli",
+      "startCommand": "./start.ps1",
+      "workingDirectory": "../../../../angular",
+      "launchUrl": "http://localhost:4200"
+    }
+  }
+}

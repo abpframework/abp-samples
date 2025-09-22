@@ -1,0 +1,70 @@
+{
+  "folders": {
+    "items": {
+      "src": {},
+      "test": {}
+    }
+  },
+  "packages": {
+    "EventOrganizer.Domain": {
+      "path": "src/EventOrganizer.Domain/EventOrganizer.Domain.abppkg",
+      "folder": "src"
+    },
+    "EventOrganizer.Application": {
+      "path": "src/EventOrganizer.Application/EventOrganizer.Application.abppkg",
+      "folder": "src"
+    },
+    "EventOrganizer.Application.Tests": {
+      "path": "test/EventOrganizer.Application.Tests/EventOrganizer.Application.Tests.abppkg",
+      "folder": "test"
+    },
+    "EventOrganizer.MongoDB": {
+      "path": "src/EventOrganizer.MongoDB/EventOrganizer.MongoDB.abppkg",
+      "folder": "src"
+    },
+    "EventOrganizer.Domain.Shared": {
+      "path": "src/EventOrganizer.Domain.Shared/EventOrganizer.Domain.Shared.abppkg",
+      "folder": "src"
+    },
+    "EventOrganizer.Application.Contracts": {
+      "path": "src/EventOrganizer.Application.Contracts/EventOrganizer.Application.Contracts.abppkg",
+      "folder": "src"
+    },
+    "EventOrganizer.HttpApi": {
+      "path": "src/EventOrganizer.HttpApi/EventOrganizer.HttpApi.abppkg",
+      "folder": "src"
+    },
+    "EventOrganizer.HttpApi.Client": {
+      "path": "src/EventOrganizer.HttpApi.Client/EventOrganizer.HttpApi.Client.abppkg",
+      "folder": "src"
+    },
+    "EventOrganizer.TestBase": {
+      "path": "test/EventOrganizer.TestBase/EventOrganizer.TestBase.abppkg",
+      "folder": "test"
+    },
+    "EventOrganizer.Domain.Tests": {
+      "path": "test/EventOrganizer.Domain.Tests/EventOrganizer.Domain.Tests.abppkg",
+      "folder": "test"
+    },
+    "EventOrganizer.MongoDB.Tests": {
+      "path": "test/EventOrganizer.MongoDB.Tests/EventOrganizer.MongoDB.Tests.abppkg",
+      "folder": "test"
+    },
+    "EventOrganizer.HttpApi.Client.ConsoleTestApp": {
+      "path": "test/EventOrganizer.HttpApi.Client.ConsoleTestApp/EventOrganizer.HttpApi.Client.ConsoleTestApp.abppkg",
+      "folder": "test"
+    },
+    "EventOrganizer.DbMigrator": {
+      "path": "src/EventOrganizer.DbMigrator/EventOrganizer.DbMigrator.abppkg",
+      "folder": "src"
+    },
+    "EventOrganizer.HttpApi.Host": {
+      "path": "src/EventOrganizer.HttpApi.Host/EventOrganizer.HttpApi.Host.abppkg",
+      "folder": "src"
+    },
+    "EventOrganizer.Blazor": {
+      "path": "src/EventOrganizer.Blazor/EventOrganizer.Blazor.abppkg",
+      "folder": "src"
+    }
+  }
+}

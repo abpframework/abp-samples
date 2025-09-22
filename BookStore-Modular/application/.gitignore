@@ -260,3 +260,6 @@ src/Acme.BookStore.HttpApi.HostWithIds/Logs/*
 
 # Use abp install-libs to restore.
 **/wwwroot/libs/*
+
+# ABP Studio
+**/.abpstudio/

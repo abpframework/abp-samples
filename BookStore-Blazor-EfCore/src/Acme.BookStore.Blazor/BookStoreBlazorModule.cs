@@ -34,6 +34,7 @@ using Volo.Abp.Identity.Blazor.Server;
 using Volo.Abp.Localization;
 using Volo.Abp.Modularity;
 using Volo.Abp.SettingManagement.Blazor.Server;
+using Volo.Abp.Studio.Client.AspNetCore;
 using Volo.Abp.Swashbuckle;
 using Volo.Abp.TenantManagement.Blazor.Server;
 using Volo.Abp.UI;
@@ -48,6 +49,7 @@ namespace Acme.BookStore.Blazor;
     typeof(BookStoreEntityFrameworkCoreModule),
     typeof(BookStoreHttpApiModule),
     typeof(AbpAutofacModule),
+    typeof(AbpStudioClientAspNetCoreModule),
     typeof(AbpSwashbuckleModule),
     typeof(AbpAspNetCoreSerilogModule),
     typeof(AbpAccountWebOpenIddictModule),
@@ -229,6 +231,7 @@ public class BookStoreBlazorModule : AbpModule
         app.UseStaticFiles();
         app.UseRouting();
         app.UseAuthentication();
+        app.UseAbpStudioLink();
         app.UseAbpOpenIddictValidation();
 
         if (MultiTenancyConsts.IsEnabled)

@@ -11,19 +11,9 @@ namespace EventOrganizer
         public static int Main(string[] args)
         {
             Log.Logger = new LoggerConfiguration()
-#if DEBUG
-                .MinimumLevel.Debug()
-#else
-                .MinimumLevel.Information()
-#endif
-                .MinimumLevel.Override("Microsoft", LogEventLevel.Information)
-                .MinimumLevel.Override("Microsoft.EntityFrameworkCore", LogEventLevel.Warning)
-                .Enrich.FromLogContext()
                 .WriteTo.Async(c => c.File("Logs/logs.txt"))
-#if DEBUG
                 .WriteTo.Async(c => c.Console())
-#endif
-                .CreateLogger();
+                .CreateBootstrapLogger();
 
             try
             {
@@ -49,6 +39,20 @@ namespace EventOrganizer
                     webBuilder.UseStartup<Startup>();
                 })
                 .UseAutofac()
-                .UseSerilog();
+                .UseSerilog((context, services, loggerConfiguration) =>
+                {
+                    loggerConfiguration
+#if DEBUG
+                        .MinimumLevel.Debug()
+#else
+                        .MinimumLevel.Information()
+#endif
+                        .MinimumLevel.Override("Microsoft", LogEventLevel.Information)
+                        .MinimumLevel.Override("Microsoft.EntityFrameworkCore", LogEventLevel.Warning)
+                        .Enrich.FromLogContext()
+                        .WriteTo.Async(c => c.File("Logs/logs.txt"))
+                        .WriteTo.Async(c => c.Console())
+                        .WriteTo.Async(c => c.AbpStudio(services));
+                });
     }
 }

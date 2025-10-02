@@ -1,0 +1,118 @@
+{
+  "name": "Acme.BookStore.Domain.Shared",
+  "hash": "",
+  "contents": [
+    {
+      "namespace": "Acme.BookStore",
+      "dependsOnModules": [
+        {
+          "declaringAssemblyName": "Volo.Abp.AuditLogging.Domain.Shared",
+          "namespace": "Volo.Abp.AuditLogging",
+          "name": "AbpAuditLoggingDomainSharedModule"
+        },
+        {
+          "declaringAssemblyName": "Volo.Abp.BackgroundJobs.Domain.Shared",
+          "namespace": "Volo.Abp.BackgroundJobs",
+          "name": "AbpBackgroundJobsDomainSharedModule"
+        },
+        {
+          "declaringAssemblyName": "Volo.Abp.FeatureManagement.Domain.Shared",
+          "namespace": "Volo.Abp.FeatureManagement",
+          "name": "AbpFeatureManagementDomainSharedModule"
+        },
+        {
+          "declaringAssemblyName": "Volo.Abp.PermissionManagement.Domain.Shared",
+          "namespace": "Volo.Abp.PermissionManagement",
+          "name": "AbpPermissionManagementDomainSharedModule"
+        },
+        {
+          "declaringAssemblyName": "Volo.Abp.SettingManagement.Domain.Shared",
+          "namespace": "Volo.Abp.SettingManagement",
+          "name": "AbpSettingManagementDomainSharedModule"
+        },
+        {
+          "declaringAssemblyName": "Volo.Abp.Identity.Pro.Domain.Shared",
+          "namespace": "Volo.Abp.Identity",
+          "name": "AbpIdentityProDomainSharedModule"
+        },
+        {
+          "declaringAssemblyName": "Volo.Abp.OpenIddict.Pro.Domain.Shared",
+          "namespace": "Volo.Abp.OpenIddict",
+          "name": "AbpOpenIddictProDomainSharedModule"
+        },
+        {
+          "declaringAssemblyName": "Volo.Abp.LanguageManagement.Domain.Shared",
+          "namespace": "Volo.Abp.LanguageManagement",
+          "name": "LanguageManagementDomainSharedModule"
+        },
+        {
+          "declaringAssemblyName": "Volo.Abp.TextTemplateManagement.Domain.Shared",
+          "namespace": "Volo.Abp.TextTemplateManagement",
+          "name": "TextTemplateManagementDomainSharedModule"
+        },
+        {
+          "declaringAssemblyName": "Volo.Abp.Gdpr.Domain.Shared",
+          "namespace": "Volo.Abp.Gdpr",
+          "name": "AbpGdprDomainSharedModule"
+        },
+        {
+          "declaringAssemblyName": "Volo.Abp.GlobalFeatures",
+          "namespace": "Volo.Abp.GlobalFeatures",
+          "name": "AbpGlobalFeaturesModule"
+        },
+        {
+          "declaringAssemblyName": "Volo.Abp.BlobStoring.Database.Domain.Shared",
+          "namespace": "Volo.Abp.BlobStoring.Database",
+          "name": "BlobStoringDatabaseDomainSharedModule"
+        }
+      ],
+      "implementingInterfaces": [
+        {
+          "name": "IAbpModule",
+          "namespace": "Volo.Abp.Modularity",
+          "declaringAssemblyName": "Volo.Abp.Core",
+          "fullName": "Volo.Abp.Modularity.IAbpModule"
+        },
+        {
+          "name": "IOnPreApplicationInitialization",
+          "namespace": "Volo.Abp.Modularity",
+          "declaringAssemblyName": "Volo.Abp.Core",
+          "fullName": "Volo.Abp.Modularity.IOnPreApplicationInitialization"
+        },
+        {
+          "name": "IOnApplicationInitialization",
+          "namespace": "Volo.Abp",
+          "declaringAssemblyName": "Volo.Abp.Core",
+          "fullName": "Volo.Abp.IOnApplicationInitialization"
+        },
+        {
+          "name": "IOnPostApplicationInitialization",
+          "namespace": "Volo.Abp.Modularity",
+          "declaringAssemblyName": "Volo.Abp.Core",
+          "fullName": "Volo.Abp.Modularity.IOnPostApplicationInitialization"
+        },
+        {
+          "name": "IOnApplicationShutdown",
+          "namespace": "Volo.Abp",
+          "declaringAssemblyName": "Volo.Abp.Core",
+          "fullName": "Volo.Abp.IOnApplicationShutdown"
+        },
+        {
+          "name": "IPreConfigureServices",
+          "namespace": "Volo.Abp.Modularity",
+          "declaringAssemblyName": "Volo.Abp.Core",
+          "fullName": "Volo.Abp.Modularity.IPreConfigureServices"
+        },
+        {
+          "name": "IPostConfigureServices",
+          "namespace": "Volo.Abp.Modularity",
+          "declaringAssemblyName": "Volo.Abp.Core",
+          "fullName": "Volo.Abp.Modularity.IPostConfigureServices"
+        }
+      ],
+      "contentType": "abpModule",
+      "name": "BookStoreDomainSharedModule",
+      "summary": null
+    }
+  ]
+}

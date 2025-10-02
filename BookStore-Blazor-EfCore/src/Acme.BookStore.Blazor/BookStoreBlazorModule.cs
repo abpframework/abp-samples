@@ -1,209 +1,59 @@
-using System.IO;
-using Blazorise.Bootstrap5;
-using Blazorise.Icons.FontAwesome;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Extensions.DependencyInjection;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
+using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.OpenApi.Models;
-using Acme.BookStore.Blazor.Menus;
-using Acme.BookStore.EntityFrameworkCore;
-using Acme.BookStore.Localization;
-using Acme.BookStore.MultiTenancy;
-using OpenIddict.Validation.AspNetCore;
+using Acme.BookStore.Blazor.Components;
+using Acme.BookStore.Blazor.Client;
 using Volo.Abp;
-using Volo.Abp.Account.Web;
-using Volo.Abp.AspNetCore.Components.Server.LeptonXLiteTheme;
-using Volo.Abp.AspNetCore.Components.Server.LeptonXLiteTheme.Bundling;
-using Volo.Abp.AspNetCore.Mvc.UI.Theme.LeptonXLite;
-using Volo.Abp.AspNetCore.Mvc.UI.Theme.LeptonXLite.Bundling;
-using Volo.Abp.AspNetCore.Components.Web.Theming.Routing;
-using Volo.Abp.AspNetCore.Mvc;
-using Volo.Abp.AspNetCore.Mvc.Localization;
-using Volo.Abp.AspNetCore.Mvc.UI;
-using Volo.Abp.AspNetCore.Mvc.UI.Bootstrap;
+using Volo.Abp.AspNetCore.Components.WebAssembly.WebApp;
 using Volo.Abp.AspNetCore.Mvc.UI.Bundling;
-using Volo.Abp.AspNetCore.Mvc.UI.MultiTenancy;
-using Volo.Abp.AspNetCore.Mvc.UI.Theme.Shared;
-using Volo.Abp.AspNetCore.Serilog;
+using Volo.Abp.AspNetCore.Mvc.Libs;
 using Volo.Abp.Autofac;
-using Volo.Abp.AutoMapper;
-using Volo.Abp.Identity.Blazor.Server;
-using Volo.Abp.Localization;
 using Volo.Abp.Modularity;
-using Volo.Abp.SettingManagement.Blazor.Server;
-using Volo.Abp.Swashbuckle;
-using Volo.Abp.TenantManagement.Blazor.Server;
-using Volo.Abp.UI;
-using Volo.Abp.UI.Navigation;
-using Volo.Abp.UI.Navigation.Urls;
-using Volo.Abp.VirtualFileSystem;
+using Volo.Abp.AspNetCore.Components.WebAssembly.Theming.Bundling;
+using Volo.Abp.AspNetCore.Components.WebAssembly.LeptonXTheme.Bundling;
+using Volo.Abp.Account.Pro.Public.Blazor.WebAssembly.Bundling;
+using Volo.Abp.AuditLogging.Blazor.WebAssembly.Bundling;
+using Volo.Saas.Host.Blazor.WebAssembly.Bundling;
 
 namespace Acme.BookStore.Blazor;
 
 [DependsOn(
-    typeof(BookStoreApplicationModule),
-    typeof(BookStoreEntityFrameworkCoreModule),
-    typeof(BookStoreHttpApiModule),
     typeof(AbpAutofacModule),
-    typeof(AbpSwashbuckleModule),
-    typeof(AbpAspNetCoreSerilogModule),
-    typeof(AbpAccountWebOpenIddictModule),
-    typeof(AbpAspNetCoreComponentsServerLeptonXLiteThemeModule),
-    typeof(AbpAspNetCoreMvcUiLeptonXLiteThemeModule),
-    typeof(AbpIdentityBlazorServerModule),
-    typeof(AbpTenantManagementBlazorServerModule),
-    typeof(AbpSettingManagementBlazorServerModule)
-   )]
+    typeof(AbpAspNetCoreComponentsWebAssemblyLeptonXThemeBundlingModule),
+    typeof(AbpAccountPublicBlazorWebAssemblyBundlingModule),
+    typeof(SaasHostBlazorWebAssemblyBundlingModule),
+    typeof(AbpAuditLoggingBlazorWebAssemblyBundlingModule),
+    typeof(AbpAspNetCoreMvcUiBundlingModule)
+)]
 public class BookStoreBlazorModule : AbpModule
 {
-    public override void PreConfigureServices(ServiceConfigurationContext context)
-    {
-        context.Services.PreConfigure<AbpMvcDataAnnotationsLocalizationOptions>(options =>
-        {
-            options.AddAssemblyResource(
-                typeof(BookStoreResource),
-                typeof(BookStoreDomainModule).Assembly,
-                typeof(BookStoreDomainSharedModule).Assembly,
-                typeof(BookStoreApplicationModule).Assembly,
-                typeof(BookStoreApplicationContractsModule).Assembly,
-                typeof(BookStoreBlazorModule).Assembly
-            );
-        });
-
-        PreConfigure<OpenIddictBuilder>(builder =>
-        {
-            builder.AddValidation(options =>
-            {
-                options.AddAudiences("BookStore");
-                options.UseLocalServer();
-                options.UseAspNetCore();
-            });
-        });
-    }
-
     public override void ConfigureServices(ServiceConfigurationContext context)
     {
-        var hostingEnvironment = context.Services.GetHostingEnvironment();
-        var configuration = context.Services.GetConfiguration();
-
-        ConfigureAuthentication(context);
-        ConfigureUrls(configuration);
-        ConfigureBundles();
-        ConfigureAutoMapper();
-        ConfigureVirtualFileSystem(hostingEnvironment);
-        ConfigureSwaggerServices(context.Services);
-        ConfigureAutoApiControllers();
-        ConfigureBlazorise(context);
-        ConfigureRouter(context);
-        ConfigureMenu(context);
-    }
-
-    private void ConfigureAuthentication(ServiceConfigurationContext context)
-    {
-        context.Services.ForwardIdentityAuthenticationForBearer(OpenIddictValidationAspNetCoreDefaults.AuthenticationScheme);
-    }
-
-    private void ConfigureUrls(IConfiguration configuration)
-    {
-        Configure<AppUrlOptions>(options =>
+        //https://github.com/dotnet/aspnetcore/issues/52530
+        Configure<RouteOptions>(options =>
         {
-            options.Applications["MVC"].RootUrl = configuration["App:SelfUrl"];
-            options.RedirectAllowedUrls.AddRange(configuration["App:RedirectAllowedUrls"].Split(','));
+            options.SuppressCheckForUnhandledSecurityMetadata = true;
         });
-    }
 
-    private void ConfigureBundles()
-    {
+        // Add services to the container.
+        context.Services.AddRazorComponents()
+            .AddInteractiveWebAssemblyComponents();
+
+        Configure<AbpMvcLibsOptions>(options =>
+        {
+            options.CheckLibs = false;
+        });
+
         Configure<AbpBundlingOptions>(options =>
         {
-            // MVC UI
-            options.StyleBundles.Configure(
-                LeptonXLiteThemeBundles.Styles.Global,
-                bundle =>
-                {
-                    bundle.AddFiles("/global-styles.css");
-                }
-            );
+            var globalStyles = options.StyleBundles.Get(BlazorWebAssemblyStandardBundles.Styles.Global);
+            globalStyles.AddContributors(typeof(BookStoreStyleBundleContributor));
 
-            //BLAZOR UI
-            options.StyleBundles.Configure(
-                BlazorLeptonXLiteThemeBundles.Styles.Global,
-                bundle =>
-                {
-                    bundle.AddFiles("/blazor-global-styles.css");
-                    //You can remove the following line if you don't use Blazor CSS isolation for components
-                    bundle.AddFiles("/Acme.BookStore.Blazor.styles.css");
-                }
-            );
-        });
-    }
+            var globalScripts = options.ScriptBundles.Get(BlazorWebAssemblyStandardBundles.Scripts.Global);
+            globalScripts.AddContributors(typeof(BookStoreScriptBundleContributor));
 
-    private void ConfigureVirtualFileSystem(IWebHostEnvironment hostingEnvironment)
-    {
-        if (hostingEnvironment.IsDevelopment())
-        {
-            Configure<AbpVirtualFileSystemOptions>(options =>
-            {
-                options.FileSets.ReplaceEmbeddedByPhysical<BookStoreDomainSharedModule>(Path.Combine(hostingEnvironment.ContentRootPath, $"..{Path.DirectorySeparatorChar}Acme.BookStore.Domain.Shared"));
-                options.FileSets.ReplaceEmbeddedByPhysical<BookStoreDomainModule>(Path.Combine(hostingEnvironment.ContentRootPath, $"..{Path.DirectorySeparatorChar}Acme.BookStore.Domain"));
-                options.FileSets.ReplaceEmbeddedByPhysical<BookStoreApplicationContractsModule>(Path.Combine(hostingEnvironment.ContentRootPath, $"..{Path.DirectorySeparatorChar}Acme.BookStore.Application.Contracts"));
-                options.FileSets.ReplaceEmbeddedByPhysical<BookStoreApplicationModule>(Path.Combine(hostingEnvironment.ContentRootPath, $"..{Path.DirectorySeparatorChar}Acme.BookStore.Application"));
-                options.FileSets.ReplaceEmbeddedByPhysical<BookStoreBlazorModule>(hostingEnvironment.ContentRootPath);
-            });
-        }
-    }
-
-    private void ConfigureSwaggerServices(IServiceCollection services)
-    {
-        services.AddAbpSwaggerGen(
-            options =>
-            {
-                options.SwaggerDoc("v1", new OpenApiInfo { Title = "BookStore API", Version = "v1" });
-                options.DocInclusionPredicate((docName, description) => true);
-                options.CustomSchemaIds(type => type.FullName);
-            }
-        );
-    }
-
-    private void ConfigureBlazorise(ServiceConfigurationContext context)
-    {
-        context.Services
-            .AddBootstrap5Providers()
-            .AddFontAwesomeIcons();
-    }
-
-    private void ConfigureMenu(ServiceConfigurationContext context)
-    {
-        Configure<AbpNavigationOptions>(options =>
-        {
-            options.MenuContributors.Add(new BookStoreMenuContributor());
-        });
-    }
-
-    private void ConfigureRouter(ServiceConfigurationContext context)
-    {
-        Configure<AbpRouterOptions>(options =>
-        {
-            options.AppAssembly = typeof(BookStoreBlazorModule).Assembly;
-        });
-    }
-
-    private void ConfigureAutoApiControllers()
-    {
-        Configure<AbpAspNetCoreMvcOptions>(options =>
-        {
-            options.ConventionalControllers.Create(typeof(BookStoreApplicationModule).Assembly);
-        });
-    }
-
-    private void ConfigureAutoMapper()
-    {
-        Configure<AbpAutoMapperOptions>(options =>
-        {
-            options.AddMaps<BookStoreBlazorModule>();
+            options.Parameters["LeptonXTheme.Layout"] = "side-menu"; // side-menu or top-menu
         });
     }
 
@@ -212,37 +62,27 @@ public class BookStoreBlazorModule : AbpModule
         var env = context.GetEnvironment();
         var app = context.GetApplicationBuilder();
 
-        app.UseAbpRequestLocalization();
-
+        // Configure the HTTP request pipeline.
         if (env.IsDevelopment())
         {
-            app.UseDeveloperExceptionPage();
+            app.UseWebAssemblyDebugging();
         }
         else
         {
-            app.UseExceptionHandler("/Error");
+            // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
             app.UseHsts();
         }
 
         app.UseHttpsRedirection();
-        app.UseCorrelationId();
-        app.UseStaticFiles();
         app.UseRouting();
-        app.UseAuthentication();
-        app.UseAbpOpenIddictValidation();
+        app.MapAbpStaticAssets();
+        app.UseAntiforgery();
 
-        if (MultiTenancyConsts.IsEnabled)
+        app.UseConfiguredEndpoints(builder =>
         {
-            app.UseMultiTenancy();
-        }
-
-        app.UseUnitOfWork();
-        app.UseAuthorization();
-        app.UseSwagger();
-        app.UseAbpSwaggerUI(options =>
-        {
-            options.SwaggerEndpoint("/swagger/v1/swagger.json", "BookStore API");
+            builder.MapRazorComponents<App>()
+                .AddInteractiveWebAssemblyRenderMode()
+                .AddAdditionalAssemblies(WebAppAdditionalAssembliesHelper.GetAssemblies<BookStoreBlazorClientModule>());
         });
-        app.UseConfiguredEndpoints();
     }
 }

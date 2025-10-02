@@ -1,0 +1,6 @@
+apiVersion: v2
+name: blazor
+appVersion: "1.0"
+description: BookStore Blazor Application
+version: 1.0.0
+type: application

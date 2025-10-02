@@ -1,0 +1,50 @@
+@using Microsoft.Extensions.Options
+@using Microsoft.Extensions.Localization
+@using global::Localization.Resources.AbpUi
+@using Volo.Abp.AspNetCore.Components.Web.LeptonXTheme
+@using Volo.Abp.AspNetCore.Components.Web.LeptonXTheme.Components
+@using Volo.Abp.AspNetCore.Components.Web.LeptonXTheme.Components.ApplicationLayout
+@using Volo.Abp.AspNetCore.Components.Web.Theming.Routing
+@inject IOptions<AbpRouterOptions> RouterOptions
+@inject IOptions<LeptonXThemeBlazorOptions> LayoutOptions
+@inject IStringLocalizer<AbpUiResource> UiLocalizer
+
+<CascadingAuthenticationState>
+    <Router AppAssembly="typeof(Program).Assembly" AdditionalAssemblies="RouterOptions.Value.AdditionalAssemblies">
+        <Found Context="routeData">
+            <AuthorizeRouteView RouteData="@routeData" DefaultLayout="@LayoutOptions.Value.Layout">
+                <Authorizing>
+                    @UiLocalizer["Authorizing"]
+                </Authorizing>
+                <NotAuthorized>
+                    @if (context.User?.Identity?.IsAuthenticated != true)
+                    {
+                        <RedirectToLogin/>
+                    }
+                    else
+                    {
+                        <ErrorView
+                            Title="@UiLocalizer["403Message"]"
+                            HttpStatusCode="403"
+                            Message="@UiLocalizer["403MessageDetail"]"/>
+                    }
+                </NotAuthorized>
+            </AuthorizeRouteView>
+        </Found>
+        <NotFound>
+            <LayoutView Layout="@LayoutOptions.Value.Layout">
+                <ErrorView
+                    Title="@UiLocalizer["404Message"]"
+                    HttpStatusCode="404"
+                    Message="@UiLocalizer["404MessageDetail"]"/>
+            </LayoutView>
+        </NotFound>
+    </Router>
+</CascadingAuthenticationState>
+
+@code {
+    protected override async Task OnInitializedAsync()
+    {
+        await LayoutOptions.SetAsync();
+    }
+}

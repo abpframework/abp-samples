@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Release.Name }}-{{ .Chart.Name }}-configmap
+data:
+  appsettings.json: |-
+    {
+    "App": {
+        "SelfUrl": "{{ include "bookstore.hosts.blazor" . }}"
+    },
+    "AuthServer": {
+        "Authority": "{{ include "bookstore.hosts.httpapi" . }}",        "ClientId": "BookStore_Blazor",
+        "ResponseType": "code"
+    },
+    "RemoteServices": {
+        "Default": {
+          "BaseUrl": "{{ include "bookstore.hosts.httpapi" . }}"
+        },
+        "AbpAccountPublic": {
+          "BaseUrl": "{{ include "bookstore.hosts.httpapi" . }}"        }
+    }
+    }

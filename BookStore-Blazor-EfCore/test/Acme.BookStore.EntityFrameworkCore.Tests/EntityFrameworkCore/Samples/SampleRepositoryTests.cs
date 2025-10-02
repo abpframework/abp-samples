@@ -1,8 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Shouldly;
-using System;
-using System.Linq;
+﻿using System;
 using System.Threading.Tasks;
+using Shouldly;
 using Volo.Abp.Domain.Repositories;
 using Volo.Abp.Identity;
 using Xunit;
@@ -11,9 +9,9 @@ namespace Acme.BookStore.EntityFrameworkCore.Samples;
 
 /* This is just an example test class.
  * Normally, you don't test ABP framework code
- * (like default AppUser repository IRepository<AppUser, Guid> here).
  * Only test your custom repository methods.
  */
+[Collection(BookStoreTestConsts.CollectionDefinitionName)]
 public class SampleRepositoryTests : BookStoreEntityFrameworkCoreTestBase
 {
     private readonly IRepository<IdentityUser, Guid> _appUserRepository;
@@ -32,9 +30,8 @@ public class SampleRepositoryTests : BookStoreEntityFrameworkCoreTestBase
         await WithUnitOfWorkAsync(async () =>
         {
                 //Act
-                var adminUser = await (await _appUserRepository.GetQueryableAsync())
-                .Where(u => u.UserName == "admin")
-                .FirstOrDefaultAsync();
+                var adminUser = await _appUserRepository
+                .FirstOrDefaultAsync(u => u.UserName == "admin");
 
                 //Assert
                 adminUser.ShouldNotBeNull();

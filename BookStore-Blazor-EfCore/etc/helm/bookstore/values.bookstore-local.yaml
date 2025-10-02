@@ -1,0 +1,12 @@
+global:
+  hosts:
+    dbmigrator: "[RELEASE_NAME]-dbmigrator"
+    httpapi: "[RELEASE_NAME]-httpapihost"
+    blazor: "[RELEASE_NAME]-blazor"
+  connectionStrings:
+    default: "Host=[RELEASE_NAME]-postgresql;Port=5432;Database=BookStore;User ID=postgres;Password=myPassword;"
+  dotnetEnvironment: "Staging"
+  disablePII: "false"
+  stringEncryptionDefaultPassPhrase: "0uFikygpIPCtQ5XU"
+  abpStudioClient:
+    isLinkEnabled: "true"

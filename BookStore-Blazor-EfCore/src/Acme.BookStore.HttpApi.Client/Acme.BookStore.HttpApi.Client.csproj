@@ -3,7 +3,8 @@
   <Import Project="..\..\common.props" />
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFramework>net9.0</TargetFramework>
+    <Nullable>enable</Nullable>
     <RootNamespace>Acme.BookStore</RootNamespace>
   </PropertyGroup>
 
@@ -12,12 +13,21 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Volo.Abp.Account.HttpApi.Client" Version="8.3.0" />
-    <PackageReference Include="Volo.Abp.Identity.HttpApi.Client" Version="8.3.0" />
-    <PackageReference Include="Volo.Abp.PermissionManagement.HttpApi.Client" Version="8.3.0" />
-    <PackageReference Include="Volo.Abp.TenantManagement.HttpApi.Client" Version="8.3.0" />
-    <PackageReference Include="Volo.Abp.FeatureManagement.HttpApi.Client" Version="8.3.0" />
-    <PackageReference Include="Volo.Abp.SettingManagement.HttpApi.Client" Version="8.3.0" />
+    <PackageReference Include="Volo.Abp.PermissionManagement.HttpApi.Client" Version="9.3.4" />
+    <PackageReference Include="Volo.Abp.FeatureManagement.HttpApi.Client" Version="9.3.4" />
+    <PackageReference Include="Volo.Abp.SettingManagement.HttpApi.Client" Version="9.3.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Volo.Abp.Identity.Pro.HttpApi.Client" Version="9.3.4" />
+    <PackageReference Include="Volo.Abp.Account.Pro.Admin.HttpApi.Client" Version="9.3.4" />
+    <PackageReference Include="Volo.Abp.Account.Pro.Public.HttpApi.Client" Version="9.3.4" />
+    <PackageReference Include="Volo.Saas.Host.HttpApi.Client" Version="9.3.4" />
+    <PackageReference Include="Volo.Abp.AuditLogging.HttpApi.Client" Version="9.3.4" />
+    <PackageReference Include="Volo.Abp.OpenIddict.Pro.HttpApi.Client" Version="9.3.4" />
+    <PackageReference Include="Volo.Abp.LanguageManagement.HttpApi.Client" Version="9.3.4" />
+    <PackageReference Include="Volo.Abp.TextTemplateManagement.HttpApi.Client" Version="9.3.4" />
+    <PackageReference Include="Volo.Abp.Gdpr.HttpApi.Client" Version="9.3.4" />
   </ItemGroup>
 
   <ItemGroup>

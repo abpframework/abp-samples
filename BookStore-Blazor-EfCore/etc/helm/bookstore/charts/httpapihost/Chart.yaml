@@ -1,0 +1,6 @@
+apiVersion: v2
+name: httpapihost
+appVersion: "1.0"
+description: BookStore HttpApi Host Application
+version: 1.0.0
+type: application

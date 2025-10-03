@@ -37,7 +37,7 @@ public static class BookStoreEfCoreEntityExtensionMappings
                          );
 
                  * See the documentation for more:
-                 * https://abp.io/docs/latest/Customizing-Application-Modules-Extending-Entities
+                 * https://docs.abp.io/en/abp/latest/Customizing-Application-Modules-Extending-Entities
                  */
         });
     }

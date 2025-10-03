@@ -248,18 +248,27 @@ paket-files/
 .fake/
 
 # JetBrains Rider
-.idea/
+**/.idea/
 *.sln.iml
+
+# ABP Studio
+**/.abpstudio/
 
 # BookStore
 src/Acme.BookStore.Web/Logs/*
 src/Acme.BookStore.Web.Host/Logs/*
+src/Acme.BookStore.Web.Public/Logs/*
+src/Acme.BookStore.Web.Public.Host/Logs/*
 src/Acme.BookStore.AuthServer/Logs/*
 src/Acme.BookStore.HttpApi.Host/Logs/*
-src/Acme.BookStore.HttpApi.HostWithIds/Logs/*
+src/Acme.BookStore.HttpApi.Host/Logs/*
 src/Acme.BookStore.DbMigrator/Logs/*
-src/Acme.BookStore.Blazor/Logs/*
-src/Acme.BookStore.Blazor.Tiered/Logs/*
+src/Acme.BookStore.Blazor.Server/Logs/*
+src/Acme.BookStore.Blazor.Server.Tiered/Logs/*
 
 # Use abp install-libs to restore.
 **/wwwroot/libs/*
+
+# IdentityServer temp files
+tempkey.rsa
+tempkey.jwk

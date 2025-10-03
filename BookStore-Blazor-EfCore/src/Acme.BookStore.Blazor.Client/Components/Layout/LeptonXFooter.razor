@@ -1,0 +1,22 @@
+﻿@using Volo.Abp.DependencyInjection
+@using Volo.Abp.AspNetCore.Components.Web.LeptonXTheme.Components.ApplicationLayout.SideMenu
+
+@inherits Footer
+@attribute [ExposeServices(typeof(Footer))]
+@attribute [Dependency(ReplaceServices = true)]
+
+<div class="lpx-footbar-container">
+    <div class="lpx-footbar">
+        <div class="lpx-footbar-copyright">
+            <span>@DateTime.UtcNow.Year©</span>
+            <a href="https://leptontheme.com/" target="_blank">Lepton Theme</a>
+            <span>by</span>
+            <a href="https://volosoft.com/" target="_blank">Volosoft</a>
+        </div>
+        <div class="lpx-footbar-solo-links">
+            <a href="#">About</a>
+            <a href="#">Privacy</a>
+            <a href="#">Contact</a>
+        </div>
+    </div>
+</div>

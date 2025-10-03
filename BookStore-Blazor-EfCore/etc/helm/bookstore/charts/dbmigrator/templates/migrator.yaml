@@ -1,0 +1,43 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: "{{ .Release.Name }}-{{ .Chart.Name }}"
+spec:
+  backoffLimit: 10
+  manualSelector: true
+  selector:
+    matchLabels:
+      app: "{{ .Release.Name }}-{{ .Chart.Name }}"
+  template:
+    metadata:
+      labels:
+        app: "{{ .Release.Name }}-{{ .Chart.Name }}"
+    spec:
+      activeDeadlineSeconds: 180
+      restartPolicy: Never
+      containers:
+      - image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+        imagePullPolicy: "{{ .Values.image.pullPolicy }}"
+        name: "{{ .Release.Name }}-{{ .Chart.Name }}"
+        ports:
+        - name: "http"
+          containerPort: 80
+        env:
+        - name: "DOTNET_ENVIRONMENT"
+          value: "{{ .Values.global.dotnetEnvironment }}"
+        - name: "ConnectionStrings__Default"
+          value: "{{ .Values.global.connectionStrings.default | replace "[RELEASE_NAME]" .Release.Name }}"
+        - name: "AbpStudioClient__StudioUrl"
+          value: "{{ .Values.global.abpStudioClient.studioUrl }}"
+        - name: "AbpStudioClient__IsLinkEnabled"
+          value: "{{ .Values.global.abpStudioClient.isLinkEnabled }}" 
+        - name: "OpenIddict__Applications__BookStore_App__ClientId"
+          value: "BookStore_App"
+        - name: "OpenIddict__Applications__BookStore_Blazor__ClientId"
+          value: "BookStore_Blazor"
+        - name: "OpenIddict__Applications__BookStore_Blazor__RootUrl"
+          value: "{{ include "bookstore.hosts.blazor" . }}"
+        - name: "OpenIddict__Applications__BookStore_Swagger__ClientId"
+          value: "BookStore_Swagger"
+        - name: "OpenIddict__Applications__BookStore_Swagger__RootUrl"
+          value: "{{ include "bookstore.hosts.httpapi" . }}"

@@ -1,36 +1,48 @@
-﻿using System;
+using System;
 using Microsoft.Extensions.DependencyInjection;
 using Volo.Abp.Uow;
 using Volo.Abp.AuditLogging.EntityFrameworkCore;
 using Volo.Abp.BackgroundJobs.EntityFrameworkCore;
 using Volo.Abp.EntityFrameworkCore;
-using Volo.Abp.EntityFrameworkCore.SqlServer;
+using Volo.Abp.EntityFrameworkCore.PostgreSql;
 using Volo.Abp.FeatureManagement.EntityFrameworkCore;
 using Volo.Abp.Identity.EntityFrameworkCore;
-using Volo.Abp.Modularity;
 using Volo.Abp.OpenIddict.EntityFrameworkCore;
+using Volo.Abp.Modularity;
 using Volo.Abp.PermissionManagement.EntityFrameworkCore;
 using Volo.Abp.SettingManagement.EntityFrameworkCore;
-using Volo.Abp.TenantManagement.EntityFrameworkCore;
+using Volo.Abp.BlobStoring.Database.EntityFrameworkCore;
+using Volo.Abp.LanguageManagement.EntityFrameworkCore;
+using Volo.Abp.TextTemplateManagement.EntityFrameworkCore;
+using Volo.Saas.EntityFrameworkCore;
+using Volo.Abp.Gdpr;
+using Volo.Abp.Studio;
 
 namespace Acme.BookStore.EntityFrameworkCore;
 
 [DependsOn(
     typeof(BookStoreDomainModule),
-    typeof(AbpIdentityEntityFrameworkCoreModule),
-    typeof(AbpOpenIddictEntityFrameworkCoreModule),
     typeof(AbpPermissionManagementEntityFrameworkCoreModule),
     typeof(AbpSettingManagementEntityFrameworkCoreModule),
-    typeof(AbpEntityFrameworkCoreSqlServerModule),
+    typeof(AbpEntityFrameworkCorePostgreSqlModule),
     typeof(AbpBackgroundJobsEntityFrameworkCoreModule),
     typeof(AbpAuditLoggingEntityFrameworkCoreModule),
-    typeof(AbpTenantManagementEntityFrameworkCoreModule),
-    typeof(AbpFeatureManagementEntityFrameworkCoreModule)
+    typeof(AbpFeatureManagementEntityFrameworkCoreModule),
+    typeof(AbpIdentityProEntityFrameworkCoreModule),
+    typeof(AbpOpenIddictProEntityFrameworkCoreModule),
+    typeof(LanguageManagementEntityFrameworkCoreModule),
+    typeof(SaasEntityFrameworkCoreModule),
+    typeof(TextTemplateManagementEntityFrameworkCoreModule),
+    typeof(AbpGdprEntityFrameworkCoreModule),
+    typeof(BlobStoringDatabaseEntityFrameworkCoreModule)
     )]
 public class BookStoreEntityFrameworkCoreModule : AbpModule
 {
     public override void PreConfigureServices(ServiceConfigurationContext context)
     {
+        // https://www.npgsql.org/efcore/release-notes/6.0.html#opting-out-of-the-new-timestamp-mapping-logic
+        AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
+
         BookStoreEfCoreEntityExtensionMappings.Configure();
     }
 
@@ -43,12 +55,19 @@ public class BookStoreEntityFrameworkCoreModule : AbpModule
             options.AddDefaultRepositories(includeAllEntities: true);
         });
 
+        if (AbpStudioAnalyzeHelper.IsInAnalyzeMode)
+        {
+            return;
+        }
+
         Configure<AbpDbContextOptions>(options =>
         {
-                /* The main point to change your DBMS.
-                 * See also BookStoreMigrationsDbContextFactory for EF Core tooling. */
-            options.UseSqlServer();
-        });
+            /* The main point to change your DBMS.
+             * See also BookStoreDbContextFactory for EF Core tooling. */
 
+            options.UseNpgsql();
+
+        });
+        
     }
 }

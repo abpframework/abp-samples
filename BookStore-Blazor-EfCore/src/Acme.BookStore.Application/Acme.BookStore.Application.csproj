@@ -3,7 +3,8 @@
   <Import Project="..\..\common.props" />
 
   <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
+    <TargetFramework>net9.0</TargetFramework>
+    <Nullable>enable</Nullable>
     <RootNamespace>Acme.BookStore</RootNamespace>
   </PropertyGroup>
 
@@ -13,12 +14,18 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Volo.Abp.Account.Application" Version="8.3.0" />
-    <PackageReference Include="Volo.Abp.Identity.Application" Version="8.3.0" />
-    <PackageReference Include="Volo.Abp.PermissionManagement.Application" Version="8.3.0" />
-    <PackageReference Include="Volo.Abp.TenantManagement.Application" Version="8.3.0" />
-    <PackageReference Include="Volo.Abp.FeatureManagement.Application" Version="8.3.0" />
-    <PackageReference Include="Volo.Abp.SettingManagement.Application" Version="8.3.0" />
+    <PackageReference Include="Volo.Abp.PermissionManagement.Application" Version="9.3.4" />
+    <PackageReference Include="Volo.Abp.FeatureManagement.Application" Version="9.3.4" />
+    <PackageReference Include="Volo.Abp.SettingManagement.Application" Version="9.3.4" />
+    <PackageReference Include="Volo.Abp.Account.Pro.Public.Application" Version="9.3.4" />
+    <PackageReference Include="Volo.Abp.Account.Pro.Admin.Application" Version="9.3.4" />
+    <PackageReference Include="Volo.Abp.Identity.Pro.Application" Version="9.3.4" />
+    <PackageReference Include="Volo.Saas.Host.Application" Version="9.3.4" />
+    <PackageReference Include="Volo.Abp.AuditLogging.Application" Version="9.3.4" />
+    <PackageReference Include="Volo.Abp.OpenIddict.Pro.Application" Version="9.3.4" />
+    <PackageReference Include="Volo.Abp.LanguageManagement.Application" Version="9.3.4" />
+    <PackageReference Include="Volo.Abp.TextTemplateManagement.Application" Version="9.3.4" />
+    <PackageReference Include="Volo.Abp.Gdpr.Application" Version="9.3.4" />
   </ItemGroup>
 
 </Project>

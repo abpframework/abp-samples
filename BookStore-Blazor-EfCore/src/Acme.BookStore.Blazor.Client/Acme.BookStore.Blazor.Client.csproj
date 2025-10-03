@@ -1,0 +1,45 @@
+<Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
+
+  <Import Project="..\..\common.props" />
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <BlazorWebAssemblyLoadAllGlobalizationData>true</BlazorWebAssemblyLoadAllGlobalizationData>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Blazorise.Bootstrap5" Version="1.8.1" />
+    <PackageReference Include="Blazorise.Icons.FontAwesome" Version="1.8.1" />
+    <PackageReference Include="Blazorise.Components" Version="1.8.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="9.0.5" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="9.0.5" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Volo.Abp.Autofac.WebAssembly" Version="9.3.4" />
+    <PackageReference Include="Volo.Abp.SettingManagement.Blazor.WebAssembly" Version="9.3.4" />
+    <PackageReference Include="Volo.Abp.FeatureManagement.Blazor.WebAssembly" Version="9.3.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Volo.Abp.AspNetCore.Components.WebAssembly.LeptonXTheme" Version="4.3.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Volo.Abp.Account.Pro.Admin.Blazor.WebAssembly" Version="9.3.4" />
+    <PackageReference Include="Volo.Abp.Account.Pro.Public.Blazor.WebAssembly" Version="9.3.4" />
+    <PackageReference Include="Volo.Abp.Identity.Pro.Blazor.WebAssembly" Version="9.3.4" />
+    <PackageReference Include="Volo.Saas.Host.Blazor.WebAssembly" Version="9.3.4" />
+    <PackageReference Include="Volo.Abp.TextTemplateManagement.Blazor.WebAssembly" Version="9.3.4" />
+    <PackageReference Include="Volo.Abp.AuditLogging.Blazor.WebAssembly" Version="9.3.4" />
+    <PackageReference Include="Volo.Abp.LanguageManagement.Blazor.WebAssembly" Version="9.3.4" />
+    <PackageReference Include="Volo.Abp.OpenIddict.Pro.Blazor.WebAssembly" Version="9.3.4" />
+    <PackageReference Include="Volo.Abp.Gdpr.Blazor.WebAssembly" Version="9.3.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\Acme.BookStore.HttpApi.Client\Acme.BookStore.HttpApi.Client.csproj" />
+  </ItemGroup>
+
+</Project>

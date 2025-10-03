@@ -12,8 +12,7 @@ public class EntityFrameworkCoreBookStoreDbSchemaMigrator
 {
     private readonly IServiceProvider _serviceProvider;
 
-    public EntityFrameworkCoreBookStoreDbSchemaMigrator(
-        IServiceProvider serviceProvider)
+    public EntityFrameworkCoreBookStoreDbSchemaMigrator(IServiceProvider serviceProvider)
     {
         _serviceProvider = serviceProvider;
     }

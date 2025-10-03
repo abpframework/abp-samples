@@ -1,0 +1,6 @@
+apiVersion: v2
+name: dbmigrator
+appVersion: "1.0"
+description: BookStore Database Migrator
+version: 1.0.0
+type: application

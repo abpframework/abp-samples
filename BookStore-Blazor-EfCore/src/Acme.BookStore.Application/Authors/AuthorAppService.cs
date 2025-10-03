@@ -1,8 +1,9 @@
-﻿using Acme.BookStore.Permissions;
-using Microsoft.AspNetCore.Authorization;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
+using Acme.BookStore.Permissions;
+using Microsoft.AspNetCore.Authorization;
 using Volo.Abp.Application.Dtos;
 using Volo.Abp.Domain.Repositories;
 
@@ -44,7 +45,8 @@ public class AuthorAppService : BookStoreAppService, IAuthorAppService
 
         var totalCount = input.Filter == null
             ? await _authorRepository.CountAsync()
-            : await _authorRepository.CountAsync(author => author.Name.Contains(input.Filter));
+            : await _authorRepository.CountAsync(
+                author => author.Name.Contains(input.Filter));
 
         return new PagedResultDto<AuthorDto>(
             totalCount,
@@ -87,4 +89,5 @@ public class AuthorAppService : BookStoreAppService, IAuthorAppService
     {
         await _authorRepository.DeleteAsync(id);
     }
+
 }

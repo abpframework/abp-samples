@@ -1,0 +1,4 @@
+image:
+  repository: "bookstore/blazor"
+  tag: "latest"
+  pullPolicy: IfNotPresent

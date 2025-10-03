@@ -1,0 +1,6 @@
+port: 5432
+sa_password: "myPassword"
+sa_user: "postgres"
+image:
+  repository: "postgres"
+  tag: "16.0"

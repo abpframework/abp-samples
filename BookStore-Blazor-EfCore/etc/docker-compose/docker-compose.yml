@@ -1,0 +1,88 @@
+services:
+  bookstore-blazor:
+    image: acme/bookstore-blazor:latest
+    container_name: bookstore-blazor
+    build:
+      context: ../../
+      dockerfile: src/Acme.BookStore.Blazor/Dockerfile.local
+    ports:
+      - "44352:8081"
+    depends_on:
+      - bookstore-api
+    restart: on-failure
+    volumes:
+      - ./appsettings.json:/usr/share/nginx/html/appsettings.json
+    networks:
+      - abp-network
+
+  bookstore-api:
+    image: acme/bookstore-api:latest
+    container_name: bookstore-api
+    hostname: bookstore-api
+    build:
+      context: ../../
+      dockerfile: src/Acme.BookStore.HttpApi.Host/Dockerfile.local
+    environment:
+      - ASPNETCORE_URLS=https://+:8081;http://+:8080;
+      - Kestrel__Certificates__Default__Path=/app/certs/localhost.pfx
+      - Kestrel__Certificates__Default__Password=dfd2467f-4707-4a24-b4f7-51a503baacd0
+      - App__SelfUrl=https://localhost:44367
+      - App__CorsOrigins=http://localhost:44352
+      - App__HealthCheckUrl=http://bookstore-api:8080/health-status
+      - AuthServer__RequireHttpsMetadata=false
+      - AuthServer__Authority=https://localhost:44330
+      - ConnectionStrings__Default=User ID=postgres;Password=myPassw0rd;Host=postgres;Port=5432;Database=BookStore;Pooling=false;
+    ports:
+      - "44330:8081"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    restart: on-failure    
+    volumes:
+      - ./certs:/app/certs
+    networks:
+      - abp-network
+  
+
+
+  db-migrator:
+    image: acme/bookstore-db-migrator:latest
+    container_name: db-migrator
+    build:
+      context: ../../
+      dockerfile: src/Acme.BookStore.DbMigrator/Dockerfile.local
+    environment:
+      - OpenIddict__Applications__BookStore_Blazor__RootUrl=http://localhost:44352
+      - ConnectionStrings__Default=User ID=postgres;Password=myPassw0rd;Host=postgres;Port=5432;Database=BookStore;Pooling=false;
+    restart: on-failure
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - abp-network    
+  
+  postgres:
+    container_name: postgres-db
+    image: postgres:14.1
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: "postgres"
+      POSTGRES_PASSWORD: "myPassw0rd"
+    volumes:
+      - postgres_data:/var/opt/postgres
+    networks: 
+      - abp-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5    
+
+volumes:
+  postgres_data:
+    name: bookstore_postgres_data
+networks:
+  abp-network:
+    name: bookstore-network
+    driver: bridge

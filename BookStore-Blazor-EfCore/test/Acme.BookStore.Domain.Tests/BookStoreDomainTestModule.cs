@@ -1,11 +1,11 @@
-﻿using Acme.BookStore.EntityFrameworkCore;
-using Volo.Abp.Modularity;
+﻿using Volo.Abp.Modularity;
 
 namespace Acme.BookStore;
 
 [DependsOn(
-    typeof(BookStoreEntityFrameworkCoreTestModule)
-    )]
+    typeof(BookStoreDomainModule),
+    typeof(BookStoreTestBaseModule)
+)]
 public class BookStoreDomainTestModule : AbpModule
 {
 

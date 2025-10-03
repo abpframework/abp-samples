@@ -1,0 +1,4 @@
+image:
+  repository: "bookstore/httpapihost"
+  tag: "latest"
+  pullPolicy: IfNotPresent

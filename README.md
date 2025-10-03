@@ -1,6 +1,6 @@
 # ABP Framework Sample Projects
 
-![build and test](https://github.com/abpframework/abp-samples/workflows/build%20and%20test/badge.svg)
+[![build and test](https://github.com/abpframework/abp-samples/actions/workflows/build-and-test.yml/badge.svg)](https://github.com/abpframework/abp-samples/actions/workflows/build-and-test.yml)
 
 Sample solutions built with the ABP Framework.
 

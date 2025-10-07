@@ -37,6 +37,7 @@ using Volo.Abp.SettingManagement.Web;
 using Volo.Abp.Swashbuckle;
 using Volo.Abp.TenantManagement.Web;
 using Volo.Abp.OpenIddict;
+using Volo.Abp.Studio.Client.AspNetCore;
 using Volo.Abp.UI.Navigation.Urls;
 using Volo.Abp.UI;
 using Volo.Abp.UI.Navigation;
@@ -55,6 +56,7 @@ namespace Acme.BookStore.Web;
     typeof(AbpAspNetCoreMvcUiLeptonXLiteThemeModule),
     typeof(AbpTenantManagementWebModule),
     typeof(AbpAspNetCoreSerilogModule),
+    typeof(AbpStudioClientAspNetCoreModule),
     typeof(AbpSwashbuckleModule)
     )]
 public class BookStoreWebModule : AbpModule
@@ -235,6 +237,7 @@ public class BookStoreWebModule : AbpModule
         app.UseUnitOfWork();
         app.UseDynamicClaims();
         app.UseAuthorization();
+        app.UseAbpStudioLink();
 
         app.UseSwagger();
         app.UseAbpSwaggerUI(options =>

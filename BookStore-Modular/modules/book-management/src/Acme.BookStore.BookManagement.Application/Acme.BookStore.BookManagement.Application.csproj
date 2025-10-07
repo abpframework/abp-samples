@@ -3,7 +3,7 @@
   <Import Project="..\..\common.props" />
 
   <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
+    <TargetFramework>net9.0</TargetFramework>
     <RootNamespace>Acme.BookStore.BookManagement</RootNamespace>
   </PropertyGroup>
 
@@ -13,7 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Volo.Abp.AutoMapper" Version="8.3.0" />
+    <PackageReference Include="Volo.Abp.AutoMapper" Version="9.3.3" />
   </ItemGroup>
 
 </Project>

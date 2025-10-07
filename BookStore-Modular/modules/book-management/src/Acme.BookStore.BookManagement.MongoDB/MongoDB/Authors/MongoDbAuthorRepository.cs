@@ -24,7 +24,7 @@ public class MongoDbAuthorRepository : MongoDbRepository<BookManagementMongoDbCo
 
     public async Task<List<Author>> GetListAsync(int skipCount, int maxResultCount, string sorting, string filter = null)
     {
-        var dbSet = await GetMongoQueryableAsync();
+        var dbSet = await GetQueryableAsync();
         return await dbSet
             .WhereIf(
                 !filter.IsNullOrWhiteSpace(),
@@ -33,7 +33,6 @@ public class MongoDbAuthorRepository : MongoDbRepository<BookManagementMongoDbCo
             .OrderBy(sorting)
             .Skip(skipCount)
             .Take(maxResultCount)
-            .As<IMongoQueryable<Author>>()
             .ToListAsync();
     }
 }

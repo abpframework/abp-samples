@@ -1,0 +1,71 @@
+{
+  "folders": {
+    "items": {
+      "src": {},
+      "test": {},
+      "host": {}
+    }
+  },
+  "packages": {
+    "Acme.BookStore.BookManagement.Domain.Shared": {
+      "path": "src/Acme.BookStore.BookManagement.Domain.Shared/Acme.BookStore.BookManagement.Domain.Shared.abppkg",
+      "folder": "src"
+    },
+    "Acme.BookStore.BookManagement.Domain": {
+      "path": "src/Acme.BookStore.BookManagement.Domain/Acme.BookStore.BookManagement.Domain.abppkg",
+      "folder": "src"
+    },
+    "Acme.BookStore.BookManagement.Application.Contracts": {
+      "path": "src/Acme.BookStore.BookManagement.Application.Contracts/Acme.BookStore.BookManagement.Application.Contracts.abppkg",
+      "folder": "src"
+    },
+    "Acme.BookStore.BookManagement.Application": {
+      "path": "src/Acme.BookStore.BookManagement.Application/Acme.BookStore.BookManagement.Application.abppkg",
+      "folder": "src"
+    },
+    "Acme.BookStore.BookManagement.EntityFrameworkCore": {
+      "path": "src/Acme.BookStore.BookManagement.EntityFrameworkCore/Acme.BookStore.BookManagement.EntityFrameworkCore.abppkg",
+      "folder": "src"
+    },
+    "Acme.BookStore.BookManagement.MongoDB": {
+      "path": "src/Acme.BookStore.BookManagement.MongoDB/Acme.BookStore.BookManagement.MongoDB.abppkg",
+      "folder": "src"
+    },
+    "Acme.BookStore.BookManagement.HttpApi": {
+      "path": "src/Acme.BookStore.BookManagement.HttpApi/Acme.BookStore.BookManagement.HttpApi.abppkg",
+      "folder": "src"
+    },
+    "Acme.BookStore.BookManagement.HttpApi.Client": {
+      "path": "src/Acme.BookStore.BookManagement.HttpApi.Client/Acme.BookStore.BookManagement.HttpApi.Client.abppkg",
+      "folder": "src"
+    },
+    "Acme.BookStore.BookManagement.TestBase": {
+      "path": "test/Acme.BookStore.BookManagement.TestBase/Acme.BookStore.BookManagement.TestBase.abppkg",
+      "folder": "test"
+    },
+    "Acme.BookStore.BookManagement.EntityFrameworkCore.Tests": {
+      "path": "test/Acme.BookStore.BookManagement.EntityFrameworkCore.Tests/Acme.BookStore.BookManagement.EntityFrameworkCore.Tests.abppkg",
+      "folder": "test"
+    },
+    "Acme.BookStore.BookManagement.MongoDB.Tests": {
+      "path": "test/Acme.BookStore.BookManagement.MongoDB.Tests/Acme.BookStore.BookManagement.MongoDB.Tests.abppkg",
+      "folder": "test"
+    },
+    "Acme.BookStore.BookManagement.Domain.Tests": {
+      "path": "test/Acme.BookStore.BookManagement.Domain.Tests/Acme.BookStore.BookManagement.Domain.Tests.abppkg",
+      "folder": "test"
+    },
+    "Acme.BookStore.BookManagement.Application.Tests": {
+      "path": "test/Acme.BookStore.BookManagement.Application.Tests/Acme.BookStore.BookManagement.Application.Tests.abppkg",
+      "folder": "test"
+    },
+    "Acme.BookStore.BookManagement.Web": {
+      "path": "src/Acme.BookStore.BookManagement.Web/Acme.BookStore.BookManagement.Web.abppkg",
+      "folder": "src"
+    },
+    "Acme.BookStore.BookManagement.HttpApi.Client.ConsoleTestApp": {
+      "path": "test/Acme.BookStore.BookManagement.HttpApi.Client.ConsoleTestApp/Acme.BookStore.BookManagement.HttpApi.Client.ConsoleTestApp.abppkg",
+      "folder": "test"
+    }
+  }
+}

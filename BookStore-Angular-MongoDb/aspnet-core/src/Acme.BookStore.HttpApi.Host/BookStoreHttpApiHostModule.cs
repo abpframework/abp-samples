@@ -25,6 +25,7 @@ using Volo.Abp.AspNetCore.Serilog;
 using Volo.Abp.Autofac;
 using Volo.Abp.Localization;
 using Volo.Abp.Modularity;
+using Volo.Abp.Studio.Client.AspNetCore;
 using Volo.Abp.Swashbuckle;
 using Volo.Abp.UI.Navigation.Urls;
 using Volo.Abp.VirtualFileSystem;
@@ -40,6 +41,7 @@ namespace Acme.BookStore;
     typeof(AbpAspNetCoreMvcUiLeptonXLiteThemeModule),
     typeof(AbpAccountWebOpenIddictModule),
     typeof(AbpAspNetCoreSerilogModule),
+    typeof(AbpStudioClientAspNetCoreModule),
     typeof(AbpSwashbuckleModule)
 )]
 public class BookStoreHttpApiHostModule : AbpModule
@@ -195,6 +197,7 @@ public class BookStoreHttpApiHostModule : AbpModule
         app.UseCors();
         app.UseAuthentication();
         app.UseAbpOpenIddictValidation();
+        app.UseAbpStudioLink();
 
         if (MultiTenancyConsts.IsEnabled)
         {

@@ -1,0 +1,16 @@
+{
+  "applications": {
+    "EventOrganizer.HttpApi.Host": {
+      "type": "dotnet-project",
+      "path": "../../../src/EventOrganizer.HttpApi.Host/EventOrganizer.HttpApi.Host.csproj",
+      "launchUrl": "https://localhost:44354",
+      "runnable": true
+    },
+    "EventOrganizer.Blazor": {
+      "type": "dotnet-project",
+      "path": "../../../src/EventOrganizer.Blazor/EventOrganizer.Blazor.csproj",
+      "launchUrl": "https://localhost:44307",
+      "runnable": true
+    }
+  }
+}

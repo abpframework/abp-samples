@@ -11,7 +11,6 @@ using Volo.Abp.AspNetCore.Components.WebAssembly.LeptonXLiteTheme;
 using Volo.Abp.AspNetCore.Components.Web.LeptonXLiteTheme.Themes.LeptonXLite;
 using Volo.Abp.AspNetCore.Components.Web.Theming.Routing;
 using Volo.Abp.Autofac.WebAssembly;
-using Volo.Abp.AutoMapper;
 using Volo.Abp.Modularity;
 using Volo.Abp.UI.Navigation;
 using Volo.Abp.Identity.Blazor.WebAssembly;
@@ -41,7 +40,6 @@ public class BookStoreBlazorModule : AbpModule
         ConfigureRouter(context);
         ConfigureUI(builder);
         ConfigureMenu(context);
-        ConfigureAutoMapper(context);
     }
 
     private void ConfigureRouter(ServiceConfigurationContext context)
@@ -93,14 +91,6 @@ public class BookStoreBlazorModule : AbpModule
         context.Services.AddTransient(sp => new HttpClient
         {
             BaseAddress = new Uri(environment.BaseAddress)
-        });
-    }
-
-    private void ConfigureAutoMapper(ServiceConfigurationContext context)
-    {
-        Configure<AbpAutoMapperOptions>(options =>
-        {
-            options.AddMaps<BookStoreBlazorModule>();
         });
     }
 }

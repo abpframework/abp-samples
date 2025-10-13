@@ -1,11 +1,11 @@
 using ModularCrm.Ordering;
 using Microsoft.Extensions.DependencyInjection;
-using Volo.Abp.AutoMapper;
 using Volo.Abp.Modularity;
 using Volo.Abp.Application;
 using Volo.Abp.EntityFrameworkCore;
 using ModularCrm.Catalog.Data;
 using Volo.Abp.AspNetCore.Mvc;
+using Volo.Abp.Mapperly;
 
 namespace ModularCrm.Catalog;
 
@@ -13,7 +13,7 @@ namespace ModularCrm.Catalog;
     typeof(OrderingContractsModule),
     typeof(CatalogContractsModule),
     typeof(AbpDddApplicationModule),
-    typeof(AbpAutoMapperModule),
+    typeof(AbpMapperlyModule),
     typeof(AbpAspNetCoreMvcModule),
     typeof(AbpEntityFrameworkCoreModule)
 )]
@@ -29,11 +29,7 @@ public class CatalogModule : AbpModule
 
     public override void ConfigureServices(ServiceConfigurationContext context)
     {
-        context.Services.AddAutoMapperObjectMapper<CatalogModule>();
-        Configure<AbpAutoMapperOptions>(options =>
-        {
-            options.AddMaps<CatalogModule>(validate: true);
-        });
+        context.Services.AddMapperlyObjectMapper<CatalogModule>();
         
         context.Services.AddAbpDbContext<CatalogDbContext>(options =>
         {

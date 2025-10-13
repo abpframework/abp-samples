@@ -1,8 +1,8 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <Import Project="..\common.props" />
   <PropertyGroup>
     <Version>1.0.0</Version>
-    <TargetFramework>net9.0</TargetFramework>
+    <TargetFramework>net10.0</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.13.0" />
@@ -15,11 +15,11 @@
     <PackageReference Include="xunit" Version="2.9.3" />
     <PackageReference Include="xunit.extensibility.execution" Version="2.9.3" />
     <PackageReference Include="xunit.runner.visualstudio" Version="3.0.1" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.4" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="10.0.0-rc.1.25451.107" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Volo.Abp.AspNetCore.TestBase" Version="9.2.0" />
-    <PackageReference Include="Volo.Abp.EntityFrameworkCore.Sqlite" Version="9.2.0" />
+    <PackageReference Include="Volo.Abp.AspNetCore.TestBase" Version="10.0.0-rc.1" />
+    <PackageReference Include="Volo.Abp.EntityFrameworkCore.Sqlite" Version="10.0.0-rc.1" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ModularCrm.Catalog\ModularCrm.Catalog.csproj" />

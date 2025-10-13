@@ -4,18 +4,18 @@ using ModularCrm.Ordering.Localization;
 using ModularCrm.Ordering.UI.Menus;
 using Volo.Abp.AspNetCore.Mvc.Localization;
 using Volo.Abp.AspNetCore.Mvc.UI.Theme.Shared;
-using Volo.Abp.AutoMapper;
 using Volo.Abp.Modularity;
 using Volo.Abp.UI.Navigation;
 using Volo.Abp.VirtualFileSystem;
 using ModularCrm.Ordering.Permissions;
+using Volo.Abp.Mapperly;
 
 namespace ModularCrm.Ordering.UI;
 
 [DependsOn(
     typeof(OrderingContractsModule),
     typeof(AbpAspNetCoreMvcUiThemeSharedModule),
-    typeof(AbpAutoMapperModule)
+    typeof(AbpMapperlyModule)
 )]
 public class OrderingWebModule : AbpModule
 {
@@ -44,11 +44,7 @@ public class OrderingWebModule : AbpModule
             options.FileSets.AddEmbedded<OrderingWebModule>();
         });
 
-        context.Services.AddAutoMapperObjectMapper<OrderingWebModule>();
-        Configure<AbpAutoMapperOptions>(options =>
-        {
-            options.AddMaps<OrderingWebModule>(validate: true);
-        });
+        context.Services.AddMapperlyObjectMapper<OrderingWebModule>();
 
         Configure<RazorPagesOptions>(options =>
         {

@@ -24,7 +24,6 @@ using Volo.Abp.AspNetCore.Mvc.UI.Theme.Shared;
 using Volo.Abp.AspNetCore.Mvc.UI.Theme.Shared.Toolbars;
 using Volo.Abp.AspNetCore.Serilog;
 using Volo.Abp.Autofac;
-using Volo.Abp.AutoMapper;
 using Volo.Abp.Caching;
 using Volo.Abp.FeatureManagement;
 using Volo.Abp.Identity;
@@ -64,6 +63,7 @@ using Volo.Abp.Identity.EntityFrameworkCore;
 using Volo.Abp.FeatureManagement.EntityFrameworkCore;
 using Volo.Abp.EntityFrameworkCore.SqlServer;
 using Volo.Abp.Studio.Client.AspNetCore;
+using Volo.Abp.Mapperly;
 
 namespace ModularCrm;
 
@@ -71,7 +71,7 @@ namespace ModularCrm;
     // ABP Framework packages
     typeof(AbpAspNetCoreMvcModule),
     typeof(AbpAutofacModule),
-    typeof(AbpAutoMapperModule),
+    typeof(AbpMapperlyModule),
     typeof(AbpCachingModule),
     typeof(AbpSwashbuckleModule),
     typeof(AbpAspNetCoreSerilogModule),
@@ -190,7 +190,7 @@ public class ModularCrmModule : AbpModule
         ConfigureUrls(configuration);
         ConfigureBundles();
         ConfigureHealthChecks(context);
-        ConfigureAutoMapper(context);
+        ConfigureMapperly(context);
         ConfigureSwagger(context.Services);
         ConfigureAutoApiControllers();
         ConfigureVirtualFiles(hostingEnvironment);
@@ -330,17 +330,9 @@ public class ModularCrmModule : AbpModule
         );
     }
 
-    private void ConfigureAutoMapper(ServiceConfigurationContext context)
+    private void ConfigureMapperly(ServiceConfigurationContext context)
     {
-        context.Services.AddAutoMapperObjectMapper<ModularCrmModule>();
-        Configure<AbpAutoMapperOptions>(options =>
-        {
-            /* Uncomment `validate: true` if you want to enable the Configuration Validation feature.
-             * See AutoMapper's documentation to learn what it is:
-             * https://docs.automapper.org/en/stable/Configuration-validation.html
-             */
-            options.AddMaps<ModularCrmModule>(/* validate: true */);
-        });
+        context.Services.AddMapperlyObjectMapper<ModularCrmModule>();
     }
 
 

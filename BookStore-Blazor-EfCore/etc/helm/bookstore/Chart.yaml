@@ -1,5 +1,0 @@
-apiVersion: v2
-name: bookstore
-version: 1.0.0
-appVersion: "1.0"
-description: BookStore Solution

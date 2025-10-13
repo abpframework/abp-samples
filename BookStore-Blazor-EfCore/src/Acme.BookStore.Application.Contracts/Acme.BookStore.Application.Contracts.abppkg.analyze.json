@@ -1,0 +1,118 @@
+{
+  "name": "Acme.BookStore.Application.Contracts",
+  "hash": "",
+  "contents": [
+    {
+      "namespace": "Acme.BookStore",
+      "dependsOnModules": [
+        {
+          "declaringAssemblyName": "Acme.BookStore.Domain.Shared",
+          "namespace": "Acme.BookStore",
+          "name": "BookStoreDomainSharedModule"
+        },
+        {
+          "declaringAssemblyName": "Volo.Abp.FeatureManagement.Application.Contracts",
+          "namespace": "Volo.Abp.FeatureManagement",
+          "name": "AbpFeatureManagementApplicationContractsModule"
+        },
+        {
+          "declaringAssemblyName": "Volo.Abp.SettingManagement.Application.Contracts",
+          "namespace": "Volo.Abp.SettingManagement",
+          "name": "AbpSettingManagementApplicationContractsModule"
+        },
+        {
+          "declaringAssemblyName": "Volo.Abp.Identity.Pro.Application.Contracts",
+          "namespace": "Volo.Abp.Identity",
+          "name": "AbpIdentityApplicationContractsModule"
+        },
+        {
+          "declaringAssemblyName": "Volo.Abp.Account.Pro.Public.Application.Contracts",
+          "namespace": "Volo.Abp.Account",
+          "name": "AbpAccountPublicApplicationContractsModule"
+        },
+        {
+          "declaringAssemblyName": "Volo.Abp.Account.Pro.Admin.Application.Contracts",
+          "namespace": "Volo.Abp.Account",
+          "name": "AbpAccountAdminApplicationContractsModule"
+        },
+        {
+          "declaringAssemblyName": "Volo.Abp.AuditLogging.Application.Contracts",
+          "namespace": "Volo.Abp.AuditLogging",
+          "name": "AbpAuditLoggingApplicationContractsModule"
+        },
+        {
+          "declaringAssemblyName": "Volo.Abp.OpenIddict.Pro.Application.Contracts",
+          "namespace": "Volo.Abp.OpenIddict",
+          "name": "AbpOpenIddictProApplicationContractsModule"
+        },
+        {
+          "declaringAssemblyName": "Volo.Abp.TextTemplateManagement.Application.Contracts",
+          "namespace": "Volo.Abp.TextTemplateManagement",
+          "name": "TextTemplateManagementApplicationContractsModule"
+        },
+        {
+          "declaringAssemblyName": "Volo.Abp.LanguageManagement.Application.Contracts",
+          "namespace": "Volo.Abp.LanguageManagement",
+          "name": "LanguageManagementApplicationContractsModule"
+        },
+        {
+          "declaringAssemblyName": "Volo.Abp.Gdpr.Application.Contracts",
+          "namespace": "Volo.Abp.Gdpr",
+          "name": "AbpGdprApplicationContractsModule"
+        },
+        {
+          "declaringAssemblyName": "Volo.Abp.PermissionManagement.Application.Contracts",
+          "namespace": "Volo.Abp.PermissionManagement",
+          "name": "AbpPermissionManagementApplicationContractsModule"
+        }
+      ],
+      "implementingInterfaces": [
+        {
+          "name": "IAbpModule",
+          "namespace": "Volo.Abp.Modularity",
+          "declaringAssemblyName": "Volo.Abp.Core",
+          "fullName": "Volo.Abp.Modularity.IAbpModule"
+        },
+        {
+          "name": "IOnPreApplicationInitialization",
+          "namespace": "Volo.Abp.Modularity",
+          "declaringAssemblyName": "Volo.Abp.Core",
+          "fullName": "Volo.Abp.Modularity.IOnPreApplicationInitialization"
+        },
+        {
+          "name": "IOnApplicationInitialization",
+          "namespace": "Volo.Abp",
+          "declaringAssemblyName": "Volo.Abp.Core",
+          "fullName": "Volo.Abp.IOnApplicationInitialization"
+        },
+        {
+          "name": "IOnPostApplicationInitialization",
+          "namespace": "Volo.Abp.Modularity",
+          "declaringAssemblyName": "Volo.Abp.Core",
+          "fullName": "Volo.Abp.Modularity.IOnPostApplicationInitialization"
+        },
+        {
+          "name": "IOnApplicationShutdown",
+          "namespace": "Volo.Abp",
+          "declaringAssemblyName": "Volo.Abp.Core",
+          "fullName": "Volo.Abp.IOnApplicationShutdown"
+        },
+        {
+          "name": "IPreConfigureServices",
+          "namespace": "Volo.Abp.Modularity",
+          "declaringAssemblyName": "Volo.Abp.Core",
+          "fullName": "Volo.Abp.Modularity.IPreConfigureServices"
+        },
+        {
+          "name": "IPostConfigureServices",
+          "namespace": "Volo.Abp.Modularity",
+          "declaringAssemblyName": "Volo.Abp.Core",
+          "fullName": "Volo.Abp.Modularity.IPostConfigureServices"
+        }
+      ],
+      "contentType": "abpModule",
+      "name": "BookStoreApplicationContractsModule",
+      "summary": null
+    }
+  ]
+}

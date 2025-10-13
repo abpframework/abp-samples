@@ -1,0 +1,118 @@
+{
+  "name": "Acme.BookStore.HttpApi",
+  "hash": "",
+  "contents": [
+    {
+      "namespace": "Acme.BookStore",
+      "dependsOnModules": [
+        {
+          "declaringAssemblyName": "Acme.BookStore.Application.Contracts",
+          "namespace": "Acme.BookStore",
+          "name": "BookStoreApplicationContractsModule"
+        },
+        {
+          "declaringAssemblyName": "Volo.Abp.PermissionManagement.HttpApi",
+          "namespace": "Volo.Abp.PermissionManagement.HttpApi",
+          "name": "AbpPermissionManagementHttpApiModule"
+        },
+        {
+          "declaringAssemblyName": "Volo.Abp.SettingManagement.HttpApi",
+          "namespace": "Volo.Abp.SettingManagement",
+          "name": "AbpSettingManagementHttpApiModule"
+        },
+        {
+          "declaringAssemblyName": "Volo.Abp.Identity.Pro.HttpApi",
+          "namespace": "Volo.Abp.Identity",
+          "name": "AbpIdentityHttpApiModule"
+        },
+        {
+          "declaringAssemblyName": "Volo.Abp.Account.Pro.Admin.HttpApi",
+          "namespace": "Volo.Abp.Account",
+          "name": "AbpAccountAdminHttpApiModule"
+        },
+        {
+          "declaringAssemblyName": "Volo.Abp.TextTemplateManagement.HttpApi",
+          "namespace": "Volo.Abp.TextTemplateManagement",
+          "name": "TextTemplateManagementHttpApiModule"
+        },
+        {
+          "declaringAssemblyName": "Volo.Abp.AuditLogging.HttpApi",
+          "namespace": "Volo.Abp.AuditLogging",
+          "name": "AbpAuditLoggingHttpApiModule"
+        },
+        {
+          "declaringAssemblyName": "Volo.Abp.OpenIddict.Pro.HttpApi",
+          "namespace": "Volo.Abp.OpenIddict",
+          "name": "AbpOpenIddictProHttpApiModule"
+        },
+        {
+          "declaringAssemblyName": "Volo.Abp.LanguageManagement.HttpApi",
+          "namespace": "Volo.Abp.LanguageManagement",
+          "name": "LanguageManagementHttpApiModule"
+        },
+        {
+          "declaringAssemblyName": "Volo.Abp.Gdpr.HttpApi",
+          "namespace": "Volo.Abp.Gdpr",
+          "name": "AbpGdprHttpApiModule"
+        },
+        {
+          "declaringAssemblyName": "Volo.Abp.Account.Pro.Public.HttpApi",
+          "namespace": "Volo.Abp.Account",
+          "name": "AbpAccountPublicHttpApiModule"
+        },
+        {
+          "declaringAssemblyName": "Volo.Abp.FeatureManagement.HttpApi",
+          "namespace": "Volo.Abp.FeatureManagement",
+          "name": "AbpFeatureManagementHttpApiModule"
+        }
+      ],
+      "implementingInterfaces": [
+        {
+          "name": "IAbpModule",
+          "namespace": "Volo.Abp.Modularity",
+          "declaringAssemblyName": "Volo.Abp.Core",
+          "fullName": "Volo.Abp.Modularity.IAbpModule"
+        },
+        {
+          "name": "IOnPreApplicationInitialization",
+          "namespace": "Volo.Abp.Modularity",
+          "declaringAssemblyName": "Volo.Abp.Core",
+          "fullName": "Volo.Abp.Modularity.IOnPreApplicationInitialization"
+        },
+        {
+          "name": "IOnApplicationInitialization",
+          "namespace": "Volo.Abp",
+          "declaringAssemblyName": "Volo.Abp.Core",
+          "fullName": "Volo.Abp.IOnApplicationInitialization"
+        },
+        {
+          "name": "IOnPostApplicationInitialization",
+          "namespace": "Volo.Abp.Modularity",
+          "declaringAssemblyName": "Volo.Abp.Core",
+          "fullName": "Volo.Abp.Modularity.IOnPostApplicationInitialization"
+        },
+        {
+          "name": "IOnApplicationShutdown",
+          "namespace": "Volo.Abp",
+          "declaringAssemblyName": "Volo.Abp.Core",
+          "fullName": "Volo.Abp.IOnApplicationShutdown"
+        },
+        {
+          "name": "IPreConfigureServices",
+          "namespace": "Volo.Abp.Modularity",
+          "declaringAssemblyName": "Volo.Abp.Core",
+          "fullName": "Volo.Abp.Modularity.IPreConfigureServices"
+        },
+        {
+          "name": "IPostConfigureServices",
+          "namespace": "Volo.Abp.Modularity",
+          "declaringAssemblyName": "Volo.Abp.Core",
+          "fullName": "Volo.Abp.Modularity.IPostConfigureServices"
+        }
+      ],
+      "contentType": "abpModule",
+      "name": "BookStoreHttpApiModule",
+      "summary": null
+    }
+  ]
+}

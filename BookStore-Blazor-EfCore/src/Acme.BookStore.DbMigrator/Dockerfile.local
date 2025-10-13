@@ -1,0 +1,6 @@
+  FROM mcr.microsoft.com/dotnet/aspnet:9.0
+  USER $APP_UID
+
+  COPY bin/Release/net9.0/publish/ app/
+  WORKDIR /app
+  ENTRYPOINT ["dotnet", "Acme.BookStore.DbMigrator.dll"]

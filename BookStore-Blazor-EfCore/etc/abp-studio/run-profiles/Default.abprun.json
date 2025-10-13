@@ -1,0 +1,28 @@
+﻿{
+  "applications": {
+    "Acme.BookStore.HttpApi.Host": {
+      "type": "dotnet-project",
+      "launchUrl": "https://localhost:44323",
+      "path": "../../../src/Acme.BookStore.HttpApi.Host/Acme.BookStore.HttpApi.Host.csproj",
+      "kubernetesService": ".*-httpapihost$",
+      "healthCheckEndpoint": "/health-status",
+      "healthUiEndpoint": "/health-ui",
+      "execution": {
+        "order": 4
+      }
+    },
+    "Acme.BookStore.Blazor": {
+      "type": "dotnet-project",
+      "launchUrl": "https://localhost:44308",
+      "path": "../../../src/Acme.BookStore.Blazor/Acme.BookStore.Blazor.csproj",
+      "healthCheckEndpoint": "/",
+      "kubernetesService": ".*-blazor$",
+      "execution": {
+        "order": 2
+      }
+    }
+  },
+  "containers": {
+    "serviceName": "BookStore-Containers",
+  }
+}

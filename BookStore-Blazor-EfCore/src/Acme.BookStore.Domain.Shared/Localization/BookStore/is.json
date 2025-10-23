@@ -1,8 +1,9 @@
 {
-  "culture": "is",
-  "texts": {
-    "Menu:Home": "Heim",
-    "Welcome": "Velkomin",
-    "LongWelcomeMessage": "Verið velkomin í forritið. Þetta er startup verkefni sem byggir á ABP. Nánari upplýsingar er að finna á abp.io."
+  "Culture": "is",
+  "Texts": {
+    "AppName": "BookStore",
+    "Menu:Home": "Home",
+    "LongWelcomeMessage": "Welcome to the application. This is a startup project based on the ABP framework. For more information visit",
+    "Welcome": "Welcome"
   }
 }

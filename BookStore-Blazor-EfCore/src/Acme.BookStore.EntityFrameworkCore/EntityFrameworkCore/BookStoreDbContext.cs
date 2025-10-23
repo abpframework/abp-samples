@@ -1,8 +1,9 @@
-﻿using Acme.BookStore.Authors;
+using Acme.BookStore.Authors;
 using Acme.BookStore.Books;
 using Microsoft.EntityFrameworkCore;
 using Volo.Abp.AuditLogging.EntityFrameworkCore;
 using Volo.Abp.BackgroundJobs.EntityFrameworkCore;
+using Volo.Abp.BlobStoring.Database.EntityFrameworkCore;
 using Volo.Abp.Data;
 using Volo.Abp.DependencyInjection;
 using Volo.Abp.EntityFrameworkCore;
@@ -23,25 +24,28 @@ namespace Acme.BookStore.EntityFrameworkCore;
 [ConnectionStringName("Default")]
 public class BookStoreDbContext :
     AbpDbContext<BookStoreDbContext>,
-    IIdentityDbContext,
-    ITenantManagementDbContext
+    ITenantManagementDbContext,
+    IIdentityDbContext
 {
+    public DbSet<Book> Books { get; set; }
+    public DbSet<Author> Authors { get; set; }
+
     /* Add DbSet properties for your Aggregate Roots / Entities here. */
 
     #region Entities from the modules
 
-    /* Notice: We only implemented IIdentityDbContext and ITenantManagementDbContext
+    /* Notice: We only implemented IIdentityProDbContext and ISaasDbContext
      * and replaced them for this DbContext. This allows you to perform JOIN
      * queries for the entities of these modules over the repositories easily. You
      * typically don't need that for other modules. But, if you need, you can
      * implement the DbContext interface of the needed module and use ReplaceDbContext
-     * attribute just like IIdentityDbContext and ITenantManagementDbContext.
+     * attribute just like IIdentityProDbContext and ISaasDbContext.
      *
      * More info: Replacing a DbContext of a module ensures that the related module
      * uses this DbContext on runtime. Otherwise, it will use its own DbContext class.
      */
 
-    //Identity
+    // Identity
     public DbSet<IdentityUser> Users { get; set; }
     public DbSet<IdentityRole> Roles { get; set; }
     public DbSet<IdentityClaimType> ClaimTypes { get; set; }
@@ -50,14 +54,10 @@ public class BookStoreDbContext :
     public DbSet<IdentityLinkUser> LinkUsers { get; set; }
     public DbSet<IdentityUserDelegation> UserDelegations { get; set; }
     public DbSet<IdentitySession> Sessions { get; set; }
+
     // Tenant Management
     public DbSet<Tenant> Tenants { get; set; }
     public DbSet<TenantConnectionString> TenantConnectionStrings { get; set; }
-
-    //Book Store
-    public DbSet<Book> Books { get; set; }
-    public DbSet<Author> Authors { get; set; }
-
 
     #endregion
 
@@ -77,12 +77,11 @@ public class BookStoreDbContext :
         builder.ConfigureSettingManagement();
         builder.ConfigureBackgroundJobs();
         builder.ConfigureAuditLogging();
+        builder.ConfigureFeatureManagement();
         builder.ConfigureIdentity();
         builder.ConfigureOpenIddict();
-        builder.ConfigureFeatureManagement();
         builder.ConfigureTenantManagement();
-
-        /* Configure your own tables/entities inside here */
+        builder.ConfigureBlobStoring();
 
         builder.Entity<Book>(b =>
         {
@@ -108,5 +107,13 @@ public class BookStoreDbContext :
             b.HasIndex(x => x.Name);
         });
 
+        /* Configure your own tables/entities inside here */
+
+        //builder.Entity<YourEntity>(b =>
+        //{
+        //    b.ToTable(BookStoreConsts.DbTablePrefix + "YourEntities", BookStoreConsts.DbSchema);
+        //    b.ConfigureByConvention(); //auto configure for the base class props
+        //    //...
+        //});
     }
 }

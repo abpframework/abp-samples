@@ -1,9 +1,7 @@
-﻿using System;
-using Volo.Abp;
+﻿using Volo.Abp;
 
 namespace Acme.BookStore.Authors;
 
-[Serializable]
 public class AuthorAlreadyExistsException : BusinessException
 {
     public AuthorAlreadyExistsException(string name)

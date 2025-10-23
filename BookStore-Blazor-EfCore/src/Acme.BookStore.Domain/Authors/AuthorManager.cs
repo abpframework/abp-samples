@@ -1,5 +1,4 @@
-﻿using JetBrains.Annotations;
-using System;
+﻿using System;
 using System.Threading.Tasks;
 using Volo.Abp;
 using Volo.Abp.Domain.Services;
@@ -16,9 +15,9 @@ public class AuthorManager : DomainService
     }
 
     public async Task<Author> CreateAsync(
-        [NotNull] string name,
+        string name,
         DateTime birthDate,
-        [CanBeNull] string shortBio = null)
+        string? shortBio = null)
     {
         Check.NotNullOrWhiteSpace(name, nameof(name));
 
@@ -37,8 +36,8 @@ public class AuthorManager : DomainService
     }
 
     public async Task ChangeNameAsync(
-        [NotNull] Author author,
-        [NotNull] string newName)
+        Author author,
+        string newName)
     {
         Check.NotNull(author, nameof(author));
         Check.NotNullOrWhiteSpace(newName, nameof(newName));

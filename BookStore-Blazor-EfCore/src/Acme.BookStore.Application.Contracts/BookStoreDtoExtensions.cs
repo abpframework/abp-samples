@@ -1,4 +1,4 @@
-﻿using Volo.Abp.Identity;
+using Volo.Abp.Identity;
 using Volo.Abp.ObjectExtending;
 using Volo.Abp.Threading;
 
@@ -21,7 +21,7 @@ public static class BookStoreDtoExtensions
                  *   .AddOrUpdateProperty<IdentityRoleDto, string>("Title");
                  *
                  * See the documentation for more:
-                 * https://abp.io/docs/latest/Object-Extensions
+                 * https://docs.abp.io/en/abp/latest/Object-Extensions
                  */
         });
     }

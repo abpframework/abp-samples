@@ -1,11 +1,13 @@
-import { ToasterService } from '@abp/ng.theme.shared';
 import {Component, inject, OnInit} from '@angular/core';
+import {FormsModule} from "@angular/forms";
+import { ToasterService } from '@abp/ng.theme.shared';
 import { TodoItemDto, TodoService } from '@proxy';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss']
+  styleUrls: ['./home.component.scss'],
+  imports: [FormsModule]
 })
 export class HomeComponent implements OnInit {
 

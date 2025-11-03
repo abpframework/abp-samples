@@ -1,5 +1,6 @@
 import { ToasterService } from "@abp/ng.theme.shared";
-import { Component, OnInit } from '@angular/core';
+import {Component, inject, OnInit} from '@angular/core';
+import {FormsModule} from "@angular/forms";
 import { TodoItemDto } from "@proxy/services/dtos";
 import { TodoService } from "@proxy/services";
 
@@ -7,24 +8,22 @@ import { TodoService } from "@proxy/services";
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
+  imports: [FormsModule]
 })
 
 export class HomeComponent implements OnInit {
 
   todoItems: TodoItemDto[];
   newTodoText: string;
-
-  constructor(
-      private todoService: TodoService,
-      private toasterService: ToasterService)
-  { }
+  readonly todoService = inject(TodoService);
+  readonly toasterService = inject(ToasterService);
 
   ngOnInit(): void {
     this.todoService.getList().subscribe(response => {
       this.todoItems = response;
     });
   }
-  
+
   create(): void{
     this.todoService.create(this.newTodoText).subscribe((result) => {
       this.todoItems = this.todoItems.concat(result);
@@ -37,5 +36,5 @@ export class HomeComponent implements OnInit {
       this.todoItems = this.todoItems.filter(item => item.id !== id);
       this.toasterService.info('Deleted the todo item.');
     });
-  }  
+  }
 }

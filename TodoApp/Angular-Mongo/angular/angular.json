@@ -15,12 +15,15 @@
       "prefix": "app",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:browser",
+          "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/TodoApp",
+            "outputPath": {
+              "base": "dist/TodoApp"
+            },
             "index": "src/index.html",
-            "main": "src/main.ts",
-            "polyfills": "src/polyfills.ts",
+            "polyfills": [
+              "src/polyfills.ts"
+            ],
             "tsConfig": "tsconfig.app.json",
             "aot": true,
             "allowedCommonJsDependencies": ["chart.js", "js-sha256"],
@@ -36,7 +39,7 @@
                 "inject": true,
                 "bundleName": "fontawesome-v4-shims.min"
               },
-              
+
         {
     "input": "node_modules/@volo/ngx-lepton-x.lite/assets/css/bootstrap-dim.css",
     "inject": false,
@@ -92,12 +95,13 @@
     "inject":false,
     "bundleName":"font-bundle"
 },
-          
+
           "node_modules/bootstrap-icons/font/bootstrap-icons.css",
           "src/styles.scss"
-          
+
           ],
-            "scripts": []
+            "scripts": [],
+            "browser": "src/main.ts"
           },
           "configurations": {
             "production": {
@@ -112,8 +116,6 @@
               "sourceMap": false,
               "namedChunks": false,
               "extractLicenses": true,
-              "vendorChunk": false,
-              "buildOptimizer": true,
               "budgets": [
                 {
                   "type": "initial",
@@ -132,18 +134,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "TodoApp:build"
+            "buildTarget": "TodoApp:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "TodoApp:build:production"
+              "buildTarget": "TodoApp:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "TodoApp:build"
+            "buildTarget": "TodoApp:build"
           }
         },
         "test": {

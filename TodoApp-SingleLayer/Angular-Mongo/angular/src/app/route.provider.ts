@@ -1,11 +1,14 @@
+import { inject, provideAppInitializer} from '@angular/core';
 import { RoutesService, eLayoutType } from '@abp/ng.core';
-import { APP_INITIALIZER } from '@angular/core';
 
 export const APP_ROUTE_PROVIDER = [
-  { provide: APP_INITIALIZER, useFactory: configureRoutes, deps: [RoutesService], multi: true },
+  provideAppInitializer(() => {
+    configureRoutes();
+  })
 ];
 
-function configureRoutes(routesService: RoutesService) {
+function configureRoutes() {
+  const routesService = inject(RoutesService);
   return () => {
     routesService.add([
       {

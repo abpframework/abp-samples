@@ -6,8 +6,8 @@ import { Component } from '@angular/core';
   selector: 'app-root',
   standalone: true,
   template: `
-    <abp-loader-bar></abp-loader-bar>
-    <abp-dynamic-layout></abp-dynamic-layout>
+    <abp-loader-bar />
+    <abp-dynamic-layout />
   `,
   imports : [LoaderBarComponent, DynamicLayoutComponent]
 })

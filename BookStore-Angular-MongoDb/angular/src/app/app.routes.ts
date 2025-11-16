@@ -1,38 +1,39 @@
 import { Routes } from '@angular/router';
-import { AuthGuard, PermissionGuard } from '@abp/ng.core';
+import { AuthGuard, PermissionGuard, eLayoutType, RoutesService } from '@abp/ng.core';
+import { APP_INITIALIZER } from '@angular/core';
 
 export const APP_ROUTES: Routes = [
 	{
 		path: '',
 		loadComponent: () => import('./home/home.component').then(m => m.HomeComponent),
-		data: {
-			name: '::Menu:Home',
-			iconClass: 'fas fa-home',
-			order: 1,
-		},
 	},
 	{
 		path: 'books',
 		canActivate: [AuthGuard, PermissionGuard],
 		loadComponent: () => import('./book/book.component').then(m => m.BookComponent),
-		data: {
-			name: '::Menu:Books',
-			iconClass: 'fas fa-book',
-			requiredPolicy: 'BookStore.Books',
-			parentName: '::Menu:BookStore',
-		},
 	},
 	{
 		path: 'authors',
 		canActivate: [AuthGuard, PermissionGuard],
 		loadComponent: () => import('./author/author.component').then(m => m.AuthorComponent),
-		data: {
-			name: '::Menu:Authors',
-			iconClass: 'fas fa-user',
-			requiredPolicy: 'BookStore.Authors',
-			parentName: '::Menu:BookStore',
-		},
+	},
+	{
+		path: 'account',
+		loadChildren: () => import('@abp/ng.account').then(c => c.createRoutes()),
+	},
+	{
+		path: 'identity',
+		loadChildren: () => import('@abp/ng.identity').then(c => c.createRoutes()),
+	},
+	{
+		path: 'tenant-management',
+		loadChildren: () =>
+		import('@abp/ng.tenant-management').then(c => c.createRoutes()),
+	},
+	{
+		path: 'setting-management',
+		loadChildren: () =>
+		import('@abp/ng.setting-management').then(c => c.createRoutes()),
 	},
 	{ path: '**', redirectTo: '' },
 ];
-

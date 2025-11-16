@@ -25,7 +25,7 @@
               "base": "dist/BookStore"
             },
             "index": "src/index.html",
-            "main": "src/main.ts",
+            "browser": "src/main.ts",
             "polyfills": [
               "src/polyfills.ts"
             ],

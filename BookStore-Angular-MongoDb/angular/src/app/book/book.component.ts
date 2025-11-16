@@ -1,15 +1,29 @@
-import { ListService, PagedResultDto } from '@abp/ng.core';
+import { ListService, PagedResultDto, LocalizationPipe, PermissionDirective } from '@abp/ng.core';
 import { Component, OnInit, inject } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { BookService, BookDto, bookTypeOptions, AuthorLookupDto } from '@proxy/books';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { NgbDateNativeAdapter, NgbDateAdapter } from '@ng-bootstrap/ng-bootstrap';
-import { ConfirmationService, Confirmation } from '@abp/ng.theme.shared';
+import { FormGroup, FormBuilder, Validators, ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { NgbDateNativeAdapter, NgbDateAdapter, NgbDatepickerModule, NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
+import { ConfirmationService, Confirmation, ThemeSharedModule } from '@abp/ng.theme.shared';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { PageModule } from '@abp/ng.components/page';
 
 @Component({
   selector: 'app-book',
-  templateUrl: './book.component.html',
+  standalone: true,
+  imports: [
+    CommonModule, 
+    FormsModule, 
+    ReactiveFormsModule, 
+    NgbDatepickerModule, 
+    NgbDropdownModule, 
+    PageModule,
+    LocalizationPipe,
+    PermissionDirective,
+    ThemeSharedModule,
+  ],
+  templateUrl: './book.component.html', 
   styleUrls: ['./book.component.scss'],
   providers: [ListService, { provide: NgbDateAdapter, useClass: NgbDateNativeAdapter }],
 })

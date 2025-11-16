@@ -1,12 +1,26 @@
 import { Component, OnInit, inject } from '@angular/core';
-import { ListService, PagedResultDto } from '@abp/ng.core';
+import { CommonModule } from '@angular/common';
+import { ListService, PagedResultDto, LocalizationPipe, PermissionDirective } from '@abp/ng.core';
 import { AuthorService, AuthorDto } from '@proxy/authors';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { NgbDateNativeAdapter, NgbDateAdapter } from '@ng-bootstrap/ng-bootstrap';
-import { ConfirmationService, Confirmation } from '@abp/ng.theme.shared';
+import { FormGroup, FormBuilder, Validators, ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { NgbDateNativeAdapter, NgbDateAdapter, NgbDatepickerModule, NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
+import { ConfirmationService, Confirmation, ThemeSharedModule } from '@abp/ng.theme.shared';
+import { PageModule } from '@abp/ng.components/page';
 
 @Component({
   selector: 'app-author',
+  standalone: true,
+  imports: [
+    CommonModule, 
+    FormsModule, 
+    ReactiveFormsModule, 
+    NgbDatepickerModule, 
+    NgbDropdownModule, 
+    PageModule,
+    LocalizationPipe,
+    PermissionDirective,
+    ThemeSharedModule,
+  ],
   templateUrl: './author.component.html',
   styleUrls: ['./author.component.scss'],
   providers: [ListService, { provide: NgbDateAdapter, useClass: NgbDateNativeAdapter }],

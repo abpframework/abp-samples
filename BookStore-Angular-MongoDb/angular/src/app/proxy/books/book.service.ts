@@ -1,12 +1,14 @@
 import type { AuthorLookupDto, BookDto, CreateUpdateBookDto } from './models';
 import { RestService } from '@abp/ng.core';
 import type { ListResultDto, PagedAndSortedResultRequestDto, PagedResultDto } from '@abp/ng.core';
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 
 @Injectable({
   providedIn: 'root',
 })
 export class BookService {
+  private restService = inject(RestService);
+
   apiName = 'Default';
   
 
@@ -59,6 +61,4 @@ export class BookService {
       body: input,
     },
     { apiName: this.apiName });
-
-  constructor(private restService: RestService) {}
 }

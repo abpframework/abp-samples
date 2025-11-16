@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { ListService, PagedResultDto } from '@abp/ng.core';
 import { AuthorService, AuthorDto } from '@proxy/authors';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
@@ -12,6 +12,11 @@ import { ConfirmationService, Confirmation } from '@abp/ng.theme.shared';
   providers: [ListService, { provide: NgbDateAdapter, useClass: NgbDateNativeAdapter }],
 })
 export class AuthorComponent implements OnInit {
+  readonly list = inject(ListService);
+  private authorService = inject(AuthorService);
+  private fb = inject(FormBuilder);
+  private confirmation = inject(ConfirmationService);
+
   author = { items: [], totalCount: 0 } as PagedResultDto<AuthorDto>;
 
   isModalOpen = false;
@@ -19,13 +24,6 @@ export class AuthorComponent implements OnInit {
   form: FormGroup;
 
   selectedAuthor = {} as AuthorDto;
-
-  constructor(
-    public readonly list: ListService,
-    private authorService: AuthorService,
-    private fb: FormBuilder,
-    private confirmation: ConfirmationService
-  ) {}
 
   ngOnInit(): void {
     const authorStreamCreator = (query) => this.authorService.getList(query);

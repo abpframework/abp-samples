@@ -1,5 +1,5 @@
 import { ListService, PagedResultDto } from '@abp/ng.core';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { BookService, BookDto, bookTypeOptions, AuthorLookupDto } from '@proxy/books';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { NgbDateNativeAdapter, NgbDateAdapter } from '@ng-bootstrap/ng-bootstrap';
@@ -14,6 +14,11 @@ import { map } from 'rxjs/operators';
   providers: [ListService, { provide: NgbDateAdapter, useClass: NgbDateNativeAdapter }],
 })
 export class BookComponent implements OnInit {
+  readonly list = inject(ListService);
+  private bookService = inject(BookService);
+  private fb = inject(FormBuilder);
+  private confirmation = inject(ConfirmationService);
+
   book = { items: [], totalCount: 0 } as PagedResultDto<BookDto>;
 
   form: FormGroup;
@@ -26,12 +31,9 @@ export class BookComponent implements OnInit {
 
   isModalOpen = false;
 
-  constructor(
-    public readonly list: ListService,
-    private bookService: BookService,
-    private fb: FormBuilder,
-    private confirmation: ConfirmationService
-  ) {
+  constructor() {
+    const bookService = this.bookService;
+
     this.authors$ = bookService.getAuthorLookup().pipe(map((r) => r.items));
   }
 

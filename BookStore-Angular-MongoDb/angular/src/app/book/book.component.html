@@ -18,7 +18,7 @@
     </div>
   </div>
   <div class="card-body">
-    <ngx-datatable [rows]="book.items" [count]="book.totalCount" [list]="list" default>
+    <ngx-datatable [rows]="book()" [count]="book().totalCount" [list]="list" default>
       <ngx-datatable-column [name]="'::Actions' | abpLocalization" [maxWidth]="150" [sortable]="false">
         <ng-template let-row="row" ngx-datatable-cell-template>
           <div ngbDropdown container="body" class="d-inline-block">
@@ -61,12 +61,10 @@
   </div>
 </div>
 
-<abp-modal [(visible)]="isModalOpen">
-  <ng-template #abpHeader>
-    <h3>{{ (selectedBook.id ? '::Edit' : '::NewBook' ) | abpLocalization }}</h3>
-  </ng-template>
-
-  <ng-template #abpBody>
+<abp-modal [visible]="isModalOpen()" (visibleChange)="isModalOpen.set($event)">
+    <ng-template #abpHeader>
+        <h3>{{ (selectedBook().id ? '::Edit' : '::NewBook' ) | abpLocalization }}</h3>
+    </ng-template>  <ng-template #abpBody>
     <form [formGroup]="form" (ngSubmit)="save()">
       <div class="form-group">
         <label for="author-id">Author</label><span> * </span>

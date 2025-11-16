@@ -1,5 +1,5 @@
 import { ListService, PagedResultDto, LocalizationPipe, PermissionDirective } from '@abp/ng.core';
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BookService, BookDto, bookTypeOptions, AuthorLookupDto } from '@proxy/books';
 import { FormGroup, FormBuilder, Validators, ReactiveFormsModule, FormsModule } from '@angular/forms';
@@ -33,17 +33,17 @@ export class BookComponent implements OnInit {
   private fb = inject(FormBuilder);
   private confirmation = inject(ConfirmationService);
 
-  book = { items: [], totalCount: 0 } as PagedResultDto<BookDto>;
+  book = signal<PagedResultDto<BookDto>>({ items: [], totalCount: 0 });
 
   form: FormGroup;
 
-  selectedBook = {} as BookDto;
+  selectedBook = signal<BookDto>({} as BookDto);
 
   authors$: Observable<AuthorLookupDto[]>;
 
   bookTypes = bookTypeOptions;
 
-  isModalOpen = false;
+  isModalOpen = signal(false);
 
   constructor() {
     const bookService = this.bookService;
@@ -55,34 +55,35 @@ export class BookComponent implements OnInit {
     const bookStreamCreator = (query) => this.bookService.getList(query);
 
     this.list.hookToQuery(bookStreamCreator).subscribe((response) => {
-      this.book = response;
+      this.book.set(response);
     });
   }
 
   createBook() {
-    this.selectedBook = {} as BookDto;
+    this.selectedBook.set({} as BookDto);
     this.buildForm();
-    this.isModalOpen = true;
+    this.isModalOpen.set(true);
   }
 
   editBook(id: string) {
     this.bookService.get(id).subscribe((book) => {
-      this.selectedBook = book;
+      this.selectedBook.set(book);
       this.buildForm();
-      this.isModalOpen = true;
+      this.isModalOpen.set(true);
     });
   }
 
   buildForm() {
+    const book = this.selectedBook();
     this.form = this.fb.group({
-      authorId: [this.selectedBook.authorId || null, Validators.required],
-      name: [this.selectedBook.name || null, Validators.required],
-      type: [this.selectedBook.type || null, Validators.required],
+      authorId: [book.authorId || null, Validators.required],
+      name: [book.name || null, Validators.required],
+      type: [book.type || null, Validators.required],
       publishDate: [
-        this.selectedBook.publishDate ? new Date(this.selectedBook.publishDate) : null,
+        book.publishDate ? new Date(book.publishDate) : null,
         Validators.required,
       ],
-      price: [this.selectedBook.price || null, Validators.required],
+      price: [book.price || null, Validators.required],
     });
   }
 
@@ -91,12 +92,13 @@ export class BookComponent implements OnInit {
       return;
     }
 
-    const request = this.selectedBook.id
-      ? this.bookService.update(this.selectedBook.id, this.form.value)
+    const book = this.selectedBook();
+    const request = book.id
+      ? this.bookService.update(book.id, this.form.value)
       : this.bookService.create(this.form.value);
 
     request.subscribe(() => {
-      this.isModalOpen = false;
+      this.isModalOpen.set(false);
       this.form.reset();
       this.list.get();
     });

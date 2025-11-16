@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ListService, PagedResultDto, LocalizationPipe, PermissionDirective } from '@abp/ng.core';
 import { AuthorService, AuthorDto } from '@proxy/authors';
@@ -31,41 +31,42 @@ export class AuthorComponent implements OnInit {
   private fb = inject(FormBuilder);
   private confirmation = inject(ConfirmationService);
 
-  author = { items: [], totalCount: 0 } as PagedResultDto<AuthorDto>;
+  author = signal<PagedResultDto<AuthorDto>>({ items: [], totalCount: 0 });
 
-  isModalOpen = false;
+  isModalOpen = signal(false);
 
   form: FormGroup;
 
-  selectedAuthor = {} as AuthorDto;
+  selectedAuthor = signal<AuthorDto>({} as AuthorDto);
 
   ngOnInit(): void {
     const authorStreamCreator = (query) => this.authorService.getList(query);
 
     this.list.hookToQuery(authorStreamCreator).subscribe((response) => {
-      this.author = response;
+      this.author.set(response);
     });
   }
 
   createAuthor() {
-    this.selectedAuthor = {} as AuthorDto;
+    this.selectedAuthor.set({} as AuthorDto);
     this.buildForm();
-    this.isModalOpen = true;
+    this.isModalOpen.set(true);
   }
 
   editAuthor(id: string) {
     this.authorService.get(id).subscribe((author) => {
-      this.selectedAuthor = author;
+      this.selectedAuthor.set(author);
       this.buildForm();
-      this.isModalOpen = true;
+      this.isModalOpen.set(true);
     });
   }
 
   buildForm() {
+    const author = this.selectedAuthor();
     this.form = this.fb.group({
-      name: [this.selectedAuthor.name || '', Validators.required],
+      name: [author.name || '', Validators.required],
       birthDate: [
-        this.selectedAuthor.birthDate ? new Date(this.selectedAuthor.birthDate) : null,
+        author.birthDate ? new Date(author.birthDate) : null,
         Validators.required,
       ],
     });
@@ -76,17 +77,18 @@ export class AuthorComponent implements OnInit {
       return;
     }
 
-    if (this.selectedAuthor.id) {
+    const author = this.selectedAuthor();
+    if (author.id) {
       this.authorService
-        .update(this.selectedAuthor.id, this.form.value)
+        .update(author.id, this.form.value)
         .subscribe(() => {
-          this.isModalOpen = false;
+          this.isModalOpen.set(false);
           this.form.reset();
           this.list.get();
         });
     } else {
       this.authorService.create(this.form.value).subscribe(() => {
-        this.isModalOpen = false;
+        this.isModalOpen.set(false);
         this.form.reset();
         this.list.get();
       });

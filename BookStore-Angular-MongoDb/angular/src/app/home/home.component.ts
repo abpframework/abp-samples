@@ -1,5 +1,5 @@
 import { AuthService } from '@abp/ng.core';
-import { Component, inject } from '@angular/core';
+import { Component, inject, computed } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { OAuthService } from 'angular-oauth2-oidc';
 import { LocalizationPipe } from '@abp/ng.core';
@@ -15,9 +15,7 @@ export class HomeComponent {
   private oAuthService = inject(OAuthService);
   private authService = inject(AuthService);
 
-  get hasLoggedIn(): boolean {
-    return this.oAuthService.hasValidAccessToken();
-  }
+  hasLoggedIn = computed(() => this.oAuthService.hasValidAccessToken());
 
   login() {
     this.authService.navigateToLogin();

@@ -4,11 +4,10 @@ import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-root',
-  standalone: true,
   template: `
     <abp-loader-bar />
     <abp-dynamic-layout />
   `,
-  imports : [LoaderBarComponent, DynamicLayoutComponent]
+  imports: [LoaderBarComponent, DynamicLayoutComponent],
 })
 export class AppComponent {}

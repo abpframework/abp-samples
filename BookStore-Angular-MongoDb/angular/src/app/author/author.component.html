@@ -17,7 +17,7 @@
       </div>
     </div>
     <div class="card-body">
-        <ngx-datatable [rows]="author().items" [count]="author().totalCount" [list]="list" default>
+      <ngx-datatable [rows]="author.items" [count]="author.totalCount" [list]="list" default>
         <ngx-datatable-column
           [name]="'::Actions' | abpLocalization"
           [maxWidth]="150"
@@ -54,9 +54,9 @@
     </div>
   </div>
   
-  <abp-modal [visible]="isModalOpen()" (visibleChange)="isModalOpen.set($event)">
+  <abp-modal [(visible)]="isModalOpen">
     <ng-template #abpHeader>
-        <h3>{{ (selectedAuthor().id ? '::Edit' : '::NewAuthor' ) | abpLocalization }}</h3>
+      <h3>{{ (selectedAuthor.id ? '::Edit' : '::NewAuthor') | abpLocalization }}</h3>
     </ng-template>
   
     <ng-template #abpBody>

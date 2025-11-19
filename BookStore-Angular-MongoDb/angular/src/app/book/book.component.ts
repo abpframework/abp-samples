@@ -64,13 +64,8 @@ export class BookComponent implements OnInit {
   ngOnInit() {
     const bookStreamCreator = query => this.bookService.getList(query);
 
-<<<<<<< HEAD
-    this.list.hookToQuery(bookStreamCreator).subscribe(response => {
-      this.book.set(response);
-=======
     this.list.hookToQuery(bookStreamCreator).subscribe((response) => {
       this.book = response;
->>>>>>> parent of d36d7924 (Refactor components to use Angular signals)
     });
   }
 
@@ -81,13 +76,8 @@ export class BookComponent implements OnInit {
   }
 
   editBook(id: string) {
-<<<<<<< HEAD
-    this.bookService.get(id).subscribe(book => {
-      this.selectedBook.set(book);
-=======
     this.bookService.get(id).subscribe((book) => {
       this.selectedBook = book;
->>>>>>> parent of d36d7924 (Refactor components to use Angular signals)
       this.buildForm();
       this.isModalOpen = true;
     });
@@ -95,13 +85,6 @@ export class BookComponent implements OnInit {
 
   buildForm() {
     this.form = this.fb.group({
-<<<<<<< HEAD
-      authorId: [book.authorId || null, Validators.required],
-      name: [book.name || null, Validators.required],
-      type: [book.type || null, Validators.required],
-      publishDate: [book.publishDate ? new Date(book.publishDate) : null, Validators.required],
-      price: [book.price || null, Validators.required],
-=======
       authorId: [this.selectedBook.authorId || null, Validators.required],
       name: [this.selectedBook.name || null, Validators.required],
       type: [this.selectedBook.type || null, Validators.required],
@@ -110,7 +93,6 @@ export class BookComponent implements OnInit {
         Validators.required,
       ],
       price: [this.selectedBook.price || null, Validators.required],
->>>>>>> parent of d36d7924 (Refactor components to use Angular signals)
     });
   }
 

@@ -1,5 +1,5 @@
 import { ListService, PagedResultDto, LocalizationPipe, PermissionDirective } from '@abp/ng.core';
-import { Component, OnInit, inject, signal } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BookService, BookDto, bookTypeOptions, AuthorLookupDto } from '@proxy/books';
 import {
@@ -43,17 +43,17 @@ export class BookComponent implements OnInit {
   private fb = inject(FormBuilder);
   private confirmation = inject(ConfirmationService);
 
-  book = signal<PagedResultDto<BookDto>>({ items: [], totalCount: 0 });
+  book = { items: [], totalCount: 0 } as PagedResultDto<BookDto>;
 
   form: FormGroup;
 
-  selectedBook = signal<BookDto>({} as BookDto);
+  selectedBook = {} as BookDto;
 
   authors$: Observable<AuthorLookupDto[]>;
 
   bookTypes = bookTypeOptions;
 
-  isModalOpen = signal(false);
+  isModalOpen = false;
 
   constructor() {
     const bookService = this.bookService;
@@ -64,33 +64,53 @@ export class BookComponent implements OnInit {
   ngOnInit() {
     const bookStreamCreator = query => this.bookService.getList(query);
 
+<<<<<<< HEAD
     this.list.hookToQuery(bookStreamCreator).subscribe(response => {
       this.book.set(response);
+=======
+    this.list.hookToQuery(bookStreamCreator).subscribe((response) => {
+      this.book = response;
+>>>>>>> parent of d36d7924 (Refactor components to use Angular signals)
     });
   }
 
   createBook() {
-    this.selectedBook.set({} as BookDto);
+    this.selectedBook = {} as BookDto;
     this.buildForm();
-    this.isModalOpen.set(true);
+    this.isModalOpen = true;
   }
 
   editBook(id: string) {
+<<<<<<< HEAD
     this.bookService.get(id).subscribe(book => {
       this.selectedBook.set(book);
+=======
+    this.bookService.get(id).subscribe((book) => {
+      this.selectedBook = book;
+>>>>>>> parent of d36d7924 (Refactor components to use Angular signals)
       this.buildForm();
-      this.isModalOpen.set(true);
+      this.isModalOpen = true;
     });
   }
 
   buildForm() {
-    const book = this.selectedBook();
     this.form = this.fb.group({
+<<<<<<< HEAD
       authorId: [book.authorId || null, Validators.required],
       name: [book.name || null, Validators.required],
       type: [book.type || null, Validators.required],
       publishDate: [book.publishDate ? new Date(book.publishDate) : null, Validators.required],
       price: [book.price || null, Validators.required],
+=======
+      authorId: [this.selectedBook.authorId || null, Validators.required],
+      name: [this.selectedBook.name || null, Validators.required],
+      type: [this.selectedBook.type || null, Validators.required],
+      publishDate: [
+        this.selectedBook.publishDate ? new Date(this.selectedBook.publishDate) : null,
+        Validators.required,
+      ],
+      price: [this.selectedBook.price || null, Validators.required],
+>>>>>>> parent of d36d7924 (Refactor components to use Angular signals)
     });
   }
 
@@ -99,13 +119,12 @@ export class BookComponent implements OnInit {
       return;
     }
 
-    const book = this.selectedBook();
-    const request = book.id
-      ? this.bookService.update(book.id, this.form.value)
+    const request = this.selectedBook.id
+      ? this.bookService.update(this.selectedBook.id, this.form.value)
       : this.bookService.create(this.form.value);
 
     request.subscribe(() => {
-      this.isModalOpen.set(false);
+      this.isModalOpen = false;
       this.form.reset();
       this.list.get();
     });

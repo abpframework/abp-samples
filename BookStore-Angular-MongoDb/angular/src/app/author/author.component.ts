@@ -1,4 +1,4 @@
-import { Component, OnInit, inject, signal } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ListService, PagedResultDto, LocalizationPipe, PermissionDirective } from '@abp/ng.core';
 import { AuthorService, AuthorDto } from '@proxy/authors';
@@ -41,41 +41,58 @@ export class AuthorComponent implements OnInit {
   private fb = inject(FormBuilder);
   private confirmation = inject(ConfirmationService);
 
-  author = signal<PagedResultDto<AuthorDto>>({ items: [], totalCount: 0 });
+  author = { items: [], totalCount: 0 } as PagedResultDto<AuthorDto>;
 
-  isModalOpen = signal(false);
+  isModalOpen = false;
 
   form: FormGroup;
 
-  selectedAuthor = signal<AuthorDto>({} as AuthorDto);
+  selectedAuthor = {} as AuthorDto;
 
   ngOnInit(): void {
     const authorStreamCreator = query => this.authorService.getList(query);
 
+<<<<<<< HEAD
     this.list.hookToQuery(authorStreamCreator).subscribe(response => {
       this.author.set(response);
+=======
+    this.list.hookToQuery(authorStreamCreator).subscribe((response) => {
+      this.author = response;
+>>>>>>> parent of d36d7924 (Refactor components to use Angular signals)
     });
   }
 
   createAuthor() {
-    this.selectedAuthor.set({} as AuthorDto);
+    this.selectedAuthor = {} as AuthorDto;
     this.buildForm();
-    this.isModalOpen.set(true);
+    this.isModalOpen = true;
   }
 
   editAuthor(id: string) {
+<<<<<<< HEAD
     this.authorService.get(id).subscribe(author => {
       this.selectedAuthor.set(author);
+=======
+    this.authorService.get(id).subscribe((author) => {
+      this.selectedAuthor = author;
+>>>>>>> parent of d36d7924 (Refactor components to use Angular signals)
       this.buildForm();
-      this.isModalOpen.set(true);
+      this.isModalOpen = true;
     });
   }
 
   buildForm() {
-    const author = this.selectedAuthor();
     this.form = this.fb.group({
+<<<<<<< HEAD
       name: [author.name || '', Validators.required],
       birthDate: [author.birthDate ? new Date(author.birthDate) : null, Validators.required],
+=======
+      name: [this.selectedAuthor.name || '', Validators.required],
+      birthDate: [
+        this.selectedAuthor.birthDate ? new Date(this.selectedAuthor.birthDate) : null,
+        Validators.required,
+      ],
+>>>>>>> parent of d36d7924 (Refactor components to use Angular signals)
     });
   }
 
@@ -84,6 +101,7 @@ export class AuthorComponent implements OnInit {
       return;
     }
 
+<<<<<<< HEAD
     const author = this.selectedAuthor();
     if (author.id) {
       this.authorService.update(author.id, this.form.value).subscribe(() => {
@@ -91,9 +109,19 @@ export class AuthorComponent implements OnInit {
         this.form.reset();
         this.list.get();
       });
+=======
+    if (this.selectedAuthor.id) {
+      this.authorService
+        .update(this.selectedAuthor.id, this.form.value)
+        .subscribe(() => {
+          this.isModalOpen = false;
+          this.form.reset();
+          this.list.get();
+        });
+>>>>>>> parent of d36d7924 (Refactor components to use Angular signals)
     } else {
       this.authorService.create(this.form.value).subscribe(() => {
-        this.isModalOpen.set(false);
+        this.isModalOpen = false;
         this.form.reset();
         this.list.get();
       });

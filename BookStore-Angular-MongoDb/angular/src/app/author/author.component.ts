@@ -2,20 +2,30 @@ import { Component, OnInit, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ListService, PagedResultDto, LocalizationPipe, PermissionDirective } from '@abp/ng.core';
 import { AuthorService, AuthorDto } from '@proxy/authors';
-import { FormGroup, FormBuilder, Validators, ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { NgbDateNativeAdapter, NgbDateAdapter, NgbDatepickerModule, NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
+import {
+  FormGroup,
+  FormBuilder,
+  Validators,
+  ReactiveFormsModule,
+  FormsModule,
+} from '@angular/forms';
+import {
+  NgbDateNativeAdapter,
+  NgbDateAdapter,
+  NgbDatepickerModule,
+  NgbDropdownModule,
+} from '@ng-bootstrap/ng-bootstrap';
 import { ConfirmationService, Confirmation, ThemeSharedModule } from '@abp/ng.theme.shared';
 import { PageModule } from '@abp/ng.components/page';
 
 @Component({
   selector: 'app-author',
-  standalone: true,
   imports: [
-    CommonModule, 
-    FormsModule, 
-    ReactiveFormsModule, 
-    NgbDatepickerModule, 
-    NgbDropdownModule, 
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
+    NgbDatepickerModule,
+    NgbDropdownModule,
     PageModule,
     LocalizationPipe,
     PermissionDirective,
@@ -40,9 +50,9 @@ export class AuthorComponent implements OnInit {
   selectedAuthor = signal<AuthorDto>({} as AuthorDto);
 
   ngOnInit(): void {
-    const authorStreamCreator = (query) => this.authorService.getList(query);
+    const authorStreamCreator = query => this.authorService.getList(query);
 
-    this.list.hookToQuery(authorStreamCreator).subscribe((response) => {
+    this.list.hookToQuery(authorStreamCreator).subscribe(response => {
       this.author.set(response);
     });
   }
@@ -54,7 +64,7 @@ export class AuthorComponent implements OnInit {
   }
 
   editAuthor(id: string) {
-    this.authorService.get(id).subscribe((author) => {
+    this.authorService.get(id).subscribe(author => {
       this.selectedAuthor.set(author);
       this.buildForm();
       this.isModalOpen.set(true);
@@ -65,10 +75,7 @@ export class AuthorComponent implements OnInit {
     const author = this.selectedAuthor();
     this.form = this.fb.group({
       name: [author.name || '', Validators.required],
-      birthDate: [
-        author.birthDate ? new Date(author.birthDate) : null,
-        Validators.required,
-      ],
+      birthDate: [author.birthDate ? new Date(author.birthDate) : null, Validators.required],
     });
   }
 
@@ -79,13 +86,11 @@ export class AuthorComponent implements OnInit {
 
     const author = this.selectedAuthor();
     if (author.id) {
-      this.authorService
-        .update(author.id, this.form.value)
-        .subscribe(() => {
-          this.isModalOpen.set(false);
-          this.form.reset();
-          this.list.get();
-        });
+      this.authorService.update(author.id, this.form.value).subscribe(() => {
+        this.isModalOpen.set(false);
+        this.form.reset();
+        this.list.get();
+      });
     } else {
       this.authorService.create(this.form.value).subscribe(() => {
         this.isModalOpen.set(false);
@@ -96,11 +101,10 @@ export class AuthorComponent implements OnInit {
   }
 
   delete(id: string) {
-    this.confirmation.warn('::AreYouSureToDelete', '::AreYouSure')
-        .subscribe((status) => {
-          if (status === Confirmation.Status.confirm) {
-            this.authorService.delete(id).subscribe(() => this.list.get());
-          }
-	    });
+    this.confirmation.warn('::AreYouSureToDelete', '::AreYouSure').subscribe(status => {
+      if (status === Confirmation.Status.confirm) {
+        this.authorService.delete(id).subscribe(() => this.list.get());
+      }
+    });
   }
 }

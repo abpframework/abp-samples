@@ -25,10 +25,7 @@
               "base": "dist/BookStore"
             },
             "index": "src/index.html",
-            "browser": "src/main.ts",
-            "polyfills": [
-              "src/polyfills.ts"
-            ],
+            "polyfills": ["src/polyfills.ts"],
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
             "allowedCommonJsDependencies": ["chart.js", "js-sha256"],
@@ -185,6 +182,5 @@
         }
       }
     }
-  },
-  "defaultProject": "BookStore"
+  }
 }

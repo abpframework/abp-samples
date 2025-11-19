@@ -6,7 +6,6 @@ import { LocalizationPipe } from '@abp/ng.core';
 
 @Component({
   selector: 'app-home',
-  standalone: true,
   imports: [CommonModule, LocalizationPipe],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],

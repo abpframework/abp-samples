@@ -1,19 +1,48 @@
-import { ListService, PagedResultDto } from '@abp/ng.core';
-import { Component, OnInit } from '@angular/core';
+import { ListService, PagedResultDto, LocalizationPipe, PermissionDirective } from '@abp/ng.core';
+import { Component, OnInit, inject } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { BookService, BookDto, bookTypeOptions, AuthorLookupDto } from '@proxy/books';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { NgbDateNativeAdapter, NgbDateAdapter } from '@ng-bootstrap/ng-bootstrap';
-import { ConfirmationService, Confirmation } from '@abp/ng.theme.shared';
+import {
+  FormGroup,
+  FormBuilder,
+  Validators,
+  ReactiveFormsModule,
+  FormsModule,
+} from '@angular/forms';
+import {
+  NgbDateNativeAdapter,
+  NgbDateAdapter,
+  NgbDatepickerModule,
+  NgbDropdownModule,
+} from '@ng-bootstrap/ng-bootstrap';
+import { ConfirmationService, Confirmation, ThemeSharedModule } from '@abp/ng.theme.shared';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { PageModule } from '@abp/ng.components/page';
 
 @Component({
   selector: 'app-book',
+  imports: [
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
+    NgbDatepickerModule,
+    NgbDropdownModule,
+    PageModule,
+    LocalizationPipe,
+    PermissionDirective,
+    ThemeSharedModule,
+  ],
   templateUrl: './book.component.html',
   styleUrls: ['./book.component.scss'],
   providers: [ListService, { provide: NgbDateAdapter, useClass: NgbDateNativeAdapter }],
 })
 export class BookComponent implements OnInit {
+  readonly list = inject(ListService);
+  private bookService = inject(BookService);
+  private fb = inject(FormBuilder);
+  private confirmation = inject(ConfirmationService);
+
   book = { items: [], totalCount: 0 } as PagedResultDto<BookDto>;
 
   form: FormGroup;
@@ -26,17 +55,14 @@ export class BookComponent implements OnInit {
 
   isModalOpen = false;
 
-  constructor(
-    public readonly list: ListService,
-    private bookService: BookService,
-    private fb: FormBuilder,
-    private confirmation: ConfirmationService
-  ) {
-    this.authors$ = bookService.getAuthorLookup().pipe(map((r) => r.items));
+  constructor() {
+    const bookService = this.bookService;
+
+    this.authors$ = bookService.getAuthorLookup().pipe(map(r => r.items));
   }
 
   ngOnInit() {
-    const bookStreamCreator = (query) => this.bookService.getList(query);
+    const bookStreamCreator = query => this.bookService.getList(query);
 
     this.list.hookToQuery(bookStreamCreator).subscribe((response) => {
       this.book = response;
@@ -87,7 +113,7 @@ export class BookComponent implements OnInit {
   }
 
   delete(id: string) {
-    this.confirmation.warn('::AreYouSureToDelete', 'AbpAccount::AreYouSure').subscribe((status) => {
+    this.confirmation.warn('::AreYouSureToDelete', 'AbpAccount::AreYouSure').subscribe(status => {
       if (status === Confirmation.Status.confirm) {
         this.bookService.delete(id).subscribe(() => this.list.get());
       }

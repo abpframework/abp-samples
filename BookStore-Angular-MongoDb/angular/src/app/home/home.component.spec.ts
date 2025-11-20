@@ -15,25 +15,25 @@ describe("HomeComponent", () => {
   beforeEach(
     waitForAsync(() => {
       TestBed.configureTestingModule({
-        declarations: [HomeComponent],
-        imports: [
-          CoreTestingModule.withConfig(),
-          ThemeSharedTestingModule.withConfig(),
-          ThemeBasicTestingModule.withConfig(),
-          NgxValidateCoreModule,
-        ],
-        providers: [
-          /* mock providers here */
-          {
+    imports: [
+        CoreTestingModule.withConfig(),
+        ThemeSharedTestingModule.withConfig(),
+        ThemeBasicTestingModule.withConfig(),
+        NgxValidateCoreModule,
+        HomeComponent,
+    ],
+    providers: [
+        /* mock providers here */
+        {
             provide: OAuthService,
             useValue: mockOAuthService
-          },
-          {
+        },
+        {
             provide: AuthService,
             useValue: mockAuthService
-          }
-        ],
-      }).compileComponents();
+        }
+    ],
+}).compileComponents();
     })
   );
 

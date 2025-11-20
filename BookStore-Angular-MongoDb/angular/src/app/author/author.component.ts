@@ -1,17 +1,46 @@
-import { Component, OnInit } from '@angular/core';
-import { ListService, PagedResultDto } from '@abp/ng.core';
+import { Component, OnInit, inject } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { ListService, PagedResultDto, LocalizationPipe, PermissionDirective } from '@abp/ng.core';
 import { AuthorService, AuthorDto } from '@proxy/authors';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { NgbDateNativeAdapter, NgbDateAdapter } from '@ng-bootstrap/ng-bootstrap';
-import { ConfirmationService, Confirmation } from '@abp/ng.theme.shared';
+import {
+  FormGroup,
+  FormBuilder,
+  Validators,
+  ReactiveFormsModule,
+  FormsModule,
+} from '@angular/forms';
+import {
+  NgbDateNativeAdapter,
+  NgbDateAdapter,
+  NgbDatepickerModule,
+  NgbDropdownModule,
+} from '@ng-bootstrap/ng-bootstrap';
+import { ConfirmationService, Confirmation, ThemeSharedModule } from '@abp/ng.theme.shared';
+import { PageModule } from '@abp/ng.components/page';
 
 @Component({
   selector: 'app-author',
+  imports: [
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
+    NgbDatepickerModule,
+    NgbDropdownModule,
+    PageModule,
+    LocalizationPipe,
+    PermissionDirective,
+    ThemeSharedModule,
+  ],
   templateUrl: './author.component.html',
   styleUrls: ['./author.component.scss'],
   providers: [ListService, { provide: NgbDateAdapter, useClass: NgbDateNativeAdapter }],
 })
 export class AuthorComponent implements OnInit {
+  readonly list = inject(ListService);
+  private authorService = inject(AuthorService);
+  private fb = inject(FormBuilder);
+  private confirmation = inject(ConfirmationService);
+
   author = { items: [], totalCount: 0 } as PagedResultDto<AuthorDto>;
 
   isModalOpen = false;
@@ -20,15 +49,8 @@ export class AuthorComponent implements OnInit {
 
   selectedAuthor = {} as AuthorDto;
 
-  constructor(
-    public readonly list: ListService,
-    private authorService: AuthorService,
-    private fb: FormBuilder,
-    private confirmation: ConfirmationService
-  ) {}
-
   ngOnInit(): void {
-    const authorStreamCreator = (query) => this.authorService.getList(query);
+    const authorStreamCreator = query => this.authorService.getList(query);
 
     this.list.hookToQuery(authorStreamCreator).subscribe((response) => {
       this.author = response;
@@ -82,11 +104,10 @@ export class AuthorComponent implements OnInit {
   }
 
   delete(id: string) {
-    this.confirmation.warn('::AreYouSureToDelete', '::AreYouSure')
-        .subscribe((status) => {
-          if (status === Confirmation.Status.confirm) {
-            this.authorService.delete(id).subscribe(() => this.list.get());
-          }
-	    });
+    this.confirmation.warn('::AreYouSureToDelete', '::AreYouSure').subscribe(status => {
+      if (status === Confirmation.Status.confirm) {
+        this.authorService.delete(id).subscribe(() => this.list.get());
+      }
+    });
   }
 }

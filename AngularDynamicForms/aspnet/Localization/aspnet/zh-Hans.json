@@ -1,0 +1,12 @@
+{
+  "culture": "zh-Hans",
+  "texts": {
+    "AppName": "aspnet",
+    "Welcome_Title": "欢迎",
+    "Welcome_Text": "这是 ABP 框架的简约单层应用程序启动模板。",
+    "Permission:Dashboard": "Dashboard",
+    "Menu:Dashboard": "Dashboard",
+    "Dashboard": "Dashboard",
+    "Menu:Home": "首页"
+  }
+}

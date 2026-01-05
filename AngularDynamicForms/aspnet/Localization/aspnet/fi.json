@@ -1,0 +1,12 @@
+{
+  "culture": "fi",
+  "texts": {
+    "AppName": "aspnet",
+    "Welcome_Title": "Tervetuloa",
+    "Welcome_Text": "Tämä on minimalistinen yksikerroksinen sovelluksen käynnistysmalli ABP Frameworkille.",
+    "Permission:Dashboard": "Dashboard",
+    "Menu:Dashboard": "Dashboard",
+    "Dashboard": "Dashboard",
+    "Menu:Home": "Koti"
+  }
+}

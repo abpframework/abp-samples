@@ -1,0 +1,21 @@
+{
+  "production": true,
+  "application": {
+    "baseUrl":"https://aspnet-web",
+    "name": "aspnet",
+    "logoUrl": ""
+  },
+  "oAuthConfig": {
+    "issuer": "https://aspnet-api/",
+    "redirectUri": "https://aspnet",
+    "clientId": "aspnet_App",
+    "responseType": "code",
+    "scope": "offline_access openid profile email phone"
+  },
+  "apis": {
+    "default": {
+      "url": "https://aspnet-api",
+      "rootNamespace": "aspnet"
+    }
+  }
+}

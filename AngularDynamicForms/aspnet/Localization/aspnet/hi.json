@@ -1,0 +1,12 @@
+{
+  "culture": "hi",
+  "texts": {
+    "AppName": "aspnet",
+    "Welcome_Title": "स्वागत हे",
+    "Welcome_Text": "यह एबीपी फ्रेमवर्क के लिए एक न्यूनतम, सिंगल लेयर एप्लिकेशन स्टार्टअप टेम्प्लेट है।",
+    "Permission:Dashboard": "Dashboard",
+    "Menu:Dashboard": "Dashboard",
+    "Dashboard": "Dashboard",
+    "Menu:Home": "घर"
+  }
+}

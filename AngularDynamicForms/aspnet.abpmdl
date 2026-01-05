@@ -1,0 +1,65 @@
+{
+  "template": "app-nolayers",
+  "imports": {
+    "Volo.Abp.LeptonXTheme": {
+      "version": "5.0.1",
+      "isInstalled": true,
+      "creationTime": "01/05/2026 11:12:34 +00:00"
+    },
+    "Volo.Abp.TextTemplateManagement": {
+      "version": "10.0.1",
+      "isInstalled": true,
+      "creationTime": "01/05/2026 11:12:34 +00:00"
+    },
+    "Volo.Abp.LanguageManagement": {
+      "version": "10.0.1",
+      "isInstalled": true,
+      "creationTime": "01/05/2026 11:12:34 +00:00"
+    },
+    "Volo.Abp.Gdpr": {
+      "version": "10.0.1",
+      "isInstalled": true,
+      "creationTime": "01/05/2026 11:12:34 +00:00"
+    },
+    "Volo.Abp.AuditLogging.Pro": {
+      "version": "10.0.1",
+      "isInstalled": true,
+      "creationTime": "01/05/2026 11:12:34 +00:00"
+    },
+    "Volo.Abp.OpenIddict.Pro": {
+      "version": "10.0.1",
+      "isInstalled": true,
+      "creationTime": "01/05/2026 11:12:34 +00:00"
+    },
+    "Volo.Abp.Identity.Pro": {
+      "version": "10.0.1",
+      "isInstalled": true,
+      "creationTime": "01/05/2026 11:12:34 +00:00"
+    },
+    "Volo.Abp.Account.Pro": {
+      "version": "10.0.1",
+      "isInstalled": true,
+      "creationTime": "01/05/2026 11:12:34 +00:00"
+    },
+    "Volo.Abp.SettingManagement": {
+      "version": "10.0.1",
+      "isInstalled": true,
+      "creationTime": "01/05/2026 11:12:34 +00:00"
+    },
+    "Volo.Abp.PermissionManagement": {
+      "version": "10.0.1",
+      "isInstalled": true,
+      "creationTime": "01/05/2026 11:12:34 +00:00"
+    },
+    "Volo.Abp.FeatureManagement": {
+      "version": "10.0.1",
+      "isInstalled": true,
+      "creationTime": "01/05/2026 11:12:34 +00:00"
+    }
+  },
+  "packages": {
+    "aspnet": {
+      "path": "aspnet/aspnet.abppkg"
+    }
+  }
+}

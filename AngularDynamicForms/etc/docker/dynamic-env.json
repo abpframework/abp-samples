@@ -1,0 +1,21 @@
+{
+  "production": true,
+  "application": {
+    "baseUrl":"http://localhost:4200",
+    "name": "aspnet",
+    "logoUrl": ""
+  },
+  "oAuthConfig": {
+    "issuer": "https://localhost:44314",
+    "redirectUri": "https://localhost:44314",
+    "clientId": "aspnet_App",
+    "responseType": "code",
+    "scope": "offline_access openid profile email phone aspnet"
+  },
+  "apis": {
+    "default": {
+      "url": "https://localhost:44314",
+      "rootNamespace": "aspnet"
+    }
+  }
+}

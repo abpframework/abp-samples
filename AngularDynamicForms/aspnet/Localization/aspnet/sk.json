@@ -1,0 +1,12 @@
+{
+  "culture": "sk",
+  "texts": {
+    "AppName": "aspnet",
+    "Welcome_Title": "Vitajte",
+    "Welcome_Text": "Toto je minimalistická šablóna na spustenie aplikácie s jednou vrstvou pre rámec ABP.",
+    "Permission:Dashboard": "Dashboard",
+    "Menu:Dashboard": "Dashboard",
+    "Dashboard": "Dashboard",
+    "Menu:Home": "Domov"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "culture": "de-DE",
+  "texts": {
+    "AppName": "aspnet",
+    "Welcome_Title": "Willkommen",
+    "Welcome_Text": "Dies ist eine minimalistische, einschichtige Anwendungsstartvorlage für das ABP-Framework.",
+    "Permission:Dashboard": "Dashboard",
+    "Menu:Dashboard": "Dashboard",
+    "Dashboard": "Dashboard",
+    "Menu:Home": "Home"
+  }
+}

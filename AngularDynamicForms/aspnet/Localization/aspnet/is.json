@@ -1,0 +1,12 @@
+{
+  "culture": "is",
+  "texts": {
+    "AppName": "aspnet",
+    "Welcome_Title": "Velkomin",
+    "Welcome_Text": "Þetta er lægstur, eins lags ræsingarsniðmát fyrir ABP Framework.",
+    "Permission:Dashboard": "Dashboard",
+    "Menu:Dashboard": "Dashboard",
+    "Dashboard": "Dashboard",
+    "Menu:Home": "Heim"
+  }
+}

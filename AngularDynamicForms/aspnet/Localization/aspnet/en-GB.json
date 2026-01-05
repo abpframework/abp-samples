@@ -1,0 +1,12 @@
+{
+  "culture": "en-GB",
+  "texts": {
+    "AppName": "aspnet",
+    "Welcome_Title": "Welcome",
+    "Welcome_Text": "This is a minimalist, single layer application startup template for the ABP Framework.",
+    "Permission:Dashboard": "Dashboard",
+    "Menu:Dashboard": "Dashboard",
+    "Dashboard": "Dashboard",
+    "Menu:Home": "Home"
+  }
+}

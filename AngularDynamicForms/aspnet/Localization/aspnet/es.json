@@ -1,0 +1,12 @@
+{
+  "culture": "es",
+  "texts": {
+    "AppName": "aspnet",
+    "Welcome_Title": "Bienvenido",
+    "Welcome_Text": "Esta es una plantilla de inicio de aplicación minimalista de una sola capa para ABP Framework.",
+    "Permission:Dashboard": "Dashboard",
+    "Menu:Dashboard": "Dashboard",
+    "Dashboard": "Dashboard",
+    "Menu:Home": "Inicio"
+  }
+}

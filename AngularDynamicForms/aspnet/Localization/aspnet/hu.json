@@ -1,0 +1,12 @@
+{
+  "culture": "hu",
+  "texts": {
+    "AppName": "aspnet",
+    "Welcome_Title": "Üdvözöljük",
+    "Welcome_Text": "Ez egy minimalista, egyrétegű alkalmazásindítási sablon az ABP-keretrendszerhez.",
+    "Permission:Dashboard": "Dashboard",
+    "Menu:Dashboard": "Dashboard",
+    "Dashboard": "Dashboard",
+    "Menu:Home": "Kezdőlap"
+  }
+}

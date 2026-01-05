@@ -1,0 +1,12 @@
+{
+  "culture": "it",
+  "texts": {
+    "AppName": "aspnet",
+    "Welcome_Title": "Benvenuto",
+    "Welcome_Text": "Questo è un modello di avvio dell'applicazione minimalista a livello singolo per ABP Framework.",
+    "Permission:Dashboard": "Dashboard",
+    "Menu:Dashboard": "Dashboard",
+    "Dashboard": "Dashboard",
+    "Menu:Home": "Home"
+  }
+}

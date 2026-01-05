@@ -1,0 +1,42 @@
+<abp-page [title]="'::Menu:Dashboard' | abpLocalization">
+  <div class="card">
+    <div class="card-body">
+      <form [formGroup]="formFilters" (ngSubmit)="refresh()">
+        <div id="datepicker" class="input-daterange row align-items-center justify-content-center">
+          <div class="col-12 col-lg-auto col-md-6 mb-3 mb-lg-0">
+            <abp-date-range-picker
+              formControlName="times"
+              id="times"
+              [labelText]="'::Date' | abpLocalization"
+              startDateProp="fromDate"
+              endDateProp="toDate"
+            >
+            </abp-date-range-picker>
+          </div>
+          <div class="col-12 col-lg-2 col-md-12">
+            <button type="submit" class="btn btn-primary btn-block">
+              <i class="fa fa-refresh me-1" aria-hidden="true"></i>
+              <span>{{ 'AbpAuditLogging::Refresh' | abpLocalization }}</span>
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div id="DashboardWidgetsArea">
+    <div class="row">
+      <div class="col col-md-12 col-lg-6" *abpPermission="'AuditLogging.AuditLogs'">
+        <abp-error-rate-widget #errorRateWidget [height]="250"></abp-error-rate-widget>
+      </div>
+
+      <div class="col col-md-12 col-lg-6" *abpPermission="'AuditLogging.AuditLogs'">
+        <abp-average-execution-duration-widget
+          #averageExecutionDurationWidget
+          [height]="250"
+        ></abp-average-execution-duration-widget>
+      </div>
+
+    </div>
+  </div>
+</abp-page>

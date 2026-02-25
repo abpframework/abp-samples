@@ -10,6 +10,7 @@ using Volo.Abp.OpenIddict.EntityFrameworkCore;
 using Volo.Abp.PermissionManagement.EntityFrameworkCore;
 using Volo.Abp.SettingManagement.EntityFrameworkCore;
 using Volo.Abp.TenantManagement.EntityFrameworkCore;
+using ModularCrm.Catalog.Data;
 
 namespace NG.ModularCRM.Data;
 
@@ -39,6 +40,7 @@ public class ModularCRMDbContext : AbpDbContext<ModularCRMDbContext>
         builder.ConfigureIdentity();
         builder.ConfigureOpenIddict();
         builder.ConfigureTenantManagement();
+        builder.ConfigureCatalog();
         
         /* Configure your own entities here */
     }

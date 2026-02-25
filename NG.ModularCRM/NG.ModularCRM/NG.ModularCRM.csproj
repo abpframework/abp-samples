@@ -114,4 +114,8 @@
     <Content Remove="$(UserProfile)\.nuget\packages\*\*\contentFiles\any\*\*.abppkg*" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\modules\modularcrm.catalog\ModularCrm.Catalog\ModularCrm.Catalog.csproj" />
+  </ItemGroup>
+
 </Project>

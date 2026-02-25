@@ -14,7 +14,10 @@
     "skipLibCheck": true,
     "target": "ES2022",
     "lib": ["ES2022", "dom", "esnext.disposable"],
-    "paths": {},
+    "paths": {
+      "@modular-crm/catalog": ["../modules/modularcrm.catalog/angular/projects/catalog/src/public-api.ts"],
+      "@modular-crm/catalog/config": ["../modules/modularcrm.catalog/angular/projects/catalog/config/src/public-api.ts"]
+    },
     "useDefineForClassFields": false
   },
   "angularCompilerOptions": {

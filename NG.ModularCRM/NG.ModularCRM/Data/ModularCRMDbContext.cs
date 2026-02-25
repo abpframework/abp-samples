@@ -12,6 +12,7 @@ using Volo.Abp.SettingManagement.EntityFrameworkCore;
 using Volo.Abp.TenantManagement.EntityFrameworkCore;
 using ModularCrm.Catalog;
 using ModularCrm.Catalog.Data;
+using ModularCrm.Ordering;
 using ModularCrm.Ordering.Data;
 
 namespace NG.ModularCRM.Data;
@@ -23,6 +24,8 @@ public class ModularCRMDbContext : AbpDbContext<ModularCRMDbContext>, ICatalogDb
     public const string DbSchema = null;
 
     public DbSet<Product> Products { get; set; } = null!;
+
+    public DbSet<Order> Orders { get; set; } = null!;
 
     public ModularCRMDbContext(DbContextOptions<ModularCRMDbContext> options)
         : base(options)

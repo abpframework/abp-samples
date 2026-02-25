@@ -27,6 +27,14 @@ public class OrderingModule : AbpModule
     
     public override void ConfigureServices(ServiceConfigurationContext context)
     {
+        Configure<AbpAspNetCoreMvcOptions>(options =>
+        {
+            options.ConventionalControllers.Create(typeof(OrderingModule).Assembly, settings =>
+            {
+                settings.RootPath = "ordering";
+            });
+        });
+
         context.Services.AddMapperlyObjectMapper<OrderingModule>();
         
         context.Services.AddAbpDbContext<OrderingDbContext>(options =>

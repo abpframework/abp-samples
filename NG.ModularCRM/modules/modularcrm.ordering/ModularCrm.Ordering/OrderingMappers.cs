@@ -3,14 +3,10 @@ using Volo.Abp.Mapperly;
 
 namespace ModularCrm.Ordering;
 
-/*
-Write your mappings here...
-
-[Mapper(RequiredMappingStrategy = RequiredMappingStrategy.Target)]
-public partial class OrderingMappers : MapperBase<Book, BookDto>
+[Mapper]
+public partial class OrderToOrderDtoMapper : MapperBase<Order, OrderDto>
 {
-    public override partial BookDto Map(Book source);
+    public override partial OrderDto Map(Order source);
 
-    public override partial void Map(Book source, BookDto destination);
+    public override partial void Map(Order source, OrderDto destination);
 }
-*/

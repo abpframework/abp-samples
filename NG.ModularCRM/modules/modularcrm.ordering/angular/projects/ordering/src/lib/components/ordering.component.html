@@ -1,0 +1,15 @@
+<h1>Orders</h1>
+
+<div class="card">
+  <div class="card-body">
+    <ul class="list-group">
+      @for (order of orders; track order.id) {
+        <li class="list-group-item">
+          <strong>Customer:</strong> {{ order.customerName }} <br />
+          <strong>Product:</strong> {{ order.productId }} <br />
+          <strong>State:</strong> {{ order.state }}
+        </li>
+      }
+    </ul>
+  </div>
+</div>

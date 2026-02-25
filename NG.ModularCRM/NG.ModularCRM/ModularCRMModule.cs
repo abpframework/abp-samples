@@ -57,6 +57,8 @@ using Volo.Abp.EntityFrameworkCore.SqlServer;
 using Volo.Abp.Studio.Client.AspNetCore;
 using ModularCrm.Catalog.Data;
 using ModularCrm.Catalog;
+using ModularCrm.Ordering;
+using ModularCrm.Ordering.Data;
 
 using Microsoft.Extensions.Hosting;
 
@@ -72,6 +74,7 @@ namespace NG.ModularCRM;
     typeof(AbpAspNetCoreSerilogModule),
     typeof(AbpStudioClientAspNetCoreModule),
     typeof(CatalogModule),
+    typeof(OrderingModule),
 
     // theme
     typeof(AbpAspNetCoreMvcUiLeptonXLiteThemeModule),
@@ -372,6 +375,7 @@ public class ModularCRMModule : AbpModule
         context.Services.AddAbpDbContext<ModularCRMDbContext>(options =>
         {
             options.ReplaceDbContext<ICatalogDbContext>();
+            options.ReplaceDbContext<IOrderingDbContext>();
 
             /* You can remove "includeAllEntities: true" to create
              * default repositories only for aggregate roots

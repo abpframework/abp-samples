@@ -1,0 +1,12 @@
+{
+  "name": "@modular-crm/ordering",
+  "version": "0.0.1",
+  "dependencies": {
+    "@abp/ng.core": "~10.1.0",
+    "@abp/ng.oauth": "~10.1.0",
+    "@abp/ng.theme.shared": "~10.1.0",
+    "@abp/ng.components":"~10.1.0",
+    "@volo/abp.commercial.ng.ui": "~10.1.0",
+    "tslib": "^2.1.0"
+  }
+}

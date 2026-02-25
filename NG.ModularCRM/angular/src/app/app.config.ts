@@ -7,6 +7,7 @@ import { provideIdentityConfig } from '@abp/ng.identity/config';
 import { provideAccountConfig } from '@abp/ng.account/config';
 import { provideTenantManagementConfig } from '@abp/ng.tenant-management/config';
 import { provideCatalog } from '@modular-crm/catalog/config';
+import { provideOrdering } from '@modular-crm/ordering/config';
 import { registerLocaleForEsBuild } from '@abp/ng.core/locale';
 import { provideThemeLeptonX } from '@abp/ng.theme.lepton-x';
 import { provideSideMenuLayout } from '@abp/ng.theme.lepton-x/layouts';
@@ -38,6 +39,7 @@ export const appConfig: ApplicationConfig = {
     provideAccountConfig(),
     provideTenantManagementConfig(),
     provideCatalog(),
+    provideOrdering(),
     provideAbpThemeShared(),
     provideThemeLeptonX(),
     provideSideMenuLayout(),

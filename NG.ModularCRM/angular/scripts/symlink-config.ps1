@@ -5,6 +5,7 @@
 # example: "../../modules/Volo.Abp.Identity.Pro/angular"
 $script:PackageDirectories = @()
 $script:PackageDirectories += "../../modules/modularcrm.catalog/angular"
+$script:PackageDirectories += "../../modules/modularcrm.ordering/angular"
 
 # Define packages that should be symlinked
 $script:PackagesToSymlink = @(

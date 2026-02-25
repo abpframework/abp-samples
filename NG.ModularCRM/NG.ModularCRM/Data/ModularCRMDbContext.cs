@@ -12,10 +12,11 @@ using Volo.Abp.SettingManagement.EntityFrameworkCore;
 using Volo.Abp.TenantManagement.EntityFrameworkCore;
 using ModularCrm.Catalog;
 using ModularCrm.Catalog.Data;
+using ModularCrm.Ordering.Data;
 
 namespace NG.ModularCRM.Data;
 
-public class ModularCRMDbContext : AbpDbContext<ModularCRMDbContext>, ICatalogDbContext
+public class ModularCRMDbContext : AbpDbContext<ModularCRMDbContext>, ICatalogDbContext, IOrderingDbContext
 {
     
     public const string DbTablePrefix = "App";
@@ -44,6 +45,7 @@ public class ModularCRMDbContext : AbpDbContext<ModularCRMDbContext>, ICatalogDb
         builder.ConfigureOpenIddict();
         builder.ConfigureTenantManagement();
         builder.ConfigureCatalog();
+        builder.ConfigureOrdering();
         
         /* Configure your own entities here */
     }

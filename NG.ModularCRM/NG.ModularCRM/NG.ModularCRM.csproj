@@ -116,6 +116,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\modules\modularcrm.catalog\ModularCrm.Catalog\ModularCrm.Catalog.csproj" />
+    <ProjectReference Include="..\modules\modularcrm.ordering\ModularCrm.Ordering\ModularCrm.Ordering.csproj" />
   </ItemGroup>
 
 </Project>

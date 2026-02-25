@@ -40,6 +40,10 @@
       "version": "10.1.0",
       "isInstalled": true,
       "creationTime": "02/25/2026 07:25:15 +00:00"
+    },
+    "ModularCrm.Ordering": {
+      "path": "modules/modularcrm.ordering/ModularCrm.Ordering.abpmdl",
+      "isInstalled": true
     }
   },
   "packages": {

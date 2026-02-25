@@ -55,6 +55,7 @@ using Volo.Abp.BlobStoring.Database.EntityFrameworkCore;
 using Volo.Abp.BackgroundJobs.EntityFrameworkCore;
 using Volo.Abp.EntityFrameworkCore.SqlServer;
 using Volo.Abp.Studio.Client.AspNetCore;
+using ModularCrm.Catalog.Data;
 using ModularCrm.Catalog;
 
 using Microsoft.Extensions.Hosting;
@@ -370,6 +371,8 @@ public class ModularCRMModule : AbpModule
     {
         context.Services.AddAbpDbContext<ModularCRMDbContext>(options =>
         {
+            options.ReplaceDbContext<ICatalogDbContext>();
+
             /* You can remove "includeAllEntities: true" to create
              * default repositories only for aggregate roots
              * Documentation: https://docs.abp.io/en/abp/latest/Entity-Framework-Core#add-default-repositories

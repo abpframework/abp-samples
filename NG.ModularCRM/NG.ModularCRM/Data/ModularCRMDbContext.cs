@@ -10,15 +10,18 @@ using Volo.Abp.OpenIddict.EntityFrameworkCore;
 using Volo.Abp.PermissionManagement.EntityFrameworkCore;
 using Volo.Abp.SettingManagement.EntityFrameworkCore;
 using Volo.Abp.TenantManagement.EntityFrameworkCore;
+using ModularCrm.Catalog;
 using ModularCrm.Catalog.Data;
 
 namespace NG.ModularCRM.Data;
 
-public class ModularCRMDbContext : AbpDbContext<ModularCRMDbContext>
+public class ModularCRMDbContext : AbpDbContext<ModularCRMDbContext>, ICatalogDbContext
 {
     
     public const string DbTablePrefix = "App";
     public const string DbSchema = null;
+
+    public DbSet<Product> Products { get; set; } = null!;
 
     public ModularCRMDbContext(DbContextOptions<ModularCRMDbContext> options)
         : base(options)

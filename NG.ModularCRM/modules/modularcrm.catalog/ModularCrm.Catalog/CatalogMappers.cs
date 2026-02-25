@@ -3,14 +3,10 @@ using Volo.Abp.Mapperly;
 
 namespace ModularCrm.Catalog;
 
-/*
-Write your mappings here...
-
-[Mapper(RequiredMappingStrategy = RequiredMappingStrategy.Target)]
-public partial class CatalogMappers : MapperBase<Book, BookDto>
+[Mapper]
+public partial class ProductToProductDtoMapper : MapperBase<Product, ProductDto>
 {
-    public override partial BookDto Map(Book source);
+    public override partial ProductDto Map(Product source);
 
-    public override partial void Map(Book source, BookDto destination);
+    public override partial void Map(Product source, ProductDto destination);
 }
-*/

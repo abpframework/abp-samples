@@ -27,6 +27,14 @@ public class CatalogModule : AbpModule
     
     public override void ConfigureServices(ServiceConfigurationContext context)
     {
+        Configure<AbpAspNetCoreMvcOptions>(options =>
+        {
+            options.ConventionalControllers.Create(typeof(CatalogModule).Assembly, settings =>
+            {
+                settings.RootPath = "catalog";
+            });
+        });
+
         context.Services.AddMapperlyObjectMapper<CatalogModule>();
         
         context.Services.AddAbpDbContext<CatalogDbContext>(options =>

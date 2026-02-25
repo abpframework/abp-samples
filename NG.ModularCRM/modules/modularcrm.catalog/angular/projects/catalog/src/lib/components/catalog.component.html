@@ -1,0 +1,13 @@
+<h1>Products</h1>
+
+<div class="card">
+  <div class="card-body">
+    <ul class="list-group">
+      @for (product of products; track product.id) {
+        <li class="list-group-item">
+          {{ product.name }} <span class="text-muted">(stock: {{ product.stockCount }})</span>
+        </li>
+      }
+    </ul>
+  </div>
+</div>

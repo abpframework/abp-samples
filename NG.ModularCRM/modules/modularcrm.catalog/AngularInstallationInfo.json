@@ -1,0 +1,46 @@
+{
+  "packages":[
+    {
+      "appRoutingModuleConfiguration":{
+        "imports":[
+          {
+            "names":[
+              "CATALOG_ROUTES"
+            ],
+            "namespace": "@modular-crm/catalog"
+          } 
+        ],
+        "routes":[
+          "{ path: 'catalog', children: CATALOG_ROUTES, canActivate: [authGuard] }"
+        ]
+      },
+      "appModuleConfiguration":{
+        "imports":[
+          {
+            "names":[
+              "provideCatalog"
+            ],
+            "namespace": "@modular-crm/catalog/config"
+          }
+        ],
+        "providerNames":[
+          "provideCatalog()"
+        ]
+      },
+      "tsJsonPathRecordConfigurations":[
+        {
+          "name": "@modular-crm/catalog",
+          "paths": [
+            "angular/projects/catalog/src/public-api.ts"
+          ]
+        },
+        {
+          "name": "@modular-crm/catalog/config",
+          "paths": [
+            "angular/projects/catalog/config/src/public-api.ts"
+          ]
+        }
+      ]
+    }
+  ]
+}

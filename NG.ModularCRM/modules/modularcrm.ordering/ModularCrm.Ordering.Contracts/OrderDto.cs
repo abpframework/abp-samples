@@ -10,5 +10,7 @@ public class OrderDto
 
     public Guid ProductId { get; set; }
 
+    public string ProductName { get; set; } = null!;
+
     public OrderState State { get; set; }
 }

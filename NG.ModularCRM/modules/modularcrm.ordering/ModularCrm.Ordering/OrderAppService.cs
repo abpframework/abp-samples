@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
+using ModularCrm.Catalog.Integration;
 using Volo.Abp.Domain.Repositories;
 
 namespace ModularCrm.Ordering;
@@ -8,16 +10,31 @@ namespace ModularCrm.Ordering;
 public class OrderAppService : OrderingAppService, IOrderAppService
 {
     private readonly IRepository<Order, Guid> _orderRepository;
+    private readonly IProductIntegrationService _productIntegrationService;
 
-    public OrderAppService(IRepository<Order, Guid> orderRepository)
+    public OrderAppService(
+        IRepository<Order, Guid> orderRepository,
+        IProductIntegrationService productIntegrationService)
     {
         _orderRepository = orderRepository;
+        _productIntegrationService = productIntegrationService;
     }
 
     public async Task<List<OrderDto>> GetListAsync()
     {
         var orders = await _orderRepository.GetListAsync();
-        return ObjectMapper.Map<List<Order>, List<OrderDto>>(orders);
+
+        var productIds = orders.Select(o => o.ProductId).Distinct().ToList();
+        var products = (await _productIntegrationService.GetProductsByIdsAsync(productIds))
+            .ToDictionary(p => p.Id, p => p.Name);
+
+        var orderDtos = ObjectMapper.Map<List<Order>, List<OrderDto>>(orders);
+        orderDtos.ForEach(orderDto =>
+        {
+            orderDto.ProductName = products.GetValueOrDefault(orderDto.ProductId, string.Empty);
+        });
+
+        return orderDtos;
     }
 
     public async Task CreateAsync(OrderCreationDto input)

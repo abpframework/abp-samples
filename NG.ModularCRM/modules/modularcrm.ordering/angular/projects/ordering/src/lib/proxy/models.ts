@@ -9,5 +9,6 @@ export interface OrderDto {
   id?: string;
   customerName?: string;
   productId?: string;
+  productName?: string;
   state?: OrderState;
 }

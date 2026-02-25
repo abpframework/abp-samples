@@ -4,11 +4,13 @@ using Volo.Abp.Modularity;
 using Volo.Abp.Application;
 using Volo.Abp.EntityFrameworkCore;
 using ModularCrm.Ordering.Data;
+using ModularCrm.Catalog;
 using Volo.Abp.AspNetCore.Mvc;
 
 namespace ModularCrm.Ordering;
 
 [DependsOn(
+    typeof(CatalogContractsModule),
     typeof(OrderingContractsModule),
     typeof(AbpDddApplicationModule),
     typeof(AbpMapperlyModule),

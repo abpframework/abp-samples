@@ -1,0 +1,41 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <LangVersion>latest</LangVersion>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <RootNamespace>ModularCrm</RootNamespace>
+    <GenerateEmbeddedFilesManifest>true</GenerateEmbeddedFilesManifest>
+  </PropertyGroup>
+  <ItemGroup>
+    <SupportedPlatform Include="browser" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Localization\ModularCrm\*.json" />
+    <Content Remove="Localization\ModularCrm\*.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Volo.Abp.Validation" Version="10.1.0" />
+    <PackageReference Include="Volo.Abp.UI" Version="10.1.0" />
+    <PackageReference Include="Volo.Abp.AspNetCore.Components" Version="10.1.0" />
+    <ProjectReference Include="../modules/modularcrm.catalog/ModularCrm.Catalog.Contracts/ModularCrm.Catalog.Contracts.csproj" />
+    <ProjectReference Include="../modules/modularcrm.ordering/ModularCrm.Ordering.Contracts/ModularCrm.Ordering.Contracts.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Volo.Abp.OpenIddict.Domain.Shared" Version="10.1.0" />
+    <PackageReference Include="Volo.Abp.Account.Application.Contracts" Version="10.1.0" />
+    <PackageReference Include="Volo.Abp.Identity.Application.Contracts" Version="10.1.0" />
+    <PackageReference Include="Volo.Abp.TenantManagement.Application.Contracts" Version="10.1.0" />
+    <PackageReference Include="Volo.Abp.PermissionManagement.Application.Contracts" Version="10.1.0" />
+    <PackageReference Include="Volo.Abp.FeatureManagement.Application.Contracts" Version="10.1.0" />
+    <PackageReference Include="Volo.Abp.SettingManagement.Application.Contracts" Version="10.1.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.FileProviders.Embedded" Version="10.0.2" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="**\*.abppkg" />
+    <None Remove="**\*.abppkg.analyze.json" />
+    <Content Remove="$(UserProfile)\.nuget\packages\*\*\contentFiles\any\*\*.abppkg*" />
+  </ItemGroup>
+</Project>

@@ -1,0 +1,9 @@
+{
+  "culture": "de-DE",
+  "texts": {
+    "AppName": "ModularCrm",
+    "Welcome_Title": "Willkommen",
+    "Welcome_Text": "Dies ist eine minimalistische, einschichtige Anwendungsstartvorlage für das ABP-Framework.",
+    "Menu:Home": "Home"
+  }
+}

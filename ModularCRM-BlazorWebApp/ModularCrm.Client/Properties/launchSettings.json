@@ -1,0 +1,12 @@
+{
+  "profiles": {
+    "ModularCrm.Client": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "applicationUrl": "https://localhost:51353;http://localhost:51354"
+    }
+  }
+}

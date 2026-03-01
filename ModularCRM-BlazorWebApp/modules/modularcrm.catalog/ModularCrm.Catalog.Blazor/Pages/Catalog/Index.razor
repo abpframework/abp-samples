@@ -1,0 +1,29 @@
+@page "/catalog"
+@using System.Collections.Generic
+@using System.Threading.Tasks
+@using ModularCrm.Catalog
+@inject IProductAppService ProductAppService
+
+<h1>Products</h1>
+
+<Card>
+    <CardBody>
+        <ListGroup>
+            @foreach (var product in Products)
+            {
+                <ListGroupItem>
+                    @product.Name <span class="text-muted">(stock: @product.StockCount)</span>
+                </ListGroupItem>
+            }
+        </ListGroup>
+    </CardBody>
+</Card>
+
+@code {
+    private List<ProductDto> Products { get; set; } = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        Products = await ProductAppService.GetListAsync();
+    }
+}

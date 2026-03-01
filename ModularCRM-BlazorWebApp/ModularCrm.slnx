@@ -1,0 +1,9 @@
+<Solution>
+    <Configurations>
+        <Platform Name="Any CPU" />
+    </Configurations>
+
+    <Project Path="ModularCrm.Contracts/ModularCrm.Contracts.csproj" />
+    <Project Path="ModularCrm.Client/ModularCrm.Client.csproj" />
+    <Project Path="ModularCrm/ModularCrm.csproj" />
+</Solution>

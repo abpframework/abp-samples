@@ -1,0 +1,8 @@
+<Solution>
+  <Configurations>
+    <Platform Name="Any CPU" />
+  </Configurations>
+  <Project Path="ModularCrm.Ordering/ModularCrm.Ordering.csproj" />
+  <Project Path="ModularCrm.Ordering.Contracts/ModularCrm.Ordering.Contracts.csproj" />
+  <Project Path="ModularCrm.Ordering.Blazor/ModularCrm.Ordering.Blazor.csproj" />
+</Solution>

@@ -1,0 +1,64 @@
+{
+  "template": "app-nolayers",
+  "imports": {
+    "Volo.Abp.LeptonXLiteTheme": {
+      "version": "5.1.0",
+      "isInstalled": true,
+      "creationTime": "03/01/2026 09:40:24 +00:00"
+    },
+    "Volo.Abp.Account": {
+      "version": "10.1.0",
+      "isInstalled": true,
+      "creationTime": "03/01/2026 09:40:24 +00:00"
+    },
+    "Volo.Abp.OpenIddict": {
+      "version": "10.1.0",
+      "isInstalled": true,
+      "creationTime": "03/01/2026 09:40:24 +00:00"
+    },
+    "Volo.Abp.Identity": {
+      "version": "10.1.0",
+      "isInstalled": true,
+      "creationTime": "03/01/2026 09:40:24 +00:00"
+    },
+    "Volo.Abp.TenantManagement": {
+      "version": "10.1.0",
+      "isInstalled": true,
+      "creationTime": "03/01/2026 09:40:24 +00:00"
+    },
+    "Volo.Abp.SettingManagement": {
+      "version": "10.1.0",
+      "isInstalled": true,
+      "creationTime": "03/01/2026 09:40:24 +00:00"
+    },
+    "Volo.Abp.PermissionManagement": {
+      "version": "10.1.0",
+      "isInstalled": true,
+      "creationTime": "03/01/2026 09:40:24 +00:00"
+    },
+    "Volo.Abp.FeatureManagement": {
+      "version": "10.1.0",
+      "isInstalled": true,
+      "creationTime": "03/01/2026 09:40:24 +00:00"
+    },
+    "ModularCrm.Catalog": {
+      "path": "modules/modularcrm.catalog/ModularCrm.Catalog.abpmdl",
+      "isInstalled": true
+    },
+    "ModularCrm.Ordering": {
+      "path": "modules/modularcrm.ordering/ModularCrm.Ordering.abpmdl",
+      "isInstalled": true
+    }
+  },
+  "packages": {
+    "ModularCrm": {
+      "path": "ModularCrm/ModularCrm.abppkg"
+    },
+    "ModularCrm.Client": {
+      "path": "ModularCrm.Client/ModularCrm.Client.abppkg"
+    },
+    "ModularCrm.Contracts": {
+      "path": "ModularCrm.Contracts/ModularCrm.Contracts.abppkg"
+    }
+  }
+}

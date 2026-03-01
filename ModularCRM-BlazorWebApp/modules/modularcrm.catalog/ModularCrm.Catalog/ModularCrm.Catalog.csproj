@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <Import Project="..\common.props" />
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <RootNamespace>ModularCrm.Catalog</RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Volo.Abp.Mapperly" Version="10.1.0" />
+    <PackageReference Include="Volo.Abp.Ddd.Application" Version="10.1.0" />
+    <PackageReference Include="Volo.Abp.AspNetCore.Mvc" Version="10.1.0" />
+    <ProjectReference Include="..\ModularCrm.Catalog.Contracts\ModularCrm.Catalog.Contracts.csproj" />
+    <PackageReference Include="Volo.Abp.EntityFrameworkCore" Version="10.1.0" />
+    <ProjectReference Include="../../modularcrm.ordering/ModularCrm.Ordering.Contracts/ModularCrm.Ordering.Contracts.csproj" />
+  </ItemGroup>
+</Project>

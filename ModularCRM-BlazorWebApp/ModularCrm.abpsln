@@ -1,0 +1,84 @@
+{
+  "id": "6875c948-7451-4ba1-ac2f-d8791f343ded",
+  "template": "app-nolayers",
+  "versions": {
+    "AbpFramework": "10.1.0",
+    "AbpStudio": "2.2.1",
+    "TargetDotnetFramework": "net10.0"
+  },
+  "modules": {
+    "ModularCrm": {
+      "path": "ModularCrm.abpmdl",
+      "isMainApplication": true,
+      "folder": "main"
+    },
+    "ModularCrm.Catalog": {
+      "path": "modules/modularcrm.catalog/ModularCrm.Catalog.abpmdl",
+      "folder": "modules"
+    },
+    "ModularCrm.Ordering": {
+      "path": "modules/modularcrm.ordering/ModularCrm.Ordering.abpmdl",
+      "folder": "modules"
+    }
+  },
+  "runProfiles": {
+    "Default": {
+      "path": "etc/run-profiles/Default.abprun.json"
+    }
+  },
+  "options": {
+    "httpRequests": {
+      "ignoredUrls": []
+    }
+  },
+  "creatingStudioConfiguration": {
+    "template": "app-nolayers",
+    "createdAbpStudioVersion": "2.2.1",
+    "creationTool": "ABP Studio UI",
+    "multiTenancy": "true",
+    "runInstallLibs": "",
+    "useLocalReferences": "false",
+    "uiFramework": "blazor-webapp",
+    "databaseProvider": "ef",
+    "runDbMigrator": "",
+    "includeTests": "false",
+    "databaseManagementSystem": "sqlserver",
+    "createInitialMigration": "",
+    "theme": "leptonx-lite",
+    "themeStyle": "",
+    "themeMenuPlacement": "",
+    "publicWebsite": "",
+    "socialLogin": "false",
+    "sampleCrudPage": "false",
+    "selectedLanguages": [
+      "English",
+      "Arabic",
+      "Chinese (Simplified)",
+      "Chinese (Traditional)",
+      "Czech",
+      "English (United Kingdom)",
+      "Finnish",
+      "French",
+      "German (Germany)",
+      "Hindi ",
+      "Hungarian",
+      "Icelandic",
+      "Italian",
+      "Portuguese (Brazil)",
+      "Romanian (Romania)",
+      "Russian",
+      "Slovak",
+      "Spanish",
+      "Swedish",
+      "Turkish"
+    ],
+    "defaultLanguage": "English",
+    "createCommand": "abp new ModularCrm -t app-nolayers --ui-framework blazor-webapp --mobile  --database-provider ef --database-management-system sqlserver --theme leptonx-lite --skip-migration  --skip-migrator  --no-tests --without-cms-kit --dont-run-install-libs --dont-run-bundling --use-open-source-template"
+  },
+  "folders": {
+    "items": {
+      "main": {},
+      "modules": {}
+    }
+  }
+}

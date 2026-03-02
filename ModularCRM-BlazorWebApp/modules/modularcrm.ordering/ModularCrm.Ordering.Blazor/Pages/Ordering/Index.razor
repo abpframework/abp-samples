@@ -1,0 +1,31 @@
+@page "/ordering"
+@using System.Collections.Generic
+@using System.Threading.Tasks
+@using ModularCrm.Ordering
+@inject IOrderAppService OrderAppService
+
+<h1>Orders</h1>
+
+<Card>
+    <CardBody>
+        <ListGroup>
+            @foreach (var order in Orders)
+            {
+                <ListGroupItem>
+                    <strong>Customer:</strong> @order.CustomerName <br />
+                    <strong>Product:</strong> @order.ProductName <br />
+                    <strong>State:</strong> @order.State
+                </ListGroupItem>
+            }
+        </ListGroup>
+    </CardBody>
+</Card>
+
+@code {
+    private List<OrderDto> Orders { get; set; } = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        Orders = await OrderAppService.GetListAsync();
+    }
+}

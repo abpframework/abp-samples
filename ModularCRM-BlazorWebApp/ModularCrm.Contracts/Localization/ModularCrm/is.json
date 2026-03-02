@@ -1,0 +1,9 @@
+{
+  "culture": "is",
+  "texts": {
+    "AppName": "ModularCrm",
+    "Welcome_Title": "Velkomin",
+    "Welcome_Text": "Þetta er lægstur, eins lags ræsingarsniðmát fyrir ABP Framework.",
+    "Menu:Home": "Heim"
+  }
+}

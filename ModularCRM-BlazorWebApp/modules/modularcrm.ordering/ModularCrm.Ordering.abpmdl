@@ -1,0 +1,18 @@
+{
+  "packages": {
+    "ModularCrm.Ordering": {
+      "path": "ModularCrm.Ordering/ModularCrm.Ordering.abppkg"
+    },
+    "ModularCrm.Ordering.Blazor": {
+      "path": "ModularCrm.Ordering.Blazor/ModularCrm.Ordering.Blazor.abppkg"
+    },
+    "ModularCrm.Ordering.Contracts": {
+      "path": "ModularCrm.Ordering.Contracts/ModularCrm.Ordering.Contracts.abppkg"
+    }
+  },
+  "imports": {
+    "ModularCrm.Catalog": {
+      "path": "../modularcrm.catalog/ModularCrm.Catalog.abpmdl"
+    }
+  }
+}

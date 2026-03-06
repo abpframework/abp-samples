@@ -1,0 +1,55 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "cli": {
+    "analytics": false
+  },
+  "version": 1,
+  "newProjectRoot": "projects",
+  "projects": {
+    "dev-app": {
+      "projectType": "application",
+      "root": "projects/dev-app",
+      "sourceRoot": "projects/dev-app/src"
+    },
+    "ordering": {
+      "projectType": "library",
+      "root": "projects/ordering",
+      "sourceRoot": "projects/ordering/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular/build:ng-packagr",
+          "options": {
+            "project": "projects/ordering/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/ordering/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/ordering/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular/build:karma",
+          "options": {
+            "main": "projects/ordering/src/test.ts",
+            "tsConfig": "projects/ordering/tsconfig.spec.json",
+            "karmaConfig": "projects/ordering/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "projects/ordering/**/*.ts",
+              "projects/ordering/**/*.html"
+            ]
+          }
+        }
+      }
+    }
+  }
+}

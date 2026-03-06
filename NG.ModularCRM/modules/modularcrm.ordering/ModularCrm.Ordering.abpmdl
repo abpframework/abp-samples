@@ -1,0 +1,13 @@
+﻿{
+  "packages": {
+    "ModularCrm.Ordering": {
+      "path": "ModularCrm.Ordering/ModularCrm.Ordering.abppkg"
+    },
+    "ModularCrm.Ordering.Tests": {
+      "path": "ModularCrm.Ordering.Tests/ModularCrm.Ordering.Tests.abppkg"
+    },
+    "ModularCrm.Ordering.Contracts": {
+      "path": "ModularCrm.Ordering.Contracts/ModularCrm.Ordering.Contracts.abppkg"
+    }
+  }
+}

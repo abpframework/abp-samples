@@ -1,0 +1,129 @@
+---
+description: "ABP Single-Layer (No-Layers) application template specific patterns"
+globs:
+  - "**/src/*/*Module.cs"
+  - "**/src/*/Entities/**/*.cs"
+  - "**/src/*/Services/**/*.cs"
+  - "**/src/*/Data/**/*.cs"
+alwaysApply: true
+---
+
+# ABP Single-Layer Application Template
+
+> **Docs**: https://abp.io/docs/latest/solution-templates/single-layer-web-application
+
+## Solution Structure
+
+Single project containing everything:
+
+```
+NG.ModularCRM/
+├── src/
+│   └── NG.ModularCRM/
+│       ├── Data/              # EF Core DbContext, migrations
+│       ├── Entities/          # Domain entities
+│       ├── Services/          # Application services + DTOs
+│       ├── angular/           # Angular SPA (separate folder)
+│       └── ModularCRMModule.cs
+```
+
+## Key Differences from Layered
+
+| Layered Template | Single-Layer Template |
+|------------------|----------------------|
+| DTOs in Application.Contracts | DTOs in Services folder (same project) |
+| Repository interfaces in Domain | Use generic `IRepository<T, TKey>` directly |
+| Separate Domain.Shared for constants | Constants in same project |
+| Multiple module classes | Single module class |
+| Separate EntityFrameworkCore project | Data folder in same project |
+
+## File Organization
+
+Group related files by feature:
+
+```
+Services/
+├── Books/
+│   ├── BookAppService.cs
+│   ├── BookDto.cs
+│   ├── CreateBookDto.cs
+│   └── IBookAppService.cs
+└── Authors/
+    ├── AuthorAppService.cs
+    └── ...
+```
+
+## Simplified Entity (Still keep invariants)
+
+Single-layer templates are structurally simpler, but you may still have real business invariants.
+
+- For **trivial CRUD** entities, public setters can be acceptable.
+- For **non-trivial business rules**, still prefer encapsulation (private setters + methods) to prevent invalid states.
+
+```csharp
+public class Book : AuditedAggregateRoot<Guid>
+{
+    public string Name { get; set; }  // OK for trivial CRUD only
+    public decimal Price { get; set; }
+}
+```
+
+## No Custom Repository Needed
+
+Use generic repository directly - no need to define custom interfaces:
+
+```csharp
+public class BookAppService : ApplicationService
+{
+    private readonly IRepository<Book, Guid> _bookRepository;
+    
+    // Generic repository is sufficient for single-layer apps
+}
+```
+
+## Database Configuration (EF Core)
+
+Configure entities in `ModularCRMDbContext`:
+
+```csharp
+public class ModularCRMDbContext : AbpDbContext<ModularCRMDbContext>
+{
+    public DbSet<Book> Books { get; set; }
+
+    protected override void OnModelCreating(ModelBuilder builder)
+    {
+        base.OnModelCreating(builder);
+        
+        builder.Entity<Book>(b =>
+        {
+            b.ToTable("Books");
+            b.ConfigureByConvention();
+            b.Property(x => x.Name).IsRequired().HasMaxLength(128);
+        });
+    }
+}
+```
+
+### Adding Migrations
+
+```bash
+cd src/NG.ModularCRM
+dotnet ef migrations add Added_Book
+dotnet ef database update
+```
+
+## UI Integration
+
+This solution uses **Angular** for the UI layer.
+
+- Angular app is in the `angular/` folder
+- Uses ABP's Angular proxy generation for API calls
+- Run `abp generate-proxy -t ng` to update service proxies
+
+## Best Practices
+
+1. **Feature folders** - Group related files (entity, service, DTOs) together
+2. **Generic repositories** - Use `IRepository<T, TKey>` directly, avoid custom interfaces
+3. **Single module** - Keep everything in one module class for simplicity
+4. **Simpler entities** - Public setters are acceptable for simple CRUD scenarios
+5. **Auto API Controllers** - Let ABP generate controllers from app services

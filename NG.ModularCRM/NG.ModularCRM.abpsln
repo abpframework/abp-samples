@@ -1,0 +1,86 @@
+{
+  "id": "e31f2f0e-b6fd-4849-97d5-9c16f0b5f917",
+  "template": "app-nolayers",
+  "versions": {
+    "AbpFramework": "10.1.0",
+    "AbpStudio": "2.2.1",
+    "TargetDotnetFramework": "net10.0"
+  },
+  "modules": {
+    "NG.ModularCRM": {
+      "path": "NG.ModularCRM.abpmdl",
+      "isMainApplication": true,
+      "folder": "main"
+    },
+    "ModularCrm.Catalog": {
+      "path": "modules/modularcrm.catalog/ModularCrm.Catalog.abpmdl",
+      "folder": "modules"
+    },
+    "ModularCrm.Ordering": {
+      "path": "modules/modularcrm.ordering/ModularCrm.Ordering.abpmdl",
+      "folder": "modules"
+    }
+  },
+  "runProfiles": {
+    "Default": {
+      "path": "etc/run-profiles/Default.abprun.json"
+    }
+  },
+  "options": {
+    "httpRequests": {
+      "ignoredUrls": []
+    }
+  },
+  "creatingStudioConfiguration": {
+    "template": "app-nolayers",
+    "createdAbpStudioVersion": "2.2.1",
+    "creationTool": "ABP Studio UI",
+    "multiTenancy": "true",
+    "runInstallLibs": "",
+    "useLocalReferences": "false",
+    "uiFramework": "angular",
+    "databaseProvider": "ef",
+    "runDbMigrator": "",
+    "includeTests": "false",
+    "databaseManagementSystem": "sqlserver",
+    "createInitialMigration": "",
+    "theme": "leptonx-lite",
+    "themeStyle": "",
+    "themeMenuPlacement": "",
+    "progressiveWebApp": "",
+    "runProgressiveWebAppSupport": "",
+    "publicWebsite": "",
+    "socialLogin": "false",
+    "sampleCrudPage": "false",
+    "selectedLanguages": [
+      "English",
+      "Arabic",
+      "Chinese (Simplified)",
+      "Chinese (Traditional)",
+      "Czech",
+      "English (United Kingdom)",
+      "Finnish",
+      "French",
+      "German (Germany)",
+      "Hindi ",
+      "Hungarian",
+      "Icelandic",
+      "Italian",
+      "Portuguese (Brazil)",
+      "Romanian (Romania)",
+      "Russian",
+      "Slovak",
+      "Spanish",
+      "Swedish",
+      "Turkish"
+    ],
+    "defaultLanguage": "English",
+    "createCommand": "abp new NG.ModularCRM -t app-nolayers --ui-framework angular --mobile  --database-provider ef --database-management-system sqlserver --theme leptonx-lite --skip-migration  --skip-migrator  --no-tests --without-cms-kit --dont-run-install-libs --dont-run-bundling --use-open-source-template"
+  },
+  "folders": {
+    "items": {
+      "main": {},
+      "modules": {}
+    }
+  }
+}

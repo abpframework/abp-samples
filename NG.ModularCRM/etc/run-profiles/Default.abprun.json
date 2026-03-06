@@ -1,0 +1,37 @@
+﻿{
+  "applications": {
+    "NG.ModularCRM.Angular": {
+      "type": "cli",
+      "workingDirectory": "../../angular",
+      "startCommand": "./start.ps1",
+      "launchUrl": "http://localhost:4200",
+      "execution": {
+        "order": 0
+      }
+    },
+    "NG.ModularCRM": {
+      "type": "dotnet-project",
+      "launchUrl": "https://localhost:44321",
+      "healthCheckEndpoint": "/health-status",
+      "healthUiEndpoint": "/health-ui",
+      "path": "../../NG.ModularCRM/NG.ModularCRM.csproj",
+      "execution": {
+        "order": 1
+      }
+    }
+  },
+  "tasks": {
+    "Initialize Solution":{
+      "behaviour": 2,
+      "startCommand": "./initialize-solution.ps1", 
+      "workingDirectory": "../scripts",
+      "shortDescription": "Installs required UI libraries, creates required certificates and seeds the database."
+    },
+    "Migrate Database":{
+      "behaviour": 0,
+      "startCommand": "./migrate-database.ps1",
+      "workingDirectory": "../scripts",
+      "shortDescription": "Migrates the database to the latest version."
+    }
+  } 
+}

@@ -1,0 +1,11 @@
+{
+  "extends": "./tsconfig.prod.json",
+  "compilerOptions": {
+    "paths": {
+      "@modular-crm/catalog": ["projects/catalog/src/public-api.ts"],
+      "@modular-crm/catalog/config": [
+        "projects/catalog/config/src/public-api.ts"
+      ]
+    }
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "production": true,
+  "application": {
+    "baseUrl":"http://localhost:4200",
+    "name": "ModularCRM",
+    "logoUrl": ""
+  },
+  "oAuthConfig": {
+    "issuer": "https://localhost:44321",
+    "redirectUri": "https://localhost:44321",
+    "clientId": "ModularCRM_App",
+    "responseType": "code",
+    "scope": "offline_access openid profile email phone ModularCRM"
+  },
+  "apis": {
+    "default": {
+      "url": "https://localhost:44321",
+      "rootNamespace": "ModularCRM"
+    }
+  }
+}

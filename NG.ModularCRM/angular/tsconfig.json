@@ -1,0 +1,28 @@
+/* To learn more about this file see: https://angular.io/config/tsconfig. */
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "baseUrl": "./",
+    "outDir": "./dist/out-tsc",
+    "sourceMap": true,
+    "declaration": false,
+    "esModuleInterop": true,
+    "experimentalDecorators": true,
+    "moduleResolution": "bundler",
+    "module": "ES2022",
+    "importHelpers": true,
+    "skipLibCheck": true,
+    "target": "ES2022",
+    "lib": ["ES2022", "dom", "esnext.disposable"],
+    "paths": {
+      "@modular-crm/catalog": ["../modules/modularcrm.catalog/angular/projects/catalog/src/public-api.ts"],
+      "@modular-crm/catalog/config": ["../modules/modularcrm.catalog/angular/projects/catalog/config/src/public-api.ts"],
+      "@modular-crm/ordering": ["../modules/modularcrm.ordering/angular/projects/ordering/src/public-api.ts"],
+      "@modular-crm/ordering/config": ["../modules/modularcrm.ordering/angular/projects/ordering/config/src/public-api.ts"]
+    },
+    "useDefineForClassFields": false
+  },
+  "angularCompilerOptions": {
+    "enableI18nLegacyMessageIdFormat": false
+  }
+}

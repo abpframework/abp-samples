@@ -1,4 +1,4 @@
-import { authGuard, permissionGuard } from '@abp/ng.core';
+import { authGuard } from '@abp/ng.core';
 import { Routes } from '@angular/router';
 import { CATALOG_ROUTES } from '@modular-crm/catalog';
 import { ORDERING_ROUTES } from '@modular-crm/ordering';

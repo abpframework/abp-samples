@@ -12,17 +12,11 @@ $script:PackagesToSymlink = @(
     "@angular",
     "@abp",
     "@volo",
-    "@volosoft",
     "@swimlane",
     "@ngx-validate",
     "@ng-bootstrap",
     "rxjs",
-    "cropperjs",
-    "angularx-qrcode",
-    "qrcode",
     "tslib",
-    "@uppy",
-    "@microsoft",
     "ng-zorro-antd"
 )
 

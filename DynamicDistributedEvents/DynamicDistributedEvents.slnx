@@ -1,0 +1,11 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/DynamicDistributedEvents.Shared/DynamicDistributedEvents.Shared.csproj" />
+    <Project Path="src/DynamicDistributedEvents.Local/DynamicDistributedEvents.Local.csproj" />
+    <Project Path="src/DynamicDistributedEvents.RabbitMq/DynamicDistributedEvents.RabbitMq.csproj" />
+    <Project Path="src/DynamicDistributedEvents.Kafka/DynamicDistributedEvents.Kafka.csproj" />
+    <Project Path="src/DynamicDistributedEvents.Rebus/DynamicDistributedEvents.Rebus.csproj" />
+    <Project Path="src/DynamicDistributedEvents.Azure/DynamicDistributedEvents.Azure.csproj" />
+    <Project Path="src/DynamicDistributedEvents.Dapr/DynamicDistributedEvents.Dapr.csproj" />
+  </Folder>
+</Solution>

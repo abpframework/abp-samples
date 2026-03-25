@@ -1,0 +1,1 @@
+All of the projects here were generated with AI code-generation. Thanks to ABP Studio's AI code-assistant feature.

@@ -24,11 +24,6 @@ export const APP_ROUTES: Routes = [
     loadChildren: () => import('@abp/ng.setting-management').then(c => c.createRoutes()),
   },
   {
-    path: 'books',
-    loadComponent: () => import('./book/book.component').then(c => c.BookComponent),
-    canActivate: [authGuard, permissionGuard],
-  },
-  {
     path: 'movies',
     loadComponent: () => import('./movie/movie.component').then(c => c.MovieComponent),
     canActivate: [authGuard, permissionGuard],

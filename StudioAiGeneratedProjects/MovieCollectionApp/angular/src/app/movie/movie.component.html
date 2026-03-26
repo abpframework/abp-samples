@@ -23,55 +23,80 @@
     </div>
   </div>
   <div class="card-body">
-    <ngx-datatable [rows]="movie.items" [count]="movie.totalCount" [list]="list" default>
-      <ngx-datatable-column
-        [name]="'::Actions' | abpLocalization"
-        [maxWidth]="150"
-        [sortable]="false"
-      >
-        <ng-template let-row="row" ngx-datatable-cell-template>
-          <div ngbDropdown container="body" class="d-inline-block">
-            <button
-              class="btn btn-primary btn-sm dropdown-toggle"
-              data-toggle="dropdown"
-              aria-haspopup="true"
-              ngbDropdownToggle
-            >
-              <i class="fa fa-cog me-1"></i>{{ '::Actions' | abpLocalization }}
-            </button>
-            <div ngbDropdownMenu>
-              <button
-                *abpPermission="'MovieCollectionApp.Movies.Edit'"
-                ngbDropdownItem
-                (click)="editMovie(row.id)"
-              >
-                {{ '::Edit' | abpLocalization }}
-              </button>
-              <button
-                *abpPermission="'MovieCollectionApp.Movies.Delete'"
-                ngbDropdownItem
-                (click)="delete(row.id)"
-              >
-                {{ '::Delete' | abpLocalization }}
-              </button>
+    @if (movie.items.length === 0) {
+      <div class="text-center text-muted py-5">
+        <i class="fa fa-film fa-3x mb-3"></i>
+        <p>No movies found. Create your first movie!</p>
+      </div>
+    } @else {
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
+        @for (item of movie.items; track item.id) {
+          <div class="col">
+            <div class="card h-100 shadow-sm movie-card">
+              <div class="movie-poster-wrapper">
+                @if (item.imageUrl) {
+                  <img [src]="item.imageUrl" class="card-img-top movie-poster" [alt]="item.title" />
+                } @else {
+                  <div class="card-img-top movie-poster-placeholder d-flex align-items-center justify-content-center">
+                    <i class="fa fa-film fa-4x text-muted"></i>
+                  </div>
+                }
+                <div class="movie-rating-badge">
+                  <i class="fa fa-star text-warning me-1"></i>{{ item.rating | number:'1.1-1' }}
+                </div>
+              </div>
+              <div class="card-body d-flex flex-column">
+                <h6 class="card-title fw-bold mb-1 text-truncate" [title]="item.title">{{ item.title }}</h6>
+                <div class="mb-1">
+                  <span class="badge bg-primary me-1">{{ item.genreName }}</span>
+                  <span class="text-muted small">{{ item.year }}</span>
+                </div>
+                @if (item.actorNames && item.actorNames.length > 0) {
+                  <p class="card-text text-muted small mb-2 text-truncate" [title]="item.actorNames.join(', ')">
+                    <i class="fa fa-users me-1"></i>{{ item.actorNames.join(', ') }}
+                  </p>
+                }
+                @if (item.description) {
+                  <p class="card-text small text-muted movie-description">{{ item.description }}</p>
+                }
+                <div class="mt-auto pt-2">
+                  <div ngbDropdown container="body" class="d-inline-block">
+                    <button
+                      class="btn btn-outline-secondary btn-sm dropdown-toggle"
+                      ngbDropdownToggle
+                    >
+                      <i class="fa fa-cog me-1"></i>{{ '::Actions' | abpLocalization }}
+                    </button>
+                    <div ngbDropdownMenu>
+                      <button
+                        *abpPermission="'MovieCollectionApp.Movies.Edit'"
+                        ngbDropdownItem
+                        (click)="editMovie(item.id)"
+                      >
+                        <i class="fa fa-pencil me-1"></i>{{ '::Edit' | abpLocalization }}
+                      </button>
+                      <button
+                        *abpPermission="'MovieCollectionApp.Movies.Delete'"
+                        ngbDropdownItem
+                        class="text-danger"
+                        (click)="delete(item.id)"
+                      >
+                        <i class="fa fa-trash me-1"></i>{{ '::Delete' | abpLocalization }}
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
-        </ng-template>
-      </ngx-datatable-column>
-      <ngx-datatable-column [name]="'::Title' | abpLocalization" prop="title"></ngx-datatable-column>
-      <ngx-datatable-column [name]="'::Year' | abpLocalization" prop="year" [maxWidth]="100"></ngx-datatable-column>
-      <ngx-datatable-column [name]="'::GenreName' | abpLocalization" prop="genreName"></ngx-datatable-column>
-      <ngx-datatable-column [name]="'::Rating' | abpLocalization" prop="rating" [maxWidth]="100">
-        <ng-template let-row="row" ngx-datatable-cell-template>
-          {{ row.rating | number:'1.1-1' }}
-        </ng-template>
-      </ngx-datatable-column>
-      <ngx-datatable-column [name]="'::ActorNames' | abpLocalization" prop="actorNames">
-        <ng-template let-row="row" ngx-datatable-cell-template>
-          {{ row.actorNames?.join(', ') }}
-        </ng-template>
-      </ngx-datatable-column>
-    </ngx-datatable>
+        }
+      </div>
+
+      <!-- Pagination -->
+      <div class="mt-4 d-flex justify-content-between align-items-center">
+        <span class="text-muted small">{{ movie.totalCount }} movies total</span>
+      </div>
+    }
   </div>
 </div>
 
@@ -100,6 +125,16 @@
       <div class="mt-2">
         <label for="movie-rating">{{ '::Rating' | abpLocalization }}</label><span> * </span>
         <input type="number" id="movie-rating" class="form-control" formControlName="rating" step="0.1" min="0" max="10" />
+      </div>
+
+      <div class="mt-2">
+        <label for="movie-imageUrl">{{ '::ImageUrl' | abpLocalization }}</label>
+        <input type="url" id="movie-imageUrl" class="form-control" formControlName="imageUrl" placeholder="https://example.com/poster.jpg" />
+        @if (form?.get('imageUrl')?.value) {
+          <div class="mt-2">
+            <img [src]="form.get('imageUrl')?.value" class="img-thumbnail" style="max-height: 120px;" alt="Preview" />
+          </div>
+        }
       </div>
 
       <div class="mt-2">

@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using MovieCollectionApp.Actors;
-using MovieCollectionApp.Books;
 using MovieCollectionApp.Genres;
 using MovieCollectionApp.Movies;
 using Volo.Abp.Data;
@@ -14,18 +13,15 @@ namespace MovieCollectionApp;
 public class MovieCollectionAppDataSeederContributor
     : IDataSeedContributor, ITransientDependency
 {
-    private readonly IRepository<Book, Guid> _bookRepository;
     private readonly IRepository<Genre, Guid> _genreRepository;
     private readonly IRepository<Actor, Guid> _actorRepository;
     private readonly IRepository<Movie, Guid> _movieRepository;
 
     public MovieCollectionAppDataSeederContributor(
-        IRepository<Book, Guid> bookRepository,
         IRepository<Genre, Guid> genreRepository,
         IRepository<Actor, Guid> actorRepository,
         IRepository<Movie, Guid> movieRepository)
     {
-        _bookRepository = bookRepository;
         _genreRepository = genreRepository;
         _actorRepository = actorRepository;
         _movieRepository = movieRepository;
@@ -33,36 +29,7 @@ public class MovieCollectionAppDataSeederContributor
 
     public async Task SeedAsync(DataSeedContext context)
     {
-        await SeedBooksAsync();
         await SeedMovieDataAsync();
-    }
-
-    private async Task SeedBooksAsync()
-    {
-        if (await _bookRepository.GetCountAsync() <= 0)
-        {
-            await _bookRepository.InsertAsync(
-                new Book
-                {
-                    Name = "1984",
-                    Type = BookType.Dystopia,
-                    PublishDate = new DateTime(1949, 6, 8),
-                    Price = 19.84f
-                },
-                autoSave: true
-            );
-
-            await _bookRepository.InsertAsync(
-                new Book
-                {
-                    Name = "The Hitchhiker's Guide to the Galaxy",
-                    Type = BookType.ScienceFiction,
-                    PublishDate = new DateTime(1995, 9, 27),
-                    Price = 42.0f
-                },
-                autoSave: true
-            );
-        }
     }
 
     private async Task SeedMovieDataAsync()
@@ -127,6 +94,7 @@ public class MovieCollectionAppDataSeederContributor
                 Year = 1999,
                 Description = "A computer hacker learns about the true nature of reality.",
                 Rating = 8.7f,
+                ImageUrl = "https://image.tmdb.org/t/p/w500/f89U3ADr1oiB1s9GkdPOEpXUk5H.jpg",
                 GenreId = sciFiGenre.Id,
                 ActorIds = new List<Guid> { keanuReeves.Id, laurenceFishburne.Id }
             },
@@ -140,6 +108,7 @@ public class MovieCollectionAppDataSeederContributor
                 Year = 2014,
                 Description = "An ex-hitman comes out of retirement to track down the gangsters who took everything from him.",
                 Rating = 7.4f,
+                ImageUrl = "https://image.tmdb.org/t/p/w500/fZPSd91yGE9fCcCe6OoQr6E3Bev.jpg",
                 GenreId = actionGenre.Id,
                 ActorIds = new List<Guid> { keanuReeves.Id }
             },
@@ -153,6 +122,7 @@ public class MovieCollectionAppDataSeederContributor
                 Year = 2010,
                 Description = "A thief who steals corporate secrets through dream-sharing technology.",
                 Rating = 8.8f,
+                ImageUrl = "https://image.tmdb.org/t/p/w500/ljsZTbVsrQSqZgWeep2B1QiDKuh.jpg",
                 GenreId = sciFiGenre.Id,
                 ActorIds = new List<Guid> { leonardoDiCaprio.Id }
             },

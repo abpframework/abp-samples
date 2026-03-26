@@ -14,6 +14,8 @@ public class MovieDto : AuditedEntityDto<Guid>
 
     public float Rating { get; set; }
 
+    public string ImageUrl { get; set; }
+
     public Guid GenreId { get; set; }
 
     public string GenreName { get; set; }

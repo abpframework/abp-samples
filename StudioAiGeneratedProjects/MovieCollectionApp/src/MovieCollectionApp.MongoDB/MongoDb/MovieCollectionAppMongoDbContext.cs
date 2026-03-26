@@ -1,7 +1,6 @@
 using Volo.Abp.Data;
 using Volo.Abp.MongoDB;
 using MongoDB.Driver;
-using MovieCollectionApp.Books;
 using MovieCollectionApp.Genres;
 using MovieCollectionApp.Actors;
 using MovieCollectionApp.Movies;
@@ -16,8 +15,6 @@ public class MovieCollectionAppMongoDbContext : AbpMongoDbContext
      * public IMongoCollection<Question> Questions => Collection<Question>();
      */
     
-    public IMongoCollection<Book> Books => Collection<Book>();
-
     public IMongoCollection<Genre> Genres => Collection<Genre>();
 
     public IMongoCollection<Actor> Actors => Collection<Actor>();

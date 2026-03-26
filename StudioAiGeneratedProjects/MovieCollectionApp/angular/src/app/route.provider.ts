@@ -18,13 +18,6 @@ function configureRoutes() {
         layout: eLayoutType.application,
       },
       {
-        path: '/books',
-        name: '::Menu:Books',
-        iconClass: 'fas fa-book',
-        layout: eLayoutType.application,
-        requiredPolicy: 'MovieCollectionApp.Books',
-      },
-      {
         path: '',
         name: '::Menu:MovieCollectionApp',
         iconClass: 'fas fa-film',

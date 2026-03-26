@@ -11,10 +11,6 @@ public class MovieCollectionAppPermissionDefinitionProvider : PermissionDefiniti
     {
         var myGroup = context.AddGroup(MovieCollectionAppPermissions.GroupName);
 
-        var booksPermission = myGroup.AddPermission(MovieCollectionAppPermissions.Books.Default, L("Permission:Books"));
-        booksPermission.AddChild(MovieCollectionAppPermissions.Books.Create, L("Permission:Books.Create"));
-        booksPermission.AddChild(MovieCollectionAppPermissions.Books.Edit, L("Permission:Books.Edit"));
-        booksPermission.AddChild(MovieCollectionAppPermissions.Books.Delete, L("Permission:Books.Delete"));
         var moviesPermission = myGroup.AddPermission(MovieCollectionAppPermissions.Movies.Default, L("Permission:Movies"));
         moviesPermission.AddChild(MovieCollectionAppPermissions.Movies.Create, L("Permission:Movies.Create"));
         moviesPermission.AddChild(MovieCollectionAppPermissions.Movies.Edit, L("Permission:Movies.Edit"));

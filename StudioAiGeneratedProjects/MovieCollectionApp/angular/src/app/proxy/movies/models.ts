@@ -5,6 +5,7 @@ export interface MovieDto extends AuditedEntityDto<string> {
   year: number;
   description?: string;
   rating: number;
+  imageUrl?: string;
   genreId: string;
   genreName?: string;
   actorIds: string[];
@@ -16,6 +17,7 @@ export interface CreateUpdateMovieDto {
   year: number;
   description?: string;
   rating: number;
+  imageUrl?: string;
   genreId: string;
   actorIds: string[];
 }

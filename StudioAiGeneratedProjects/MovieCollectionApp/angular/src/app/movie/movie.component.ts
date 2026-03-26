@@ -8,19 +8,17 @@ import {
 import { Component, inject, OnInit } from '@angular/core';
 import { DecimalPipe } from '@angular/common';
 import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
-import { NgxDatatableModule } from '@swimlane/ngx-datatable';
+
 import {
   ListService,
   PagedResultDto,
   LocalizationPipe,
   PermissionDirective,
-  AutofocusDirective
+  AutofocusDirective,
 } from '@abp/ng.core';
 import {
   ConfirmationService,
   Confirmation,
-  NgxDatatableDefaultDirective,
-  NgxDatatableListDirective,
   ModalCloseDirective,
   ModalComponent
 } from '@abp/ng.theme.shared';
@@ -29,15 +27,13 @@ import { MovieService, MovieDto, GenreLookupDto, ActorLookupDto } from '../proxy
 @Component({
   selector: 'app-movie',
   templateUrl: './movie.component.html',
+  styleUrls: ['./movie.component.scss'],
   imports: [
     FormsModule,
     ReactiveFormsModule,
-    NgxDatatableModule,
     NgbDropdownModule,
     ModalComponent,
     AutofocusDirective,
-    NgxDatatableListDirective,
-    NgxDatatableDefaultDirective,
     PermissionDirective,
     ModalCloseDirective,
     LocalizationPipe,
@@ -103,6 +99,7 @@ export class MovieComponent implements OnInit {
       year: [this.selectedMovie.year || null, [Validators.required, Validators.min(1888)]],
       description: [this.selectedMovie.description || ''],
       rating: [this.selectedMovie.rating || 0, [Validators.required, Validators.min(0), Validators.max(10)]],
+      imageUrl: [this.selectedMovie.imageUrl || ''],
       genreId: [this.selectedMovie.genreId || null, Validators.required],
       actorIds: [this.selectedMovie.actorIds || []],
     });

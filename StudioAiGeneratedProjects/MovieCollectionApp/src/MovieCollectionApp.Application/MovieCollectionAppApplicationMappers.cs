@@ -1,27 +1,10 @@
 using Riok.Mapperly.Abstractions;
 using Volo.Abp.Mapperly;
-using MovieCollectionApp.Books;
 using MovieCollectionApp.Genres;
 using MovieCollectionApp.Actors;
 using MovieCollectionApp.Movies;
 
 namespace MovieCollectionApp;
-
-[Mapper(RequiredMappingStrategy = RequiredMappingStrategy.Target)]
-public partial class MovieCollectionAppBookToBookDtoMapper : MapperBase<Book, BookDto>
-{
-    public override partial BookDto Map(Book source);
-
-    public override partial void Map(Book source, BookDto destination);
-}
-
-[Mapper(RequiredMappingStrategy = RequiredMappingStrategy.Target)]
-public partial class MovieCollectionAppCreateUpdateBookDtoToBookMapper : MapperBase<CreateUpdateBookDto, Book>
-{
-    public override partial Book Map(CreateUpdateBookDto source);
-
-    public override partial void Map(CreateUpdateBookDto source, Book destination);
-}
 
 // Genre mappers
 [Mapper(RequiredMappingStrategy = RequiredMappingStrategy.Target)]

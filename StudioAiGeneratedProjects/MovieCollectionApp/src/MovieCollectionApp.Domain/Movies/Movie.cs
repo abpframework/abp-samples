@@ -16,5 +16,7 @@ public class Movie : AuditedAggregateRoot<Guid>
 
     public Guid GenreId { get; set; }
 
+    public string ImageUrl { get; set; }
+
     public List<Guid> ActorIds { get; set; } = new List<Guid>();
 }

@@ -21,6 +21,9 @@ public class CreateUpdateMovieDto
     [Range(0, MovieConsts.MaxRating)]
     public float Rating { get; set; }
 
+    [StringLength(MovieConsts.MaxImageUrlLength)]
+    public string ImageUrl { get; set; }
+
     [Required]
     public Guid GenreId { get; set; }
 

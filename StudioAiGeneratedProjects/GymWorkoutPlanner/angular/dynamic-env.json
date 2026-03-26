@@ -1,0 +1,21 @@
+{
+  "production": true,
+  "application": {
+    "baseUrl":"https://gymworkoutplanner-web",
+    "name": "GymWorkoutPlanner",
+    "logoUrl": ""
+  },
+  "oAuthConfig": {
+    "issuer": "https://gymworkoutplanner-api/",
+    "redirectUri": "https://gymworkoutplanner",
+    "clientId": "GymWorkoutPlanner_App",
+    "responseType": "code",
+    "scope": "offline_access openid profile email phone"
+  },
+  "apis": {
+    "default": {
+      "url": "https://gymworkoutplanner-api",
+      "rootNamespace": "GymWorkoutPlanner"
+    }
+  }
+}

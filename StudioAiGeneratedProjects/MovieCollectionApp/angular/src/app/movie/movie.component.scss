@@ -1,0 +1,48 @@
+.movie-card {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  border: none;
+  border-radius: 12px;
+  overflow: hidden;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15) !important;
+  }
+}
+
+.movie-poster-wrapper {
+  position: relative;
+  overflow: hidden;
+}
+
+.movie-poster {
+  height: 280px;
+  object-fit: cover;
+  width: 100%;
+}
+
+.movie-poster-placeholder {
+  height: 280px;
+  background: linear-gradient(135deg, #e9ecef 0%, #dee2e6 100%);
+}
+
+.movie-rating-badge {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: rgba(0, 0, 0, 0.75);
+  color: #fff;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  backdrop-filter: blur(4px);
+}
+
+.movie-description {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

@@ -1,0 +1,23 @@
+<Solution>
+    <Configurations>
+        <Platform Name="Any CPU" />
+    </Configurations>
+    <Folder Name="/src/">
+        <Project Path="src/MovieCollectionApp.Domain/MovieCollectionApp.Domain.csproj" />
+        <Project Path="src/MovieCollectionApp.Application/MovieCollectionApp.Application.csproj" />
+        <Project Path="src/MovieCollectionApp.MongoDB/MovieCollectionApp.MongoDB.csproj" />
+        <Project Path="src/MovieCollectionApp.Domain.Shared/MovieCollectionApp.Domain.Shared.csproj" />
+        <Project Path="src/MovieCollectionApp.Application.Contracts/MovieCollectionApp.Application.Contracts.csproj" />
+        <Project Path="src/MovieCollectionApp.HttpApi/MovieCollectionApp.HttpApi.csproj" />
+        <Project Path="src/MovieCollectionApp.HttpApi.Client/MovieCollectionApp.HttpApi.Client.csproj" />
+        <Project Path="src/MovieCollectionApp.DbMigrator/MovieCollectionApp.DbMigrator.csproj" />
+        <Project Path="src/MovieCollectionApp.HttpApi.Host/MovieCollectionApp.HttpApi.Host.csproj" />
+    </Folder>
+    <Folder Name="/test/">
+        <Project Path="test/MovieCollectionApp.Application.Tests/MovieCollectionApp.Application.Tests.csproj" />
+        <Project Path="test/MovieCollectionApp.TestBase/MovieCollectionApp.TestBase.csproj" />
+        <Project Path="test/MovieCollectionApp.Domain.Tests/MovieCollectionApp.Domain.Tests.csproj" />
+        <Project Path="test/MovieCollectionApp.MongoDB.Tests/MovieCollectionApp.MongoDB.Tests.csproj" />
+        <Project Path="test/MovieCollectionApp.HttpApi.Client.ConsoleTestApp/MovieCollectionApp.HttpApi.Client.ConsoleTestApp.csproj" />
+    </Folder>
+</Solution>

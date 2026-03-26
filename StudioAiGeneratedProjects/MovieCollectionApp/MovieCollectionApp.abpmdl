@@ -1,0 +1,109 @@
+{
+  "template": "app",
+  "imports": {
+    "Volo.Abp.LeptonXLiteTheme": {
+      "version": "5.1.1",
+      "isInstalled": true,
+      "creationTime": "03/26/2026 13:48:49 +00:00"
+    },
+    "Volo.Abp.Account": {
+      "version": "10.1.1",
+      "isInstalled": true,
+      "creationTime": "03/26/2026 13:48:49 +00:00"
+    },
+    "Volo.Abp.OpenIddict": {
+      "version": "10.1.1",
+      "isInstalled": true,
+      "creationTime": "03/26/2026 13:48:49 +00:00"
+    },
+    "Volo.Abp.Identity": {
+      "version": "10.1.1",
+      "isInstalled": true,
+      "creationTime": "03/26/2026 13:48:49 +00:00"
+    },
+    "Volo.Abp.TenantManagement": {
+      "version": "10.1.1",
+      "isInstalled": true,
+      "creationTime": "03/26/2026 13:48:49 +00:00"
+    },
+    "Volo.Abp.SettingManagement": {
+      "version": "10.1.1",
+      "isInstalled": true,
+      "creationTime": "03/26/2026 13:48:49 +00:00"
+    },
+    "Volo.Abp.PermissionManagement": {
+      "version": "10.1.1",
+      "isInstalled": true,
+      "creationTime": "03/26/2026 13:48:49 +00:00"
+    },
+    "Volo.Abp.FeatureManagement": {
+      "version": "10.1.1",
+      "isInstalled": true,
+      "creationTime": "03/26/2026 13:48:49 +00:00"
+    }
+  },
+  "folders": {
+    "items": {
+      "src": {},
+      "test": {}
+    }
+  },
+  "packages": {
+    "MovieCollectionApp.Application": {
+      "path": "src/MovieCollectionApp.Application/MovieCollectionApp.Application.abppkg",
+      "folder": "src"
+    },
+    "MovieCollectionApp.Application.Tests": {
+      "path": "test/MovieCollectionApp.Application.Tests/MovieCollectionApp.Application.Tests.abppkg",
+      "folder": "test"
+    },
+    "MovieCollectionApp.MongoDB": {
+      "path": "src/MovieCollectionApp.MongoDB/MovieCollectionApp.MongoDB.abppkg",
+      "folder": "src"
+    },
+    "MovieCollectionApp.MongoDB.Tests": {
+      "path": "test/MovieCollectionApp.MongoDB.Tests/MovieCollectionApp.MongoDB.Tests.abppkg",
+      "folder": "test"
+    },
+    "MovieCollectionApp.Domain.Shared": {
+      "path": "src/MovieCollectionApp.Domain.Shared/MovieCollectionApp.Domain.Shared.abppkg",
+      "folder": "src"
+    },
+    "MovieCollectionApp.Application.Contracts": {
+      "path": "src/MovieCollectionApp.Application.Contracts/MovieCollectionApp.Application.Contracts.abppkg",
+      "folder": "src"
+    },
+    "MovieCollectionApp.HttpApi": {
+      "path": "src/MovieCollectionApp.HttpApi/MovieCollectionApp.HttpApi.abppkg",
+      "folder": "src"
+    },
+    "MovieCollectionApp.HttpApi.Client": {
+      "path": "src/MovieCollectionApp.HttpApi.Client/MovieCollectionApp.HttpApi.Client.abppkg",
+      "folder": "src"
+    },
+    "MovieCollectionApp.TestBase": {
+      "path": "test/MovieCollectionApp.TestBase/MovieCollectionApp.TestBase.abppkg",
+      "folder": "test"
+    },
+    "MovieCollectionApp.Domain.Tests": {
+      "path": "test/MovieCollectionApp.Domain.Tests/MovieCollectionApp.Domain.Tests.abppkg",
+      "folder": "test"
+    },
+    "MovieCollectionApp.HttpApi.Client.ConsoleTestApp": {
+      "path": "test/MovieCollectionApp.HttpApi.Client.ConsoleTestApp/MovieCollectionApp.HttpApi.Client.ConsoleTestApp.abppkg",
+      "folder": "test"
+    },
+    "MovieCollectionApp.DbMigrator": {
+      "path": "src/MovieCollectionApp.DbMigrator/MovieCollectionApp.DbMigrator.abppkg",
+      "folder": "src"
+    },
+    "MovieCollectionApp.HttpApi.Host": {
+      "path": "src/MovieCollectionApp.HttpApi.Host/MovieCollectionApp.HttpApi.Host.abppkg",
+      "folder": "src"
+    },
+    "MovieCollectionApp.Domain": {
+      "path": "src/MovieCollectionApp.Domain/MovieCollectionApp.Domain.abppkg",
+      "folder": "src"
+    }
+  }
+}

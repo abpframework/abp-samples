@@ -1,0 +1,147 @@
+<div class="card">
+  <div class="card-header">
+    <div class="row">
+      <div class="col col-md-6">
+        <h5 class="card-title">
+          {{ '::Menu:Movies' | abpLocalization }}
+        </h5>
+      </div>
+      <div class="text-end col col-md-6">
+        <div class="text-lg-end pt-2">
+          <button
+            *abpPermission="'MovieCollectionApp.Movies.Create'"
+            id="create"
+            class="btn btn-primary"
+            type="button"
+            (click)="createMovie()"
+          >
+            <i class="fa fa-plus me-1"></i>
+            <span>{{ '::NewMovie' | abpLocalization }}</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="card-body">
+    <ngx-datatable [rows]="movie.items" [count]="movie.totalCount" [list]="list" default>
+      <ngx-datatable-column
+        [name]="'::Actions' | abpLocalization"
+        [maxWidth]="150"
+        [sortable]="false"
+      >
+        <ng-template let-row="row" ngx-datatable-cell-template>
+          <div ngbDropdown container="body" class="d-inline-block">
+            <button
+              class="btn btn-primary btn-sm dropdown-toggle"
+              data-toggle="dropdown"
+              aria-haspopup="true"
+              ngbDropdownToggle
+            >
+              <i class="fa fa-cog me-1"></i>{{ '::Actions' | abpLocalization }}
+            </button>
+            <div ngbDropdownMenu>
+              <button
+                *abpPermission="'MovieCollectionApp.Movies.Edit'"
+                ngbDropdownItem
+                (click)="editMovie(row.id)"
+              >
+                {{ '::Edit' | abpLocalization }}
+              </button>
+              <button
+                *abpPermission="'MovieCollectionApp.Movies.Delete'"
+                ngbDropdownItem
+                (click)="delete(row.id)"
+              >
+                {{ '::Delete' | abpLocalization }}
+              </button>
+            </div>
+          </div>
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column [name]="'::Title' | abpLocalization" prop="title"></ngx-datatable-column>
+      <ngx-datatable-column [name]="'::Year' | abpLocalization" prop="year" [maxWidth]="100"></ngx-datatable-column>
+      <ngx-datatable-column [name]="'::GenreName' | abpLocalization" prop="genreName"></ngx-datatable-column>
+      <ngx-datatable-column [name]="'::Rating' | abpLocalization" prop="rating" [maxWidth]="100">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+          {{ row.rating | number:'1.1-1' }}
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column [name]="'::ActorNames' | abpLocalization" prop="actorNames">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+          {{ row.actorNames?.join(', ') }}
+        </ng-template>
+      </ngx-datatable-column>
+    </ngx-datatable>
+  </div>
+</div>
+
+<abp-modal [(visible)]="isModalOpen">
+  <ng-template #abpHeader>
+    <h3>{{ (selectedMovie.id ? '::Edit' : '::NewMovie') | abpLocalization }}</h3>
+  </ng-template>
+
+  <ng-template #abpBody>
+    <form [formGroup]="form" (ngSubmit)="save()">
+      <div class="mt-2">
+        <label for="movie-title">{{ '::Title' | abpLocalization }}</label><span> * </span>
+        <input type="text" id="movie-title" class="form-control" formControlName="title" autofocus />
+      </div>
+
+      <div class="mt-2">
+        <label for="movie-year">{{ '::Year' | abpLocalization }}</label><span> * </span>
+        <input type="number" id="movie-year" class="form-control" formControlName="year" />
+      </div>
+
+      <div class="mt-2">
+        <label for="movie-description">{{ '::Description' | abpLocalization }}</label>
+        <textarea id="movie-description" class="form-control" formControlName="description" rows="3"></textarea>
+      </div>
+
+      <div class="mt-2">
+        <label for="movie-rating">{{ '::Rating' | abpLocalization }}</label><span> * </span>
+        <input type="number" id="movie-rating" class="form-control" formControlName="rating" step="0.1" min="0" max="10" />
+      </div>
+
+      <div class="mt-2">
+        <label for="movie-genre">{{ '::Genre' | abpLocalization }}</label><span> * </span>
+        <select class="form-control" id="movie-genre" formControlName="genreId">
+          <option [ngValue]="null">{{ '::SelectGenre' | abpLocalization }}</option>
+          @for (g of genres; track g.id) {
+            <option [ngValue]="g.id">{{ g.name }}</option>
+          }
+        </select>
+      </div>
+
+      <div class="mt-2">
+        <label>{{ '::Actors' | abpLocalization }}</label>
+        <div class="border rounded p-2" style="max-height: 200px; overflow-y: auto;">
+          @for (a of actors; track a.id) {
+            <div class="form-check">
+              <input
+                class="form-check-input"
+                type="checkbox"
+                [id]="'actor-' + a.id"
+                [checked]="isActorSelected(a.id)"
+                (change)="toggleActor(a.id)"
+              />
+              <label class="form-check-label" [for]="'actor-' + a.id">
+                {{ a.name }}
+              </label>
+            </div>
+          }
+        </div>
+      </div>
+    </form>
+  </ng-template>
+
+  <ng-template #abpFooter>
+    <button type="button" class="btn btn-secondary" abpClose>
+      {{ '::Close' | abpLocalization }}
+    </button>
+
+    <button class="btn btn-primary" (click)="save()" [disabled]="form.invalid">
+      <i class="fa fa-check mr-1"></i>
+      {{ '::Save' | abpLocalization }}
+    </button>
+  </ng-template>
+</abp-modal>

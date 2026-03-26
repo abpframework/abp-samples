@@ -1,4 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 
 namespace GymWorkoutPlanner.Data;
@@ -14,7 +14,7 @@ public class GymWorkoutPlannerDbContextFactory : IDesignTimeDbContextFactory<Gym
         var configuration = BuildConfiguration();
 
         var builder = new DbContextOptionsBuilder<GymWorkoutPlannerDbContext>()
-            .UseMySQL(configuration.GetConnectionString("Default"));
+            .UseNpgsql(configuration.GetConnectionString("Default"));
 
         return new GymWorkoutPlannerDbContext(builder.Options);
     }

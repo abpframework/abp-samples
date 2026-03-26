@@ -28,4 +28,16 @@ export const APP_ROUTES: Routes = [
     loadComponent: () => import('./book/book.component').then(c => c.BookComponent),
     canActivate: [authGuard, permissionGuard],
   },
+  {
+    path: 'exercises',
+    loadComponent: () => import('./exercise/exercise.component').then(c => c.ExerciseComponent),
+    canActivate: [authGuard, permissionGuard],
+    data: { requiredPolicy: 'GymWorkoutPlanner.Exercises' },
+  },
+  {
+    path: 'workout-plans',
+    loadComponent: () => import('./workout-plan/workout-plan.component').then(c => c.WorkoutPlanComponent),
+    canActivate: [authGuard, permissionGuard],
+    data: { requiredPolicy: 'GymWorkoutPlanner.WorkoutPlans' },
+  },
 ];

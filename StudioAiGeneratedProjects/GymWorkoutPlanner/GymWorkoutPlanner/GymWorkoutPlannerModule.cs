@@ -54,8 +54,9 @@ using Volo.Abp.Identity.EntityFrameworkCore;
 using Volo.Abp.FeatureManagement.EntityFrameworkCore;
 using Volo.Abp.BlobStoring.Database.EntityFrameworkCore;
 using Volo.Abp.BackgroundJobs.EntityFrameworkCore;
-using Volo.Abp.EntityFrameworkCore.MySQL;
+using Volo.Abp.EntityFrameworkCore.PostgreSql;
 using Volo.Abp.Studio.Client.AspNetCore;
+using Volo.Abp.Timing;
 
 using Microsoft.Extensions.Hosting;
 
@@ -111,7 +112,7 @@ namespace GymWorkoutPlanner;
     typeof(AbpSettingManagementEntityFrameworkCoreModule),
     typeof(AbpBackgroundJobsEntityFrameworkCoreModule),
     typeof(BlobStoringDatabaseEntityFrameworkCoreModule),
-    typeof(AbpEntityFrameworkCoreMySQLModule)
+    typeof(AbpEntityFrameworkCorePostgreSqlModule)
 )]
 public class GymWorkoutPlannerModule : AbpModule
 {
@@ -162,6 +163,11 @@ public class GymWorkoutPlannerModule : AbpModule
     {
         var hostingEnvironment = context.Services.GetHostingEnvironment();
         var configuration = context.Services.GetConfiguration();
+
+        Configure<AbpClockOptions>(options =>
+        {
+            options.Kind = DateTimeKind.Utc;
+        });
 
         if (!hostingEnvironment.IsProduction())
         {
@@ -386,10 +392,7 @@ public class GymWorkoutPlannerModule : AbpModule
         {
             options.Configure(configurationContext =>
             {
-                configurationContext.UseMySQL(builder =>
-                {
-                    builder.TranslateParameterizedCollectionsToConstants();
-                });
+                configurationContext.UseNpgsql();
             });
         });
         

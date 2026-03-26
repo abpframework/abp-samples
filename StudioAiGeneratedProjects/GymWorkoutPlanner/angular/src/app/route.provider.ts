@@ -24,5 +24,19 @@ function configureRoutes() {
       layout: eLayoutType.application,
       requiredPolicy: 'GymWorkoutPlanner.Books',
     },
+    {
+      path: '/exercises',
+      name: '::Menu:Exercises',
+      iconClass: 'fas fa-dumbbell',
+      layout: eLayoutType.application,
+      requiredPolicy: 'GymWorkoutPlanner.Exercises',
+    },
+    {
+      path: '/workout-plans',
+      name: '::Menu:WorkoutPlans',
+      iconClass: 'fas fa-list-check',
+      layout: eLayoutType.application,
+      requiredPolicy: 'GymWorkoutPlanner.WorkoutPlans',
+    },
   ]);
 }

@@ -1,0 +1,41 @@
+@using System.Globalization
+@using Microsoft.Extensions.Localization
+@using UrlBasedLocalizationSample.Localization
+@inject IStringLocalizer<UrlBasedLocalizationSampleResource> L
+
+@{
+    var currentCulture = CultureInfo.CurrentCulture.Name;
+    var routeCulture = ViewContext.RouteData.Values["culture"]?.ToString() ?? "(none)";
+}
+
+<div class="container py-5">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <div class="card shadow-sm border-info">
+                <div class="card-header bg-info text-white">
+                    MVC Controller Home
+                </div>
+                <div class="card-body p-5">
+                    <h2>MVC Controller — @L["Home:Title"]</h2>
+                    <p class="text-muted">
+                        This page is rendered by <code>HomeController.Index</code>.
+                        The main home page is a <strong>Razor Page</strong>.
+                    </p>
+
+                    <table class="table table-bordered mt-4">
+                        <tr>
+                            <th>Culture</th>
+                            <td><span class="badge bg-info fs-6">@currentCulture</span></td>
+                        </tr>
+                        <tr>
+                            <th>Route {culture} value</th>
+                            <td><code>@routeCulture</code></td>
+                        </tr>
+                    </table>
+
+                    <a href="@Url.Action("About", "Home")" class="btn btn-outline-info">MVC About →</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

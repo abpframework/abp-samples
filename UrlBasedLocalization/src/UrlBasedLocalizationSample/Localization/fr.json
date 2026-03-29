@@ -1,0 +1,20 @@
+{
+  "Culture": "fr",
+  "Texts": {
+    "AppName": "Exemple de Localisation Basée sur l'URL",
+    "Menu:Home": "Accueil",
+    "Menu:About": "À propos",
+    "Home:Title": "Bienvenue !",
+    "Home:Description": "Cet exemple montre la fonctionnalité de localisation basée sur l'URL d'ABP.",
+    "Home:CurrentCulture": "Culture actuelle (depuis l'URL)",
+    "Home:TryIt": "Changez la langue ci-dessus et observez comment l'URL change.",
+    "Home:UrlExample": "Exemples d'URL",
+    "About:Title": "À propos de cet exemple",
+    "About:Description": "La localisation basée sur l'URL intègre le code de culture directement dans le chemin de l'URL, par exemple <strong>/fr/about</strong> ou <strong>/en/about</strong>.",
+    "About:HowItWorks": "Comment ça marche",
+    "About:HowItWorksDetail": "ABP utilise le <code>RouteDataRequestCultureProvider</code> intégré d'ASP.NET Core. Quand une requête arrive sur <code>/{culture}/page</code>, le segment de culture est capturé par le routage et la culture du thread courant est définie en conséquence.",
+    "About:MiddlewareOrder": "Ordre des middlewares",
+    "About:MiddlewareOrderDetail": "La seule configuration requise est que <code>UseAbpRequestLocalization()</code> soit appelé <strong>après</strong> <code>UseRouting()</code>.",
+    "About:ApiRoutes": "Les routes API (ex. <code>/api/...</code>) ne sont pas affectées — elles n'ont pas de segment <code>{culture}</code>, donc le fournisseur retourne null et passe au fournisseur suivant."
+  }
+}

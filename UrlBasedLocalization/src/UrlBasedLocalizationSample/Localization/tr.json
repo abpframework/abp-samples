@@ -1,0 +1,20 @@
+{
+  "Culture": "tr",
+  "Texts": {
+    "AppName": "URL Tabanlı Yerelleştirme Örneği",
+    "Menu:Home": "Ana Sayfa",
+    "Menu:About": "Hakkında",
+    "Home:Title": "Hoş Geldiniz!",
+    "Home:Description": "Bu örnek, ABP'nin URL tabanlı yerelleştirme özelliğini göstermektedir.",
+    "Home:CurrentCulture": "Mevcut kültür (URL'den)",
+    "Home:TryIt": "Yukarıdan dili değiştirin ve URL'nin nasıl değiştiğini fark edin.",
+    "Home:UrlExample": "URL örnekleri",
+    "About:Title": "Bu Örnek Hakkında",
+    "About:Description": "URL tabanlı yerelleştirme, kültür kodunu doğrudan URL yoluna gömer, örneğin <strong>/tr/about</strong> veya <strong>/en/about</strong>.",
+    "About:HowItWorks": "Nasıl Çalışır",
+    "About:HowItWorksDetail": "ABP, ASP.NET Core'un yerleşik <code>RouteDataRequestCultureProvider</code>'ını kullanır. <code>/{culture}/sayfa</code>'ya bir istek geldiğinde, kültür segmenti yönlendirme tarafından yakalanır ve mevcut iş parçacığı kültürü buna göre ayarlanır.",
+    "About:MiddlewareOrder": "Middleware sırası",
+    "About:MiddlewareOrderDetail": "Tek yapılandırma gereksinimi, <code>UseAbpRequestLocalization()</code>'ın <code>UseRouting()</code>'den <strong>sonra</strong> çağrılmasıdır.",
+    "About:ApiRoutes": "API rotaları (örn. <code>/api/...</code>) etkilenmez — bunların <code>{culture}</code> segmenti yoktur, bu nedenle sağlayıcı null döndürür ve bir sonraki sağlayıcıya geçer."
+  }
+}

@@ -1,0 +1,53 @@
+@using System.Globalization
+@using Microsoft.Extensions.Localization
+@using UrlBasedLocalizationSample.Localization
+@inject IStringLocalizer<UrlBasedLocalizationSampleResource> L
+
+@{
+    var currentCulture = CultureInfo.CurrentCulture.Name;
+    var routeCulture = ViewContext.RouteData.Values["culture"]?.ToString() ?? "(none)";
+}
+
+<div class="container py-5">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <div class="card shadow-sm border-info">
+                <div class="card-header bg-info text-white">
+                    MVC Controller Demo
+                </div>
+                <div class="card-body p-5">
+                    <h2>MVC Controller — @L["About:Title"]</h2>
+                    <p class="text-muted">
+                        This page is rendered by an <strong>MVC Controller</strong> (<code>HomeController.About</code>),
+                        demonstrating that <code>{culture}/{controller}/{action}</code> conventional routes work
+                        with URL-based localization.
+                    </p>
+
+                    <table class="table table-bordered mt-4">
+                        <tr>
+                            <th>Culture (CultureInfo.CurrentCulture)</th>
+                            <td><span class="badge bg-info fs-6">@currentCulture</span></td>
+                        </tr>
+                        <tr>
+                            <th>Route {culture} value</th>
+                            <td><code>@routeCulture</code></td>
+                        </tr>
+                    </table>
+
+                    <p class="small text-muted">
+                        Within an MVC Controller, <code>Url.Action()</code> automatically propagates the
+                        ambient <code>{culture}</code> route value:
+                    </p>
+                    <div class="d-flex flex-column gap-2">
+                        <a href="@Url.Action("Index", "Home")" class="btn btn-outline-info">
+                            Url.Action("Index", "Home") — <code>@Url.Action("Index", "Home")</code>
+                        </a>
+                        <a href="@Url.Action("About", "Home")" class="btn btn-outline-info">
+                            Url.Action("About", "Home") — <code>@Url.Action("About", "Home")</code>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

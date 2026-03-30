@@ -1,0 +1,113 @@
+{
+  "template": "app",
+  "imports": {
+    "Volo.Abp.LeptonXLiteTheme": {
+      "version": "5.1.1",
+      "isInstalled": true,
+      "creationTime": "03/30/2026 14:24:12 +00:00"
+    },
+    "Volo.Abp.Account": {
+      "version": "10.1.1",
+      "isInstalled": true,
+      "creationTime": "03/30/2026 14:24:12 +00:00"
+    },
+    "Volo.Abp.OpenIddict": {
+      "version": "10.1.1",
+      "isInstalled": true,
+      "creationTime": "03/30/2026 14:24:12 +00:00"
+    },
+    "Volo.Abp.Identity": {
+      "version": "10.1.1",
+      "isInstalled": true,
+      "creationTime": "03/30/2026 14:24:12 +00:00"
+    },
+    "Volo.Abp.TenantManagement": {
+      "version": "10.1.1",
+      "isInstalled": true,
+      "creationTime": "03/30/2026 14:24:12 +00:00"
+    },
+    "Volo.Abp.SettingManagement": {
+      "version": "10.1.1",
+      "isInstalled": true,
+      "creationTime": "03/30/2026 14:24:12 +00:00"
+    },
+    "Volo.Abp.PermissionManagement": {
+      "version": "10.1.1",
+      "isInstalled": true,
+      "creationTime": "03/30/2026 14:24:12 +00:00"
+    },
+    "Volo.Abp.FeatureManagement": {
+      "version": "10.1.1",
+      "isInstalled": true,
+      "creationTime": "03/30/2026 14:24:12 +00:00"
+    }
+  },
+  "folders": {
+    "items": {
+      "src": {},
+      "test": {}
+    }
+  },
+  "packages": {
+    "RecipeOrganizer.Application": {
+      "path": "src/RecipeOrganizer.Application/RecipeOrganizer.Application.abppkg",
+      "folder": "src"
+    },
+    "RecipeOrganizer.Application.Tests": {
+      "path": "test/RecipeOrganizer.Application.Tests/RecipeOrganizer.Application.Tests.abppkg",
+      "folder": "test"
+    },
+    "RecipeOrganizer.MongoDB": {
+      "path": "src/RecipeOrganizer.MongoDB/RecipeOrganizer.MongoDB.abppkg",
+      "folder": "src"
+    },
+    "RecipeOrganizer.MongoDB.Tests": {
+      "path": "test/RecipeOrganizer.MongoDB.Tests/RecipeOrganizer.MongoDB.Tests.abppkg",
+      "folder": "test"
+    },
+    "RecipeOrganizer.Domain.Shared": {
+      "path": "src/RecipeOrganizer.Domain.Shared/RecipeOrganizer.Domain.Shared.abppkg",
+      "folder": "src"
+    },
+    "RecipeOrganizer.Application.Contracts": {
+      "path": "src/RecipeOrganizer.Application.Contracts/RecipeOrganizer.Application.Contracts.abppkg",
+      "folder": "src"
+    },
+    "RecipeOrganizer.HttpApi": {
+      "path": "src/RecipeOrganizer.HttpApi/RecipeOrganizer.HttpApi.abppkg",
+      "folder": "src"
+    },
+    "RecipeOrganizer.HttpApi.Client": {
+      "path": "src/RecipeOrganizer.HttpApi.Client/RecipeOrganizer.HttpApi.Client.abppkg",
+      "folder": "src"
+    },
+    "RecipeOrganizer.TestBase": {
+      "path": "test/RecipeOrganizer.TestBase/RecipeOrganizer.TestBase.abppkg",
+      "folder": "test"
+    },
+    "RecipeOrganizer.Domain.Tests": {
+      "path": "test/RecipeOrganizer.Domain.Tests/RecipeOrganizer.Domain.Tests.abppkg",
+      "folder": "test"
+    },
+    "RecipeOrganizer.HttpApi.Client.ConsoleTestApp": {
+      "path": "test/RecipeOrganizer.HttpApi.Client.ConsoleTestApp/RecipeOrganizer.HttpApi.Client.ConsoleTestApp.abppkg",
+      "folder": "test"
+    },
+    "RecipeOrganizer.DbMigrator": {
+      "path": "src/RecipeOrganizer.DbMigrator/RecipeOrganizer.DbMigrator.abppkg",
+      "folder": "src"
+    },
+    "RecipeOrganizer.Blazor": {
+      "path": "src/RecipeOrganizer.Blazor/RecipeOrganizer.Blazor.abppkg",
+      "folder": "src"
+    },
+    "RecipeOrganizer.Blazor.Client": {
+      "path": "src/RecipeOrganizer.Blazor.Client/RecipeOrganizer.Blazor.Client.abppkg",
+      "folder": "src"
+    },
+    "RecipeOrganizer.Domain": {
+      "path": "src/RecipeOrganizer.Domain/RecipeOrganizer.Domain.abppkg",
+      "folder": "src"
+    }
+  }
+}

@@ -208,11 +208,11 @@
                                                 <TableHeaderCell>@L["Name"]</TableHeaderCell>
                                                 <TableHeaderCell>@L["Quantity"]</TableHeaderCell>
                                                 <TableHeaderCell>@L["Unit"]</TableHeaderCell>
-                                                <TableHeaderCell Width="60px"></TableHeaderCell>
-                                            </TableRow>
-                                        </TableHeader>
-                                        <TableBody>
-                                            @foreach (var ingredient in NewEntity.Ingredients)
+                                                <TableHeaderCell Style="width:60px"></TableHeaderCell>
+                                                </TableRow>
+                                                </TableHeader>
+                                                <TableBody>
+                                                @foreach (var ingredient in NewEntity.Ingredients)
                                             {
                                                 <TableRow>
                                                     <TableRowCell>
@@ -344,11 +344,11 @@
                                                 <TableHeaderCell>@L["Name"]</TableHeaderCell>
                                                 <TableHeaderCell>@L["Quantity"]</TableHeaderCell>
                                                 <TableHeaderCell>@L["Unit"]</TableHeaderCell>
-                                                <TableHeaderCell Width="60px"></TableHeaderCell>
-                                            </TableRow>
-                                        </TableHeader>
-                                        <TableBody>
-                                            @foreach (var ingredient in EditingEntity.Ingredients)
+                                                <TableHeaderCell Style="width:60px"></TableHeaderCell>
+                                                </TableRow>
+                                                </TableHeader>
+                                                <TableBody>
+                                                @foreach (var ingredient in EditingEntity.Ingredients)
                                             {
                                                 <TableRow>
                                                     <TableRowCell>
@@ -418,7 +418,7 @@
         return string.Format(L["RecipeDeletionConfirmationMessage"], entity.Title);
     }
 
-    public override async Task OpenEditModalAsync(RecipeDto entity)
+    protected override async Task OpenEditModalAsync(RecipeDto entity)
     {
         await base.OpenEditModalAsync(entity);
         // Populate ingredients from the read DTO since the mapper ignores them

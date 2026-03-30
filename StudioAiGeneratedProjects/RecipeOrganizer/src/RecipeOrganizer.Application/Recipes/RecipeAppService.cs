@@ -81,8 +81,12 @@ public class RecipeAppService : ApplicationService, IRecipeAppService
         recipe.Ingredients = input.Ingredients
             .Select(i =>
             {
-                var ingredient = ObjectMapper.Map<CreateUpdateIngredientDto, Ingredient>(i);
-                ingredient.Id = GuidGenerator.Create();
+                var ingredient = new Ingredient(GuidGenerator.Create())
+                {
+                    Name = i.Name,
+                    Quantity = i.Quantity,
+                    Unit = i.Unit
+                };
                 return ingredient;
             })
             .ToList();
@@ -111,8 +115,12 @@ public class RecipeAppService : ApplicationService, IRecipeAppService
         recipe.Ingredients = input.Ingredients
             .Select(i =>
             {
-                var ingredient = ObjectMapper.Map<CreateUpdateIngredientDto, Ingredient>(i);
-                ingredient.Id = GuidGenerator.Create();
+                var ingredient = new Ingredient(GuidGenerator.Create())
+                {
+                    Name = i.Name,
+                    Quantity = i.Quantity,
+                    Unit = i.Unit
+                };
                 return ingredient;
             })
             .ToList();

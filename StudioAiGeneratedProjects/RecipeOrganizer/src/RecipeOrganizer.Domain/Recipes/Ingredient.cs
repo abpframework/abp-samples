@@ -5,7 +5,7 @@ namespace RecipeOrganizer.Recipes;
 
 public class Ingredient : Entity<Guid>
 {
-    protected Ingredient() { }
+    public Ingredient() { }
 
     public Ingredient(Guid id)
     {

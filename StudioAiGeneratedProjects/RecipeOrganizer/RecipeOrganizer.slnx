@@ -1,0 +1,24 @@
+<Solution>
+    <Configurations>
+        <Platform Name="Any CPU" />
+    </Configurations>
+    <Folder Name="/src/">
+        <Project Path="src/RecipeOrganizer.Domain/RecipeOrganizer.Domain.csproj" />
+        <Project Path="src/RecipeOrganizer.Application/RecipeOrganizer.Application.csproj" />
+        <Project Path="src/RecipeOrganizer.MongoDB/RecipeOrganizer.MongoDB.csproj" />
+        <Project Path="src/RecipeOrganizer.Domain.Shared/RecipeOrganizer.Domain.Shared.csproj" />
+        <Project Path="src/RecipeOrganizer.Application.Contracts/RecipeOrganizer.Application.Contracts.csproj" />
+        <Project Path="src/RecipeOrganizer.HttpApi/RecipeOrganizer.HttpApi.csproj" />
+        <Project Path="src/RecipeOrganizer.HttpApi.Client/RecipeOrganizer.HttpApi.Client.csproj" />
+        <Project Path="src/RecipeOrganizer.DbMigrator/RecipeOrganizer.DbMigrator.csproj" />
+        <Project Path="src/RecipeOrganizer.Blazor/RecipeOrganizer.Blazor.csproj" />
+        <Project Path="src/RecipeOrganizer.Blazor.Client/RecipeOrganizer.Blazor.Client.csproj" />
+    </Folder>
+    <Folder Name="/test/">
+        <Project Path="test/RecipeOrganizer.Application.Tests/RecipeOrganizer.Application.Tests.csproj" />
+        <Project Path="test/RecipeOrganizer.TestBase/RecipeOrganizer.TestBase.csproj" />
+        <Project Path="test/RecipeOrganizer.Domain.Tests/RecipeOrganizer.Domain.Tests.csproj" />
+        <Project Path="test/RecipeOrganizer.MongoDB.Tests/RecipeOrganizer.MongoDB.Tests.csproj" />
+        <Project Path="test/RecipeOrganizer.HttpApi.Client.ConsoleTestApp/RecipeOrganizer.HttpApi.Client.ConsoleTestApp.csproj" />
+    </Folder>
+</Solution>

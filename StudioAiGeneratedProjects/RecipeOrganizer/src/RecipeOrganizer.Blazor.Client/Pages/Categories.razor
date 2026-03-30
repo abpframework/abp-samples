@@ -1,0 +1,226 @@
+@page "/categories"
+@attribute [Authorize(RecipeOrganizerPermissions.Categories.Default)]
+@using RecipeOrganizer.Permissions
+@using Volo.Abp.Application.Dtos
+@using Microsoft.AspNetCore.Authorization
+@using RecipeOrganizer.Categories
+@using RecipeOrganizer.Localization
+@using Microsoft.Extensions.Localization
+@using Volo.Abp.AspNetCore.Components.Web
+@inject IStringLocalizer<RecipeOrganizerResource> L
+@inject AbpBlazorMessageLocalizerHelper<RecipeOrganizerResource> LH
+@inherits AbpCrudPageBase<ICategoryAppService, CategoryDto, Guid, PagedAndSortedResultRequestDto, CreateUpdateCategoryDto>
+
+<Card>
+    <CardHeader>
+        <Row Class="justify-content-between">
+            <Column ColumnSize="ColumnSize.IsAuto">
+                <h4 class="mb-0">
+                    <i class="fa fa-tags me-2 text-primary"></i>
+                    @L["Menu:Categories"]
+                </h4>
+            </Column>
+            <Column ColumnSize="ColumnSize.IsAuto">
+                @if (HasCreatePermission)
+                {
+                    <Button Color="Color.Primary" Clicked="OpenCreateModalAsync">
+                        <Icon Name="IconName.Add" />
+                        @L["NewCategory"]
+                    </Button>
+                }
+            </Column>
+        </Row>
+    </CardHeader>
+    <CardBody>
+        <DataGrid TItem="CategoryDto"
+                  Data="Entities"
+                  ReadData="OnDataGridReadAsync"
+                  CurrentPage="CurrentPage"
+                  TotalItems="TotalCount"
+                  ShowPager="true"
+                  PageSize="PageSize"
+                  Striped="true"
+                  Hoverable="true"
+                  Responsive="true">
+            <DataGridColumns>
+                <DataGridEntityActionsColumn TItem="CategoryDto" @ref="@EntityActionsColumn">
+                    <DisplayTemplate>
+                        <EntityActions TItem="CategoryDto" EntityActionsColumn="@EntityActionsColumn">
+                            <EntityAction TItem="CategoryDto"
+                                          Text="@L["Edit"]"
+                                          Visible=HasUpdatePermission
+                                          Clicked="() => OpenEditModalAsync(context)" />
+                            <EntityAction TItem="CategoryDto"
+                                          Text="@L["Delete"]"
+                                          Visible=HasDeletePermission
+                                          Clicked="() => DeleteEntityAsync(context)"
+                                          ConfirmationMessage="() => GetDeleteConfirmationMessage(context)" />
+                        </EntityActions>
+                    </DisplayTemplate>
+                </DataGridEntityActionsColumn>
+                <DataGridColumn TItem="CategoryDto"
+                                Field="@nameof(CategoryDto.IconClass)"
+                                Caption="@L["Icon"]"
+                                Width="80px">
+                    <DisplayTemplate>
+                        <span class="category-icon-badge">
+                            <i class="@context.IconClass fa-lg"></i>
+                        </span>
+                    </DisplayTemplate>
+                </DataGridColumn>
+                <DataGridColumn TItem="CategoryDto"
+                                Field="@nameof(CategoryDto.Name)"
+                                Caption="@L["Name"]">
+                    <DisplayTemplate>
+                        <strong>@context.Name</strong>
+                    </DisplayTemplate>
+                </DataGridColumn>
+                <DataGridColumn TItem="CategoryDto"
+                                Field="@nameof(CategoryDto.Description)"
+                                Caption="@L["Description"]">
+                    <DisplayTemplate>
+                        <span class="text-muted">@context.Description</span>
+                    </DisplayTemplate>
+                </DataGridColumn>
+                <DataGridColumn TItem="CategoryDto"
+                                Field="@nameof(CategoryDto.CreationTime)"
+                                Caption="@L["CreationTime"]">
+                    <DisplayTemplate>
+                        @context.CreationTime.ToShortDateString()
+                    </DisplayTemplate>
+                </DataGridColumn>
+            </DataGridColumns>
+        </DataGrid>
+    </CardBody>
+</Card>
+
+<Modal @ref="@CreateModal">
+    <ModalBackdrop />
+    <ModalContent IsCentered="true">
+        <Form>
+            <ModalHeader>
+                <ModalTitle>
+                    <i class="fa fa-plus-circle me-2 text-primary"></i>
+                    @L["NewCategory"]
+                </ModalTitle>
+                <CloseButton Clicked="CloseCreateModalAsync" />
+            </ModalHeader>
+            <ModalBody>
+                <Validations @ref="@CreateValidationsRef" Model="@NewEntity" ValidateOnLoad="false">
+                    <Validation MessageLocalizer="@LH.Localize">
+                        <Field>
+                            <FieldLabel>@L["Name"] <span class="text-danger">*</span></FieldLabel>
+                            <TextEdit @bind-Text="@NewEntity.Name" AutoFocus="true" Placeholder="@L["Name"]">
+                                <Feedback>
+                                    <ValidationError />
+                                </Feedback>
+                            </TextEdit>
+                        </Field>
+                    </Validation>
+                    <Field>
+                        <FieldLabel>@L["Description"]</FieldLabel>
+                        <MemoEdit @bind-Text="@NewEntity.Description" Rows="3" Placeholder="@L["Description"]" />
+                    </Field>
+                    <Field>
+                        <FieldLabel>@L["IconClass"]</FieldLabel>
+                        <Addons>
+                            <Addon AddonType="AddonType.Start">
+                                <AddonLabel>
+                                    <i class="@(string.IsNullOrWhiteSpace(NewEntity.IconClass) ? "fa fa-tag" : NewEntity.IconClass)"></i>
+                                </AddonLabel>
+                            </Addon>
+                            <Addon AddonType="AddonType.Body">
+                                <TextEdit @bind-Text="@NewEntity.IconClass" Placeholder="fa fa-utensils" />
+                            </Addon>
+                        </Addons>
+                        <FieldHelp>@L["IconClassHelp"]</FieldHelp>
+                    </Field>
+                </Validations>
+            </ModalBody>
+            <ModalFooter>
+                <Button Color="Color.Secondary" Clicked="CloseCreateModalAsync">@L["Cancel"]</Button>
+                <Button Color="Color.Primary"
+                        Type="@ButtonType.Submit"
+                        PreventDefaultOnSubmit="true"
+                        Clicked="CreateEntityAsync">
+                    <Icon Name="IconName.Save" />
+                    @L["Save"]
+                </Button>
+            </ModalFooter>
+        </Form>
+    </ModalContent>
+</Modal>
+
+<Modal @ref="@EditModal">
+    <ModalBackdrop />
+    <ModalContent IsCentered="true">
+        <Form>
+            <ModalHeader>
+                <ModalTitle>
+                    <i class="fa fa-edit me-2 text-warning"></i>
+                    @L["Edit"]
+                </ModalTitle>
+                <CloseButton Clicked="CloseEditModalAsync" />
+            </ModalHeader>
+            <ModalBody>
+                <Validations @ref="@EditValidationsRef" Model="@EditingEntity" ValidateOnLoad="false">
+                    <Validation MessageLocalizer="@LH.Localize">
+                        <Field>
+                            <FieldLabel>@L["Name"] <span class="text-danger">*</span></FieldLabel>
+                            <TextEdit @bind-Text="@EditingEntity.Name" Placeholder="@L["Name"]">
+                                <Feedback>
+                                    <ValidationError />
+                                </Feedback>
+                            </TextEdit>
+                        </Field>
+                    </Validation>
+                    <Field>
+                        <FieldLabel>@L["Description"]</FieldLabel>
+                        <MemoEdit @bind-Text="@EditingEntity.Description" Rows="3" Placeholder="@L["Description"]" />
+                    </Field>
+                    <Field>
+                        <FieldLabel>@L["IconClass"]</FieldLabel>
+                        <Addons>
+                            <Addon AddonType="AddonType.Start">
+                                <AddonLabel>
+                                    <i class="@(string.IsNullOrWhiteSpace(EditingEntity.IconClass) ? "fa fa-tag" : EditingEntity.IconClass)"></i>
+                                </AddonLabel>
+                            </Addon>
+                            <Addon AddonType="AddonType.Body">
+                                <TextEdit @bind-Text="@EditingEntity.IconClass" Placeholder="fa fa-utensils" />
+                            </Addon>
+                        </Addons>
+                        <FieldHelp>@L["IconClassHelp"]</FieldHelp>
+                    </Field>
+                </Validations>
+            </ModalBody>
+            <ModalFooter>
+                <Button Color="Color.Secondary" Clicked="CloseEditModalAsync">@L["Cancel"]</Button>
+                <Button Color="Color.Primary"
+                        Type="@ButtonType.Submit"
+                        PreventDefaultOnSubmit="true"
+                        Clicked="UpdateEntityAsync">
+                    <Icon Name="IconName.Save" />
+                    @L["Save"]
+                </Button>
+            </ModalFooter>
+        </Form>
+    </ModalContent>
+</Modal>
+
+@code
+{
+    public Categories()
+    {
+        CreatePolicyName = RecipeOrganizerPermissions.Categories.Create;
+        UpdatePolicyName = RecipeOrganizerPermissions.Categories.Edit;
+        DeletePolicyName = RecipeOrganizerPermissions.Categories.Delete;
+
+        LocalizationResource = typeof(RecipeOrganizerResource);
+    }
+
+    protected override string GetDeleteConfirmationMessage(CategoryDto entity)
+    {
+        return string.Format(L["CategoryDeletionConfirmationMessage"], entity.Name);
+    }
+}

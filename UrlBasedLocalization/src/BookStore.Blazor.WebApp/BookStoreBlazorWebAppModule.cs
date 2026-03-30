@@ -6,8 +6,13 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
 using BookStore.Blazor.WebApp.Client;
 using BookStore.Blazor.WebApp.Components;
+using BookStore.Blazor.WebApp.Data;
+using BookStore.Blazor.Shared.Menus;
 using BookStore.Localization;
+using Microsoft.EntityFrameworkCore;
 using Volo.Abp;
+using Volo.Abp.Account;
+using Volo.Abp.Account.Web;
 using Volo.Abp.AspNetCore.Components.Server.BasicTheme;
 using Volo.Abp.AspNetCore.Components.Server.BasicTheme.Bundling;
 using Volo.Abp.AspNetCore.Components.Web;
@@ -16,13 +21,20 @@ using Volo.Abp.AspNetCore.Components.WebAssembly.BasicTheme.Bundling;
 using Volo.Abp.AspNetCore.Mvc;
 using Volo.Abp.AspNetCore.Mvc.Localization;
 using Volo.Abp.AspNetCore.Mvc.UI.Bundling;
+using Volo.Abp.AspNetCore.Mvc.UI.Theme.Basic;
 using Volo.Abp.Autofac;
-using Volo.Abp.AspNetCore.Components.Web.Theming.Toolbars;
+using Volo.Abp.Data;
+using Volo.Abp.EntityFrameworkCore;
+using Volo.Abp.Identity;
+using Volo.Abp.Identity.Blazor.Server;
+using Volo.Abp.Identity.EntityFrameworkCore;
 using Volo.Abp.Localization;
 using Volo.Abp.Modularity;
+using Volo.Abp.PermissionManagement;
+using Volo.Abp.PermissionManagement.EntityFrameworkCore;
 using Volo.Abp.UI.Navigation;
+using Volo.Abp.Uow;
 using BookStore.Blazor.Shared;
-using BookStore.Blazor.Shared.Menus;
 
 namespace BookStore.Blazor.WebApp;
 
@@ -31,7 +43,17 @@ namespace BookStore.Blazor.WebApp;
     typeof(AbpAspNetCoreMvcModule),
     typeof(AbpAspNetCoreComponentsServerBasicThemeModule),
     typeof(AbpAspNetCoreComponentsWebAssemblyBasicThemeBundlingModule),
-    typeof(BookStoreSharedModule)
+    typeof(BookStoreSharedModule),
+    typeof(AbpIdentityBlazorServerModule),
+    typeof(AbpIdentityApplicationModule),
+    typeof(AbpIdentityHttpApiModule),
+    typeof(AbpIdentityEntityFrameworkCoreModule),
+    typeof(AbpAccountWebModule),
+    typeof(AbpAccountApplicationModule),
+    typeof(AbpAccountHttpApiModule),
+    typeof(AbpPermissionManagementApplicationModule),
+    typeof(AbpPermissionManagementEntityFrameworkCoreModule),
+    typeof(AbpAspNetCoreMvcUiBasicThemeModule)
 )]
 public class BookStoreBlazorWebAppModule : AbpModule
 {
@@ -92,13 +114,32 @@ public class BookStoreBlazorWebAppModule : AbpModule
             options.MenuContributors.Add(new BookStoreMenuContributor());
         });
 
-        Configure<AbpToolbarOptions>(options =>
+        context.Services.AddAbpDbContext<BookStoreDbContext>(options =>
         {
-            options.Contributors.Add(new RemoveLoginDisplayToolbarContributor());
+            options.AddDefaultRepositories(includeAllEntities: true);
+        });
+
+        Configure<AbpDbContextOptions>(options =>
+        {
+            options.Configure(ctx =>
+            {
+                ctx.DbContextOptions.UseInMemoryDatabase("BookStoreWebAppDb");
+            });
+        });
+
+        Configure<AbpUnitOfWorkDefaultOptions>(options =>
+        {
+            options.TransactionBehavior = UnitOfWorkTransactionBehavior.Disabled;
+        });
+
+        Configure<PermissionManagementOptions>(options =>
+        {
+            options.SaveStaticPermissionsToDatabase = false;
+            options.IsDynamicPermissionStoreEnabled = false;
         });
     }
 
-    public override void OnApplicationInitialization(ApplicationInitializationContext context)
+    public override async Task OnApplicationInitializationAsync(ApplicationInitializationContext context)
     {
         var app = context.GetApplicationBuilder();
         var env = context.GetEnvironment();
@@ -113,6 +154,8 @@ public class BookStoreBlazorWebAppModule : AbpModule
         app.MapAbpStaticAssets();
         app.UseRouting();
         app.UseAbpRequestLocalization();
+        app.UseAuthentication();
+        app.UseUnitOfWork();
         app.UseAntiforgery();
         app.UseAuthorization();
 
@@ -126,5 +169,10 @@ public class BookStoreBlazorWebAppModule : AbpModule
                         .GetRequiredService<IOptions<AbpRouterOptions>>().Value
                         .AdditionalAssemblies.ToArray());
         });
+
+        using var scope = context.ServiceProvider.CreateScope();
+        await scope.ServiceProvider
+            .GetRequiredService<IDataSeeder>()
+            .SeedAsync();
     }
 }

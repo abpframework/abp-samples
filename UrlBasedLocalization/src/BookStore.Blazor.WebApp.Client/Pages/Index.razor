@@ -28,14 +28,16 @@
                     <hr />
 
                     <table class="table table-bordered">
-                        <tr>
-                            <th>@L["Home:CurrentCulture"]</th>
-                            <td><span class="badge bg-primary fs-6">@CultureInfo.CurrentCulture.Name</span></td>
-                        </tr>
-                        <tr>
-                            <th>Render type</th>
-                            <td><code>Blazor WebApp (InteractiveAuto — WASM after first load)</code></td>
-                        </tr>
+                        <tbody>
+                            <tr>
+                                <th>@L["Home:CurrentCulture"]</th>
+                                <td><span class="badge bg-primary fs-6">@CultureInfo.CurrentCulture.Name</span></td>
+                            </tr>
+                            <tr>
+                                <th>Render type</th>
+                                <td><code>Blazor WebApp (InteractiveAuto — WASM after first load)</code></td>
+                            </tr>
+                        </tbody>
                     </table>
 
                     <p class="text-muted small">@L["Home:TryIt"]</p>
@@ -55,13 +57,13 @@
                     <p>
                         After WASM downloads, subsequent renders run in the browser.
                         The WASM app fetches <code>/api/abp/application-configuration</code> from the
-                        server to get the current culture, so the culture stays consistent.
+                        server to get the current culture and the <code>UseRouteBasedCulture</code>
+                        flag, so the culture stays consistent.
                     </p>
                     <p class="mb-0">
-                        <strong>Language switching</strong> in WASM uses the server's
-                        <code>/Abp/Languages/Switch</code> endpoint (via the language menu), which
-                        rewrites the culture segment in the URL and redirects — exactly the same as
-                        the Blazor Server and MVC demos.
+                        <strong>Language switching</strong> in WASM replaces the culture segment
+                        in the current URL and navigates with <code>forceLoad: true</code>,
+                        triggering a full page reload with the new culture.
                     </p>
                 </div>
             </div>

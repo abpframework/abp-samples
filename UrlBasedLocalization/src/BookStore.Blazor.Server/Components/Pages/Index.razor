@@ -80,6 +80,67 @@
                 </div>
             </div>
 
+            <div class="card border-secondary mt-4">
+                <div class="card-header">
+                    Module Page Routes (Dual <code>@@page</code> pattern)
+                </div>
+                <div class="card-body">
+                    <p class="small text-muted mb-3">
+                        ABP built-in module pages (Identity, Settings, Tenant Management, etc.) ship with
+                        both <code>/route</code> and <code>/{culture}/route</code> variants.
+                        The page below demonstrates this same dual-route pattern.
+                    </p>
+                    <div class="d-flex flex-wrap gap-2">
+                        <button class="btn btn-outline-secondary btn-sm" @onclick='() => NavigateTo("/module-page")'>
+                            /module-page
+                        </button>
+                        <button class="btn btn-outline-secondary btn-sm" @onclick='() => NavigateTo("/en/module-page")'>
+                            /en/module-page
+                        </button>
+                        <button class="btn btn-outline-secondary btn-sm" @onclick='() => NavigateTo("/tr/module-page")'>
+                            /tr/module-page
+                        </button>
+                        <button class="btn btn-outline-secondary btn-sm" @onclick='() => NavigateTo("/zh-Hans/module-page")'>
+                            /zh-Hans/module-page
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card border-primary mt-4">
+                <div class="card-header bg-primary text-white">
+                    ABP Identity Module Pages (Real Module Test)
+                </div>
+                <div class="card-body">
+                    <p class="small text-muted mb-3">
+                        These navigate to the real ABP Identity module pages.
+                        Log in as <code>admin</code> / <code>1q2w3E*</code> first.
+                    </p>
+                    <div class="d-flex flex-wrap gap-2">
+                        <button class="btn btn-outline-primary btn-sm" @onclick='() => NavigateTo("/identity/users")'>
+                            /identity/users
+                        </button>
+                        <button class="btn btn-outline-primary btn-sm" @onclick='() => NavigateTo("/en/identity/users")'>
+                            /en/identity/users
+                        </button>
+                        <button class="btn btn-outline-primary btn-sm" @onclick='() => NavigateTo("/tr/identity/users")'>
+                            /tr/identity/users
+                        </button>
+                        <button class="btn btn-outline-primary btn-sm" @onclick='() => NavigateTo("/zh-Hans/identity/users")'>
+                            /zh-Hans/identity/users
+                        </button>
+                    </div>
+                    <div class="d-flex flex-wrap gap-2 mt-2">
+                        <button class="btn btn-outline-secondary btn-sm" @onclick='() => NavigateTo("/identity/roles")'>
+                            /identity/roles
+                        </button>
+                        <button class="btn btn-outline-secondary btn-sm" @onclick='() => NavigateTo("/zh-Hans/identity/roles")'>
+                            /zh-Hans/identity/roles
+                        </button>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
 </div>

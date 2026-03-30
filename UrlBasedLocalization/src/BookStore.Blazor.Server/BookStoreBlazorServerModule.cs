@@ -5,10 +5,12 @@ using Microsoft.AspNetCore.RequestLocalization;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
 using BookStore.Blazor.Server.Components;
-using BookStore.Blazor.Shared;
+using BookStore.Blazor.Server.Data;
 using BookStore.Blazor.Shared.Menus;
 using BookStore.Localization;
 using Volo.Abp;
+using Volo.Abp.Account;
+using Volo.Abp.Account.Web;
 using Volo.Abp.AspNetCore.Components.Server.BasicTheme;
 using Volo.Abp.AspNetCore.Components.Server.BasicTheme.Bundling;
 using Volo.Abp.AspNetCore.Components.Web;
@@ -17,10 +19,19 @@ using Volo.Abp.AspNetCore.Mvc;
 using Volo.Abp.AspNetCore.Mvc.Localization;
 using Volo.Abp.AspNetCore.Mvc.UI.Bundling;
 using Volo.Abp.Autofac;
+using Volo.Abp.Data;
+using Microsoft.EntityFrameworkCore;
+using Volo.Abp.EntityFrameworkCore;
+using Volo.Abp.AspNetCore.Mvc.UI.Theme.Basic;
+using Volo.Abp.Identity;
+using Volo.Abp.Identity.Blazor.Server;
+using Volo.Abp.Identity.EntityFrameworkCore;
 using Volo.Abp.Localization;
 using Volo.Abp.Modularity;
-using Volo.Abp.AspNetCore.Components.Web.Theming.Toolbars;
+using Volo.Abp.PermissionManagement;
+using Volo.Abp.PermissionManagement.EntityFrameworkCore;
 using Volo.Abp.UI.Navigation;
+using Volo.Abp.Uow;
 
 namespace BookStore.Blazor.Server;
 
@@ -28,7 +39,15 @@ namespace BookStore.Blazor.Server;
     typeof(AbpAutofacModule),
     typeof(AbpAspNetCoreMvcModule),
     typeof(AbpAspNetCoreComponentsServerBasicThemeModule),
-    typeof(BookStoreSharedModule)
+    typeof(BookStoreSharedModule),
+    typeof(AbpIdentityBlazorServerModule),
+    typeof(AbpIdentityApplicationModule),
+    typeof(AbpIdentityEntityFrameworkCoreModule),
+    typeof(AbpAccountWebModule),
+    typeof(AbpAccountApplicationModule),
+    typeof(AbpPermissionManagementApplicationModule),
+    typeof(AbpPermissionManagementEntityFrameworkCoreModule),
+    typeof(AbpAspNetCoreMvcUiBasicThemeModule)
 )]
 public class BookStoreBlazorServerModule : AbpModule
 {
@@ -87,13 +106,32 @@ public class BookStoreBlazorServerModule : AbpModule
             options.MenuContributors.Add(new BookStoreMenuContributor());
         });
 
-        Configure<AbpToolbarOptions>(options =>
+        context.Services.AddAbpDbContext<BookStoreDbContext>(options =>
         {
-            options.Contributors.Add(new RemoveLoginDisplayToolbarContributor());
+            options.AddDefaultRepositories(includeAllEntities: true);
+        });
+
+        Configure<AbpDbContextOptions>(options =>
+        {
+            options.Configure(ctx =>
+            {
+                ctx.DbContextOptions.UseInMemoryDatabase("BookStoreDb");
+            });
+        });
+
+        Configure<AbpUnitOfWorkDefaultOptions>(options =>
+        {
+            options.TransactionBehavior = UnitOfWorkTransactionBehavior.Disabled;
+        });
+
+        Configure<PermissionManagementOptions>(options =>
+        {
+            options.SaveStaticPermissionsToDatabase = false;
+            options.IsDynamicPermissionStoreEnabled = false;
         });
     }
 
-    public override void OnApplicationInitialization(ApplicationInitializationContext context)
+    public override async Task OnApplicationInitializationAsync(ApplicationInitializationContext context)
     {
         var app = context.GetApplicationBuilder();
         var env = context.GetEnvironment();
@@ -107,8 +145,9 @@ public class BookStoreBlazorServerModule : AbpModule
         app.MapAbpStaticAssets();
         app.UseRouting();
         app.UseAbpRequestLocalization();
-        app.UseAntiforgery();
+        app.UseAuthentication();
         app.UseAuthorization();
+        app.UseAntiforgery();
 
         app.UseConfiguredEndpoints(builder =>
         {
@@ -119,5 +158,10 @@ public class BookStoreBlazorServerModule : AbpModule
                         .GetRequiredService<IOptions<AbpRouterOptions>>().Value
                         .AdditionalAssemblies.ToArray());
         });
+
+        using var scope = context.ServiceProvider.CreateScope();
+        await scope.ServiceProvider
+            .GetRequiredService<IDataSeeder>()
+            .SeedAsync();
     }
 }

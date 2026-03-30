@@ -4,17 +4,30 @@ This sample demonstrates ABP's **URL-based localization** feature, where the cur
 
 See the documentation: **https://abp.io/docs/latest/framework/fundamentals/url-based-localization**
 
+## Demo Projects
+
+| Project | UI Type | Port |
+|---|---|---|
+| `BookStore.Mvc` | MVC / Razor Pages | `https://localhost:44335` |
+| `BookStore.Blazor.Server` | Blazor Server | `https://localhost:44336` |
+| `BookStore.Blazor.WebApp` + `BookStore.Blazor.WebApp.Client` | Blazor WebApp (InteractiveAuto) | `https://localhost:44337` |
+
 ## Running
 
 ```bash
-dotnet run --project src/UrlBasedLocalizationSample
+# MVC
+dotnet run --project src/BookStore.Mvc
+
+# Blazor Server
+dotnet run --project src/BookStore.Blazor.Server
+
+# Blazor WebApp (InteractiveAuto)
+dotnet run --project src/BookStore.Blazor.WebApp
 ```
 
-Navigate to `https://localhost:44335/en/` and use the language switcher in the top bar.
+Navigate to the corresponding URL (e.g., `https://localhost:44337/en/`) and use the language switcher in the top bar.
 
 ## Configuration
-
-The only required configuration is a single option:
 
 ```csharp
 Configure<AbpRequestLocalizationOptions>(options =>
@@ -22,8 +35,6 @@ Configure<AbpRequestLocalizationOptions>(options =>
     options.UseRouteBasedCulture = true;
 });
 ```
-
-ABP automatically handles route registration, URL generation, menu links, and language switching.
 
 > `UseAbpRequestLocalization()` must be called after `UseRouting()` in the middleware pipeline.
 

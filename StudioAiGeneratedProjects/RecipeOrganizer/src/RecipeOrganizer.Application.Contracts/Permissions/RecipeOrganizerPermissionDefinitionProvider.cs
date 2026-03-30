@@ -15,6 +15,16 @@ public class RecipeOrganizerPermissionDefinitionProvider : PermissionDefinitionP
         booksPermission.AddChild(RecipeOrganizerPermissions.Books.Create, L("Permission:Books.Create"));
         booksPermission.AddChild(RecipeOrganizerPermissions.Books.Edit, L("Permission:Books.Edit"));
         booksPermission.AddChild(RecipeOrganizerPermissions.Books.Delete, L("Permission:Books.Delete"));
+        var categoriesPermission = myGroup.AddPermission(RecipeOrganizerPermissions.Categories.Default, L("Permission:Categories"));
+        categoriesPermission.AddChild(RecipeOrganizerPermissions.Categories.Create, L("Permission:Categories.Create"));
+        categoriesPermission.AddChild(RecipeOrganizerPermissions.Categories.Edit, L("Permission:Categories.Edit"));
+        categoriesPermission.AddChild(RecipeOrganizerPermissions.Categories.Delete, L("Permission:Categories.Delete"));
+
+        var recipesPermission = myGroup.AddPermission(RecipeOrganizerPermissions.Recipes.Default, L("Permission:Recipes"));
+        recipesPermission.AddChild(RecipeOrganizerPermissions.Recipes.Create, L("Permission:Recipes.Create"));
+        recipesPermission.AddChild(RecipeOrganizerPermissions.Recipes.Edit, L("Permission:Recipes.Edit"));
+        recipesPermission.AddChild(RecipeOrganizerPermissions.Recipes.Delete, L("Permission:Recipes.Delete"));
+
         //Define your own permissions here. Example:
         //myGroup.AddPermission(RecipeOrganizerPermissions.MyPermission1, L("Permission:MyPermission1"));
     }

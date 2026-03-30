@@ -1,7 +1,9 @@
-﻿using Volo.Abp.Data;
+using Volo.Abp.Data;
 using Volo.Abp.MongoDB;
 using MongoDB.Driver;
 using RecipeOrganizer.Books;
+using RecipeOrganizer.Categories;
+using RecipeOrganizer.Recipes;
 
 namespace RecipeOrganizer.MongoDB;
 
@@ -9,19 +11,29 @@ namespace RecipeOrganizer.MongoDB;
 public class RecipeOrganizerMongoDbContext : AbpMongoDbContext
 {
 
-    /* Add mongo collections here. Example:
-     * public IMongoCollection<Question> Questions => Collection<Question>();
-     */
-    
     public IMongoCollection<Book> Books => Collection<Book>();
+
+    public IMongoCollection<Category> Categories => Collection<Category>();
+
+    public IMongoCollection<Recipe> Recipes => Collection<Recipe>();
 
     protected override void CreateModel(IMongoModelBuilder modelBuilder)
     {
         base.CreateModel(modelBuilder);
 
-        //builder.Entity<YourEntity>(b =>
-        //{
-        //    //...
-        //});
+        modelBuilder.Entity<Book>(b =>
+        {
+            b.CollectionName = "Books";
+        });
+
+        modelBuilder.Entity<Category>(b =>
+        {
+            b.CollectionName = "Categories";
+        });
+
+        modelBuilder.Entity<Recipe>(b =>
+        {
+            b.CollectionName = "Recipes";
+        });
     }
 }

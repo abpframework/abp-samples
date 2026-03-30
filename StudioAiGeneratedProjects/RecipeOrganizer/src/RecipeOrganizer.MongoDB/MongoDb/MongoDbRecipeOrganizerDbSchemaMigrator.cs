@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
@@ -37,6 +37,12 @@ public class MongoDbRecipeOrganizerDbSchemaMigrator : IRecipeOrganizerDbSchemaMi
             var connectionString =
                 await connectionStringResolver.ResolveAsync(
                     ConnectionStringNameAttribute.GetConnStringName(dbContext.GetType()));
+
+            if (connectionString.IsNullOrWhiteSpace())
+            {
+                continue;
+            }
+
             var mongoUrl = new MongoUrl(connectionString);
             var databaseName = mongoUrl.DatabaseName;
             var client = new MongoClient(mongoUrl);

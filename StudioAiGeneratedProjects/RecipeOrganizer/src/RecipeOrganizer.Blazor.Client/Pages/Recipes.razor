@@ -1,0 +1,444 @@
+@page "/recipes"
+@attribute [Authorize(RecipeOrganizerPermissions.Recipes.Default)]
+@using RecipeOrganizer.Permissions
+@using Volo.Abp.Application.Dtos
+@using Microsoft.AspNetCore.Authorization
+@using RecipeOrganizer.Recipes
+@using RecipeOrganizer.Localization
+@using Microsoft.Extensions.Localization
+@using Volo.Abp.AspNetCore.Components.Web
+@using System.Linq
+@inject IStringLocalizer<RecipeOrganizerResource> L
+@inject AbpBlazorMessageLocalizerHelper<RecipeOrganizerResource> LH
+@inherits AbpCrudPageBase<IRecipeAppService, RecipeDto, Guid, PagedAndSortedResultRequestDto, CreateUpdateRecipeDto>
+
+<Card>
+    <CardHeader>
+        <Row Class="justify-content-between">
+            <Column ColumnSize="ColumnSize.IsAuto">
+                <h4 class="mb-0">
+                    <i class="fa fa-book-open me-2 text-primary"></i>
+                    @L["Menu:Recipes"]
+                </h4>
+            </Column>
+            <Column ColumnSize="ColumnSize.IsAuto">
+                @if (HasCreatePermission)
+                {
+                    <Button Color="Color.Primary" Clicked="OpenCreateModalAsync">
+                        <Icon Name="IconName.Add" />
+                        @L["NewRecipe"]
+                    </Button>
+                }
+            </Column>
+        </Row>
+    </CardHeader>
+    <CardBody>
+        <DataGrid TItem="RecipeDto"
+                  Data="Entities"
+                  ReadData="OnDataGridReadAsync"
+                  CurrentPage="CurrentPage"
+                  TotalItems="TotalCount"
+                  ShowPager="true"
+                  PageSize="PageSize"
+                  Striped="true"
+                  Hoverable="true"
+                  Responsive="true">
+            <DataGridColumns>
+                <DataGridEntityActionsColumn TItem="RecipeDto" @ref="@EntityActionsColumn">
+                    <DisplayTemplate>
+                        <EntityActions TItem="RecipeDto" EntityActionsColumn="@EntityActionsColumn">
+                            <EntityAction TItem="RecipeDto"
+                                          Text="@L["Edit"]"
+                                          Visible=HasUpdatePermission
+                                          Clicked="() => OpenEditModalAsync(context)" />
+                            <EntityAction TItem="RecipeDto"
+                                          Text="@L["Delete"]"
+                                          Visible=HasDeletePermission
+                                          Clicked="() => DeleteEntityAsync(context)"
+                                          ConfirmationMessage="() => GetDeleteConfirmationMessage(context)" />
+                        </EntityActions>
+                    </DisplayTemplate>
+                </DataGridEntityActionsColumn>
+                <DataGridColumn TItem="RecipeDto"
+                                Field="@nameof(RecipeDto.Title)"
+                                Caption="@L["Title"]">
+                    <DisplayTemplate>
+                        <strong>@context.Title</strong>
+                    </DisplayTemplate>
+                </DataGridColumn>
+                <DataGridColumn TItem="RecipeDto"
+                                Field="@nameof(RecipeDto.CategoryName)"
+                                Caption="@L["Category"]">
+                    <DisplayTemplate>
+                        <Badge Color="Color.Info">@context.CategoryName</Badge>
+                    </DisplayTemplate>
+                </DataGridColumn>
+                <DataGridColumn TItem="RecipeDto"
+                                Field="@nameof(RecipeDto.Difficulty)"
+                                Caption="@L["Difficulty"]">
+                    <DisplayTemplate>
+                        @{
+                            var (color, icon) = context.Difficulty switch
+                            {
+                                RecipeDifficulty.Easy => (Color.Success, "fa fa-smile"),
+                                RecipeDifficulty.Medium => (Color.Warning, "fa fa-meh"),
+                                RecipeDifficulty.Hard => (Color.Danger, "fa fa-fire"),
+                                _ => (Color.Secondary, "fa fa-question")
+                            };
+                        }
+                        <Badge Color="@color">
+                            <i class="@icon me-1"></i>
+                            @L[$"Enum:RecipeDifficulty.{(int)context.Difficulty}"]
+                        </Badge>
+                    </DisplayTemplate>
+                </DataGridColumn>
+                <DataGridColumn TItem="RecipeDto"
+                                Field="@nameof(RecipeDto.PreparationTime)"
+                                Caption="@L["PreparationTime"]">
+                    <DisplayTemplate>
+                        <i class="fa fa-clock me-1 text-muted"></i>
+                        @context.PreparationTime @L["Minutes"]
+                    </DisplayTemplate>
+                </DataGridColumn>
+                <DataGridColumn TItem="RecipeDto"
+                                Caption="@L["Ingredients"]">
+                    <DisplayTemplate>
+                        <Badge Color="Color.Secondary">
+                            <i class="fa fa-list me-1"></i>
+                            @(context.Ingredients?.Count ?? 0)
+                        </Badge>
+                    </DisplayTemplate>
+                </DataGridColumn>
+                <DataGridColumn TItem="RecipeDto"
+                                Field="@nameof(RecipeDto.CreationTime)"
+                                Caption="@L["CreationTime"]">
+                    <DisplayTemplate>
+                        @context.CreationTime.ToShortDateString()
+                    </DisplayTemplate>
+                </DataGridColumn>
+            </DataGridColumns>
+        </DataGrid>
+    </CardBody>
+</Card>
+
+<!-- Create Modal -->
+<Modal @ref="@CreateModal">
+    <ModalBackdrop />
+    <ModalContent IsCentered="true" Size="ModalSize.Large">
+        <Form>
+            <ModalHeader>
+                <ModalTitle>
+                    <i class="fa fa-plus-circle me-2 text-primary"></i>
+                    @L["NewRecipe"]
+                </ModalTitle>
+                <CloseButton Clicked="CloseCreateModalAsync" />
+            </ModalHeader>
+            <ModalBody>
+                <Validations @ref="@CreateValidationsRef" Model="@NewEntity" ValidateOnLoad="false">
+                    <Row>
+                        <Column ColumnSize="ColumnSize.Is8">
+                            <Validation MessageLocalizer="@LH.Localize">
+                                <Field>
+                                    <FieldLabel>@L["Title"] <span class="text-danger">*</span></FieldLabel>
+                                    <TextEdit @bind-Text="@NewEntity.Title" AutoFocus="true" Placeholder="@L["Title"]">
+                                        <Feedback><ValidationError /></Feedback>
+                                    </TextEdit>
+                                </Field>
+                            </Validation>
+                        </Column>
+                        <Column ColumnSize="ColumnSize.Is4">
+                            <Field>
+                                <FieldLabel>@L["Category"] <span class="text-danger">*</span></FieldLabel>
+                                <Select TValue="Guid" @bind-SelectedValue="@NewEntity.CategoryId">
+                                    <SelectItem TValue="Guid" Value="Guid.Empty">@L["SelectCategory"]</SelectItem>
+                                    @foreach (var cat in _categoryLookup)
+                                    {
+                                        <SelectItem TValue="Guid" Value="@cat.Id">@cat.Name</SelectItem>
+                                    }
+                                </Select>
+                            </Field>
+                        </Column>
+                    </Row>
+                    <Field>
+                        <FieldLabel>@L["Description"]</FieldLabel>
+                        <MemoEdit @bind-Text="@NewEntity.Description" Rows="3" Placeholder="@L["Description"]" />
+                    </Field>
+                    <Row>
+                        <Column ColumnSize="ColumnSize.Is6">
+                            <Field>
+                                <FieldLabel>@L["PreparationTime"] <span class="text-danger">*</span></FieldLabel>
+                                <Addons>
+                                    <Addon AddonType="AddonType.Body">
+                                        <NumericEdit TValue="int" @bind-Value="NewEntity.PreparationTime" Min="1" Max="1440" />
+                                    </Addon>
+                                    <Addon AddonType="AddonType.End">
+                                        <AddonLabel>@L["Minutes"]</AddonLabel>
+                                    </Addon>
+                                </Addons>
+                            </Field>
+                        </Column>
+                        <Column ColumnSize="ColumnSize.Is6">
+                            <Field>
+                                <FieldLabel>@L["Difficulty"] <span class="text-danger">*</span></FieldLabel>
+                                <Select TValue="RecipeDifficulty" @bind-SelectedValue="@NewEntity.Difficulty">
+                                    @foreach (int val in Enum.GetValues(typeof(RecipeDifficulty)))
+                                    {
+                                        <SelectItem TValue="RecipeDifficulty" Value="@((RecipeDifficulty)val)">
+                                            @L[$"Enum:RecipeDifficulty.{val}"]
+                                        </SelectItem>
+                                    }
+                                </Select>
+                            </Field>
+                        </Column>
+                    </Row>
+
+                    <!-- Inline Ingredient Editor -->
+                    <Field>
+                        <FieldLabel>
+                            <i class="fa fa-list me-1"></i>
+                            @L["Ingredients"]
+                        </FieldLabel>
+                        <Card Background="Background.Light">
+                            <CardBody Class="p-2">
+                                @if (NewEntity.Ingredients.Any())
+                                {
+                                    <Table Small="true" Narrow="true" Hoverable="true" Class="mb-2">
+                                        <TableHeader>
+                                            <TableRow>
+                                                <TableHeaderCell>@L["Name"]</TableHeaderCell>
+                                                <TableHeaderCell>@L["Quantity"]</TableHeaderCell>
+                                                <TableHeaderCell>@L["Unit"]</TableHeaderCell>
+                                                <TableHeaderCell Width="60px"></TableHeaderCell>
+                                            </TableRow>
+                                        </TableHeader>
+                                        <TableBody>
+                                            @foreach (var ingredient in NewEntity.Ingredients)
+                                            {
+                                                <TableRow>
+                                                    <TableRowCell>
+                                                        <TextEdit @bind-Text="ingredient.Name" Placeholder="@L["IngredientName"]" Size="Size.Small" />
+                                                    </TableRowCell>
+                                                    <TableRowCell>
+                                                        <NumericEdit TValue="float" @bind-Value="ingredient.Quantity" Min="0.01f" Size="Size.Small" />
+                                                    </TableRowCell>
+                                                    <TableRowCell>
+                                                        <TextEdit @bind-Text="ingredient.Unit" Placeholder="@L["UnitPlaceholder"]" Size="Size.Small" />
+                                                    </TableRowCell>
+                                                    <TableRowCell>
+                                                        <Button Color="Color.Danger" Size="Size.Small" Clicked="() => RemoveIngredient(NewEntity, ingredient)">
+                                                            <Icon Name="IconName.Delete" />
+                                                        </Button>
+                                                    </TableRowCell>
+                                                </TableRow>
+                                            }
+                                        </TableBody>
+                                    </Table>
+                                }
+                                <Button Color="Color.Secondary" Size="Size.Small" Clicked="() => AddIngredient(NewEntity)">
+                                    <Icon Name="IconName.Add" />
+                                    @L["AddIngredient"]
+                                </Button>
+                            </CardBody>
+                        </Card>
+                    </Field>
+                </Validations>
+            </ModalBody>
+            <ModalFooter>
+                <Button Color="Color.Secondary" Clicked="CloseCreateModalAsync">@L["Cancel"]</Button>
+                <Button Color="Color.Primary"
+                        Type="@ButtonType.Submit"
+                        PreventDefaultOnSubmit="true"
+                        Clicked="CreateEntityAsync">
+                    <Icon Name="IconName.Save" />
+                    @L["Save"]
+                </Button>
+            </ModalFooter>
+        </Form>
+    </ModalContent>
+</Modal>
+
+<!-- Edit Modal -->
+<Modal @ref="@EditModal">
+    <ModalBackdrop />
+    <ModalContent IsCentered="true" Size="ModalSize.Large">
+        <Form>
+            <ModalHeader>
+                <ModalTitle>
+                    <i class="fa fa-edit me-2 text-warning"></i>
+                    @L["Edit"]
+                </ModalTitle>
+                <CloseButton Clicked="CloseEditModalAsync" />
+            </ModalHeader>
+            <ModalBody>
+                <Validations @ref="@EditValidationsRef" Model="@EditingEntity" ValidateOnLoad="false">
+                    <Row>
+                        <Column ColumnSize="ColumnSize.Is8">
+                            <Validation MessageLocalizer="@LH.Localize">
+                                <Field>
+                                    <FieldLabel>@L["Title"] <span class="text-danger">*</span></FieldLabel>
+                                    <TextEdit @bind-Text="@EditingEntity.Title" Placeholder="@L["Title"]">
+                                        <Feedback><ValidationError /></Feedback>
+                                    </TextEdit>
+                                </Field>
+                            </Validation>
+                        </Column>
+                        <Column ColumnSize="ColumnSize.Is4">
+                            <Field>
+                                <FieldLabel>@L["Category"] <span class="text-danger">*</span></FieldLabel>
+                                <Select TValue="Guid" @bind-SelectedValue="@EditingEntity.CategoryId">
+                                    <SelectItem TValue="Guid" Value="Guid.Empty">@L["SelectCategory"]</SelectItem>
+                                    @foreach (var cat in _categoryLookup)
+                                    {
+                                        <SelectItem TValue="Guid" Value="@cat.Id">@cat.Name</SelectItem>
+                                    }
+                                </Select>
+                            </Field>
+                        </Column>
+                    </Row>
+                    <Field>
+                        <FieldLabel>@L["Description"]</FieldLabel>
+                        <MemoEdit @bind-Text="@EditingEntity.Description" Rows="3" Placeholder="@L["Description"]" />
+                    </Field>
+                    <Row>
+                        <Column ColumnSize="ColumnSize.Is6">
+                            <Field>
+                                <FieldLabel>@L["PreparationTime"] <span class="text-danger">*</span></FieldLabel>
+                                <Addons>
+                                    <Addon AddonType="AddonType.Body">
+                                        <NumericEdit TValue="int" @bind-Value="EditingEntity.PreparationTime" Min="1" Max="1440" />
+                                    </Addon>
+                                    <Addon AddonType="AddonType.End">
+                                        <AddonLabel>@L["Minutes"]</AddonLabel>
+                                    </Addon>
+                                </Addons>
+                            </Field>
+                        </Column>
+                        <Column ColumnSize="ColumnSize.Is6">
+                            <Field>
+                                <FieldLabel>@L["Difficulty"] <span class="text-danger">*</span></FieldLabel>
+                                <Select TValue="RecipeDifficulty" @bind-SelectedValue="@EditingEntity.Difficulty">
+                                    @foreach (int val in Enum.GetValues(typeof(RecipeDifficulty)))
+                                    {
+                                        <SelectItem TValue="RecipeDifficulty" Value="@((RecipeDifficulty)val)">
+                                            @L[$"Enum:RecipeDifficulty.{val}"]
+                                        </SelectItem>
+                                    }
+                                </Select>
+                            </Field>
+                        </Column>
+                    </Row>
+
+                    <!-- Inline Ingredient Editor -->
+                    <Field>
+                        <FieldLabel>
+                            <i class="fa fa-list me-1"></i>
+                            @L["Ingredients"]
+                        </FieldLabel>
+                        <Card Background="Background.Light">
+                            <CardBody Class="p-2">
+                                @if (EditingEntity.Ingredients.Any())
+                                {
+                                    <Table Small="true" Narrow="true" Hoverable="true" Class="mb-2">
+                                        <TableHeader>
+                                            <TableRow>
+                                                <TableHeaderCell>@L["Name"]</TableHeaderCell>
+                                                <TableHeaderCell>@L["Quantity"]</TableHeaderCell>
+                                                <TableHeaderCell>@L["Unit"]</TableHeaderCell>
+                                                <TableHeaderCell Width="60px"></TableHeaderCell>
+                                            </TableRow>
+                                        </TableHeader>
+                                        <TableBody>
+                                            @foreach (var ingredient in EditingEntity.Ingredients)
+                                            {
+                                                <TableRow>
+                                                    <TableRowCell>
+                                                        <TextEdit @bind-Text="ingredient.Name" Placeholder="@L["IngredientName"]" Size="Size.Small" />
+                                                    </TableRowCell>
+                                                    <TableRowCell>
+                                                        <NumericEdit TValue="float" @bind-Value="ingredient.Quantity" Min="0.01f" Size="Size.Small" />
+                                                    </TableRowCell>
+                                                    <TableRowCell>
+                                                        <TextEdit @bind-Text="ingredient.Unit" Placeholder="@L["UnitPlaceholder"]" Size="Size.Small" />
+                                                    </TableRowCell>
+                                                    <TableRowCell>
+                                                        <Button Color="Color.Danger" Size="Size.Small" Clicked="() => RemoveIngredient(EditingEntity, ingredient)">
+                                                            <Icon Name="IconName.Delete" />
+                                                        </Button>
+                                                    </TableRowCell>
+                                                </TableRow>
+                                            }
+                                        </TableBody>
+                                    </Table>
+                                }
+                                <Button Color="Color.Secondary" Size="Size.Small" Clicked="() => AddIngredient(EditingEntity)">
+                                    <Icon Name="IconName.Add" />
+                                    @L["AddIngredient"]
+                                </Button>
+                            </CardBody>
+                        </Card>
+                    </Field>
+                </Validations>
+            </ModalBody>
+            <ModalFooter>
+                <Button Color="Color.Secondary" Clicked="CloseEditModalAsync">@L["Cancel"]</Button>
+                <Button Color="Color.Primary"
+                        Type="@ButtonType.Submit"
+                        PreventDefaultOnSubmit="true"
+                        Clicked="UpdateEntityAsync">
+                    <Icon Name="IconName.Save" />
+                    @L["Save"]
+                </Button>
+            </ModalFooter>
+        </Form>
+    </ModalContent>
+</Modal>
+
+@code
+{
+    private List<CategoryLookupDto> _categoryLookup = new();
+
+    public Recipes()
+    {
+        CreatePolicyName = RecipeOrganizerPermissions.Recipes.Create;
+        UpdatePolicyName = RecipeOrganizerPermissions.Recipes.Edit;
+        DeletePolicyName = RecipeOrganizerPermissions.Recipes.Delete;
+
+        LocalizationResource = typeof(RecipeOrganizerResource);
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        await base.OnInitializedAsync();
+        var result = await AppService.GetCategoryLookupAsync();
+        _categoryLookup = result.Items.ToList();
+    }
+
+    protected override string GetDeleteConfirmationMessage(RecipeDto entity)
+    {
+        return string.Format(L["RecipeDeletionConfirmationMessage"], entity.Title);
+    }
+
+    public override async Task OpenEditModalAsync(RecipeDto entity)
+    {
+        await base.OpenEditModalAsync(entity);
+        // Populate ingredients from the read DTO since the mapper ignores them
+        EditingEntity.Ingredients = entity.Ingredients
+            .Select(i => new CreateUpdateIngredientDto
+            {
+                Name = i.Name,
+                Quantity = i.Quantity,
+                Unit = i.Unit
+            })
+            .ToList();
+    }
+
+    private void AddIngredient(CreateUpdateRecipeDto recipe)
+    {
+        recipe.Ingredients.Add(new CreateUpdateIngredientDto());
+    }
+
+    private void RemoveIngredient(CreateUpdateRecipeDto recipe, CreateUpdateIngredientDto ingredient)
+    {
+        recipe.Ingredients.Remove(ingredient);
+    }
+}

@@ -82,6 +82,34 @@ public class RecipeOrganizerMenuContributor : IMenuContributor
                 url: "/books"
             ));
         }
+
+        var recipeOrganizerMenu = new ApplicationMenuItem(
+            "RecipeOrganizer",
+            l["Menu:RecipeOrganizer"],
+            icon: "fa fa-utensils"
+        );
+
+        context.Menu.AddItem(recipeOrganizerMenu);
+
+        if (await context.IsGrantedAsync(RecipeOrganizerPermissions.Categories.Default))
+        {
+            recipeOrganizerMenu.AddItem(new ApplicationMenuItem(
+                RecipeOrganizerMenus.Categories,
+                l["Menu:Categories"],
+                url: "/categories",
+                icon: "fa fa-tags"
+            ));
+        }
+
+        if (await context.IsGrantedAsync(RecipeOrganizerPermissions.Recipes.Default))
+        {
+            recipeOrganizerMenu.AddItem(new ApplicationMenuItem(
+                RecipeOrganizerMenus.Recipes,
+                l["Menu:Recipes"],
+                url: "/recipes",
+                icon: "fa fa-book-open"
+            ));
+        }
     }
     
     private async Task ConfigureUserMenuAsync(MenuConfigurationContext context)

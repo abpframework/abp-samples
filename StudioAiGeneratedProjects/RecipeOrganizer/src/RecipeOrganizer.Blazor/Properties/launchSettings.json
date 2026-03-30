@@ -17,7 +17,7 @@
     },
     "RecipeOrganizer.Blazor": {
       "commandName": "Project",
-      "dotnetRunMessages": "true",
+      "dotnetRunMessages": true,
       "launchBrowser": true,
       "applicationUrl": "https://localhost:44362/",
       "environmentVariables": {

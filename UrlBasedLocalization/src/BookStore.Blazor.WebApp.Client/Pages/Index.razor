@@ -1,0 +1,105 @@
+@page "/"
+@page "/{culture}"
+@using System.Globalization
+@using Microsoft.Extensions.Localization
+@using BookStore.Localization
+@inject IStringLocalizer<BookStoreResource> L
+@inject NavigationManager NavigationManager
+
+@code {
+    [Parameter]
+    public string? Culture { get; set; }
+
+    private void NavigateTo(string url)
+    {
+        NavigationManager.NavigateTo(url, forceLoad: true);
+    }
+}
+
+<div class="container py-5">
+    <div class="row">
+        <div class="col-md-10 offset-md-1">
+
+            <div class="card shadow-sm mb-4">
+                <div class="card-body p-5">
+                    <h1 class="card-title mb-4">@L["Home:Title"]</h1>
+                    <p class="lead text-muted">@L["Home:Description"]</p>
+
+                    <hr />
+
+                    <table class="table table-bordered">
+                        <tr>
+                            <th>@L["Home:CurrentCulture"]</th>
+                            <td><span class="badge bg-primary fs-6">@CultureInfo.CurrentCulture.Name</span></td>
+                        </tr>
+                        <tr>
+                            <th>Render type</th>
+                            <td><code>Blazor WebApp (InteractiveAuto — WASM after first load)</code></td>
+                        </tr>
+                    </table>
+
+                    <p class="text-muted small">@L["Home:TryIt"]</p>
+                </div>
+            </div>
+
+            <div class="card border-info mb-4">
+                <div class="card-header bg-info text-white">
+                    WASM culture behavior
+                </div>
+                <div class="card-body small">
+                    <p>
+                        On the <strong>first page load</strong>, the server renders this page via SSR.
+                        The culture is read from the URL path (e.g., <code>/zh-Hans/</code>) by
+                        <code>RouteDataRequestCultureProvider</code>.
+                    </p>
+                    <p>
+                        After WASM downloads, subsequent renders run in the browser.
+                        The WASM app fetches <code>/api/abp/application-configuration</code> from the
+                        server to get the current culture, so the culture stays consistent.
+                    </p>
+                    <p class="mb-0">
+                        <strong>Language switching</strong> in WASM uses the server's
+                        <code>/Abp/Languages/Switch</code> endpoint (via the language menu), which
+                        rewrites the culture segment in the URL and redirects — exactly the same as
+                        the Blazor Server and MVC demos.
+                    </p>
+                </div>
+            </div>
+
+            <div class="card border-success mb-4">
+                <div class="card-header bg-success text-white">
+                    @L["Home:TryLanguages"]
+                </div>
+                <div class="card-body">
+                    <div class="d-flex flex-wrap gap-2">
+                        <button class="btn btn-outline-success" @onclick='() => NavigateTo("/en")'>English — <code>/en</code></button>
+                        <button class="btn btn-outline-success" @onclick='() => NavigateTo("/tr")'>Türkçe — <code>/tr</code></button>
+                        <button class="btn btn-outline-success" @onclick='() => NavigateTo("/fr")'>Français — <code>/fr</code></button>
+                        <button class="btn btn-outline-success" @onclick='() => NavigateTo("/zh-Hans")'>简体中文 — <code>/zh-Hans</code></button>
+                    </div>
+                    <div class="d-flex flex-wrap gap-2 mt-2">
+                        <button class="btn btn-outline-secondary btn-sm" @onclick='() => NavigateTo("/en/About")'>English About</button>
+                        <button class="btn btn-outline-secondary btn-sm" @onclick='() => NavigateTo("/tr/About")'>Türkçe About</button>
+                        <button class="btn btn-outline-secondary btn-sm" @onclick='() => NavigateTo("/fr/About")'>Français About</button>
+                        <button class="btn btn-outline-secondary btn-sm" @onclick='() => NavigateTo("/zh-Hans/About")'>简体中文 About</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card border-warning">
+                <div class="card-header bg-warning">
+                    @L["Home:UrlExample"]
+                </div>
+                <div class="card-body">
+                    <ul class="small">
+                        <li><code>/en</code> → Index (English)</li>
+                        <li><code>/tr</code> → Index (Türkçe)</li>
+                        <li><code>/zh-Hans/About</code> → About (简体中文)</li>
+                        <li><code>/fr/About</code> → About (Français)</li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

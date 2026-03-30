@@ -1,0 +1,49 @@
+@page
+@model BookStore.Mvc.Pages.AboutModel
+@using Microsoft.Extensions.Localization
+@using BookStore.Localization
+@inject IStringLocalizer<BookStoreResource> L
+
+<div class="container py-5">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <div class="card shadow-sm">
+                <div class="card-body p-5">
+                    <h1 class="card-title mb-4">@L["About:Title"]</h1>
+                    <p class="lead text-muted">@Html.Raw(L["About:Description"].Value)</p>
+
+                    <hr />
+
+                    <h5>@L["About:HowItWorks"]</h5>
+                    <p>@Html.Raw(L["About:HowItWorksDetail"].Value)</p>
+
+                    <h5>@L["About:MiddlewareOrder"]</h5>
+                    <p>@Html.Raw(L["About:MiddlewareOrderDetail"].Value)</p>
+
+                    <div class="alert alert-info">
+                        @Html.Raw(L["About:ApiRoutes"].Value)
+                    </div>
+
+                    <div class="card bg-light mt-4">
+                        <div class="card-body">
+                            <h6 class="card-subtitle mb-3 text-muted">Module configuration</h6>
+                            <pre class="mb-0"><code>// Enable URL-based culture detection — that's it!
+Configure&lt;AbpRequestLocalizationOptions&gt;(options =&gt;
+{
+    options.UseRouteBasedCulture = true;
+});
+
+// Middleware order (UseRouting FIRST, then UseAbpRequestLocalization)
+app.MapAbpStaticAssets();
+app.UseRouting();
+app.UseAbpRequestLocalization();
+app.UseConfiguredEndpoints();</code></pre>
+                        </div>
+                    </div>
+
+                    <a href="@Url.Page("/Index")" class="btn btn-outline-secondary mt-4">← @L["Menu:Home"]</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

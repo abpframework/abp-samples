@@ -1,0 +1,10 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/BookStore.Shared/BookStore.Shared.csproj" />
+    <Project Path="src/BookStore.Mvc/BookStore.Mvc.csproj" />
+    <Project Path="src/BookStore.Blazor.Shared/BookStore.Blazor.Shared.csproj" />
+    <Project Path="src/BookStore.Blazor.Server/BookStore.Blazor.Server.csproj" />
+    <Project Path="src/BookStore.Blazor.WebApp/BookStore.Blazor.WebApp.csproj" />
+    <Project Path="src/BookStore.Blazor.WebApp.Client/BookStore.Blazor.WebApp.Client.csproj" />
+  </Folder>
+</Solution>

@@ -1,0 +1,21 @@
+{
+  "Culture": "zh-Hans",
+  "Texts": {
+    "AppName": "基于URL的本地化示例",
+    "Menu:Home": "首页",
+    "Menu:About": "关于",
+    "Home:Title": "欢迎！",
+    "Home:Description": "本示例演示了ABP框架的基于URL的本地化功能。",
+    "Home:CurrentCulture": "当前区域（来自URL）",
+    "Home:TryIt": "切换上方的语言，注意URL是如何变化的。",
+    "Home:TryLanguages": "尝试不同语言",
+    "Home:UrlExample": "URL示例",
+    "About:Title": "关于本示例",
+    "About:Description": "基于URL的本地化将区域代码直接嵌入URL路径中，例如 <strong>/zh-Hans/about</strong> 或 <strong>/en/about</strong>。",
+    "About:HowItWorks": "工作原理",
+    "About:HowItWorksDetail": "ABP使用ASP.NET Core内置的 <code>RouteDataRequestCultureProvider</code>。当请求到达 <code>/{culture}/page</code> 时，路由捕获区域段并相应地设置当前线程的区域。",
+    "About:MiddlewareOrder": "中间件顺序",
+    "About:MiddlewareOrderDetail": "唯一的配置要求是 <code>UseAbpRequestLocalization()</code> 必须在 <code>UseRouting()</code> <strong>之后</strong> 调用。",
+    "About:ApiRoutes": "API路由（例如 <code>/api/...</code>）不受影响——它们没有 <code>{culture}</code> 段，因此提供程序返回null并传递给下一个提供程序。"
+  }
+}

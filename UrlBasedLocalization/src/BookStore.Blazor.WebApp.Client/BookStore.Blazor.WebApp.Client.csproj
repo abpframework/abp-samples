@@ -23,6 +23,7 @@
     <ProjectReference Include="..\..\..\..\abp\framework\src\Volo.Abp.Autofac.WebAssembly\Volo.Abp.Autofac.WebAssembly.csproj" />
     <ProjectReference Include="..\..\..\..\abp\modules\basic-theme\src\Volo.Abp.AspNetCore.Components.WebAssembly.BasicTheme\Volo.Abp.AspNetCore.Components.WebAssembly.BasicTheme.csproj" />
     <ProjectReference Include="..\..\..\..\abp\modules\identity\src\Volo.Abp.Identity.Blazor.WebAssembly\Volo.Abp.Identity.Blazor.WebAssembly.csproj" />
+    <ProjectReference Include="..\..\..\..\abp\modules\account\src\Volo.Abp.Account.Application.Contracts\Volo.Abp.Account.Application.Contracts.csproj" />
   </ItemGroup>
 
 </Project>

@@ -5,6 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Net.Http;
 using BookStore.Blazor.Shared.Menus;
+using BookStore.Blazor.WebApp.Client.Menus;
 using BookStore.Localization;
 using Volo.Abp.AspNetCore.Components.Web;
 using Volo.Abp.AspNetCore.Components.Web.Theming.Routing;
@@ -68,6 +69,7 @@ public class BookStoreBlazorWebAppClientModule : AbpModule
         Configure<AbpNavigationOptions>(options =>
         {
             options.MenuContributors.Add(new BookStoreMenuContributor());
+            options.MenuContributors.Add(new BookStoreWebAppClientMenuContributor());
         });
     }
 

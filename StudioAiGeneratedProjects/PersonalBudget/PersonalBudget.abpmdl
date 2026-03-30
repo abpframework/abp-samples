@@ -1,0 +1,51 @@
+{
+  "template": "app-nolayers",
+  "localAbpPath": "",
+  "imports": {
+    "Volo.Abp.BasicTheme": {
+      "version": "10.1.1",
+      "isInstalled": true,
+      "creationTime": "03/26/2026 10:46:54 +00:00"
+    },
+    "Volo.Abp.Account": {
+      "version": "10.1.1",
+      "isInstalled": true,
+      "creationTime": "03/26/2026 10:46:54 +00:00"
+    },
+    "Volo.Abp.OpenIddict": {
+      "version": "10.1.1",
+      "isInstalled": true,
+      "creationTime": "03/26/2026 10:46:54 +00:00"
+    },
+    "Volo.Abp.Identity": {
+      "version": "10.1.1",
+      "isInstalled": true,
+      "creationTime": "03/26/2026 10:46:54 +00:00"
+    },
+    "Volo.Abp.TenantManagement": {
+      "version": "10.1.1",
+      "isInstalled": true,
+      "creationTime": "03/26/2026 10:46:54 +00:00"
+    },
+    "Volo.Abp.SettingManagement": {
+      "version": "10.1.1",
+      "isInstalled": true,
+      "creationTime": "03/26/2026 10:46:54 +00:00"
+    },
+    "Volo.Abp.PermissionManagement": {
+      "version": "10.1.1",
+      "isInstalled": true,
+      "creationTime": "03/26/2026 10:46:54 +00:00"
+    },
+    "Volo.Abp.FeatureManagement": {
+      "version": "10.1.1",
+      "isInstalled": true,
+      "creationTime": "03/26/2026 10:46:54 +00:00"
+    }
+  },
+  "packages": {
+    "PersonalBudget": {
+      "path": "PersonalBudget/PersonalBudget.abppkg"
+    }
+  }
+}

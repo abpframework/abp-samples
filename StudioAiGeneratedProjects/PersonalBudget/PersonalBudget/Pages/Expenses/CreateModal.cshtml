@@ -1,0 +1,46 @@
+@page
+@using PersonalBudget.Localization
+@using Microsoft.Extensions.Localization
+@using Volo.Abp.AspNetCore.Mvc.UI.Bootstrap.TagHelpers.Modal
+@model PersonalBudget.Pages.Expenses.CreateModalModel
+@inject IStringLocalizer<PersonalBudgetResource> L
+
+<abp-modal>
+    <abp-modal-header title="@L["NewExpense"].Value"></abp-modal-header>
+    <abp-modal-body>
+        <form id="CreateExpenseForm" method="post" asp-page="/Expenses/CreateModal">
+            <div class="mb-3">
+                <label class="form-label" for="Expense_CategoryId">@L["Category"].Value</label>
+                <select id="Expense_CategoryId" name="Expense.CategoryId" class="form-select" required>
+                    <option value="">-- @L["SelectCategory"].Value --</option>
+                    @foreach (var category in Model.Categories)
+                    {
+                        <option value="@category.Id">@category.Name</option>
+                    }
+                </select>
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="Expense_Description">@L["ExpenseDescription"].Value</label>
+                <input type="text" id="Expense_Description" name="Expense.Description" class="form-control" required maxlength="500" asp-for="Expense.Description" />
+                <span asp-validation-for="Expense.Description" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="Expense_Amount">@L["Amount"].Value</label>
+                <input type="number" id="Expense_Amount" name="Expense.Amount" class="form-control" step="0.01" min="0.01" required asp-for="Expense.Amount" />
+                <span asp-validation-for="Expense.Amount" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="Expense_Date">@L["Date"].Value</label>
+                <input type="date" id="Expense_Date" name="Expense.Date" class="form-control" required
+                       value="@Model.Expense.Date.ToString("yyyy-MM-dd")" asp-for="Expense.Date" />
+                <span asp-validation-for="Expense.Date" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="Expense_Notes">@L["Notes"].Value</label>
+                <textarea id="Expense_Notes" name="Expense.Notes" class="form-control" rows="3" maxlength="1000" asp-for="Expense.Notes"></textarea>
+                <span asp-validation-for="Expense.Notes" class="text-danger"></span>
+            </div>
+        </form>
+    </abp-modal-body>
+    <abp-modal-footer buttons="@(AbpModalButtons.Save | AbpModalButtons.Cancel)"></abp-modal-footer>
+</abp-modal>

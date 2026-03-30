@@ -1,0 +1,33 @@
+@page
+@using Microsoft.AspNetCore.Authorization
+@using PersonalBudget.Localization
+@using PersonalBudget.Permissions
+@using Microsoft.Extensions.Localization
+@model PersonalBudget.Pages.Categories.IndexModel
+@inject IStringLocalizer<PersonalBudgetResource> L
+@inject IAuthorizationService AuthorizationService
+@section scripts {
+    <abp-script src="/Pages/Categories/Index.js" />
+}
+
+<abp-card>
+    <abp-card-header>
+        <abp-row>
+            <abp-column size-md="_6">
+                <abp-card-title>@L["Categories"]</abp-card-title>
+            </abp-column>
+            <abp-column size-md="_6" class="text-end">
+                @if (await AuthorizationService.IsGrantedAsync(PersonalBudgetPermissions.Categories.Create))
+                {
+                    <abp-button id="NewCategoryButton"
+                                button-type="Primary"
+                                icon="fas fa-plus"
+                                text="@L["NewCategory"].Value" />
+                }
+            </abp-column>
+        </abp-row>
+    </abp-card-header>
+    <abp-card-body>
+        <abp-table striped-rows="true" id="CategoriesTable"></abp-table>
+    </abp-card-body>
+</abp-card>

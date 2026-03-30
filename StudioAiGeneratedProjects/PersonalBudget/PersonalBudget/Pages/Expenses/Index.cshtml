@@ -1,0 +1,66 @@
+@page
+@using Microsoft.AspNetCore.Authorization
+@using PersonalBudget.Localization
+@using PersonalBudget.Permissions
+@using Microsoft.Extensions.Localization
+@model PersonalBudget.Pages.Expenses.IndexModel
+@inject IStringLocalizer<PersonalBudgetResource> L
+@inject IAuthorizationService AuthorizationService
+@section scripts {
+    <abp-script src="/Pages/Expenses/Index.js" />
+}
+
+<abp-card>
+    <abp-card-header>
+        <abp-row>
+            <abp-column size-md="_6">
+                <abp-card-title>@L["Expenses"]</abp-card-title>
+            </abp-column>
+            <abp-column size-md="_6" class="text-end">
+                @if (await AuthorizationService.IsGrantedAsync(PersonalBudgetPermissions.Expenses.Create))
+                {
+                    <abp-button id="NewExpenseButton"
+                                button-type="Primary"
+                                icon="fas fa-plus"
+                                text="@L["NewExpense"].Value" />
+                }
+            </abp-column>
+        </abp-row>
+    </abp-card-header>
+    <abp-card-body>
+        <!-- Filter Bar -->
+        <abp-row class="mb-3">
+            <abp-column size-md="_3">
+                <input type="text" id="FilterInput" class="form-control" placeholder="@L["SearchExpenses"].Value" />
+            </abp-column>
+            <abp-column size-md="_3">
+                <select id="CategoryFilterSelect" class="form-select">
+                    <option value="">@L["AllCategories"].Value</option>
+                    @foreach (var category in Model.Categories)
+                    {
+                        <option value="@category.Id">@category.Name</option>
+                    }
+                </select>
+            </abp-column>
+            <abp-column size-md="_2">
+                <input type="date" id="StartDateInput" class="form-control" placeholder="@L["StartDate"].Value" />
+            </abp-column>
+            <abp-column size-md="_2">
+                <input type="date" id="EndDateInput" class="form-control" placeholder="@L["EndDate"].Value" />
+            </abp-column>
+            <abp-column size-md="_1">
+                <input type="number" id="MinAmountInput" class="form-control" placeholder="@L["MinAmount"].Value" min="0" step="0.01" />
+            </abp-column>
+            <abp-column size-md="_1">
+                <input type="number" id="MaxAmountInput" class="form-control" placeholder="@L["MaxAmount"].Value" min="0" step="0.01" />
+            </abp-column>
+        </abp-row>
+        <abp-row class="mb-3">
+            <abp-column>
+                <abp-button id="FilterButton" button-type="Info" icon="fas fa-search" text="@L["Filter"].Value" />
+                <abp-button id="ClearFilterButton" button-type="Secondary" icon="fas fa-times" text="@L["ClearFilter"].Value" />
+            </abp-column>
+        </abp-row>
+        <abp-table striped-rows="true" id="ExpensesTable"></abp-table>
+    </abp-card-body>
+</abp-card>

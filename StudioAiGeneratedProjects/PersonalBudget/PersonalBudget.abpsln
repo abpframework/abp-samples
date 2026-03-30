@@ -1,0 +1,47 @@
+{
+  "id": "dabfed77-48aa-4bda-acd7-517e7f62e7a4",
+  "template": "app-nolayers",
+  "versions": {
+    "AbpFramework": "10.1.1",
+    "AbpStudio": "2.2.1",
+    "TargetDotnetFramework": "net10.0"
+  },
+  "modules": {
+    "PersonalBudget": {
+      "path": "PersonalBudget.abpmdl"
+    }
+  },
+  "runProfiles": {
+    "Default": {
+      "path": "etc/run-profiles/Default.abprun.json"
+    }
+  },
+  "options": {
+    "httpRequests": {
+      "ignoredUrls": [
+      
+      ]
+    }
+  },
+  "creatingStudioConfiguration": {
+    "template": "app-nolayers",
+    "createdAbpStudioVersion": "2.2.1",
+    "creationTool": "ABP Studio UI",
+    "multiTenancy": "true",
+    "runInstallLibs": "",
+    "useLocalReferences": "true",
+    "uiFramework": "mvc",
+    "databaseProvider": "mongodb",
+    "runDbMigrator": "",
+    "includeTests": "false",
+    "theme": "basic",
+    "themeStyle": "",
+    "themeMenuPlacement": "",
+    "publicWebsite": "",
+    "socialLogin": "false",
+    "sampleCrudPage": "false",
+    "selectedLanguages": ["English", "Arabic", "Chinese (Simplified)", "Chinese (Traditional)", "Czech", "English (United Kingdom)", "Finnish", "French", "German (Germany)", "Hindi ", "Hungarian", "Icelandic", "Italian", "Portuguese (Brazil)", "Romanian (Romania)", "Russian", "Slovak", "Spanish", "Swedish", "Turkish", ],
+    "defaultLanguage": "English",
+    "createCommand": "abp new PersonalBudget -t app-nolayers --ui-framework mvc --mobile  --database-provider mongodb --theme basic --skip-migration  --skip-migrator  --no-tests --without-cms-kit --dont-run-install-libs --dont-run-bundling --use-open-source-template"
+  }
+}

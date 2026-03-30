@@ -1,0 +1,60 @@
+services:
+  personalbudget-web:
+    image: personalbudget:latest
+    container_name: personalbudget
+    build:
+      context: ../../
+      dockerfile: PersonalBudget/Dockerfile.local
+    environment:
+      - ASPNETCORE_URLS=https://+:8081;http://+:8080;
+      - Kestrel__Certificates__Default__Path=/app/certs/localhost.pfx
+      - Kestrel__Certificates__Default__Password=91f91912-5ab0-49df-8166-23377efaf3cc
+      - App__HealthCheckUrl=http://personalbudget:8080/health-status
+      - ConnectionStrings__Default=mongodb://mongodb/PersonalBudget
+    ports:
+      - "44330:8081"
+    depends_on:
+      mongodb:
+        condition: service_healthy
+    restart: on-failure  
+    volumes:
+      - ./certs:/app/certs
+    networks:
+      - abp-network  
+  
+  db-migrator:
+    image: personalbudget:latest
+    container_name: db-migrator
+    build:
+      context: ../../
+      dockerfile: PersonalBudget/Dockerfile.local
+    environment:
+      - ConnectionStrings__Default=mongodb://mongodb/PersonalBudget
+    command:
+      - --migrate-database
+    depends_on:
+      mongodb:
+        condition: service_healthy
+    networks:
+      - abp-network
+  mongodb:
+    container_name: mongodb
+    image: mongo:7.0.2
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+    networks:
+      - abp-network
+    healthcheck:
+      test: echo 'db.stats().ok' | mongosh localhost:27017/test --quiet
+      interval: 10s
+      timeout: 10s
+      retries: 10
+volumes:
+  mongodb_data:
+    name: personalbudget_mongodb_data
+networks:
+  abp-network:
+    name: personalbudget-network
+    driver: bridge

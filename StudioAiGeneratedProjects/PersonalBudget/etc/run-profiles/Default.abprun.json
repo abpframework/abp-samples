@@ -1,0 +1,81 @@
+{
+  "applications": {
+    "PersonalBudget": {
+      "type": "dotnet-project",
+      "launchUrl": "https://localhost:44330",
+      "healthCheckEndpoint": "/health-status",
+      "healthUiEndpoint": "/health-ui",
+      "path": "../../PersonalBudget/PersonalBudget.csproj",
+      "execution": {
+        "order": 0
+      }
+    }
+  },
+  "tasks": {
+    "Initialize Solution":{
+      "behaviour": 2,
+      "startCommand": "./initialize-solution.ps1", 
+      "workingDirectory": "../scripts",
+      "shortDescription": "Prepares the solution for development."
+    },
+    "Migrate Database":{
+      "behaviour": 0,
+      "startCommand": "./migrate-database.ps1",
+      "workingDirectory": "../scripts",
+      "shortDescription": "Migrates the database to the latest version."
+    }
+  },
+  "workflows": {
+    "d3b2a1c4-e5f6-4890-abcd-ef1234567890": {
+      "Id": "d3b2a1c4-e5f6-4890-abcd-ef1234567890",
+      "Name": "Default Workflow",
+      "Description": "Stops applications, builds, migrates, and starts applications",
+      "IsShared": true,
+      "BeforeTasks": [],
+      "AfterTasks": [
+        {
+          "ActionType": "Build",
+          "Targets": [],
+          "AllTargets": true,
+          "ModuleTargets": [],
+          "PackageTargets": [],
+          "FolderTargets": [],
+          "ApplicationTargets": [],
+          "ContainerTargets": []
+        },
+        {
+          "ActionType": "AddMigration",
+          "Targets": [],
+          "AllTargets": false,
+          "ModuleTargets": [],
+          "PackageTargets": [],
+          "FolderTargets": [],
+          "ApplicationTargets": [],
+          "ContainerTargets": []
+        },
+        {
+          "ActionType": "RunTask",
+          "Targets": [
+            "Migrate Database"
+          ],
+          "AllTargets": false,
+          "ModuleTargets": [],
+          "PackageTargets": [],
+          "FolderTargets": [],
+          "ApplicationTargets": [],
+          "ContainerTargets": []
+        },
+        {
+          "ActionType": "StartApplication",
+          "Targets": [],
+          "AllTargets": true,
+          "ModuleTargets": [],
+          "PackageTargets": [],
+          "FolderTargets": [],
+          "ApplicationTargets": [],
+          "ContainerTargets": []
+        }
+      ]
+    }
+  }
+}

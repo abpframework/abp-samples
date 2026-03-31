@@ -1,0 +1,113 @@
+{
+  "template": "app",
+  "imports": {
+    "Volo.Abp.LeptonXLiteTheme": {
+      "version": "5.1.1",
+      "isInstalled": true,
+      "creationTime": "03/31/2026 12:42:52 +00:00"
+    },
+    "Volo.Abp.Account": {
+      "version": "10.1.1",
+      "isInstalled": true,
+      "creationTime": "03/31/2026 12:42:52 +00:00"
+    },
+    "Volo.Abp.OpenIddict": {
+      "version": "10.1.1",
+      "isInstalled": true,
+      "creationTime": "03/31/2026 12:42:52 +00:00"
+    },
+    "Volo.Abp.Identity": {
+      "version": "10.1.1",
+      "isInstalled": true,
+      "creationTime": "03/31/2026 12:42:52 +00:00"
+    },
+    "Volo.Abp.TenantManagement": {
+      "version": "10.1.1",
+      "isInstalled": true,
+      "creationTime": "03/31/2026 12:42:52 +00:00"
+    },
+    "Volo.Abp.SettingManagement": {
+      "version": "10.1.1",
+      "isInstalled": true,
+      "creationTime": "03/31/2026 12:42:52 +00:00"
+    },
+    "Volo.Abp.PermissionManagement": {
+      "version": "10.1.1",
+      "isInstalled": true,
+      "creationTime": "03/31/2026 12:42:52 +00:00"
+    },
+    "Volo.Abp.FeatureManagement": {
+      "version": "10.1.1",
+      "isInstalled": true,
+      "creationTime": "03/31/2026 12:42:52 +00:00"
+    }
+  },
+  "folders": {
+    "items": {
+      "src": {},
+      "test": {}
+    }
+  },
+  "packages": {
+    "QuickBills.Application": {
+      "path": "src/QuickBills.Application/QuickBills.Application.abppkg",
+      "folder": "src"
+    },
+    "QuickBills.Application.Tests": {
+      "path": "test/QuickBills.Application.Tests/QuickBills.Application.Tests.abppkg",
+      "folder": "test"
+    },
+    "QuickBills.Domain.Shared": {
+      "path": "src/QuickBills.Domain.Shared/QuickBills.Domain.Shared.abppkg",
+      "folder": "src"
+    },
+    "QuickBills.Application.Contracts": {
+      "path": "src/QuickBills.Application.Contracts/QuickBills.Application.Contracts.abppkg",
+      "folder": "src"
+    },
+    "QuickBills.HttpApi": {
+      "path": "src/QuickBills.HttpApi/QuickBills.HttpApi.abppkg",
+      "folder": "src"
+    },
+    "QuickBills.HttpApi.Client": {
+      "path": "src/QuickBills.HttpApi.Client/QuickBills.HttpApi.Client.abppkg",
+      "folder": "src"
+    },
+    "QuickBills.EntityFrameworkCore.Tests": {
+      "path": "test/QuickBills.EntityFrameworkCore.Tests/QuickBills.EntityFrameworkCore.Tests.abppkg",
+      "folder": "test"
+    },
+    "QuickBills.EntityFrameworkCore": {
+      "path": "src/QuickBills.EntityFrameworkCore/QuickBills.EntityFrameworkCore.abppkg",
+      "folder": "src"
+    },
+    "QuickBills.TestBase": {
+      "path": "test/QuickBills.TestBase/QuickBills.TestBase.abppkg",
+      "folder": "test"
+    },
+    "QuickBills.Domain.Tests": {
+      "path": "test/QuickBills.Domain.Tests/QuickBills.Domain.Tests.abppkg",
+      "folder": "test"
+    },
+    "QuickBills.HttpApi.Client.ConsoleTestApp": {
+      "path": "test/QuickBills.HttpApi.Client.ConsoleTestApp/QuickBills.HttpApi.Client.ConsoleTestApp.abppkg",
+      "folder": "test"
+    },
+    "QuickBills.DbMigrator": {
+      "path": "src/QuickBills.DbMigrator/QuickBills.DbMigrator.abppkg",
+      "folder": "src"
+    },
+    "QuickBills.Blazor": {
+      "path": "src/QuickBills.Blazor/QuickBills.Blazor.abppkg",
+      "folder": "src"
+    },
+    "QuickBills.Blazor.Client": {
+      "path": "src/QuickBills.Blazor.Client/QuickBills.Blazor.Client.abppkg",
+      "folder": "src"
+    },
+    "QuickBills.Domain": {
+      "path": "src/QuickBills.Domain/QuickBills.Domain.abppkg",
+      "folder": "src"
+    }
+  }
+}

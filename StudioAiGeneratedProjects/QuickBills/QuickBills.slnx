@@ -1,0 +1,24 @@
+<Solution>
+    <Configurations>
+        <Platform Name="Any CPU" />
+    </Configurations>
+    <Folder Name="/src/">
+        <Project Path="src/QuickBills.Domain/QuickBills.Domain.csproj" />
+        <Project Path="src/QuickBills.Application/QuickBills.Application.csproj" />
+        <Project Path="src/QuickBills.EntityFrameworkCore/QuickBills.EntityFrameworkCore.csproj" />
+        <Project Path="src/QuickBills.Domain.Shared/QuickBills.Domain.Shared.csproj" />
+        <Project Path="src/QuickBills.Application.Contracts/QuickBills.Application.Contracts.csproj" />
+        <Project Path="src/QuickBills.HttpApi/QuickBills.HttpApi.csproj" />
+        <Project Path="src/QuickBills.HttpApi.Client/QuickBills.HttpApi.Client.csproj" />
+        <Project Path="src/QuickBills.DbMigrator/QuickBills.DbMigrator.csproj" />
+        <Project Path="src/QuickBills.Blazor/QuickBills.Blazor.csproj" />
+        <Project Path="src/QuickBills.Blazor.Client/QuickBills.Blazor.Client.csproj" />
+    </Folder>
+    <Folder Name="/test/">
+        <Project Path="test/QuickBills.Application.Tests/QuickBills.Application.Tests.csproj" />
+        <Project Path="test/QuickBills.EntityFrameworkCore.Tests/QuickBills.EntityFrameworkCore.Tests.csproj" />
+        <Project Path="test/QuickBills.TestBase/QuickBills.TestBase.csproj" />
+        <Project Path="test/QuickBills.Domain.Tests/QuickBills.Domain.Tests.csproj" />
+        <Project Path="test/QuickBills.HttpApi.Client.ConsoleTestApp/QuickBills.HttpApi.Client.ConsoleTestApp.csproj" />
+    </Folder>
+</Solution>

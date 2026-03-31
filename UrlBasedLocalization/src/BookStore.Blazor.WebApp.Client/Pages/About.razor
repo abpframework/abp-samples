@@ -31,28 +31,10 @@
 
                     <div class="card bg-light mt-4">
                         <div class="card-body">
-                            <h6 class="card-subtitle mb-3 text-muted">Module configuration (Blazor WebApp)</h6>
-                            <pre class="mb-0"><code>// Server module
-Configure&lt;AbpRequestLocalizationOptions&gt;(options =&gt;
+                            <h6 class="card-subtitle mb-3 text-muted">Configuration</h6>
+                            <pre class="mb-0"><code>Configure&lt;AbpRequestLocalizationOptions&gt;(options =&gt;
 {
     options.UseRouteBasedCulture = true;
-});
-
-app.UseRouting();
-app.UseAbpRequestLocalization();
-app.UseAntiforgery();
-app.UseConfiguredEndpoints(builder =&gt;
-{
-    builder.MapRazorComponents&lt;App&gt;()
-        .AddInteractiveServerRenderMode()
-        .AddInteractiveWebAssemblyRenderMode()
-        .AddAdditionalAssemblies(clientAssembly);
-});
-
-// WASM client module
-PreConfigure&lt;AbpAspNetCoreComponentsWebOptions&gt;(options =&gt;
-{
-    options.IsBlazorWebApp = true;
 });</code></pre>
                         </div>
                     </div>

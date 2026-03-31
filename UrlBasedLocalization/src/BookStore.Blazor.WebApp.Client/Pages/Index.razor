@@ -46,24 +46,16 @@
 
             <div class="card border-info mb-4">
                 <div class="card-header bg-info text-white">
-                    WASM culture behavior
+                    Blazor WebApp (InteractiveAuto)
                 </div>
                 <div class="card-body small">
                     <p>
-                        On the <strong>first page load</strong>, the server renders this page via SSR.
-                        The culture is read from the URL path (e.g., <code>/zh-Hans/</code>) by
-                        <code>RouteDataRequestCultureProvider</code>.
-                    </p>
-                    <p>
-                        After WASM downloads, subsequent renders run in the browser.
-                        The WASM app fetches <code>/api/abp/application-configuration</code> from the
-                        server to get the current culture and the <code>UseRouteBasedCulture</code>
-                        flag, so the culture stays consistent.
+                        On the <strong>first page load</strong>, the server renders this page via SSR
+                        and detects the culture from the URL path (e.g., <code>/zh-Hans/</code>).
                     </p>
                     <p class="mb-0">
-                        <strong>Language switching</strong> in WASM replaces the culture segment
-                        in the current URL and navigates with <code>forceLoad: true</code>,
-                        triggering a full page reload with the new culture.
+                        After WASM downloads, subsequent renders run in the browser.
+                        Culture detection, menu URLs, and language switching all work automatically.
                     </p>
                 </div>
             </div>

@@ -31,21 +31,10 @@
 
                     <div class="card bg-light mt-4">
                         <div class="card-body">
-                            <h6 class="card-subtitle mb-3 text-muted">Module configuration (Blazor Server)</h6>
-                            <pre class="mb-0"><code>// Enable URL-based culture detection
-Configure&lt;AbpRequestLocalizationOptions&gt;(options =&gt;
+                            <h6 class="card-subtitle mb-3 text-muted">Configuration</h6>
+                            <pre class="mb-0"><code>Configure&lt;AbpRequestLocalizationOptions&gt;(options =&gt;
 {
     options.UseRouteBasedCulture = true;
-});
-
-// Middleware order (UseRouting FIRST, then UseAbpRequestLocalization)
-app.UseRouting();
-app.UseAbpRequestLocalization();
-app.UseAntiforgery();
-app.UseConfiguredEndpoints(builder =&gt;
-{
-    builder.MapRazorComponents&lt;App&gt;()
-        .AddInteractiveServerRenderMode();
 });</code></pre>
                         </div>
                     </div>

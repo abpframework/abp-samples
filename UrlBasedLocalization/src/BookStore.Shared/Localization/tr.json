@@ -11,11 +11,11 @@
     "Home:TryLanguages": "Farklı dilleri deneyin",
     "Home:UrlExample": "URL örnekleri",
     "About:Title": "Bu Örnek Hakkında",
-    "About:Description": "URL tabanlı yerelleştirme, kültür kodunu doğrudan URL yoluna gömer, örneğin <strong>/tr/about</strong> veya <strong>/en/about</strong>.",
-    "About:HowItWorks": "Nasıl Çalışır",
-    "About:HowItWorksDetail": "ABP, ASP.NET Core'un yerleşik <code>RouteDataRequestCultureProvider</code>'ını kullanır. <code>/{culture}/sayfa</code>'ya bir istek geldiğinde, kültür segmenti yönlendirme tarafından yakalanır ve mevcut iş parçacığı kültürü buna göre ayarlanır.",
-    "About:MiddlewareOrder": "Middleware sırası",
-    "About:MiddlewareOrderDetail": "Tek yapılandırma gereksinimi, <code>UseAbpRequestLocalization()</code>'ın <code>UseRouting()</code>'den <strong>sonra</strong> çağrılmasıdır.",
-    "About:ApiRoutes": "API rotaları (örn. <code>/api/...</code>) etkilenmez — bunların <code>{culture}</code> segmenti yoktur, bu nedenle sağlayıcı null döndürür ve bir sonraki sağlayıcıya geçer."
+    "About:Description": "URL tabanlı yerelleştirme, kültür kodunu doğrudan URL yoluna gömer, örneğin <strong>/tr/about</strong> veya <strong>/en/about</strong>. Her dilin kendine özgü kararlı bir URL'si vardır, bu da SEO ve bağlantı paylaşımı için uygundur.",
+    "About:HowItWorks": "Yapılandırma",
+    "About:HowItWorksDetail": "Tek bir yapılandırma ile özellik etkinleştirilir: <code>options.UseRouteBasedCulture = true</code>. ABP, rota kaydı, URL oluşturma, menü bağlantıları ve dil değiştirmeyi otomatik olarak yönetir.",
+    "About:MiddlewareOrder": "Blazor sayfaları",
+    "About:MiddlewareOrderDetail": "Blazor bileşen rotaları, her sayfada manuel olarak <code>@page \"/{culture}/...\"</code> yönergesi gerektirir. MVC ve Razor Pages rotaları otomatik olarak eklenir.",
+    "About:ApiRoutes": "API rotaları (örn. <code>/api/...</code>) etkilenmez — URL yollarında kültür segmenti yoktur."
   }
 }

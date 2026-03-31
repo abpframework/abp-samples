@@ -11,11 +11,11 @@
     "Home:TryLanguages": "Essayez différentes langues",
     "Home:UrlExample": "Exemples d'URL",
     "About:Title": "À propos de cet exemple",
-    "About:Description": "La localisation basée sur l'URL intègre le code de culture directement dans le chemin de l'URL, par exemple <strong>/fr/about</strong> ou <strong>/en/about</strong>.",
-    "About:HowItWorks": "Comment ça marche",
-    "About:HowItWorksDetail": "ABP utilise le <code>RouteDataRequestCultureProvider</code> intégré d'ASP.NET Core. Quand une requête arrive sur <code>/{culture}/page</code>, le segment de culture est capturé par le routage et la culture du thread courant est définie en conséquence.",
-    "About:MiddlewareOrder": "Ordre des middlewares",
-    "About:MiddlewareOrderDetail": "La seule configuration requise est que <code>UseAbpRequestLocalization()</code> soit appelé <strong>après</strong> <code>UseRouting()</code>.",
-    "About:ApiRoutes": "Les routes API (ex. <code>/api/...</code>) ne sont pas affectées — elles n'ont pas de segment <code>{culture}</code>, donc le fournisseur retourne null et passe au fournisseur suivant."
+    "About:Description": "La localisation basée sur l'URL intègre le code de culture directement dans le chemin de l'URL, par exemple <strong>/fr/about</strong> ou <strong>/en/about</strong>. Chaque langue a sa propre URL stable, ce qui est favorable au SEO et au partage de liens.",
+    "About:HowItWorks": "Configuration",
+    "About:HowItWorksDetail": "Une seule configuration active la fonctionnalité : <code>options.UseRouteBasedCulture = true</code>. ABP gère automatiquement l'enregistrement des routes, la génération d'URL, les liens de menu et le changement de langue.",
+    "About:MiddlewareOrder": "Pages Blazor",
+    "About:MiddlewareOrderDetail": "Les routes des composants Blazor nécessitent une directive manuelle <code>@page \"/{culture}/...\"</code> sur chaque page. Les routes MVC et Razor Pages sont ajoutées automatiquement.",
+    "About:ApiRoutes": "Les routes API (ex. <code>/api/...</code>) ne sont pas affectées — elles n'ont pas de segment de culture dans le chemin URL."
   }
 }

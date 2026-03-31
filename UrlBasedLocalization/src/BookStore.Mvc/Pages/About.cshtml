@@ -26,18 +26,11 @@
 
                     <div class="card bg-light mt-4">
                         <div class="card-body">
-                            <h6 class="card-subtitle mb-3 text-muted">Module configuration</h6>
-                            <pre class="mb-0"><code>// Enable URL-based culture detection — that's it!
-Configure&lt;AbpRequestLocalizationOptions&gt;(options =&gt;
+                            <h6 class="card-subtitle mb-3 text-muted">Configuration</h6>
+                            <pre class="mb-0"><code>Configure&lt;AbpRequestLocalizationOptions&gt;(options =&gt;
 {
     options.UseRouteBasedCulture = true;
-});
-
-// Middleware order (UseRouting FIRST, then UseAbpRequestLocalization)
-app.MapAbpStaticAssets();
-app.UseRouting();
-app.UseAbpRequestLocalization();
-app.UseConfiguredEndpoints();</code></pre>
+});</code></pre>
                         </div>
                     </div>
 

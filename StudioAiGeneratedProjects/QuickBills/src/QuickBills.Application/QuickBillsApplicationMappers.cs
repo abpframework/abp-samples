@@ -1,15 +1,22 @@
 using Riok.Mapperly.Abstractions;
+using QuickBills.Dtos.Invoicing;
+using QuickBills.Invoicing;
 using Volo.Abp.Mapperly;
 
 namespace QuickBills;
 
-/*
- * You can add your own mappings here.
- * [Mapper(RequiredMappingStrategy = RequiredMappingStrategy.Target)]
- * public partial class QuickBillsApplicationMappers : MapperBase<BookDto, CreateUpdateBookDto>
- * {
- *    public override partial CreateUpdateBookDto Map(BookDto source);
- * 
- *    public override partial void Map(BookDto source, CreateUpdateBookDto destination);
- * }
- */
+[Mapper]
+public partial class QuickBillsApplicationMappers
+{
+    // Customer mappings
+    public partial CustomerDto Map(Customer source);
+    public partial void Map(CreateUpdateCustomerDto source, Customer destination);
+
+    // Invoice mappings
+    public partial InvoiceDto Map(Invoice source);
+    public partial void Map(CreateUpdateInvoiceDto source, Invoice destination);
+
+    // InvoiceItem mappings
+    public partial InvoiceItemDto Map(InvoiceItem source);
+    public partial void Map(CreateUpdateInvoiceItemDto source, InvoiceItem destination);
+}

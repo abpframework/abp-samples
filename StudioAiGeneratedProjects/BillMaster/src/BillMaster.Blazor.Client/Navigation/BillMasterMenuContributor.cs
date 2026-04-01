@@ -82,6 +82,35 @@ public class BillMasterMenuContributor : IMenuContributor
                 url: "/books"
             ));
         }
+
+        // Invoicing menu
+        var invoicingMenu = new ApplicationMenuItem(
+            BillMasterMenus.Invoicing,
+            l["Menu:Invoicing"],
+            icon: "fa fa-file-invoice"
+        );
+
+        context.Menu.AddItem(invoicingMenu);
+
+        // Customers submenu
+        if (await context.IsGrantedAsync(BillMasterPermissions.Customers.Default))
+        {
+            invoicingMenu.AddItem(new ApplicationMenuItem(
+                "Invoicing.Customers",
+                l["Menu:Customers"],
+                url: "/customers"
+            ));
+        }
+
+        // Invoices submenu
+        if (await context.IsGrantedAsync(BillMasterPermissions.Invoice.Default))
+        {
+            invoicingMenu.AddItem(new ApplicationMenuItem(
+                "Invoicing.Invoices",
+                l["Menu:Invoices"],
+                url: "/invoices"
+            ));
+        }
     }
     
     private async Task ConfigureUserMenuAsync(MenuConfigurationContext context)

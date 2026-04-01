@@ -1,0 +1,194 @@
+@page "/customers"
+@attribute [Authorize(BillMasterPermissions.Customers.Default)]
+@using BillMaster.Permissions
+@using Volo.Abp.Application.Dtos
+@using Microsoft.AspNetCore.Authorization
+@using BillMaster.Invoices
+@using BillMaster.Localization
+@using Microsoft.Extensions.Localization
+@using Volo.Abp.AspNetCore.Components.Web
+@inject IStringLocalizer<BillMasterResource> L
+@inject AbpBlazorMessageLocalizerHelper<BillMasterResource> LH
+@inherits AbpCrudPageBase<ICustomerAppService, CustomerDto, Guid, PagedAndSortedResultRequestDto, CreateUpdateCustomerDto>
+
+<Card>
+    <CardHeader>
+        <Row Class="justify-content-between">
+            <Column ColumnSize="ColumnSize.IsAuto">
+                <CardTitle>@L["Customers"]</CardTitle>
+            </Column>
+            <Column ColumnSize="ColumnSize.IsAuto">
+                @if (HasCreatePermission)
+                {
+                    <Button Color="Color.Primary"
+                        Clicked="OpenCreateModalAsync">
+                        <Icon Name="IconName.Add" />
+                        @L["NewCustomer"]
+                    </Button>
+                }
+            </Column>
+        </Row>
+    </CardHeader>
+    <CardBody>
+        <DataGrid TItem="CustomerDto"
+                  Data="Entities"
+                  ReadData="OnDataGridReadAsync"
+                  CurrentPage="CurrentPage"
+                  TotalItems="TotalCount"
+                  ShowPager="true"
+                  PageSize="PageSize">
+            <DataGridColumns>
+                <DataGridEntityActionsColumn TItem="CustomerDto" @ref="@EntityActionsColumn">
+                    <DisplayTemplate>
+                        <EntityActions TItem="CustomerDto" EntityActionsColumn="@EntityActionsColumn">
+                            <EntityAction TItem="CustomerDto"
+                                          Text="@L["Edit"]"
+                                          Visible=HasUpdatePermission
+                                          Clicked="() => OpenEditModalAsync(context)" />
+                            <EntityAction TItem="CustomerDto"
+                                          Text="@L["Delete"]"
+                                          Visible=HasDeletePermission
+                                          Clicked="() => DeleteEntityAsync(context)"
+                                          ConfirmationMessage="()=>GetDeleteConfirmationMessage(context)" />
+                        </EntityActions>
+                    </DisplayTemplate>
+                </DataGridEntityActionsColumn>
+                <DataGridColumn TItem="CustomerDto"
+                                Field="@nameof(CustomerDto.Name)"
+                                Caption="@L["Name"]"></DataGridColumn>
+                <DataGridColumn TItem="CustomerDto"
+                                Field="@nameof(CustomerDto.Email)"
+                                Caption="@L["Email"]"></DataGridColumn>
+                <DataGridColumn TItem="CustomerDto"
+                                Field="@nameof(CustomerDto.Phone)"
+                                Caption="@L["Phone"]"></DataGridColumn>
+                <DataGridColumn TItem="CustomerDto"
+                                Field="@nameof(CustomerDto.CreationTime)"
+                                Caption="@L["CreationTime"]">
+                    <DisplayTemplate>
+                        @context.CreationTime.ToLongDateString()
+                    </DisplayTemplate>
+                </DataGridColumn>
+            </DataGridColumns>
+        </DataGrid>
+    </CardBody>
+</Card>
+
+<Modal @ref="@CreateModal">
+    <ModalBackdrop />
+    <ModalContent IsCentered="true">
+        <Form>
+            <ModalHeader>
+                <ModalTitle>@L["NewCustomer"]</ModalTitle>
+                <CloseButton Clicked="CloseCreateModalAsync"/>
+            </ModalHeader>
+            <ModalBody>
+                <Validations @ref="@CreateValidationsRef" Model="@NewEntity" ValidateOnLoad="false">
+                    <Validation MessageLocalizer="@LH.Localize">
+                        <Field>
+                            <FieldLabel>@L["Name"]</FieldLabel>
+                            <TextEdit @bind-Text="@NewEntity.Name" AutoFocus="true">
+                                <Feedback>
+                                    <ValidationError/>
+                                </Feedback>
+                            </TextEdit>
+                        </Field>
+                    </Validation>
+                    <Validation MessageLocalizer="@LH.Localize">
+                        <Field>
+                            <FieldLabel>@L["Email"]</FieldLabel>
+                            <TextEdit @bind-Text="@NewEntity.Email" Role="TextRole.Email">
+                                <Feedback>
+                                    <ValidationError/>
+                                </Feedback>
+                            </TextEdit>
+                        </Field>
+                    </Validation>
+                    <Validation MessageLocalizer="@LH.Localize">
+                        <Field>
+                            <FieldLabel>@L["Phone"]</FieldLabel>
+                            <TextEdit @bind-Text="@NewEntity.Phone">
+                                <Feedback>
+                                    <ValidationError/>
+                                </Feedback>
+                            </TextEdit>
+                        </Field>
+                    </Validation>
+                </Validations>
+            </ModalBody>
+            <ModalFooter>
+                <Button Color="Color.Secondary"
+                        Clicked="CloseCreateModalAsync">@L["Cancel"]</Button>
+                <Button Color="Color.Primary"
+                        Type="@ButtonType.Submit"
+                        PreventDefaultOnSubmit="true"
+                        Clicked="CreateEntityAsync">@L["Save"]</Button>
+            </ModalFooter>
+        </Form>
+    </ModalContent>
+</Modal>
+
+<Modal @ref="@EditModal">
+    <ModalBackdrop />
+    <ModalContent IsCentered="true">
+        <Form>
+            <ModalHeader>
+                <ModalTitle>@L["Edit"]</ModalTitle>
+                <CloseButton Clicked="CloseEditModalAsync"/>
+            </ModalHeader>
+            <ModalBody>
+                <Validations @ref="@EditValidationsRef" Model="@NewEntity" ValidateOnLoad="false">
+                    <Validation MessageLocalizer="@LH.Localize">
+                        <Field>
+                            <FieldLabel>@L["Name"]</FieldLabel>
+                            <TextEdit @bind-Text="@EditingEntity.Name">
+                                <Feedback>
+                                    <ValidationError/>
+                                </Feedback>
+                            </TextEdit>
+                        </Field>
+                    </Validation>
+                    <Validation MessageLocalizer="@LH.Localize">
+                        <Field>
+                            <FieldLabel>@L["Email"]</FieldLabel>
+                            <TextEdit @bind-Text="@EditingEntity.Email" Role="TextRole.Email">
+                                <Feedback>
+                                    <ValidationError/>
+                                </Feedback>
+                            </TextEdit>
+                        </Field>
+                    </Validation>
+                    <Validation MessageLocalizer="@LH.Localize">
+                        <Field>
+                            <FieldLabel>@L["Phone"]</FieldLabel>
+                            <TextEdit @bind-Text="@EditingEntity.Phone">
+                                <Feedback>
+                                    <ValidationError/>
+                                </Feedback>
+                            </TextEdit>
+                        </Field>
+                    </Validation>
+                </Validations>
+            </ModalBody>
+            <ModalFooter>
+                <Button Color="Color.Secondary"
+                        Clicked="CloseEditModalAsync">@L["Cancel"]</Button>
+                <Button Color="Color.Primary"
+                        Type="@ButtonType.Submit"
+                        PreventDefaultOnSubmit="true"
+                        Clicked="UpdateEntityAsync">@L["Save"]</Button>
+            </ModalFooter>
+        </Form>
+    </ModalContent>
+</Modal>
+@code
+{
+    public Customers() // Constructor
+    {
+        CreatePolicyName = BillMasterPermissions.Customers.Create;
+        UpdatePolicyName = BillMasterPermissions.Customers.Edit;
+        DeletePolicyName = BillMasterPermissions.Customers.Delete;
+
+        LocalizationResource = typeof(BillMasterResource);
+    }
+}

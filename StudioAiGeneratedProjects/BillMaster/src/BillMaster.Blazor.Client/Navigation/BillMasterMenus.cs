@@ -1,8 +1,7 @@
-﻿namespace BillMaster.Blazor.Client.Navigation;
+namespace BillMaster.Blazor.Client.Navigation;
 
 public class BillMasterMenus
 {
-    private const string Prefix = "BillMaster";
-
-    public const string Home = Prefix + ".Home";
+    public const string Home = "BillMasterMenu:Home";
+    public const string Invoicing = "BillMasterMenu:Invoicing";
 }

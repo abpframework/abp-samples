@@ -6,7 +6,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
 using BookStore.Blazor.WebApp.Client;
 using BookStore.Blazor.WebApp.Components;
-using BookStore.Blazor.WebApp.Data;
+using BookStore.Data;
 using BookStore.Blazor.Shared.Menus;
 using BookStore.Localization;
 using Microsoft.EntityFrameworkCore;
@@ -27,11 +27,9 @@ using Volo.Abp.Data;
 using Volo.Abp.EntityFrameworkCore;
 using Volo.Abp.Identity;
 using Volo.Abp.Identity.Blazor.Server;
-using Volo.Abp.Identity.EntityFrameworkCore;
 using Volo.Abp.Localization;
 using Volo.Abp.Modularity;
 using Volo.Abp.PermissionManagement;
-using Volo.Abp.PermissionManagement.EntityFrameworkCore;
 using Volo.Abp.UI.Navigation;
 using Volo.Abp.Uow;
 using BookStore.Blazor.Shared;
@@ -43,16 +41,14 @@ namespace BookStore.Blazor.WebApp;
     typeof(AbpAspNetCoreMvcModule),
     typeof(AbpAspNetCoreComponentsServerBasicThemeModule),
     typeof(AbpAspNetCoreComponentsWebAssemblyBasicThemeBundlingModule),
-    typeof(BookStoreSharedModule),
+    typeof(BookStoreSharedDataModule),
     typeof(AbpIdentityBlazorServerModule),
     typeof(AbpIdentityApplicationModule),
     typeof(AbpIdentityHttpApiModule),
-    typeof(AbpIdentityEntityFrameworkCoreModule),
     typeof(AbpAccountWebModule),
     typeof(AbpAccountApplicationModule),
     typeof(AbpAccountHttpApiModule),
     typeof(AbpPermissionManagementApplicationModule),
-    typeof(AbpPermissionManagementEntityFrameworkCoreModule),
     typeof(AbpAspNetCoreMvcUiBasicThemeModule)
 )]
 public class BookStoreBlazorWebAppModule : AbpModule

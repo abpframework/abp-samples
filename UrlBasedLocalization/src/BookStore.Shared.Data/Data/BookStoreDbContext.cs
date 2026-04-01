@@ -7,7 +7,7 @@ using Volo.Abp.Identity.EntityFrameworkCore;
 using Volo.Abp.PermissionManagement;
 using Volo.Abp.PermissionManagement.EntityFrameworkCore;
 
-namespace BookStore.Blazor.Server.Data;
+namespace BookStore.Data;
 
 [ReplaceDbContext(typeof(IIdentityDbContext))]
 [ReplaceDbContext(typeof(IPermissionManagementDbContext))]
@@ -17,7 +17,6 @@ public class BookStoreDbContext :
     IIdentityDbContext,
     IPermissionManagementDbContext
 {
-    // IIdentityDbContext
     public DbSet<IdentityUser> Users { get; set; }
     public DbSet<IdentityRole> Roles { get; set; }
     public DbSet<IdentityClaimType> ClaimTypes { get; set; }
@@ -27,7 +26,6 @@ public class BookStoreDbContext :
     public DbSet<IdentityUserDelegation> UserDelegations { get; set; }
     public DbSet<IdentitySession> Sessions { get; set; }
 
-    // IPermissionManagementDbContext
     public DbSet<PermissionGroupDefinitionRecord> PermissionGroups { get; set; }
     public DbSet<PermissionDefinitionRecord> Permissions { get; set; }
     public DbSet<PermissionGrant> PermissionGrants { get; set; }

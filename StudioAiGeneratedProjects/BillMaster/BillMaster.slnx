@@ -1,0 +1,24 @@
+<Solution>
+    <Configurations>
+        <Platform Name="Any CPU" />
+    </Configurations>
+    <Folder Name="/src/">
+        <Project Path="src/BillMaster.Domain/BillMaster.Domain.csproj" />
+        <Project Path="src/BillMaster.Application/BillMaster.Application.csproj" />
+        <Project Path="src/BillMaster.EntityFrameworkCore/BillMaster.EntityFrameworkCore.csproj" />
+        <Project Path="src/BillMaster.Domain.Shared/BillMaster.Domain.Shared.csproj" />
+        <Project Path="src/BillMaster.Application.Contracts/BillMaster.Application.Contracts.csproj" />
+        <Project Path="src/BillMaster.HttpApi/BillMaster.HttpApi.csproj" />
+        <Project Path="src/BillMaster.HttpApi.Client/BillMaster.HttpApi.Client.csproj" />
+        <Project Path="src/BillMaster.DbMigrator/BillMaster.DbMigrator.csproj" />
+        <Project Path="src/BillMaster.Blazor/BillMaster.Blazor.csproj" />
+        <Project Path="src/BillMaster.Blazor.Client/BillMaster.Blazor.Client.csproj" />
+    </Folder>
+    <Folder Name="/test/">
+        <Project Path="test/BillMaster.Application.Tests/BillMaster.Application.Tests.csproj" />
+        <Project Path="test/BillMaster.EntityFrameworkCore.Tests/BillMaster.EntityFrameworkCore.Tests.csproj" />
+        <Project Path="test/BillMaster.TestBase/BillMaster.TestBase.csproj" />
+        <Project Path="test/BillMaster.Domain.Tests/BillMaster.Domain.Tests.csproj" />
+        <Project Path="test/BillMaster.HttpApi.Client.ConsoleTestApp/BillMaster.HttpApi.Client.ConsoleTestApp.csproj" />
+    </Folder>
+</Solution>

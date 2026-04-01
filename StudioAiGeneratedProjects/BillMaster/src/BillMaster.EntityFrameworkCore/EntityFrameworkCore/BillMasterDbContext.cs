@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Volo.Abp.AuditLogging.EntityFrameworkCore;
 using BillMaster.Books;
+using BillMaster.Invoices;
 using Volo.Abp.BackgroundJobs.EntityFrameworkCore;
 using Volo.Abp.BlobStoring.Database.EntityFrameworkCore;
 using Volo.Abp.Data;
@@ -29,6 +30,12 @@ public class BillMasterDbContext :
     /* Add DbSet properties for your Aggregate Roots / Entities here. */
 
     public DbSet<Book> Books { get; set; }
+
+    public DbSet<Customer> Customers { get; set; }
+
+    public DbSet<Invoice> Invoices { get; set; }
+
+    public DbSet<InvoiceItem> InvoiceItems { get; set; }
 
     #region Entities from the modules
 
@@ -87,6 +94,43 @@ public class BillMasterDbContext :
                 BillMasterConsts.DbSchema);
             b.ConfigureByConvention(); //auto configure for the base class props
             b.Property(x => x.Name).IsRequired().HasMaxLength(128);
+        });
+
+        // Customer configuration
+        builder.Entity<Customer>(b =>
+        {
+            b.ToTable(BillMasterConsts.DbTablePrefix + "Customers",
+                BillMasterConsts.DbSchema);
+            b.ConfigureByConvention();
+            b.Property(x => x.Name).IsRequired().HasMaxLength(128);
+            b.Property(x => x.Email).IsRequired().HasMaxLength(256);
+            b.Property(x => x.Phone).IsRequired().HasMaxLength(20);
+            b.HasMany(x => x.Invoices).WithOne(x => x.Customer).HasForeignKey(x => x.CustomerId).OnDelete(DeleteBehavior.Cascade);
+        });
+
+        // Invoice configuration
+        builder.Entity<Invoice>(b =>
+        {
+            b.ToTable(BillMasterConsts.DbTablePrefix + "Invoices",
+                BillMasterConsts.DbSchema);
+            b.ConfigureByConvention();
+            b.Property(x => x.Number).IsRequired().HasMaxLength(50);
+            b.Property(x => x.Status).HasDefaultValue(InvoiceStatus.Draft);
+            b.Property(x => x.Notes).HasMaxLength(500);
+            b.HasOne(x => x.Customer).WithMany(x => x.Invoices).HasForeignKey(x => x.CustomerId).OnDelete(DeleteBehavior.Restrict);
+            b.HasMany(x => x.Items).WithOne(x => x.Invoice).HasForeignKey(x => x.InvoiceId).OnDelete(DeleteBehavior.Cascade);
+        });
+
+        // InvoiceItem configuration
+        builder.Entity<InvoiceItem>(b =>
+        {
+            b.ToTable(BillMasterConsts.DbTablePrefix + "InvoiceItems",
+                BillMasterConsts.DbSchema);
+            b.ConfigureByConvention();
+            b.Property(x => x.Description).IsRequired().HasMaxLength(500);
+            b.Property(x => x.Quantity).IsRequired();
+            b.Property(x => x.UnitPrice).IsRequired().HasPrecision(18, 2);
+            b.HasOne(x => x.Invoice).WithMany(x => x.Items).HasForeignKey(x => x.InvoiceId).OnDelete(DeleteBehavior.Cascade);
         });
         
         /* Configure your own tables/entities inside here */

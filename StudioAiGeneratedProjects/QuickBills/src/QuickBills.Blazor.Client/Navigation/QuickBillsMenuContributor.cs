@@ -52,6 +52,22 @@ public class QuickBillsMenuContributor : IMenuContributor
             icon: "fas fa-home",
             order: 1
         ));
+
+        context.Menu.AddItem(new ApplicationMenuItem(
+            QuickBillsMenus.Customers,
+            l["Menu:Customers"],
+            "/customers",
+            icon: "fas fa-users",
+            order: 2
+        ).RequirePermissions(QuickBillsPermissions.Customers.Default));
+
+        context.Menu.AddItem(new ApplicationMenuItem(
+            QuickBillsMenus.Invoices,
+            l["Menu:Invoices"],
+            "/invoices",
+            icon: "fas fa-file-invoice",
+            order: 3
+        ).RequirePermissions(QuickBillsPermissions.Invoices.Default));
         
         if (MultiTenancyConsts.IsEnabled)
         {
@@ -76,11 +92,6 @@ public class QuickBillsMenuContributor : IMenuContributor
             var accountResource = context.GetLocalizer<AccountResource>();
 
             context.Menu.AddItem(new ApplicationMenuItem("Account.Manage", accountResource["MyAccount"], $"{authServerUrl.EnsureEndsWith('/')}Account/Manage", icon: "fa fa-cog", order: 900,  target: "_blank").RequireAuthenticated());
-
-        }
-        else
-        {
-            //Blazor server menu items
 
         }
         await Task.CompletedTask;

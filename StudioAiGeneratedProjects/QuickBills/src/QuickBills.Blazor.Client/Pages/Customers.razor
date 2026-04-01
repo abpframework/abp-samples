@@ -1,0 +1,164 @@
+@page "/customers"
+@inherits QuickBillsComponentBase
+@using QuickBills.Dtos.Invoicing
+@using QuickBills.Invoicing
+@using Volo.Abp.Application.Dtos
+@using Volo.Abp.AspNetCore.Components.Web.Theming.Layout
+@inject PageLayout PageLayout
+@inject ICustomerAppService CustomerAppService
+
+@{
+    PageLayout.Title = L["Customers"];
+}
+
+<div class="card">
+    <div class="card-header">
+        <div class="card-title">
+            <i class="fa fa-list"></i> @L["Customers"]
+        </div>
+        <div class="card-toolbar">
+            @if (HasCreatePermission)
+            {
+                <button type="button" class="btn btn-primary btn-sm" @onclick="OpenCreateCustomerModal">
+                    <i class="fa fa-plus"></i> @L["Create"]
+                </button>
+            }
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="mb-3">
+            <input type="text" 
+                   class="form-control" 
+                   placeholder="@L["Search"]..." 
+                   @bind-value="FilterText"
+                   @onkeyup="OnFilterTextChanged" />
+        </div>
+
+        @if (Loading)
+        {
+            <div class="text-center">
+                <div class="spinner-border text-primary" role="status">
+                    <span class="sr-only">@L["Loading"]</span>
+                </div>
+            </div>
+        }
+        else if (CustomerRows.Count == 0)
+        {
+            <div class="alert alert-info">@L["NoData"]</div>
+        }
+        else
+        {
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>@L["CustomerName"]</th>
+                            <th>@L["CustomerEmail"]</th>
+                            <th>@L["CustomerPhone"]</th>
+                            <th>@L["CustomerCity"]</th>
+                            <th>@L["Actions"]</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var customer in CustomerRows)
+                        {
+                            <tr>
+                                <td>@customer.Name</td>
+                                <td>@customer.Email</td>
+                                <td>@customer.Phone</td>
+                                <td>@customer.City</td>
+                                <td>
+                                    @if (HasEditPermission)
+                                    {
+                                        <button class="btn btn-sm btn-warning" @onclick="() => OpenEditCustomerModal(customer)">
+                                            <i class="fa fa-edit"></i> @L["Edit"]
+                                        </button>
+                                    }
+                                    @if (HasDeletePermission)
+                                    {
+                                        <button class="btn btn-sm btn-danger" @onclick="() => DeleteCustomer(customer.Id)">
+                                            <i class="fa fa-trash"></i> @L["Delete"]
+                                        </button>
+                                    }
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+            <nav aria-label="Page navigation">
+                <ul class="pagination">
+                    <li class="page-item" @onclick="PreviousPage">
+                        <a class="page-link">@L["PreviousPage"]</a>
+                    </li>
+                    @for (int i = 0; i < PageCount; i++)
+                    {
+                        var pageNum = i;
+                        <li class="page-item @(CurrentPage == pageNum ? "active" : "")">
+                            <a class="page-link" @onclick="() => GoToPage(pageNum)">@(pageNum + 1)</a>
+                        </li>
+                    }
+                    <li class="page-item" @onclick="NextPage">
+                        <a class="page-link">@L["NextPage"]</a>
+                    </li>
+                </ul>
+            </nav>
+        }
+    </div>
+</div>
+
+<!-- Create/Edit Modal -->
+<div class="modal fade" id="customerModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">@(IsEditMode ? L["Edit"] : L["Create"]) @L["Customer"]</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <EditForm Model="@NewCustomer" OnValidSubmit="SaveCustomer">
+                    <Microsoft.AspNetCore.Components.Forms.DataAnnotationsValidator />
+                    <Microsoft.AspNetCore.Components.Forms.ValidationSummary />
+
+                    <div class="mb-3">
+                        <label class="form-label">@L["CustomerName"]</label>
+                        <Microsoft.AspNetCore.Components.Forms.InputText class="form-control" @bind-Value="NewCustomer.Name" />
+                        <ValidationMessage For="@(() => NewCustomer.Name)" />
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">@L["CustomerEmail"]</label>
+                        <Microsoft.AspNetCore.Components.Forms.InputText type="email" class="form-control" @bind-Value="NewCustomer.Email" />
+                        <ValidationMessage For="@(() => NewCustomer.Email)" />
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">@L["CustomerPhone"]</label>
+                        <Microsoft.AspNetCore.Components.Forms.InputText class="form-control" @bind-Value="NewCustomer.Phone" />
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">@L["CustomerAddress"]</label>
+                        <Microsoft.AspNetCore.Components.Forms.InputText class="form-control" @bind-Value="NewCustomer.Address" />
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">@L["CustomerCity"]</label>
+                        <Microsoft.AspNetCore.Components.Forms.InputText class="form-control" @bind-Value="NewCustomer.City" />
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">@L["CustomerCountry"]</label>
+                        <Microsoft.AspNetCore.Components.Forms.InputText class="form-control" @bind-Value="NewCustomer.Country" />
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">@L["Cancel"]</button>
+                        <button type="submit" class="btn btn-primary">@L["Save"]</button>
+                    </div>
+                </EditForm>
+            </div>
+        </div>
+    </div>
+</div>

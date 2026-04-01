@@ -1,0 +1,242 @@
+@page "/invoice-details/{InvoiceId:guid}"
+@inherits QuickBillsComponentBase
+@using QuickBills.Dtos.Invoicing
+@using QuickBills.Invoicing
+@using Volo.Abp.AspNetCore.Components.Web.Theming.Layout
+@inject PageLayout PageLayout
+@inject IInvoiceAppService InvoiceAppService
+@inject NavigationManager NavigationManager
+
+@{
+    PageLayout.Title = L["Invoice"];
+}
+
+@if (Loading)
+{
+    <div class="text-center">
+        <div class="spinner-border text-primary" role="status">
+            <span class="sr-only">@L["Loading"]</span>
+        </div>
+    </div>
+}
+else if (Invoice != null)
+{
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card mb-3">
+                <div class="card-header">
+                    <div class="card-title">
+                        <i class="fa fa-file-invoice"></i> @L["Invoice"] - @Invoice.InvoiceNumber
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <p><strong>@L["Customer"]:</strong> @Invoice.CustomerName</p>
+                            <p><strong>@L["InvoiceNumber"]:</strong> @Invoice.InvoiceNumber</p>
+                        </div>
+                        <div class="col-md-6">
+                            <p><strong>@L["IssuedDate"]:</strong> @Invoice.IssuedDate.ToString("yyyy-MM-dd")</p>
+                            <p><strong>@L["DueDate"]:</strong> @Invoice.DueDate.ToString("yyyy-MM-dd")</p>
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <span class="badge @GetStatusClass(Invoice.Status) fs-6">
+                                @L[$"Status:{Invoice.Status}"]
+                            </span>
+                        </div>
+                        <div class="col-md-6 text-end">
+                            @if (HasEditPermission)
+                            {
+                                <button class="btn btn-sm btn-warning" @onclick="OpenStatusModal">
+                                    <i class="fa fa-exchange-alt"></i> @L["ChangeStatus"]
+                                </button>
+                            }
+                        </div>
+                    </div>
+
+                    @if (!string.IsNullOrEmpty(Invoice.Notes))
+                    {
+                        <div class="mb-3">
+                            <p><strong>@L["Notes"]:</strong></p>
+                            <p>@Invoice.Notes</p>
+                        </div>
+                    }
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">
+                        <i class="fa fa-list"></i> @L["InvoiceItems"]
+                    </div>
+                    <div class="card-toolbar">
+                        @if (HasEditPermission)
+                        {
+                            <button type="button" class="btn btn-primary btn-sm" @onclick="OpenAddItemModal">
+                                <i class="fa fa-plus"></i> @L["Add"] @L["Item"]
+                            </button>
+                        }
+                    </div>
+                </div>
+                <div class="card-body">
+                    @if (Invoice.Items == null || Invoice.Items.Count == 0)
+                    {
+                        <div class="alert alert-info">@L["NoItems"]</div>
+                    }
+                    else
+                    {
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>@L["Description"]</th>
+                                        <th>@L["Quantity"]</th>
+                                        <th>@L["UnitPrice"]</th>
+                                        <th>@L["LineTotal"]</th>
+                                        <th>@L["Actions"]</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Invoice.Items)
+                                    {
+                                        <tr>
+                                            <td>@item.Description</td>
+                                            <td>@item.Quantity</td>
+                                            <td>@item.UnitPrice.ToString("C")</td>
+                                            <td><strong>@item.LineTotal.ToString("C")</strong></td>
+                                            <td>
+                                                @if (HasEditPermission)
+                                                {
+                                                    <button class="btn btn-sm btn-warning" @onclick="() => OpenEditItemModal(item)">
+                                                        <i class="fa fa-edit"></i>
+                                                    </button>
+                                                    <button class="btn btn-sm btn-danger" @onclick="() => RemoveItem(item.Id)">
+                                                        <i class="fa fa-trash"></i>
+                                                    </button>
+                                                }
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">@L["Summary"]</div>
+                </div>
+                <div class="card-body">
+                    <div class="d-flex justify-content-between mb-2">
+                        <span>@L["Subtotal"]:</span>
+                        <span>@Invoice.Total.ToString("C")</span>
+                    </div>
+                    <div class="d-flex justify-content-between mb-2">
+                        <span>@L["Tax"]:</span>
+                        <span>$0.00</span>
+                    </div>
+                    <hr />
+                    <div class="d-flex justify-content-between fs-5">
+                        <strong>@L["Total"]:</strong>
+                        <strong>@Invoice.Total.ToString("C")</strong>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card mt-3">
+                <div class="card-header">
+                    <div class="card-title">@L["Actions"]</div>
+                </div>
+                <div class="card-body">
+                    <button class="btn btn-secondary btn-sm w-100 mb-2" @onclick="GoBackToInvoices">
+                        <i class="fa fa-arrow-left"></i> @L["Back"]
+                    </button>
+                    @if (HasEditPermission)
+                    {
+                        <button class="btn btn-warning btn-sm w-100 mb-2" @onclick="OpenEditInvoiceModal">
+                            <i class="fa fa-edit"></i> @L["Edit"]
+                        </button>
+                    }
+                    @if (HasDeletePermission)
+                    {
+                        <button class="btn btn-danger btn-sm w-100" @onclick="DeleteInvoice">
+                            <i class="fa fa-trash"></i> @L["Delete"]
+                        </button>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add/Edit Item Modal -->
+    <div class="modal fade" id="itemModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">@(IsEditingItem ? L["Edit"] : L["Add"]) @L["Item"]</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <EditForm Model="@NewItem" OnValidSubmit="SaveItem">
+                        <Microsoft.AspNetCore.Components.Forms.DataAnnotationsValidator />
+                        <Microsoft.AspNetCore.Components.Forms.ValidationSummary />
+
+                        <div class="mb-3">
+                            <label class="form-label">@L["Description"]</label>
+                            <Microsoft.AspNetCore.Components.Forms.InputText class="form-control" @bind-Value="NewItem.Description" />
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">@L["Quantity"]</label>
+                            <Microsoft.AspNetCore.Components.Forms.InputNumber class="form-control" @bind-Value="NewItem.Quantity" />
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">@L["UnitPrice"]</label>
+                            <Microsoft.AspNetCore.Components.Forms.InputNumber class="form-control" @bind-Value="NewItem.UnitPrice" />
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">@L["Cancel"]</button>
+                            <button type="submit" class="btn btn-primary">@L["Save"]</button>
+                        </div>
+                    </EditForm>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Change Status Modal -->
+    <div class="modal fade" id="statusModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">@L["ChangeStatus"]</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label class="form-label">@L["Status"]</label>
+                        <select class="form-select" @bind="SelectedStatus">
+                            <option value="@InvoiceStatus.Draft">@L["Status:Draft"]</option>
+                            <option value="@InvoiceStatus.Sent">@L["Status:Sent"]</option>
+                            <option value="@InvoiceStatus.Paid">@L["Status:Paid"]</option>
+                            <option value="@InvoiceStatus.Cancelled">@L["Status:Cancelled"]</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">@L["Cancel"]</button>
+                    <button type="button" class="btn btn-primary" @onclick="ChangeStatus">@L["Change"]</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}

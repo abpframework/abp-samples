@@ -15,22 +15,16 @@ namespace BillMaster.Invoices;
 public class InvoiceItemAppService : ApplicationService, IInvoiceItemAppService
 {
     private readonly IRepository<InvoiceItem, Guid> _repository;
-    private readonly IRepository<Invoice, Guid> _invoiceRepository;
 
-    public InvoiceItemAppService(
-        IRepository<InvoiceItem, Guid> repository,
-        IRepository<Invoice, Guid> invoiceRepository)
+    public InvoiceItemAppService(IRepository<InvoiceItem, Guid> repository)
     {
         _repository = repository;
-        _invoiceRepository = invoiceRepository;
     }
 
     public async Task<InvoiceItemDto> GetAsync(Guid id)
     {
         var item = await _repository.GetAsync(id);
-        var dto = ObjectMapper.Map<InvoiceItem, InvoiceItemDto>(item);
-        dto.LineTotal = item.GetLineTotal();
-        return dto;
+        return ObjectMapper.Map<InvoiceItem, InvoiceItemDto>(item);
     }
 
     public async Task<PagedResultDto<InvoiceItemDto>> GetListAsync(PagedAndSortedResultRequestDto input)
@@ -44,19 +38,10 @@ public class InvoiceItemAppService : ApplicationService, IInvoiceItemAppService
         var items = await AsyncExecuter.ToListAsync(query);
         var totalCount = await AsyncExecuter.CountAsync(queryable);
 
-        var dtos = ObjectMapper.Map<List<InvoiceItem>, List<InvoiceItemDto>>(items);
-        
-        // Calculate line totals
-        foreach (var item in items)
-        {
-            var dto = dtos.FirstOrDefault(x => x.Id == item.Id);
-            if (dto != null)
-            {
-                dto.LineTotal = item.GetLineTotal();
-            }
-        }
-
-        return new PagedResultDto<InvoiceItemDto>(totalCount, dtos);
+        return new PagedResultDto<InvoiceItemDto>(
+            totalCount,
+            ObjectMapper.Map<List<InvoiceItem>, List<InvoiceItemDto>>(items)
+        );
     }
 
     [Authorize(BillMasterPermissions.InvoiceItems.Create)]
@@ -64,10 +49,7 @@ public class InvoiceItemAppService : ApplicationService, IInvoiceItemAppService
     {
         var item = ObjectMapper.Map<CreateUpdateInvoiceItemDto, InvoiceItem>(input);
         await _repository.InsertAsync(item);
-        
-        var dto = ObjectMapper.Map<InvoiceItem, InvoiceItemDto>(item);
-        dto.LineTotal = item.GetLineTotal();
-        return dto;
+        return ObjectMapper.Map<InvoiceItem, InvoiceItemDto>(item);
     }
 
     [Authorize(BillMasterPermissions.InvoiceItems.Edit)]
@@ -76,10 +58,7 @@ public class InvoiceItemAppService : ApplicationService, IInvoiceItemAppService
         var item = await _repository.GetAsync(id);
         ObjectMapper.Map(input, item);
         await _repository.UpdateAsync(item);
-        
-        var dto = ObjectMapper.Map<InvoiceItem, InvoiceItemDto>(item);
-        dto.LineTotal = item.GetLineTotal();
-        return dto;
+        return ObjectMapper.Map<InvoiceItem, InvoiceItemDto>(item);
     }
 
     [Authorize(BillMasterPermissions.InvoiceItems.Delete)]

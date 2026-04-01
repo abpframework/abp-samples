@@ -15,34 +15,21 @@ namespace BillMaster.Invoices;
 public class InvoiceAppService : ApplicationService, IInvoiceAppService
 {
     private readonly IRepository<Invoice, Guid> _repository;
-    private readonly IRepository<InvoiceItem, Guid> _itemRepository;
 
-    public InvoiceAppService(
-        IRepository<Invoice, Guid> repository,
-        IRepository<InvoiceItem, Guid> itemRepository)
+    public InvoiceAppService(IRepository<Invoice, Guid> repository)
     {
         _repository = repository;
-        _itemRepository = itemRepository;
     }
 
     public async Task<InvoiceDto> GetAsync(Guid id)
     {
-        var queryable = await _repository.WithDetailsAsync(x => x.Customer, x => x.Items);
-        var invoice = await AsyncExecuter.FirstOrDefaultAsync(queryable, x => x.Id == id);
-
-        if (invoice == null)
-        {
-            throw new ArgumentException($"Invoice with id {id} not found");
-        }
-
-        var dto = ObjectMapper.Map<Invoice, InvoiceDto>(invoice);
-        dto.TotalAmount = invoice.GetTotalAmount();
-        return dto;
+        var invoice = await _repository.GetAsync(id);
+        return ObjectMapper.Map<Invoice, InvoiceDto>(invoice);
     }
 
     public async Task<PagedResultDto<InvoiceDto>> GetListAsync(PagedAndSortedResultRequestDto input)
     {
-        var queryable = await _repository.WithDetailsAsync(x => x.Customer);
+        var queryable = await _repository.GetQueryableAsync();
         var query = queryable
             .OrderBy(input.Sorting.IsNullOrWhiteSpace() ? "Number" : input.Sorting)
             .Skip(input.SkipCount)
@@ -51,19 +38,10 @@ public class InvoiceAppService : ApplicationService, IInvoiceAppService
         var invoices = await AsyncExecuter.ToListAsync(query);
         var totalCount = await AsyncExecuter.CountAsync(queryable);
 
-        var dtos = ObjectMapper.Map<List<Invoice>, List<InvoiceDto>>(invoices);
-        
-        // Calculate totals for each invoice
-        foreach (var invoice in invoices)
-        {
-            var dto = dtos.FirstOrDefault(x => x.Id == invoice.Id);
-            if (dto != null)
-            {
-                dto.TotalAmount = invoice.GetTotalAmount();
-            }
-        }
-
-        return new PagedResultDto<InvoiceDto>(totalCount, dtos);
+        return new PagedResultDto<InvoiceDto>(
+            totalCount,
+            ObjectMapper.Map<List<Invoice>, List<InvoiceDto>>(invoices)
+        );
     }
 
     [Authorize(BillMasterPermissions.Invoice.Create)]
@@ -71,14 +49,7 @@ public class InvoiceAppService : ApplicationService, IInvoiceAppService
     {
         var invoice = ObjectMapper.Map<CreateUpdateInvoiceDto, Invoice>(input);
         await _repository.InsertAsync(invoice);
-        
-        // Reload with customer and items
-        var queryable = await _repository.WithDetailsAsync(x => x.Customer, x => x.Items);
-        var reloaded = await AsyncExecuter.FirstOrDefaultAsync(queryable, x => x.Id == invoice.Id);
-
-        var dto = ObjectMapper.Map<Invoice, InvoiceDto>(reloaded);
-        dto.TotalAmount = reloaded.GetTotalAmount();
-        return dto;
+        return ObjectMapper.Map<Invoice, InvoiceDto>(invoice);
     }
 
     [Authorize(BillMasterPermissions.Invoice.Edit)]
@@ -87,60 +58,12 @@ public class InvoiceAppService : ApplicationService, IInvoiceAppService
         var invoice = await _repository.GetAsync(id);
         ObjectMapper.Map(input, invoice);
         await _repository.UpdateAsync(invoice);
-
-        // Reload with customer and items
-        var queryable = await _repository.WithDetailsAsync(x => x.Customer, x => x.Items);
-        var reloaded = await AsyncExecuter.FirstOrDefaultAsync(queryable, x => x.Id == id);
-
-        var dto = ObjectMapper.Map<Invoice, InvoiceDto>(reloaded);
-        dto.TotalAmount = reloaded.GetTotalAmount();
-        return dto;
+        return ObjectMapper.Map<Invoice, InvoiceDto>(invoice);
     }
 
     [Authorize(BillMasterPermissions.Invoice.Delete)]
     public async Task DeleteAsync(Guid id)
     {
         await _repository.DeleteAsync(id);
-    }
-
-    /// <summary>
-    /// Get an invoice with its customer and all line items
-    /// </summary>
-    public async Task<InvoiceDto> GetWithItemsAsync(Guid invoiceId)
-    {
-        var queryable = await _repository.WithDetailsAsync(x => x.Customer, x => x.Items);
-        var invoice = await AsyncExecuter.FirstOrDefaultAsync(queryable, x => x.Id == invoiceId);
-
-        if (invoice == null)
-        {
-            throw new ArgumentException($"Invoice with id {invoiceId} not found");
-        }
-
-        var dto = ObjectMapper.Map<Invoice, InvoiceDto>(invoice);
-        dto.TotalAmount = invoice.GetTotalAmount();
-        return dto;
-    }
-
-    /// <summary>
-    /// Get all items for a specific invoice
-    /// </summary>
-    public async Task<List<InvoiceItemDto>> GetInvoiceItemsAsync(Guid invoiceId)
-    {
-        var queryable = await _itemRepository.GetQueryableAsync();
-        var items = await AsyncExecuter.ToListAsync(queryable.Where(x => x.InvoiceId == invoiceId));
-
-        var dtos = ObjectMapper.Map<List<InvoiceItem>, List<InvoiceItemDto>>(items);
-        
-        // Calculate line totals
-        foreach (var item in items)
-        {
-            var dto = dtos.FirstOrDefault(x => x.Id == item.Id);
-            if (dto != null)
-            {
-                dto.LineTotal = item.GetLineTotal();
-            }
-        }
-
-        return dtos;
     }
 }

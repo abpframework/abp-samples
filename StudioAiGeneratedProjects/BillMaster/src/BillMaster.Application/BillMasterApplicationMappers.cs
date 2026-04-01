@@ -34,15 +34,9 @@ public partial class BillMasterCustomerToCustomerDtoMapper : MapperBase<Customer
 [Mapper(RequiredMappingStrategy = RequiredMappingStrategy.Target)]
 public partial class BillMasterCreateUpdateCustomerDtoToCustomerMapper : MapperBase<CreateUpdateCustomerDto, Customer>
 {
-    public override Customer Map(CreateUpdateCustomerDto source)
-    {
-        return new Customer(source.Name, source.Email, source.Phone);
-    }
+    public override partial Customer Map(CreateUpdateCustomerDto source);
 
-    public override void Map(CreateUpdateCustomerDto source, Customer destination)
-    {
-        destination.Update(source.Name, source.Email, source.Phone);
-    }
+    public override partial void Map(CreateUpdateCustomerDto source, Customer destination);
 }
 
 // Invoice Mappers
@@ -57,18 +51,9 @@ public partial class BillMasterInvoiceToInvoiceDtoMapper : MapperBase<Invoice, I
 [Mapper(RequiredMappingStrategy = RequiredMappingStrategy.Target)]
 public partial class BillMasterCreateUpdateInvoiceDtoToInvoiceMapper : MapperBase<CreateUpdateInvoiceDto, Invoice>
 {
-    public override Invoice Map(CreateUpdateInvoiceDto source)
-    {
-        return new Invoice(source.Number, source.CustomerId, source.InvoiceDate, source.Status)
-        {
-            Notes = source.Notes
-        };
-    }
+    public override partial Invoice Map(CreateUpdateInvoiceDto source);
 
-    public override void Map(CreateUpdateInvoiceDto source, Invoice destination)
-    {
-        destination.Update(source.Number, source.CustomerId, source.InvoiceDate, source.Status, source.Notes);
-    }
+    public override partial void Map(CreateUpdateInvoiceDto source, Invoice destination);
 }
 
 // InvoiceItem Mappers
@@ -83,14 +68,7 @@ public partial class BillMasterInvoiceItemToInvoiceItemDtoMapper : MapperBase<In
 [Mapper(RequiredMappingStrategy = RequiredMappingStrategy.Target)]
 public partial class BillMasterCreateUpdateInvoiceItemDtoToInvoiceItemMapper : MapperBase<CreateUpdateInvoiceItemDto, InvoiceItem>
 {
-    public override InvoiceItem Map(CreateUpdateInvoiceItemDto source)
-    {
-        // Note: InvoiceId will be set by the AppService when creating items for an invoice
-        return new InvoiceItem(source.Description, source.Quantity, source.UnitPrice, Guid.Empty);
-    }
+    public override partial InvoiceItem Map(CreateUpdateInvoiceItemDto source);
 
-    public override void Map(CreateUpdateInvoiceItemDto source, InvoiceItem destination)
-    {
-        destination.Update(source.Description, source.Quantity, source.UnitPrice);
-    }
+    public override partial void Map(CreateUpdateInvoiceItemDto source, InvoiceItem destination);
 }

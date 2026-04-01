@@ -1,0 +1,165 @@
+# Invoice Tracker — Full CRUD with Blazor + EF Core (SQLite)
+
+## 2. Solution
+
+Build a complete invoice tracking module on top of the existing QuickBills ABP scaffold. The feature covers three aggregate boundaries — **Customer**, **Invoice**, and **InvoiceItem** — wired together with ABP's standard layered architecture: Domain → Application.Contracts → Application → EntityFrameworkCore → Blazor.Client.
+
+### Key architectural decisions
+
+| Decision | Choice | Reason |
+|---|---|---|
+| `Customer` base class | `AuditedAggregateRoot<Guid>` | Independent lifecycle, needs audit fields |
+| `Invoice` base class | `AuditedAggregateRoot<Guid>` | Independent aggregate, owns its Items |
+| `InvoiceItem` base class | `Entity<Guid>` | Owned by Invoice, never fetched standalone |
+| App service base | `CrudAppService<>` for Customer; custom `QuickBillsAppService` for Invoice (needs related data) | CrudAppService covers simple CRUD; Invoice needs Include() |
+| EF config | Separate `IEntityTypeConfiguration<T>` files | Keeps DbContext clean |
+| Read queries | `AsNoTracking()` in list/detail queries | Performance for reads |
+| Related data | Explicit `Include(i => i.Items)` in Invoice queries | ABP repos expose `IQueryable`; use `WithDetailsAsync` |
+| Total calculation | Computed inside `Invoice` domain method `CalculateTotal()` | Keeps business logic out of the UI and app service |
+| Permissions | Nested constants in `QuickBillsPermissions` per entity | ABP convention: `GroupName.EntityName.Action` |
+| Blazor rendering | `@rendermode InteractiveAuto` pages in `QuickBills.Blazor.Client` | Consistent with the existing `Index.razor` pattern |
+
+---
+
+## 3. Workflow Diagram
+
+```mermaid
+sequenceDiagram
+    participant UI as Blazor Page
+    participant Svc as AppService
+    participant Repo as IRepository
+    participant DB as SQLite (EF Core)
+
+    UI->>Svc: GetListAsync(input)
+    Svc->>Repo: GetListAsync() with Include + AsNoTracking
+    Repo->>DB: SELECT with JOIN
+    DB-->>Repo: Entities
+    Repo-->>Svc: List<Invoice>
+    Svc->>Svc: Map → InvoiceDto (ObjectMapper)
+    Svc-->>UI: PagedResultDto<InvoiceDto>
+
+    UI->>Svc: CreateAsync(CreateUpdateInvoiceDto)
+    Svc->>Svc: new Invoice(GuidGenerator.Create(), ...)
+    Svc->>Repo: InsertAsync(invoice)
+    Repo->>DB: INSERT
+    DB-->>Repo: OK
+    Svc-->>UI: InvoiceDto
+
+    UI->>Svc: AddItemAsync(invoiceId, dto)
+    Svc->>Repo: GetAsync(invoiceId)   // tracked
+    Svc->>Svc: invoice.AddItem(...)   // domain method recalculates total
+    Svc->>Repo: UpdateAsync(invoice)
+    Repo->>DB: UPDATE Invoice + INSERT InvoiceItem
+    Svc-->>UI: InvoiceDto (updated total)
+```
+
+---
+
+## 4. Files Affected
+
+### Domain — `src/QuickBills.Domain/`
+- `Customers/Customer.cs` — new `AuditedAggregateRoot<Guid>` entity
+- `Invoices/Invoice.cs` — new `AuditedAggregateRoot<Guid>` entity with domain methods
+- `Invoices/InvoiceItem.cs` — new `Entity<Guid>` owned by Invoice
+- `Invoices/InvoiceStatus.cs` — new enum (Draft, Sent, Paid, Cancelled)
+
+### Application Contracts — `src/QuickBills.Application.Contracts/`
+- `Customers/Dtos/CustomerDto.cs` — read DTO
+- `Customers/Dtos/CreateUpdateCustomerDto.cs` — create/update DTO with validation
+- `Customers/ICustomerAppService.cs` — CRUD service interface
+- `Invoices/Dtos/InvoiceDto.cs` — read DTO (includes `List<InvoiceItemDto>` + `TotalAmount`)
+- `Invoices/Dtos/CreateUpdateInvoiceDto.cs` — create/update DTO
+- `Invoices/Dtos/InvoiceItemDto.cs` — item read DTO
+- `Invoices/Dtos/CreateUpdateInvoiceItemDto.cs` — item create/update DTO
+- `Invoices/Dtos/GetInvoiceListInput.cs` — filtering/paging input (`PagedAndSortedResultRequestDto`)
+- `Invoices/IInvoiceAppService.cs` — invoice + item CRUD interface
+- `Permissions/QuickBillsPermissions.cs` — add Customer + Invoice permission constants
+- `Permissions/QuickBillsPermissionDefinitionProvider.cs` — register permissions
+
+### Application — `src/QuickBills.Application/`
+- `Customers/CustomerAppService.cs` — extends `CrudAppService<Customer, CustomerDto, Guid, PagedAndSortedResultRequestDto, CreateUpdateCustomerDto>`
+- `Invoices/InvoiceAppService.cs` — custom service, extends `QuickBillsAppService`, uses `IRepository<Invoice, Guid>` with `WithDetailsAsync`
+- `QuickBillsApplicationAutoMapperProfile.cs` — add mappings for all new DTOs
+
+### Infrastructure — `src/QuickBills.EntityFrameworkCore/`
+- `EntityFrameworkCore/QuickBillsDbContext.cs` — add `DbSet<Customer>`, `DbSet<Invoice>`, `DbSet<InvoiceItem>`
+- `EntityFrameworkCore/Configurations/CustomerConfiguration.cs` — `IEntityTypeConfiguration<Customer>`
+- `EntityFrameworkCore/Configurations/InvoiceConfiguration.cs` — `IEntityTypeConfiguration<Invoice>` (HasMany Items, cascade delete)
+- `EntityFrameworkCore/Configurations/InvoiceItemConfiguration.cs` — `IEntityTypeConfiguration<InvoiceItem>`
+- `Migrations/` — new EF Core migration (add-migration + update-database)
+
+### Blazor UI — `src/QuickBills.Blazor.Client/`
+- `Pages/Customers/Index.razor` — customer list + create/edit/delete modal
+- `Pages/Customers/Index.razor.cs` — code-behind
+- `Pages/Invoices/Index.razor` — invoice list with customer name + total
+- `Pages/Invoices/Index.razor.cs` — code-behind
+- `Pages/Invoices/Detail.razor` — invoice detail with inline InvoiceItems table
+- `Pages/Invoices/Detail.razor.cs` — code-behind
+- `Navigation/QuickBillsMenuContributor.cs` — add Customers & Invoices menu items
+- `Navigation/QuickBillsMenus.cs` — add menu key constants
+
+### Localization — `src/QuickBills.Domain.Shared/`
+- `Localization/QuickBills/en.json` — add localization keys for all new UI strings
+
+---
+
+## 5. Implementation Steps
+
+### Domain Layer
+- [x] Create `InvoiceStatus` enum (`Draft`, `Sent`, `Paid`, `Cancelled`)
+- [x] Create `Customer` aggregate root with properties: `Name`, `Email`, `Phone`, `Address`; include a navigation collection `Invoices` (for EF config only — not used in domain logic)
+- [x] Create `InvoiceItem` entity owned by `Invoice` with: `Description`, `Quantity`, `UnitPrice`, `LineTotal` (computed: `Quantity × UnitPrice`)
+- [x] Create `Invoice` aggregate root with: `InvoiceNumber`, `CustomerId`, `IssueDate`, `DueDate`, `Status`, `Notes`, `TotalAmount`, and `Items` collection; add domain methods `AddItem(...)`, `RemoveItem(Guid itemId)`, and `CalculateTotal()` that sums `LineTotal` of all items
+
+### Application Contracts Layer
+- [x] Define `CustomerDto` and `CreateUpdateCustomerDto` (with `[Required]` / `[MaxLength]` data annotations)
+- [x] Define `InvoiceDto` (includes `CustomerName`, `List<InvoiceItemDto>`, `TotalAmount`), `CreateUpdateInvoiceDto`, `InvoiceItemDto`, `CreateUpdateInvoiceItemDto`, `GetInvoiceListInput`
+- [x] Define `ICustomerAppService` extending `ICrudAppService<...>`
+- [x] Define `IInvoiceAppService` with `GetListAsync`, `GetAsync`, `CreateAsync`, `UpdateAsync`, `DeleteAsync`, `AddItemAsync`, `UpdateItemAsync`, `RemoveItemAsync`
+- [x] Add `Customers` and `Invoices` nested permission groups to `QuickBillsPermissions` following the pattern `QuickBills.Customers.Create`, `QuickBills.Customers.Edit`, etc.
+- [x] Register all permissions in `QuickBillsPermissionDefinitionProvider`
+
+### Application Layer
+- [x] Implement `CustomerAppService` using `CrudAppService` base — requires only AutoMapper + permission policy names
+- [x] Implement `InvoiceAppService`: list query uses `GetQueryableAsync()` with `Include(i => i.Items)` and `AsNoTracking()`; single-entity fetch uses `WithDetailsAsync(i => i.Items)`; `AddItemAsync`/`RemoveItemAsync` load the tracked aggregate and call domain methods; all write operations are authorized with the corresponding permission
+- [x] Add AutoMapper profiles for all entity → DTO mappings in `QuickBillsApplicationAutoMapperProfile.cs`
+
+### Infrastructure Layer
+- [x] Create separate `IEntityTypeConfiguration<T>` classes for `Customer`, `Invoice`, and `InvoiceItem`; configure table names using `QuickBillsConsts.DbTablePrefix` (`AppCustomers`, `AppInvoices`, `AppInvoiceItems`), call `b.ConfigureByConvention()`, define the `Invoice → InvoiceItems` one-to-many with `HasForeignKey` + `OnDelete(DeleteBehavior.Cascade)`
+- [x] Register configurations in `OnModelCreating` via `builder.ApplyConfiguration(...)` and expose `DbSet<Customer>`, `DbSet<Invoice>`, `DbSet<InvoiceItem>`
+- [x] Add and apply EF Core migration for SQLite
+
+### Blazor UI Layer
+- [x] Add localization keys in `en.json` for all page titles, column headers, button labels, and validation messages (e.g., `"Menu:Customers"`, `"Customers"`, `"NewCustomer"`, `"Invoices"`, `"InvoiceNumber"`, `"TotalAmount"`, etc.)
+- [x] Add `QuickBillsMenus.Customers` and `QuickBillsMenus.Invoices` constants; register both as top-level menu items in `QuickBillsMenuContributor` with permission guards (`RequirePermissions(QuickBillsPermissions.Customers.Default)`)
+- [x] Build `/customers` page: paginated `AbpDataGrid` (or table) with columns Name, Email, Phone; inline Create/Edit modal using `AbpModal`; delete with confirmation; authorize actions with Customer permissions
+- [x] Build `/invoices` list page: table with Invoice Number, Customer Name, Issue Date, Due Date, Status badge, Total Amount; link each row to the detail page; Create modal for new invoices (customer dropdown populated from `ICustomerAppService.GetListAsync`)
+- [x] Build `/invoices/{id}` detail page: invoice header info + status; read-only summary of Customer; editable `InvoiceItems` table (Add / Edit / Remove item inline); display computed `TotalAmount` that refreshes after every item mutation
+
+### Authorization wiring
+- [x] Ensure every AppService method is decorated with `[Authorize(QuickBillsPermissions.Xxx.Yyy)]`
+- [x] Ensure Blazor pages hide/disable Create, Edit, Delete buttons when the user lacks the corresponding permission (use `IAuthorizationService` or ABP's `<AbpPermissionCheck>`)
+
+---
+
+## 6. Expected Result & Testing
+
+### What should work after implementation
+- Navigate to `/customers` — full CRUD with modal dialogs, paginated list
+- Navigate to `/invoices` — list with Customer Name resolved, total visible, status badge colored
+- Navigate to `/invoices/{id}` — master-detail page showing invoice header + live-updating items table; adding/removing items immediately updates the total
+- All write operations require authentication + the correct permission
+- Unauthorized users see read-only views; unauthenticated users are redirected to login
+
+### Manual test steps
+1. **Seed data**: Create 2 Customers via the UI → verify they appear in the list
+2. **Invoice flow**: Create an Invoice for Customer A → open detail → add 3 items → verify `TotalAmount = sum of (Qty × UnitPrice)` → remove one item → verify total recalculates
+3. **Navigation**: From Customer list, confirm the menu "Invoices" opens filtered or full invoice list
+4. **Permission test**: Log in as a user without `QuickBills.Invoices.Create` → verify the "New Invoice" button is hidden
+5. **Validation test**: Submit empty CreateCustomer form → verify `[Required]` error messages appear
+
+### Edge cases to test
+- Invoice with zero items → `TotalAmount` should be `0.00`
+- Deleting a Customer that has Invoices → decide and document cascade behaviour (recommend: block delete with a business exception if invoices exist)
+- Duplicate `InvoiceNumber` → add a unique index in EF config and surface the error via ABP's exception localization
+- `DueDate` before `IssueDate` → add domain-level guard in `Invoice` constructor

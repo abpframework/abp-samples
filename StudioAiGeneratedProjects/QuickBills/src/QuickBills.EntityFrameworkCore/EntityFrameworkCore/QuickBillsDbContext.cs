@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
+using QuickBills.Invoicing;
+using QuickBills.EntityFrameworkCore.Configuration;
 using Volo.Abp.AuditLogging.EntityFrameworkCore;
-using Volo.Abp.BackgroundJobs.EntityFrameworkCore;
 using Volo.Abp.BlobStoring.Database.EntityFrameworkCore;
 using Volo.Abp.Data;
 using Volo.Abp.DependencyInjection;
@@ -26,6 +27,10 @@ public class QuickBillsDbContext :
     IIdentityDbContext
 {
     /* Add DbSet properties for your Aggregate Roots / Entities here. */
+
+    public DbSet<Customer> Customers { get; set; }
+    public DbSet<Invoice> Invoices { get; set; }
+    public DbSet<InvoiceItem> InvoiceItems { get; set; }
 
 
     #region Entities from the modules
@@ -71,7 +76,6 @@ public class QuickBillsDbContext :
 
         builder.ConfigurePermissionManagement();
         builder.ConfigureSettingManagement();
-        builder.ConfigureBackgroundJobs();
         builder.ConfigureAuditLogging();
         builder.ConfigureFeatureManagement();
         builder.ConfigureIdentity();
@@ -79,13 +83,16 @@ public class QuickBillsDbContext :
         builder.ConfigureTenantManagement();
         builder.ConfigureBlobStoring();
         
+        // Note: ConfigureBackgroundJobs() was removed to resolve missing package dependency.
+        // If ABP background job persistence is needed in future, add:
+        //   - PackageReference: Volo.Abp.BackgroundJobs.EntityFrameworkCore
+        //   - Dependency: BackgroundJobsEntityFrameworkCoreModule
+        //   - Call: builder.ConfigureBackgroundJobs();
+        
         /* Configure your own tables/entities inside here */
 
-        //builder.Entity<YourEntity>(b =>
-        //{
-        //    b.ToTable(QuickBillsConsts.DbTablePrefix + "YourEntities", QuickBillsConsts.DbSchema);
-        //    b.ConfigureByConvention(); //auto configure for the base class props
-        //    //...
-        //});
+        builder.ApplyConfiguration(new CustomerConfiguration());
+        builder.ApplyConfiguration(new InvoiceConfiguration());
+        builder.ApplyConfiguration(new InvoiceItemConfiguration());
     }
 }

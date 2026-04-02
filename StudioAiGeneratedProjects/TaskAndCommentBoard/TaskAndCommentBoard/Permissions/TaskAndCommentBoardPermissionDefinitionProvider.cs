@@ -16,6 +16,15 @@ public class TaskAndCommentBoardPermissionDefinitionProvider : PermissionDefinit
         booksPermission.AddChild(TaskAndCommentBoardPermissions.Books.Create, L("Permission:Books.Create"));
         booksPermission.AddChild(TaskAndCommentBoardPermissions.Books.Edit, L("Permission:Books.Edit"));
         booksPermission.AddChild(TaskAndCommentBoardPermissions.Books.Delete, L("Permission:Books.Delete"));
+
+        var tasksPermission = myGroup.AddPermission(TaskAndCommentBoardPermissions.Tasks.Default, L("Permission:Tasks"));
+        tasksPermission.AddChild(TaskAndCommentBoardPermissions.Tasks.Create, L("Permission:Tasks.Create"));
+        tasksPermission.AddChild(TaskAndCommentBoardPermissions.Tasks.Edit, L("Permission:Tasks.Edit"));
+        tasksPermission.AddChild(TaskAndCommentBoardPermissions.Tasks.Delete, L("Permission:Tasks.Delete"));
+
+        var commentsPermission = myGroup.AddPermission(TaskAndCommentBoardPermissions.Comments.Default, L("Permission:Comments"));
+        commentsPermission.AddChild(TaskAndCommentBoardPermissions.Comments.Create, L("Permission:Comments.Create"));
+        commentsPermission.AddChild(TaskAndCommentBoardPermissions.Comments.Delete, L("Permission:Comments.Delete"));
         
         //Define your own permissions here. Example:
         //myGroup.AddPermission(TaskAndCommentBoardPermissions.MyPermission1, L("Permission:MyPermission1"));

@@ -47,15 +47,23 @@ public class TaskAndCommentBoardMenuContributor : IMenuContributor
     
         context.Menu.AddItem(
             new ApplicationMenuItem(
-                "BooksStore",
+                "TaskAndCommentBoard.Main",
                 l["Menu:TaskAndCommentBoard"],
-                icon: "fa fa-book"
-            ).AddItem(
+                icon: "fa fa-list-check"
+            )
+            .AddItem(
                 new ApplicationMenuItem(
-                    "BooksStore.Books",
+                    "TaskAndCommentBoard.Main.Tasks",
+                    l["Menu:Tasks"],
+                    url: "/Tasks"
+                ).RequirePermissions(TaskAndCommentBoardPermissions.Tasks.Default)
+            )
+            .AddItem(
+                new ApplicationMenuItem(
+                    "TaskAndCommentBoard.Main.Books",
                     l["Menu:Books"],
                     url: "/Books"
-                ).RequirePermissions(TaskAndCommentBoardPermissions.Books.Default) 
+                ).RequirePermissions(TaskAndCommentBoardPermissions.Books.Default)
             )
         );
         

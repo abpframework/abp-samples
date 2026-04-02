@@ -1,297 +1,222 @@
-﻿@page
+@page
 @using Microsoft.AspNetCore.Mvc.Localization
 @using TaskAndCommentBoard.Localization
-@using Volo.Abp.Users
-@using Volo.Abp.AspNetCore.Mvc.UI.Layout;
-@using TaskAndCommentBoard.Menus;
+@using TaskAndCommentBoard.Menus
+@using Volo.Abp.AspNetCore.Mvc.UI.Layout
 @inject IHtmlLocalizer<TaskAndCommentBoardResource> L
 @model TaskAndCommentBoard.Pages.IndexModel
-@inject ICurrentUser CurrentUser
 @inject IPageLayout PageLayout
 @{
-    PageLayout.Content.Title = L["Menu:Home"].Value;    
+    PageLayout.Content.Title = L["Menu:Home"].Value;
     PageLayout.Content.BreadCrumb.ShowCurrent = false;
     PageLayout.Content.ShowToolbar = false;
     PageLayout.Content.MenuItemName = TaskAndCommentBoardMenus.Home;
 }
 
-@section styles {
-    <abp-style src="/Pages/Index.cshtml.css" />
-}
-@section scripts {
-    <abp-script src="/Pages/Index.cshtml.js" />
-}
+<div class="marketing-landing">
+    <div class="marketing-shell">
+        <section class="marketing-hero">
+            <div class="marketing-hero__bg-orb marketing-hero__bg-orb--one"></div>
+            <div class="marketing-hero__bg-orb marketing-hero__bg-orb--two"></div>
 
-<div class="row mb-3">
-    <div class="col-xl-6 col-12 d-flex">
-        <div class="card h-lg-100 w-100 overflow-hidden">
-            <div class="card-body">
-                <div class="starting-content pe-5">
-                    @if (!CurrentUser.IsAuthenticated)
-                    {
-                        <h3>@L["Welcome_Title"]</h3>
-                        <p class="lead text-muted mb-2">@L["Welcome_Text"]</p>
-                        <a href="/Account/Login" class="btn btn-primary mb-4"><i class="fa-solid fa-right-to-bracket me-1"></i><span>@L["Login"]</span></a>
-                    }
-
-                    <h4>Getting Started</h4>
-                    <p class="text-muted mb-2">Learn how to create and run
-                        a
-                        new web application using the application startup
-                        template.</p>
-                    <a href="https://abp.io/docs/latest/getting-started" class="btn btn-primary mb-2" target="_blank">Getting
-                        Started</a>
-
-                    <h4>Web Application Development Tutorial</h4>
-                    <p class="text-muted mb-2">Learn how to build an ABP based
-                        web
-                        application named Acme.BookStore.</p>
-                    <a href="https://abp.io/docs/latest/tutorials/book-store/part-1?UI=MVC&DB=EF" class="btn btn-primary soft mb-2" target="_blank">Explore Tutorial</a>
+            <div class="marketing-hero__content">
+                <span class="marketing-chip">Built for modern SaaS teams</span>
+                <h1>Turn team chaos into clear progress.</h1>
+                <p>
+                    Task & Comment Board is a lightweight issue-driven workspace where teams create tasks,
+                    collaborate in threaded comments, and keep product delivery moving — without project-management bloat.
+                </p>
+                <div class="marketing-hero__actions">
+                    <a href="/Tasks" class="btn btn-lg board-primary-button">
+                        <i class="fa fa-rocket me-2"></i>Start managing tasks
+                    </a>
+                    <a href="#marketing-features" class="btn btn-lg btn-outline-light">Explore features</a>
                 </div>
-                <img class="card-bg-image" src="/images/getting-started/bg-01.png">
+                <div class="marketing-proof">
+                    <div><strong>99.9%</strong><span>Uptime ready</span></div>
+                    <div><strong>2x</strong><span>Faster collaboration</span></div>
+                    <div><strong>100%</strong><span>Focus on essentials</span></div>
+                </div>
             </div>
-        </div>
-    </div>
-    <div class="col-xl-3 col-md-6 d-flex">
-        <div class="row">
-            <div class="col-12 d-flex">
-                <div class="card overflow-hidden mb-3">
-                    <div class="card-body d-flex flex-column">
-                        <div class="abp-support abp-logo mb-2"></div>
-                        <p class="text-muted mb-2">You can check for
-                            similar problems and solutions, or open a
-                            new topic to discuss your specific issue.</p>
-                        <a href="https://abp.io/support/questions" class="btn btn-primary soft" target="_blank">Visit Support</a>
-                        <img style="margin-bottom: -24px;" class="w-100 mt-auto" src="/images/getting-started/img-support.png">
+
+            <div class="marketing-hero__visual">
+                <div class="saas-window">
+                    <div class="saas-window__topbar">
+                        <span></span><span></span><span></span>
                     </div>
-                </div>
-            </div>
-            <div class="col-12 d-flex">
-                <div class="card h-md-100 overflow-hidden">
-                    <div class="card-body d-flex flex-column">
-                        <div class="abp-blog abp-logo mb-2"></div>
-                        <p class="text-muted mb-2">You can find content
-                            on .NET development, cross-platform, ASP.NET
-                            application templates, ABP-related news, and
-                            more.</p>
-                        <a href="https://abp.io/blog" class="btn btn-primary soft" target="_blank">Visit Blog</a>
-
-                        <img style="margin-bottom: -24px;" class="w-100 mt-auto" src="/images/getting-started/img-blog.png">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-xl-3 col-md-6 d-flex">
-        <div class="card h-100 overflow-hidden">
-            <div class="card-body">
-                <div class="abp-community abp-logo mb-2"></div>
-                <p class="lead text-muted">A unique community platform
-                    for <span class="fw-bold">ABP Lovers!</span></p>
-                <p class="text-muted mb-2">Explore all ABP users'
-                    experiences with the ABP Framework, discover
-                    articles and videos on how to use ABP, and join
-                    raffles for a chance to win surprise gifts!</p>
-                <a class="btn btn-primary soft mb-3" href="https://abp.io/community/" target="_blank">Join ABP
-                    Community</a>
-            </div>
-            <img class="mt-3 w-100" src="/images/getting-started/img-community.png">
-        </div>
-    </div>
-</div>
-
-<div class="row mb-3">
-    <div class="col-xl-3 col-lg-4">
-        <div class="card h-100 w-100 d-flex flex-column">
-            <div class="card-header">
-                <div class="card-title text-body">More from ABP.IO</div>
-            </div>
-            <div class="card-body pt-0">
-
-                <div>
-                    <table class="table mb-0">
-                        <tbody>
-                            <tr>
-                                <td class="ps-0 d-flex">
-                                    <div class="rounded-circle me-2
-                                        flex-center bg-brand soft" style="width: 20px; height:
-                                        20px;"><i class="bi bi-check fs-4"></i></div>
-                                    <div> Latest Release Logs </div>
-                                </td>
-                                <td class="text-end pe-0 opacity-25">
-                                    <a href="https://github.com/abpframework/abp/releases" target="_blank">
-                                        <i class="fa fa-external-link
-                                            text-dark"></i>
-                                    </a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="ps-0 d-flex">
-                                    <div class="rounded-circle me-2
-                                        flex-center bg-brand soft" style="width: 20px; height:
-                                        20px;"><i class="bi bi-check fs-4"></i></div>
-                                    <div> Video Courses </div>
-                                </td>
-                                <td class="text-end pe-0 opacity-25">
-                                    <a href="https://abp.io/video-courses/essentials" target="_blank">
-                                        <i class="fa fa-external-link
-                                            text-dark"></i>
-                                    </a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="ps-0 d-flex">
-                                    <div class="rounded-circle me-2
-                                        flex-center bg-brand soft" style="width: 20px; height:
-                                        20px;"><i class="bi bi-check fs-4"></i></div>
-                                    <div> Samples </div>
-                                </td>
-                                <td class="text-end pe-0 opacity-25">
-                                    <a href="https://abp.io/docs/latest/Samples/Index" target="_blank">
-                                        <i class="fa fa-external-link
-                                            text-dark"></i>
-                                    </a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="ps-0 d-flex">
-                                    <div class="rounded-circle me-2
-                                        flex-center bg-brand soft" style="width: 20px; height:
-                                        20px;"><i class="bi bi-check fs-4"></i></div>
-                                    <div> Books </div>
-                                </td>
-                                <td class="text-end pe-0 opacity-25">
-                                    <a href="https://abp.io/books" target="_blank">
-                                        <i class="fa fa-external-link
-                                            text-dark"></i>
-                                    </a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="ps-0 d-flex border-bottom-0">
-                                    <div class="rounded-circle me-2
-                                        flex-center bg-brand soft" style="width: 20px; height:
-                                        20px;"><i class="bi bi-check fs-4"></i></div>
-                                    <div> FAQ </div>
-                                </td>
-                                <td class="text-end pe-0 opacity-25
-                                    border-bottom-0">
-                                    <a href="https://abp.io/faq" target="_blank">
-                                        <i class="fa fa-external-link
-                                            text-dark"></i>
-                                    </a>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-xl-6 col-lg-8 d-flex">
-        <div class="card h-100 w-100 d-flex flex-column">
-            <div class="card-body d-flex">
-                <div class="row align-items-center">
-                    <div class="col-md-8">
-                        <p class="text-muted mb-0">THE OFFICIAL GUIDE</p>
-                        <h3>Mastering ABP Framework</h3>
-                        <p class="text-muted">Written by the creator of the ABP
-                            Framework, this book will help you gain a complete
-                            understanding of the framework
-                            and modern web application development techniques.</p>
-                        <div class="d-md-flex mb-2 mb-md-0">
-                            <a href="https://www.amazon.com/gp/product/B097Z2DM8Q" target="_blank" class="btn btn-primary soft
-                                me-md-2 mb-2 mb-md-0">
-                                Buy on Amazon US
-                            </a>
-                            <a href="https://www.packtpub.com/product/mastering-abp-framework/9781801079242" target="_blank" class="btn btn-primary soft mb-2
-                                mb-md-0">
-                                Buy on PACKT
-                            </a>
+                    <div class="saas-window__body">
+                        <div class="saas-window__task">
+                            <div>
+                                <h6>Launch public API docs portal</h6>
+                                <p>Coordinate release notes with dev rel team and post migration guide.</p>
+                            </div>
+                            <span class="badge task-badge task-badge--open">Open</span>
+                        </div>
+                        <div class="saas-window__comment">
+                            <i class="fa fa-message"></i>
+                            <span>“Added sample requests and versioning notes.”</span>
+                        </div>
+                        <div class="saas-window__comment">
+                            <i class="fa fa-message"></i>
+                            <span>“Need final review from product before publishing.”</span>
+                        </div>
+                        <div class="saas-window__footer">
+                            <span>6 comments</span>
+                            <span>Updated 5 min ago</span>
                         </div>
                     </div>
-                    <div class="col-md-4 text-center">
-                        <img src="/images/getting-started/book.png" class="img-fluid">
-                    </div>
                 </div>
+            </div>
+        </section>
 
+        <section class="marketing-logo-strip">
+            <span>BUILT ON THE VOLOSOFT ECOSYSTEM</span>
+            <div class="marketing-logo-strip__items">
+                <a class="marketing-brand marketing-brand--volosoft" href="https://volosoft.com" target="_blank" rel="noreferrer" aria-label="Volosoft">
+                    <img src="~/images/logo/volosoft.svg" asp-append-version="true" alt="Volosoft logo" loading="lazy" />
+                </a>
+                <a class="marketing-brand marketing-brand--abp" href="https://abp.io" target="_blank" rel="noreferrer" aria-label="ABP.io">
+                    <img src="~/images/logo/abp-io.svg" asp-append-version="true" alt="ABP.io logo" loading="lazy" />
+                </a>
+                <a class="marketing-brand marketing-brand--aspnetzero" href="https://aspnetzero.com" target="_blank" rel="noreferrer" aria-label="AspNetZero">
+                    <img src="~/images/logo/aspnetzero.svg" asp-append-version="true" alt="AspNetZero logo" loading="lazy" />
+                </a>
             </div>
-        </div>
-    </div>
-    <div class="col-xl-3 col-lg-4">
-        <div class="card h-100 w-100 d-flex flex-column">
-            <div class="card-header">
-                <div class="card-title text-body">Follow us on Social Media</div>
+        </section>
+
+        <section id="marketing-features" class="marketing-section">
+            <div class="marketing-section__header">
+                <span class="marketing-chip">Features</span>
+                <h2>Everything you need for issue-style collaboration</h2>
             </div>
-            <div class="card-body pt-0">
-                <div>
-                    <table class="table mb-0">
-                        <tbody>
-                            <tr>
-                                <td class="ps-0 d-flex">
-                                    <img src="/images/getting-started/x-white.svg" class="me-2" style="background-color: black;">
-                                    <div>X.com</div>
-                                </td>
-                                <td class="text-end pe-0 opacity-25">
-                                    <a href="https://twitter.com/abpframework" target="_blank">
-                                        <i class="fa fa-external-link
-                                            text-dark"></i>
-                                    </a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="ps-0 d-flex">
-                                    <img src="/images/getting-started/discord.svg" class="me-2">
-                                    <div>Discord</div>
-                                </td>
-                                <td class="text-end pe-0 opacity-25">
-                                    <a href="https://abp.io/community/discord" target="_blank">
-                                        <i class="fa fa-external-link
-                                            text-dark"></i>
-                                    </a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="ps-0 d-flex">
-                                    <img src="/images/getting-started/stack-overflow.svg" class="me-2">
-                                    <div>Stack Overflow</div>
-                                </td>
-                                <td class="text-end pe-0 opacity-25">
-                                    <a href="https://stackoverflow.com/questions/tagged/abp" target="_blank">
-                                        <i class="fa fa-external-link
-                                            text-dark"></i>
-                                    </a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="ps-0 d-flex">
-                                    <img src="/images/getting-started/youtube.svg" class="me-2">
-                                    <div>YouTube</div>
-                                </td>
-                                <td class="text-end pe-0 opacity-25">
-                                    <a href="https://www.youtube.com/@@Volosoft" target="_blank">
-                                        <i class="fa fa-external-link
-                                            text-dark"></i>
-                                    </a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="ps-0 d-flex border-bottom-0">
-                                    <img src="/images/getting-started/instagram.svg" class="me-2">
-                                    <div>Instagram</div>
-                                </td>
-                                <td class="text-end pe-0 opacity-25
-                                    border-bottom-0">
-                                    <a href="https://www.instagram.com/abpframework/" target="_blank">
-                                        <i class="fa fa-external-link
-                                            text-dark"></i>
-                                    </a>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+            <div class="marketing-feature-grid">
+                <article>
+                    <i class="fa fa-list-check"></i>
+                    <h5>Issue-like task flow</h5>
+                    <p>Create clear tasks with title, details, and state — just what your team really needs.</p>
+                </article>
+                <article>
+                    <i class="fa fa-comments"></i>
+                    <h5>Comment conversations</h5>
+                    <p>Keep all context under each task so updates never get lost between tools.</p>
+                </article>
+                <article>
+                    <i class="fa fa-shield-halved"></i>
+                    <h5>ABP permission ready</h5>
+                    <p>Secure actions with built-in authorization and role-based access controls.</p>
+                </article>
+                <article>
+                    <i class="fa fa-chart-line"></i>
+                    <h5>Team visibility</h5>
+                    <p>Quickly see what is open, what is done, and where the conversation is active.</p>
+                </article>
+                <article>
+                    <i class="fa fa-bolt"></i>
+                    <h5>Fast user experience</h5>
+                    <p>Responsive pages, clean flows, and smooth interactions optimized for daily use.</p>
+                </article>
+                <article>
+                    <i class="fa fa-cloud"></i>
+                    <h5>SaaS-friendly foundation</h5>
+                    <p>Designed to evolve from internal app into a polished multi-tenant SaaS product.</p>
+                </article>
             </div>
-        </div>
+        </section>
+
+        <section class="marketing-section marketing-workflow">
+            <div class="marketing-section__header">
+                <span class="marketing-chip">How it works</span>
+                <h2>From idea to done in 3 simple steps</h2>
+            </div>
+            <div class="marketing-steps">
+                <article>
+                    <span>01</span>
+                    <h5>Create a task</h5>
+                    <p>Capture a bug report, feature request, or operational activity in seconds.</p>
+                </article>
+                <article>
+                    <span>02</span>
+                    <h5>Discuss in comments</h5>
+                    <p>Align teammates with decisions, updates, and shared implementation notes.</p>
+                </article>
+                <article>
+                    <span>03</span>
+                    <h5>Ship with confidence</h5>
+                    <p>Mark resolved work and move forward with a transparent history of execution.</p>
+                </article>
+            </div>
+        </section>
+
+        <section class="marketing-section marketing-testimonials">
+            <div class="marketing-section__header">
+                <span class="marketing-chip">Customer love</span>
+                <h2>Teams ship faster with less coordination overhead</h2>
+            </div>
+            <div class="marketing-testimonials__grid">
+                <article>
+                    <p>“We replaced scattered chat threads with clear task-level conversations. Our delivery updates are finally transparent.”</p>
+                    <h6>Selin Arda</h6>
+                    <span>Product Lead, NovaCloud</span>
+                </article>
+                <article>
+                    <p>“The UI feels modern, clean, and focused. New team members become productive in under a day.”</p>
+                    <h6>Can Yılmaz</h6>
+                    <span>Engineering Manager, ByteForge</span>
+                </article>
+                <article>
+                    <p>“Exactly the lightweight issue board we needed for our SaaS support workflows.”</p>
+                    <h6>Ece Demir</h6>
+                    <span>Operations Director, FlowPilot</span>
+                </article>
+            </div>
+        </section>
+
+        <section class="marketing-section marketing-pricing">
+            <div class="marketing-section__header">
+                <span class="marketing-chip">Simple pricing</span>
+                <h2>Start free, scale with your team</h2>
+            </div>
+            <div class="marketing-pricing__grid">
+                <article>
+                    <h5>Starter</h5>
+                    <strong>$0<span>/month</span></strong>
+                    <p>For small teams trying issue-style collaboration.</p>
+                    <ul>
+                        <li>Up to 5 members</li>
+                        <li>Unlimited tasks</li>
+                        <li>Task comments</li>
+                    </ul>
+                </article>
+                <article class="is-featured">
+                    <span class="featured-pill">Most popular</span>
+                    <h5>Growth</h5>
+                    <strong>$29<span>/month</span></strong>
+                    <p>For product teams running daily delivery operations.</p>
+                    <ul>
+                        <li>Up to 25 members</li>
+                        <li>Activity visibility</li>
+                        <li>Priority support</li>
+                    </ul>
+                </article>
+                <article>
+                    <h5>Scale</h5>
+                    <strong>$99<span>/month</span></strong>
+                    <p>For larger SaaS organizations with multiple squads.</p>
+                    <ul>
+                        <li>Unlimited members</li>
+                        <li>Advanced security</li>
+                        <li>Dedicated success manager</li>
+                    </ul>
+                </article>
+            </div>
+        </section>
+
+        <section class="marketing-cta">
+            <h2>Ready to launch your team’s lightweight issue hub?</h2>
+            <p>Bring clarity to delivery, reduce noisy tools, and keep everyone aligned around outcomes.</p>
+            <a href="/Tasks" class="btn btn-lg board-primary-button">
+                <i class="fa fa-arrow-right me-2"></i>Go to Task Board
+            </a>
+        </section>
     </div>
 </div>

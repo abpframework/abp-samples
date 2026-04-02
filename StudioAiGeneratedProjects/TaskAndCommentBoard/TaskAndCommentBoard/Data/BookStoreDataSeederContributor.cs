@@ -1,6 +1,7 @@
-﻿using System;
+using System;
 using System.Threading.Tasks;
 using TaskAndCommentBoard.Entities.Books;
+using TaskAndCommentBoard.Entities.Tasks;
 using Volo.Abp.Data;
 using Volo.Abp.DependencyInjection;
 using Volo.Abp.Domain.Repositories;
@@ -11,10 +12,17 @@ public class TaskAndCommentBoardDataSeederContributor
     : IDataSeedContributor, ITransientDependency
 {
     private readonly IRepository<Book, Guid> _bookRepository;
+    private readonly IRepository<TaskItem, Guid> _taskRepository;
+    private readonly IRepository<TaskComment, Guid> _commentRepository;
 
-    public TaskAndCommentBoardDataSeederContributor(IRepository<Book, Guid> bookRepository)
+    public TaskAndCommentBoardDataSeederContributor(
+        IRepository<Book, Guid> bookRepository,
+        IRepository<TaskItem, Guid> taskRepository,
+        IRepository<TaskComment, Guid> commentRepository)
     {
         _bookRepository = bookRepository;
+        _taskRepository = taskRepository;
+        _commentRepository = commentRepository;
     }
 
     public async Task SeedAsync(DataSeedContext context)
@@ -39,6 +47,47 @@ public class TaskAndCommentBoardDataSeederContributor
                     Type = BookType.ScienceFiction,
                     PublishDate = new DateTime(1995, 9, 27),
                     Price = 42.0f
+                },
+                autoSave: true
+            );
+        }
+
+        if (await _taskRepository.GetCountAsync() <= 0)
+        {
+            var setupTask = await _taskRepository.InsertAsync(
+                new TaskItem
+                {
+                    Title = "Set up the first project board",
+                    Description = "Create the first task board and invite your team members.",
+                    IsClosed = false
+                },
+                autoSave: true
+            );
+
+            var roadmapTask = await _taskRepository.InsertAsync(
+                new TaskItem
+                {
+                    Title = "Draft MVP roadmap",
+                    Description = "Document the must-have features for the first public release.",
+                    IsClosed = false
+                },
+                autoSave: true
+            );
+
+            await _commentRepository.InsertAsync(
+                new TaskComment
+                {
+                    TaskId = setupTask.Id,
+                    Content = "Great starting point. Let's keep the first sprint small."
+                },
+                autoSave: true
+            );
+
+            await _commentRepository.InsertAsync(
+                new TaskComment
+                {
+                    TaskId = roadmapTask.Id,
+                    Content = "I can draft the roadmap and share it by Friday."
                 },
                 autoSave: true
             );

@@ -1,0 +1,21 @@
+@page
+@using Microsoft.Extensions.Localization
+@using TaskAndCommentBoard.Localization
+@using TaskAndCommentBoard.Pages.Tasks
+@using Volo.Abp.AspNetCore.Mvc.UI.Bootstrap.TagHelpers.Modal
+@model EditModalModel
+@inject IStringLocalizer<TaskAndCommentBoardResource> L
+@{
+    Layout = null;
+}
+
+<abp-dynamic-form abp-model="TaskItem" asp-page="/Tasks/EditModal">
+    <abp-modal>
+        <abp-modal-header title="@L["Edit"].Value"></abp-modal-header>
+        <abp-modal-body>
+            <abp-input asp-for="Id" />
+            <abp-form-content />
+        </abp-modal-body>
+        <abp-modal-footer buttons="@(AbpModalButtons.Cancel|AbpModalButtons.Save)"></abp-modal-footer>
+    </abp-modal>
+</abp-dynamic-form>

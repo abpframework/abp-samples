@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Cors;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
@@ -202,6 +202,11 @@ public class TaskAndCommentBoardModule : AbpModule
             options.Conventions.AuthorizePage("/Books/Index", TaskAndCommentBoardPermissions.Books.Default);
             options.Conventions.AuthorizePage("/Books/CreateModal", TaskAndCommentBoardPermissions.Books.Create);
             options.Conventions.AuthorizePage("/Books/EditModal", TaskAndCommentBoardPermissions.Books.Edit);
+
+            options.Conventions.AuthorizePage("/Tasks/Index", TaskAndCommentBoardPermissions.Tasks.Default);
+            options.Conventions.AuthorizePage("/Tasks/Details", TaskAndCommentBoardPermissions.Tasks.Default);
+            options.Conventions.AuthorizePage("/Tasks/CreateModal", TaskAndCommentBoardPermissions.Tasks.Create);
+            options.Conventions.AuthorizePage("/Tasks/EditModal", TaskAndCommentBoardPermissions.Tasks.Edit);
         });
     }
 

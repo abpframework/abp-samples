@@ -7,7 +7,7 @@
   <ItemGroup>
     <PackageReference Include="Serilog.Extensions.Hosting" Version="9.0.0" />
     <PackageReference Include="Serilog.Sinks.Console" Version="6.0.0" />
-    <ProjectReference Include="../../../../abp2/abp/framework/src/Volo.Abp.EventBus.RabbitMQ/Volo.Abp.EventBus.RabbitMQ.csproj" />
+    <PackageReference Include="Volo.Abp.EventBus.RabbitMQ" Version="10.3.0-rc.1" />
     <ProjectReference Include="../DynamicDistributedEvents.Shared/DynamicDistributedEvents.Shared.csproj" />
   </ItemGroup>
   <ItemGroup>

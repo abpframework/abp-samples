@@ -1,0 +1,81 @@
+services:
+  gymworkoutplanner-web:
+    image: gymworkoutplanner-web:latest
+    container_name: gymworkoutplanner-web
+    build:
+      context: ../../../
+      dockerfile: angular/Dockerfile.local      
+    ports:
+      - "4200:80"
+    depends_on:
+      - gymworkoutplanner-api
+    volumes:
+      - ./dynamic-env.json://usr/share/nginx/html/dynamic-env.json
+    networks:
+      - abp-network  
+
+  gymworkoutplanner-api:
+    image: gymworkoutplanner-api:latest
+    container_name: gymworkoutplanner-api-container
+    build:
+      context: ../../
+      dockerfile: GymWorkoutPlanner/Dockerfile.local
+    environment:
+      - ASPNETCORE_URLS=https://+:8081;http://+:8080;
+      - Kestrel__Certificates__Default__Path=/app/certs/localhost.pfx
+      - Kestrel__Certificates__Default__Password=91f91912-5ab0-49df-8166-23377efaf3cc
+      - App__SelfUrl=https://localhost:44395
+      - App__HealthCheckUrl=http://gymworkoutplanner:8080/health-status
+      - AuthServer__Authority=http://gymworkoutplanner-api:8080
+      - AuthServer__RequireHttpsMetadata=false
+      - AuthServer__SetSelfAsIssuer=true 
+      - ConnectionStrings__Default=Server=mysql;Port=3306;Userid=root;Password=myPassw0rd;Database=GymWorkoutPlanner;
+    ports:
+      - "44395:8081"
+    depends_on:
+      mysql:
+        condition: service_healthy
+    restart: on-failure    
+    volumes:
+      - ./certs:/app/certs
+    networks:
+      - abp-network  
+  
+  db-migrator:
+    image: gymworkoutplanner-api:latest
+    container_name: db-migrator
+    build:
+      context: ../../
+      dockerfile: GymWorkoutPlanner/Dockerfile.local
+    environment:
+      - ConnectionStrings__Default=Server=mysql;Port=3306;Userid=root;Password=myPassw0rd;Database=GymWorkoutPlanner;
+    command:
+      - --migrate-database
+    depends_on:
+      mysql:
+        condition: service_healthy
+    networks:
+      - abp-network
+  mysql:
+    container_name: mysql-db
+    image: mysql:8.0
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: myPassw0rd
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - abp-network
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "127.0.0.1", "--silent"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+volumes:
+  mysql_data:
+    name: gymworkoutplanner_mysql_data
+networks:
+  abp-network:
+    name: gymworkoutplanner-network
+    driver: bridge

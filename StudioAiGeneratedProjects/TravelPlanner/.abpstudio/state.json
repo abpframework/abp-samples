@@ -1,0 +1,27 @@
+﻿{
+  "selectedKubernetesProfile": null,
+  "solutionRunner": {
+    "selectedProfile": "Default",
+    "targetFrameworks": [],
+    "applicationsStartingWithoutBuild": [],
+    "applicationsWithoutAutoRefreshBrowserOnRestart": [],
+    "applicationBatchStartStates": [
+      {
+        "profile": "Default",
+        "applicationOrFolder": "TravelPlanner",
+        "value": 0
+      }
+    ],
+    "folderBatchStartStates": [],
+    "selectedWorkflowIds": [
+      {
+        "profile": "Default",
+        "selectedWorkflowId": null
+      }
+    ]
+  },
+  "lastSelectedAgentSessionId": null,
+  "disabledAiRules": [],
+  "aiScopes": [],
+  "activeAiScopeId": null
+}

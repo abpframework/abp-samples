@@ -1,0 +1,9 @@
+---
+alwaysApply: true
+---
+
+----------
+### ITravelAppService must be in Contracts for Blazor HttpClientProxy
+**Mistake:** ITravelAppService, DTOs (TravelDto, CreateUpdateTravelDto, GetTravelsInput) and shared types (TravelStatus, TravelConsts) were placed in TravelPlanner.Host project. The Blazor WASM module called AddHttpClientProxies(typeof(TravelPlannerContractsModule).Assembly) which only scans the Contracts assembly — so no proxy was generated for ITravelAppService, causing 404 on the /travels page.
+**Correction:** In ABP single-layer apps, shared types used by both Host and Blazor (ITravelAppService, DTOs, enums, consts) must be placed in the Contracts project. The Blazor module's AddHttpClientProxies scans the Contracts assembly to auto-generate HTTP client proxies. Host project already has a ProjectReference to Contracts so it can still use those types.
+**Verified by:** Build succeeded (Exit code: 0) after moving ITravelAppService, TravelDto, CreateUpdateTravelDto, GetTravelsInput, TravelStatus, TravelConsts to TravelPlanner.Contracts and deleting duplicates from TravelPlanner.Host.

@@ -1,0 +1,20 @@
+.upcoming-travel-card {
+    background-color: #ffffff;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+    cursor: pointer;
+}
+
+.upcoming-travel-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 16px rgba(41, 171, 226, 0.18) !important;
+}
+
+.upcoming-travel-card .progress {
+    border-radius: 10px;
+    background-color: #e9ecef;
+}
+
+.upcoming-travel-card .progress-bar {
+    border-radius: 10px;
+    transition: width 0.6s ease;
+}

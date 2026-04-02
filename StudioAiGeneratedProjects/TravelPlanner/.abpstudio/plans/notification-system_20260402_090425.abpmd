@@ -1,0 +1,146 @@
+# Bildirim Sistemi - In-App + Browser Push
+
+## 2. Solution
+
+### Yaklaşım
+
+ABP'nin mevcut `AbpBackgroundJobsEntityFrameworkCoreModule` altyapısı zaten kurulu. Bu altyapı üzerine:
+
+1. **`AppNotification` entity** — bildirimleri DB'de sakla
+2. **`TravelReminderBackgroundWorker`** — her gece 00:00'da çalışıp 7 gün sonra başlayacak seyahatleri kontrol et ve bildirim oluştur
+3. **`NotificationAppService`** — bildirimleri listele, okundu işaretle, sil
+4. **Blazor `/notifications` sayfası** — bildirim listesi (okunmamış/tümü)
+5. **Navbar zil ikonu** — okunmamış bildirim sayısını göster
+6. **Browser Push** — `INotificationService` (JS interop ile Web Push API)
+
+### Mimari Kararlar
+
+- **Entity tabanlı bildirim** (DB'de saklanır) — ABP'nin built-in notification modülü yoktur, en sağlam pattern budur
+- **`AsyncPeriodicBackgroundWorkerBase`** — ABP'nin background worker altyapısı (Quartz/Hangfire gerektirmez, mevcut `AbpBackgroundJobsEntityFrameworkCoreModule` ile çalışır)
+- **Background worker her 1 saatte** bir çalışır, 7 gün kala bildirim üretir (aynı seyahat için tekrar üretmemek için `IsReminderSent` flag'i Travel entity'ye eklenir)
+- **Navbar polling** — Blazor tarafı 30 saniyede bir okunmamış bildirim sayısını polling ile çeker (SignalR gerektirmez, sade ve stabil)
+- **Browser Push** — JS interop + `Notification` Web API (`navigator.serviceWorker` ile)
+- Bildirimler `TravelPlannerPermissions.Travels.Default` permission'ı ile korunur
+
+### Mevcut Altyapıdan Yararlanılan Noktalar
+- `AbpBackgroundJobsEntityFrameworkCoreModule` zaten `[DependsOn]` listesinde mevcut
+- `TravelPlannerDbContext` üzerine `AppNotifications` tablosu eklenir
+- `IRepository<TravelNotification, Guid>` — generic repository, custom repository gerekmez
+- Mapperly mapper pattern — `TravelNotification → NotificationDto` için aynı pattern uygulanır
+- Localization: `en.json` ve `tr.json` üzerine `Notification:*` key'leri eklenir
+- Permission pattern: `TravelPlannerPermissions` sabitine `Notifications` eklenir
+
+---
+
+## 3. Workflow Diagram
+
+```mermaid
+sequenceDiagram
+    participant Worker as TravelReminderWorker (Arka plan)
+    participant DB as Database
+    participant API as NotificationAppService
+    participant Blazor as Blazor Client
+    participant Browser as Tarayıcı (Push API)
+
+    Note over Worker: Her 1 saatte çalışır
+    Worker->>DB: 7 gün sonra başlayan & IsReminderSent=false seyahatleri sorgula
+    Worker->>DB: AppNotification kaydı oluştur
+    Worker->>DB: Travel.IsReminderSent = true yap
+
+    Note over Blazor: Her 30 saniyede polling
+    Blazor->>API: GetUnreadCountAsync()
+    API->>DB: Okunmamış bildirim sayısı
+    API-->>Blazor: count
+    Blazor-->>Blazor: Navbar zil ikonuna badge göster
+
+    Note over Blazor: Kullanıcı zil ikonuna tıklar
+    Blazor->>API: GetListAsync(onlyUnread=false)
+    API-->>Blazor: List<NotificationDto>
+    Blazor-->>Blazor: /notifications sayfası listeler
+
+    Note over Browser: Kullanıcı izin verirse
+    Worker->>Browser: JS Interop → Notification API Push
+```
+
+---
+
+## 4. Files Affected
+
+### Yeni Dosyalar
+
+**Contracts (TravelPlanner.Contracts):**
+- `TravelPlanner.Contracts/Services/Notifications/INotificationAppService.cs`
+- `TravelPlanner.Contracts/Services/Notifications/NotificationDto.cs`
+- `TravelPlanner.Contracts/Services/Notifications/GetNotificationsInput.cs`
+
+**Host (TravelPlanner.Host):**
+- `TravelPlanner.Host/Entities/TravelNotification.cs` — entity
+- `TravelPlanner.Host/Services/Notifications/NotificationAppService.cs`
+- `TravelPlanner.Host/BackgroundWorkers/TravelReminderBackgroundWorker.cs`
+
+**Blazor (TravelPlanner.Blazor):**
+- `TravelPlanner.Blazor/Pages/Notifications.razor`
+- `TravelPlanner.Blazor/Pages/Notifications.razor.cs`
+- `TravelPlanner.Blazor/Pages/Notifications.razor.css`
+- `TravelPlanner.Blazor/Components/NotificationBell.razor` — navbar zil bileşeni
+- `TravelPlanner.Blazor/Components/NotificationBell.razor.cs`
+- `TravelPlanner.Blazor/wwwroot/js/browserNotification.js` — Web Push JS interop
+
+### Değiştirilen Dosyalar
+- `TravelPlanner.Host/Entities/Travel.cs` — `IsReminderSent` property eklenir
+- `TravelPlanner.Host/Data/TravelPlannerDbContext.cs` — `AppNotifications` DbSet + konfigürasyon
+- `TravelPlanner.Host/TravelPlannerHostModule.cs` — background worker kaydı (`OnApplicationInitializationAsync`)
+- `TravelPlanner.Contracts/Permissions/TravelPlannerPermissions.cs` — `Notifications` sabiti eklenir
+- `TravelPlanner.Contracts/Permissions/TravelPlannerPermissionDefinitionProvider.cs` — bildirim permission tanımı
+- `TravelPlanner.Blazor/Menus/TravelPlannerMenuContributor.cs` — "Notifications" menü öğesi (order: 5, Travels'ın altı)
+- `TravelPlanner.Blazor/Menus/TravelPlannerMenus.cs` — `Notifications` sabiti
+- `TravelPlanner.Contracts/Localization/TravelPlanner/en.json` — `Notification:*` key'leri
+- `TravelPlanner.Contracts/Localization/TravelPlanner/tr.json` — Türkçe karşılıklar
+- `TravelPlanner.Blazor/Components/` — navbar layout'a `NotificationBell` bileşeni eklenir
+- **Migration** — `Added_TravelNotification` + `Added_IsReminderSent_To_Travel`
+
+---
+
+## 5. Implementation Steps
+
+- [ ] **`TravelNotification` entity** oluştur — `AuditedAggregateRoot<Guid>`, alanlar: `UserId`, `TravelId`, `TripName`, `Message`, `IsRead`, `NotificationType` (enum: `TravelReminder`)
+- [ ] **`Travel` entity'ye `IsReminderSent` flag** ekle — background worker tekrar bildirim üretmesin
+- [ ] **`INotificationAppService` + `NotificationDto`** Contracts'a ekle — `GetListAsync`, `GetUnreadCountAsync`, `MarkAsReadAsync`, `MarkAllAsReadAsync`, `DeleteAsync`
+- [ ] **`NotificationAppService`** implement et — CRUD + okundu işaretle, permission kontrolü
+- [ ] **`TravelReminderBackgroundWorker`** yaz — `AsyncPeriodicBackgroundWorkerBase` ile, 1 saatte bir çalışır, 7 gün kalan `IsReminderSent=false` seyahatleri bulur, bildirim üretir
+- [ ] **`TravelPlannerHostModule`'a worker kaydı** ekle — `OnApplicationInitializationAsync` içinde `AddBackgroundWorkerAsync<TravelReminderBackgroundWorker>()`
+- [ ] **DB migration** oluştur ve uygula — `AppNotifications` tablosu + `IsReminderSent` kolonu
+- [ ] **`/notifications` Blazor sayfası** oluştur — okunmamış/tümü tab'lı liste, okundu işaretle butonu, sil butonu, boş durum mesajı
+- [ ] **`NotificationBell` navbar bileşeni** oluştur — 30sn polling, badge sayısı, tıklayınca `/notifications`'a yönlendir
+- [ ] **Browser Push JS interop** ekle — `navigator.permissions.query({name:'notifications'})` + `Notification` API, izin iste + push gönder (`browserNotification.js`)
+- [ ] **Permission + Menü** tanımla — `Notifications.Default` permission, menüde 🔔 ikonu ile (Travels'ın altında)
+- [ ] **Localization** key'lerini ekle — `en.json` + `tr.json`
+- [ ] **Seed data kontrolü** — mevcut 15 seyahatin `IsReminderSent` değeri `false` olarak seed edilecek
+
+---
+
+## 6. Expected Result & Testing
+
+### Çalışması Gereken Senaryolar
+
+| Senaryo | Beklenen Davranış |
+|---------|-------------------|
+| Seyahat 7 gün sonraya eklenir | Background worker çalıştığında bildirim oluşur |
+| Navbar'da zil ikonu | Okunmamış bildirim varsa kırmızı badge gösterir |
+| `/notifications` sayfası | Tüm bildirimler listelenir, okunmamışlar belirginleştirilir |
+| "Okundu işaretle" tıklanır | Badge sayısı azalır |
+| Tüm okundu | Badge kaybolur |
+| Browser push | İzin verilmişse tarayıcı bildirimi de gösterilir |
+
+### Test Adımları
+1. 7 gün sonraya yeni bir seyahat oluştur
+2. Background worker'ı manuel tetiklemek için worker periyodunu geçici olarak `60000` (1dk) yap
+3. `/notifications` sayfasını aç → bildirim görünmeli
+4. Navbar'da zil ikonu badge göstermeli
+5. "Okundu işaretle"ye tıkla → badge kaybolmalı
+6. Browser push için tarayıcı izin popup'ı çıkmalı
+
+### Edge Case'ler
+- Aynı seyahat için ikinci kez bildirim üretilmemeli (`IsReminderSent` flag kontrolü)
+- İptal edilmiş (`Cancelled`) seyahatler için bildirim üretilmemeli
+- Kullanıcı browser push izni vermezse uygulama düzgün çalışmaya devam etmeli

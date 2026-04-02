@@ -1,0 +1,148 @@
+@page "/discovery/{Xid}"
+@attribute [Authorize(Policy = TravelPlannerPermissions.Travels.Default)]
+@inherits TravelPlannerComponentBase
+@using Microsoft.AspNetCore.Authorization
+@using TravelPlanner.Permissions
+@using TravelPlanner.Services.Discovery
+@using Volo.Abp.AspNetCore.Components.Web.Theming.Layout
+@inject IDiscoveryAppService DiscoveryAppService
+
+<PageHeader Title="@(Location?.Name ?? L["Menu:Discovery"])" />
+
+@if (IsLoading)
+{
+    <div class="text-center py-5">
+        <div class="spinner-border text-primary" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+    </div>
+}
+else if (Location == null)
+{
+    <div class="text-center py-5 text-muted">
+        <div style="font-size:4rem;">🗺️</div>
+        <h5 class="mt-3">@L["Discovery:NotFound"]</h5>
+        <Button Color="Color.Primary" Clicked="GoBack" Class="mt-3">
+            <Icon Name="IconName.ArrowLeft" Class="me-1" /> @L["Discovery:BackToDiscovery"]
+        </Button>
+    </div>
+}
+else
+{
+    <!-- Hero Image -->
+    <div class="detail-hero rounded-3 overflow-hidden mb-4 shadow-sm position-relative">
+        <img src="@Location.ImageUrl"
+             alt="@Location.Name"
+             class="detail-hero-img"
+             onerror="this.src='https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=1200&q=80'" />
+        <div class="detail-hero-overlay">
+            <div class="detail-hero-content p-4">
+                <span class="detail-category-badge mb-2 d-inline-block">@Location.CategoryLabel</span>
+                <h1 class="text-white fw-bold mb-1 detail-title">@Location.Name</h1>
+                <p class="text-white-50 mb-2">
+                    <i class="fas fa-map-marker-alt me-1"></i>
+                    @Location.City@(string.IsNullOrWhiteSpace(Location.City) || string.IsNullOrWhiteSpace(Location.Country) ? "" : ", ")@Location.Country
+                </p>
+                <div class="detail-stars">
+                    @for (int i = 0; i < 5; i++)
+                    {
+                        var starIdx = i;
+                        <span class="@(starIdx < Location.Rating ? "detail-star filled" : "detail-star")">★</span>
+                    }
+                    <span class="text-white-50 ms-1 small">(@Location.Rating/5)</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <Row>
+        <!-- Description -->
+        <Column ColumnSize="ColumnSize.Is12.OnMobile.Is8.OnDesktop">
+            <Card Class="mb-4 shadow-sm">
+                <CardHeader>
+                    <CardTitle>
+                        <i class="fas fa-info-circle me-2 text-primary"></i>
+                        @L["Discovery:AboutThisPlace"]
+                    </CardTitle>
+                </CardHeader>
+                <CardBody>
+                    @if (!string.IsNullOrWhiteSpace(Location.Description))
+                    {
+                        <p class="detail-description">@Location.Description</p>
+                    }
+                    else
+                    {
+                        <p class="text-muted">@L["Discovery:NoDescription"]</p>
+                    }
+                </CardBody>
+            </Card>
+
+            <!-- Back Button -->
+            <Button Color="Color.Light" Clicked="GoBack" Class="me-2">
+                <Icon Name="IconName.ArrowLeft" Class="me-1" /> @L["Discovery:BackToDiscovery"]
+            </Button>
+
+            @if (!string.IsNullOrWhiteSpace(Location.WikipediaUrl))
+            {
+                <a href="@Location.WikipediaUrl" target="_blank" class="btn btn-outline-primary">
+                    <i class="fab fa-wikipedia-w me-1"></i> @L["Discovery:ReadOnWikipedia"]
+                </a>
+            }
+        </Column>
+
+        <!-- Info Panel -->
+        <Column ColumnSize="ColumnSize.Is12.OnMobile.Is4.OnDesktop">
+            <Card Class="mb-4 shadow-sm">
+                <CardHeader>
+                    <CardTitle>
+                        <i class="fas fa-map me-2 text-primary"></i>
+                        @L["Discovery:LocationInfo"]
+                    </CardTitle>
+                </CardHeader>
+                <CardBody>
+                    <div class="detail-info-row">
+                        <span class="detail-info-label">
+                            <i class="fas fa-city me-2 text-muted"></i>@L["Discovery:City"]
+                        </span>
+                        <span class="detail-info-value">@(string.IsNullOrWhiteSpace(Location.City) ? "-" : Location.City)</span>
+                    </div>
+                    <div class="detail-info-row">
+                        <span class="detail-info-label">
+                            <i class="fas fa-flag me-2 text-muted"></i>@L["Discovery:Country"]
+                        </span>
+                        <span class="detail-info-value">@(string.IsNullOrWhiteSpace(Location.Country) ? "-" : Location.Country)</span>
+                    </div>
+                    <div class="detail-info-row">
+                        <span class="detail-info-label">
+                            <i class="fas fa-tag me-2 text-muted"></i>@L["Discovery:Category"]
+                        </span>
+                        <span class="detail-info-value">@Location.CategoryLabel</span>
+                    </div>
+                    <div class="detail-info-row">
+                        <span class="detail-info-label">
+                            <i class="fas fa-star me-2 text-muted"></i>@L["Discovery:Rating"]
+                        </span>
+                        <span class="detail-info-value">@Location.Rating / 5</span>
+                    </div>
+                    @if (Location.Latitude != 0 && Location.Longitude != 0)
+                    {
+                        <div class="detail-info-row">
+                            <span class="detail-info-label">
+                                <i class="fas fa-globe me-2 text-muted"></i>@L["Discovery:Coordinates"]
+                            </span>
+                            <span class="detail-info-value small">
+                                @Location.Latitude.ToString("F4"), @Location.Longitude.ToString("F4")
+                            </span>
+                        </div>
+                        <div class="mt-3">
+                            <a href="https://www.google.com/maps?q=@Location.Latitude,@Location.Longitude"
+                               target="_blank" class="btn btn-sm btn-outline-success w-100">
+                                <i class="fas fa-map-marker-alt me-1"></i> @L["Discovery:ViewOnGoogleMaps"]
+                            </a>
+                        </div>
+                    }
+                </CardBody>
+            </Card>
+        </Column>
+    </Row>
+}

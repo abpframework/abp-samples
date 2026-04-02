@@ -1,0 +1,111 @@
+@page "/dashboard"
+@attribute [Authorize(Policy = TravelPlannerPermissions.Travels.Default)]
+@inherits TravelPlannerComponentBase
+@using Microsoft.AspNetCore.Authorization
+@using TravelPlanner.Permissions
+@using TravelPlanner.Services.Travels
+@using TravelPlanner.Entities
+@using Volo.Abp.AspNetCore.Components.Web.Theming.Layout
+@inject ITravelAppService TravelAppService
+@inject NavigationManager NavigationManager
+
+<PageHeader Title="@L["Menu:Dashboard"]" />
+
+<!-- Yaklaşan Seyahatler Kartı -->
+<Row>
+    <Column ColumnSize="ColumnSize.Is12">
+        <Card>
+            <CardHeader>
+                <Row Class="align-items-center">
+                    <Column>
+                        <CardTitle>
+                            <Icon Name="IconName.MapMarker" Class="me-2 text-primary" />
+                            @L["Dashboard:UpcomingTravels"]
+                        </CardTitle>
+                    </Column>
+                    <Column ColumnSize="ColumnSize.IsAuto">
+                        <Badge Color="Color.Primary" Pill="true">@UpcomingTravels.Count</Badge>
+                    </Column>
+                </Row>
+            </CardHeader>
+            <CardBody>
+                @if (IsLoading)
+                {
+                    <div class="text-center py-4">
+                        <div class="spinner-border text-primary" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                    </div>
+                }
+                else if (!UpcomingTravels.Any())
+                {
+                    <div class="text-center py-5 text-muted">
+                        <Icon Name="IconName.Calendar" Style="font-size: 3rem;" Class="mb-3 d-block" />
+                        <p class="mb-0">@L["Dashboard:NoUpcomingTravels"]</p>
+                    </div>
+                }
+                else
+                {
+                    <Row>
+                        @foreach (var travel in UpcomingTravels)
+                        {
+                            var daysLeft = (travel.StartDate - DateTime.Today).Days;
+                            <Column ColumnSize="ColumnSize.Is12.OnMobile.Is6.OnTablet.Is4.OnDesktop" Class="mb-3">
+                                <div class="upcoming-travel-card h-100 p-3 rounded border @GetCardBorderClass(travel.Status)" @onclick="() => NavigateToTravels()" style="cursor: pointer;">
+                                    <div class="d-flex justify-content-between align-items-start mb-2">
+                                        <h6 class="fw-bold mb-0 text-truncate me-2">
+                                            <Icon Name="IconName.Plane" Class="me-1" />
+                                            @travel.TripName
+                                        </h6>
+                                        <Badge Color="@GetStatusColor(travel.Status)" Pill="true">
+                                            @L[$"Enum:TravelStatus.{travel.Status}"]
+                                        </Badge>
+                                    </div>
+
+                                    @if (!string.IsNullOrWhiteSpace(travel.Destination))
+                                    {
+                                        <p class="text-muted small mb-2">
+                                            <Icon Name="IconName.MapMarker" Class="me-1" />
+                                            @travel.Destination
+                                        </p>
+                                    }
+
+                                    <div class="d-flex justify-content-between align-items-center mt-auto">
+                                        <div class="small text-muted">
+                                            <Icon Name="IconName.CalendarDay" Class="me-1" />
+                                            @travel.StartDate.ToString("dd MMM yyyy")
+                                            <span class="mx-1">→</span>
+                                            @travel.EndDate.ToString("dd MMM yyyy")
+                                        </div>
+                                    </div>
+
+                                    <div class="mt-2">
+                                        <div class="d-flex justify-content-between align-items-center mb-1">
+                                            <span class="small fw-semibold @GetDaysLeftClass(daysLeft)">
+                                                @if (daysLeft == 0)
+                                                {
+                                                    <span><Icon Name="IconName.ExclamationTriangle" Class="me-1" />Today!</span>
+                                                }
+                                                else
+                                                {
+                                                    <span>@daysLeft @L["Dashboard:DaysLeft"]</span>
+                                                }
+                                            </span>
+                                            <span class="small text-muted">@GetProgressPercent(daysLeft)%</span>
+                                        </div>
+                                        <div class="progress" style="height: 6px;">
+                                            <div class="progress-bar @GetProgressBarClass(daysLeft)"
+                                                 role="progressbar"
+                                                 style="width: @GetProgressPercent(daysLeft)%">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </Column>
+                        }
+                    </Row>
+                }
+            </CardBody>
+        </Card>
+    </Column>
+</Row>

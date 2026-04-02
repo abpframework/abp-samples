@@ -1,0 +1,143 @@
+@page "/discovery"
+@attribute [Authorize(Policy = TravelPlannerPermissions.Travels.Default)]
+@inherits TravelPlannerComponentBase
+@using Microsoft.AspNetCore.Authorization
+@using TravelPlanner.Permissions
+@using TravelPlanner.Services.Discovery
+@using Volo.Abp.AspNetCore.Components.Web.Theming.Layout
+@inject IDiscoveryAppService DiscoveryAppService
+
+<PageHeader Title="@L["Menu:Discovery"]" />
+
+<!-- Category Filter + Search -->
+<Row Class="mb-4 align-items-center g-2">
+    <Column ColumnSize="ColumnSize.Is12.OnMobile.Is6.OnTablet">
+        <div class="d-flex flex-wrap gap-2">
+            @foreach (var cat in Categories)
+            {
+                <Button Color="@(SelectedCategory == cat.Key ? Color.Primary : Color.Light)"
+                        Size="Size.Small"
+                        Clicked="() => OnCategoryChangedAsync(cat.Key)"
+                        Class="discovery-filter-btn">
+                    @cat.Value
+                </Button>
+            }
+        </div>
+    </Column>
+    <Column ColumnSize="ColumnSize.Is12.OnMobile.Is6.OnTablet">
+        <Addons>
+            <Addon AddonType="AddonType.Start">
+                <AddonLabel><Icon Name="IconName.Search" /></AddonLabel>
+            </Addon>
+            <Addon AddonType="AddonType.Body">
+                <TextEdit Placeholder="@L["Discovery:SearchPlaceholder"]"
+                          Text="@SearchKeyword"
+                          TextChanged="OnSearchChangedAsync" />
+            </Addon>
+        </Addons>
+    </Column>
+</Row>
+
+<!-- Location Cards -->
+@if (IsLoading)
+{
+    <Row>
+        @for (int i = 0; i < 9; i++)
+        {
+            <Column ColumnSize="ColumnSize.Is12.OnMobile.Is6.OnTablet.Is4.OnDesktop" Class="mb-4">
+                <div class="discovery-skeleton rounded-3"></div>
+            </Column>
+        }
+    </Row>
+}
+else if (!Locations.Any())
+{
+    <div class="text-center py-5 text-muted">
+        <div style="font-size:4rem;">🗺️</div>
+        <h5 class="mt-3">@L["Discovery:NoResults"]</h5>
+        <p>@L["Discovery:NoResultsDesc"]</p>
+    </div>
+}
+else
+{
+    <Row>
+        @foreach (var location in Locations)
+        {
+            <Column ColumnSize="ColumnSize.Is12.OnMobile.Is6.OnTablet.Is4.OnDesktop" Class="mb-4">
+                <div class="discovery-card h-100 rounded-3 overflow-hidden shadow-sm"
+                     @onclick="() => NavigateToDetail(location.Xid)"
+                     style="cursor: pointer;">
+
+                    <!-- Image -->
+                    <div class="discovery-card-img-wrapper">
+                        <img src="@location.ImageUrl"
+                             alt="@location.Name"
+                             class="discovery-card-img"
+                             onerror="this.src='https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=600&q=80'" />
+                        <div class="discovery-card-overlay">
+                            <span class="discovery-category-badge">@location.CategoryLabel</span>
+                        </div>
+                        <div class="discovery-rating">
+                            @for (int i = 0; i < 5; i++)
+                            {
+                                var starIdx = i;
+                                <span class="@(starIdx < location.Rating ? "star filled" : "star")">★</span>
+                            }
+                        </div>
+                    </div>
+
+                    <!-- Card Body -->
+                    <div class="discovery-card-body p-3">
+                        <h6 class="fw-bold mb-1 discovery-card-title">@location.Name</h6>
+                        <p class="text-muted small mb-2">
+                            <i class="fas fa-map-marker-alt me-1"></i>
+                            @location.City@(string.IsNullOrWhiteSpace(location.City) || string.IsNullOrWhiteSpace(location.Country) ? "" : ", ")@location.Country
+                        </p>
+                        @if (!string.IsNullOrWhiteSpace(location.Description))
+                        {
+                            <p class="discovery-card-desc small text-secondary mb-0">
+                                @(location.Description.Length > 100
+                                    ? location.Description.Substring(0, 100) + "..."
+                                    : location.Description)
+                            </p>
+                        }
+                        <div class="mt-2 pt-2 border-top d-flex justify-content-between align-items-center">
+                            <small class="text-muted">@L["Discovery:ClickForDetails"]</small>
+                            <i class="fas fa-arrow-right text-primary"></i>
+                        </div>
+                    </div>
+                </div>
+            </Column>
+        }
+    </Row>
+
+    <!-- Pagination -->
+    @if (TotalCount > PageSize)
+    {
+        <Row Class="mt-3">
+            <Column Class="d-flex justify-content-center">
+                <nav>
+                    <ul class="pagination">
+                        <li class="page-item @(CurrentPage == 1 ? "disabled" : "")">
+                            <button class="page-link" @onclick="() => OnPageChangedAsync(CurrentPage - 1)">
+                                <i class="fas fa-chevron-left"></i>
+                            </button>
+                        </li>
+                        @for (int p = 1; p <= TotalPages; p++)
+                        {
+                            var pageNum = p;
+                            <li class="page-item @(CurrentPage == pageNum ? "active" : "")">
+                                <button class="page-link" @onclick="() => OnPageChangedAsync(pageNum)">@pageNum</button>
+                            </li>
+                        }
+                        <li class="page-item @(CurrentPage == TotalPages ? "disabled" : "")">
+                            <button class="page-link" @onclick="() => OnPageChangedAsync(CurrentPage + 1)">
+                                <i class="fas fa-chevron-right"></i>
+                            </button>
+                        </li>
+                    </ul>
+                </nav>
+            </Column>
+        </Row>
+    }
+}

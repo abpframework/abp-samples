@@ -1,0 +1,64 @@
+services:
+  travelplanner-web:
+    image: travelplanner:latest
+    container_name: travelplanner
+    build:
+      context: ../../
+      dockerfile: TravelPlanner.Host/Dockerfile.local
+    environment:
+      - ASPNETCORE_URLS=https://+:8081;http://+:8080;
+      - Kestrel__Certificates__Default__Path=/app/certs/localhost.pfx
+      - Kestrel__Certificates__Default__Password=91f91912-5ab0-49df-8166-23377efaf3cc
+      - App__HealthCheckUrl=http://travelplanner:8080/health-status
+      - ConnectionStrings__Default=DataSource=/data/TravelPlanner.db
+    ports:
+      - "44312:8081"
+    depends_on:
+      sqlite:
+        condition: service_healthy
+    restart: on-failure  
+    volumes:
+      - sqlite_data:/data
+      - ./certs:/app/certs
+    networks:
+      - abp-network  
+  
+  db-migrator:
+    image: travelplanner:latest
+    container_name: db-migrator
+    build:
+      context: ../../
+      dockerfile: TravelPlanner.Host/Dockerfile.local
+    environment:
+      - ConnectionStrings__Default=DataSource=/data/TravelPlanner.db
+    command:
+      - --migrate-database
+    depends_on:
+      sqlite:
+        condition: service_healthy
+    volumes:
+      - sqlite_data:/data
+    networks:
+      - abp-network
+  sqlite:
+    container_name: sqlite-container
+    image: alpine:latest
+    command: sh -c "apk add sqlite && touch /data/TravelPlanner.db && sqlite3 /data/TravelPlanner.db '.databases' && tail -f /dev/null"
+    environment:
+      - TZ=UTC
+    volumes:
+      - sqlite_data:/data
+    networks:
+      - abp-network
+    healthcheck:
+      test: ["CMD-SHELL", "if [ -f /data/TravelPlanner.db ]; then exit 0; else exit 1; fi"]
+      interval: 10s
+      timeout: 3s
+      retries: 10
+volumes:
+  sqlite_data:
+    name: travelplanner_sqlite_data
+networks:
+  abp-network:
+    name: travelplanner-network
+    driver: bridge

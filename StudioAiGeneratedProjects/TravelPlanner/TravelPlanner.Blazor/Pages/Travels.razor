@@ -1,0 +1,401 @@
+@page "/travels"
+@attribute [Authorize(Policy = TravelPlannerPermissions.Travels.Default)]
+@inherits TravelPlannerComponentBase
+@using Microsoft.AspNetCore.Authorization
+@using TravelPlanner.Permissions
+@using TravelPlanner.Services.Travels
+@using TravelPlanner.Entities
+@using Volo.Abp.AspNetCore.Components.Web.Theming.Layout
+@using Volo.Abp.Application.Dtos
+@inject ITravelAppService TravelAppService
+
+<PageHeader Title="@L["Menu:Travels"]" />
+
+<Card>
+    <CardBody>
+        <Row Class="mb-3 align-items-center">
+            <Column>
+                <TextEdit Placeholder="@L["Search"]"
+                          Text="@Filter"
+                          TextChanged="@OnFilterChanged" />
+            </Column>
+            <Column ColumnSize="ColumnSize.IsAuto">
+                <Button Color="Color.Primary"
+                        Clicked="OpenCreateModalAsync"
+                        Permissions="@TravelPlannerPermissions.Travels.Create">
+                    <Icon Name="IconName.Add" />
+                    @L["NewTravel"]
+                </Button>
+            </Column>
+        </Row>
+
+        <DataGrid TItem="TravelDto"
+                  @ref="DataGridRef"
+                  Data="@TravelList"
+                  ReadData="@LoadDataAsync"
+                  TotalItems="@TotalCount"
+                  ShowPager="true"
+                  PageSize="@PageSize"
+                  Striped="true"
+                  Hoverable="true"
+                  Responsive="true"
+                  Sortable="true"
+                  SortMode="DataGridSortMode.Single">
+            <DataGridColumns>
+                <DataGridColumn TItem="TravelDto"
+                                Field="@nameof(TravelDto.TripName)"
+                                Caption="@L["TripName"]"
+                                Sortable="true" />
+                <DataGridColumn TItem="TravelDto"
+                                Field="@nameof(TravelDto.Destination)"
+                                Caption="@L["Destination"]"
+                                Sortable="true" />
+                <DataGridColumn TItem="TravelDto"
+                                Field="@nameof(TravelDto.StartDate)"
+                                Caption="@L["StartDate"]"
+                                Sortable="true">
+                    <DisplayTemplate>
+                        @context.StartDate.ToShortDateString()
+                    </DisplayTemplate>
+                </DataGridColumn>
+                <DataGridColumn TItem="TravelDto"
+                                Field="@nameof(TravelDto.EndDate)"
+                                Caption="@L["EndDate"]"
+                                Sortable="true">
+                    <DisplayTemplate>
+                        @context.EndDate.ToShortDateString()
+                    </DisplayTemplate>
+                </DataGridColumn>
+                <DataGridColumn TItem="TravelDto"
+                                Field="@nameof(TravelDto.Status)"
+                                Caption="@L["Status"]"
+                                Sortable="true">
+                    <DisplayTemplate>
+                        <Badge Color="@GetStatusColor(context.Status)">
+                            @L[$"Enum:TravelStatus.{context.Status}"]
+                        </Badge>
+                    </DisplayTemplate>
+                </DataGridColumn>
+                <DataGridColumn TItem="TravelDto"
+                                Field="@nameof(TravelDto.Notes)"
+                                Caption="@L["Notes"]"
+                                Sortable="true" />
+                <DataGridColumn TItem="TravelDto" Caption="@L["Actions"]">
+                    <DisplayTemplate>
+                        <Buttons>
+                            <Button Color="Color.Warning"
+                                    Size="Size.Small"
+                                    Clicked="() => OpenEditModalAsync(context)"
+                                    Permissions="@TravelPlannerPermissions.Travels.Edit">
+                                <Icon Name="IconName.Edit" />
+                            </Button>
+                            <Button Color="Color.Danger"
+                                    Size="Size.Small"
+                                    Clicked="() => DeleteAsync(context)"
+                                    Permissions="@TravelPlannerPermissions.Travels.Delete">
+                                <Icon Name="IconName.Delete" />
+                            </Button>
+                        </Buttons>
+                    </DisplayTemplate>
+                </DataGridColumn>
+            </DataGridColumns>
+        </DataGrid>
+    </CardBody>
+</Card>
+
+<!-- Create Modal -->
+<Modal @ref="CreateModal" Size="ModalSize.Large">
+    <ModalContent Centered="true">
+        <Form>
+            <ModalHeader>
+                <ModalTitle>@L["NewTravel"]</ModalTitle>
+                <CloseButton Clicked="CloseCreateModalAsync" />
+            </ModalHeader>
+            <ModalBody>
+                <Tabs SelectedTab="@CreateSelectedTab" SelectedTabChanged="@(t => CreateSelectedTab = t)">
+                    <Items>
+                        <Tab Name="general">
+                            <Icon Name="IconName.InfoCircle" /> @L["TripName"]
+                        </Tab>
+                        <Tab Name="transportation">
+                            <Icon Name="IconName.Bus" /> @L["TransportationInformation"]
+                        </Tab>
+                    </Items>
+                    <Content>
+                        <!-- General Tab -->
+                        <TabPanel Name="general">
+                            <Validations @ref="CreateValidationsRef" Model="@NewTravel" ValidateOnLoad="false">
+                                <Validation>
+                                    <Field>
+                                        <FieldLabel>@L["TripName"] *</FieldLabel>
+                                        <TextEdit @bind-Text="@NewTravel.TripName">
+                                            <Feedback><ValidationError /></Feedback>
+                                        </TextEdit>
+                                    </Field>
+                                </Validation>
+                                <Field>
+                                    <FieldLabel>@L["Destination"]</FieldLabel>
+                                    <TextEdit @bind-Text="@NewTravel.Destination" />
+                                </Field>
+                                <Row>
+                                    <Column>
+                                        <Validation>
+                                            <Field>
+                                                <FieldLabel>@L["StartDate"] *</FieldLabel>
+                                                <DateEdit TValue="DateTime" @bind-Date="@NewTravel.StartDate">
+                                                    <Feedback><ValidationError /></Feedback>
+                                                </DateEdit>
+                                            </Field>
+                                        </Validation>
+                                    </Column>
+                                    <Column>
+                                        <Validation>
+                                            <Field>
+                                                <FieldLabel>@L["EndDate"] *</FieldLabel>
+                                                <DateEdit TValue="DateTime" @bind-Date="@NewTravel.EndDate">
+                                                    <Feedback><ValidationError /></Feedback>
+                                                </DateEdit>
+                                            </Field>
+                                        </Validation>
+                                    </Column>
+                                </Row>
+                                <Field>
+                                    <FieldLabel>@L["Status"]</FieldLabel>
+                                    <Select TValue="TravelStatus" @bind-SelectedValue="@NewTravel.Status">
+                                        @foreach (var status in Enum.GetValues<TravelStatus>())
+                                        {
+                                            <SelectItem TValue="TravelStatus" Value="@status">
+                                                @L[$"Enum:TravelStatus.{status}"]
+                                            </SelectItem>
+                                        }
+                                    </Select>
+                                </Field>
+                                <Field>
+                                    <FieldLabel>@L["Notes"]</FieldLabel>
+                                    <MemoEdit @bind-Text="@NewTravel.Notes" Rows="3" />
+                                </Field>
+                            </Validations>
+                        </TabPanel>
+
+                        <!-- Transportation Tab -->
+                        <TabPanel Name="transportation">
+                            @foreach (var (transport, index) in NewTravel.Transportations.Select((t, i) => (t, i)))
+                            {
+                                <Card Margin="Margin.Is2.FromBottom">
+                                    <CardHeader>
+                                        <Row Class="align-items-center">
+                                            <Column>
+                                                <strong>@L[$"Enum:TransportationType.{transport.Type}"]</strong>
+                                                @if (!string.IsNullOrWhiteSpace(transport.FromLocation) || !string.IsNullOrWhiteSpace(transport.ToLocation))
+                                                {
+                                                    <small class="text-muted ms-2">@transport.FromLocation → @transport.ToLocation</small>
+                                                }
+                                            </Column>
+                                            <Column ColumnSize="ColumnSize.IsAuto">
+                                                <Button Color="Color.Danger" Size="Size.Small" Clicked="() => RemoveTransportation(NewTravel, index)">
+                                                    <Icon Name="IconName.Delete" />
+                                                </Button>
+                                            </Column>
+                                        </Row>
+                                    </CardHeader>
+                                    <CardBody>
+                                        @RenderTransportationForm(transport)
+                                    </CardBody>
+                                </Card>
+                            }
+                            <Button Color="Color.Secondary" Outline="true" Clicked="() => AddTransportation(NewTravel)" Class="w-100 mt-2">
+                                <Icon Name="IconName.Add" /> @L["AddTransportation"]
+                            </Button>
+                        </TabPanel>
+                    </Content>
+                </Tabs>
+            </ModalBody>
+            <ModalFooter>
+                <Button Color="Color.Secondary" Clicked="CloseCreateModalAsync">
+                    @L["Cancel"]
+                </Button>
+                <Button Color="Color.Primary" Clicked="CreateAsync">
+                    <Icon Name="IconName.Save" /> @L["Save"]
+                </Button>
+            </ModalFooter>
+        </Form>
+    </ModalContent>
+</Modal>
+
+<!-- Edit Modal -->
+<Modal @ref="EditModal" Size="ModalSize.Large">
+    <ModalContent Centered="true">
+        <Form>
+            <ModalHeader>
+                <ModalTitle>@L["EditTravel"]</ModalTitle>
+                <CloseButton Clicked="CloseEditModalAsync" />
+            </ModalHeader>
+            <ModalBody>
+                <Tabs SelectedTab="@EditSelectedTab" SelectedTabChanged="@(t => EditSelectedTab = t)">
+                    <Items>
+                        <Tab Name="general">
+                            <Icon Name="IconName.InfoCircle" /> @L["TripName"]
+                        </Tab>
+                        <Tab Name="transportation">
+                            <Icon Name="IconName.Bus" /> @L["TransportationInformation"]
+                        </Tab>
+                    </Items>
+                    <Content>
+                        <!-- General Tab -->
+                        <TabPanel Name="general">
+                            <Validations @ref="EditValidationsRef" Model="@EditingTravel" ValidateOnLoad="false">
+                                <Validation>
+                                    <Field>
+                                        <FieldLabel>@L["TripName"] *</FieldLabel>
+                                        <TextEdit @bind-Text="@EditingTravel.TripName">
+                                            <Feedback><ValidationError /></Feedback>
+                                        </TextEdit>
+                                    </Field>
+                                </Validation>
+                                <Field>
+                                    <FieldLabel>@L["Destination"]</FieldLabel>
+                                    <TextEdit @bind-Text="@EditingTravel.Destination" />
+                                </Field>
+                                <Row>
+                                    <Column>
+                                        <Validation>
+                                            <Field>
+                                                <FieldLabel>@L["StartDate"] *</FieldLabel>
+                                                <DateEdit TValue="DateTime" @bind-Date="@EditingTravel.StartDate">
+                                                    <Feedback><ValidationError /></Feedback>
+                                                </DateEdit>
+                                            </Field>
+                                        </Validation>
+                                    </Column>
+                                    <Column>
+                                        <Validation>
+                                            <Field>
+                                                <FieldLabel>@L["EndDate"] *</FieldLabel>
+                                                <DateEdit TValue="DateTime" @bind-Date="@EditingTravel.EndDate">
+                                                    <Feedback><ValidationError /></Feedback>
+                                                </DateEdit>
+                                            </Field>
+                                        </Validation>
+                                    </Column>
+                                </Row>
+                                <Field>
+                                    <FieldLabel>@L["Status"]</FieldLabel>
+                                    <Select TValue="TravelStatus" @bind-SelectedValue="@EditingTravel.Status">
+                                        @foreach (var status in Enum.GetValues<TravelStatus>())
+                                        {
+                                            <SelectItem TValue="TravelStatus" Value="@status">
+                                                @L[$"Enum:TravelStatus.{status}"]
+                                            </SelectItem>
+                                        }
+                                    </Select>
+                                </Field>
+                                <Field>
+                                    <FieldLabel>@L["Notes"]</FieldLabel>
+                                    <MemoEdit @bind-Text="@EditingTravel.Notes" Rows="3" />
+                                </Field>
+                            </Validations>
+                        </TabPanel>
+
+                        <!-- Transportation Tab -->
+                        <TabPanel Name="transportation">
+                            @foreach (var (transport, index) in EditingTravel.Transportations.Select((t, i) => (t, i)))
+                            {
+                                <Card Margin="Margin.Is2.FromBottom">
+                                    <CardHeader>
+                                        <Row Class="align-items-center">
+                                            <Column>
+                                                <strong>@L[$"Enum:TransportationType.{transport.Type}"]</strong>
+                                                @if (!string.IsNullOrWhiteSpace(transport.FromLocation) || !string.IsNullOrWhiteSpace(transport.ToLocation))
+                                                {
+                                                    <small class="text-muted ms-2">@transport.FromLocation → @transport.ToLocation</small>
+                                                }
+                                            </Column>
+                                            <Column ColumnSize="ColumnSize.IsAuto">
+                                                <Button Color="Color.Danger" Size="Size.Small" Clicked="() => RemoveTransportation(EditingTravel, index)">
+                                                    <Icon Name="IconName.Delete" />
+                                                </Button>
+                                            </Column>
+                                        </Row>
+                                    </CardHeader>
+                                    <CardBody>
+                                        @RenderTransportationForm(transport)
+                                    </CardBody>
+                                </Card>
+                            }
+                            <Button Color="Color.Secondary" Outline="true" Clicked="() => AddTransportation(EditingTravel)" Class="w-100 mt-2">
+                                <Icon Name="IconName.Add" /> @L["AddTransportation"]
+                            </Button>
+                        </TabPanel>
+                    </Content>
+                </Tabs>
+            </ModalBody>
+            <ModalFooter>
+                <Button Color="Color.Secondary" Clicked="CloseEditModalAsync">
+                    @L["Cancel"]
+                </Button>
+                <Button Color="Color.Primary" Clicked="UpdateAsync">
+                    <Icon Name="IconName.Save" /> @L["Save"]
+                </Button>
+            </ModalFooter>
+        </Form>
+    </ModalContent>
+</Modal>
+
+@code {
+    private RenderFragment RenderTransportationForm(CreateUpdateTransportationDto t) =>
+        @<div>
+            <Row>
+                <Column>
+                    <Field>
+                        <FieldLabel>@L["TransportationType"] *</FieldLabel>
+                        <Select TValue="TransportationType" @bind-SelectedValue="t.Type">
+                            @foreach (var type in Enum.GetValues<TransportationType>())
+                            {
+                                <SelectItem TValue="TransportationType" Value="@type">
+                                    @L[$"Enum:TransportationType.{type}"]
+                                </SelectItem>
+                            }
+                        </Select>
+                    </Field>
+                </Column>
+                <Column>
+                    <Field>
+                        <FieldLabel>@L["DepartureTime"] *</FieldLabel>
+                        <DateEdit TValue="DateTime" InputMode="DateInputMode.DateTime" @bind-Date="t.DepartureTime" />
+                    </Field>
+                </Column>
+            </Row>
+            <Row>
+                <Column>
+                    <Field>
+                        <FieldLabel>@L["FromLocation"]</FieldLabel>
+                        <TextEdit @bind-Text="t.FromLocation" Placeholder="e.g. Istanbul" />
+                    </Field>
+                </Column>
+                <Column>
+                    <Field>
+                        <FieldLabel>@L["ToLocation"]</FieldLabel>
+                        <TextEdit @bind-Text="t.ToLocation" Placeholder="e.g. London" />
+                    </Field>
+                </Column>
+            </Row>
+            <Row>
+                <Column>
+                    <Field>
+                        <FieldLabel>@L["CompanyName"]</FieldLabel>
+                        <TextEdit @bind-Text="t.CompanyName" Placeholder="e.g. Turkish Airlines" />
+                    </Field>
+                </Column>
+                <Column>
+                    <Field>
+                        <FieldLabel>@L["TicketNumber"]</FieldLabel>
+                        <TextEdit @bind-Text="t.TicketNumber" Placeholder="e.g. TK1234" />
+                    </Field>
+                </Column>
+            </Row>
+            <Field>
+                <FieldLabel>@L["Notes"]</FieldLabel>
+                <MemoEdit @bind-Text="t.Notes" Rows="2" />
+            </Field>
+        </div>;
+}

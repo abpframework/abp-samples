@@ -1,0 +1,9 @@
+<Solution>
+    <Configurations>
+        <Platform Name="Any CPU" />
+    </Configurations>
+
+    <Project Path="TravelPlanner.Contracts/TravelPlanner.Contracts.csproj" />
+    <Project Path="TravelPlanner.Blazor/TravelPlanner.Blazor.csproj" />
+    <Project Path="TravelPlanner.Host/TravelPlanner.Host.csproj" />
+</Solution>

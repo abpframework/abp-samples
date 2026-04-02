@@ -1,0 +1,56 @@
+{
+  "template": "app-nolayers",
+  "imports": {
+    "Volo.Abp.LeptonXLiteTheme": {
+      "version": "5.1.1",
+      "isInstalled": true,
+      "creationTime": "04/01/2026 05:18:44 +00:00"
+    },
+    "Volo.Abp.Account": {
+      "version": "10.1.1",
+      "isInstalled": true,
+      "creationTime": "04/01/2026 05:18:44 +00:00"
+    },
+    "Volo.Abp.OpenIddict": {
+      "version": "10.1.1",
+      "isInstalled": true,
+      "creationTime": "04/01/2026 05:18:44 +00:00"
+    },
+    "Volo.Abp.Identity": {
+      "version": "10.1.1",
+      "isInstalled": true,
+      "creationTime": "04/01/2026 05:18:44 +00:00"
+    },
+    "Volo.Abp.TenantManagement": {
+      "version": "10.1.1",
+      "isInstalled": true,
+      "creationTime": "04/01/2026 05:18:44 +00:00"
+    },
+    "Volo.Abp.SettingManagement": {
+      "version": "10.1.1",
+      "isInstalled": true,
+      "creationTime": "04/01/2026 05:18:44 +00:00"
+    },
+    "Volo.Abp.PermissionManagement": {
+      "version": "10.1.1",
+      "isInstalled": true,
+      "creationTime": "04/01/2026 05:18:44 +00:00"
+    },
+    "Volo.Abp.FeatureManagement": {
+      "version": "10.1.1",
+      "isInstalled": true,
+      "creationTime": "04/01/2026 05:18:44 +00:00"
+    }
+  },
+  "packages": {
+    "TravelPlanner.Blazor": {
+      "path": "TravelPlanner.Blazor/TravelPlanner.Blazor.abppkg"
+    },
+    "TravelPlanner.Host": {
+      "path": "TravelPlanner.Host/TravelPlanner.Host.abppkg"
+    },
+    "TravelPlanner.Contracts": {
+      "path": "TravelPlanner.Contracts/TravelPlanner.Contracts.abppkg"
+    }
+  }
+}

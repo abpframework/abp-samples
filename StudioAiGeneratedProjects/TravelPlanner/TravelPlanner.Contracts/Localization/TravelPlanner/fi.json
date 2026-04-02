@@ -1,0 +1,9 @@
+{
+  "culture": "fi",
+  "texts": {
+    "AppName": "TravelPlanner",
+    "Welcome_Title": "Tervetuloa",
+    "Welcome_Text": "Tämä on minimalistinen yksikerroksinen sovelluksen käynnistysmalli ABP Frameworkille.",
+    "Menu:Home": "Koti"
+  }
+}

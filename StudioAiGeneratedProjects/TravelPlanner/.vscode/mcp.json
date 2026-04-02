@@ -1,0 +1,10 @@
+{
+  "servers": {
+    "abp-studio": {
+      "command": "abptest",
+      "args": [
+        "mcp-studio"
+      ]
+    }
+  }
+}

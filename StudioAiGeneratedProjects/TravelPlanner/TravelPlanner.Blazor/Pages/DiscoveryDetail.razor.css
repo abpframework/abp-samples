@@ -1,0 +1,90 @@
+/* Hero Image */
+.detail-hero {
+    height: 420px;
+    position: relative;
+}
+
+.detail-hero-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.detail-hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.15) 60%, transparent 100%);
+    display: flex;
+    align-items: flex-end;
+}
+
+.detail-hero-content {
+    width: 100%;
+}
+
+.detail-title {
+    font-size: 2rem;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.4);
+}
+
+.detail-category-badge {
+    background: rgba(255,255,255,0.2);
+    color: #fff;
+    font-size: 0.8rem;
+    font-weight: 600;
+    padding: 4px 14px;
+    border-radius: 20px;
+    border: 1px solid rgba(255,255,255,0.35);
+    backdrop-filter: blur(4px);
+}
+
+.detail-star {
+    color: rgba(255,255,255,0.3);
+    font-size: 1.3rem;
+}
+
+.detail-star.filled {
+    color: #FFD700;
+    text-shadow: 0 0 6px rgba(0,0,0,0.3);
+}
+
+/* Info rows */
+.detail-info-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 0;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.detail-info-row:last-of-type {
+    border-bottom: none;
+}
+
+.detail-info-label {
+    color: #666;
+    font-size: 0.88rem;
+}
+
+.detail-info-value {
+    font-weight: 600;
+    color: #1a1a2e;
+    font-size: 0.88rem;
+}
+
+/* Description */
+.detail-description {
+    color: #444;
+    line-height: 1.8;
+    font-size: 1rem;
+}
+
+@media (max-width: 768px) {
+    .detail-hero {
+        height: 260px;
+    }
+
+    .detail-title {
+        font-size: 1.4rem;
+    }
+}

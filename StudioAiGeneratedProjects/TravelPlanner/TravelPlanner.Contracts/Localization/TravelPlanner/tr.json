@@ -1,0 +1,29 @@
+{
+  "culture": "tr",
+  "texts": {
+    "AppName": "TravelPlanner",
+    "Welcome_Title": "Hoşgeldiniz",
+    "Welcome_Text": "Bu proje tek katmanlı ABP uygulamaları yapmak için bir başlangıç şablonudur.",
+    "Menu:Home": "Ana sayfa",
+    "Menu:Travels": "Seyahatler",
+    "Travels:TripName": "Seyahat adı",
+    "TripName": "Seyahat Adı",
+    "StartDate": "Başlangıç Tarihi",
+    "EndDate": "Bitiş Tarihi",
+    "Status": "Durum",
+    "Destination": "Hedef",
+    "Notes": "Notlar",
+    "NewTravel": "Yeni Seyahat",
+    "EditTravel": "Seyahati Düzenle",
+    "Actions": "İşlemler",
+    "Search": "Ara...",
+    "Save": "Kaydet",
+    "Cancel": "İptal",
+    "DeletionConfirmationMessage": "'{0}' adlı seyahati silmek istediğinizden emin misiniz?",
+    "Enum:TravelStatus.Draft": "Taslak",
+    "Enum:TravelStatus.Planned": "Planlandı",
+    "Enum:TravelStatus.Ongoing": "Devam Ediyor",
+    "Enum:TravelStatus.Completed": "Tamamlandı",
+    "Enum:TravelStatus.Cancelled": "İptal Edildi"
+  }
+}

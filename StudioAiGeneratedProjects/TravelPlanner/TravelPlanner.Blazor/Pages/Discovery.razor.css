@@ -1,0 +1,130 @@
+/* Discovery Card */
+.discovery-card {
+    background: #fff;
+    border: 1px solid #e8ecef;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.discovery-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 32px rgba(41, 171, 226, 0.18) !important;
+    border-color: #29ABE2;
+}
+
+/* Image wrapper */
+.discovery-card-img-wrapper {
+    position: relative;
+    height: 200px;
+    overflow: hidden;
+}
+
+.discovery-card-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.35s ease;
+}
+
+.discovery-card:hover .discovery-card-img {
+    transform: scale(1.05);
+}
+
+/* Gradient overlay */
+.discovery-card-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.45) 100%);
+    display: flex;
+    align-items: flex-start;
+    padding: 10px;
+}
+
+/* Category badge on image */
+.discovery-category-badge {
+    background: rgba(255,255,255,0.92);
+    color: #333;
+    font-size: 0.72rem;
+    font-weight: 600;
+    padding: 3px 10px;
+    border-radius: 20px;
+    backdrop-filter: blur(4px);
+}
+
+/* Star rating */
+.discovery-rating {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+}
+
+.star {
+    color: rgba(255,255,255,0.4);
+    font-size: 1rem;
+}
+
+.star.filled {
+    color: #FFD700;
+    text-shadow: 0 0 4px rgba(0,0,0,0.4);
+}
+
+/* Card body */
+.discovery-card-body {
+    background: #fff;
+}
+
+.discovery-card-title {
+    color: #1a1a2e;
+    font-size: 1rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.discovery-card-desc {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    line-height: 1.5;
+}
+
+/* Filter buttons */
+.discovery-filter-btn {
+    border-radius: 20px !important;
+    font-size: 0.82rem;
+    padding: 4px 14px !important;
+    transition: all 0.2s ease;
+}
+
+/* Skeleton loading */
+.discovery-skeleton {
+    height: 320px;
+    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.4s infinite;
+}
+
+@keyframes shimmer {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+}
+
+/* Pagination */
+.page-link {
+    color: #29ABE2;
+    border-color: #dee2e6;
+}
+
+.page-item.active .page-link {
+    background-color: #29ABE2;
+    border-color: #29ABE2;
+    color: #fff;
+}
+
+.page-link:hover {
+    color: #0288D1;
+    background-color: #f0f8ff;
+}

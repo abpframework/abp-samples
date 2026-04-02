@@ -1,0 +1,115 @@
+#ApplicationContainer > div:first-child:not(:only-child) {
+    display: none !important;
+}
+
+#blazor-error-ui {
+    background: lightyellow;
+    bottom: 0;
+    box-shadow: 0 -1px 2px rgba(0, 0, 0, 0.2);
+    display: none;
+    left: 0;
+    padding: 0.6rem 1.25rem 0.7rem 1.25rem;
+    position: fixed;
+    width: 100%;
+    z-index: 1000;
+}
+
+    #blazor-error-ui .dismiss {
+        cursor: pointer;
+        position: absolute;
+        right: 0.75rem;
+        top: 0.5rem;
+        text-decoration: none;
+    }
+
+/* 
+    loader
+*/
+.loader {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 999;
+    background-color: #f1f1f2;
+  }
+
+:root {
+    --lpx-logo: url('/images/logo/leptonxlite/logo-light-thumbnail.png') !important;
+    --lpx-logo-icon: url('/images/logo/leptonxlite/logo-light-thumbnail.png') !important;
+
+    /* ===== Light Blue Theme ===== */
+
+    /* LeptonX variables */
+    --lpx-brand: #29ABE2;
+    --lpx-brand-text: #ffffff;
+    --lpx-light: #E1F5FE;
+    --lpx-dark: #0277BD;
+    --lpx-content-bg: #F0F8FF;
+    --lpx-content-text: #1a3a4a;
+    --lpx-card-bg: #ffffff;
+    --lpx-card-title-text-color: #0288D1;
+    --lpx-border-color: #B3E5FC;
+    --lpx-shadow: 0 2px 8px rgba(41, 171, 226, 0.15);
+    --lpx-navbar-color: #0288D1;
+    --lpx-navbar-text-color: #E1F5FE;
+    --lpx-navbar-active-text-color: #ffffff;
+    --lpx-navbar-active-bg-color: rgba(255, 255, 255, 0.25);
+    --lpx-radius: 6px;
+
+    /* Bootstrap 5 variables (used by Blazorise + LeptonX buttons/links) */
+    --bs-primary: #29ABE2;
+    --bs-primary-rgb: 41, 171, 226;
+    --bs-link-color: #0288D1;
+    --bs-link-hover-color: #0277BD;
+    --bs-body-bg: #F0F8FF;
+    --bs-body-color: #1a3a4a;
+    --bs-border-color: #B3E5FC;
+}
+:root .abp-account-layout .lpx-brand-logo{
+    --lpx-logo: url('/images/logo/leptonxlite/logo-dark-thumbnail.png') !important;
+    background-position: left;
+}
+
+/* Primary buttons */
+.btn-primary {
+    background-color: #29ABE2 !important;
+    border-color: #29ABE2 !important;
+    color: #ffffff !important;
+}
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary:active {
+    background-color: #0288D1 !important;
+    border-color: #0277BD !important;
+    color: #ffffff !important;
+}
+
+/* Sidebar / Navbar */
+.lpx-sidebar-container,
+.lpx-left-menu-container {
+    background-color: #0288D1 !important;
+}
+
+.lpx-nav-menu-item .lpx-nav-menu-link:hover,
+.lpx-nav-menu-item.active > .lpx-nav-menu-link {
+    background-color: rgba(255,255,255,0.2) !important;
+    color: #ffffff !important;
+}
+
+/* Top navbar */
+.lpx-toolbar-container {
+    background-color: #0299D1 !important;
+    border-bottom: 1px solid #B3E5FC !important;
+}
+
+/* Links */
+a, a:visited {
+    color: #0288D1;
+}
+a:hover {
+    color: #0277BD;
+}

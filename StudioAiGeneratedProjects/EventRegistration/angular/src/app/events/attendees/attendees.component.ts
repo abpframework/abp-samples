@@ -15,6 +15,11 @@ import {
   UpdateAttendeeDto,
 } from '../../proxy/events';
 
+const AVATAR_COLORS = [
+  '#4361ee', '#2ec4b6', '#ef476f', '#ffd166', '#118ab2',
+  '#073b4c', '#8338ec', '#ff6b6b', '#06d6a0', '#f77f00',
+];
+
 @Component({
   selector: 'app-attendees',
   standalone: true,
@@ -67,6 +72,15 @@ export class AttendeesComponent implements OnInit {
     ).subscribe(res => {
       this.data = res;
     });
+  }
+
+  getCapacityPercent(): number {
+    if (!this.event?.capacity) return 0;
+    return Math.min(100, Math.round((this.event.attendeeCount / this.event.capacity) * 100));
+  }
+
+  getAvatarColor(index: number): string {
+    return AVATAR_COLORS[index % AVATAR_COLORS.length];
   }
 
   openCreateModal(): void {

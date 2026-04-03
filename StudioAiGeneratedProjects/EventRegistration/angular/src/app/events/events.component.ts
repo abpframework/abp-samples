@@ -33,6 +33,19 @@ export class EventsComponent implements OnInit {
   isModalOpen = false;
   modalBusy = false;
 
+  // Computed stats
+  get activeCount(): number {
+    return (this.data.items || []).filter(e => !e.isCancelled).length;
+  }
+
+  get cancelledCount(): number {
+    return (this.data.items || []).filter(e => e.isCancelled).length;
+  }
+
+  get totalAttendees(): number {
+    return (this.data.items || []).reduce((sum, e) => sum + (e.attendeeCount || 0), 0);
+  }
+
   get totalPages(): number {
     return Math.ceil(this.data.totalCount / this.list.maxResultCount);
   }
@@ -50,6 +63,11 @@ export class EventsComponent implements OnInit {
     this.canViewAttendees = this.permissionService.getGrantedPolicy('EventRegistration.Events.Attendees');
 
     this.hookToQuery();
+  }
+
+  getCapacityPercent(event: EventDto): number {
+    if (!event.capacity) return 0;
+    return Math.min(100, Math.round((event.attendeeCount / event.capacity) * 100));
   }
 
   private hookToQuery(): void {
@@ -145,7 +163,6 @@ export class EventsComponent implements OnInit {
   private toDateInputValue(dateStr: string): string {
     if (!dateStr) return '';
     const d = new Date(dateStr);
-    // Format: YYYY-MM-DDTHH:mm for datetime-local input
     const pad = (n: number) => n.toString().padStart(2, '0');
     return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}T${pad(d.getHours())}:${pad(d.getMinutes())}`;
   }

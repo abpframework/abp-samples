@@ -1,0 +1,82 @@
+@page "/module-page"
+@page "/{culture}/module-page"
+@using System.Globalization
+
+@code {
+    [Parameter]
+    public string? Culture { get; set; }
+}
+
+<div class="container py-5">
+    <div class="row">
+        <div class="col-md-10 offset-md-1">
+
+            <div class="card shadow-sm mb-4">
+                <div class="card-body p-5">
+                    <h1 class="card-title mb-3">Demo Module Page</h1>
+                    <p class="lead text-muted">
+                        This page demonstrates the same dual-route pattern that ABP built-in module pages
+                        (Identity Users, Settings, Tenant Management, etc.) now use.
+                    </p>
+
+                    <hr />
+
+                    <table class="table table-bordered">
+                        <tr>
+                            <th>Culture from URL <code>@("{culture}")</code></th>
+                            <td>
+                                @if (string.IsNullOrEmpty(Culture))
+                                {
+                                    <span class="text-muted">— (no culture prefix in URL)</span>
+                                }
+                                else
+                                {
+                                    <span class="badge bg-primary fs-6">@Culture</span>
+                                }
+                            </td>
+                        </tr>
+                        <tr>
+                            <th><code>CultureInfo.CurrentCulture</code></th>
+                            <td><span class="badge bg-success fs-6">@CultureInfo.CurrentCulture.Name</span></td>
+                        </tr>
+                    </table>
+
+                    <div class="alert alert-success">
+                        <strong>Route matching works.</strong> Both <code>/module-page</code> and
+                        <code>/{culture}/module-page</code> are registered on this component — exactly
+                        the pattern applied to ABP module pages.
+                    </div>
+                </div>
+            </div>
+
+            <div class="card border-secondary mb-4">
+                <div class="card-header">Registered routes on this component</div>
+                <div class="card-body">
+                    <pre class="mb-0"><code>@@page "/module-page"
+@@page "/{culture}/module-page"
+
+@@code {
+    [Parameter]
+    public string? Culture { get; set; }
+}</code></pre>
+                </div>
+            </div>
+
+            <div class="card border-info mb-4">
+                <div class="card-header bg-info text-white">Try these URLs directly</div>
+                <div class="card-body">
+                    <ul class="mb-0">
+                        <li><code>/module-page</code> — no culture prefix, culture from cookie</li>
+                        <li><code>/en/module-page</code></li>
+                        <li><code>/tr/module-page</code></li>
+                        <li><code>/fr/module-page</code></li>
+                        <li><code>/zh-Hans/module-page</code></li>
+                    </ul>
+                </div>
+            </div>
+
+            <a href="/" class="btn btn-outline-secondary">← Home</a>
+
+        </div>
+    </div>
+</div>

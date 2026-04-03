@@ -1,0 +1,21 @@
+{
+  "Culture": "en",
+  "Texts": {
+    "AppName": "URL-Based Localization Sample",
+    "Menu:Home": "Home",
+    "Menu:About": "About",
+    "Home:Title": "Welcome!",
+    "Home:Description": "This sample demonstrates ABP's URL-based localization feature.",
+    "Home:CurrentCulture": "Current culture (from URL)",
+    "Home:TryIt": "Try switching the language above and notice how the URL changes.",
+    "Home:TryLanguages": "Try different languages",
+    "Home:UrlExample": "URL examples",
+    "About:Title": "About This Sample",
+    "About:Description": "URL-based localization embeds the culture code directly in the URL path, for example <strong>/tr/about</strong> or <strong>/en/about</strong>. Each language has its own stable URL, which is friendly for SEO and link sharing.",
+    "About:HowItWorks": "Configuration",
+    "About:HowItWorksDetail": "A single configuration enables the feature: <code>options.UseRouteBasedCulture = true</code>. ABP automatically handles route registration, URL generation, menu links, and language switching.",
+    "About:MiddlewareOrder": "Blazor pages",
+    "About:MiddlewareOrderDetail": "Blazor component routes require a manual <code>@page \"/{culture}/...\"</code> directive on each page. MVC and Razor Pages routes are added automatically.",
+    "About:ApiRoutes": "API routes (e.g., <code>/api/...</code>) are not affected — they have no culture segment in the URL path."
+  }
+}

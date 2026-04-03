@@ -1,0 +1,4 @@
+@using Microsoft.AspNetCore.Mvc.Localization
+@using Volo.Abp.Account.Localization
+@inject IHtmlLocalizer<AccountResource> L
+<a class="nav-link" role="button" href="@Url.Page("/Account/Login")">@L["Login"]</a>

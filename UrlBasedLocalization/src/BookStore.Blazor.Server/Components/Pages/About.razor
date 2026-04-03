@@ -1,0 +1,47 @@
+@page "/About"
+@page "/{culture}/About"
+@using Microsoft.Extensions.Localization
+@using BookStore.Localization
+@inject IStringLocalizer<BookStoreResource> L
+
+@code {
+    [Parameter]
+    public string? Culture { get; set; }
+}
+
+<div class="container py-5">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <div class="card shadow-sm">
+                <div class="card-body p-5">
+                    <h1 class="card-title mb-4">@L["About:Title"]</h1>
+                    <p class="lead text-muted">@((MarkupString)L["About:Description"].Value)</p>
+
+                    <hr />
+
+                    <h5>@L["About:HowItWorks"]</h5>
+                    <p>@((MarkupString)L["About:HowItWorksDetail"].Value)</p>
+
+                    <h5>@L["About:MiddlewareOrder"]</h5>
+                    <p>@((MarkupString)L["About:MiddlewareOrderDetail"].Value)</p>
+
+                    <div class="alert alert-info">
+                        @((MarkupString)L["About:ApiRoutes"].Value)
+                    </div>
+
+                    <div class="card bg-light mt-4">
+                        <div class="card-body">
+                            <h6 class="card-subtitle mb-3 text-muted">Configuration</h6>
+                            <pre class="mb-0"><code>Configure&lt;AbpRequestLocalizationOptions&gt;(options =&gt;
+{
+    options.UseRouteBasedCulture = true;
+});</code></pre>
+                        </div>
+                    </div>
+
+                    <a href="/" class="btn btn-outline-secondary mt-4">← @L["Menu:Home"]</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

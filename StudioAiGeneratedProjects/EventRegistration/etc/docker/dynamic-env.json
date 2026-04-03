@@ -1,0 +1,21 @@
+{
+  "production": true,
+  "application": {
+    "baseUrl":"http://localhost:4200",
+    "name": "EventRegistration",
+    "logoUrl": ""
+  },
+  "oAuthConfig": {
+    "issuer": "https://localhost:44382",
+    "redirectUri": "https://localhost:44382",
+    "clientId": "EventRegistration_App",
+    "responseType": "code",
+    "scope": "offline_access openid profile email phone EventRegistration"
+  },
+  "apis": {
+    "default": {
+      "url": "https://localhost:44382",
+      "rootNamespace": "EventRegistration"
+    }
+  }
+}

@@ -1,0 +1,259 @@
+<div class="container-fluid py-4">
+  <!-- Back + Page Header -->
+  <a routerLink="/events" class="er-back-btn mb-3">
+    <i class="fa fa-arrow-left"></i>
+    {{ '::BackToEvents' | abpLocalization }}
+  </a>
+
+  <div class="er-page-header">
+    <div>
+      <h1 class="er-page-title">
+        <span class="er-page-icon"><i class="fa fa-users"></i></span>
+        {{ '::Event:Attendees' | abpLocalization }}
+      </h1>
+      <p class="er-page-subtitle" *ngIf="event">{{ event.title }}</p>
+    </div>
+    <button *ngIf="canCreate && event && !event.isCancelled" class="er-btn btn-primary" (click)="openCreateModal()">
+      <i class="fa fa-user-plus"></i>
+      {{ '::Attendee:New' | abpLocalization }}
+    </button>
+  </div>
+
+  <!-- Event Info Banner -->
+  <div class="er-info-banner" *ngIf="event">
+    <div class="er-banner-title">{{ event.title }}</div>
+    <div class="er-banner-stats">
+      <div class="er-banner-stat">
+        <div class="stat-label">{{ '::Event:Location' | abpLocalization }}</div>
+        <div class="stat-value"><i class="fa fa-map-marker-alt me-1"></i>{{ event.location }}</div>
+      </div>
+      <div class="er-banner-stat">
+        <div class="stat-label">{{ '::Event:StartDate' | abpLocalization }}</div>
+        <div class="stat-value">{{ event.startDate | date:'medium' }}</div>
+      </div>
+      <div class="er-banner-stat">
+        <div class="stat-label">{{ '::Event:EndDate' | abpLocalization }}</div>
+        <div class="stat-value">{{ event.endDate | date:'medium' }}</div>
+      </div>
+      <div class="er-banner-stat">
+        <div class="stat-label">{{ '::Event:Capacity' | abpLocalization }}</div>
+        <div class="stat-value">
+          {{ event.attendeeCount }} / {{ event.capacity }}
+          <span class="ms-2" style="opacity: 0.7; font-size: 0.8rem;">
+            ({{ getCapacityPercent() }}%)
+          </span>
+        </div>
+      </div>
+      <div class="er-banner-stat">
+        <div class="stat-label">{{ '::Event:Status' | abpLocalization }}</div>
+        <div class="stat-value">
+          <span
+            class="er-badge"
+            [class.badge-success]="!event.isCancelled"
+            [class.badge-danger]="event.isCancelled"
+            style="color: #fff; background: rgba(255,255,255,0.2);"
+          >
+            <i [class]="event.isCancelled ? 'fa fa-times-circle' : 'fa fa-check-circle'"></i>
+            {{ (event.isCancelled ? '::Event:StatusCancelled' : '::Event:StatusActive') | abpLocalization }}
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Attendees Card -->
+  <div class="er-card">
+    <div class="card-body">
+      <div class="er-table-wrapper">
+        <table class="er-table">
+          <thead>
+            <tr>
+              <th style="width: 90px;">{{ '::Actions' | abpLocalization }}</th>
+              <th>{{ '::Attendee:FullName' | abpLocalization }}</th>
+              <th>{{ '::Attendee:Email' | abpLocalization }}</th>
+              <th>{{ '::Attendee:PhoneNumber' | abpLocalization }}</th>
+              <th>{{ '::Attendee:RegisteredAt' | abpLocalization }}</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let attendee of data.items; let i = index">
+              <td>
+                <div class="d-flex gap-1">
+                  <button
+                    *ngIf="canEdit"
+                    class="er-action-btn action-edit"
+                    (click)="openEditModal(attendee)"
+                    [title]="'::Edit' | abpLocalization"
+                  >
+                    <i class="fa fa-pen"></i>
+                  </button>
+                  <button
+                    *ngIf="canDelete"
+                    class="er-action-btn action-delete"
+                    (click)="deleteAttendee(attendee)"
+                    [title]="'::Delete' | abpLocalization"
+                  >
+                    <i class="fa fa-trash-alt"></i>
+                  </button>
+                </div>
+              </td>
+              <td>
+                <div class="d-flex align-items-center gap-2">
+                  <div
+                    class="d-flex align-items-center justify-content-center rounded-circle text-white fw-bold"
+                    [style.width.px]="36"
+                    [style.height.px]="36"
+                    [style.font-size.rem]="0.8"
+                    [style.background]="getAvatarColor(i)"
+                    [style.flex-shrink]="0"
+                  >
+                    {{ attendee.firstName.charAt(0) }}{{ attendee.lastName.charAt(0) }}
+                  </div>
+                  <div>
+                    <div class="fw-semibold">{{ attendee.firstName }} {{ attendee.lastName }}</div>
+                  </div>
+                </div>
+              </td>
+              <td>
+                <a [href]="'mailto:' + attendee.email" class="text-decoration-none">
+                  <i class="fa fa-envelope text-muted me-1" style="font-size: 0.8rem;"></i>
+                  {{ attendee.email }}
+                </a>
+              </td>
+              <td>
+                <span *ngIf="attendee.phoneNumber">
+                  <i class="fa fa-phone text-muted me-1" style="font-size: 0.8rem;"></i>
+                  {{ attendee.phoneNumber }}
+                </span>
+                <span *ngIf="!attendee.phoneNumber" class="text-muted">—</span>
+              </td>
+              <td>
+                <div class="fw-medium">{{ attendee.creationTime | date:'mediumDate' }}</div>
+                <small class="text-muted">{{ attendee.creationTime | date:'shortTime' }}</small>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <!-- Empty State -->
+        <div class="er-empty-state" *ngIf="!data.items?.length">
+          <div class="er-empty-icon"><i class="fa fa-user-slash"></i></div>
+          <div class="er-empty-title">{{ '::Attendee:EmptyTitle' | abpLocalization }}</div>
+          <div class="er-empty-text">{{ '::Attendee:EmptyHint' | abpLocalization }}</div>
+        </div>
+      </div>
+
+      <!-- Pagination -->
+      <div class="er-pagination" *ngIf="data.totalCount > 0">
+        <span class="er-pagination-info">
+          {{ '::TotalRecords' | abpLocalization }}: <strong>{{ data.totalCount }}</strong>
+        </span>
+        <nav>
+          <ul class="pagination mb-0">
+            <li class="page-item" [class.disabled]="list.page === 0">
+              <a class="page-link" href="javascript:;" (click)="list.page = list.page - 1">
+                <i class="fa fa-chevron-left"></i>
+              </a>
+            </li>
+            <li
+              class="page-item"
+              *ngFor="let p of [].constructor(attendeeTotalPages); let i = index"
+              [class.active]="i === list.page"
+            >
+              <a class="page-link" href="javascript:;" (click)="list.page = i">{{ i + 1 }}</a>
+            </li>
+            <li class="page-item" [class.disabled]="list.page >= attendeeTotalPages - 1">
+              <a class="page-link" href="javascript:;" (click)="list.page = list.page + 1">
+                <i class="fa fa-chevron-right"></i>
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Create/Edit Attendee Modal -->
+<ng-container *ngIf="isModalOpen">
+  <div class="er-modal-overlay" (click)="closeModal()"></div>
+  <div class="er-modal">
+    <div class="er-modal-content">
+      <div class="er-modal-header">
+        <h5 class="er-modal-title">
+          <i [class]="selectedAttendee ? 'fa fa-user-edit' : 'fa fa-user-plus'"></i>
+          {{ (selectedAttendee ? '::Attendee:Edit' : '::Attendee:Create') | abpLocalization }}
+        </h5>
+        <button class="er-modal-close" (click)="closeModal()">
+          <i class="fa fa-times"></i>
+        </button>
+      </div>
+      <form [formGroup]="form" (ngSubmit)="save()">
+        <div class="er-modal-body">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="er-form-group">
+                <label class="er-form-label">
+                  {{ '::Attendee:FirstName' | abpLocalization }} <span class="required">*</span>
+                </label>
+                <input
+                  type="text"
+                  class="er-form-control"
+                  formControlName="firstName"
+                  maxlength="128"
+                  [placeholder]="'::Attendee:FirstNamePlaceholder' | abpLocalization"
+                />
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="er-form-group">
+                <label class="er-form-label">
+                  {{ '::Attendee:LastName' | abpLocalization }} <span class="required">*</span>
+                </label>
+                <input
+                  type="text"
+                  class="er-form-control"
+                  formControlName="lastName"
+                  maxlength="128"
+                  [placeholder]="'::Attendee:LastNamePlaceholder' | abpLocalization"
+                />
+              </div>
+            </div>
+          </div>
+          <div class="er-form-group">
+            <label class="er-form-label">
+              {{ '::Attendee:Email' | abpLocalization }} <span class="required">*</span>
+            </label>
+            <input
+              type="email"
+              class="er-form-control"
+              formControlName="email"
+              maxlength="256"
+              [placeholder]="'::Attendee:EmailPlaceholder' | abpLocalization"
+            />
+          </div>
+          <div class="er-form-group">
+            <label class="er-form-label">{{ '::Attendee:PhoneNumber' | abpLocalization }}</label>
+            <input
+              type="tel"
+              class="er-form-control"
+              formControlName="phoneNumber"
+              maxlength="32"
+              [placeholder]="'::Attendee:PhonePlaceholder' | abpLocalization"
+            />
+          </div>
+        </div>
+        <div class="er-modal-footer">
+          <button type="button" class="er-btn btn-secondary" (click)="closeModal()">
+            {{ '::Cancel' | abpLocalization }}
+          </button>
+          <button type="submit" class="er-btn btn-primary" [disabled]="form.invalid || modalBusy">
+            <i class="fa fa-spinner fa-spin" *ngIf="modalBusy"></i>
+            <i class="fa fa-check" *ngIf="!modalBusy"></i>
+            {{ '::Save' | abpLocalization }}
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</ng-container>

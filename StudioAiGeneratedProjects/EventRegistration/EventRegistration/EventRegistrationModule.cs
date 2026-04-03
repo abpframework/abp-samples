@@ -371,6 +371,7 @@ public class EventRegistrationModule : AbpModule
         });
     }
 
+
     private void ConfigureEfCore(ServiceConfigurationContext context)
     {
         context.Services.AddAbpDbContext<EventRegistrationDbContext>(options =>

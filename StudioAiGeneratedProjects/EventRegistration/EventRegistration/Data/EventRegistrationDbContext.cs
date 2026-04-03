@@ -10,6 +10,7 @@ using Volo.Abp.OpenIddict.EntityFrameworkCore;
 using Volo.Abp.PermissionManagement.EntityFrameworkCore;
 using Volo.Abp.SettingManagement.EntityFrameworkCore;
 using Volo.Abp.TenantManagement.EntityFrameworkCore;
+using EventRegistration.Entities;
 
 namespace EventRegistration.Data;
 
@@ -18,6 +19,9 @@ public class EventRegistrationDbContext : AbpDbContext<EventRegistrationDbContex
     
     public const string DbTablePrefix = "App";
     public const string DbSchema = null;
+
+    public DbSet<Event> Events { get; set; }
+    public DbSet<Attendee> Attendees { get; set; }
 
     public EventRegistrationDbContext(DbContextOptions<EventRegistrationDbContext> options)
         : base(options)
@@ -41,6 +45,41 @@ public class EventRegistrationDbContext : AbpDbContext<EventRegistrationDbContex
         builder.ConfigureTenantManagement();
         
         /* Configure your own entities here */
+
+        builder.Entity<Event>(b =>
+        {
+            b.ToTable(DbTablePrefix + "Events", DbSchema);
+            b.ConfigureByConvention();
+
+            b.Property(x => x.Title).IsRequired().HasMaxLength(EventConsts.MaxTitleLength);
+            b.Property(x => x.Description).HasMaxLength(EventConsts.MaxDescriptionLength);
+            b.Property(x => x.Location).IsRequired().HasMaxLength(EventConsts.MaxLocationLength);
+            b.Property(x => x.Capacity).IsRequired();
+            b.Property(x => x.IsCancelled).IsRequired().HasDefaultValue(false);
+
+            b.HasMany(x => x.Attendees)
+                .WithOne()
+                .HasForeignKey(x => x.EventId)
+                .IsRequired();
+
+            b.Navigation(x => x.Attendees).UsePropertyAccessMode(PropertyAccessMode.Field);
+
+            b.HasIndex(x => x.StartDate);
+            b.HasIndex(x => x.Title);
+        });
+
+        builder.Entity<Attendee>(b =>
+        {
+            b.ToTable(DbTablePrefix + "Attendees", DbSchema);
+            b.ConfigureByConvention();
+
+            b.Property(x => x.FirstName).IsRequired().HasMaxLength(AttendeeConsts.MaxFirstNameLength);
+            b.Property(x => x.LastName).IsRequired().HasMaxLength(AttendeeConsts.MaxLastNameLength);
+            b.Property(x => x.Email).IsRequired().HasMaxLength(AttendeeConsts.MaxEmailLength);
+            b.Property(x => x.PhoneNumber).HasMaxLength(AttendeeConsts.MaxPhoneNumberLength);
+
+            b.HasIndex(x => new { x.EventId, x.Email });
+        });
     }
 }
 

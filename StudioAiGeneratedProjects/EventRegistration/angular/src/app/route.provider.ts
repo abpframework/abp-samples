@@ -17,5 +17,13 @@ function configureRoutes() {
       order: 1,
       layout: eLayoutType.application,
     },
+    {
+      path: '/events',
+      name: '::Menu:Events',
+      iconClass: 'fas fa-calendar',
+      order: 2,
+      layout: eLayoutType.application,
+      requiredPolicy: 'EventRegistration.Events',
+    },
   ]);
 }

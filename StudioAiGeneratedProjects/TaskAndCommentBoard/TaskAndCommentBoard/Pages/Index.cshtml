@@ -1,0 +1,222 @@
+@page
+@using Microsoft.AspNetCore.Mvc.Localization
+@using TaskAndCommentBoard.Localization
+@using TaskAndCommentBoard.Menus
+@using Volo.Abp.AspNetCore.Mvc.UI.Layout
+@inject IHtmlLocalizer<TaskAndCommentBoardResource> L
+@model TaskAndCommentBoard.Pages.IndexModel
+@inject IPageLayout PageLayout
+@{
+    PageLayout.Content.Title = L["Menu:Home"].Value;
+    PageLayout.Content.BreadCrumb.ShowCurrent = false;
+    PageLayout.Content.ShowToolbar = false;
+    PageLayout.Content.MenuItemName = TaskAndCommentBoardMenus.Home;
+}
+
+<div class="marketing-landing">
+    <div class="marketing-shell">
+        <section class="marketing-hero">
+            <div class="marketing-hero__bg-orb marketing-hero__bg-orb--one"></div>
+            <div class="marketing-hero__bg-orb marketing-hero__bg-orb--two"></div>
+
+            <div class="marketing-hero__content">
+                <span class="marketing-chip">Built for modern SaaS teams</span>
+                <h1>Turn team chaos into clear progress.</h1>
+                <p>
+                    Task & Comment Board is a lightweight issue-driven workspace where teams create tasks,
+                    collaborate in threaded comments, and keep product delivery moving — without project-management bloat.
+                </p>
+                <div class="marketing-hero__actions">
+                    <a href="/Tasks" class="btn btn-lg board-primary-button">
+                        <i class="fa fa-rocket me-2"></i>Start managing tasks
+                    </a>
+                    <a href="#marketing-features" class="btn btn-lg btn-outline-light">Explore features</a>
+                </div>
+                <div class="marketing-proof">
+                    <div><strong>99.9%</strong><span>Uptime ready</span></div>
+                    <div><strong>2x</strong><span>Faster collaboration</span></div>
+                    <div><strong>100%</strong><span>Focus on essentials</span></div>
+                </div>
+            </div>
+
+            <div class="marketing-hero__visual">
+                <div class="saas-window">
+                    <div class="saas-window__topbar">
+                        <span></span><span></span><span></span>
+                    </div>
+                    <div class="saas-window__body">
+                        <div class="saas-window__task">
+                            <div>
+                                <h6>Launch public API docs portal</h6>
+                                <p>Coordinate release notes with dev rel team and post migration guide.</p>
+                            </div>
+                            <span class="badge task-badge task-badge--open">Open</span>
+                        </div>
+                        <div class="saas-window__comment">
+                            <i class="fa fa-message"></i>
+                            <span>“Added sample requests and versioning notes.”</span>
+                        </div>
+                        <div class="saas-window__comment">
+                            <i class="fa fa-message"></i>
+                            <span>“Need final review from product before publishing.”</span>
+                        </div>
+                        <div class="saas-window__footer">
+                            <span>6 comments</span>
+                            <span>Updated 5 min ago</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="marketing-logo-strip">
+            <span>BUILT ON THE VOLOSOFT ECOSYSTEM</span>
+            <div class="marketing-logo-strip__items">
+                <a class="marketing-brand marketing-brand--volosoft" href="https://volosoft.com" target="_blank" rel="noreferrer" aria-label="Volosoft">
+                    <img src="~/images/logo/volosoft.svg" asp-append-version="true" alt="Volosoft logo" loading="lazy" />
+                </a>
+                <a class="marketing-brand marketing-brand--abp" href="https://abp.io" target="_blank" rel="noreferrer" aria-label="ABP.io">
+                    <img src="~/images/logo/abp-io.svg" asp-append-version="true" alt="ABP.io logo" loading="lazy" />
+                </a>
+                <a class="marketing-brand marketing-brand--aspnetzero" href="https://aspnetzero.com" target="_blank" rel="noreferrer" aria-label="AspNetZero">
+                    <img src="~/images/logo/aspnetzero.svg" asp-append-version="true" alt="AspNetZero logo" loading="lazy" />
+                </a>
+            </div>
+        </section>
+
+        <section id="marketing-features" class="marketing-section">
+            <div class="marketing-section__header">
+                <span class="marketing-chip">Features</span>
+                <h2>Everything you need for issue-style collaboration</h2>
+            </div>
+            <div class="marketing-feature-grid">
+                <article>
+                    <i class="fa fa-list-check"></i>
+                    <h5>Issue-like task flow</h5>
+                    <p>Create clear tasks with title, details, and state — just what your team really needs.</p>
+                </article>
+                <article>
+                    <i class="fa fa-comments"></i>
+                    <h5>Comment conversations</h5>
+                    <p>Keep all context under each task so updates never get lost between tools.</p>
+                </article>
+                <article>
+                    <i class="fa fa-shield-halved"></i>
+                    <h5>ABP permission ready</h5>
+                    <p>Secure actions with built-in authorization and role-based access controls.</p>
+                </article>
+                <article>
+                    <i class="fa fa-chart-line"></i>
+                    <h5>Team visibility</h5>
+                    <p>Quickly see what is open, what is done, and where the conversation is active.</p>
+                </article>
+                <article>
+                    <i class="fa fa-bolt"></i>
+                    <h5>Fast user experience</h5>
+                    <p>Responsive pages, clean flows, and smooth interactions optimized for daily use.</p>
+                </article>
+                <article>
+                    <i class="fa fa-cloud"></i>
+                    <h5>SaaS-friendly foundation</h5>
+                    <p>Designed to evolve from internal app into a polished multi-tenant SaaS product.</p>
+                </article>
+            </div>
+        </section>
+
+        <section class="marketing-section marketing-workflow">
+            <div class="marketing-section__header">
+                <span class="marketing-chip">How it works</span>
+                <h2>From idea to done in 3 simple steps</h2>
+            </div>
+            <div class="marketing-steps">
+                <article>
+                    <span>01</span>
+                    <h5>Create a task</h5>
+                    <p>Capture a bug report, feature request, or operational activity in seconds.</p>
+                </article>
+                <article>
+                    <span>02</span>
+                    <h5>Discuss in comments</h5>
+                    <p>Align teammates with decisions, updates, and shared implementation notes.</p>
+                </article>
+                <article>
+                    <span>03</span>
+                    <h5>Ship with confidence</h5>
+                    <p>Mark resolved work and move forward with a transparent history of execution.</p>
+                </article>
+            </div>
+        </section>
+
+        <section class="marketing-section marketing-testimonials">
+            <div class="marketing-section__header">
+                <span class="marketing-chip">Customer love</span>
+                <h2>Teams ship faster with less coordination overhead</h2>
+            </div>
+            <div class="marketing-testimonials__grid">
+                <article>
+                    <p>“We replaced scattered chat threads with clear task-level conversations. Our delivery updates are finally transparent.”</p>
+                    <h6>Selin Arda</h6>
+                    <span>Product Lead, NovaCloud</span>
+                </article>
+                <article>
+                    <p>“The UI feels modern, clean, and focused. New team members become productive in under a day.”</p>
+                    <h6>Can Yılmaz</h6>
+                    <span>Engineering Manager, ByteForge</span>
+                </article>
+                <article>
+                    <p>“Exactly the lightweight issue board we needed for our SaaS support workflows.”</p>
+                    <h6>Ece Demir</h6>
+                    <span>Operations Director, FlowPilot</span>
+                </article>
+            </div>
+        </section>
+
+        <section class="marketing-section marketing-pricing">
+            <div class="marketing-section__header">
+                <span class="marketing-chip">Simple pricing</span>
+                <h2>Start free, scale with your team</h2>
+            </div>
+            <div class="marketing-pricing__grid">
+                <article>
+                    <h5>Starter</h5>
+                    <strong>$0<span>/month</span></strong>
+                    <p>For small teams trying issue-style collaboration.</p>
+                    <ul>
+                        <li>Up to 5 members</li>
+                        <li>Unlimited tasks</li>
+                        <li>Task comments</li>
+                    </ul>
+                </article>
+                <article class="is-featured">
+                    <span class="featured-pill">Most popular</span>
+                    <h5>Growth</h5>
+                    <strong>$29<span>/month</span></strong>
+                    <p>For product teams running daily delivery operations.</p>
+                    <ul>
+                        <li>Up to 25 members</li>
+                        <li>Activity visibility</li>
+                        <li>Priority support</li>
+                    </ul>
+                </article>
+                <article>
+                    <h5>Scale</h5>
+                    <strong>$99<span>/month</span></strong>
+                    <p>For larger SaaS organizations with multiple squads.</p>
+                    <ul>
+                        <li>Unlimited members</li>
+                        <li>Advanced security</li>
+                        <li>Dedicated success manager</li>
+                    </ul>
+                </article>
+            </div>
+        </section>
+
+        <section class="marketing-cta">
+            <h2>Ready to launch your team’s lightweight issue hub?</h2>
+            <p>Bring clarity to delivery, reduce noisy tools, and keep everyone aligned around outcomes.</p>
+            <a href="/Tasks" class="btn btn-lg board-primary-button">
+                <i class="fa fa-arrow-right me-2"></i>Go to Task Board
+            </a>
+        </section>
+    </div>
+</div>

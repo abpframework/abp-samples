@@ -1,0 +1,55 @@
+@page
+@using Microsoft.AspNetCore.Authorization
+@using Microsoft.Extensions.Localization
+@using TaskAndCommentBoard.Localization
+@using TaskAndCommentBoard.Pages.Tasks
+@using TaskAndCommentBoard.Permissions
+@model DetailsModel
+@inject IStringLocalizer<TaskAndCommentBoardResource> L
+@inject IAuthorizationService AuthorizationService
+
+@section scripts
+{
+    <abp-script src="/Pages/Tasks/Details.js" />
+}
+
+<section class="task-details-shell">
+    <input type="hidden" id="TaskId" value="@Model.Id" />
+
+    <div class="task-details-wrap mb-4">
+        <a href="/Tasks" class="btn btn-link ps-0 task-back-link">← @L["Tasks"]</a>
+        <div class="task-title-row d-flex align-items-center gap-2 mb-2 flex-wrap">
+            <h2 class="mb-0">@Model.TaskItem.Title</h2>
+            @if (Model.TaskItem.IsClosed)
+            {
+                <span class="badge task-badge task-badge--closed">@L["TaskStatus:Closed"]</span>
+            }
+            else
+            {
+                <span class="badge task-badge task-badge--open">@L["TaskStatus:Open"]</span>
+            }
+        </div>
+        <p class="text-muted mb-2">@L["CreatedAt"]: @Model.TaskItem.CreationTime.ToString("yyyy-MM-dd HH:mm")</p>
+        <div class="task-details-description">@Model.TaskItem.Description</div>
+    </div>
+
+    <abp-card class="board-card border-0 shadow-sm task-comments-card">
+        <abp-card-header>
+            <abp-card-title>@L["Comments"]</abp-card-title>
+        </abp-card-header>
+        <abp-card-body>
+            @if (await AuthorizationService.IsGrantedAsync(TaskAndCommentBoardPermissions.Comments.Create))
+            {
+                <div class="comment-editor mb-4">
+                    <label class="form-label" for="NewCommentContent">@L["AddComment"]</label>
+                    <textarea id="NewCommentContent" class="form-control" rows="4" maxlength="2000" placeholder="Share your progress, blocker, or update..."></textarea>
+                    <div class="mt-2 text-end">
+                        <button type="button" id="AddCommentButton" class="btn btn-primary board-primary-button">@L["PostComment"]</button>
+                    </div>
+                </div>
+            }
+
+            <div id="CommentsContainer" class="comment-list"></div>
+        </abp-card-body>
+    </abp-card>
+</section>

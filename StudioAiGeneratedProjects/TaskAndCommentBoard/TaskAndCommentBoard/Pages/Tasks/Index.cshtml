@@ -1,0 +1,71 @@
+@page
+@using Microsoft.AspNetCore.Authorization
+@using Microsoft.Extensions.Localization
+@using TaskAndCommentBoard.Localization
+@using TaskAndCommentBoard.Pages.Tasks
+@using TaskAndCommentBoard.Permissions
+@model IndexModel
+@inject IStringLocalizer<TaskAndCommentBoardResource> L
+@inject IAuthorizationService AuthorizationService
+
+@section scripts
+{
+    <abp-script src="/Pages/Tasks/Index.js" />
+}
+
+<section class="task-board-shell mb-4">
+    <div class="task-board-shell__glow task-board-shell__glow--one"></div>
+    <div class="task-board-shell__glow task-board-shell__glow--two"></div>
+
+    <div class="board-page-header mb-4">
+        <div>
+            <span class="task-board-chip">SaaS Workspace</span>
+            <h2 class="mb-1 mt-2">@L["Tasks"]</h2>
+            <p class="text-muted mb-0">@L["Tasks:SubTitle"]</p>
+        </div>
+        @if (await AuthorizationService.IsGrantedAsync(TaskAndCommentBoardPermissions.Tasks.Create))
+        {
+            <abp-button id="NewTaskButton"
+                        text="@L["NewTask"].Value"
+                        icon="plus"
+                        button-type="Primary"
+                        class="board-primary-button" />
+        }
+    </div>
+
+    <abp-card class="board-card border-0 shadow-sm task-list-card task-list-card--premium">
+        <abp-card-body>
+            <div class="task-toolbar mb-3">
+                <div class="task-toolbar__search-wrap">
+                    <input id="TaskSearchInput" class="form-control" placeholder="@L["Tasks:SearchPlaceholder"]" />
+                </div>
+                <div class="btn-group task-filter-group" role="group" aria-label="Task status filter">
+                    <button type="button" class="btn btn-outline-secondary active" data-filter="all">@L["Tasks:FilterAll"]</button>
+                    <button type="button" class="btn btn-outline-secondary" data-filter="open">@L["Tasks:FilterOpen"]</button>
+                    <button type="button" class="btn btn-outline-secondary" data-filter="closed">@L["Tasks:FilterClosed"]</button>
+                </div>
+            </div>
+
+            <div id="TasksStats" class="task-stats mb-3"></div>
+            <div id="TasksList" class="task-list"></div>
+            <div id="TasksEmptyState" class="task-empty-state d-none">
+                <h5 class="mb-2">@L["Tasks:EmptyTitle"]</h5>
+                <p class="text-muted mb-0">@L["Tasks:EmptyDescription"]</p>
+            </div>
+        </abp-card-body>
+    </abp-card>
+</section>
+
+<template id="TaskCardTemplate">
+    <article class="task-card" data-id="" data-open="true">
+        <div class="task-card__header">
+            <div class="d-flex align-items-center gap-2 flex-wrap">
+                <span class="task-card__status badge"></span>
+                <h5 class="task-card__title mb-0"></h5>
+            </div>
+            <div class="task-card__actions"></div>
+        </div>
+        <p class="task-card__description mb-3"></p>
+        <div class="task-card__meta"></div>
+    </article>
+</template>

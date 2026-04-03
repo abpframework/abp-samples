@@ -1,0 +1,21 @@
+{
+  "production": true,
+  "application": {
+    "baseUrl":"https://eventregistration-web",
+    "name": "EventRegistration",
+    "logoUrl": ""
+  },
+  "oAuthConfig": {
+    "issuer": "https://eventregistration-api/",
+    "redirectUri": "https://eventregistration",
+    "clientId": "EventRegistration_App",
+    "responseType": "code",
+    "scope": "offline_access openid profile email phone"
+  },
+  "apis": {
+    "default": {
+      "url": "https://eventregistration-api",
+      "rootNamespace": "EventRegistration"
+    }
+  }
+}

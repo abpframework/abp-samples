@@ -1,0 +1,50 @@
+{
+  "template": "app-nolayers",
+  "imports": {
+    "Volo.Abp.BasicTheme": {
+      "version": "10.1.1",
+      "isInstalled": true,
+      "creationTime": "04/03/2026 10:02:36 +00:00"
+    },
+    "Volo.Abp.Account": {
+      "version": "10.1.1",
+      "isInstalled": true,
+      "creationTime": "04/03/2026 10:02:36 +00:00"
+    },
+    "Volo.Abp.OpenIddict": {
+      "version": "10.1.1",
+      "isInstalled": true,
+      "creationTime": "04/03/2026 10:02:36 +00:00"
+    },
+    "Volo.Abp.Identity": {
+      "version": "10.1.1",
+      "isInstalled": true,
+      "creationTime": "04/03/2026 10:02:36 +00:00"
+    },
+    "Volo.Abp.TenantManagement": {
+      "version": "10.1.1",
+      "isInstalled": true,
+      "creationTime": "04/03/2026 10:02:36 +00:00"
+    },
+    "Volo.Abp.SettingManagement": {
+      "version": "10.1.1",
+      "isInstalled": true,
+      "creationTime": "04/03/2026 10:02:36 +00:00"
+    },
+    "Volo.Abp.PermissionManagement": {
+      "version": "10.1.1",
+      "isInstalled": true,
+      "creationTime": "04/03/2026 10:02:36 +00:00"
+    },
+    "Volo.Abp.FeatureManagement": {
+      "version": "10.1.1",
+      "isInstalled": true,
+      "creationTime": "04/03/2026 10:02:36 +00:00"
+    }
+  },
+  "packages": {
+    "EventRegistration": {
+      "path": "EventRegistration/EventRegistration.abppkg"
+    }
+  }
+}

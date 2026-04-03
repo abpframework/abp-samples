@@ -1,0 +1,257 @@
+@page "/invoices"
+@attribute [Authorize(BillMasterPermissions.Invoice.Default)]
+@using BillMaster.Permissions
+@using Volo.Abp.Application.Dtos
+@using Microsoft.AspNetCore.Authorization
+@using BillMaster.Invoices
+@using BillMaster.Localization
+@using Microsoft.Extensions.Localization
+@using Volo.Abp.AspNetCore.Components.Web
+@inject IStringLocalizer<BillMasterResource> L
+@inject AbpBlazorMessageLocalizerHelper<BillMasterResource> LH
+@inject ICustomerAppService CustomerService
+@inherits AbpCrudPageBase<IInvoiceAppService, InvoiceDto, Guid, PagedAndSortedResultRequestDto, CreateUpdateInvoiceDto>
+
+<Card>
+    <CardHeader>
+        <Row Class="justify-content-between">
+            <Column ColumnSize="ColumnSize.IsAuto">
+                <CardTitle>@L["Invoices"]</CardTitle>
+            </Column>
+            <Column ColumnSize="ColumnSize.IsAuto">
+                @if (HasCreatePermission)
+                {
+                    <Button Color="Color.Primary"
+                        Clicked="OpenCreateModalAsync">
+                        <Icon Name="IconName.Add" />
+                        @L["NewInvoice"]
+                    </Button>
+                }
+            </Column>
+        </Row>
+    </CardHeader>
+    <CardBody>
+        <DataGrid TItem="InvoiceDto"
+                  Data="Entities"
+                  ReadData="OnDataGridReadAsync"
+                  CurrentPage="CurrentPage"
+                  TotalItems="TotalCount"
+                  ShowPager="true"
+                  PageSize="PageSize">
+            <DataGridColumns>
+                <DataGridEntityActionsColumn TItem="InvoiceDto" @ref="@EntityActionsColumn">
+                    <DisplayTemplate>
+                        <EntityActions TItem="InvoiceDto" EntityActionsColumn="@EntityActionsColumn">
+                            <EntityAction TItem="InvoiceDto"
+                                          Text="@L["Edit"]"
+                                          Visible=HasUpdatePermission
+                                          Clicked="() => OpenEditModalAsync(context)" />
+                            <EntityAction TItem="InvoiceDto"
+                                          Text="@L["Delete"]"
+                                          Visible=HasDeletePermission
+                                          Clicked="() => DeleteEntityAsync(context)"
+                                          ConfirmationMessage="()=>GetDeleteConfirmationMessage(context)" />
+                        </EntityActions>
+                    </DisplayTemplate>
+                </DataGridEntityActionsColumn>
+                <DataGridColumn TItem="InvoiceDto"
+                                Field="@nameof(InvoiceDto.Number)"
+                                Caption="@L["InvoiceNumber"]"></DataGridColumn>
+                <DataGridColumn TItem="InvoiceDto"
+                                Field="Customer.Name"
+                                Caption="@L["Customer"]"></DataGridColumn>
+                <DataGridColumn TItem="InvoiceDto"
+                                Field="@nameof(InvoiceDto.InvoiceDate)"
+                                Caption="@L["InvoiceDate"]">
+                    <DisplayTemplate>
+                        @context.InvoiceDate.ToShortDateString()
+                    </DisplayTemplate>
+                </DataGridColumn>
+                <DataGridColumn TItem="InvoiceDto"
+                                Field="@nameof(InvoiceDto.Status)"
+                                Caption="@L["Status"]">
+                    <DisplayTemplate>
+                        @L[$"Enum:InvoiceStatus.{(int)context.Status}"]
+                    </DisplayTemplate>
+                </DataGridColumn>
+                <DataGridColumn TItem="InvoiceDto"
+                                Field="@nameof(InvoiceDto.TotalAmount)"
+                                Caption="@L["TotalAmount"]">
+                    <DisplayTemplate>
+                        @context.TotalAmount.ToString("C")
+                    </DisplayTemplate>
+                </DataGridColumn>
+                <DataGridColumn TItem="InvoiceDto"
+                                Field="@nameof(InvoiceDto.CreationTime)"
+                                Caption="@L["CreationTime"]">
+                    <DisplayTemplate>
+                        @context.CreationTime.ToLongDateString()
+                    </DisplayTemplate>
+                </DataGridColumn>
+            </DataGridColumns>
+        </DataGrid>
+    </CardBody>
+</Card>
+
+<Modal @ref="@CreateModal">
+    <ModalBackdrop />
+    <ModalContent IsCentered="true">
+        <Form>
+            <ModalHeader>
+                <ModalTitle>@L["NewInvoice"]</ModalTitle>
+                <CloseButton Clicked="CloseCreateModalAsync"/>
+            </ModalHeader>
+            <ModalBody>
+                <Validations @ref="@CreateValidationsRef" Model="@NewEntity" ValidateOnLoad="false">
+                    <Validation MessageLocalizer="@LH.Localize">
+                        <Field>
+                            <FieldLabel>@L["InvoiceNumber"]</FieldLabel>
+                            <TextEdit @bind-Text="@NewEntity.Number" AutoFocus="true">
+                                <Feedback>
+                                    <ValidationError/>
+                                </Feedback>
+                            </TextEdit>
+                        </Field>
+                    </Validation>
+                    <Field>
+                        <FieldLabel>@L["Customer"]</FieldLabel>
+                        <Select @bind-SelectedValue="@NewEntity.CustomerId">
+                            <SelectItem TValue="Guid" Value="Guid.Empty">@L["SelectCustomer"]</SelectItem>
+                            @foreach (var customer in Customers)
+                            {
+                                <SelectItem TValue="Guid" Value="@customer.Id">
+                                    @customer.Name
+                                </SelectItem>
+                            }
+                        </Select>
+                    </Field>
+                    <Field>
+                        <FieldLabel>@L["InvoiceDate"]</FieldLabel>
+                        <DateEdit TValue="DateTime" @bind-Date="NewEntity.InvoiceDate"/>
+                    </Field>
+                    <Field>
+                        <FieldLabel>@L["Status"]</FieldLabel>
+                        <Select TValue="InvoiceStatus" @bind-SelectedValue="@NewEntity.Status">
+                            @foreach (int statusValue in Enum.GetValues(typeof(InvoiceStatus)))
+                            {
+                                <SelectItem TValue="InvoiceStatus" Value="@((InvoiceStatus) statusValue)">
+                                    @L[$"Enum:InvoiceStatus.{statusValue}"]
+                                </SelectItem>
+                            }
+                        </Select>
+                    </Field>
+                    <Field>
+                        <FieldLabel>@L["Notes"]</FieldLabel>
+                        <TextEdit @bind-Text="@NewEntity.Notes"/>
+                    </Field>
+                </Validations>
+            </ModalBody>
+            <ModalFooter>
+                <Button Color="Color.Secondary"
+                        Clicked="CloseCreateModalAsync">@L["Cancel"]</Button>
+                <Button Color="Color.Primary"
+                        Type="@ButtonType.Submit"
+                        PreventDefaultOnSubmit="true"
+                        Clicked="CreateEntityAsync">@L["Save"]</Button>
+            </ModalFooter>
+        </Form>
+    </ModalContent>
+</Modal>
+
+<Modal @ref="@EditModal">
+    <ModalBackdrop />
+    <ModalContent IsCentered="true">
+        <Form>
+            <ModalHeader>
+                <ModalTitle>@L["Edit"]</ModalTitle>
+                <CloseButton Clicked="CloseEditModalAsync"/>
+            </ModalHeader>
+            <ModalBody>
+                <Validations @ref="@EditValidationsRef" Model="@NewEntity" ValidateOnLoad="false">
+                    <Validation MessageLocalizer="@LH.Localize">
+                        <Field>
+                            <FieldLabel>@L["InvoiceNumber"]</FieldLabel>
+                            <TextEdit @bind-Text="@EditingEntity.Number">
+                                <Feedback>
+                                    <ValidationError/>
+                                </Feedback>
+                            </TextEdit>
+                        </Field>
+                    </Validation>
+                    <Field>
+                        <FieldLabel>@L["Customer"]</FieldLabel>
+                        <Select @bind-SelectedValue="@EditingEntity.CustomerId">
+                            <SelectItem TValue="Guid" Value="Guid.Empty">@L["SelectCustomer"]</SelectItem>
+                            @foreach (var customer in Customers)
+                            {
+                                <SelectItem TValue="Guid" Value="@customer.Id">
+                                    @customer.Name
+                                </SelectItem>
+                            }
+                        </Select>
+                    </Field>
+                    <Field>
+                        <FieldLabel>@L["InvoiceDate"]</FieldLabel>
+                        <DateEdit TValue="DateTime" @bind-Date="EditingEntity.InvoiceDate"/>
+                    </Field>
+                    <Field>
+                        <FieldLabel>@L["Status"]</FieldLabel>
+                        <Select TValue="InvoiceStatus" @bind-SelectedValue="@EditingEntity.Status">
+                            @foreach (int statusValue in Enum.GetValues(typeof(InvoiceStatus)))
+                            {
+                                <SelectItem TValue="InvoiceStatus" Value="@((InvoiceStatus) statusValue)">
+                                    @L[$"Enum:InvoiceStatus.{statusValue}"]
+                                </SelectItem>
+                            }
+                        </Select>
+                    </Field>
+                    <Field>
+                        <FieldLabel>@L["Notes"]</FieldLabel>
+                        <TextEdit @bind-Text="@EditingEntity.Notes"/>
+                    </Field>
+                </Validations>
+            </ModalBody>
+            <ModalFooter>
+                <Button Color="Color.Secondary"
+                        Clicked="CloseEditModalAsync">@L["Cancel"]</Button>
+                <Button Color="Color.Primary"
+                        Type="@ButtonType.Submit"
+                        PreventDefaultOnSubmit="true"
+                        Clicked="UpdateEntityAsync">@L["Save"]</Button>
+            </ModalFooter>
+        </Form>
+    </ModalContent>
+</Modal>
+@code
+{
+    private List<CustomerDto> Customers { get; set; } = new();
+
+    public Invoices()
+    {
+        CreatePolicyName = BillMasterPermissions.Invoice.Create;
+        UpdatePolicyName = BillMasterPermissions.Invoice.Edit;
+        DeletePolicyName = BillMasterPermissions.Invoice.Delete;
+
+        LocalizationResource = typeof(BillMasterResource);
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        await base.OnInitializedAsync();
+        await LoadCustomers();
+    }
+
+    private async Task LoadCustomers()
+    {
+        try
+        {
+            var result = await CustomerService.GetListAsync(new PagedAndSortedResultRequestDto { MaxResultCount = 999 });
+            Customers = result.Items.ToList();
+        }
+        catch
+        {
+            // Silently handle if customers can't be loaded
+            Customers = new List<CustomerDto>();
+        }
+    }
+}

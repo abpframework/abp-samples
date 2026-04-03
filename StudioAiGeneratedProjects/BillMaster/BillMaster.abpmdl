@@ -1,0 +1,113 @@
+{
+  "template": "app",
+  "imports": {
+    "Volo.Abp.LeptonXLiteTheme": {
+      "version": "5.1.1",
+      "isInstalled": true,
+      "creationTime": "04/01/2026 10:31:48 +00:00"
+    },
+    "Volo.Abp.Account": {
+      "version": "10.1.1",
+      "isInstalled": true,
+      "creationTime": "04/01/2026 10:31:48 +00:00"
+    },
+    "Volo.Abp.OpenIddict": {
+      "version": "10.1.1",
+      "isInstalled": true,
+      "creationTime": "04/01/2026 10:31:48 +00:00"
+    },
+    "Volo.Abp.Identity": {
+      "version": "10.1.1",
+      "isInstalled": true,
+      "creationTime": "04/01/2026 10:31:48 +00:00"
+    },
+    "Volo.Abp.TenantManagement": {
+      "version": "10.1.1",
+      "isInstalled": true,
+      "creationTime": "04/01/2026 10:31:48 +00:00"
+    },
+    "Volo.Abp.SettingManagement": {
+      "version": "10.1.1",
+      "isInstalled": true,
+      "creationTime": "04/01/2026 10:31:48 +00:00"
+    },
+    "Volo.Abp.PermissionManagement": {
+      "version": "10.1.1",
+      "isInstalled": true,
+      "creationTime": "04/01/2026 10:31:48 +00:00"
+    },
+    "Volo.Abp.FeatureManagement": {
+      "version": "10.1.1",
+      "isInstalled": true,
+      "creationTime": "04/01/2026 10:31:48 +00:00"
+    }
+  },
+  "folders": {
+    "items": {
+      "src": {},
+      "test": {}
+    }
+  },
+  "packages": {
+    "BillMaster.Application": {
+      "path": "src/BillMaster.Application/BillMaster.Application.abppkg",
+      "folder": "src"
+    },
+    "BillMaster.Application.Tests": {
+      "path": "test/BillMaster.Application.Tests/BillMaster.Application.Tests.abppkg",
+      "folder": "test"
+    },
+    "BillMaster.Domain.Shared": {
+      "path": "src/BillMaster.Domain.Shared/BillMaster.Domain.Shared.abppkg",
+      "folder": "src"
+    },
+    "BillMaster.Application.Contracts": {
+      "path": "src/BillMaster.Application.Contracts/BillMaster.Application.Contracts.abppkg",
+      "folder": "src"
+    },
+    "BillMaster.HttpApi": {
+      "path": "src/BillMaster.HttpApi/BillMaster.HttpApi.abppkg",
+      "folder": "src"
+    },
+    "BillMaster.HttpApi.Client": {
+      "path": "src/BillMaster.HttpApi.Client/BillMaster.HttpApi.Client.abppkg",
+      "folder": "src"
+    },
+    "BillMaster.EntityFrameworkCore.Tests": {
+      "path": "test/BillMaster.EntityFrameworkCore.Tests/BillMaster.EntityFrameworkCore.Tests.abppkg",
+      "folder": "test"
+    },
+    "BillMaster.EntityFrameworkCore": {
+      "path": "src/BillMaster.EntityFrameworkCore/BillMaster.EntityFrameworkCore.abppkg",
+      "folder": "src"
+    },
+    "BillMaster.TestBase": {
+      "path": "test/BillMaster.TestBase/BillMaster.TestBase.abppkg",
+      "folder": "test"
+    },
+    "BillMaster.Domain.Tests": {
+      "path": "test/BillMaster.Domain.Tests/BillMaster.Domain.Tests.abppkg",
+      "folder": "test"
+    },
+    "BillMaster.HttpApi.Client.ConsoleTestApp": {
+      "path": "test/BillMaster.HttpApi.Client.ConsoleTestApp/BillMaster.HttpApi.Client.ConsoleTestApp.abppkg",
+      "folder": "test"
+    },
+    "BillMaster.DbMigrator": {
+      "path": "src/BillMaster.DbMigrator/BillMaster.DbMigrator.abppkg",
+      "folder": "src"
+    },
+    "BillMaster.Blazor": {
+      "path": "src/BillMaster.Blazor/BillMaster.Blazor.abppkg",
+      "folder": "src"
+    },
+    "BillMaster.Blazor.Client": {
+      "path": "src/BillMaster.Blazor.Client/BillMaster.Blazor.Client.abppkg",
+      "folder": "src"
+    },
+    "BillMaster.Domain": {
+      "path": "src/BillMaster.Domain/BillMaster.Domain.abppkg",
+      "folder": "src"
+    }
+  }
+}

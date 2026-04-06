@@ -1,0 +1,113 @@
+{
+  "template": "app",
+  "imports": {
+    "Volo.Abp.LeptonXLiteTheme": {
+      "version": "5.1.1",
+      "isInstalled": true,
+      "creationTime": "04/06/2026 10:36:28 +00:00"
+    },
+    "Volo.Abp.Account": {
+      "version": "10.1.1",
+      "isInstalled": true,
+      "creationTime": "04/06/2026 10:36:28 +00:00"
+    },
+    "Volo.Abp.OpenIddict": {
+      "version": "10.1.1",
+      "isInstalled": true,
+      "creationTime": "04/06/2026 10:36:28 +00:00"
+    },
+    "Volo.Abp.Identity": {
+      "version": "10.1.1",
+      "isInstalled": true,
+      "creationTime": "04/06/2026 10:36:28 +00:00"
+    },
+    "Volo.Abp.TenantManagement": {
+      "version": "10.1.1",
+      "isInstalled": true,
+      "creationTime": "04/06/2026 10:36:28 +00:00"
+    },
+    "Volo.Abp.SettingManagement": {
+      "version": "10.1.1",
+      "isInstalled": true,
+      "creationTime": "04/06/2026 10:36:28 +00:00"
+    },
+    "Volo.Abp.PermissionManagement": {
+      "version": "10.1.1",
+      "isInstalled": true,
+      "creationTime": "04/06/2026 10:36:28 +00:00"
+    },
+    "Volo.Abp.FeatureManagement": {
+      "version": "10.1.1",
+      "isInstalled": true,
+      "creationTime": "04/06/2026 10:36:28 +00:00"
+    }
+  },
+  "folders": {
+    "items": {
+      "src": {},
+      "test": {}
+    }
+  },
+  "packages": {
+    "BookReviewTracker4.Application": {
+      "path": "src/BookReviewTracker4.Application/BookReviewTracker4.Application.abppkg",
+      "folder": "src"
+    },
+    "BookReviewTracker4.Application.Tests": {
+      "path": "test/BookReviewTracker4.Application.Tests/BookReviewTracker4.Application.Tests.abppkg",
+      "folder": "test"
+    },
+    "BookReviewTracker4.Domain.Shared": {
+      "path": "src/BookReviewTracker4.Domain.Shared/BookReviewTracker4.Domain.Shared.abppkg",
+      "folder": "src"
+    },
+    "BookReviewTracker4.Application.Contracts": {
+      "path": "src/BookReviewTracker4.Application.Contracts/BookReviewTracker4.Application.Contracts.abppkg",
+      "folder": "src"
+    },
+    "BookReviewTracker4.HttpApi": {
+      "path": "src/BookReviewTracker4.HttpApi/BookReviewTracker4.HttpApi.abppkg",
+      "folder": "src"
+    },
+    "BookReviewTracker4.HttpApi.Client": {
+      "path": "src/BookReviewTracker4.HttpApi.Client/BookReviewTracker4.HttpApi.Client.abppkg",
+      "folder": "src"
+    },
+    "BookReviewTracker4.Web": {
+      "path": "src/BookReviewTracker4.Web/BookReviewTracker4.Web.abppkg",
+      "folder": "src"
+    },
+    "BookReviewTracker4.Web.Tests": {
+      "path": "test/BookReviewTracker4.Web.Tests/BookReviewTracker4.Web.Tests.abppkg",
+      "folder": "test"
+    },
+    "BookReviewTracker4.EntityFrameworkCore.Tests": {
+      "path": "test/BookReviewTracker4.EntityFrameworkCore.Tests/BookReviewTracker4.EntityFrameworkCore.Tests.abppkg",
+      "folder": "test"
+    },
+    "BookReviewTracker4.EntityFrameworkCore": {
+      "path": "src/BookReviewTracker4.EntityFrameworkCore/BookReviewTracker4.EntityFrameworkCore.abppkg",
+      "folder": "src"
+    },
+    "BookReviewTracker4.TestBase": {
+      "path": "test/BookReviewTracker4.TestBase/BookReviewTracker4.TestBase.abppkg",
+      "folder": "test"
+    },
+    "BookReviewTracker4.Domain.Tests": {
+      "path": "test/BookReviewTracker4.Domain.Tests/BookReviewTracker4.Domain.Tests.abppkg",
+      "folder": "test"
+    },
+    "BookReviewTracker4.HttpApi.Client.ConsoleTestApp": {
+      "path": "test/BookReviewTracker4.HttpApi.Client.ConsoleTestApp/BookReviewTracker4.HttpApi.Client.ConsoleTestApp.abppkg",
+      "folder": "test"
+    },
+    "BookReviewTracker4.DbMigrator": {
+      "path": "src/BookReviewTracker4.DbMigrator/BookReviewTracker4.DbMigrator.abppkg",
+      "folder": "src"
+    },
+    "BookReviewTracker4.Domain": {
+      "path": "src/BookReviewTracker4.Domain/BookReviewTracker4.Domain.abppkg",
+      "folder": "src"
+    }
+  }
+}

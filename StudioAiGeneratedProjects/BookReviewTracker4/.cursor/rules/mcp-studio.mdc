@@ -1,0 +1,186 @@
+---
+description: Guide for AI to effectively use ABP Studio MCP tools - workflows, best practices, and tool reference
+alwaysApply: true
+---
+
+# ABP Studio MCP Tools - AI Usage Guide
+
+ABP Studio exposes 33 MCP tools that let AI interact with the running IDE. These tools give you real-time access to the solution structure, application monitoring, solution runner, Kubernetes/Helm resources, custom commands, and solution modification.
+
+All tools require an open solution in ABP Studio. If no solution is open, every tool returns an error.
+
+## Tool Categories at a Glance
+
+| Category | Purpose | Tools |
+|---|---|---|
+| Solution Structure | Explore modules, packages, dependencies | `get_solution_info`, `list_modules`, `list_packages`, `get_module_dependencies` |
+| Monitoring | Observe running apps (logs, errors, requests) | `list_applications`, `get_exceptions`, `get_logs`, `get_requests`, `get_events`, `clear_monitor` |
+| Solution Runner | Start/stop/build apps, containers, tasks | `list_runnable_applications`, `start_application`, `stop_application`, `restart_application`, `build_application`, `list_containers`, `start_containers`, `stop_containers`, `list_tasks`, `run_task`, `stop_task` |
+| Run Profiles | Manage profiles and add items | `list_run_profiles`, `select_run_profile`, `create_run_profile`, `add_folder`, `add_dotnet_application`, `add_cli_application`, `add_docker_container` |
+| Custom Commands | List and execute user-defined commands | `list_custom_commands`, `run_custom_command` |
+| Kubernetes | Explore Helm charts and K8s services | `list_kubernetes_charts`, `list_kubernetes_services` |
+| Solution Modifier | Add modules to the solution | `add_microservice_module` |
+
+---
+
+## Workflows
+
+### 1. Understanding a Solution (Start Here)
+
+Always begin with discovery before taking action:
+
+```
+get_solution_info          -- solution name, template, module count
+  -> list_modules          -- see all modules
+  -> list_packages         -- see packages/projects in each module
+  -> get_module_dependencies  -- understand how modules connect
+```
+
+### 2. Running and Monitoring Applications
+
+```
+list_run_profiles           -- see available profiles
+  -> select_run_profile     -- switch profile if needed
+  -> list_runnable_applications  -- see apps and their current state
+  -> start_application      -- start individual or all apps
+  -> list_applications      -- see which apps are connected to monitor
+  -> get_logs / get_exceptions / get_requests  -- observe runtime behavior
+```
+
+After code changes:
+```
+build_application           -- compile after edits
+  -> restart_application    -- restart to pick up changes
+  -> get_exceptions         -- check for new errors
+```
+
+### 3. Infrastructure (Docker Containers)
+
+```
+list_containers             -- see Docker containers in the profile
+  -> start_containers       -- docker-compose up (starts all stopped)
+  -> stop_containers        -- docker-compose down (stops all running)
+```
+
+Containers are typically infrastructure dependencies (databases, Redis, RabbitMQ). Start them before starting applications.
+
+### 4. Running Tasks
+
+Tasks are one-shot operations (database migrations, seed data, npm install, etc.) that run to completion:
+
+```
+list_tasks                  -- see available tasks with descriptions
+  -> run_task               -- execute and wait for completion (returns exit code + logs)
+  -> stop_task              -- cancel if stuck
+```
+
+### 5. Executing Custom Commands
+
+Custom commands are user-defined CLI operations. They can target different tree items (Helm charts, K8s services, Solution Runner items):
+
+```
+list_custom_commands        -- discover available commands with descriptions, trigger/execution targets
+```
+
+Before running a command, find valid targets:
+```
+list_kubernetes_charts      -- for HelmMainChart / HelmSubChart targets
+list_kubernetes_services    -- for KubernetesService targets
+list_runnable_applications  -- for SolutionRunnerApplication targets
+```
+
+Then run:
+```
+run_custom_command          -- execute on a specific target, waits for completion, returns logs
+```
+
+### 6. Kubernetes Exploration
+
+```
+list_kubernetes_charts      -- Helm chart hierarchy (main + sub-charts), metadata, service patterns
+list_kubernetes_services    -- K8s services from connected profile, port mappings, interception status
+```
+
+Note: `list_kubernetes_services` requires a selected AND connected Kubernetes profile.
+
+### 7. Adding a New Microservice
+
+Only works on microservice-template solutions:
+
+```
+get_solution_info           -- verify it's a microservice solution
+  -> add_microservice_module  -- creates the service, updates Solution Explorer and Runner
+  -> list_tasks             -- find migration tasks for the new service
+  -> run_task               -- run database migration
+  -> start_application      -- start the new service
+```
+
+### 8. Setting Up a Run Profile
+```
+create_run_profile          -- create empty profile
+  -> select_run_profile     -- switch to it
+  -> add_folder             -- organize with folders (e.g., "Infrastructure", "Services")
+  -> add_docker_container   -- add infrastructure
+  -> add_dotnet_application -- add .NET projects
+  -> add_cli_application    -- add CLI-based apps
+```
+
+---
+
+## Best Practices
+
+### Always List Before Acting
+Every "action" tool has a corresponding "list" tool. Always list first to discover valid names and current states. Tool names are case-insensitive in lookups.
+
+### Check Application State
+Applications have states: `Stopped`, `Starting`, `Started`, `Stopping`. Do not start an already running app or stop an already stopped one -- the tools will return informative messages rather than errors, but it wastes a call.
+
+### Use `all` Parameter for Batch Operations
+`start_application`, `stop_application`, and `build_application` accept `all: true` to operate on all items at once. Use this instead of calling the tool repeatedly for each app.
+
+### Respect Timeouts
+`run_task` and `run_custom_command` accept `timeout_seconds` (default: 300). For long operations (large builds, npm install, Docker pulls), increase this value. If a timeout occurs, the operation may still be running in the background.
+
+### Read Logs for Debugging
+When `run_task` or `run_custom_command` fails, the response includes `logs` with the full stdout/stderr output. Read these logs before asking the user what went wrong.
+
+### Custom Command Targets
+Custom commands have `triggerTargets` (where the command appears in the UI) and `executionTargets` (which items it runs on). When calling `run_custom_command`:
+- If `target_type` is omitted, the command runs at solution level
+- For `HelmChartsRoot` and `SolutionRunnerRoot`, no `target_name` is needed
+- For all other target types, `target_name` is required
+
+### Monitor Filtering
+All monitor tools (`get_logs`, `get_exceptions`, `get_requests`, `get_events`) accept an optional `app` parameter. When debugging a specific service, always filter by app name to reduce noise.
+
+### Profile Awareness
+Most Solution Runner operations work on the **currently selected** run profile. Always verify or switch the active profile before performing operations if the solution has multiple profiles.
+
+---
+
+## Quick Reference: Common Scenarios
+
+| User Says | Tool Sequence |
+|---|---|
+| "Start the application" | `list_runnable_applications` -> `start_application` |
+| "What errors are happening?" | `list_applications` -> `get_exceptions` |
+| "Run database migration" | `list_tasks` -> `run_task` |
+| "Deploy to Kubernetes" | `list_custom_commands` -> `list_kubernetes_charts` -> `run_custom_command` |
+| "Add a new service" | `get_solution_info` -> `add_microservice_module` |
+| "Show me the API calls" | `list_applications` -> `get_requests` |
+| "Build and restart" | `build_application` -> `restart_application` |
+| "Start infrastructure" | `list_containers` -> `start_containers` |
+| "What does this solution look like?" | `get_solution_info` -> `list_modules` -> `list_packages` |
+| "Check application logs" | `get_logs` with `app` and optionally `level: "Error"` |
+
+---
+
+## Error Handling
+
+All tools return structured responses. Error responses include an `isError: true` flag and a descriptive message. Common error patterns:
+
+- **"No solution is open"** -- The user needs to open a solution in ABP Studio first
+- **"No run profile selected"** -- Use `list_run_profiles` and `select_run_profile`
+- **"Application not found"** -- Use the list tool to get exact names
+- **"Kubernetes profile not connected"** -- The user needs to connect the K8s profile in the UI first
+- **"Timed out"** -- Increase `timeout_seconds` or check if the operation is stuck

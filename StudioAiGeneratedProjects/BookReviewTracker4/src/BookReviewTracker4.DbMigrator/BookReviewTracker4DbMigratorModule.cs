@@ -1,4 +1,4 @@
-﻿using BookReviewTracker4.EntityFrameworkCore;
+using BookReviewTracker4.EntityFrameworkCore;
 using Volo.Abp.Autofac;
 using Volo.Abp.Modularity;
 

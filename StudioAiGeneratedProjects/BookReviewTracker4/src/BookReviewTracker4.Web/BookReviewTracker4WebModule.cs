@@ -1,4 +1,4 @@
-﻿using System.IO;
+using System.IO;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpOverrides;
@@ -137,9 +137,10 @@ public class BookReviewTracker4WebModule : AbpModule
             });
         }
 
+        context.Services.AddControllersWithViews();
         if (hostingEnvironment.IsDevelopment())
         {
-            context.Services.AddRazorPages()
+            context.Services.AddControllersWithViews()
                 .AddRazorRuntimeCompilation();
         }
 
@@ -276,13 +277,15 @@ public class BookReviewTracker4WebModule : AbpModule
         var env = context.GetEnvironment();
 
         app.UseForwardedHeaders();
+        app.UseAbpRequestLocalization();
+        app.UseStaticFiles();
+        app.UseCookiePolicy();
+        app.UseRouting();
 
         if (env.IsDevelopment())
         {
             app.UseDeveloperExceptionPage();
         }
-
-        app.UseAbpRequestLocalization();
 
         if (!env.IsDevelopment())
         {
@@ -291,8 +294,6 @@ public class BookReviewTracker4WebModule : AbpModule
         }
 
         app.UseCorrelationId();
-        app.UseRouting();
-        app.MapAbpStaticAssets();
         app.UseAbpStudioLink();
         app.UseAbpSecurityHeaders();
         app.UseAuthentication();
@@ -313,6 +314,7 @@ public class BookReviewTracker4WebModule : AbpModule
         });
         app.UseAuditing();
         app.UseAbpSerilogEnrichers();
+        
         app.UseConfiguredEndpoints();
     }
 }

@@ -3,6 +3,7 @@ using System;
 using BookReviewTracker4.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using Volo.Abp.EntityFrameworkCore;
@@ -12,9 +13,11 @@ using Volo.Abp.EntityFrameworkCore;
 namespace BookReviewTracker4.Migrations
 {
     [DbContext(typeof(BookReviewTracker4DbContext))]
-    partial class BookReviewTracker4DbContextModelSnapshot : ModelSnapshot
+    [Migration("20260406113125_AddAuthorBookReviewEntities")]
+    partial class AddAuthorBookReviewEntities
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

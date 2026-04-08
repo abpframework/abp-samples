@@ -1,0 +1,21 @@
+{
+  "Culture": "tr",
+  "Texts": {
+    "AppName": "URL Tabanlı Yerelleştirme Örneği",
+    "Menu:Home": "Ana Sayfa",
+    "Menu:About": "Hakkında",
+    "Home:Title": "Hoş Geldiniz!",
+    "Home:Description": "Bu örnek, ABP'nin URL tabanlı yerelleştirme özelliğini göstermektedir.",
+    "Home:CurrentCulture": "Mevcut kültür (URL'den)",
+    "Home:TryIt": "Yukarıdan dili değiştirin ve URL'nin nasıl değiştiğini fark edin.",
+    "Home:TryLanguages": "Farklı dilleri deneyin",
+    "Home:UrlExample": "URL örnekleri",
+    "About:Title": "Bu Örnek Hakkında",
+    "About:Description": "URL tabanlı yerelleştirme, kültür kodunu doğrudan URL yoluna gömer, örneğin <strong>/tr/about</strong> veya <strong>/en/about</strong>. Her dilin kendine özgü kararlı bir URL'si vardır, bu da SEO ve bağlantı paylaşımı için uygundur.",
+    "About:HowItWorks": "Yapılandırma",
+    "About:HowItWorksDetail": "Tek bir yapılandırma ile özellik etkinleştirilir: <code>options.UseRouteBasedCulture = true</code>. ABP, rota kaydı, URL oluşturma, menü bağlantıları ve dil değiştirmeyi otomatik olarak yönetir.",
+    "About:MiddlewareOrder": "Blazor sayfaları",
+    "About:MiddlewareOrderDetail": "Blazor bileşen rotaları, her sayfada manuel olarak <code>@page \"/{culture}/...\"</code> yönergesi gerektirir. MVC ve Razor Pages rotaları otomatik olarak eklenir.",
+    "About:ApiRoutes": "API rotaları (örn. <code>/api/...</code>) etkilenmez — URL yollarında kültür segmenti yoktur."
+  }
+}

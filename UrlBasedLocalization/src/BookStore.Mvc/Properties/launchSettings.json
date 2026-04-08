@@ -1,0 +1,13 @@
+{
+  "profiles": {
+    "BookStore": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "launchUrl": "https://localhost:44335/en",
+      "applicationUrl": "https://localhost:44335",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    }
+  }
+}

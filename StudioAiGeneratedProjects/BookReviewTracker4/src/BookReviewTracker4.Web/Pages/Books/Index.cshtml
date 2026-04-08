@@ -1,0 +1,33 @@
+@page
+@using BookReviewTracker4.Localization
+@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<BookReviewTracker4Resource> L
+
+@section content_toolbar {
+    <abp-button id="NewBookButton" text="@L["NewBook"].Value" icon="plus" button-type="Primary" />
+}
+
+<abp-card>
+    <abp-card-body>
+        <abp-row class="mb-3">
+            <abp-column size-md="_4">
+                <div class="input-group">
+                    <input type="text" id="SearchFilter" class="form-control" placeholder="@L["Search"]..." />
+                    <button class="btn btn-outline-secondary" type="button" id="SearchButton">
+                        <i class="fa fa-search"></i>
+                    </button>
+                </div>
+            </abp-column>
+            <abp-column size-md="_3">
+                <select id="AuthorFilter" class="form-select">
+                    <option value="">@L["AllAuthors"]</option>
+                </select>
+            </abp-column>
+        </abp-row>
+        <abp-table striped-rows="true" id="BooksTable"></abp-table>
+    </abp-card-body>
+</abp-card>
+
+@section scripts {
+    <script src="~/Pages/Books/Index.js"></script>
+}

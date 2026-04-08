@@ -1,0 +1,35 @@
+@page
+@using BookReviewTracker4.Localization
+@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<BookReviewTracker4Resource> L
+
+@section content_toolbar {
+    <abp-button id="NewReviewButton" text="@L["NewReview"].Value" icon="plus" button-type="Primary" />
+}
+
+<abp-card>
+    <abp-card-body>
+        <abp-row class="mb-3">
+            <abp-column size-md="_3">
+                <select id="BookFilter" class="form-select">
+                    <option value="">@L["AllBooks"]</option>
+                </select>
+            </abp-column>
+            <abp-column size-md="_3">
+                <select id="RatingFilter" class="form-select">
+                    <option value="">@L["AllRatings"]</option>
+                    <option value="5">⭐⭐⭐⭐⭐ (5)</option>
+                    <option value="4">⭐⭐⭐⭐ (4)</option>
+                    <option value="3">⭐⭐⭐ (3)</option>
+                    <option value="2">⭐⭐ (2)</option>
+                    <option value="1">⭐ (1)</option>
+                </select>
+            </abp-column>
+        </abp-row>
+        <abp-table striped-rows="true" id="ReviewsTable"></abp-table>
+    </abp-card-body>
+</abp-card>
+
+@section scripts {
+    <script src="~/Pages/Reviews/Index.js"></script>
+}

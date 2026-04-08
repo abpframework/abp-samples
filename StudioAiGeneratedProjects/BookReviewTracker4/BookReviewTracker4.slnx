@@ -1,0 +1,24 @@
+<Solution>
+    <Configurations>
+        <Platform Name="Any CPU" />
+    </Configurations>
+    <Folder Name="/src/">
+        <Project Path="src/BookReviewTracker4.Domain/BookReviewTracker4.Domain.csproj" />
+        <Project Path="src/BookReviewTracker4.Application/BookReviewTracker4.Application.csproj" />
+        <Project Path="src/BookReviewTracker4.EntityFrameworkCore/BookReviewTracker4.EntityFrameworkCore.csproj" />
+        <Project Path="src/BookReviewTracker4.Web/BookReviewTracker4.Web.csproj" />
+        <Project Path="src/BookReviewTracker4.Domain.Shared/BookReviewTracker4.Domain.Shared.csproj" />
+        <Project Path="src/BookReviewTracker4.Application.Contracts/BookReviewTracker4.Application.Contracts.csproj" />
+        <Project Path="src/BookReviewTracker4.HttpApi/BookReviewTracker4.HttpApi.csproj" />
+        <Project Path="src/BookReviewTracker4.HttpApi.Client/BookReviewTracker4.HttpApi.Client.csproj" />
+        <Project Path="src/BookReviewTracker4.DbMigrator/BookReviewTracker4.DbMigrator.csproj" />
+    </Folder>
+    <Folder Name="/test/">
+        <Project Path="test/BookReviewTracker4.Application.Tests/BookReviewTracker4.Application.Tests.csproj" />
+        <Project Path="test/BookReviewTracker4.Web.Tests/BookReviewTracker4.Web.Tests.csproj" />
+        <Project Path="test/BookReviewTracker4.EntityFrameworkCore.Tests/BookReviewTracker4.EntityFrameworkCore.Tests.csproj" />
+        <Project Path="test/BookReviewTracker4.TestBase/BookReviewTracker4.TestBase.csproj" />
+        <Project Path="test/BookReviewTracker4.Domain.Tests/BookReviewTracker4.Domain.Tests.csproj" />
+        <Project Path="test/BookReviewTracker4.HttpApi.Client.ConsoleTestApp/BookReviewTracker4.HttpApi.Client.ConsoleTestApp.csproj" />
+    </Folder>
+</Solution>

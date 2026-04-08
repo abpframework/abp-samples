@@ -1,0 +1,23 @@
+@page
+@using Microsoft.Extensions.Localization
+@using BookReviewTracker4.Localization
+@using Volo.Abp.AspNetCore.Mvc.UI.Bootstrap.TagHelpers.Modal
+@inject IStringLocalizer<BookReviewTracker4Resource> L
+@model BookReviewTracker4.Web.Pages.Books.EditModalModel
+@{
+    Layout = null;
+}
+
+<form asp-page="/Books/EditModal" method="post">
+    <abp-modal>
+        <abp-modal-header title="@L["EditBook"].Value"></abp-modal-header>
+        <abp-modal-body>
+            <abp-input asp-for="Id" />
+            <abp-input asp-for="Book.Title" />
+            <abp-select asp-for="Book.AuthorId" asp-items="@Model.Authors" />
+            <abp-input asp-for="Book.Description" />
+            <abp-input asp-for="Book.PublishDate" />
+        </abp-modal-body>
+        <abp-modal-footer buttons="@(AbpModalButtons.Cancel | AbpModalButtons.Save)"></abp-modal-footer>
+    </abp-modal>
+</form>

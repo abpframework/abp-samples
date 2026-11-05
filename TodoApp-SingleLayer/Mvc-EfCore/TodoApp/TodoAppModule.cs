@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
-using Microsoft.OpenApi.Models;
+using Microsoft.OpenApi;
 using TodoApp.Data;
 using TodoApp.Localization;
 using TodoApp.Menus;
@@ -18,7 +18,6 @@ using Volo.Abp.AspNetCore.Mvc.UI.Theme.Shared;
 using Volo.Abp.AspNetCore.Serilog;
 using Volo.Abp.AuditLogging.EntityFrameworkCore;
 using Volo.Abp.Autofac;
-using Volo.Abp.AutoMapper;
 using Volo.Abp.Emailing;
 using Volo.Abp.EntityFrameworkCore;
 using Volo.Abp.EntityFrameworkCore.SqlServer;
@@ -55,7 +54,6 @@ namespace TodoApp;
     // ABP Framework packages
     typeof(AbpAspNetCoreMvcModule),
     typeof(AbpAutofacModule),
-    typeof(AbpAutoMapperModule),
     typeof(AbpEntityFrameworkCoreSqlServerModule),
     typeof(AbpSwashbuckleModule),
     typeof(AbpAspNetCoreSerilogModule),
@@ -140,7 +138,6 @@ public class TodoAppModule : AbpModule
         ConfigureMultiTenancy();
         ConfigureUrls(configuration);
         ConfigureBundles();
-        ConfigureAutoMapper(context);
         ConfigureSwagger(context.Services);
         ConfigureNavigationServices();
         ConfigureAutoApiControllers();
@@ -265,19 +262,6 @@ public class TodoAppModule : AbpModule
         );
     }
 
-    private void ConfigureAutoMapper(ServiceConfigurationContext context)
-    {
-        context.Services.AddAutoMapperObjectMapper<TodoAppModule>();
-        Configure<AbpAutoMapperOptions>(options =>
-        {
-            /* Uncomment `validate: true` if you want to enable the Configuration Validation feature.
-             * See AutoMapper's documentation to learn what it is:
-             * https://docs.automapper.org/en/stable/Configuration-validation.html
-             */
-            options.AddMaps<TodoAppModule>(/* validate: true */);
-        });
-    }
-
     private void ConfigureEfCore(ServiceConfigurationContext context)
     {
         context.Services.AddAbpDbContext<TodoAppDbContext>(options =>
@@ -317,7 +301,7 @@ public class TodoAppModule : AbpModule
         }
 
         app.UseCorrelationId();
-        app.UseStaticFiles();
+        app.MapAbpStaticAssets();
         app.UseRouting();
         app.UseAuthentication();
         app.UseAbpOpenIddictValidation();

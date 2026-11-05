@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
-using Microsoft.OpenApi.Models;
+using Microsoft.OpenApi;
 using TodoApp.Data;
 using TodoApp.Localization;
 using OpenIddict.Validation.AspNetCore;
@@ -20,7 +20,6 @@ using Volo.Abp.AspNetCore.Mvc.UI.Theme.Shared;
 using Volo.Abp.AspNetCore.Serilog;
 using Volo.Abp.AuditLogging.EntityFrameworkCore;
 using Volo.Abp.Autofac;
-using Volo.Abp.AutoMapper;
 using Volo.Abp.Emailing;
 using Volo.Abp.EntityFrameworkCore;
 using Volo.Abp.EntityFrameworkCore.SqlServer;
@@ -54,7 +53,6 @@ namespace TodoApp;
     typeof(AbpAspNetCoreMvcModule),
     typeof(AbpAspNetCoreMultiTenancyModule),
     typeof(AbpAutofacModule),
-    typeof(AbpAutoMapperModule),
     typeof(AbpEntityFrameworkCoreSqlServerModule),
     typeof(AbpAspNetCoreMvcUiLeptonXLiteThemeModule),
     typeof(AbpSwashbuckleModule),
@@ -135,7 +133,6 @@ public class TodoAppModule : AbpModule
         ConfigureBundles();
         ConfigureMultiTenancy();
         ConfigureUrls(configuration);
-        ConfigureAutoMapper(context);
         ConfigureSwagger(context.Services, configuration);
         ConfigureAutoApiControllers();
         ConfigureVirtualFiles(hostingEnvironment);
@@ -257,19 +254,6 @@ public class TodoAppModule : AbpModule
             });
     }
 
-    private void ConfigureAutoMapper(ServiceConfigurationContext context)
-    {
-        context.Services.AddAutoMapperObjectMapper<TodoAppModule>();
-        Configure<AbpAutoMapperOptions>(options =>
-        {
-            /* Uncomment `validate: true` if you want to enable the Configuration Validation feature.
-             * See AutoMapper's documentation to learn what it is:
-             * https://docs.automapper.org/en/stable/Configuration-validation.html
-             */
-            options.AddMaps<TodoAppModule>(/* validate: true */);
-        });
-    }
-
     private void ConfigureCors(ServiceConfigurationContext context, IConfiguration configuration)
     {
         context.Services.AddCors(options =>
@@ -336,7 +320,7 @@ public class TodoAppModule : AbpModule
         }
 
         app.UseCorrelationId();
-        app.UseStaticFiles();
+        app.MapAbpStaticAssets();
         app.UseRouting();
         app.UseCors();
         app.UseAuthentication();

@@ -9,24 +9,24 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="10.0.7">
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="10.0.11">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
     <ProjectReference Include="..\Acme.BookStore.Domain\Acme.BookStore.Domain.csproj" />
-    <PackageReference Include="Volo.Abp.EntityFrameworkCore.SqlServer" Version="10.6.0" />
-    <PackageReference Include="Volo.Abp.PermissionManagement.EntityFrameworkCore" Version="10.6.0" />
-    <PackageReference Include="Volo.Abp.SettingManagement.EntityFrameworkCore" Version="10.6.0" />
-    <PackageReference Include="Volo.Abp.Identity.EntityFrameworkCore" Version="10.6.0" />
-    <PackageReference Include="Volo.Abp.BackgroundJobs.EntityFrameworkCore" Version="10.6.0" />
-    <PackageReference Include="Volo.Abp.AuditLogging.EntityFrameworkCore" Version="10.6.0" />
-    <PackageReference Include="Volo.Abp.TenantManagement.EntityFrameworkCore" Version="10.6.0" />
-    <PackageReference Include="Volo.Abp.FeatureManagement.EntityFrameworkCore" Version="10.6.0" />
-    <PackageReference Include="Volo.Abp.OpenIddict.EntityFrameworkCore" Version="10.6.0" />
+    <PackageReference Include="Volo.Abp.EntityFrameworkCore.SqlServer" Version="10.7.0" />
+    <PackageReference Include="Volo.Abp.PermissionManagement.EntityFrameworkCore" Version="10.7.0" />
+    <PackageReference Include="Volo.Abp.SettingManagement.EntityFrameworkCore" Version="10.7.0" />
+    <PackageReference Include="Volo.Abp.Identity.EntityFrameworkCore" Version="10.7.0" />
+    <PackageReference Include="Volo.Abp.BackgroundJobs.EntityFrameworkCore" Version="10.7.0" />
+    <PackageReference Include="Volo.Abp.AuditLogging.EntityFrameworkCore" Version="10.7.0" />
+    <PackageReference Include="Volo.Abp.TenantManagement.EntityFrameworkCore" Version="10.7.0" />
+    <PackageReference Include="Volo.Abp.FeatureManagement.EntityFrameworkCore" Version="10.7.0" />
+    <PackageReference Include="Volo.Abp.OpenIddict.EntityFrameworkCore" Version="10.7.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="10.0.7">
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="10.0.11">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>

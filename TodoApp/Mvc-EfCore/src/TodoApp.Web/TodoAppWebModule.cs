@@ -9,7 +9,7 @@ using TodoApp.EntityFrameworkCore;
 using TodoApp.Localization;
 using TodoApp.MultiTenancy;
 using TodoApp.Web.Menus;
-using Microsoft.OpenApi.Models;
+using Microsoft.OpenApi;
 using OpenIddict.Validation.AspNetCore;
 using Volo.Abp;
 using Volo.Abp.Account.Web;

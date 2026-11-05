@@ -1,5 +1,4 @@
 ﻿using Volo.Abp.Account;
-using Volo.Abp.AutoMapper;
 using Volo.Abp.FeatureManagement;
 using Volo.Abp.Identity;
 using Volo.Abp.Modularity;
@@ -21,11 +20,4 @@ namespace TodoApp;
     )]
 public class TodoAppApplicationModule : AbpModule
 {
-    public override void ConfigureServices(ServiceConfigurationContext context)
-    {
-        Configure<AbpAutoMapperOptions>(options =>
-        {
-            options.AddMaps<TodoAppApplicationModule>();
-        });
-    }
 }

@@ -26,7 +26,6 @@ using Volo.Abp.AspNetCore.Mvc.UI.Theme.LeptonXLite;
 using Volo.Abp.AspNetCore.Mvc.UI.Theme.LeptonXLite.Bundling;
 using Volo.Abp.AspNetCore.Serilog;
 using Volo.Abp.Autofac;
-using Volo.Abp.AutoMapper;
 using Volo.Abp.Identity.Blazor.Server;
 using Volo.Abp.Localization;
 using Volo.Abp.Modularity;
@@ -89,7 +88,6 @@ namespace TodoApp.Blazor
             ConfigureUrls(configuration);
             ConfigureBundles();
             ConfigureAuthentication(context, configuration);
-            ConfigureAutoMapper();
             ConfigureVirtualFileSystem(hostingEnvironment);
             ConfigureLocalizationServices();
             ConfigureAutoApiControllers();
@@ -212,14 +210,6 @@ namespace TodoApp.Blazor
             });
         }
 
-        private void ConfigureAutoMapper()
-        {
-            Configure<AbpAutoMapperOptions>(options =>
-            {
-                options.AddMaps<TodoAppBlazorModule>();
-            });
-        }
-
         public override void OnApplicationInitialization(ApplicationInitializationContext context)
         {
             var env = context.GetEnvironment();
@@ -239,7 +229,7 @@ namespace TodoApp.Blazor
 
             app.UseHttpsRedirection();
             app.UseCorrelationId();
-            app.UseStaticFiles();
+            app.MapAbpStaticAssets();
             app.UseRouting();
             app.UseAuthentication();
             app.UseAbpOpenIddictValidation();

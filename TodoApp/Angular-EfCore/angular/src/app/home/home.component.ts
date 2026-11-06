@@ -11,8 +11,8 @@ import { TodoItemDto, TodoService } from '@proxy';
 })
 export class HomeComponent implements OnInit {
 
-  todoItems: TodoItemDto[];
-  newTodoText: string;
+  todoItems: TodoItemDto[] = [];
+  newTodoText: string = '';
   readonly todoService = inject(TodoService);
   readonly toasterService = inject(ToasterService);
 
@@ -25,7 +25,7 @@ export class HomeComponent implements OnInit {
   create(): void{
     this.todoService.create(this.newTodoText).subscribe((result) => {
       this.todoItems = this.todoItems.concat(result);
-      this.newTodoText = null;
+      this.newTodoText = '';
     });
   }
 

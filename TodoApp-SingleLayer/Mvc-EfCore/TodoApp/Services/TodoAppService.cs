@@ -1,11 +1,10 @@
 ﻿using TodoApp.Entities;
 using TodoApp.Services.Dtos;
-using Volo.Abp.Application.Services;
 using Volo.Abp.Domain.Repositories;
 
 namespace TodoApp.Services;
 
-public class TodoAppService : ApplicationService
+public class TodoAppService : TodoAppAppService
 {
     private readonly IRepository<TodoItem, Guid> _todoItemRepository;
     

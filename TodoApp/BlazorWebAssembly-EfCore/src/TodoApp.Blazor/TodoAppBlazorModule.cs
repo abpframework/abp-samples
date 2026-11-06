@@ -10,7 +10,6 @@ using TodoApp.Blazor.Menus;
 using Volo.Abp.AspNetCore.Components.Web.LeptonXLiteTheme.Themes.LeptonXLite;
 using Volo.Abp.AspNetCore.Components.Web.Theming.Routing;
 using Volo.Abp.Autofac.WebAssembly;
-using Volo.Abp.AutoMapper;
 using Volo.Abp.Modularity;
 using Volo.Abp.UI.Navigation;
 using Volo.Abp.AspNetCore.Components.WebAssembly.LeptonXLiteTheme;
@@ -41,7 +40,6 @@ namespace TodoApp.Blazor
             ConfigureRouter(context);
             ConfigureUI(builder);
             ConfigureMenu(context);
-            ConfigureAutoMapper(context);
         }
 
         private void ConfigureRouter(ServiceConfigurationContext context)
@@ -92,14 +90,6 @@ namespace TodoApp.Blazor
             context.Services.AddTransient(sp => new HttpClient
             {
                 BaseAddress = new Uri(environment.BaseAddress)
-            });
-        }
-
-        private void ConfigureAutoMapper(ServiceConfigurationContext context)
-        {
-            Configure<AbpAutoMapperOptions>(options =>
-            {
-                options.AddMaps<TodoAppBlazorModule>();
             });
         }
     }

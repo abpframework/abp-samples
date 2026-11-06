@@ -3,11 +3,11 @@
   "creationTime": "10/13/2025 08:07:54 +00:00",
   "template": "app",
   "versions": {
-    "AbpFramework": "10.6.0",
+    "AbpFramework": "10.7.0",
     "AbpStudio": "3.0.10",
     "TargetDotnetFramework": "net10.0",
-    "AbpCommercial": "10.6.0",
-    "LeptonX": "5.6.0"
+    "AbpCommercial": "10.7.0",
+    "LeptonX": "5.7.0"
   },
   "modules": {
     "Acme.BookStore": {

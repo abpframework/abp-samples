@@ -44,24 +44,24 @@
   <ItemGroup>
     <PackageReference Include="Serilog.AspNetCore" Version="8.0.0" />
     <PackageReference Include="Serilog.Sinks.Async" Version="1.5.0" />
-    <PackageReference Include="Volo.Abp.Mapperly" Version="10.6.0" />
+    <PackageReference Include="Volo.Abp.Mapperly" Version="10.7.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Volo.Abp.AspNetCore.Mvc.UI.Theme.LeptonXLite" Version="5.6.0" />
+    <PackageReference Include="Volo.Abp.AspNetCore.Mvc.UI.Theme.LeptonXLite" Version="5.7.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Acme.BookStore.Application\Acme.BookStore.Application.csproj" />
     <ProjectReference Include="..\Acme.BookStore.HttpApi\Acme.BookStore.HttpApi.csproj" />
     <ProjectReference Include="..\Acme.BookStore.EntityFrameworkCore\Acme.BookStore.EntityFrameworkCore.csproj" />
-    <PackageReference Include="Volo.Abp.Autofac" Version="10.6.0" />
-    <PackageReference Include="Volo.Abp.Swashbuckle" Version="10.6.0" />
-    <PackageReference Include="Volo.Abp.AspNetCore.Serilog" Version="10.6.0" />
-    <PackageReference Include="Volo.Abp.Identity.Web" Version="10.6.0" />
-    <PackageReference Include="Volo.Abp.Account.Web.OpenIddict" Version="10.6.0" />
-    <PackageReference Include="Volo.Abp.TenantManagement.Web" Version="10.6.0" />
-    <PackageReference Include="Volo.Abp.SettingManagement.Web" Version="10.6.0" />
+    <PackageReference Include="Volo.Abp.Autofac" Version="10.7.0" />
+    <PackageReference Include="Volo.Abp.Swashbuckle" Version="10.7.0" />
+    <PackageReference Include="Volo.Abp.AspNetCore.Serilog" Version="10.7.0" />
+    <PackageReference Include="Volo.Abp.Identity.Web" Version="10.7.0" />
+    <PackageReference Include="Volo.Abp.Account.Web.OpenIddict" Version="10.7.0" />
+    <PackageReference Include="Volo.Abp.TenantManagement.Web" Version="10.7.0" />
+    <PackageReference Include="Volo.Abp.SettingManagement.Web" Version="10.7.0" />
   </ItemGroup>
 
 </Project>

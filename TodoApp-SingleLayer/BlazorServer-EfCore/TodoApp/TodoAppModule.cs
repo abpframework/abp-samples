@@ -2,7 +2,7 @@ using Blazorise.Bootstrap5;
 using Blazorise.Icons.FontAwesome;
 using Microsoft.AspNetCore.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
-using Microsoft.OpenApi.Models;
+using Microsoft.OpenApi;
 using TodoApp.Data;
 using TodoApp.Localization;
 using TodoApp.Menus;
@@ -22,7 +22,6 @@ using Volo.Abp.AspNetCore.Mvc.UI.Bundling;
 using Volo.Abp.AspNetCore.Serilog;
 using Volo.Abp.AuditLogging.EntityFrameworkCore;
 using Volo.Abp.Autofac;
-using Volo.Abp.AutoMapper;
 using Volo.Abp.Emailing;
 using Volo.Abp.EntityFrameworkCore;
 using Volo.Abp.EntityFrameworkCore.SqlServer;
@@ -59,7 +58,6 @@ namespace TodoApp;
     // ABP Framework packages
     typeof(AbpAspNetCoreMvcModule),
     typeof(AbpAutofacModule),
-    typeof(AbpAutoMapperModule),
     typeof(AbpEntityFrameworkCoreSqlServerModule),
     typeof(AbpSwashbuckleModule),
     typeof(AbpAspNetCoreSerilogModule),
@@ -145,7 +143,6 @@ public class TodoAppModule : AbpModule
         ConfigureAuthentication(context);
         ConfigureUrls(configuration);
         ConfigureBundles();
-        ConfigureAutoMapper(context);
         ConfigureVirtualFiles(hostingEnvironment);
         ConfigureLocalizationServices();
         ConfigureSwaggerServices(context.Services);
@@ -291,15 +288,6 @@ public class TodoAppModule : AbpModule
         });
     }
 
-    private void ConfigureAutoMapper(ServiceConfigurationContext context)
-    {
-        context.Services.AddAutoMapperObjectMapper<TodoAppModule>();
-        Configure<AbpAutoMapperOptions>(options =>
-        {
-            options.AddMaps<TodoAppModule>();
-        });
-    }
-
     private void ConfigureEfCore(ServiceConfigurationContext context)
     {
         context.Services.AddAbpDbContext<TodoAppDbContext>(options =>
@@ -340,7 +328,7 @@ public class TodoAppModule : AbpModule
 
         app.UseHttpsRedirection();
         app.UseCorrelationId();
-        app.UseStaticFiles();
+        app.MapAbpStaticAssets();
         app.UseRouting();
         app.UseAuthentication();
         app.UseAbpOpenIddictValidation();

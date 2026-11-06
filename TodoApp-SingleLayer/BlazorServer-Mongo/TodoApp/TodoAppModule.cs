@@ -2,7 +2,7 @@ using Blazorise.Bootstrap5;
 using Blazorise.Icons.FontAwesome;
 using Microsoft.AspNetCore.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
-using Microsoft.OpenApi.Models;
+using Microsoft.OpenApi;
 using TodoApp.Data;
 using TodoApp.Localization;
 using TodoApp.Menus;
@@ -21,7 +21,6 @@ using Volo.Abp.AspNetCore.Mvc.UI.Bundling;
 using Volo.Abp.AspNetCore.Serilog;
 using Volo.Abp.AuditLogging.MongoDB;
 using Volo.Abp.Autofac;
-using Volo.Abp.AutoMapper;
 using Volo.Abp.MongoDB;
 using Volo.Abp.Emailing;
 using Volo.Abp.FeatureManagement;
@@ -58,7 +57,6 @@ namespace TodoApp;
     // ABP Framework packages
     typeof(AbpAspNetCoreMvcModule),
     typeof(AbpAutofacModule),
-    typeof(AbpAutoMapperModule),
     typeof(AbpSwashbuckleModule),
     typeof(AbpAspNetCoreSerilogModule),
     typeof(AbpAspNetCoreMvcUiLeptonXLiteThemeModule),
@@ -143,7 +141,6 @@ public class TodoAppModule : AbpModule
         ConfigureAuthentication(context);
         ConfigureUrls(configuration);
         ConfigureBundles();
-        ConfigureAutoMapper(context);
         ConfigureVirtualFiles(hostingEnvironment);
         ConfigureLocalizationServices();
         ConfigureSwaggerServices(context.Services);
@@ -289,15 +286,6 @@ public class TodoAppModule : AbpModule
         });
     }
 
-    private void ConfigureAutoMapper(ServiceConfigurationContext context)
-    {
-        context.Services.AddAutoMapperObjectMapper<TodoAppModule>();
-        Configure<AbpAutoMapperOptions>(options =>
-        {
-            options.AddMaps<TodoAppModule>();
-        });
-    }
-
     private void ConfigureMongoDB(ServiceConfigurationContext context)
     {
         context.Services.AddMongoDbContext<TodoAppDbContext>(options =>
@@ -330,7 +318,7 @@ public class TodoAppModule : AbpModule
 
         app.UseHttpsRedirection();
         app.UseCorrelationId();
-        app.UseStaticFiles();
+        app.MapAbpStaticAssets();
         app.UseRouting();
         app.UseAuthentication();
         app.UseAbpOpenIddictValidation();

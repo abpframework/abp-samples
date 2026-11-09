@@ -25,6 +25,15 @@ import {
 import { ConfirmationService, Confirmation, ThemeSharedModule } from '@abp/ng.theme.shared';
 import { PageModule } from '@abp/ng.components/page';
 
+// Sends the picked local calendar date as yyyy-MM-dd, so toISOString() time-zone shifts cannot move it to the previous day.
+function toDateOnly(date: Date | null): string | null {
+  if (!date) {
+    return null;
+  }
+  const pad = (n: number) => String(n).padStart(2, '0');
+  return `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())}`;
+}
+
 @Component({
   selector: 'app-author',
   imports: [
@@ -90,14 +99,15 @@ export class AuthorComponent {
     }
 
     const selectedAuthor = this.selectedAuthor();
+    const value = { ...this.form.value, birthDate: toDateOnly(this.form.value.birthDate) };
     if (selectedAuthor.id) {
-      this.authorService.update(selectedAuthor.id, this.form.value).subscribe(() => {
+      this.authorService.update(selectedAuthor.id, value).subscribe(() => {
         this.isModalOpen.set(false);
         this.form.reset();
         this.list.get();
       });
     } else {
-      this.authorService.create(this.form.value).subscribe(() => {
+      this.authorService.create(value).subscribe(() => {
         this.isModalOpen.set(false);
         this.form.reset();
         this.list.get();

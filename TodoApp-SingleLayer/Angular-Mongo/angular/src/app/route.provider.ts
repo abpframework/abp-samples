@@ -3,13 +3,7 @@ import { RoutesService, eLayoutType } from '@abp/ng.core';
 
 export const APP_ROUTE_PROVIDER = [
   provideAppInitializer(() => {
-    configureRoutes();
-  })
-];
-
-function configureRoutes() {
-  const routesService = inject(RoutesService);
-  return () => {
+    const routesService = inject(RoutesService);
     routesService.add([
       {
         path: '/',
@@ -19,5 +13,5 @@ function configureRoutes() {
         layout: eLayoutType.application,
       },
     ]);
-  };
-}
+  }),
+];

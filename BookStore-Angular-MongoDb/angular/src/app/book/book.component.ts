@@ -8,7 +8,7 @@ import {
 import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { CommonModule } from '@angular/common';
-import { BookService, BookDto, bookTypeOptions, AuthorLookupDto } from '@proxy/books';
+import { BookService, BookDto, bookTypeOptions, AuthorLookupDto, BookType } from '@proxy/books';
 import {
   FormGroup,
   FormBuilder,
@@ -25,6 +25,33 @@ import {
 import { ConfirmationService, Confirmation, ThemeSharedModule } from '@abp/ng.theme.shared';
 import { map } from 'rxjs/operators';
 import { PageModule } from '@abp/ng.components/page';
+
+// The API may send the enum as a number or as its name. Options are always the numeric value.
+function toBookType(type: BookType | string | null | undefined): BookType | null {
+  if (type === null || type === undefined || type === '') {
+    return null;
+  }
+
+  if (typeof type === 'number') {
+    return type;
+  }
+
+  const numeric = Number(type);
+  if (bookTypeOptions.some(option => option.value === numeric)) {
+    return numeric;
+  }
+
+  return bookTypeOptions.find(option => option.key === type)?.value ?? null;
+}
+
+// Sends the picked local calendar date as yyyy-MM-dd, so toISOString() time-zone shifts cannot move it to the previous day.
+function toDateOnly(date: Date | null): string | null {
+  if (!date) {
+    return null;
+  }
+  const pad = (n: number) => String(n).padStart(2, '0');
+  return `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())}`;
+}
 
 @Component({
   selector: 'app-book',
@@ -65,6 +92,9 @@ export class BookComponent {
 
   bookTypes = bookTypeOptions;
 
+  readonly compareBookType = (option: BookType | null, value: BookType | string | null) =>
+    toBookType(option) === toBookType(value);
+
   readonly isModalOpen = signal(false);
 
   createBook() {
@@ -86,7 +116,7 @@ export class BookComponent {
     this.form = this.fb.group({
       authorId: [selectedBook.authorId || null, Validators.required],
       name: [selectedBook.name || null, Validators.required],
-      type: [selectedBook.type || null, Validators.required],
+      type: [toBookType(selectedBook.type), Validators.required],
       publishDate: [
         selectedBook.publishDate ? new Date(selectedBook.publishDate) : null,
         Validators.required,
@@ -95,15 +125,22 @@ export class BookComponent {
     });
   }
 
+  // The modal view is created after this form, so the select must be written again once its options exist.
+  syncBookType() {
+    const type = toBookType(this.selectedBook().type);
+    setTimeout(() => this.form?.get('type')?.setValue(type));
+  }
+
   save() {
     if (this.form.invalid) {
       return;
     }
 
     const selectedBook = this.selectedBook();
+    const value = { ...this.form.value, publishDate: toDateOnly(this.form.value.publishDate) };
     const request = selectedBook.id
-      ? this.bookService.update(selectedBook.id, this.form.value)
-      : this.bookService.create(this.form.value);
+      ? this.bookService.update(selectedBook.id, value)
+      : this.bookService.create(value);
 
     request.subscribe(() => {
       this.isModalOpen.set(false);

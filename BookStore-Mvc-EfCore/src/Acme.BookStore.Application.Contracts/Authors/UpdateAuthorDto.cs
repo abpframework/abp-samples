@@ -12,5 +12,5 @@ public class UpdateAuthorDto
     [Required]
     public DateTime BirthDate { get; set; }
 
-    public string ShortBio { get; set; }
+    public string? ShortBio { get; set; }
 }

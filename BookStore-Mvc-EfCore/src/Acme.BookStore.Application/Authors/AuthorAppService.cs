@@ -60,7 +60,7 @@ public class AuthorAppService : BookStoreAppService, IAuthorAppService
         var author = await _authorManager.CreateAsync(
             input.Name,
             input.BirthDate,
-            input.ShortBio
+            input.ShortBio ?? string.Empty
         );
 
         await _authorRepository.InsertAsync(author);
@@ -79,7 +79,7 @@ public class AuthorAppService : BookStoreAppService, IAuthorAppService
         }
 
         author.BirthDate = input.BirthDate;
-        author.ShortBio = input.ShortBio;
+        author.ShortBio = input.ShortBio ?? string.Empty;
 
         await _authorRepository.UpdateAsync(author);
     }

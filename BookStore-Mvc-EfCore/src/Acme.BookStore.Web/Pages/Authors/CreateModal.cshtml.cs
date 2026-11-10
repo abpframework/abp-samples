@@ -42,6 +42,6 @@ public class CreateModalModel : BookStorePageModel
         public DateTime BirthDate { get; set; }
 
         [TextArea]
-        public string ShortBio { get; set; }
+        public string? ShortBio { get; set; }
     }
 }

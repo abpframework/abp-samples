@@ -1,14 +1,14 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
-    "baseUrl": "./",
     "outDir": "./dist/out-tsc",
     "sourceMap": true,
+    "skipLibCheck": true,
     "esModuleInterop": true,
     "declaration": false,
     "experimentalDecorators": true,
-    "module": "esnext",
-    "moduleResolution": "node",
+    "module": "ES2022",
+    "moduleResolution": "bundler",
     "importHelpers": true,
     "target": "ES2022",
     "typeRoots": [
@@ -20,10 +20,10 @@
     ],
     "paths": {
       "@proxy": [
-        "src/app/proxy/index.ts"
+        "./src/app/proxy/index.ts"
       ],
       "@proxy/*": [
-        "src/app/proxy/*"
+        "./src/app/proxy/*"
       ]
     },
     "useDefineForClassFields": false

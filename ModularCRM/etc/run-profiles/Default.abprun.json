@@ -4,7 +4,6 @@
       "type": "dotnet-project",
       "launchUrl": "https://localhost:44366",
       "healthCheckEndpoint": "/health-status",
-      "healthUiEndpoint": "/health-ui",
       "path": "../../ModularCrm/ModularCrm.csproj",
       "execution": {
         "order": 0

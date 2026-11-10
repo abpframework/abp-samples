@@ -6,7 +6,7 @@ using ModularCrm.Catalog;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
-using Microsoft.OpenApi.Models;
+using Microsoft.OpenApi;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using ModularCrm.Data;
 using ModularCrm.Localization;

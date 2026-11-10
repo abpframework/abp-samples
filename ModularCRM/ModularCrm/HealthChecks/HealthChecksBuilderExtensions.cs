@@ -20,20 +20,6 @@ public static class HealthChecksBuilderExtensions
         }
         
         services.ConfigureHealthCheckEndpoint("/health-status");
-
-        var healthChecksUiBuilder = services.AddHealthChecksUI(settings =>
-        {
-            settings.AddHealthCheckEndpoint("ModularCrm Health Status", healthCheckUrl);
-        });
-
-        // Set your HealthCheck UI Storage here
-        healthChecksUiBuilder.AddInMemoryStorage();
-
-        services.MapHealthChecksUiEndpoints(options =>
-        {
-            options.UIPath = "/health-ui";
-            options.ApiPath = "/health-api";
-        });
     }
 
     private static IServiceCollection ConfigureHealthCheckEndpoint(this IServiceCollection services, string path)
@@ -50,19 +36,6 @@ public static class HealthChecksBuilderExtensions
                         ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse,
                         AllowCachingResponses = false,
                     });
-            });
-        });
-
-        return services;
-    }
-
-    private static IServiceCollection MapHealthChecksUiEndpoints(this IServiceCollection services, Action<global::HealthChecks.UI.Configuration.Options>? setupOption = null)
-    {
-        services.Configure<AbpEndpointRouterOptions>(routerOptions =>
-        {
-            routerOptions.EndpointConfigureActions.Add(endpointContext =>
-            {
-                endpointContext.Endpoints.MapHealthChecksUI(setupOption);
             });
         });
 

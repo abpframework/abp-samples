@@ -61,7 +61,7 @@
   </div>
 </div>
 
-<abp-modal [visible]="isModalOpen()" (visibleChange)="isModalOpen.set($event)">
+<abp-modal [visible]="isModalOpen()" (visibleChange)="isModalOpen.set($event)" (appear)="syncBookType()">
   <ng-template #abpHeader>
     <h3>{{ (selectedBook().id ? '::Edit' : '::NewBook' ) | abpLocalization }}</h3>
   </ng-template>
@@ -93,9 +93,9 @@
 
       <div class="mt-2">
         <label for="book-type">Type</label><span> * </span>
-        <select class="form-control" id="book-type" formControlName="type">
+        <select class="form-control" id="book-type" formControlName="type" [compareWith]="compareBookType">
           <option [ngValue]="null">Select a book type</option>
-          @for (type of bookTypes; track type) {
+          @for (type of bookTypes; track type.value) {
             <option [ngValue]="type.value">
               {{ '::Enum:BookType.' + type.value | abpLocalization }}
             </option>

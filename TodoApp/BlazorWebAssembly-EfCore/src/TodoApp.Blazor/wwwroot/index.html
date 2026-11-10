@@ -8,7 +8,7 @@
     <base href="/" />
 
     <!--ABP:Styles-->
-    <link href="global.css?_v=638617489069710770" rel="stylesheet"/>
+    <link href="global.css?_v=639299012432946325" rel="stylesheet"/>
     <link href="main.css" rel="stylesheet"/>
     <!--/ABP:Styles-->
     <link href="TodoApp.Blazor.styles.css" rel="stylesheet"/>
@@ -23,8 +23,17 @@
     </div>
 </div>
 
+<!-- Keeps dotnet.js resolvable when ABP bundles blazor.webassembly.js into /global.js. -->
+<script type="importmap">
+{
+    "imports": {
+        "/dotnet.js": "/_framework/dotnet.js"
+    }
+}
+</script>
+
 <!--ABP:Scripts-->
-    <script src="global.js?_v=638617489071546261"></script>
+    <script src="global.js?_v=639299012435139241"></script>
     <!--/ABP:Scripts-->
 
 </body>

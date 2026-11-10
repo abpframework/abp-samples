@@ -2,31 +2,31 @@
   "template": "app",
   "imports": {
     "Volo.Abp.LeptonXLiteTheme": {
-      "version": "5.6.0",
+      "version": "5.7.0",
       "isInstalled": true
     },
     "Volo.Abp.Account": {
-      "version": "10.6.0",
+      "version": "10.7.0",
       "isInstalled": true
     },
     "Volo.Abp.OpenIddict": {
-      "version": "10.6.0",
+      "version": "10.7.0",
       "isInstalled": true
     },
     "Volo.Abp.Identity": {
-      "version": "10.6.0",
+      "version": "10.7.0",
       "isInstalled": true
     },
     "Volo.Abp.TenantManagement": {
-      "version": "10.6.0",
+      "version": "10.7.0",
       "isInstalled": true
     },
     "Volo.Abp.PermissionManagement": {
-      "version": "10.6.0",
+      "version": "10.7.0",
       "isInstalled": true
     },
     "Volo.Abp.FeatureManagement": {
-      "version": "10.6.0",
+      "version": "10.7.0",
       "isInstalled": true
     }
   },

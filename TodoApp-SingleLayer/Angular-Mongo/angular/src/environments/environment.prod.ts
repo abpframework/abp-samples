@@ -10,7 +10,7 @@ export const environment = {
     logoUrl: '',
   },
   oAuthConfig: {
-    issuer: 'https://localhost:44350',
+    issuer: 'https://localhost:44350/',
     redirectUri: baseUrl,
     clientId: 'TodoApp_App',
     responseType: 'code',

@@ -2,9 +2,11 @@
   "id": "d3472073-dbca-4c52-8576-40ae88e0bad8",
   "template": "app-nolayers",
   "versions": {
-    "AbpFramework": "9.2.0",
-    "AbpStudio": "1.0.1",
-    "TargetDotnetFramework": "net9.0"
+    "AbpFramework": "10.7.0",
+    "AbpStudio": "1.3.3",
+    "TargetDotnetFramework": "net9.0",
+    "AbpCommercial": "10.7.0",
+    "LeptonX": "5.7.0"
   },
   "modules": {
     "ModularCrm": {

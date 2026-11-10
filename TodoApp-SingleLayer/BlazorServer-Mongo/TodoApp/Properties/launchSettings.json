@@ -17,7 +17,7 @@
     },
     "TodoApp.Blazor.Server": {
       "commandName": "Project",
-      "dotnetRunMessages": "true",
+      "dotnetRunMessages": true,
       "launchBrowser": true,
       "applicationUrl": "https://localhost:44313/",
       "environmentVariables": {

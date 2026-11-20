@@ -4,12 +4,7 @@ $jobs = @()
 
 $jobs += Start-Job -Name "InstallLibs" -ScriptBlock {
     $ErrorActionPreference = "Stop"
-    Set-Location (Join-Path $using:scriptRoot "../../")
-    abp install-libs
-
-    if ($LASTEXITCODE -ne 0) {
-        throw "abp install-libs exited with code $LASTEXITCODE"
-    }
+    & (Join-Path $using:scriptRoot "install-libs.ps1")
 }
 
 $jobs += Start-Job -Name "DbMigrator" -ScriptBlock {

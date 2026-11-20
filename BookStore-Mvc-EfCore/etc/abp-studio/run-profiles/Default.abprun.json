@@ -17,6 +17,12 @@
       "workingDirectory": "../../scripts",
       "shortDescription": "Installs client libraries, applies database migrations, seeds data, and creates the development certificate."
     },
+    "Install Client-Side Libraries": {
+      "behaviour": 0,
+      "startCommand": "./install-libs.ps1",
+      "workingDirectory": "../../scripts",
+      "shortDescription": "Runs abp install-libs to restore client-side libraries."
+    },
     "Migrate Database": {
       "behaviour": 0,
       "startCommand": "./migrate-database.ps1",

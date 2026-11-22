@@ -1,6 +1,7 @@
 ﻿{
   "culture": "en",
   "texts": {
+    "ResetMyPasswordTitle": "Reset my password",
     "ResetMyPassword": "Click here to reset your password"
   }
 }
